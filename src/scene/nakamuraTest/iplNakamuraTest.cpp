@@ -3,11 +3,17 @@
 #include "scene/nakamuratest/iplContest.h"
 #include "scene/setting/iplSetting.h"
 
-#include <revolution/nhttp/d_nhttp.h>
+#include <revolution/net.h>
+#include <revolution/nhttp.h>
+#include <revolution/nup.h>
 #include <revolution/os.h>
+#include <revolution/scutil.h>
 #include <revolution/soex.h>
+#include <revolution/wad.h>
 
 #include "system/iplSystem.h"
+
+#include "titledb.h"
 
 namespace ipl {
     namespace scene {
@@ -15,36 +21,38 @@ namespace ipl {
         BOOL NakamuraTest::sNHTTPFinished;
 
         NakamuraTest::NakamuraTest(EGG::Heap* heap) : scene::FaderSceneBase(heap), mNetSetup() {
-            pNetSetupHeapBuf = NULL;
-            pNUPHeapBuf = 0;
-            unk_0x2b88 = 0;
-            mState = 0x00;
+            mpNetSetupHeapBuf = NULL;
+            mpNUPHeapBuf = 0;
+            unk_0x2B88 = 0;
+            mState = 0;
 
-            pAppHeapBuf = System::getMem2App()->alloc(0x299999, 4);
-            pAppHeap = EGG::ExpHeap::create(pAppHeapBuf, 0x299999, 2);
-            spHeap = pAppHeap;
+            mpAppHeapBuf = System::getMem2App()->alloc(0x299999, 4);
+            mpAppHeap = EGG::ExpHeap::create(mpAppHeapBuf, 0x299999, 2);
+            spHeap = mpAppHeap;
         }
 
         NakamuraTest::~NakamuraTest() {
-            pAppHeap->destroy();
-            System::getMem2App()->free(pAppHeapBuf);
+            mpAppHeap->destroy();
+            System::getMem2App()->free(mpAppHeapBuf);
         }
 
         void NakamuraTest::prepare() {
         }
+
         void NakamuraTest::create() {
             OSReport("Nakamuratest scene created.\n");
-            pNetSetupHeapBuf = NULL;
-            pNUPHeapBuf = NULL;
-            pNUPHeap = NULL;
-            mState = 0x01;
+            mpNetSetupHeapBuf = NULL;
+            mpNUPHeapBuf = NULL;
+            mNUPHeap = NULL;
+            mState = 1;
             mNetSetupLastErr = 0;
             mConnTestResult = 0;
             mFoundUpdate = false;
             mAmtCompleted = 0;
             mAmtTotal = 0;
-            pNUPInstance = NULL;
+            mpNUPInstance = NULL;
         }
+
         void NakamuraTest::destroy() {
             OSReport("Nakamuratest scene destroyed.\n");
         }
@@ -52,114 +60,103 @@ namespace ipl {
         void NakamuraTest::calcCommon() {
         }
 
-        // TODO: Put these in iplContest
-        extern "C" {
-        int WADGetInstalledVersion(ESTitleId titleID, u16* version);
-
-        // int NHTTPStartup(void* (*)(u32, int), void (*)(void*), int);
-        // int NHTTPCleanupAsync(void (*)());
-
-        int NETGetStartupErrorCode(int);
-
-        void* NUP_Init(MEMAllocator* allocator);
-        int NUP_Start(void* instance, const char* nus, const char* isoCountryCode, void* productAreaString, int);
-        int NUP_GetStatus(void* instance, u64*);
-        int NUP_Finish(void* instance);
-
-        const char* SCUTILGetISOCountryCodeA2();
-        }
         FaderSceneCommand NakamuraTest::calcNormal() {
             FaderSceneCommand cmd = FADER_SCN_CONTINUE;
 
             System::getMasterController();
             switch (mState) {
-                case 0x00:
+                case 0: {
                     break;
-                case 0x01:
+                }
+                case 1: {
                     if (System::isReceiveScheduleStopped() == FALSE) {
                         System::stopReceiveSchedule();
                         OSReport("[Receive Scheduler] Wait..\n");
                     } else {
-                        pNetSetupHeapBuf = pAppHeap->alloc(0x10000, 4);
+                        mpNetSetupHeapBuf = mpAppHeap->alloc(0x10000, 4);
                         mNetSetupLastErr = 0;
-                        Setting* settingScene = (Setting*)System::getSceneManager()->getScene(SCENE_SETTING);
-                        u32 profileId = settingScene->getProfileID();
-                        if (mNetSetup.setup(pNetSetupHeapBuf, profileId)) {
-                            mState = 0x02;
+                        u32 profileId = ((Setting*)System::getScene(SCENE_SETTING))->getProfileID();
+                        if (mNetSetup.setup(mpNetSetupHeapBuf, profileId)) {
+                            mState = 2;
                             OSReport("NetSetup Start\n");
                         } else {
-                            mState = 0x11;
+                            mState = 17;
                             mNetSetupLastErr = mNetSetup.getlasterror();
-                            if (pNetSetupHeapBuf != NULL) {
-                                pAppHeap->free(pNetSetupHeapBuf);
-                                pNetSetupHeapBuf = NULL;
+                            if (mpNetSetupHeapBuf != NULL) {
+                                mpAppHeap->free(mpNetSetupHeapBuf);
+                                mpNetSetupHeapBuf = NULL;
                             }
                             OSReport("[error] NetSetup failed\n");
                         }
                     }
                     break;
-
-                case 0x02:
+                }
+                case 2: {
                     switch (mNetSetup.getstate()) {
-                        case NetSetup::NET_SETUP_SUCCESS:
-                            mState = 0x03;
+                        case NetSetup::NET_SETUP_SUCCESS: {
+                            mState = 3;
                             OSReport("NetSetup Completed\n");
                             OSReport("Starting Connecting Test\n");
                             break;
-                        case NetSetup::NET_SETUP_UNK_4:
-                            mState = 0x11;
+                        }
+                        case NetSetup::NET_SETUP_UNK_4: {
+                            mState = 17;
                             mNetSetup.cleanup();
                             mNetSetupLastErr = mNetSetup.getlasterror();
-                            if (pNetSetupHeapBuf != NULL) {
-                                pAppHeap->free(pNetSetupHeapBuf);
-                                pNetSetupHeapBuf = NULL;
+                            if (mpNetSetupHeapBuf != NULL) {
+                                mpAppHeap->free(mpNetSetupHeapBuf);
+                                mpNetSetupHeapBuf = NULL;
                             }
-                            OSReport("[error] %d\n", this->mNetSetupLastErr);
+                            OSReport("[error] %d\n", mNetSetupLastErr);
                             break;
-                        case NetSetup::NET_SETUP_ERROR:
-                            mState = 0x11;
+                        }
+                        case NetSetup::NET_SETUP_ERROR: {
+                            mState = 17;
                             mNetSetup.cleanup();
                             mNetSetupLastErr = mNetSetup.getlasterror();
-                            if (pNetSetupHeapBuf != NULL) {
-                                pAppHeap->free(pNetSetupHeapBuf);
-                                pNetSetupHeapBuf = NULL;
+                            if (mpNetSetupHeapBuf != NULL) {
+                                mpAppHeap->free(mpNetSetupHeapBuf);
+                                mpNetSetupHeapBuf = NULL;
                             }
-                            OSReport("[error] %d\n", this->mNetSetupLastErr);
+                            OSReport("[error] %d\n", mNetSetupLastErr);
                             break;
-
-                        default:
+                        }
+                        default: {
                             break;
+                        }
                     }
                     break;
+                }
+                case 3: {
+                    mpNUPHeapBuf = mpAppHeap->alloc(0x10000, 4);
 
-                case 0x03:
-                    pNUPHeapBuf = pAppHeap->alloc(0x10000, 4);
-                    IPLContestInitialize(pNUPHeapBuf, mNetSetup.getproxy());
-                    pConnTestThreadStack = pAppHeap->alloc(0x4000, 4);
-                    OSCreateThread(&mConnTestThread, conntestthread, NULL, (u8*)pConnTestThreadStack + 0x4000, 0x4000, 0x12, 1);
+                    IPLContestInitialize(mpNUPHeapBuf, mNetSetup.getproxy());
+                    mpConnTestThreadStack = mpAppHeap->alloc(0x4000, 4);
+
+                    OSCreateThread(&mConnTestThread, conntestthread, NULL, (u8*)mpConnTestThreadStack + 0x4000, 0x4000, 0x12, 1);
                     OSResumeThread(&mConnTestThread);
-                    mState = 0x04;
+                    mState = 4;
                     break;
-
-                case 0x04:
+                }
+                case 4: {
                     if (OSIsThreadTerminated(&mConnTestThread)) {
-                        if (pConnTestThreadStack != NULL) {
-                            pAppHeap->free(pConnTestThreadStack);
-                            pConnTestThreadStack = NULL;
+                        if (mpConnTestThreadStack != NULL) {
+                            mpAppHeap->free(mpConnTestThreadStack);
+                            mpConnTestThreadStack = NULL;
                         }
-                        mState = 0x05;
+                        mState = 5;
                         System::resetNWC24Regist();
                     }
                     break;
-
-                case 0x05:
-                    mState = 0x06;
+                }
+                case 5: {
+                    mState = 6;
                     if (IPLContestGetResult() == 0 && System::processNWC24Regist() == 0) {
-                        mState = 0x05;
+                        mState = 5;
                     }
                     break;
-
-                case 0x06:
+                }
+                case 6: {
                     mConnTestResult = IPLContestGetResult();
                     if (System::getNWC24RegistErr() != 0) {
                         OSReport("WiiID ErrorOccur\n");
@@ -182,151 +179,171 @@ namespace ipl {
                             mNetSetupLastErr = IPLContestGetErrorCode(mNetSetup.getconntype());
                         }
                     } else {
-                        Setting* settingsScene = (Setting*)System::getScene(SCENE_SETTING);
-
-                        settingsScene->setConnectTestResult(1, mNetSetupLastErr, mFoundUpdate, IPLGetNATSupportCode(mNetSetup.getconntype()));
+                        ((Setting*)System::getScene(SCENE_SETTING))
+                            ->setConnectTestResult(1, mNetSetupLastErr, mFoundUpdate, IPLGetNATSupportCode(mNetSetup.getconntype()));
                     }
-                    mState = 0x07;
+                    mState = 7;
                     break;
-
-                case 0x07:
+                }
+                case 7: {
                     IPLContestShutdown();
-                    if (pNUPHeapBuf != NULL) {
-                        pAppHeap->free(pNUPHeapBuf);
-                        pNUPHeapBuf = NULL;
+                    if (mpNUPHeapBuf != NULL) {
+                        mpAppHeap->free(mpNUPHeapBuf);
+                        mpNUPHeapBuf = NULL;
                     }
 
                     if (mNetSetupLastErr != 0) {
-                        mState = 0x11;
+                        mState = 17;
                         mNetSetup.cleanup();
 
-                        if (pNetSetupHeapBuf != NULL) {
-                            pAppHeap->free(pNetSetupHeapBuf);
-                            pNetSetupHeapBuf = NULL;
+                        if (mpNetSetupHeapBuf != NULL) {
+                            mpAppHeap->free(mpNetSetupHeapBuf);
+                            mpNetSetupHeapBuf = NULL;
                         }
                     } else {
-                        mState = 0x08;
-                    }
-                    break;
-
-                case 0x08: {
-                    Setting* settingsScene = (Setting*)System::getScene(SCENE_SETTING);
-                    if (settingsScene->getUpdateTiming() == 4) {
-                        mState = 0x09;
-                    } else if (settingsScene->getUpdateTiming() == 10) {
-                        mState = 0x0e;
+                        mState = 8;
                     }
                     break;
                 }
-                case 0x09: {
+                case 8: {
+                    Setting* settingsScene = (Setting*)System::getScene(SCENE_SETTING);
+                    if (settingsScene->getUpdateTiming() == 4) {
+                        mState = 9;
+                    } else if (settingsScene->getUpdateTiming() == 10) {
+                        mState = 14;
+                    }
+                    break;
+                }
+                case 9: {
                     u16 menuVersion;
                     System::getNandManager()->closeContentsAll();
-                    WADGetInstalledVersion(0x0000000100000002ULL, &menuVersion);
+                    WADGetInstalledVersion(SYSMENU_TITLE_ID, &menuVersion);
                     mCurrVersion = menuVersion;
                     NHTTPStartup(nhttpalloc, nhttpfree, 0x13);
 
-                    pNUPHeapBuf = pAppHeap->alloc(0x270000, 4);
-                    pNUPHeap = MEMCreateExpHeapEx(pNUPHeapBuf, 0x270000, 0);
-                    MEMInitAllocatorForExpHeap(&mNUPAllocator, pNUPHeap, 4);
-                    pNUPInstance = NUP_Init(&mNUPAllocator);
-                    if (pNUPInstance != (void*)0x0) {
+                    mpNUPHeapBuf = mpAppHeap->alloc(0x270000, 4);
+                    mNUPHeap = MEMCreateExpHeapEx(mpNUPHeapBuf, 0x270000, 0);
+                    MEMInitAllocatorForExpHeap(&mNUPAllocator, mNUPHeap, 4);
+
+                    mpNUPInstance = NUP_Init(&mNUPAllocator);
+
+                    if (mpNUPInstance != NULL) {
                         char productAreaString[8];
                         char nus[] = "nus.shop.wii.com";
                         SCGetProductAreaString(productAreaString, 4);
                         OSReport("NUP region code : %s\n", productAreaString);
                         const char* isoCountryCode = SCUTILGetISOCountryCodeA2();
                         OSReport("NUP country code : %s\n", isoCountryCode);
-                        int iVar8 = NUP_Start(pNUPInstance, nus, isoCountryCode, productAreaString, 0);
+                        int iVar8 = NUP_Start(mpNUPInstance, nus, isoCountryCode, productAreaString, 0);
                         OSReport("NUP_Start()\n");
                         if (iVar8 < 0) {
                             switch (iVar8) {
-                                case -5000:
+                                case -5000: {
                                     OSReport("FAIL ALLOC\n");
-                                case -5001:
+                                }
+                                case -5001: {
                                     OSReport("FAIL INTERNAL\n");
-                                case -5002:
+                                }
+                                case -5002: {
                                     OSReport("INVALID_FLAG\n");
-                                case -5003:
+                                }
+                                case -5003: {
                                     OSReport("NOT READY\n");
-                                case -5011:
+                                }
+                                case -5011: {
                                     OSReport("BAD HEAP\n");
-                                case -5012:
+                                }
+                                case -5012: {
                                     OSReport("BAD SIZE\n");
                                     mNetSetupLastErr = 32004;
                                     break;
-                                case -5005:
+                                }
+                                case -5005: {
                                     mNetSetupLastErr = 32001;
                                     break;
+                                }
                                 case -5009:
                                 case -5008:
                                 case -5007:
                                 case -5006:
-                                case -5004:
+                                case -5004: {
                                     mNetSetupLastErr = 32002;
                                     break;
-                                case -5010:
+                                }
+                                case -5010: {
                                     mNetSetupLastErr = 32003;
                                     break;
-                                default:
+                                }
+                                default: {
                                     mNetSetupLastErr = 32004;
                                     break;
+                                }
                             }
-                            mState = 0x0c;
+                            mState = 12;
                             break;
                         }
                     }
-                    mState = 0x0a;
+                    mState = 10;
                     break;
                 }
-                case 0x0a: {
+                case 10: {
                     u16 menuVersion;
 
                     u64 nupStatus[3];
-                    int nupErrno = NUP_GetStatus(pNUPInstance, nupStatus);
+                    int nupErrno = NUP_GetStatus(mpNUPInstance, nupStatus);
                     if (nupStatus[1] != 0) {
                         mAmtCompleted = nupStatus[2];
                         mAmtTotal = nupStatus[1];
                     }
                     if (nupErrno == 0) {
                         mFoundUpdate = true;
-                        mState = 0x0c;
+                        mState = 12;
                     } else if (nupErrno < 0) {
                         OSReport("NUP failed errorcode :%d\n", nupErrno);
-                        WADGetInstalledVersion(0x0000000100000002ULL, &menuVersion);
+                        WADGetInstalledVersion(SYSMENU_TITLE_ID, &menuVersion);
                         if (mCurrVersion != menuVersion) {
                             mFoundUpdate = true;
                         } else {
                             mFoundUpdate = false;
                         }
                         switch (nupErrno) {
-                            case -5000:
+                            case -5000: {
                                 OSReport("FAIL ALLOC\n");
-                            case -5001:
+                            }
+                            case -5001: {
                                 OSReport("FAIL INTERNAL\n");
-                            case -5002:
+                            }
+                            case -5002: {
                                 OSReport("INVALID_FLAG\n");
-                            case -5003:
+                            }
+                            case -5003: {
                                 OSReport("NOT READY\n");
-                            case -5011:
+                            }
+                            case -5011: {
                                 OSReport("BAD HEAP\n");
-                            case -5012:
+                            }
+                            case -5012: {
                                 OSReport("BAD SIZE\n");
                                 mNetSetupLastErr = 32004;
                                 break;
-                            case -5005:
+                            }
+                            case -5005: {
                                 mNetSetupLastErr = 32001;
                                 break;
+                            }
                             case -5009:
                             case -5008:
                             case -5007:
                             case -5006:
-                            case -5004:
+                            case -5004: {
                                 mNetSetupLastErr = 32002;
                                 break;
-                            case -5010:
+                            }
+                            case -5010: {
                                 mNetSetupLastErr = 32003;
                                 break;
-                            default:
+                            }
+                            default: {
                                 if (-1001 >= nupErrno && nupErrno >= -1007) {
                                     mNetSetupLastErr = 32005;
                                 } else if (-6000 >= nupErrno && nupErrno > -7000) {
@@ -338,62 +355,62 @@ namespace ipl {
                                 } else {
                                     mNetSetupLastErr = 32004;
                                 }
+                            }
                         }
-                        mState = 0x0c;
+                        mState = 12;
                     }
                     break;
                 }
-
-                case 0x0c: {
-                    NUP_Finish(pNUPInstance);
-                    if (pNUPHeap != NULL) {
-                        MEMDestroyExpHeap(pNUPHeap);
-                        pNUPHeap = NULL;
+                case 12: {
+                    NUP_Finish(mpNUPInstance);
+                    if (mNUPHeap != NULL) {
+                        MEMDestroyExpHeap(mNUPHeap);
+                        mNUPHeap = NULL;
                     }
-                    if (pNUPHeapBuf != NULL) {
-                        pAppHeap->free(pNUPHeapBuf);
-                        pNUPHeapBuf = NULL;
+                    if (mpNUPHeapBuf != NULL) {
+                        mpAppHeap->free(mpNUPHeapBuf);
+                        mpNUPHeapBuf = NULL;
                     }
                     sNHTTPFinished = false;
                     NHTTPCleanupAsync(nhttpcleanupcallback);
-                    mState = 0x0d;
+                    mState = 13;
 
                     u16 menuVersion;
-                    WADGetInstalledVersion(0x0000000100000002ULL, &menuVersion);
+                    WADGetInstalledVersion(SYSMENU_TITLE_ID, &menuVersion);
                     OSReport("systemmenu ver. before:%d after:%d\n", mCurrVersion, menuVersion);
                     mFoundUpdate = true;
                     break;
                 }
-
-                case 0x0d:
+                case 13: {
                     if (sNHTTPFinished)
-                        mState = 0x0b;
+                        mState = 11;
                     break;
-                case 0x0b:
-                    mState = 0x0f;
+                }
+                case 11: {
+                    mState = 15;
                     break;
-
-                case 0x0e:
-                    mState = 0x0f;
+                }
+                case 14: {
+                    mState = 15;
                     OSReport("Network update has been skipped.\n");
                     break;
-
-                case 0x0f:
+                }
+                case 15: {
                     OSReport("Disconnecting from network.\n");
                     mNetSetup.cleanup();
                     OSReport("Finished\n");
-                    if (pNetSetupHeapBuf != NULL) {
-                        pAppHeap->free(pNetSetupHeapBuf);
-                        pNetSetupHeapBuf = NULL;
+                    if (mpNetSetupHeapBuf != NULL) {
+                        mpAppHeap->free(mpNetSetupHeapBuf);
+                        mpNetSetupHeapBuf = NULL;
                     }
                     if (mNetSetupLastErr == 0) {
-                        mState = 0x10;
+                        mState = 16;
                     } else {
-                        mState = 0x11;
+                        mState = 17;
                     }
                     break;
-
-                case 0x10:
+                }
+                case 16: {
                     if (mAmtTotal == 0) {
                         Setting* settingScene = (Setting*)System::getScene(SCENE_SETTING);
                         settingScene->setConnectTestResult(3, mNetSetupLastErr, mFoundUpdate, 0);
@@ -404,14 +421,11 @@ namespace ipl {
                         cmd = FADER_SCN_NEXT;
                     }
                     break;
-
-                case 0x11:
+                }
+                case 17: {
                     int val;
                     int len = 4;
-                    // local_50 = 4;
-                    int level = 0xfffe;
-                    int optname = 0x1003;
-                    if (SOGetInterfaceOpt(NULL, level, optname, &val, &len) == 0 && val == -111) {
+                    if (SOGetInterfaceOpt(NULL, SO_SOL_CONFIG, SO_CONFIG_ERROR, &val, &len) == 0 && val == -111) {
                         int iVar7 = NETGetStartupErrorCode(-111);
                         mNetSetupLastErr = (-iVar7 / 100) * 100;
                         mNetSetupLastErr = mNetSetup.getconntype();
@@ -420,9 +434,9 @@ namespace ipl {
                     settingScene->setConnectTestResult(2, mNetSetupLastErr, mFoundUpdate, 0);
                     cmd = FADER_SCN_NEXT;
                     break;
+                }
             }
             return cmd;
-            // WADGetInstalledVersion;
         }
 
         FaderSceneCommand NakamuraTest::calcFadeout() {
@@ -433,7 +447,7 @@ namespace ipl {
             if (System::getSceneManager()->onDefaultDrawLayer() != TRUE) {
                 return;
             }
-            utility::Graphics::setOrtho(0);
+            utility::Graphics::setOrtho();
         }
 
         void* NakamuraTest::conntestthread(void*) {
@@ -442,14 +456,15 @@ namespace ipl {
             IPLContestStart();
             while (true) {
                 switch (IPLContestProcess()) {
-                    case 4:
+                    case 4: {
                         return NULL;
-
+                    }
                     case 0:
                     case 1:
                     case 2:
-                    case 3:
+                    case 3: {
                         break;
+                    }
                 }
                 OSSleepTicks(OSMicrosecondsToTicks(1));
             }
@@ -460,9 +475,11 @@ namespace ipl {
                 align = 4;
             return spHeap->alloc(size, align);
         }
+
         void NakamuraTest::nhttpfree(void* buf) {
             return spHeap->free(buf);
         }
+
         void NakamuraTest::nhttpcleanupcallback() {
             sNHTTPFinished = TRUE;
         }
@@ -470,6 +487,5 @@ namespace ipl {
         BOOL NakamuraTest::isResetAcceptable() const {
             return FALSE;
         }
-
     }  // namespace scene
 }  // namespace ipl

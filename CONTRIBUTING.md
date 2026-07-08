@@ -44,11 +44,13 @@
 
 # Code Guidelines
 
+### Note: In some scenarios, some of these rules can be ignored if they either affect matching or relate to symbols or DWARF from ELF files.
+
 ### General
 
 - Style formatting is all done by `clang-format`.
   - It should automatically apply when using Visual Studio Code on saving a source file.
-- For checking on pointers, please use the `NULL` macro, unless if it affects code matching.
+- For checking on pointers, please use the `NULL` macro.
 ```cpp
 // Do this!
 if (myPointer == NULL) {
@@ -149,7 +151,7 @@ Make sure the guard names are uppercase SNAKE_CASE.
 
 ### Literals
 
-- For floating-point values, please be explicit with them. (it can change code and data matching)
+- For floating-point values, please be explicit with them. (they also affect matching)
 ```cpp
 // Do this!
 float value0 = 1.0f;

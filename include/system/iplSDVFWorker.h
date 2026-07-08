@@ -8,11 +8,6 @@
 #include <revolution/os.h>
 
 namespace ipl {
-#define FAT_PAGES 4
-#define DATA_PAGES 4
-#define TOTAl_PAGES (FAT_PAGES + DATA_PAGES)
-#define STACK_SIZE 0x20000
-
     class SDVFWorker {
     public:
         typedef enum WorkMessage {
@@ -31,27 +26,32 @@ namespace ipl {
         } WorkState;
 
         typedef enum WorkSDState {
-            SD_STATE_UNAVAILABLE = 0,
+            SD_STATE_INITIAL = 0,
             SD_STATE_EJECTED,
             SD_STATE_INSERTED,
             SD_STATE_BROKEN,
             SD_STATE_ERROR,
-            SD_STATE_AVAILABLE,
+            SD_STATE_READY,
         } WorkSDState;
 
         enum {
             RESULT_SUCCESS = 0,
-            RESULT_STILL_WORKING = -1,
+            RESULT_WORKING = -1,
             RESULT_FATAL_SD_ERROR = -2,
             RESULT_NAND_CORRUPT = -5,  // Unused but checked by CdbBackup
             RESULT_OUT_OF_SPACE = -7,
             RESULT_FA_ERROR = -8,
-            RESULT_SD_BROKEN = -9,
+            RESULT_BROKEN_MEDIA = -9,
             RESULT_SD_ERROR = -10,
             RESULT_WRITE_PROTECTED = -11,
         };
 
     private:
+        static const int FAT_PAGES = 4;
+        static const int DATA_PAGES = 4;
+        static const int TOTAl_PAGES = (FAT_PAGES + DATA_PAGES);
+        static const int STACK_SIZE = 0x20000;
+
         typedef struct Work {
             FACacheBuf cacheBuf[TOTAl_PAGES];     // 0x00
             FACachePage cachePages[TOTAl_PAGES];  // 0x1000
@@ -68,8 +68,8 @@ namespace ipl {
             OSMessageQueue msgQueue;  // 0x21490
             OSMessage messages[8];    // 0x214B0
 
-            WorkState workState;    // 0x214D0
-            int asyncResult;        // 0x214D4
+            WorkState state;        // 0x214D0
+            s32 asyncResult;        // 0x214D4
             BOOL isWriteProtected;  // 0x214D8
             int prevAsyncResult;    // 0x214DC
             int priority;           // 0x214E0
@@ -102,7 +102,7 @@ namespace ipl {
 
         int call_fa_mount();
 
-        void send_work(WorkMessage messsage);
+        void send_work(WorkMessage message);
         WorkMessage wait_work();
 
         WorkState get_state();

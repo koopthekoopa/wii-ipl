@@ -232,20 +232,16 @@ namespace ipl {
         }
 
         ESTitleId Manager::hasChannel(ESTitleId titleId, int* outPage, int* outIndex) const {
-            u64 typeMask;
-            if (ES_TITLE_TYPE(titleId) != 0) {
-                typeMask = 0xFFFFFFFFFFFFFFFF;
-            } else {
-                typeMask = 0x00000000FFFFFFFF;
-            }
+            ESTitleId titleCodeRegion = ES_TITLE_TYPE(titleId) != 0 ? 0xFFFFFFFFFFFFFFFF : 0x00000000FFFFFFFF;
+            ESTitleId titleCode = TITLE_NO_REGION(titleCodeRegion);
 
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
                 for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
                     if (mChannels[page][index].loadedBnr) {
                         if (mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_CHANNEL) {
                             ESTitleId tId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
-                            if (titleId == (tId & typeMask) ||
-                                TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
+                            if (titleId == (tId & titleCodeRegion) ||
+                                (tId & titleCode) == (titleId & titleCode) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
                                 if (outPage) {
                                     *outPage = page;
                                 }
@@ -367,7 +363,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = getChannel(page, index).loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconRSOIdx : 0;
+                u32 rsoIndex = getMetaHdr_IconRSOIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -382,7 +378,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerRSOIdx : 0;
+                u32 rsoIndex = getMetaHdr_BannerRSOIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -397,7 +393,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconCSIdx : 0;
+                u32 rsoIndex = getMetaHdr_IconCSIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -412,7 +408,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerCSIdx : 0;
+                u32 rsoIndex = getMetaHdr_BannerCSIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -471,6 +467,8 @@ namespace ipl {
                 return NULL;
             }
 
+            u32 lang;
+
             // Get title name via language
             if (mChannels[page][index].metaHdr->names[System::getLanguage()][nameIndex][0] != 0) {
                 return mChannels[page][index].metaHdr->names[System::getLanguage()][nameIndex];
@@ -481,7 +479,7 @@ namespace ipl {
             u32* lookup = (u32*)scLangLookup[System::getRegion()];
 
             for (int i = 0; i < ARRAY_LENGTH(scLangLookup[0]); i++) {
-                u32 lang = lookup[i];
+                lang = lookup[i];
                 if (mChannels[page][index].metaHdr->names[lang][nameIndex][0] != 0) {
                     return mChannels[page][index].metaHdr->names[lang][nameIndex];
                 }
@@ -701,9 +699,10 @@ namespace ipl {
                 channel->bnrFile = NULL;
             } else {
                 // Search for meta header
-                channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_PAD);
-                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase(
-                                                     (u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
+                channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_RESERVED_PADDING);
+                if (channel->headerOffset < 0 ||
+                    !System::getChannelManager()->checkHeaderBase(
+                        (u8*)(channel->headerOffset + (u32)channel->bnrFile->getBuffer() + META_RESERVED_PADDING), &channel->headerSize)) {
                     memset(channel, 0, sizeof(SEntry));
                     delete channel->bnrFile;
                     channel->bnrFile = NULL;
@@ -717,7 +716,7 @@ namespace ipl {
                         memset(channel, 0, sizeof(SEntry));
                     } else {
                         // Alright, prepare the ARC!
-                        channel->arcData = (u8*)(channel->bnrFile->getBuffer() + channel->headerSize + channel->headerOffset);
+                        channel->arcData = (u8*)(channel->headerSize + channel->headerOffset + (u32)channel->bnrFile->getBuffer());
                         ARCInitHandle(channel->arcData, &channel->arc);
                         channel->loadedBnr = true;
                     }
@@ -726,21 +725,22 @@ namespace ipl {
 
             channel->state = CHAN_STATE_LOADED;
         }
-
+#pragma push
+#pragma ppc_iro_level 0
         void Manager::loadMetaHeaderAsync(int page, int index) {
-            if (mTmpChannel.state != CHAN_STATE_UNLOADED) {
+            if (mChannels[page][index].state != CHAN_STATE_UNLOADED) {
                 return;
             }
 
             SInfo info = System::getSaveData()->getChanInfo(page, index);
             mChannels[page][index].info = info;
 
-            if (info.primaryType == channel::PRIMARY_TYPE_NONE) {
+            if (mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_NONE) {
                 // Invalid!!!!
                 memset(&mChannels[page][index], 0, sizeof(SEntry));
                 mNumFinished++;
                 mChannels[page][index].state = CHAN_STATE_LOADED;
-            } else if (info.primaryType == channel::PRIMARY_TYPE_DISK) {
+            } else if (mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 // Load disk banner
                 mChannels[page][index].loadedBnr = true;
                 if (mChannels[page][index].info.sceneID == SCENE_ID_DISK_CHANNEL) {
@@ -755,17 +755,17 @@ namespace ipl {
             } else {
                 // Load channel banner
                 ESTitleId titleId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
-                s32 ret = utility::ESMisc::GetValidTicketIndex(System::getMem2Sys(), titleId);
-                if (ret == -1) {
-                    ret = 0;
+                s32 ticketIdx = utility::ESMisc::GetValidTicketIndex(System::getMem2Sys(), titleId);
+                if (ticketIdx == -1) {
+                    ticketIdx = 0;
                     mChannels[page][index].missingTicket = TRUE;
                 }
 
-                mChannels[page][index].ticketIdx = ret;
+                mChannels[page][index].ticketIdx = ticketIdx;
 
                 // Get tmd
                 ESTmdView* tmdView = NULL;
-                ret = utility::ESMisc::GetTmdView(System::getMem2Sys(), titleId, &tmdView);
+                s32 ret = utility::ESMisc::GetTmdView(System::getMem2Sys(), titleId, &tmdView);
                 if (ret != ES_ERR_OK) {
                     IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 1468);
                 }
@@ -787,6 +787,7 @@ namespace ipl {
                 mChannels[page][index].state = CHAN_STATE_LOADED_META;
             }
         }
+#pragma pop
 
         void Manager::cbReadMetaHeader(void* work) {
             SEntry* channel = (SEntry*)work;
@@ -800,9 +801,10 @@ namespace ipl {
                 channel->bnrFile = NULL;
             } else {
                 // Search for meta header
-                channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_PAD);
-                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase(
-                                                     (u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
+                channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_RESERVED_PADDING);
+                if (channel->headerOffset < 0 ||
+                    !System::getChannelManager()->checkHeaderBase(
+                        (u8*)(channel->headerOffset + (u32)channel->bnrFile->getBuffer() + META_RESERVED_PADDING), &channel->headerSize)) {
                     memset(channel, 0, sizeof(SEntry));
                     delete channel->bnrFile;
                     channel->bnrFile = NULL;
@@ -816,7 +818,7 @@ namespace ipl {
                         memset(channel, 0, sizeof(SEntry));
                     } else {
                         // Alright, prepare the ARC!
-                        channel->arcData = (u8*)(channel->bnrFile->getBuffer() + channel->headerSize + channel->headerOffset);
+                        channel->arcData = (u8*)(channel->headerSize + channel->headerOffset + (u32)channel->bnrFile->getBuffer());
                         ARCInitHandle(channel->arcData, &channel->arc);
                         channel->loadedBnr = true;
 
@@ -902,7 +904,7 @@ namespace ipl {
             const char* magic = "IMET";
             int next = 0;
 
-            for (int i = 0; i < ((META_PAD * 2) + 0x20); i++, buffer++) {
+            for (int i = 0; i < ((META_RESERVED_PADDING * 2) + 0x20); i++, buffer++) {
                 // Found one character?
                 if (*buffer == magic[next]) {
                     // Look for the next one
@@ -950,7 +952,7 @@ namespace ipl {
             }
 
             // Reset padding
-            memset(buffer, 0, META_PAD);
+            memset(buffer, 0, META_RESERVED_PADDING);
             // Do not include sum in buffer
             memset(buffer + (size - NET_MD5_DIGEST_SIZE), 0, NET_MD5_DIGEST_SIZE);
 
@@ -1178,16 +1180,16 @@ namespace ipl {
         SEntry* Manager::fn_8133A4E0(ESTitleId titleId) {
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
                 for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
-                    if (mChannels[page][index].loadedBnr) {
-                        if (ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode) == titleId) {
-                            return &mChannels[page][index];
-                        }
+                    ESTitleId cmp = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
+                    if (mChannels[page][index].loadedBnr && cmp == titleId) {
+                        return &mChannels[page][index];
                     }
                 }
             }
 
             if (mTmpChannel.loadedBnr) {
-                if (ES_TITLE_ID(mTmpChannel.info.titleType, mTmpChannel.info.titleCode) == titleId) {
+                ESTitleId cmp = ES_TITLE_ID(mTmpChannel.info.titleType, mTmpChannel.info.titleCode);
+                if (cmp == titleId) {
                     return &mTmpChannel;
                 }
             }

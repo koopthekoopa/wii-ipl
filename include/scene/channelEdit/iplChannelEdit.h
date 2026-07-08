@@ -14,39 +14,39 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(ChannelEdit) {
         public:
-            enum State {
-                CHANEDIT_STATE_ON_NORMAL = 0,       // 0x00
-                CHANEDIT_STATE_ON_FADEIN1ST,        // 0x01
-                CHANEDIT_STATE_ON_FADEIN2ND,        // 0x02
-                CHANEDIT_STATE_ON_FADEOUT1ST,       // 0x03
-                CHANEDIT_STATE_ON_FADEOUT2ND,       // 0x04
-                CHANEDIT_STATE_ON_SCROLL_R,         // 0x05
-                CHANEDIT_STATE_ON_SCROLL_L,         // 0x06
-                CHANEDIT_STATE_ON_CHANGE_TAG1ST,    // 0x07
-                CHANEDIT_STATE_ON_CHANGE_TAG2ND,    // 0x08
-                CHANEDIT_STATE_ON_TRIG_COPY,        // 0x09
-                CHANEDIT_STATE_ON_EDIT,             // 0x0a
-                CHANEDIT_STATE_ON_EDIT_FADEIN,      // 0x0b
-                CHANEDIT_STATE_ON_EDIT_FADEOUT1ST,  // 0x0c
-                CHANEDIT_STATE_ON_EDIT_FADEOUT2ND,  // 0x0d
-                CHANEDIT_STATE_ON_VERIFY1ST,        // 0x0e
-                CHANEDIT_STATE_ON_VERIFY2ND,        // 0x0f
-                CHANEDIT_STATE_ON_VERIFY_COPY,      // 0x10
-                CHANEDIT_STATE_ON_VERIFY_DEL,       // 0x11
-                CHANEDIT_STATE_ON_VERIFY_FORMAT,    // 0x12
-                CHANEDIT_STATE_ON_END_FORMAT,       // 0x13
-                CHANEDIT_STATE_ON_END_DEL,          // 0x14
-                CHANEDIT_STATE_ON_SD_MOUNT,         // 0x15
-                CHANEDIT_STATE_ON_SD_MESSAGE1ST,    // 0x16
-                CHANEDIT_STATE_ON_SD_MESSAGE2ND,    // 0x17
-                CHANEDIT_STATE_ON_SD_MESSAGE3RD,    // 0x18
-                CHANEDIT_STATE_ON_PROCESS,          // 0x19
-                CHANEDIT_STATE_ON_END_PROCESS,      // 0x1a
-                CHANEDIT_STATE_ON_EXIST_APP,        // 0x1b
-                CHANEDIT_STATE_ON_SD_MOUNT_ONLY,    // 0x1c
-                CHANEDIT_STATE_ON_TRIG_MOVE,        // 0x1d
-                CHANEDIT_STATE_ON_VERIFY_MOVE,      // 0x1e
-                CHANEDIT_STATE_ON_END_MOVE,         // 0x1f
+            enum {
+                STATE_ON_NORMAL = 0,
+                STATE_ON_FADEIN1ST,
+                STATE_ON_FADEIN2ND,
+                STATE_ON_FADEOUT1ST,
+                STATE_ON_FADEOUT2ND,
+                STATE_ON_SCROLL_R,
+                STATE_ON_SCROLL_L,
+                STATE_ON_CHANGE_TAG1ST,
+                STATE_ON_CHANGE_TAG2ND,
+                STATE_ON_TRIG_COPY,
+                STATE_ON_EDIT,
+                STATE_ON_EDIT_FADEIN,
+                STATE_ON_EDIT_FADEOUT1ST,
+                STATE_ON_EDIT_FADEOUT2ND,
+                STATE_ON_VERIFY1ST,
+                STATE_ON_VERIFY2ND,
+                STATE_ON_VERIFY_COPY,
+                STATE_ON_VERIFY_DEL,
+                STATE_ON_VERIFY_FORMAT,
+                STATE_ON_END_FORMAT,
+                STATE_ON_END_DEL,
+                STATE_ON_SD_MOUNT,
+                STATE_ON_SD_MESSAGE1ST,
+                STATE_ON_SD_MESSAGE2ND,
+                STATE_ON_SD_MESSAGE3RD,
+                STATE_ON_PROCESS,
+                STATE_ON_END_PROCESS,
+                STATE_ON_EXIST_APP,
+                STATE_ON_SD_MOUNT_ONLY,
+                STATE_ON_TRIG_MOVE,
+                STATE_ON_VERIFY_MOVE,
+                STATE_ON_END_MOVE,
             };
 
             ChannelEdit(EGG::Heap * heap);
@@ -70,17 +70,25 @@ namespace ipl {
             void update_nand_free();
             void update_sd_free();
 
-            void onPoint(AnmPane*);
-            void onLeft(AnmPane*);
-            void onTrig(AnmPane*);
-            void onTrig(ChanAppBox*);
+            void onPoint(AnmPane * pane);
+            void onLeft(AnmPane * pane);
+            void onTrig(AnmPane * pane);
+            void onTrig(ChanAppBox * box);
             void onTrigButton(bool isErr);
             void onTrigDel();
             void onTrigCopy();
             void onTrigMove();
 
-            inline State getState() {
+            inline int getState() {
                 return mState;
+            }
+
+            nand::File* getHatenaLayout() {
+                return mpCorruptIconFile;
+            }
+
+            nand::File* geTmpTitleLayout() {
+                return mpTmpTitleIconFile;
             }
 
         private:
@@ -131,42 +139,54 @@ namespace ipl {
             void on_end_move();
 
             enum Page {
-                CHANEDIT_PAGE_WII = 0,
-                CHANEDIT_PAGE_SD = 1,
+                PAGE_WII = 0,
+                PAGE_SD = 1,
             };
 
             enum IntentType {
-                CHANEDIT_INTENT_NONE = 0,
-                CHANEDIT_INTENT_COPY = 1,
-                CHANEDIT_INTENT_MOVE = 2,
+                INTENT_NONE = 0,
+                INTENT_COPY,
+                INTENT_MOVE,
             };
 
             enum {
-                CHANEDIT_PROC_NUL = 0,  // 0
-                CHANEDIT_PROC_CPY = 1,  // 1
-                CHANEDIT_PROC_DEL = 2,  // 2
-                CHANEDIT_PROC_FMT = 3,  // 3
-                CHANEDIT_PROC_MOV = 4,  // 4
+                PROC_NUL = 0,
+                PROC_CPY,
+                PROC_DEL,
+                PROC_FMT,
+                PROC_MOV,
             };
 
-            State mState;                           // 0x54
-            nand::LayoutFile* pChanEditLytFile;     // 0x58
-            nand::LayoutFile* pBalloonLytFile;      // 0x5c
-            nand::File* pCorruptIconFile;           // 0x60
-            nand::File* pTmptitleIconFile;          // 0x64
-            ChanAppBase* pChanAppBase;              // 0x68
-            ChanAppEdit* pChanAppEdit;              // 0x6c
-            nw4r::ut::List mChanAppBoxList;         // 0x70
-            NandSDCardManager* pNandSDCardManager;  // 0x7c
-            TextBalloon* mTextBalloonArr[15];       // 0x80
-            Page mPage;                             // 0xbc
-            ChanAppBox* pCurrBox;                   // 0xc0
-            int mPageOffset;                        // 0xc4
-            int mSdState;                           // 0xc8
-            bool mArwRVisible;                      // 0xcc
-            bool mArwLVisible;                      // 0xcd
-            int mProcessType;                       // 0xd0
-            IntentType mActionIntent;               // 0xd4
+            int mState;  // 0x54
+
+            nand::LayoutFile* mpLayoutFile;   // 0x58
+            nand::LayoutFile* mpBalloonFile;  // 0x5C
+
+            nand::File* mpCorruptIconFile;   // 0x60
+            nand::File* mpTmpTitleIconFile;  // 0x64
+
+            ChanAppBase* mpChanAppBase;      // 0x68
+            ChanAppEdit* mpChanAppEdit;      // 0x6C
+            nw4r::ut::List mChanAppBoxList;  // 0x70
+
+            NandSDCardManager* mpNandSDCardManager;  // 0x7C
+
+            static const int MAX_BALLOONS = 15;
+
+            TextBalloon* mpBalloons[MAX_BALLOONS];  // 0x80
+
+            Page mPage;                // 0xBC
+            ChanAppBox* mpCurrentBox;  // 0xC0
+            int mPageOffset;           // 0xC4
+
+            int mSDState;  // 0xC8
+
+            bool mArwRVisible;  // 0xCC
+            bool mArwLVisible;  // 0xCD
+
+            int mProcessType;  // 0xD0
+
+            IntentType mActionIntent;  // 0xD4
         };
     }  // namespace scene
 }  // namespace ipl

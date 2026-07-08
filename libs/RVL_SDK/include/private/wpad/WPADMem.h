@@ -23,7 +23,7 @@ typedef struct WPADMemBlock {
     int unk_0x00;           // 0x00
     int unk_0x04;           // 0x04
     s16 unk_0x08;           // 0x08
-    int unk_0x0c;           // 0x0C
+    int unk_0x0C;           // 0x0C
     WPADCallback unk_0x10;  // 0x10
 } WPADMemBlock;
 

@@ -8,42 +8,18 @@
 namespace ipl {
     namespace scene {
         const f32 offsets[2][2] = {
-            {64.000000f, 48.000000f},
-            {85.000000f, 48.000000f},
+            {64.f, 48.f},
+            {85.f, 48.f},
         };
-
-        typedef struct {
-            wchar_t digits[10];
-        } SCNumber;
-        static const SCNumber scNumber = {L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9'};
 
         // TODO: Figure out what this might've been/why it isn't inlining
         void CHANAPPEDIT_dummyFunctionToKeepAConstructorStuffFromInlining(nw4r::math::VEC3& vec) {
             math::VEC3 end(vec);
         }
 
-        enum ChanAppEditAnimIdx {
-            ANIM_MASK_IN = 0,   // 0x0
-            ANIM_MASK_OUT,      // 0x1
-            ANIM_COPY_IN,       // 0x2
-            ANIM_COPY_OUT,      // 0x3
-            ANIM_COPY_FLASH,    // 0x4
-            ANIM_DEL_IN,        // 0x5
-            ANIM_DEL_OUT,       // 0x6
-            ANIM_DEL_FLASH,     // 0x7
-            ANIM_SELECT_OUT,    // 0x8
-            ANIM_TEXT_FADEIN,   // 0x9
-            ANIM_TEXT_FADEOUT,  // 0xa
-            ANIM_WAIT,          // 0xb
-            ANIM_COVER_IN,      // 0xc
-            ANIM_MOVE_IN,       // 0xd
-            ANIM_MOVE_OUT,      // 0xe
-            ANIM_MOVE_FLASH,    // 0xf
-        };
-
-        ChanAppEdit::ChanAppEdit(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName)
-            : AnmController(heap), ::gui::EventHandler(), mState(EDIT_STATE_IDLE), mLinearInterp(), pChanAppBox(NULL), mMsgId(0), pThumbnail(NULL) {
-            pLytObj = new (heap) layout::Object(heap, lytFile, lytFolder, lytFileName);
+        ChanAppEdit::ChanAppEdit(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName)
+            : AnmController(heap), ::gui::EventHandler(), mState(STATE_IDLE), mLinearInterp(), mpChanAppBox(NULL), mMsgId(0), mpThumbnail(NULL) {
+            mpLayout = new (heap) layout::Object(heap, layoutFile, layoutDir, layoutFileName);
 
             add_animation("mn_ChannelDetail_a_SeenIn.brlan", "G_Mask");
             add_animation("mn_ChannelDetail_a_SeenOut.brlan", "G_Mask");
@@ -62,7 +38,7 @@ namespace ipl {
             add_animation("mn_ChannelDetail_a_MoveFoucusOut.brlan", "G_Move");
             add_animation("mn_ChannelDetail_a_MoveFlash.brlan", "G_MoveFlash");
 
-            pLytObj->finishBinding();
+            mpLayout->finishBinding();
             set_textbox("T_Move_00", MESG_SAVEDATA_EDIT_MOVE);
             set_textbox("T_Copy_00", MESG_SAVEDATA_EDIT_COPY);
             set_textbox("T_Del_00", MESG_SAVEDATA_EDIT_DEL);
@@ -87,13 +63,13 @@ namespace ipl {
             set_visible("T_Move_off", false);
             set_visible("T_Move_off_00", false);
 
-            pPaneManager = new ipl::gui::PaneManager(this, pLytObj->getDrawInfo(), NULL, NULL, true);
-            pPaneManager->createLayoutScene(*pLytObj->getNW4RLyt());
-            pPaneManager->setAllComponentTriggerTarget(false);
+            mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
+            mpGui->createLayoutScene(*mpLayout->getNW4RLyt());
+            mpGui->setAllComponentTriggerTarget(false);
 
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Move_00"), true);
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Copy_00"), true);
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Del_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Move_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Copy_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Del_00"), true);
 
             add_anmpane("B_Move_00", get_animation(ANIM_MOVE_IN), get_animation(ANIM_MOVE_OUT));
             add_anmpane("B_Copy_00", get_animation(ANIM_COPY_IN), get_animation(ANIM_COPY_OUT));
@@ -101,86 +77,100 @@ namespace ipl {
         }
 
         ChanAppEdit::~ChanAppEdit() {
-            delete pLytObj;
-            delete pPaneManager;
+            delete mpLayout;
+            delete mpGui;
         }
 
         void ChanAppEdit::calc() {
             AnmPane* anmPane;
 
-            pLytObj->calc();
-            pPaneManager->calc();
+            mpLayout->calc();
+            mpGui->calc();
             anmPane = NULL;
             while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL)
                 anmPane->calc();
 
-            if (pThumbnail != NULL)
-                pThumbnail->calc();
+            if (mpThumbnail != NULL)
+                mpThumbnail->calc();
 
             switch (mState) {
-                case EDIT_STATE_IDLE:
+                case STATE_IDLE: {
                     break;
-                case EDIT_STATE_FADEIN:
+                }
+                case STATE_FADEIN: {
                     on_fadein();
                     break;
-                case EDIT_STATE_FADEOUT:
+                }
+                case STATE_FADEOUT: {
                     on_fadeout();
                     break;
-                case EDIT_STATE_HIDE_BTN0_DIALOG:
+                }
+                case STATE_HIDE_BTN0_DIALOG: {
                     on_hide_btn0_dialog();
                     break;
-                case EDIT_STATE_SHOW_BTN2_DIALOG1ST:
+                }
+                case STATE_SHOW_BTN2_DIALOG1ST: {
                     on_show_btn2_dialog1st();
                     break;
-                case EDIT_STATE_SHOW_BTN2_DIALOG2ND:
+                }
+                case STATE_SHOW_BTN2_DIALOG2ND: {
                     on_show_btn2_dialog2nd();
                     break;
-                case EDIT_STATE_SELECT_FADEIN:
+                }
+                case STATE_SELECT_FADEIN: {
                     on_select_fadein();
                     break;
-                case EDIT_STATE_SELECT_FADEOUT1ST:
+                }
+                case STATE_SELECT_FADEOUT1ST: {
                     on_select_fadeout1st();
                     break;
-                case EDIT_STATE_SELECT_FADEOUT2ND:
+                }
+                case STATE_SELECT_FADEOUT2ND: {
                     on_select_fadeout2nd();
                     break;
-                case EDIT_STATE_TEXT_FADEIN:
+                }
+                case STATE_TEXT_FADEIN: {
                     on_text_fadein();
                     break;
-                case EDIT_STATE_TEXT_FADEOUT:
+                }
+                case STATE_TEXT_FADEOUT: {
                     on_text_fadeout();
                     break;
-                case EDIT_STATE_TRIG_DEL:
+                }
+                case STATE_TRIG_DEL: {
                     on_trig_del();
                     break;
-                case EDIT_STATE_CLEAR:
+                }
+                case STATE_CLEAR: {
                     on_clear();
                     break;
+                }
             }
             return;
         }
 
         void ChanAppEdit::draw() {
-            pLytObj->draw();
+            mpLayout->draw();
 
             // set_visible("DataBaseCover_00", false);
             // set_visible("DataBaseCover_01", false);
 
             // ChannelEdit* sceneChannelEdit = get_channel_edit();
-            // if (sceneChannelEdit->getState() == ChannelEdit::CHANEDIT_STATE_ON_UNK_x05 ||
-            //     sceneChannelEdit->getState() == ChannelEdit::CHANEDIT_STATE_ON_UNK_x06)
+            // if (sceneChannelEdit->getState() == ChannelEdit::CHANSTATE_ON_UNK_x05 ||
+            //     sceneChannelEdit->getState() == ChannelEdit::CHANSTATE_ON_UNK_x06)
             //     return;
-            if (!(mState != EDIT_STATE_FADEIN || get_animation(ANIM_MASK_IN)->animator->getCurrentFrame() > 15))
+            if (!(mState != STATE_FADEIN || get_animation(ANIM_MASK_IN)->animator->getCurrentFrame() > 15)) {
                 return;
-            if (pThumbnail == NULL)
+            }
+            if (mpThumbnail == NULL) {
                 return;
-            if (pThumbnail->getLytObj() == NULL)
+            }
+            if (mpThumbnail->getLytObj() == NULL) {
                 return;
+            }
 
-            f32 fScisHalfW;
-            f32 fScisHalfH;
-            fScisHalfW = offsets[SCGetAspectRatio()][0];
-            fScisHalfH = offsets[SCGetAspectRatio()][1];
+            f32 fScisHalfW = offsets[SCGetAspectRatio()][0];
+            f32 fScisHalfH = offsets[SCGetAspectRatio()][1];
 
             nw4r::ut::Rect projRect;
             System::getProjectionRect(&projRect);
@@ -190,7 +180,7 @@ namespace ipl {
             u32 fbW = renderModeObj->fbWidth;
             u32 efbH = renderModeObj->efbHeight;
 
-            nw4r::math::VEC3 translate = pThumbnail->getLytObj()->GetRootPane()->GetTranslate();
+            nw4r::math::VEC3 translate = mpThumbnail->getLytObj()->GetRootPane()->GetTranslate();
 
             f32 scisL = (translate.x - fScisHalfW) * (fbW / projRect.GetWidth()) + fbW / 2.f;
             f32 scisT = efbH / 2.f - translate.y - fScisHalfH;
@@ -198,20 +188,20 @@ namespace ipl {
             f32 scisH = fScisHalfH * 2.f;
             GXSetScissor(scisL, scisT, scisW, scisH);
 
-            pThumbnail->getLytObj()->GetRootPane()->CalculateMtx(*pLytObj->getDrawInfo());
-            pThumbnail->draw();
+            mpThumbnail->getLytObj()->GetRootPane()->CalculateMtx(*mpLayout->getDrawInfo());
+            mpThumbnail->draw();
 
             GXSetScissor(0, 0, System::getRenderModeObj()->fbWidth, System::getRenderModeObj()->efbHeight);
 
-            pLytObj->draw(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? "N_Mask16x9" : "N_Mask4x3");
+            mpLayout->draw(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? "N_Mask16x9" : "N_Mask4x3");
         }
 
         void ChanAppEdit::update() {
-            pPaneManager->update();
+            mpGui->update();
         }
 
         void ChanAppEdit::anmFadein(ChanAppBox* box) {
-            pChanAppBox = box;
+            mpChanAppBox = box;
             set_visible("Mask_00", true);
             set_visible("N_Window", true);
             set_visible("Cover_16x9_del", false);
@@ -252,25 +242,31 @@ namespace ipl {
                 set_visible("BlockLine", true);
             }
 
-            pThumbnail = new (System::getMem2App(), 4) Thumbnail();
+            mpThumbnail = new (System::getMem2App(), 4) Thumbnail();
 
-            pThumbnail->create(box->getThumbnail()->getLytHeapBufRef());
+            mpThumbnail->create(box->getThumbnail()->getLytHeapBufRef());
 
-            pThumbnail->getLytObj()->GetRootPane()->SetTranslate(
+            mpThumbnail->getLytObj()->GetRootPane()->SetTranslate(
                 get_translate(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? "N_Atari16x9" : "N_Atari4x3"));
 
             u32 blockCount = box->getThumbnail()->getBlockCount();
-            SCNumber scNumberData = scNumber;
+
+            const wchar_t scNumber[10] = {L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9'};
+
             wchar_t blockTextDigits[5] = L"";
             wchar_t blockText[5] = L"";
-            blockTextDigits[0] = scNumberData.digits[blockCount / 1000];
-            blockTextDigits[1] = scNumberData.digits[blockCount / 100 % 10];
-            blockTextDigits[2] = scNumberData.digits[blockCount / 10 % 10];
-            blockTextDigits[3] = scNumberData.digits[blockCount % 10];
+
+            blockTextDigits[0] = scNumber[blockCount / 1000];
+            blockTextDigits[1] = scNumber[blockCount / 100 % 10];
+            blockTextDigits[2] = scNumber[blockCount / 10 % 10];
+            blockTextDigits[3] = scNumber[blockCount % 10];
+
             int zeroOffset;
-            for (zeroOffset = 0; zeroOffset < 3; zeroOffset++)
-                if (blockTextDigits[zeroOffset] != L'0')
+            for (zeroOffset = 0; zeroOffset < 3; zeroOffset++) {
+                if (blockTextDigits[zeroOffset] != L'0') {
                     break;
+                }
+            }
             wcscpy(blockText, blockTextDigits + zeroOffset);
 
             set_textbox("T_Block_00", blockText);
@@ -283,34 +279,38 @@ namespace ipl {
             change_button_text(MESG_CMN_BACK_ALT_3);
 
             AnmPane* anmPane = NULL;
-            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL)
+            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL) {
                 clear_anmpane(anmPane->getName());
+            }
 
             do_animation(ANIM_MASK_IN, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_FADEIN;
+            mState = STATE_FADEIN;
         }
+
         void ChanAppEdit::anmFadeout() {
-            pChanAppBox = NULL;
+            mpChanAppBox = NULL;
             change_button_text(MESG_CMN_BACK_ALT);
-            if (pThumbnail != NULL) {
-                delete pThumbnail;
-                pThumbnail = NULL;
+            if (mpThumbnail != NULL) {
+                delete mpThumbnail;
+                mpThumbnail = NULL;
             }
 
             do_animation(ANIM_MASK_OUT, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_FADEOUT;
+            mState = STATE_FADEOUT;
         }
 
         void ChanAppEdit::anmHideBtn0Dialog() {
             System::getDialog()->terminate();
-            mState = EDIT_STATE_HIDE_BTN0_DIALOG;
+            mState = STATE_HIDE_BTN0_DIALOG;
         }
+
         void ChanAppEdit::anmShowBtn0Dialog(u32 msgId, bool dontWait, bool showLoading) {
             System::getDialog()->callBtn0(msgId, dontWait ? 0 : 180, showLoading);
         }
+
         void ChanAppEdit::anmShowS2Btn2Dialog(u32 msgId) {
             set_textbox("T_Message_00", msgId);
-            mState = EDIT_STATE_SHOW_BTN2_DIALOG1ST;
+            mState = STATE_SHOW_BTN2_DIALOG1ST;
         }
 
         void ChanAppEdit::anmSelectFadein() {
@@ -320,20 +320,21 @@ namespace ipl {
             change_button_text(MESG_CMN_BACK_ALT_3);
 
             AnmPane* anmPane = NULL;
-            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL)
+            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL) {
                 clear_anmpane(anmPane->getName());
+            }
 
-            mState = EDIT_STATE_SELECT_FADEIN;
+            mState = STATE_SELECT_FADEIN;
         }
         void ChanAppEdit::anmSelectFadeout(u32 msgId) {
             set_textbox("T_Message_00", msgId);
-            mState = EDIT_STATE_SELECT_FADEOUT1ST;
+            mState = STATE_SELECT_FADEOUT1ST;
         }
 
         void ChanAppEdit::anmTextFadein(u32 msgId) {
             mMsgId = msgId;
             do_animation(ANIM_TEXT_FADEIN, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_TEXT_FADEIN;
+            mState = STATE_TEXT_FADEIN;
         }
         void ChanAppEdit::anmTextFadeout() {
             do_animation(ANIM_TEXT_FADEOUT, ANIM_TYPE_FORWARD, true);
@@ -342,12 +343,12 @@ namespace ipl {
             sceneSettingButton->reserve(SettingButton::CMD_SET_TEXT, MESG_CMN_BACK_ALT);
             sceneSettingButton->reserve(SettingButton::CMD_SHOW_BTN, 0);
 
-            if (pThumbnail != NULL) {
-                delete pThumbnail;
-                pThumbnail = NULL;
+            if (mpThumbnail != NULL) {
+                delete mpThumbnail;
+                mpThumbnail = NULL;
             }
 
-            mState = EDIT_STATE_TEXT_FADEOUT;
+            mState = STATE_TEXT_FADEOUT;
         }
 
         void ChanAppEdit::anmStartWaitAnm() {
@@ -372,13 +373,13 @@ namespace ipl {
             set_visible(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? "Cover_16x9_del" : "Cover_4x3_del", true);
 
             do_animation(ANIM_COVER_IN, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_CLEAR;
+            mState = STATE_CLEAR;
         }
 
         void ChanAppEdit::clearAllThumbnails() {
-            if (pThumbnail != NULL) {
-                delete pThumbnail;
-                pThumbnail = NULL;
+            if (mpThumbnail != NULL) {
+                delete mpThumbnail;
+                mpThumbnail = NULL;
             }
         }
 
@@ -386,47 +387,51 @@ namespace ipl {
             gui::PaneComponent* paneComponent = (gui::PaneComponent*)mpManager->getComponent(compId);
             const char* paneName = paneComponent->getPane()->GetName();
 
-            if (mState == EDIT_STATE_TRIG_DEL)
+            controller::Interface* con = (controller::Interface*)data;
+
+            if (mState == STATE_TRIG_DEL) {
                 return;
+            }
 
             AnmPane* anmPane;
             switch (event) {
-                case ON_POINT:
+                case ON_POINT: {
                     anmPane = get_anmpane(paneName);
                     if (anmPane != NULL) {
-                        ChannelEdit* sceneChannelEdit = (ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT);
-                        sceneChannelEdit->onPoint(anmPane);
+                        ((ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT))->onPoint(anmPane);
                     }
                     break;
-                case ON_LEFT:
+                }
+                case ON_LEFT: {
                     anmPane = get_anmpane(paneName);
                     if (anmPane != NULL) {
                         ChannelEdit* sceneChannelEdit = (ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT);
                         sceneChannelEdit->onLeft(anmPane);
                     }
                     break;
-                case ON_TRIG:
-                    if (!((controller::Interface*)data)->downTrg(controller::BTN_INTERACT))
+                }
+                case ON_TRIG: {
+                    if (!con->downTrg(controller::BTN_INTERACT)) {
                         break;
+                    }
                     anmPane = get_anmpane(paneName);
                     if (anmPane != NULL) {
                         if (strcmp(anmPane->getName(), "B_Copy_00") == 0) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
                             do_animation(ANIM_COPY_FLASH, ANIM_TYPE_FORWARD, true);
-                            ChannelEdit* sceneChannelEdit = (ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT);
-                            sceneChannelEdit->onTrigCopy();
+                            ((ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT))->onTrigCopy();
                         } else if (strcmp(anmPane->getName(), "B_Move_00") == 0) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
                             do_animation(ANIM_MOVE_FLASH, ANIM_TYPE_FORWARD, true);
-                            ChannelEdit* sceneChannelEdit = (ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT);
-                            sceneChannelEdit->onTrigMove();
-                        } else if (strcmp(anmPane->getName(), "B_Del_00") == 0 && mState != EDIT_STATE_TRIG_DEL) {
+                            ((ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT))->onTrigMove();
+                        } else if (strcmp(anmPane->getName(), "B_Del_00") == 0 && mState != STATE_TRIG_DEL) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
                             do_animation(ANIM_DEL_FLASH, ANIM_TYPE_FORWARD, true);
-                            mState = EDIT_STATE_TRIG_DEL;
+                            mState = STATE_TRIG_DEL;
                         }
                     }
                     break;
+                }
             }
         }
 
@@ -438,53 +443,57 @@ namespace ipl {
 
             switch (msgId) {
                 case MESG_CMN_BACK_ALT_3:
-                case MESG_CMN_BACK_ALT:
+                case MESG_CMN_BACK_ALT: {
                     sceneSettingButton->setSoundType(SettingButton::CANCEL);
                     break;
-
-                case MESG_CMN_OK:
+                }
+                case MESG_CMN_OK: {
                     sceneSettingButton->setSoundType(SettingButton::DECIDE);
                     break;
+                }
             }
         }
 
         void ChanAppEdit::on_fadein() {
             mLinearInterp.calc();
             set_translate("N_Window", mLinearInterp.get());
-            if (is_animation(ANIM_MASK_IN))
+            if (is_animation(ANIM_MASK_IN)) {
                 return;
-            if (mLinearInterp.isPlaying())
+            }
+            if (mLinearInterp.isPlaying()) {
                 return;
-            mState = EDIT_STATE_IDLE;
+            }
+            mState = STATE_IDLE;
         }
-        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_fadeout, ANIM_MASK_OUT, mState = EDIT_STATE_IDLE);
+
+        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_fadeout, ANIM_MASK_OUT, mState = STATE_IDLE);
         void ChanAppEdit::on_hide_btn0_dialog() {
             if (System::getDialog()->getLastResult() != DialogWindow::RESULT_PROGRESS &&
                 System::getDialog()->getLastResult() != DialogWindow::RESULT_TERMINATED)
                 return;
 
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         }
         WAIT_FOR_ANIM_STATE(ChanAppEdit::on_show_btn2_dialog1st, ANIM_COPY_FLASH, {
             do_animation(ANIM_SELECT_OUT, ANIM_TYPE_FORWARD, true);
             SettingButton* sceneSettingButton = (SettingButton*)System::getScene(SCENE_SETTING_BUTTON);
             sceneSettingButton->hideBtn();
 
-            mState = EDIT_STATE_SHOW_BTN2_DIALOG2ND;
+            mState = STATE_SHOW_BTN2_DIALOG2ND;
         });
         WAIT_FOR_ANIM_STATE(ChanAppEdit::on_show_btn2_dialog2nd, ANIM_SELECT_OUT, {
             System::getDialog()->callS2Btn2(MESG_CMN_NO, MESG_CMN_YES, true);
 
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         });
-        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_select_fadein, ANIM_SELECT_OUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_select_fadein, ANIM_SELECT_OUT, mState = STATE_IDLE);
         WAIT_FOR_ANIM_STATE(ChanAppEdit::on_select_fadeout1st, ANIM_COPY_FLASH, {
             do_animation(ANIM_SELECT_OUT, ANIM_TYPE_FORWARD, true);
             change_button_text(MESG_CMN_OK);
 
-            mState = EDIT_STATE_SELECT_FADEOUT2ND;
+            mState = STATE_SELECT_FADEOUT2ND;
         });
-        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_select_fadeout2nd, ANIM_SELECT_OUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_select_fadeout2nd, ANIM_SELECT_OUT, mState = STATE_IDLE);
 
         void ChanAppEdit::on_text_fadein() {
             if (get_animation(ANIM_TEXT_FADEIN)->animator->getCurrentFrame() >= 20.0f) {
@@ -495,20 +504,20 @@ namespace ipl {
                 return;
 
             stop_animation(ANIM_TEXT_FADEIN);
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         }
-        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_text_fadeout, ANIM_TEXT_FADEOUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(ChanAppEdit::on_text_fadeout, ANIM_TEXT_FADEOUT, mState = STATE_IDLE);
         WAIT_FOR_ANIM_STATE(ChanAppEdit::on_trig_del, ANIM_DEL_FLASH, {
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
             ChannelEdit* sceneChannelEdit = (ChannelEdit*)System::getScene(SCENE_CHANNEL_EDIT);
             sceneChannelEdit->onTrigDel();
         });
         WAIT_FOR_ANIM_STATE(ChanAppEdit::on_clear, ANIM_COVER_IN, {
-            if (pThumbnail != NULL) {
-                delete pThumbnail;
-                pThumbnail = NULL;
+            if (mpThumbnail != NULL) {
+                delete mpThumbnail;
+                mpThumbnail = NULL;
             }
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         });
     }  // namespace scene
 }  // namespace ipl

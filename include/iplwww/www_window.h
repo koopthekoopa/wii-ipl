@@ -23,8 +23,10 @@ namespace ext_ead {
             void SendNotifyEvent(WWWEvent event, WWWHandleEventData* dataHandle);
             void ExecuteEvent();
             void UpdateTexture();
-            void* GetTextureBuffer(int, bool, WWWRect**);
-            void SetWindowSize(int, int);
+            void* GetTextureBuffer(int a, bool b, WWWRect** rectPtrOut);
+            void SetWindowSize(int w, int h);
+
+            WWWHandlewindow* GetHandleWindow() { return mpWwwWindow; };
 
         private:
             void ExecWwwEvent_(int eventCode, WWWHandleEventData* dataHandle);
@@ -34,28 +36,30 @@ namespace ext_ead {
             void ReportEventId_(int eventCode, void*);
 
             struct WindowCmd {
-            public:
-                // u32 unk_0x00;
-                u32 mEventCode;
-                WWWHandleEventData* pHandleEventData;
+                u32 eventCode;                         // 0x00
+                WWWHandleEventData* pHandleEventData;  // 0x04
             };
-            u16 mWidth;                      // 0x004
-            u16 mHeight;                     // 0x006
-            BrowserThread* pThread;          // 0x008
-            void* mTexBufArr[2][3];          // 0x00C
-            WWWRect mTexDisplayRects[2][3];  // 0x024
-        public:
-            WWWHandlewindow* pWwwWindow;  // 0x084
+
+            u16 mWidth;   // 0x04
+            u16 mHeight;  // 0x06
+
+            BrowserThread* mpBrowserThread;  // 0x08
+
+            void* mTexBufArr[2][3];          // 0x0C
+            WWWRect mTexDisplayRects[2][3];  // 0x24
+
+            WWWHandlewindow* mpWwwWindow;  // 0x84
+
         private:
-            ut_message_cmd<ext_ead::www::BrowserWindow::WindowCmd, 32> mMessage;  // 0x088
-            u32 mRenderingMode;                                                   // 0x2ac
+            ut_message_cmd<ext_ead::www::BrowserWindow::WindowCmd, 32> mMessage;  // 0x88
+            u32 mRenderingMode;                                                   // 0x2AC
+
         public:
-            int unk_0x2b0;     // 0x2b0
-            u32 unk_0x2b4[2];  // 0x2b4
-            u32 unk_0x2bc;     // 0x2bc
-            u32 unk_0x2c0;     // 0x2c0
-            u8 unk_0x2c4[6];   // 0x2c4
-            // u8[]
+            int unk_0x2B0;     // 0x2B0
+            u32 unk_0x2B4[2];  // 0x2B4
+            u32 unk_0x2BC;     // 0x2BC
+            u32 unk_0x2C0;     // 0x2C0
+            u8 unk_0x2C4[6];   // 0x2C4
         };
     }  // namespace www
 }  // namespace ext_ead

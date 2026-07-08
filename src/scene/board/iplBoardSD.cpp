@@ -21,7 +21,7 @@ namespace ipl {
                                 sdWorker->mount_sd_async();
                                 break;
                             }
-                            case SDVFWorker::SD_STATE_AVAILABLE: {
+                            case SDVFWorker::SD_STATE_READY: {
                                 mSDState = SD_STATE_INSERTED;
                                 sdWorker->prepare_cdb_backup_to_sd_async();
                                 mState = STATE_PREPARE_RESULT;

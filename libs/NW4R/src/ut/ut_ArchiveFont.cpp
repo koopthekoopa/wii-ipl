@@ -10,9 +10,9 @@
 
 namespace nw4r {
     namespace ut {
-#define GLYPH_INDEX_NOT_FOUND 0xFFFF
         ArchiveFont::ArchiveFont() {
         }
+
         ArchiveFont::~ArchiveFont() {
         }
 
@@ -34,7 +34,7 @@ namespace nw4r {
             const u32* flags0A;
             const u32* flags0C;
 
-            int wordI, j;
+            int i, j;
             int entryI;
             const HeaderedGlyphGroups* offsetPGlgr;
             u32 loadedSheetCount, loadedSmth0ASize, loadedSmth0CSize;
@@ -48,8 +48,9 @@ namespace nw4r {
             u32 neededCharacterSize;
             u32 baseSize;
 
-            if (!ArchiveFontBase::IsValidResource(fontData, 0x4000))
+            if (!ArchiveFontBase::IsValidResource(fontData, 0x4000)) {
                 return 0;
+            }
 
             font = (ArchiveFontBinaryLayout*)fontData;
             pGlgr = &font->glgr;
@@ -83,8 +84,8 @@ namespace nw4r {
             loadedSmth0CSize = 0;
 
             // Get the NUMBER of sheets that should be loaded
-            for (wordI = 0, entryI = 0; entryI < pGlgr->inner.sheetCount; entryI += 0x20, wordI++) {
-                offsetFlags = (const u8*)flagsSheets + wordI * sizeof(u32);
+            for (i = 0, entryI = 0; entryI < pGlgr->inner.sheetCount; entryI += 0x20, i++) {
+                offsetFlags = (const u8*)flagsSheets + i * sizeof(u32);
 
                 flagWord = 0;
                 for (j = 0, offsetPGlgr = pGlgr; j < pGlgr->inner.nameCount;
@@ -100,8 +101,8 @@ namespace nw4r {
             // getLoadedSheetCount(pGlgr, flagsSheets, stepSheets, fontData, includedGroups, &loadedSheetCount);
 
             // Get the SIZE of unk_0x0a that should be loaded
-            for (wordI = 0, entryI = 0; entryI < pGlgr->inner.smthCount_0x0a; entryI += 0x20, wordI++) {
-                offsetFlags = (const u8*)flags0A + wordI * sizeof(u32);
+            for (i = 0, entryI = 0; entryI < pGlgr->inner.smthCount_0x0a; entryI += 32, i++) {
+                offsetFlags = (const u8*)flags0A + i * sizeof(u32);
 
                 flagWord = 0;
                 for (j = 0; j < pGlgr->inner.nameCount; j++) {
@@ -111,16 +112,17 @@ namespace nw4r {
                     }
                 }
 
-                offsetData = (const u32*)data0A + wordI * 32;
+                offsetData = (const u32*)data0A + i * 32;
                 for (j = 0; j < 32; j++) {
-                    if ((flagWord << j) & 0x80000000U)
+                    if ((flagWord << j) & 0x80000000U) {
                         loadedSmth0ASize += offsetData[j] - sizeof(BinaryBlockHeader);
+                    }
                 }
             }
 
-            // Get the SIZE of unk_0x0c that should be loaded
-            for (wordI = 0, entryI = 0; entryI < pGlgr->inner.smthCount_0x0c; entryI += 0x20, wordI++) {
-                offsetFlags = (const u8*)flags0C + wordI * sizeof(u32);
+            // Get the SIZE of unk_0x0C that should be loaded
+            for (i = 0, entryI = 0; entryI < pGlgr->inner.smthCount_0x0c; entryI += 32, i++) {
+                offsetFlags = (const u8*)flags0C + i * sizeof(u32);
 
                 flagWord = 0;
                 for (j = 0; j < pGlgr->inner.nameCount; j++) {
@@ -130,10 +132,11 @@ namespace nw4r {
                     }
                 }
 
-                offsetData = (const u32*)data0C + wordI * 32;
+                offsetData = (const u32*)data0C + i * 32;
                 for (j = 0; j < 32; j++) {
-                    if ((flagWord << j) & 0x80000000U)
+                    if ((flagWord << j) & 0x80000000U) {
                         loadedSmth0CSize += offsetData[j] - sizeof(BinaryBlockHeader);
+                    }
                 }
             }
 
@@ -143,10 +146,11 @@ namespace nw4r {
             loadedSheetsSize = ROUNDUP(loadedSheetCount * pGlgr->inner.uncompSheetSize, 4);
 
             neededCharacterSize = sizeof(CXUncompContextHuffman);
-            if (loadedSmth0ASize + loadedSmth0CSize >= sizeof(CXUncompContextHuffman))
+            if (loadedSmth0ASize + loadedSmth0CSize >= sizeof(CXUncompContextHuffman)) {
                 neededCharacterSize = loadedSmth0ASize + loadedSmth0CSize;
+            }
 
-            baseSize = ROUNDUP(sizeof(FontInformation) + sizeof(FontTextureGlyph) + sheetOffsetsSize, 0x20);
+            baseSize = OSRoundUp32B(sizeof(FontInformation) + sizeof(FontTextureGlyph) + sheetOffsetsSize);
             return baseSize + neededCharacterSize + loadedSheetsSize;
         }
 
@@ -155,8 +159,9 @@ namespace nw4r {
             CachedStreamReader* reader;
 
             // If there's already data bound, exit early
-            if (mFontInfo != NULL)
+            if (mFontInfo != NULL) {
                 return ctx->mBlocksParsed < ctx->mTotalBlocks ? CONSTRUCT_STATE_FATAL_ERR : CONSTRUCT_STATE_DONE;
+            }
 
             state = CONSTRUCT_STATE_WORKING;
             reader = &ctx->mReader;
@@ -164,48 +169,62 @@ namespace nw4r {
 
             while (state == CONSTRUCT_STATE_WORKING) {
                 switch (ctx->mNextCmd) {
-                    case CONSTRUCT_CMD_DISPATCH:
+                    case CONSTRUCT_CMD_DISPATCH: {
                         state = detail::ArchiveFontBase::ConstructOpDispatch(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_FILE_HEADER:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_FILE_HEADER: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeFileHeader(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_GLGR:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_GLGR: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeGLGR(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_FINF:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_FINF: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeFINF(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_CMAP:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_CMAP: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeCMAP(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_CWDH:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_CWDH: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeCWDH(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_ANALYZE_TGLP:
+                    }
+                    case CONSTRUCT_CMD_ANALYZE_TGLP: {
                         state = detail::ArchiveFontBase::ConstructOpAnalyzeTGLP(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_PREPAIR_COPY_SHEET:
+                    }
+                    case CONSTRUCT_CMD_PREPAIR_COPY_SHEET: {
                         state = detail::ArchiveFontBase::ConstructOpPrepairCopySheet(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_PREPAIR_EXPAND_SHEET:
+                    }
+                    case CONSTRUCT_CMD_PREPAIR_EXPAND_SHEET: {
                         state = detail::ArchiveFontBase::ConstructOpPrepairExpandSheet(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_COPY:
+                    }
+                    case CONSTRUCT_CMD_COPY: {
                         state = detail::ArchiveFontBase::ConstructOpCopy(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_SKIP:
+                    }
+                    case CONSTRUCT_CMD_SKIP: {
                         state = detail::ArchiveFontBase::ConstructOpSkip(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_EXPAND:
+                    }
+                    case CONSTRUCT_CMD_EXPAND: {
                         state = detail::ArchiveFontBase::ConstructOpExpand(ctx, reader);
                         break;
-                    case CONSTRUCT_CMD_FATAL_ERR:
+                    }
+                    case CONSTRUCT_CMD_FATAL_ERR: {
                         state = detail::ArchiveFontBase::ConstructOpFatalError(ctx, reader);
                         break;
-                    default:
+                    }
+                    default: {
                         ctx->mNextCmd = CONSTRUCT_CMD_FATAL_ERR;
                         state = CONSTRUCT_STATE_FATAL_ERR;
+                    }
                 }
             }
 
@@ -213,16 +232,17 @@ namespace nw4r {
             // buffer, adjust the alternate character index to respect unloaded
             // sheets, and set the reader function (for displaying strings) to
             // use the encoding in mFontInfo
-            if ((state == CONSTRUCT_STATE_DONE) && (mFontInfo == NULL)) {
+            if (state == CONSTRUCT_STATE_DONE && mFontInfo == NULL) {
                 DCFlushRange(ctx->pWorkStart, ctx->pWorkEnd - ctx->pWorkStart);
                 SetResourceBuffer(ctx->pWorkStart, ctx->pFontInfo, ctx->pSheetOffsets);
-                if (AdjustIndex(this->mFontInfo->alterCharIndex) == GLYPH_INDEX_NOT_FOUND) {
-                    this->mFontInfo->alterCharIndex = 0;
+                if (AdjustIndex(mFontInfo->alterCharIndex) == detail::GLYPH_INDEX_NOT_FOUND) {
+                    mFontInfo->alterCharIndex = 0;
                 }
                 Font::InitReaderFunc(GetEncoding());
             }
             return state;
         }
+
         bool ArchiveFont::Construct(void* work, u32 workSize, const void* fontData, const char* includedGroups) {
             u32 fontDataSize = ((BinaryFileHeader*)fontData)->fileSize;
 
@@ -271,11 +291,12 @@ namespace nw4r {
             u16 idx = ResFontBase::GetGlyphIndex(c);
             GetGlyphFromIndex(glyph, idx);
         }
+
         void ArchiveFont::GetGlyphFromIndex(Glyph* glyph, u16 index) const {
             FontTextureGlyph& tg = *mFontInfo->pGlyph;
 
             u16 realIndex = ArchiveFontBase::AdjustIndex(index);
-            if (realIndex == GLYPH_INDEX_NOT_FOUND) {
+            if (realIndex == detail::GLYPH_INDEX_NOT_FOUND) {
                 index = mFontInfo->alterCharIndex;
                 realIndex = ArchiveFontBase::AdjustIndex(index);
             }

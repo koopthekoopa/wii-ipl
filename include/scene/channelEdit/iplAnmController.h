@@ -8,21 +8,23 @@
 
 namespace ipl {
     namespace scene {
+
 #define WAIT_FOR_ANIM_STATE(FN_NAME, ANIM, THEN)                                                                                                     \
     void FN_NAME() {                                                                                                                                 \
-        if (is_animation(ANIM))                                                                                                                      \
+        if (is_animation(ANIM)) {                                                                                                                    \
             return;                                                                                                                                  \
+        }                                                                                                                                            \
         THEN;                                                                                                                                        \
     }
 
-        struct Anm {
+        class Anm {
         public:
-            inline Anm(ipl::layout::GroupAnimator* _animator) : animator(_animator) {}
-            ipl::layout::GroupAnimator* animator;
+            inline Anm(layout::GroupAnimator* _animator) : animator(_animator) {}
+            layout::GroupAnimator* animator;
             nw4r::ut::Link mLink;
         };
 
-        struct AnmPane {
+        typedef class AnmPane {
         public:
             enum AnimCommand {
                 ANIM_CMD_NONE = 0,
@@ -31,8 +33,8 @@ namespace ipl {
                 ANIM_CMD_CANCEL = 3,
             };
             inline AnmPane(const char* name, Anm* anmIn, Anm* anmOut)
-                : pName(name), mCurrState(ANIM_STATE_IDLE), mPrevState(ANIM_STATE_IDLE), mHoverCount(0), mCurrCmd(ANIM_CMD_NONE), pAnmCurr(NULL),
-                  pAnmIn(anmIn), pAnmOut(anmOut) {}
+                : pName(name), mCurrState(ANIM_STATE_IDLE), mPrevState(ANIM_STATE_IDLE), mHoverCount(0), mCurrCmd(ANIM_CMD_NONE), mpAnmCurr(NULL),
+                  mpAnmIn(anmIn), mpAnmOut(anmOut) {}
 
             void calc();
             void on_cmd_recv(AnimCommand);
@@ -50,21 +52,27 @@ namespace ipl {
                 ANIM_STATE_POINT = 1,
                 ANIM_STATE_LEFT = 2,
             };
+
             nw4r::ut::Link mLink;  // 0x00
-            const char* pName;     // 0x08
-            AnimState mCurrState;  // 0x0c
+
+            const char* pName;  // 0x08
+
+            AnimState mCurrState;  // 0x0C
             AnimState mPrevState;  // 0x10
-            int mHoverCount;       // 0x14
+
+            int mHoverCount;  // 0x14
+
             AnimCommand mCurrCmd;  // 0x18
-            Anm* pAnmCurr;         // 0x1c
-            Anm* pAnmIn;           // 0x20
-            Anm* pAnmOut;          // 0x24
-        };
+
+            Anm* mpAnmCurr;  // 0x1C
+            Anm* mpAnmIn;    // 0x20
+            Anm* mpAnmOut;   // 0x24
+        } AnmPane;
 
         class AnmController {
         public:
-            inline AnmController(EGG::Heap* heap) : pHeap(heap) {
-                pLytObj = NULL;
+            inline AnmController(EGG::Heap* heap) : mpHeap(heap) {
+                mpLayout = NULL;
                 nw4r::ut::List_Init(&mAnmList, 4);
                 nw4r::ut::List_Init(&mPaneList, 0);
             }
@@ -73,8 +81,9 @@ namespace ipl {
                 while (currAnm != NULL) {
                     nw4r::ut::List_Remove(&mAnmList, currAnm);
 
-                    if (currAnm != NULL)
+                    if (currAnm != NULL) {
                         delete currAnm;
+                    }
 
                     currAnm = (Anm*)nw4r::ut::List_GetFirst(&mAnmList);
                 }
@@ -112,11 +121,13 @@ namespace ipl {
             const nw4r::math::VEC2& get_scale(const char* pane);
 
         protected:
-            layout::Object* pLytObj;              // 0x04
-            ipl::gui::PaneManager* pPaneManager;  // 0x08
-            nw4r::ut::List mAnmList;              // 0x0c
-            nw4r::ut::List mPaneList;             // 0x18
-            EGG::Heap* pHeap;                     // 0x24
+            layout::Object* mpLayout;  // 0x04
+            gui::PaneManager* mpGui;   // 0x08
+
+            nw4r::ut::List mAnmList;   // 0x0c
+            nw4r::ut::List mPaneList;  // 0x18
+
+            EGG::Heap* mpHeap;  // 0x24
         };
     }  // namespace scene
 }  // namespace ipl

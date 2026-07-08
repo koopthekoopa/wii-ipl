@@ -432,8 +432,8 @@ namespace ipl {
         void start_left_event(const char* paneName);
         void start_trig_event(const char* paneName);
 
-        State mState;                         // 0x0C
-        ipl::nand::LayoutFile* mpLayoutFile;  // 0x10
+        State mState;                    // 0x0C
+        nand::LayoutFile* mpLayoutFile;  // 0x10
 
         BOOL mbBtnHovered[DIALOG_BTN_TYPE_MAX];  // 0x14
 

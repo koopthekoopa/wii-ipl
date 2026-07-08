@@ -777,7 +777,7 @@ static void __ClearControlBlock(s32 chan) {
     _wmb[chan].unk_0x00 = 0;
     _wmb[chan].unk_0x04 = 0;
     _wmb[chan].unk_0x08 = 0;
-    _wmb[chan].unk_0x0c = 0;
+    _wmb[chan].unk_0x0C = 0;
     _wmb[chan].unk_0x10 = NULL;
 
     _rumbleCnt[chan] = 0;

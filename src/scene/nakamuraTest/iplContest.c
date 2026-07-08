@@ -5,16 +5,16 @@
 #include "gamespy/natneg/natneg.h"
 
 #include <revolution/mem/expHeap.h>
-#include <revolution/nhttp/d_nhttp.h>
+#include <revolution/nhttp.h>
 #include <revolution/os.h>
 
 typedef enum {
     HTTP_TEST_NOT_STARTED = 0,
-    HTTP_TEST_STARTED = 1,
-    HTTP_TEST_REQUEST_MADE = 2,
-    HTTP_TEST_RESPONSE_RECEIVED = 3,
-    HTTP_TEST_RESPONSE_ERRORED = 4,
-    HTTP_TEST_DONE = 5,
+    HTTP_TEST_STARTED,
+    HTTP_TEST_REQUEST_MADE,
+    HTTP_TEST_RESPONSE_RECEIVED,
+    HTTP_TEST_RESPONSE_ERRORED,
+    HTTP_TEST_DONE,
 } HTTPTestState;
 
 typedef struct {
@@ -29,7 +29,7 @@ typedef struct {
     undefined4 unk_0x034;
     undefined4 unk_0x038;
     undefined4 unk_0x03c;
-    s64 detectStartTime;
+    OSTime detectStartTime;
     NHTTPConnection httpConnection;
     NHTTPRequest* httpRequest;
     NHTTPResponse* httpResponse;
@@ -67,7 +67,7 @@ void IPLContestInitialize(void* heapBuf, NCDProxyProfile* proxy) {
     g_session.heap = MEMCreateExpHeapEx(heapBuf, 0x10000, 0);
     OSInitMutex(&g_session.mutex);
     g_session.state = 0;
-    g_session.result = 0xff00;
+    g_session.result = 0xFF00;
     g_session.errCode = 0;
     g_session.httpTestState = HTTP_TEST_NOT_STARTED;
     g_session.unk_0x030 = 0;
@@ -85,20 +85,22 @@ void IPLContestStart() {
     g_session.state = 1;
 }
 
-int IPLContestProcess(void) {
+int IPLContestProcess() {
     const char* xOrganizationHeader;
     u32 total;
     u32 complete;
 
     switch (g_session.state) {
-        case 0:
+        case 0: {
             break;
-        case 1:
+        }
+        case 1: {
             g_session.state = 2;
-        case 2:
+        }
+        case 2: {
             switch (g_session.httpTestState) {
-                case HTTP_TEST_NOT_STARTED:
-                    if (NHTTPStartup(IPLContestNHTTPAlloc, IPLContestNHTTPFree, 0x11) == -1) {
+                case HTTP_TEST_NOT_STARTED: {
+                    if (NHTTPStartup(IPLContestNHTTPAlloc, IPLContestNHTTPFree, 17) == NHTTP_ERROR_SYSTEM) {
                         g_session.httpTestState = HTTP_TEST_RESPONSE_ERRORED;
                         g_session.result |= 4;
                         g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52200;
@@ -109,7 +111,8 @@ int IPLContestProcess(void) {
                         OSReport("Starting HTTP conectting test.\n");
                     }
                     break;
-                case HTTP_TEST_STARTED:
+                }
+                case HTTP_TEST_STARTED: {
                     g_session.httpRequest =
                         NHTTPCreateRequest("http://conntest.nintendowifi.net/", 0, g_session.unk_0x7f0, 0x400, sNHTTPReqCallback, 0);
                     if (g_session.httpRequest == 0) {
@@ -117,7 +120,7 @@ int IPLContestProcess(void) {
                         g_session.result |= 4;
                         g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52200;
                         OSReport("[error] Failed to create request.\n");
-                    } else if (g_session.proxy.http.mode == 1 && NHTTPSetProxyDefault(g_session.httpRequest) != 0) {
+                    } else if (g_session.proxy.http.mode == 1 && NHTTPSetProxyDefault(g_session.httpRequest) != NHTTP_ERROR_NONE) {
                         g_session.httpTestState = HTTP_TEST_RESPONSE_ERRORED;
                         g_session.result |= 4;
                         g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52400;
@@ -140,16 +143,19 @@ int IPLContestProcess(void) {
                         }
                     }
                     break;
-                case HTTP_TEST_REQUEST_MADE:
+                }
+                case HTTP_TEST_REQUEST_MADE: {
                     NHTTPGetProgress(&complete, &total);
                     OSReport("received:%d/%d\n", complete, total);
-                    if (OSGetTime() - g_session.detectStartTime < OSMillisecondsToTicks(90000LL) || g_session.httpConnection < 0)
+                    if (OSGetTime() - g_session.detectStartTime < OSMillisecondsToTicks((OSTime)90000) || g_session.httpConnection < 0) {
                         break;
+                    }
                     NHTTPCancelRequestAsync(g_session.httpConnection);
                     OSReport("[error] NHTTP timeout.\n");
                     g_session.httpConnection = -1;
                     break;
-                case HTTP_TEST_RESPONSE_RECEIVED:
+                }
+                case HTTP_TEST_RESPONSE_RECEIVED: {
                     if (NHTTPGetHeaderField(g_session.httpResponse, "X-Organization", &xOrganizationHeader) == strlen("Nintendo") &&
                         strcmp("Nintendo", xOrganizationHeader) == 0) {
                         if (g_session.httpResponse != NULL) {
@@ -170,7 +176,8 @@ int IPLContestProcess(void) {
                         OSReport("[error] Invalid response header.\n");
                     }
                     break;
-                case HTTP_TEST_RESPONSE_ERRORED:
+                }
+                case HTTP_TEST_RESPONSE_ERRORED: {
                     if (g_session.httpResponse != NULL) {
                         NHTTPDestroyResponse(g_session.httpResponse);
                         g_session.httpResponse = NULL;
@@ -183,78 +190,94 @@ int IPLContestProcess(void) {
                     NHTTPCleanupAsync(sNHTTPCleanupCallback);
                     OSReport("HTTP test has been completed with error.\n");
                     break;
-                case HTTP_TEST_DONE:
+                }
+                case HTTP_TEST_DONE: {
                     break;
+                }
             }
             break;
-        case 3:
-            if (((g_session.result & 1) != 0) || ((g_session.result & 4) != 0)) {
+        }
+        case 3: {
+            if ((g_session.result & 1) || (g_session.result & 4)) {
                 g_session.state = 4;
-                g_session.result = g_session.result & 0xffff00ff;
+                g_session.result = g_session.result & 0xFFFF00FF;
                 OSReport("Port mapping detectioning test has been skipped.\n");
 
             } else
                 switch (g_session.unk_0x030) {
-                    case 0:
+                    case 0: {
                         gsiMemoryCallbacksSet(IPLContestGSMalloc, IPLContestGSFree, IPLContestGSRealloc, IPLContestGSMemalign);
                         GSIStartAvailableCheckA("wiinat");
                         g_session.unk_0x030 = 1;
                         OSReport("Starting GameSpy available check.\n");
                         break;
-                    case 1:
+                    }
+                    case 1: {
                         switch (GSIAvailableCheckThink()) {
-                            case GSIACWaiting:
+                            case GSIACWaiting: {
                                 break;
-                            case GSIACAvailable:
+                            }
+                            case GSIACAvailable: {
                                 g_session.unk_0x034 = 1;
                                 g_session.unk_0x030 = 2;
                                 OSReport("GameSpy server is currently available.\n");
                                 break;
-                            default:
+                            }
+                            default: {
                                 g_session.unk_0x034 = 0;
                                 g_session.unk_0x030 = 5;
                                 OSReport("GameSpy server is currently unavailable.\n");
                                 break;
+                            }
                         }
                         break;
-                    case 2:
+                    }
+                    case 2: {
                         NNStartNatDetection(iplContest_813D54F8);
                         g_session.unk_0x030 = 3;
                         OSReport("Port mapping detectioning test has been started.\n");
                         g_session.detectStartTime = OSGetTime();
                         break;
-                    case 3:
+                    }
+                    case 3: {
                         NNThink();
-                        if (OSGetTime() - g_session.detectStartTime < OSMillisecondsToTicks(90000LL))
+                        if (OSGetTime() - g_session.detectStartTime < OSMillisecondsToTicks((OSTime)90000)) {
                             break;
+                        }
                         g_session.unk_0x030 = 5;
                         g_session.unk_0x038 = 1;
                         OSReport("[error] NAT timeout.\n");
                         break;
-                    case 4:
+                    }
+                    case 4: {
                         NNFreeNegotiateList();
                         g_session.state = 4;
-                        g_session.result = g_session.result & 0xffff00ff;
+                        g_session.result = g_session.result & 0xFFFF00FF;
                         OSReport("Port mapping detectioning test has been completed.\n");
                         break;
-                    case 5:
+                    }
+                    case 5: {
                         g_session.state = 4;
-                        g_session.result = g_session.result & 0xffff00ff;
+                        g_session.result = g_session.result & 0xFFFF00FF;
                         break;
+                    }
                 }
             break;
-        case 4:
+        }
+        case 4: {
             break;
+        }
     }
     return g_session.state;
 }
 
 int IPLContestGetResult() {
-    if ((g_session.result & 0xff00) != 0) {
-        return 0xff00;
+    if ((g_session.result & 0xFF00) != 0) {
+        return 0xFF00;
     }
     return g_session.result;
 }
+
 int IPLContestGetErrorCode(int conntype) {
     return -(g_session.errCode - conntype);
 }
@@ -296,15 +319,18 @@ int IPLGetNATSupportCode(int conntype) {
         code = 11190;
     }
     switch (conntype / 10) {
-        case 2:
+        case 2: {
             code += 1;
             break;
-        case 3:
+        }
+        case 3: {
             code += 2;
             break;
-        case 4:
+        }
+        case 4: {
             code += 3;
             break;
+        }
     }
     OSReport("Wii Support Code:%d\n", code);
     return code;
@@ -320,8 +346,9 @@ void IPLContestShutdown() {
 void* IPLContestNHTTPAlloc(u32 size, int align) {
     void* block;
 
-    if (align < 4)
+    if (align < 4) {
         align = 4;
+    }
 
     OSLockMutex(&g_session.mutex);
     block = MEMAllocFromExpHeapEx(g_session.heap, size, align);
@@ -393,41 +420,49 @@ void sNHTTPReqCallback(int param_1, NHTTPResponse* httpRes) {
     g_session.httpResponse = httpRes;
     if (param_1 == 0) {
         switch (NHTTPGetResultCode(httpRes)) {
-            case 200:
+            case 200: {
                 g_session.httpTestState = HTTP_TEST_RESPONSE_RECEIVED;
                 return;
-            case 407:
+            }
+            case 407: {
                 g_session.httpTestState = HTTP_TEST_RESPONSE_ERRORED;
                 g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52500;
                 g_session.result |= 4;
                 return;
-            default:
+            }
+            default: {
                 g_session.httpTestState = HTTP_TEST_RESPONSE_ERRORED;
                 g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52200;
                 g_session.result |= 4;
                 return;
+            }
         }
     }
 
     g_session.httpTestState = HTTP_TEST_RESPONSE_ERRORED;
     switch (param_1) {
-        case 0x4:
+        case 0x4: {
             g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52100;
             break;
-        case 0xc:
+        }
+        case 0xC: {
             g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52400;
             break;
-        case 0xd:
+        }
+        case 0xD: {
             g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52400;
             break;
-        default:
+        }
+        default: {
             g_session.errCode = g_session.errCode != 0 ? g_session.errCode : -52200;
             break;
+        }
     }
     g_session.result |= 4;
     OSReport("[error] NHTTPReqCallback errorcode:%d\n", NHTTPGetError());
     return;
 }
+
 void sNHTTPCleanupCallback() {
     g_session.state = 3;
 }

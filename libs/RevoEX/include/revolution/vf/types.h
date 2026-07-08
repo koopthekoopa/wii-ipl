@@ -1,6 +1,10 @@
 #ifndef REVOLUTION_VF_TYPES_H
 #define REVOLUTION_VF_TYPES_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif  // __cplusplus
+
 #include <revolution/types.h>
 
 enum {
@@ -89,5 +93,9 @@ typedef struct VFDta {
     s8 longName[520];        // 0x23A
     s8 pad[2];               // 0x442
 } VFDta;
+
+#ifdef __cplusplus
+}
+#endif  // __cplusplus
 
 #endif  // REVOLUTION_VF_TYPES_H

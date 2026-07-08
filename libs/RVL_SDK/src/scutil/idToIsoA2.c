@@ -1,4 +1,5 @@
 #include <revolution/sc.h>
+#include <revolution/scutil.h>
 
 char* countryIdToISOA2[] = {
     NULL, "JP", NULL, NULL, NULL, NULL, NULL, NULL, "AI", "AG", "AR", "AW", "BS", "BB", "BZ", "BO", "BR", "VG", "CA", "KY", "CL", "CO", "CR",
@@ -11,7 +12,7 @@ char* countryIdToISOA2[] = {
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, "AE", "IN", "EG", "OM", "QA", "KW", "SA", "SY", "BH", "JO",
 };
 
-char* SCUTILGetISOCountryCodeA2() {
+const char* SCUTILGetISOCountryCodeA2() {
     u32 countryID, addressID = SCGetSimpleAddressID();
     if (addressID == 0xFFFFFFFF) {
         return NULL;

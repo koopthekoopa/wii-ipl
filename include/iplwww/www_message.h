@@ -9,6 +9,11 @@
 
 namespace ext_ead {
     namespace www {
+        // fakematch?
+        inline void ut_message_cmd_printerr_() {
+            OSReport("ERROR?\n");
+        }
+
         class ut_message_base {
         public:
             virtual ~ut_message_base() {}
@@ -69,7 +74,7 @@ namespace ext_ead {
                 if (ReceiveMessage(&msg, 0)) {
                     entry = (BufferEntry*)msg;
                     if (entry->taken != -1) {
-                        OSReport("ERROR?\n");
+                        ut_message_cmd_printerr_();
                     }
                     *data = entry->value;
                     memset(entry, 0, sizeof(BufferEntry));

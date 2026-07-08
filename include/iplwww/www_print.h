@@ -11,6 +11,15 @@ namespace ext_ead {
             void IPLWWWReport(int type, const char* format, ...);
             void IPLWWWVReport(int type, const char* format, va_list args);
 
+            enum {
+                WWW_TICK_TIMER = 0,
+                WWW_WARNING,
+                WWW_INFO,
+                WWW_DEBUG,
+                WWW_EVENT,
+                WWW_REPORT,  // ?
+            };
+
             class TickTimer {
             public:
                 TickTimer() : start(OSGetTick()) {}
@@ -21,10 +30,10 @@ namespace ext_ead {
 
                     va_list vlist;
                     va_start(vlist, fmt);
-                    IPLWWWVReport(0, fmt, vlist);
+                    IPLWWWVReport(WWW_TICK_TIMER, fmt, vlist);
                     va_end(vlist);
 
-                    IPLWWWReport(5, " : %d[ms]\n", OSTicksToMilliseconds(end - start));
+                    IPLWWWReport(WWW_REPORT, " : %d[ms]\n", OSTicksToMilliseconds(end - start));
                 }
 
             private:
@@ -38,6 +47,7 @@ namespace ext_ead {
             // };
             extern const char* Message[6];
 
+            // TODO: sort out this messy match hack
 #define IPL_WWW_REPORT_REDEFINE_MESSAGE(RESPECT_STRIP)                                                                                               \
     char MSG_TICK_TIMER_TAG[12] = "[TickTimer]";                                                                                                     \
     char MSG_WARNING_TAG[10] = "[Warning]";                                                                                                          \

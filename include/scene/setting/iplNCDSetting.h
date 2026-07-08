@@ -13,57 +13,55 @@ namespace ipl {
     namespace ncd {
         class NCDSetting {
         public:
-            static NCDConfig mConfig;
-            static NCDConfig mSaveConfig;
-            static u8 mMac[];
-
-            static u16 mID;
-            static u32 mMacNum;
-
             static void init();
-            static void initSetID(u16);
-            static int checkFlag(int);
+
+            static void initSetID(u16 setID);
+
+            static int checkFlag(int id);
             static int checkThisFlag();
             static bool checkAllFlag();
+
             static u8 checkConnectTestFlag();
             static u8 checkDHCPFlag();
             static u8 checkDNSFlag();
-            static void checkDHCP_();
             static u8 checkProxyFlag();
             static u8 checkBasic();
             static bool checkChangeEnable();
-            static bool convert16toASCII(char, char, unsigned char*);
-            static int checkWEPKey(char*);
-            static bool checkProxy(char*);
-            static bool checkProxyBasic(char*);
-            static void adjustNCDData_();
-            static void adjustSelectMedia_(int);
-            static void adjustEnableFlag_(int);
-            static void setConnectTestFlag(bool);
-            static void setDHCPFlag(unsigned char);
-            static void setDNSFlag(unsigned char);
-            static void setProxyFlag(unsigned char);
-            static void setBasicFlag(unsigned char);
+            static int checkWEPKey(char* key);
+            static bool checkProxy(char* proxy);
+            static bool checkProxyBasic(char* proxy);
+
+            static void setConnectTestFlag(bool newFlag);
+            static void setDHCPFlag(u8 newFlag);
+            static void setDNSFlag(u8 newFlag);
+            static void setProxyFlag(u8 newFlag);
+            static void setBasicFlag(u8 newFlag);
             static void setWired();
-            static void setWireless(unsigned char);
-            static void changeConnectType(unsigned char);
-            static void setSSID(u8*);
-            static void setPrivacyMode(u16);
-            static void setWDPrivacyMode(u16);
-            static void setPrivacy(unsigned char*, int);
-            static void setIP(NCDIpProfile*);
-            static void setDNS(NCDIpProfile*);
-            static void setMTU(long);
-            static void setProxy(NCDProxyServerProfile*);
-            static void setBasic(NCDProxyServerProfile*);
+            static void setWireless(u8 configMethod);
+            static void changeConnectType(u8 connectType);
+            static void setSSID(u8* newSSID);
+            static void setPrivacyMode(u16 newMode);
+            static void setWDPrivacyMode(u16 mode);
+            static void setPrivacy(u8* newKey, int len);
+            static void setIP(NCDIpProfile* ip);
+            static void setDNS(NCDIpProfile* ip);
+            static void setMTU(s32 mtu);
+
+            static void setProxy(NCDProxyServerProfile* proxyServerProfile);
+            static void setBasic(NCDProxyServerProfile* proxyServerProfile);
+
             static void clearData();
             static void clearLocal();
+
             static void write();
+
             static void backupData();
             static void resetData();
+
             static void setUseProfileID();
-            static void setAOSSParams(const NCDAossConfig&);
-            static void setRakuParams(const NCDApConfig&);
+            static void setAOSSParams(const NCDAossConfig& src);
+            static void setRakuParams(const NCDApConfig& src);
+
             static u16 getID();
             static NCDApConfig* getSSID();
             static u16 getUseProfileID();
@@ -74,14 +72,33 @@ namespace ipl {
             static NCDIpProfile* getIP();
             static u32 getMacNum();
             static u8* getMacAddr();
+
             static void makeMacAddr();
+
             static NCDProxyProfile* getProxy();
             static s32 getMTU();
             static NCDConfig* getData();
             static bool getConnectEnableFlag();
             static bool getEnableFlag();
+
             static NCDErr adjustNWC24Flag();
+
+        private:
+            static void checkDHCP_();
+
+            static void adjustNCDData_();
+            static void adjustSelectMedia_(int exclude);
+            static void adjustEnableFlag_(int exclude);
             static void adjustNWC24FlagEx_();
+
+            static bool convert16toASCII(char hexHi, char hexLo, u8* byte);
+
+            static NCDConfig mConfig;
+            static NCDConfig mSaveConfig;
+            static u8 mMac[0x20];
+
+            static u16 mID;
+            static u32 mMacNum;
 
 #ifndef NON_MATCHING
             static void matchHack();

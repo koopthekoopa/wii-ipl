@@ -7,7 +7,7 @@ namespace ipl {
         public:
             Tree();
 
-            virtual ~Tree() {};  // 0x08
+            virtual ~Tree(){};  // 0x08
 
             virtual Tree* getParent() { return mpParent; }  // 0x0C
             virtual Tree* getChild() { return mpChild; }    // 0x10
@@ -47,8 +47,9 @@ namespace ipl {
                             mPtr = mPtr->getNext();
                         } else {
                             while ((mPtr = mPtr->getParent())) {
-                                if (!mPtr->getNext())
+                                if (!mPtr->getNext()) {
                                     continue;
+                                }
 
                                 mPtr = mPtr->getNext();
                                 break;

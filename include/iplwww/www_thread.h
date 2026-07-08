@@ -1,37 +1,37 @@
 #ifndef IPL_WWW_THREAD
 #define IPL_WWW_THREAD
 
-#include <revolution/types.h>
 #include <revolution/os.h>
+#include <revolution/types.h>
 
 namespace ext_ead {
     namespace www {
         class ut_thread {
-            public:
-                ut_thread();
+        public:
+            ut_thread();
 
-                virtual ~ut_thread();                                                                       // 0x08
-                virtual void* Run() = 0;                                                                    // 0x0C
-                virtual void Create(void* pStack, u32 stackSize, int priority, bool bStartThread = true);   // 0x10
-                virtual void Resume();                                                                      // 0x14
-                virtual void Suspend();                                                                     // 0x18
-                virtual BOOL WaitForThreadExit();                                                           // 0x1C
-                virtual bool IsThreadTerminated();                                                          // 0x20
-                virtual bool IsThreadSuspended();                                                           // 0x24
-                
-            private:
-                static  void* ThreadMain_(void* param);
+            virtual ~ut_thread();                                                                      // 0x08
+            virtual void* Run() = 0;                                                                   // 0x0C
+            virtual void Create(void* pStack, u32 stackSize, int priority, bool bStartThread = true);  // 0x10
+            virtual void Resume();                                                                     // 0x14
+            virtual void Suspend();                                                                    // 0x18
+            virtual BOOL WaitForThreadExit();                                                          // 0x1C
+            virtual bool IsThreadTerminated();                                                         // 0x20
+            virtual bool IsThreadSuspended();                                                          // 0x24
 
-            protected:
-                OSThread        mThread;        // 0x08
-                
-            private:
-                void*           mpStack;        // 0x320
-                u32             mStackSize;     // 0x324
-                
-                int             mPriority;      // 0x328
+        private:
+            static void* ThreadMain_(void* param);
+
+        protected:
+            OSThread mThread;  // 0x08
+
+        private:
+            void* mpStack;   // 0x320
+            u32 mStackSize;  // 0x324
+
+            int mPriority;  // 0x328
         };
-    }
-}
+    }  // namespace www
+}  // namespace ext_ead
 
-#endif // IPL_WWW_THREAD
+#endif  // IPL_WWW_THREAD

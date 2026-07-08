@@ -6,13 +6,13 @@
 typedef s32 NCDErr;
 
 enum {
-    NCD_MODE_NONE = 0,           // 0
-    NCD_MODE_WEP40 = 1,          // 1
-    NCD_MODE_WEP104 = 2,         // 2
-    NCD_MODE_INVALID3 = 3,       // 3
-    NCD_MODE_WPA_PSK_TKIP = 4,   // 4
-    NCD_MODE_WPA2_PSK_TKIP = 5,  // 5
-    NCD_MODE_WPA_PSK_AES = 6,    // 6
+    NCD_MODE_NONE = 0,
+    NCD_MODE_WEP40,
+    NCD_MODE_WEP104,
+    NCD_MODE_INVALID3,
+    NCD_MODE_WPA_PSK_TKIP,
+    NCD_MODE_WPA2_PSK_TKIP,
+    NCD_MODE_WPA_PSK_AES,
 };
 enum {
     NCD_LINKSTATUS_WIRED = 3,  // ?
@@ -20,6 +20,7 @@ enum {
 
 enum {
     NCD_RESULT_SUCCESS = 0,
+    NCD_RESULT_4 = -4,
     NCD_RESULT_INPROGRESS = -8,
 };
 

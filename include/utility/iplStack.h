@@ -14,12 +14,12 @@ namespace ipl {
                 u8 data[];
             };
 
-            FreeList() : pFreeTop(NULL), mStride(0), pBuf(NULL) {}
+            FreeList() : mpFreeTop(NULL), mStride(0), mpBuffer(NULL) {}
 
             void init(void* buf, u32 stride, u32 count) {
-                pFreeTop = (Block*)buf;
+                mpFreeTop = (Block*)buf;
 
-                Block* ptrBuf = pFreeTop;
+                Block* ptrBuf = mpFreeTop;
                 int i;
                 u32 ptrsStride = stride / sizeof(Block*);
                 for (i = 0; i < count - 1; i++) {
@@ -28,28 +28,28 @@ namespace ipl {
                 ptrBuf[ptrsStride * (count - 1)].next = NULL;
 
                 mStride = stride;
-                pBuf = buf;
+                mpBuffer = buf;
             }
 
             Block* get() {
-                Block* out = pFreeTop;
+                Block* out = mpFreeTop;
                 if (out == NULL)
                     return NULL;
 
-                pFreeTop = pFreeTop->next;
+                mpFreeTop = mpFreeTop->next;
                 return out;
             }
             void release(Block* block) {
-                block->next = pFreeTop;
-                pFreeTop = block;
+                block->next = mpFreeTop;
+                mpFreeTop = block;
             }
 
-            void* getBuf() { return pBuf; }
+            void* getBuf() { return mpBuffer; }
 
         private:
-            Block* pFreeTop;  // 0x0
-            u32 mStride;      // 0x4
-            void* pBuf;       // 0x8
+            Block* mpFreeTop;  // 0x00
+            u32 mStride;       // 0x04
+            void* mpBuffer;    // 0x08
         };
 
         class Stack : private FreeList {
@@ -62,6 +62,21 @@ namespace ipl {
                 mStackElSize = elSize;
                 pStackTop = NULL;
                 mCount = 0;
+            }
+
+            bool pop(void* data) {
+                Block* popped = pStackTop;
+                if (popped != NULL) {
+                    if (data != NULL) {
+                        memcpy(data, popped->data, mStackElSize);
+                    }
+                    pStackTop = popped->next;
+                    release(popped);
+                    mCount--;
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             bool push(const void* data) {
@@ -77,21 +92,6 @@ namespace ipl {
                 }
             }
 
-            bool pop(void* data) {
-                Block* popped = this->pStackTop;
-                if (popped != NULL) {
-                    if (data != NULL) {
-                        memcpy(data, popped->data, mStackElSize);
-                    }
-                    pStackTop = popped->next;
-                    release(popped);
-                    mCount--;
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
             void* getBuf() { return FreeList::getBuf(); }
 
             static inline u32 getRequiredBufSize(u32 capacity, u32 elSize) { return (elSize + sizeof(FreeList::Block)) * capacity; }
@@ -101,17 +101,6 @@ namespace ipl {
             u32 mStackElSize;            // 0x10
             u32 mCount;                  // 0x14
         };
-
-        void CONCAT(FORCEACTIVE_ipl_ut_Stack, __LINE__)();
-        void CONCAT(FORCEACTIVE_ipl_ut_Stack, __LINE__)() {
-            ut::FreeList freeList;
-            freeList.init(NULL, 0, 0);
-            freeList.get();
-
-            ut::Stack stack;
-            stack.init(NULL, 0, 0);
-            stack.pop(NULL);
-        }
     }  // namespace ut
 }  // namespace ipl
 

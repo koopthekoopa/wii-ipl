@@ -131,68 +131,76 @@ namespace ext_ead {
             IPL_WWW_REPORT_REDEFINE_MESSAGE(false)
         }
 
+        // TODO: What does this magic number mean?
+        static const u32 MSG_MAGIC = 0x798ADFE1;
+
         OSMutex BrowserThread::runSliceMutex_ = {};
         int BrowserThread::classInitialized_ = false;
 
         BOOL BrowserThread::SNotifyCallback_(WWWHandle* wwwBrowser, WWWHandlewindow* wwwWindow, WWWEvent event, WWWHandleEventData* eventData) {
-            return SurfaceManager::Instance_->pBrowserThread->NotifyCallback_(wwwBrowser, wwwWindow, event, eventData);
+            return SurfaceManager::GetInstance()->GetBrowserThread()->NotifyCallback_(wwwBrowser, wwwWindow, event, eventData);
         }
+
         BOOL BrowserThread::NotifyCallback_(WWWHandle* wwwBrowser, WWWHandlewindow* wwwWindow, WWWEvent event, WWWHandleEventData* eventData) {
             BrowserWindow* pWindow;
-            for (int i = 0; i < ARRAY_LENGTH(pBrowserWindows); i++) {
-                pWindow = (BrowserWindow*)pBrowserWindows[i];
-                if (pWindow != NULL && pWindow->pWwwWindow == wwwWindow)
+            for (int i = 0; i < ARRAY_LENGTH(mpBrowserWindows); i++) {
+                pWindow = (BrowserWindow*)mpBrowserWindows[i];
+                if (pWindow != NULL && pWindow->GetHandleWindow() == wwwWindow) {
                     break;
+                }
             }
-            if (event == 0x2c) {
-                ::www::arcreader::ReadRequest((WWWProtocolData*)eventData, (::www::arcreader::ArcContainer*)this->pArcContainer);
+            if (event == WWW_EVT_PROTOCOL_LOADING_START) {
+                ::www::arcreader::ReadRequest((WWWProtocolData*)eventData, mpArcContainer);
             }
             if (pWindow != NULL) {
                 pWindow->SendNotifyEvent(event, eventData);
-                if (event == 7) {
-                    print::IPLWWWReport(3, "  EVT_FINISHED: %d/%d %d/%d s:%d\n", eventData->data[1], eventData->data[0], eventData->data[3],
-                                        eventData->data[2], eventData->data[6]);
+                if (event == WWW_EVT_LOADING_FINISHED) {
+                    print::IPLWWWReport(print::WWW_DEBUG, "  EVT_FINISHED: %d/%d %d/%d s:%d\n", eventData->data[1], eventData->data[0],
+                                        eventData->data[3], eventData->data[2], eventData->data[6]);
                 }
             }
             return false;
         }
 
         BrowserThread::BrowserThread()
-            : pRaster(NULL), pOperaHeapBuf(NULL), mWidth(0), mHeight(0), pIniData(NULL), mIniLen(0), pArcContainer(NULL),
-              pArcDecompressionScratch(NULL) {
+            : mpRaster(NULL), mpOperaHeapBuf(NULL), mWidth(0), mHeight(0), mpIniData(NULL), mIniLen(0), mpArcContainer(NULL),
+              mpArcDecmpScratch(NULL) {
             if (!classInitialized_) {
                 OSInitMutex(&runSliceMutex_);
             }
             classInitialized_++;
         }
+
         BrowserThread::~BrowserThread() {
             classInitialized_--;
             if (!classInitialized_) {
-                if (this->pRaster != NULL) {
-                    Heap::freeMem1(pRaster);
-                    pRaster = NULL;
+                if (mpRaster != NULL) {
+                    Heap::freeMem1(mpRaster);
+                    mpRaster = NULL;
                 }
-                if (pOperaHeapBuf != NULL) {
-                    Heap::freeMem2(pOperaHeapBuf);
-                    pOperaHeapBuf = NULL;
+                if (mpOperaHeapBuf != NULL) {
+                    Heap::freeMem2(mpOperaHeapBuf);
+                    mpOperaHeapBuf = NULL;
                 }
-                if (this->pArcContainer != NULL) {
-                    Heap::freeMem1(pArcContainer);
-                    Heap::freeMem1(pArcDecompressionScratch);
+                if (mpArcContainer != NULL) {
+                    Heap::freeMem1(mpArcContainer);
+                    Heap::freeMem1(mpArcDecmpScratch);
                 }
             }
         }
+
         void BrowserThread::RegisterArcFile(void* arcData) {
-            if (pArcContainer == NULL) {
-                pArcContainer = (::www::arcreader::ArcContainer*)Heap::allocMem1(0x78, 4);
-                pArcDecompressionScratch = Heap::allocMem1(0x20000, 4);
-                new (pArcContainer)::www::arcreader::ArcContainer(pArcDecompressionScratch);
+            if (mpArcContainer == NULL) {
+                mpArcContainer = (::www::arcreader::ArcContainer*)Heap::allocMem1(sizeof(::www::arcreader::ArcContainer), 4);
+                mpArcDecmpScratch = Heap::allocMem1(0x20000, 4);
+                new (mpArcContainer)::www::arcreader::ArcContainer(mpArcDecmpScratch);
             }
-            ((::www::arcreader::ArcContainer*)pArcContainer)->RegisterArcFile(arcData);
+            mpArcContainer->RegisterArcFile(arcData);
             return;
         }
+
         void BrowserThread::RegisterIniFile(void* iniData, u32 iniLen) {
-            pIniData = iniData;
+            mpIniData = iniData;
             mIniLen = iniLen;
         }
 
@@ -200,15 +208,16 @@ namespace ext_ead {
             mWidth = w;
             mHeight = h;
             OSInitMessageQueue(&mQueue, mQueueBuf, ARRAY_LENGTH(mQueueBuf));
-            memset(pBrowserWindows, 0, 0x10);
+            memset(mpBrowserWindows, 0, sizeof(mpBrowserWindows));
             ut_thread::Create(threadStack, threadStackSize, priority, false);
         }
+
         void BrowserThread::StopThread() {
             if (!IsThreadTerminated()) {
-                // TODO: What does this magic number mean?
-                OSSendMessage(&mQueue, (void*)0x798adfe1, 0);
+                OSSendMessage(&mQueue, (void*)MSG_MAGIC, 0);
             }
         }
+
         bool BrowserThread::IsThreadStopped() {
             bool isStopped = IsThreadTerminated();
             if (isStopped != 0) {
@@ -220,49 +229,52 @@ namespace ext_ead {
         bool BrowserThread::CheckThreadExit_() {
             OSMessage msg = NULL;
             if (OSReceiveMessage(&mQueue, &msg, 0)) {
-                print::IPLWWWReport(3, "BrowserThread:: msg received.\n");
-                if ((u32)msg == 0x798adfe1)
-                    return 1;
+                print::IPLWWWReport(print::WWW_DEBUG, "BrowserThread:: msg received.\n");
+                if ((u32)msg == MSG_MAGIC) {
+                    return true;
+                }
             }
-            return 0;
+            return false;
         }
+
         void BrowserThread::InitSurface_() {
             u32 surfaceW, surfaceH;
             int surfaceInitRet, setFlushCbRet;
             int rasterRowSize, rasterSize;
-            void* pvVar1;
             u32* rasterPtr;
 
-            surfaceW = SurfaceManager::Instance_->mWidth;
-            surfaceH = SurfaceManager::Instance_->mHeight;
-            SurfaceManager::Instance_->ResolveRsoModule();
+            surfaceW = SurfaceManager::GetInstance()->GetWidth();
+            surfaceH = SurfaceManager::GetInstance()->GetHeight();
+            SurfaceManager::GetInstance()->ResolveRsoModule();
 
             rasterRowSize = surfaceW * sizeof(u32);
             rasterSize = rasterRowSize * surfaceH;
             rasterPtr = (u32*)Heap::allocMem1(rasterSize, 4);
-            pRaster = rasterPtr;
-            print::IPLWWWReport(3, "www_surface: OperaFrameBuffer: ptr:%p, size:%d\n", rasterPtr, rasterSize);
+            mpRaster = rasterPtr;
+            print::IPLWWWReport(print::WWW_DEBUG, "www_surface: OperaFrameBuffer: ptr:%p, size:%d\n", rasterPtr, rasterSize);
 
-            pOperaHeapBuf = Heap::allocMem2(0x6e0000, 0x20);
-            memset(pOperaHeapBuf, 0, 0x6e0000);
-            print::IPLWWWReport(3, "www_surface: OperaHeapBuffer : ptr:%p \n", pOperaHeapBuf);
+            mpOperaHeapBuf = Heap::allocMem2(0x6E0000, 0x20);
+            memset(mpOperaHeapBuf, 0, 0x6E0000);
+            print::IPLWWWReport(print::WWW_DEBUG, "www_surface: OperaHeapBuffer : ptr:%p \n", mpOperaHeapBuf);
 
-            (*WWWGetBrowserAllocationFunctions)(this->pOperaHeapBuf, 0x6e0000, &Heap::wwwalloc_, &Heap::wwwfree_, &Heap::wwwavail_);
-            (*WWWSetAllocationFunctions)(Heap::wwwalloc_, Heap::wwwfree_, Heap::wwwavail_, Heap::wwwalloc_, Heap::wwwfree_, Heap::wwwalloc_,
-                                         Heap::wwwfree_);
+            WWWGetBrowserAllocationFunctions(mpOperaHeapBuf, 0x6E0000, &Heap::wwwalloc_, &Heap::wwwfree_, &Heap::wwwavail_);
+            WWWSetAllocationFunctions(Heap::wwwalloc_, Heap::wwwfree_, Heap::wwwavail_, Heap::wwwalloc_, Heap::wwwfree_, Heap::wwwalloc_,
+                                      Heap::wwwfree_);
 
             print::TickTimer tt;
             tt.reset();
-            surfaceInitRet = (*WWWSurfaceInit)(surfaceW, surfaceH, rasterRowSize, 0, this->pRaster);
+            surfaceInitRet = WWWSurfaceInit(surfaceW, surfaceH, rasterRowSize, 0, mpRaster);
             tt.report("WWWSurfaceInit");
-            if (surfaceInitRet != 0)
+            if (surfaceInitRet != WWW_ERROR_OK) {
                 OSReport("WWWSurfaceInit %d\n", surfaceInitRet);
+            }
 
             tt.reset();
-            setFlushCbRet = (*WWWSurfaceSetFlushCallback)(FlushCallback, 0);
+            setFlushCbRet = WWWSurfaceSetFlushCallback(FlushCallback, 0);
             tt.report("WWWSurfaceSetFlushCallback");
-            if (setFlushCbRet != 0)
+            if (setFlushCbRet != WWW_ERROR_OK) {
                 OSReport("WWWSurfaceSetFlushCallback %d\n", setFlushCbRet);
+            }
         }
 
         void* BrowserThread::Run() {
@@ -270,7 +282,7 @@ namespace ext_ead {
 
             InitSurface_();
             InitFonts_("/operafonts/");
-            print::IPLWWWReport(3, "BrowserThread:: executed\n");
+            print::IPLWWWReport(print::WWW_DEBUG, "BrowserThread:: executed\n");
 
             tt.reset();
 
@@ -281,88 +293,97 @@ namespace ext_ead {
             fonts[4] = "Wii NTLG Gothic";
             fonts[1] = "Wii NTLG PGothic";
             fonts[0] = "Wii NTLG PGothic";
-            (*WWWCreateBrowser)(&pWwwBrowser, SNotifyCallback_, fonts, "/tmp/www.arc/nand");
+            WWWCreateBrowser(&mpBrowserHandle, SNotifyCallback_, fonts, "/tmp/www.arc/nand");
             tt.report("WWWCreateBrowser");
 
             ::www::trasition::AddJsPlugin();
             ::www::wiisetting::AddJsPlugin();
             ::www::arcreader::AddProtocol();
 
-            SurfaceManager* surface = SurfaceManager::Instance_;
-            pBrowserWindows[0] = (BrowserWindow*)Heap::allocMem1(0x2cc, 4);
-            new (pBrowserWindows[0]) BrowserWindow(this);
-            ((BrowserWindow*)pBrowserWindows[0])->CreateWindow(mWidth, mHeight, surface->mWidth, surface->mHeight);
+            SurfaceManager* surface = SurfaceManager::GetInstance();
+            mpBrowserWindows[0] = (BrowserWindow*)Heap::allocMem1(sizeof(BrowserWindow), 4);
+            new (mpBrowserWindows[0]) BrowserWindow(this);
+            ((BrowserWindow*)mpBrowserWindows[0])->CreateWindow(mWidth, mHeight, surface->GetWidth(), surface->GetHeight());
             Heap::reportHeap();
 
             while (true) {
-                if (CheckThreadExit_())
+                if (CheckThreadExit_()) {
                     break;
+                }
                 HandleUIEvent_();
                 OSLockMutex(&runSliceMutex_);
 
                 int i = 0;
                 BOOL sliceRes;
                 do {
-                    sliceRes = (*WWWRunSlice)(pWwwBrowser);
+                    sliceRes = WWWRunSlice(mpBrowserHandle);
                     i++;
-                    ((BrowserWindow*)pBrowserWindows[0])->ExecuteEvent();
+                    ((BrowserWindow*)mpBrowserWindows[0])->ExecuteEvent();
                 } while (sliceRes == 0);
                 if (i > 10) {
-                    print::IPLWWWReport(3, "+++ too many WWWRunSlice called. %d\n", i);
+                    print::IPLWWWReport(print::WWW_DEBUG, "+++ too many WWWRunSlice called. %d\n", i);
                 }
                 OSUnlockMutex(&runSliceMutex_);
-                (*WWWSurfaceUpdateScreen)(0);
-                (*WWWSurfaceUpdateScreen)(0);
-                (*WWWSurfaceUpdateScreen)(0);
+                WWWSurfaceUpdateScreen(0);
+                WWWSurfaceUpdateScreen(0);
+                WWWSurfaceUpdateScreen(0);
 
-                ((BrowserWindow*)pBrowserWindows[0])->ExecuteEvent();
-                ((BrowserWindow*)pBrowserWindows[0])->UpdateTexture();
-                if (*(u32*)mThread.stackEnd != -0x21524542) {
-                    print::IPLWWWReport(3, "This thread stack has overflowed.\n");
+                ((BrowserWindow*)mpBrowserWindows[0])->ExecuteEvent();
+                ((BrowserWindow*)mpBrowserWindows[0])->UpdateTexture();
+
+                if (*(u32*)mThread.stackEnd != 0xDEADBABE) {
+                    print::IPLWWWReport(print::WWW_DEBUG, "This thread stack has overflowed.\n");
                 }
                 OSSleepMilliseconds(5);
             }
-            ((BrowserWindow*)pBrowserWindows[0])->CloseWindow();
-            ((BrowserWindow*)pBrowserWindows[0])->~BrowserWindow();
+            ((BrowserWindow*)mpBrowserWindows[0])->CloseWindow();
+            ((BrowserWindow*)mpBrowserWindows[0])->~BrowserWindow();
 
-            Heap::freeMem1(pBrowserWindows[0]);
-            pBrowserWindows[0] = NULL;
+            Heap::freeMem1(mpBrowserWindows[0]);
+            mpBrowserWindows[0] = NULL;
 
-            (*WWWTerminateBrowser)(pWwwBrowser);
+            WWWTerminateBrowser(mpBrowserHandle);
             return this;
         }
 
         void BrowserThread::SendKeyboardEvent_(u32 btnMask, u32 triggerFlag, u32 releaseFlag, WWWKeySym sym) {
             if (triggerFlag & btnMask) {
-                (*WWWSurfaceKeyboardEvt)(KEY_CMD_TRIGGER, sym, 0);
+                WWWSurfaceKeyboardEvt(KEY_CMD_TRIGGER, sym, 0);
             } else if (releaseFlag & btnMask) {
-                (*WWWSurfaceKeyboardEvt)(KEY_CMD_RELEASE, sym, 0);
+                WWWSurfaceKeyboardEvt(KEY_CMD_RELEASE, sym, 0);
             }
         }
+
         WWWKeySym BrowserThread::GetKeyboardSym_(u32 input) {
             switch (input) {
-                case ipl::controller::BTN_NEXT_RIGHT:
+                case ipl::controller::BTN_NEXT_RIGHT: {
                     return KEY_SYM_NEXT_RIGHT;
-                case ipl::controller::BTN_NEXT_LEFT:
+                }
+                case ipl::controller::BTN_NEXT_LEFT: {
                     // return KEY_SYM_NEXT_LEFT;
                     return KEY_SYM_SOMETHING;
-
-                case ipl::controller::BTN_UP:
+                }
+                case ipl::controller::BTN_UP: {
                     return KEY_SYM_UP;
-                case ipl::controller::BTN_DOWN:
+                }
+                case ipl::controller::BTN_DOWN: {
                     return KEY_SYM_DOWN;
-                case ipl::controller::BTN_LEFT:
+                }
+                case ipl::controller::BTN_LEFT: {
                     return KEY_SYM_LEFT;
-                case ipl::controller::BTN_RIGHT:
+                }
+                case ipl::controller::BTN_RIGHT: {
                     return KEY_SYM_RIGHT;
-
-                case ipl::controller::REVO_BTN_1:
+                }
+                case ipl::controller::REVO_BTN_1: {
                     return KEY_SYM_BTN1;
-                case ipl::controller::REVO_BTN_2:
+                }
+                case ipl::controller::REVO_BTN_2: {
                     return KEY_SYM_BTN2;
-
-                default:
+                }
+                default: {
                     return KEY_SYM_BLANK;
+                }
             }
         }
 
@@ -373,34 +394,37 @@ namespace ext_ead {
             x = cmd.data.controller.irX;
             y = cmd.data.controller.irY;
             if (cmd.data.controller.btnTrigger & ipl::controller::BTN_INTERACT) {
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_TRIGGER, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_RELEASE, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_TRIGGER, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_RELEASE, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
                 somethingClicked = 1;
             } else if (cmd.data.controller.btnRelease & ipl::controller::BTN_INTERACT) {
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_RELEASE, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_RELEASE, x, y, MOUSE_ATTRIB_BUTTON, 1, 0);
             } else {
-                (*WWWSurfaceMouseEvt)(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
+                WWWSurfaceMouseEvt(MOUSE_CMD_MOVE, x, y, MOUSE_ATTRIB_POSITION, 0, 0);
                 if (gDpdWaitFrm >= 4 && (cmd.data.controller.btnTrigger & ipl::controller::BTN_NEXT_LEFT)) {
-                    (*WWWSurfaceKeyboardEvt)(KEY_CMD_RELEASE, KEY_SYM_NEXT_RIGHT, 0);
-                    (*WWWSurfaceKeyboardEvt)(KEY_CMD_TRIGGER, KEY_SYM_NEXT_RIGHT, 0);
+                    WWWSurfaceKeyboardEvt(KEY_CMD_RELEASE, KEY_SYM_NEXT_RIGHT, 0);
+                    WWWSurfaceKeyboardEvt(KEY_CMD_TRIGGER, KEY_SYM_NEXT_RIGHT, 0);
                 } else if (gDpdWaitFrm >= 4 && (cmd.data.controller.btnTrigger & ipl::controller::BTN_NEXT_RIGHT)) {
-                    (*WWWSurfaceKeyboardEvt)(KEY_CMD_RELEASE, KEY_SYM_NEXT_LEFT, 0);
-                    (*WWWSurfaceKeyboardEvt)(KEY_CMD_TRIGGER, KEY_SYM_NEXT_LEFT, 0);
+                    WWWSurfaceKeyboardEvt(KEY_CMD_RELEASE, KEY_SYM_NEXT_LEFT, 0);
+                    WWWSurfaceKeyboardEvt(KEY_CMD_TRIGGER, KEY_SYM_NEXT_LEFT, 0);
                 }
             }
+
             if (gEnableDpd && ++gDpdWaitFrm > 4) {
                 gDpdWaitFrm = 4;
             }
+
             return somethingClicked;
         }
+
         void BrowserThread::ExecSpacialEvent_(const CmdPacket& cmd) {
             if (cmd.data.controller.btnTrigger & ipl::controller::BTN_NEXT_RIGHT) {
-                ((BrowserWindow*)pBrowserWindows[0])->PrevPage();
+                ((BrowserWindow*)mpBrowserWindows[0])->PrevPage();
             }
             if (cmd.data.controller.btnTrigger & ipl::controller::BTN_NEXT_LEFT) {
-                ((BrowserWindow*)pBrowserWindows[0])->GotoHome();
+                ((BrowserWindow*)mpBrowserWindows[0])->GotoHome();
             }
 #define SEND_KEYBOARD_EVENT_FROM_CONTROLLER_CODE(CONTROLLER_CODE, CMD)                                                                               \
     SendKeyboardEvent_(CONTROLLER_CODE, (CMD).data.controller.btnTrigger, (CMD).data.controller.btnRelease, GetKeyboardSym_(CONTROLLER_CODE));
@@ -412,98 +436,112 @@ namespace ext_ead {
             SEND_KEYBOARD_EVENT_FROM_CONTROLLER_CODE(ipl::controller::REVO_BTN_1, cmd);
             SEND_KEYBOARD_EVENT_FROM_CONTROLLER_CODE(ipl::controller::REVO_BTN_2, cmd);
         }
+
         void BrowserThread::HandleUIEvent_() {
             CmdPacket cmd;
             while (mCmdPacketQueue.TryReceiveTypedMessage(&cmd)) {
-                BrowserWindow* pBrowserWindow = (BrowserWindow*)pBrowserWindows[0];
+                BrowserWindow* pBrowserWindow = (BrowserWindow*)mpBrowserWindows[0];
                 bool something = false;
-                if ((pBrowserWindow->unk_0x2c4[2] != '\0') && (pBrowserWindow->unk_0x2c4[3] != '\0')) {
+                if ((pBrowserWindow->unk_0x2C4[2] != '\0') && (pBrowserWindow->unk_0x2C4[3] != '\0')) {
                     something = true;
                 }
-                if (something || pBrowserWindow->unk_0x2c4[0] != '\0') {
+                if (something || pBrowserWindow->unk_0x2C4[0] != '\0') {
                     continue;
                 }
 
                 int retVal = 0;
                 switch (cmd.type) {
-                    case 0:
+                    case 0: {
                         retVal = ExecDpdEvent_(cmd);
                         break;
-                    case 1:
+                    }
+                    case 1: {
                         ExecSpacialEvent_(cmd);
                         break;
-                    case 2:
+                    }
+                    case 2: {
                         pBrowserWindow->SetWindowSize(cmd.data.setWindowSize.width, cmd.data.setWindowSize.height);
                         break;
-                    case 3:
+                    }
+                    case 3: {
                         CommitImeCmdPacket(&cmd);
                         break;
-                    case 4:
+                    }
+                    case 4: {
                         UpdateImeCmdPacket(&cmd);
                         break;
-                    default:
-                        print::IPLWWWReport(3, "BrowserThread::HandleUIEvent_: Unknown type: %d\n", cmd.type);
+                    }
+                    default: {
+                        print::IPLWWWReport(print::WWW_DEBUG, "BrowserThread::HandleUIEvent_: Unknown type: %d\n", cmd.type);
                         break;
+                    }
                 }
-                if (retVal != 0)
+                if (retVal != 0) {
                     break;
+                }
             }
         }
+
         void BrowserThread::SendUIEvent(CmdPacket* packet) {
             mCmdPacketQueue.SendTypedMessage(packet);
         }
 
-        void BrowserThread::InitFonts_(const char*) {
+        void BrowserThread::InitFonts_(const char* unk) {
             print::TickTimer tt;
             tt.reset();
-            (*WWWSurfaceAddFont)("DirectUniversal");
+            WWWSurfaceAddFont("DirectUniversal");
             tt.report("WWWSurfaceAddFont:font1");
         }
+
         void* BrowserThread::GetTextureBuffer(int val, WWWRect** rectPtrOut) {
-            if (pBrowserWindows[0] == NULL)
+            if (mpBrowserWindows[0] == NULL) {
                 return NULL;
-            return ((BrowserWindow*)pBrowserWindows[0])->GetTextureBuffer(val, false, rectPtrOut);
+            }
+            return ((BrowserWindow*)mpBrowserWindows[0])->GetTextureBuffer(val, false, rectPtrOut);
         }
-        void BrowserThread::FlushCallback(WWWRect*, int) {
+
+        void BrowserThread::FlushCallback(WWWRect* rect, int unk) {
             BOOL level;
             BrowserWindow* pBrowserWindow;
 
-            pBrowserWindow = (BrowserWindow*)SurfaceManager::Instance_->pBrowserThread->pBrowserWindows[0];
-            if ((pBrowserWindow->unk_0x2c4[0] == '\0') && (pBrowserWindow->unk_0x2c4[1] == '\0')) {
+            pBrowserWindow = (BrowserWindow*)SurfaceManager::GetInstance()->GetBrowserThread()->mpBrowserWindows[0];
+            if ((pBrowserWindow->unk_0x2C4[0] == '\0') && (pBrowserWindow->unk_0x2C4[1] == '\0')) {
                 level = OSDisableInterrupts();
-                if (pBrowserWindow->unk_0x2c4[2] == '\0') {
-                    if (pBrowserWindow->unk_0x2c4[4] == '\0') {
-                        pBrowserWindow->unk_0x2c0 = pBrowserWindow->unk_0x2b0;
-                        pBrowserWindow->unk_0x2bc = (int)(pBrowserWindow->unk_0x2b4[pBrowserWindow->unk_0x2b0] + 1) % 3;
+                if (pBrowserWindow->unk_0x2C4[2] == '\0') {
+                    if (pBrowserWindow->unk_0x2C4[4] == '\0') {
+                        pBrowserWindow->unk_0x2C0 = pBrowserWindow->unk_0x2B0;
+                        pBrowserWindow->unk_0x2BC = (int)(pBrowserWindow->unk_0x2B4[pBrowserWindow->unk_0x2B0] + 1) % 3;
                     }
-                    pBrowserWindow->unk_0x2c4[4] = 1;
+                    pBrowserWindow->unk_0x2C4[4] = 1;
                 }
-                pBrowserWindow->unk_0x2c4[1] = 1;
+                pBrowserWindow->unk_0x2C4[1] = 1;
                 OSRestoreInterrupts(level);
             }
             return;
         }
+
         bool BrowserThread::SendEventFromWindow(ImeData* imeData) {
             if (!mImeDataQueue.SendTypedMessage(imeData)) {
-                print::IPLWWWReport(3, "WARNING: Too Many Ime commands. cannot send request.\n");
+                print::IPLWWWReport(print::WWW_DEBUG, "WARNING: Too Many Ime commands. cannot send request.\n");
                 return false;
             } else {
                 return true;
             }
         }
+
         bool BrowserThread::ReceiveWindowEvent(ImeData* imeData) {
             return mImeDataQueue.TryReceiveTypedMessage(imeData);
         }
 
         void BrowserThread::CreateImeData(ImeData* data, const WWWIMEData* wwwData) {
             memset(data, 0, sizeof(ImeData));
-            print::IPLWWWReport(3, "WWWIMEData imeID:%p\n", wwwData->imeID);
-            print::IPLWWWReport(3, "WWWIMEData text:%p\n", wwwData->text);
-            print::IPLWWWReport(3, "WWWIMEData maxlength:%d\n", wwwData->maxLength);
+            print::IPLWWWReport(print::WWW_DEBUG, "WWWIMEData imeID:%p\n", wwwData->imeID);
+            print::IPLWWWReport(print::WWW_DEBUG, "WWWIMEData text:%p\n", wwwData->text);
+            print::IPLWWWReport(print::WWW_DEBUG, "WWWIMEData maxlength:%d\n", wwwData->maxLength);
             // @bug I think this was supposed to access a different member of
             // the struct
-            print::IPLWWWReport(3, "WWWIMEData format:%p\n", wwwData->text);
-            print::IPLWWWReport(3, "WWWIMEData text_string:%s\n", wwwData->text);
+            print::IPLWWWReport(print::WWW_DEBUG, "WWWIMEData format:%p\n", wwwData->text);
+            print::IPLWWWReport(print::WWW_DEBUG, "WWWIMEData text_string:%s\n", wwwData->text);
 
             if (wwwData->text) {
                 data->text = (char*)Heap::allocMem2(strlen(wwwData->text) + 1, 4);
@@ -514,8 +552,8 @@ namespace ext_ead {
 
             data->imeID = wwwData->imeID;
             data->unk_0x00 = 0;
-            data->unk_0x0c = wwwData->unk_0x08;
-            data->unk_0x10 = wwwData->unk_0x0c;
+            data->unk_0x0C = wwwData->unk_0x08;
+            data->unk_0x10 = wwwData->unk_0x0C;
             data->unk_0x14 = wwwData->unk_0x10;
             data->unk_0x18 = wwwData->unk_0x14;
             data->maxLength = wwwData->maxLength;
@@ -536,18 +574,22 @@ namespace ext_ead {
             } else {
                 packet.data.commitIme.str = NULL;
             }
+
             packet.type = 3;
             packet.data.commitIme.imeID = data->imeID;
+
             SendUIEvent(&packet);
         }
+
         void BrowserThread::CommitImeCmdPacket(const CmdPacket* packet) {
-            (*WWWCommitIme)(packet->data.commitIme.imeID, packet->data.commitIme.str);
+            WWWCommitIme(packet->data.commitIme.imeID, packet->data.commitIme.str);
             if (packet->data.commitIme.str != NULL) {
                 Heap::freeMem1(packet->data.commitIme.str);
             }
         }
+
         void BrowserThread::UpdateImeCmdPacket(const CmdPacket* packet) {
-            (*WWWUpdateIme)(packet->data.updateIme.imeID, packet->data.updateIme.str, packet->data.updateIme.unk_0x0c);
+            WWWUpdateIme(packet->data.updateIme.imeID, packet->data.updateIme.str, packet->data.updateIme.unk_0x0C);
             if (packet->data.updateIme.str != NULL) {
                 Heap::freeMem1(packet->data.updateIme.str);
             }

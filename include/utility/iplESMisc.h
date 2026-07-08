@@ -60,7 +60,7 @@ namespace ipl {
 
             static u32 NumInodesSaveDirRoot(ESTitleId titleId);
 
-            static BOOL CheckSafeDeleteTitle(EGG::Heap* heap, ESTitleId titleId);
+            static s32 CheckSafeDeleteTitle(EGG::Heap* heap, ESTitleId titleId);
 
             static ESError PrepareTitleDir(ESTitleId titleId, EGG::Heap* heap);
 

@@ -120,7 +120,7 @@ namespace ipl {
         if (System::isSafeMode()) {
         }
         switch (sdVfWorker->get_sd_state()) {
-            case SDVFWorker::SD_STATE_UNAVAILABLE: {
+            case SDVFWorker::SD_STATE_INITIAL: {
                 break;
             }
             case SDVFWorker::SD_STATE_EJECTED: {
@@ -230,7 +230,7 @@ namespace ipl {
     void CdbBackup::stt_check_sd_err() {
         SDVFWorker* sdVfWorker = System::getCdbManager()->getSDWorker();
         switch (sdVfWorker->get_sd_state()) {
-            case SDVFWorker::SD_STATE_AVAILABLE: {
+            case SDVFWorker::SD_STATE_READY: {
                 if (sdVfWorker->is_sd_write_protected()) {
                     System::getDialog()->callBtn1(MESG_CDBBACKUP_SD_LOCKED, MESG_CMN_OK);
                     mState = STATE_WAIT_RET;

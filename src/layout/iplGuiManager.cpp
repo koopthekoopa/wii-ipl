@@ -24,7 +24,7 @@ namespace ipl {
                     System::getProjectionRect(&projRect);
 
                     // Get Cursor Position
-                    ipl::math::VEC2 conProjPos = con->getDpdProjectionPos();
+                    math::VEC2 conProjPos = con->getDpdProjectionPos();
                     if ((projRect.left > conProjPos.x || conProjPos.x > projRect.right) ||
                         (projRect.top > conProjPos.y && conProjPos.y > projRect.bottom)) {
                         conProjPos.y = IPL_MATH_NULL_FLOAT;

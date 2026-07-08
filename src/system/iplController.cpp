@@ -11,62 +11,63 @@
 #include "system/iplController.h"
 #include "system/iplSystem.h"
 
-const f32 lbl_8160D2C0[] = { 0.2, 0.3, 0, 0 };
+const f32 lbl_8160D2C0[] = {0.2, 0.3, 0, 0};
 
 namespace ipl {
     namespace controller {
 
         void Base::read() {
-            if (this->isValidBtn()) {
-                if (this->downTrg(BTN_INTERACT)) {
-                    this->mButton = 1;
+            if (isValidBtn()) {
+                if (downTrg(BTN_INTERACT)) {
+                    mButton = 1;
                 }
-                if (this->pinch()) {
-                    this->mButton = 0;
+                if (pinch()) {
+                    mButton = 0;
                 }
-                if (this->mButton != 0) {
-                    if (this->down(BTN_INTERACT)) {
-                        this->mUnk8++;
+                if (mButton != 0) {
+                    if (down(BTN_INTERACT)) {
+                        unk_0x08++;
                     } else {
-                        this->mUnk8 = 0;
-                        this->mButton = 0;
+                        unk_0x08 = 0;
+                        mButton = 0;
                     }
                 } else {
-                    this->mUnk8 = 0;
+                    unk_0x08 = 0;
                 }
             } else {
-                this->mButton = 0;
-                this->mUnk8 = 0;
+                mButton = 0;
+                unk_0x08 = 0;
             }
 
-            switch (this->mRumbleType) {
+            switch (mRumbleType) {
                 case 0:
                 case 1: {
-                    u32 time = (OSGetTick() - this->mLastRumbleTime) / ((__OSBusClock >> 2) / 1000);
-                    float f1 = (float)time / 1000.0f;
+                    u32 time = OSTicksToMilliseconds(OSGetTick() - mLastRumbleTime);
+                    f32 f1 = (f32)time / 1000.0f;
                     if (f1 < 7.0f / 120.0f) {
-                        WPADControlMotor(this->mChan, 0x1);
-                    } else if (f1 < lbl_8160D2C0[this->mRumbleType]) {
-                        WPADControlMotor(this->mChan, 0x0);
-                    } else if (this->getKPADStatus() == NULL || this->getKPADStatus()->wpad_err == 0) {
-                        this->mLastRumbleTime = 0;
-                        this->mRumbleType = -1;
-                        WPADControlMotor(this->mChan, 0x0);
+                        WPADControlMotor(mChan, 1);
+                    } else if (f1 < lbl_8160D2C0[mRumbleType]) {
+                        WPADControlMotor(mChan, 0);
+                    } else if (getKPADStatus() == NULL || getKPADStatus()->wpad_err == 0) {
+                        mLastRumbleTime = 0;
+                        mRumbleType = -1;
+                        WPADControlMotor(mChan, 0);
                     }
-                    if (this->downTrg(BTN_INTERACT) != 0 || this->decide() != 0) {
-                        WPADControlMotor(this->mChan, 0x0);
-                        this->mRumbleType = 2;
+                    if (downTrg(BTN_INTERACT) != 0 || decide() != 0) {
+                        WPADControlMotor(mChan, 0);
+                        mRumbleType = 2;
                     }
                     break;
-                } case 2: {
-                    u32 time = (OSGetTick() - this->mLastRumbleTime) / ((__OSBusClock >> 2) / 1000);
-                    float f1 = (float)time / 1000.0f;
+                }
+                case 2: {
+                    u32 time = OSTicksToMilliseconds(OSGetTick() - mLastRumbleTime);
+                    f32 f1 = (f32)time / 1000.0f;
                     if (f1 < lbl_8160D2C0[1]) {
-                        WPADControlMotor(this->mChan, 0x0);
-                    } else if (this->getKPADStatus() == NULL || this->getKPADStatus()->wpad_err == 0) {
-                        this->mLastRumbleTime = 0;
-                        this->mRumbleType = -1;
-                        WPADControlMotor(this->mChan, 0x0);
+                        WPADControlMotor(mChan, 0);
+                    } else if (getKPADStatus() == NULL || getKPADStatus()->wpad_err == 0) {
+                        mLastRumbleTime = 0;
+                        mRumbleType = -1;
+                        WPADControlMotor(mChan, 0);
                     }
                     break;
                 }
@@ -94,71 +95,71 @@ namespace ipl {
         }
 
         int Base::decide() const {
-            return (unsigned int)__cntlzw(this->mUnk8 - 5) >> 5;
+            return (unk_0x08 - 5) == 0;
         }
 
         int Base::rumble(int type) {
-            int ret = 0;
-            if (WPADIsMotorEnabled() && this->mRumbleType == -1) {
-                this->mLastRumbleTime = OSGetTick();
-                ret = 1;
-                this->mRumbleType = type;
+            int ret = FALSE;
+            if (WPADIsMotorEnabled() && mRumbleType == -1) {
+                mLastRumbleTime = OSGetTick();
+                ret = TRUE;
+                mRumbleType = type;
             }
 
             return ret;
         }
 
         void Base::cancelRumbling() {
-            if (this->mRumbleType != -1) {
-                WPADControlMotor(this->mChan, 0x0);
+            if (mRumbleType != -1) {
+                WPADControlMotor(mChan, 0);
             }
-            this->mLastRumbleTime = 0;
-            this->mRumbleType = -1;
+            mLastRumbleTime = 0;
+            mRumbleType = -1;
         }
 
         void Revolution::read() {
-            if (!this->isValidDpd()) {
-                this->mUnk20->pos.y = 1.0f / 0.0f;
-                this->mUnk20->pos.x = 1.0f / 0.0f;
-                this->mUnk20->speed = 0.0f;
-                this->mUnk20->vec.y = 0.0f;
-                this->mUnk20->vec.x = 0.0f;
+            if (!isValidDpd()) {
+                unk_0x20->pos.y = 1.0f / 0.0f;
+                unk_0x20->pos.x = 1.0f / 0.0f;
+                unk_0x20->speed = 0.0f;
+                unk_0x20->vec.y = 0.0f;
+                unk_0x20->vec.x = 0.0f;
             }
-            this->mUnk1E = this->mUnk1D;
+            unk_0x1E = unk_0x1D;
 
-            if (this->isValidBtn()) {
-                if (this->mUnk1E == 0) {
-                    if (this->down(REVO_BTN_A) && this->down(REVO_BTN_B)) {
-                        this->mUnk1D = 1;
+            if (isValidBtn()) {
+                if (unk_0x1E == 0) {
+                    if (down(REVO_BTN_A) && down(REVO_BTN_B)) {
+                        unk_0x1D = 1;
                     }
-                } else if (!this->down(REVO_BTN_A) || !this->down(REVO_BTN_B)) {
-                    this->mUnk1D = 0;
+                } else if (!down(REVO_BTN_A) || !down(REVO_BTN_B)) {
+                    unk_0x1D = 0;
                 }
             } else {
-                this->mUnk1D = 0;
+                unk_0x1D = 0;
             }
 
             Interface::read();
         }
 
         bool Revolution::isValidDpd() const {
-            if (this->mUnk1C != 0) {
+            if (unk_0x1C != 0) {
                 return false;
             }
 
-            return (this->mUnk20->wpad_err == 0 || this->mUnk20->wpad_err == -7) && this->mUnk20->dpd_valid_fg != 0;
+            return (unk_0x20->wpad_err == 0 || unk_0x20->wpad_err == -7) && unk_0x20->dpd_valid_fg != 0;
         }
 
         bool Revolution::isValidBtn() const {
-            u8 val = this->mUnk20->wpad_err;
+            u8 val = unk_0x20->wpad_err;
 
             return (u8)(val + 7) <= 7 && ((1 << (val + 7)) & 0xA1) != 0;
         }
 
         int Revolution::down(u32 mButton) const {
             bool ret = false;
-            if (this->isValidBtn()) {
-                if (this->mUnk20->hold & (mButton & 0xFFFF)) {
+            if (isValidBtn()) {
+                if (unk_0x20->hold & (mButton & 0xFFFF)) {
                     ret = true;
                 }
             }
@@ -170,8 +171,8 @@ namespace ipl {
         math::VEC2 Revolution::getDpdProjectionPos() const {
             math::VEC2 ret;
             Vec2 dest;
-            Vec2 src = { this->mUnk20->pos.x, this->mUnk20->pos.y };
-            nw4r::ut::Rect nw4r_rect; // constructor shouldn't be inlined
+            Vec2 src = {unk_0x20->pos.x, unk_0x20->pos.y};
+            nw4r::ut::Rect nw4r_rect;  // constructor shouldn't be inlined
             Rect kpad_rect;
 
             System::getProjectionRect(&nw4r_rect);
@@ -199,55 +200,58 @@ namespace ipl {
             }
             // //
 
-            ret.set(dest.x, dest.y); // shouldn't be inlined
+            ret.set(dest.x, dest.y);  // shouldn't be inlined
 
             return ret;
         }
 
-        Classic::Classic(int arg0, KPADStatus &arg1) : Revolution(arg0, arg1) {
-            this->unk24.y = 0.01f;
-            this->unk24.x = 0.01f;
-            this->unk2C = 0;
+        Classic::Classic(int arg0, KPADStatus& arg1) : Revolution(arg0, arg1) {
+            unk_0x24.y = 0.01f;
+            unk_0x24.x = 0.01f;
+            unk_0x2C = 0;
         }
 
-        Base::~Base() {}
+        Base::~Base() {
+        }
 
-        Revolution::~Revolution() {}
+        Revolution::~Revolution() {
+        }
 
         void Classic::read() {
             if (!Revolution::isValidDpd()) {
-                math::VEC2 lstick(this->mUnk20->ex_status.cl.lstick.x, this->mUnk20->ex_status.cl.lstick.y);
+                math::VEC2 lstick(unk_0x20->ex_status.cl.lstick.x, unk_0x20->ex_status.cl.lstick.y);
 
                 if (lstick.x * lstick.x + lstick.y * lstick.y > 0.0036f) {
-                    this->unk24.x = math::abs_clamp(this->unk24.x + this->mUnk20->ex_status.cl.lstick.x * 0.05f, 1.8f);
-                    this->unk24.y = math::abs_clamp(this->unk24.y - this->mUnk20->ex_status.cl.lstick.y * 0.05f, 1.2f);
+                    unk_0x24.x = math::abs_clamp(unk_0x24.x + unk_0x20->ex_status.cl.lstick.x * 0.05f, 1.8f);
+                    unk_0x24.y = math::abs_clamp(unk_0x24.y - unk_0x20->ex_status.cl.lstick.y * 0.05f, 1.2f);
                 }
 
-                math::VEC2 rstick = math::VEC2(this->mUnk20->ex_status.cl.rstick.x, this->mUnk20->ex_status.cl.rstick.y);
-                if (this->getClassicHoldFlag() != 0 || lstick.x * lstick.x + lstick.y * lstick.y > 0.0036f || rstick.x * rstick.x + rstick.y * rstick.y > 0.0036f) {
-                    this->unk2C = 180;
+                math::VEC2 rstick = math::VEC2(unk_0x20->ex_status.cl.rstick.x, unk_0x20->ex_status.cl.rstick.y);
+                if (getClassicHoldFlag() != 0 || lstick.x * lstick.x + lstick.y * lstick.y > 0.0036f ||
+                    rstick.x * rstick.x + rstick.y * rstick.y > 0.0036f) {
+                    unk_0x2C = 180;
                 }
 
-                if (--this->unk2C < 0) {
-                    this->unk2C = 0;
+                if (--unk_0x2C < 0) {
+                    unk_0x2C = 0;
                 }
             } else {
-                this->unk24.y = 0.01f;
-                this->unk24.x = 0.01f;
-                this->unk2C = 0;
+                unk_0x24.y = 0.01f;
+                unk_0x24.x = 0.01f;
+                unk_0x2C = 0;
             }
 
             Revolution::read();
         }
 
         int Classic::getClassicHoldFlag() const {
-            return this->mUnk20->ex_status.cl.hold;
+            return unk_0x20->ex_status.cl.hold;
         }
 
         math::VEC2 Classic::getHorizon() const {
             math::VEC2 ret;
             if (Revolution::isValidDpd()) {
-                ret.set(this->mUnk20->horizon.x, this->mUnk20->horizon.y);
+                ret.set(unk_0x20->horizon.x, unk_0x20->horizon.y);
                 return ret;
             } else {
                 return math::VEC2(1.0f, -0.2679492f);
@@ -257,15 +261,15 @@ namespace ipl {
         math::VEC2 Classic::getDpdPos() const {
             math::VEC2 ret;
             if (Revolution::isValidDpd()) {
-                ret.set(this->mUnk20->pos.x, this->mUnk20->pos.y);
+                ret.set(unk_0x20->pos.x, unk_0x20->pos.y);
                 return ret;
             }
 
-            if (this->unk2C != 0) {
-                ret = this->unk24;
+            if (unk_0x2C != 0) {
+                ret = unk_0x24;
                 return ret;
             }
             return math::VEC2(1.0f / 0.0f, 1.0f / 0.0f);
         }
-    }
-}
+    }  // namespace controller
+}  // namespace ipl

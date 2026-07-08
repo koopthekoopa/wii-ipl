@@ -4,7 +4,6 @@
 #include <revolution/gx/GXStruct.h>
 #include <revolution/types.h>
 
-
 #include <nw4r/ut/binaryFileFormat.h>
 
 #include <nw4r/lyt/resourceAccessor.h>

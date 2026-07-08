@@ -27,6 +27,9 @@ extern "C" {
 
 #define NAND_MB_TO_BYTES(x) (((x) * 1024) * 1024)
 #define NAND_MB_TO_BLOCKS(x) (NAND_MB_TO_BYTES(x) / NAND_BLOCK_SIZE)
+#define NAND_BYTES_TO_BLOCKS(x) ((x) / NAND_BLOCK_SIZE)
+
+#define NAND_BLOCKS_TO_BYTES(x) ((x) * NAND_BLOCK_SIZE)
 
 // The amount of blocks of the entire area of the System Memory.
 #define NAND_MAX_BLOCKS NAND_MB_TO_BLOCKS(512) /* 32768 blocks / 4096 data management blocks */

@@ -49,14 +49,8 @@ enum {
 };
 
 enum {
-    FA_STATUS_INSERTED = (1 << 4),
-};
-
-enum {
     FA_FLAG_FILENAME_CHECK = (1 << 17),
 };
-
-#define FA_INSERTED(driveTable) (driveTable.stat & FA_STATUS_INSERTED)
 
 typedef void FAFILE;
 typedef void FADIR;
@@ -198,6 +192,12 @@ typedef struct FADrvTbl {
     u8 stat;     // 0x09
 } FADrvTbl;
 
+enum {
+    FA_DRV_TBL_STAT_INSERTED = (1 << 4),
+};
+
+#define FA_INSERTED(driveTable) (driveTable.stat & FA_DRV_TBL_STAT_INSERTED)
+
 typedef struct FAFileInfo {
     u8 unknown[32];
 } FAFileInfo;
@@ -242,6 +242,11 @@ typedef struct FAFileStat {
 
     u8 stat;  // 0x10
 } FAFileStat;
+
+enum {
+    FA_FILE_UNK_1 = (1 << 1),
+    FA_FILE_STAT_DIR = (1 << 4)
+};
 
 #ifdef __cplusplus
 }

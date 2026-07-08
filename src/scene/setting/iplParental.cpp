@@ -197,18 +197,18 @@ namespace ipl {
 
         void Parental::setRestrictions(u32 restrictions) {
             m_sc.netContentRestrict = 0;
+
+            m_sc.netContentRestrict |= (restrictions >> 3) & 0x01;
+            m_sc.netContentRestrict |= -((restrictions >> 1) & 1) & 0x02;
+            m_sc.netContentRestrict |= -((restrictions >> 0) & 1) & 0x04;
+
             m_sc.wwwRestrict = (restrictions >> 2) & 1;
-            m_sc.netContentRestrict |= -((restrictions >> 1) & 1) & 0b010;
-            m_sc.netContentRestrict |= (restrictions >> 3) & 0b001;
-            m_sc.netContentRestrict |= -((restrictions >> 0) & 1) & 0b100;
-            // m_sc.netContentRestrict = newNetContentRestrict;
-            // m_sc.netContentRestrict = ((((((restrictions >> 1) & 1) * -1) & 2 & ~1) | ((restrictions >> 3) & 1)) & ~4) | (-(restrictions & 1) & 4);
         }
 
         void Parental::adjustOgn(u8 country) {
             m_sc.info.rating = 20;
 
-            switch (country) {  // irregular
+            switch (country) {
                 case SC_COUNTRY_DE: {
                     m_sc.info.org = SC_PARENTAL_ORG_USK;
                     break;

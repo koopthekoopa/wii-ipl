@@ -8,6 +8,8 @@
 #include "iplSystem.h"
 #include "utility/iplGraphics.h"
 
+#include "system/iplSaveBanner.h"
+
 namespace ipl {
     namespace kitayama {
         class NandSDWorker_AutoTest {
@@ -93,7 +95,6 @@ namespace ipl {
                     }
                     break;
                 }
-
                 case 2: {
                     s32 result;
                     NANDFileInfo bannerInfo;
@@ -105,82 +106,82 @@ namespace ipl {
                     ISFS_OpenLib();
 
                     nand::wrapper::Delete("/title/00010000/30303030/data/banner.bin");
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/banner.bin", 0x3F, 0);
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/banner.bin", NAND_PERM_ALL_RW, 0);
                     if (result == 0) {
-                        result = nand::wrapper::Open("/title/00010000/30303030/data/banner.bin", &bannerInfo, 2);
+                        result = nand::wrapper::Open("/title/00010000/30303030/data/banner.bin", &bannerInfo, NAND_ACCESS_WRITE);
                         if (result != 0) {
                             OSReport(" NANDOpen failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xAD, "Terminated.\n");
+                            OSHalt("Terminated.\n", 173);
                         }
 
-                        buffer = (u8*)unk_0x58->alloc(0xF0A0, 0x20);
-                        memset(buffer, 0x55, 0xF0A0);
-                        ((u32*)buffer)[0] = 0x5749424E;
+                        buffer = (u8*)unk_0x58->alloc(sizeof(WIISaveBannerFile), 32);
+                        memset(buffer, 0x55, sizeof(WIISaveBannerFile));
+                        ((u32*)buffer)[0] = 'WBIN';
                         ((u32*)buffer)[1] = 0;
 
-                        result = nand::wrapper::Write(&bannerInfo, buffer, 0xF0A0);
-                        if ((u32)result != 0xF0A0) {
-                            OSReport(" NANDWrite failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xB8, "Terminated.\n");
+                        u32 read = nand::wrapper::Write(&bannerInfo, buffer, sizeof(WIISaveBannerFile));
+                        if (read != sizeof(WIISaveBannerFile)) {
+                            OSReport(" NANDWrite failed: %d\n", read);
+                            OSHalt("Terminated.\n", 184);
                         }
 
                         result = nand::wrapper::Close(&bannerInfo);
-                        if (result != 0) {
+                        if (result != NAND_RESULT_OK) {
                             OSReport(" NANDClose failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xBE, "Terminated.\n");
+                            OSHalt("Terminated.\n", 190);
                         }
 
                         unk_0x58->free(buffer);
-                    } else if (result == -6) {
+                    } else if (result == NAND_RESULT_EXISTS) {
                         OSReport("banner.bin already exist.\n");
                     } else {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSPanic("iplKitayamaTest.cpp", 0xC6, "Terminated.\n");
+                        OSHalt("Terminated.\n", 198);
                     }
 
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/test1.bin", 0x3F, 0);
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/test1.bin", NAND_PERM_ALL_RW, 0);
                     if (result == 0) {
-                        result = nand::wrapper::Open("/title/00010000/30303030/data/test1.bin", &testInfo, 2);
+                        result = nand::wrapper::Open("/title/00010000/30303030/data/test1.bin", &testInfo, NAND_ACCESS_WRITE);
                         if (result != 0) {
                             OSReport(" NANDOpen failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xD5, "Terminated.\n");
+                            OSHalt("Terminated.\n", 213);
                         }
 
-                        buffer = (u8*)unk_0x58->alloc(0xF0A0, 0x20);
-                        memset(buffer, 0x55, 0xF0A0);
-                        ((u32*)buffer)[0] = 0x5749424E;
+                        buffer = (u8*)unk_0x58->alloc(sizeof(WIISaveBannerFile), 32);
+                        memset(buffer, 0x55, sizeof(WIISaveBannerFile));
+                        ((u32*)buffer)[0] = 'WBIN';
                         ((u32*)buffer)[1] = 0;
 
-                        result = nand::wrapper::Write(&testInfo, buffer, 0xF0A0);
-                        if ((u32)result != 0xF0A0) {
-                            OSReport(" NANDWrite failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xE0, "Terminated.\n");
+                        u32 read = nand::wrapper::Write(&testInfo, buffer, sizeof(WIISaveBannerFile));
+                        if (read != sizeof(WIISaveBannerFile)) {
+                            OSReport(" NANDWrite failed: %d\n", read);
+                            OSHalt("Terminated.\n", 224);
                         }
 
                         result = nand::wrapper::Close(&testInfo);
                         if (result != 0) {
                             OSReport(" NANDClose failed: %d\n", result);
-                            OSPanic("iplKitayamaTest.cpp", 0xE6, "Terminated.\n");
+                            OSHalt("Terminated.\n", 230);
                         }
 
                         unk_0x58->free(buffer);
-                    } else if (result == -6) {
+                    } else if (result == NAND_RESULT_EXISTS) {
                         OSReport("test1.bin already exist.\n");
                     } else {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSPanic("iplKitayamaTest.cpp", 0xEE, "Terminated.\n");
+                        OSHalt("Terminated.\n", 238);
                     }
 
-                    result = nand::wrapper::CreateDir("/title/00010000/30303030/data/nocopy", 0x3F, 0);
-                    if (result != 0 && result != -6) {
+                    result = nand::wrapper::CreateDir("/title/00010000/30303030/data/nocopy", NAND_PERM_ALL_RW, 0);
+                    if (result != 0 && result != NAND_RESULT_EXISTS) {
                         OSReport(" NANDCreateDir failed: %d\n", result);
-                        OSPanic("iplKitayamaTest.cpp", 0xF8, "Terminated.\n");
+                        OSHalt("Terminated.\n", 248);
                     }
 
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/nocopy/test1.txt", 0x3F, 0);
-                    if (result != 0 && result != -6) {
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/nocopy/test1.txt", NAND_PERM_ALL_RW, 0);
+                    if (result != 0 && result != NAND_RESULT_EXISTS) {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSPanic("iplKitayamaTest.cpp", 0xFE, "Terminated.\n");
+                        OSHalt("Terminated.\n", 254);
                     }
 
                     ES_SetUid(SYSMENU_TITLE_ID);
@@ -193,13 +194,11 @@ namespace ipl {
                     unk_0x60 = 3;
                     break;
                 }
-
                 case 3: {
                     unk_0x64->start_save_test((void*)unk_0x68, (void*)unk_0x6C, 0x18);
                     unk_0x60 = 4;
                     break;
                 }
-
                 case 4: {
                     if (unk_0x64->process() == 0x51) {
                         unk_0x60 = 12;
@@ -208,13 +207,11 @@ namespace ipl {
                     }
                     break;
                 }
-
                 case 5: {
                     unk_0x64->start_app_test((void*)unk_0x68, (void*)unk_0x6C, 0x18);
                     unk_0x60 = 6;
                     break;
                 }
-
                 case 6: {
                     if (unk_0x64->process() == 0x51) {
                         unk_0x60 = 12;
@@ -223,14 +220,12 @@ namespace ipl {
                     }
                     break;
                 }
-
                 case 7: {
                     System::stopReceiveSchedule();
                     unk_0x68 = (u32)System::getMem2App()->alloc(0x3EA60, 0x40);
                     unk_0x60 = 8;
                     break;
                 }
-
                 case 8: {
                     if (System::isReceiveScheduleStopped()) {
                         System::getNandManager()->closeContentsAll();
@@ -249,14 +244,12 @@ namespace ipl {
                     }
                     break;
                 }
-
                 case 9: {
                     if (unk_0x64->process() == 0x51 || unk_0x64->process() == 0x52) {
                         unk_0x60 = 10;
                     }
                     break;
                 }
-
                 case 10: {
                     int result = unk_0x64->get_result();
                     System::getNandManager()->openContentsAll();
@@ -272,7 +265,6 @@ namespace ipl {
                     }
                     break;
                 }
-
                 case 11:
                 case 12: {
                     if (controller->downTrg(controller::REVO_BTN_1)) {

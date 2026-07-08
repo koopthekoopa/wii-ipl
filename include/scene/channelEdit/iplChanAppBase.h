@@ -14,7 +14,7 @@ namespace ipl {
 
         class ChanAppBase : public AnmController, private ::gui::EventHandler {
         public:
-            ChanAppBase(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName);
+            ChanAppBase(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName);
             virtual ~ChanAppBase();
 
             void calc();
@@ -38,10 +38,38 @@ namespace ipl {
 
             virtual void onEvent(u32 compId, u32 event, void* data) override;
 
-            inline layout::Object* getLytObject() { return pLytObj; }
-            inline bool isIdle() { return mState == CHANAPP_IDLE; }
+            inline layout::Object* getLytObject() { return mpLayout; }
+
+            inline bool isIdle() { return mState == STATE_IDLE; }
 
         private:
+            enum {
+                ANIM_DATA_IN = 0,
+                ANIM_DATA_OUT,
+                ANIM_SELECT_IN,
+                ANIM_SELECT_WII_IN,
+                ANIM_SELECT_WII_OUT,
+                ANIM_SELECT_WII_FLASH,
+                ANIM_SELECT_SD_IN,
+                ANIM_SELECT_SD_OUT,
+                ANIM_SELECT_SD_FLASH,
+                ANIM_ARROWS_MOVE_L,
+                ANIM_ARROWS_MOVE_R,
+                ANIM_ARROW_R_SELECT,
+                ANIM_ARROW_L_SELECT,
+                ANIM_ARROW_R_FOCUS_ON,
+                ANIM_ARROW_L_FOCUS_ON,
+                ANIM_ARROW_R_FOCUS_OFF,
+                ANIM_ARROW_L_FOCUS_OFF,
+                ANIM_ARROW_R_LOOP,
+                ANIM_ARROW_R_END,
+                ANIM_ARROW_L_END,
+                ANIM_ARROW_R_LOST,
+                ANIM_ARROW_L_LOST,
+                ANIM_ERROR_TEXT_IN,
+                ANIM_ERROR_TEXT_OUT,
+            };
+
             void on_fadein1st();
             void on_fadein2nd();
 
@@ -56,21 +84,22 @@ namespace ipl {
             void on_text_fadein();
             void on_text_fadeout();
 
-            enum State {
-                CHANAPP_IDLE = 0,          // 0x0
-                CHANAPP_FADEIN1ST,         // 0x1
-                CHANAPP_FADEIN2ND,         // 0x2
-                CHANAPP_FADEOUT,           // 0x3
-                CHANAPP_CHANGE_SD_TO_WII,  // 0x4
-                CHANAPP_CHANGE_WII_TO_SD,  // 0x5
-
-                CHANAPP_SCROLL_R = 8,  // 0x8
-                CHANAPP_SCROLL_L,      // 0x9
-                CHANAPP_TEXT_FADEIN,   // 0xa
-                CHANAPP_TEXT_FADEOUT,  // 0xb
+            enum {
+                STATE_IDLE = 0,
+                STATE_FADE_IN_1ST,
+                STATE_FADE_IN_2ND,
+                STATE_FADE_OUT,
+                STATE_CHANGE_SD_TO_WII,
+                STATE_CHANGE_WII_TO_SD,
+                STATE_6,
+                STATE_7,
+                STATE_SCROLL_R = 8,
+                STATE_SCROLL_L,
+                STATE_TEXT_FADEIN,
+                STATE_TEXT_FADEOUT,
             };
 
-            State mState;  // 0x34
+            int mState;  // 0x34
         };
     }  // namespace scene
 }  // namespace ipl

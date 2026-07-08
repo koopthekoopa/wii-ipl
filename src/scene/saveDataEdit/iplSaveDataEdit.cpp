@@ -13,38 +13,16 @@
 
 namespace ipl {
     namespace scene {
-        typedef struct {
-            wchar_t digits[10];
-        } SCNumber;
-        static const SCNumber scNumber = {L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9'};
-
-        // TODO: Figure out what this might've been/why it isn't inlining
-        void dummyFunctionToKeepAConstructorStuffFromInlining(nw4r::math::VEC3& vec) {
+        // stripped out function generated a weak
+        void forceWeakFunc(nw4r::math::VEC3& vec) {
             math::VEC3 end(vec);
         }
 
-        enum SavedataEditAnimIdx {
-            ANIM_MASK_IN = 0x0,       // 0x0
-            ANIM_MASK_OUT = 0x1,      // 0x1
-            ANIM_COPY_IN = 0x2,       // 0x2
-            ANIM_COPY_OUT = 0x3,      // 0x3
-            ANIM_COPY_FLASH = 0x4,    // 0x4
-            ANIM_DEL_IN = 0x5,        // 0x5
-            ANIM_DEL_OUT = 0x6,       // 0x6
-            ANIM_DEL_FLASH = 0x7,     // 0x7
-            ANIM_SELECT_OUT = 0x8,    // 0x8
-            ANIM_TEXT_FADEIN = 0x9,   // 0x9
-            ANIM_TEXT_FADEOUT = 0xa,  // 0xa
-            ANIM_WAIT = 0xb,          // 0xb
-            ANIM_MOVE_IN = 0xc,       // 0xc
-            ANIM_MOVE_OUT = 0xd,      // 0xd
-            ANIM_MOVE_FLASH = 0xe,    // 0xe
-        };
+        SavedataEdit::SavedataEdit(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName)
+            : AnmController(heap), ::gui::EventHandler(), mState(STATE_IDLE), mLinearInterp(), mpSavedataBox(NULL), mMsgId(0) {
+            mpLayout = new (heap) layout::Object(heap, layoutFile, layoutDir, layoutFileName);
 
-        SavedataEdit::SavedataEdit(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName)
-            : AnmController(heap), ::gui::EventHandler(), mState(EDIT_STATE_IDLE), mLinearInterp(), pSavedataBox(NULL), mMsgId(0) {
-            pLytObj = new (heap) layout::Object(heap, lytFile, lytFolder, lytFileName);
-
+            // New filenames for 4.0 (10th December 2008)
             add_animation("081210_sys4_mn_DataDetail_a_SeenIn.brlan", "G_Mask");
             add_animation("081210_sys4_mn_DataDetail_a_SeenOut.brlan", "G_Mask");
             add_animation("081210_sys4_mn_DataDetail_a_CopyFoucusIn.brlan", "G_Copy");
@@ -61,7 +39,7 @@ namespace ipl {
             add_animation("081210_sys4_mn_DataDetail_a_MoveFoucusOut.brlan", "G_Move");
             add_animation("081210_sys4_mn_DataDetail_a_MoveFlash.brlan", "G_MoveFlash");
 
-            pLytObj->finishBinding();
+            mpLayout->finishBinding();
             set_textbox("T_Move_00", MESG_SAVEDATA_EDIT_MOVE);
             set_textbox("T_Copy_00", MESG_SAVEDATA_EDIT_COPY);
             set_textbox("T_Del_00", MESG_SAVEDATA_EDIT_DEL);
@@ -81,13 +59,13 @@ namespace ipl {
             set_visible("T_Move_off", false);
             set_visible("T_Move_off_00", false);
 
-            pPaneManager = new ipl::gui::PaneManager(this, pLytObj->getDrawInfo(), NULL, NULL, true);
-            pPaneManager->createLayoutScene(*pLytObj->getNW4RLyt());
-            pPaneManager->setAllComponentTriggerTarget(false);
+            mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
+            mpGui->createLayoutScene(*mpLayout->getNW4RLyt());
+            mpGui->setAllComponentTriggerTarget(false);
 
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Move_00"), true);
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Copy_00"), true);
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Del_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Move_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Copy_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Del_00"), true);
 
             add_anmpane("B_Move_00", get_animation(ANIM_MOVE_IN), get_animation(ANIM_MOVE_OUT));
             add_anmpane("B_Copy_00", get_animation(ANIM_COPY_IN), get_animation(ANIM_COPY_OUT));
@@ -95,53 +73,53 @@ namespace ipl {
         }
 
         SavedataEdit::~SavedataEdit() {
-            delete pLytObj;
-            delete pPaneManager;
+            delete mpLayout;
+            delete mpGui;
         }
 
         void SavedataEdit::calc() {
             AnmPane* anmPane;
 
-            pLytObj->calc();
-            pPaneManager->calc();
+            mpLayout->calc();
+            mpGui->calc();
             anmPane = NULL;
             while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL)
                 anmPane->calc();
 
             switch (mState) {
-                case EDIT_STATE_IDLE:
+                case STATE_IDLE:
                     break;
-                case EDIT_STATE_FADEIN:
+                case STATE_FADEIN:
                     on_fadein();
                     break;
-                case EDIT_STATE_FADEOUT:
+                case STATE_FADEOUT:
                     on_fadeout();
                     break;
-                case EDIT_STATE_HIDE_BTN0_DIALOG:
+                case STATE_HIDE_BTN0_DIALOG:
                     on_hide_btn0_dialog();
                     break;
-                case EDIT_STATE_SHOW_BTN2_DIALOG1ST:
+                case STATE_SHOW_BTN2_DIALOG1ST:
                     on_show_btn2_dialog1st();
                     break;
-                case EDIT_STATE_SHOW_BTN2_DIALOG2ND:
+                case STATE_SHOW_BTN2_DIALOG2ND:
                     on_show_btn2_dialog2nd();
                     break;
-                case EDIT_STATE_SELECT_FADEIN:
+                case STATE_SELECT_FADEIN:
                     on_select_fadein();
                     break;
-                case EDIT_STATE_SELECT_FADEOUT1ST:
+                case STATE_SELECT_FADEOUT1ST:
                     on_select_fadeout1st();
                     break;
-                case EDIT_STATE_SELECT_FADEOUT2ND:
+                case STATE_SELECT_FADEOUT2ND:
                     on_select_fadeout2nd();
                     break;
-                case EDIT_STATE_TEXT_FADEIN:
+                case STATE_TEXT_FADEIN:
                     on_text_fadein();
                     break;
-                case EDIT_STATE_TEXT_FADEOUT:
+                case STATE_TEXT_FADEOUT:
                     on_text_fadeout();
                     break;
-                case EDIT_STATE_TRIG_DEL:
+                case STATE_TRIG_DEL:
                     on_trig_del();
                     break;
             }
@@ -149,15 +127,15 @@ namespace ipl {
         }
 
         void SavedataEdit::draw() {
-            pLytObj->draw();
+            mpLayout->draw();
         }
 
         void SavedataEdit::update() {
-            pPaneManager->update();
+            mpGui->update();
         }
 
         void SavedataEdit::anmFadein(SavedataBox* box) {
-            pSavedataBox = box;
+            mpSavedataBox = box;
             set_visible("Mask_00", true);
             set_visible("N_Window", true);
             set_visible("Banner_00", true);
@@ -199,13 +177,17 @@ namespace ipl {
                 set_texture("Banner_00", corruptIconTex);
             }
             u32 blockCount = box->getBanner()->getBlockCount();
-            SCNumber scNumberData = scNumber;
+
+            const wchar_t scNumber[10] = {L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9'};
+
             wchar_t blockTextDigits[5] = L"";
             wchar_t blockText[5] = L"";
-            blockTextDigits[0] = scNumberData.digits[blockCount / 1000];
-            blockTextDigits[1] = scNumberData.digits[blockCount / 100 % 10];
-            blockTextDigits[2] = scNumberData.digits[blockCount / 10 % 10];
-            blockTextDigits[3] = scNumberData.digits[blockCount % 10];
+
+            blockTextDigits[0] = scNumber[blockCount / 1000];
+            blockTextDigits[1] = scNumber[blockCount / 100 % 10];
+            blockTextDigits[2] = scNumber[blockCount / 10 % 10];
+            blockTextDigits[3] = scNumber[blockCount % 10];
+
             int zeroOffset;
             for (zeroOffset = 0; zeroOffset < 3; zeroOffset++)
                 if (blockTextDigits[zeroOffset] != L'0')
@@ -225,25 +207,25 @@ namespace ipl {
                 clear_anmpane(anmPane->getName());
 
             do_animation(ANIM_MASK_IN, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_FADEIN;
+            mState = STATE_FADEIN;
         }
         void SavedataEdit::anmFadeout() {
-            pSavedataBox = NULL;
+            mpSavedataBox = NULL;
             change_button_text(MESG_CMN_BACK_ALT);
             do_animation(ANIM_MASK_OUT, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_FADEOUT;
+            mState = STATE_FADEOUT;
         }
 
         void SavedataEdit::anmHideBtn0Dialog() {
             System::getDialog()->terminate();
-            mState = EDIT_STATE_HIDE_BTN0_DIALOG;
+            mState = STATE_HIDE_BTN0_DIALOG;
         }
         void SavedataEdit::anmShowBtn0Dialog(u32 msgId, bool dontWait, bool showLoading) {
             System::getDialog()->callBtn0(msgId, dontWait ? 0 : 180, showLoading);
         }
         void SavedataEdit::anmShowS2Btn2Dialog(u32 msgId) {
             set_textbox("T_Message_00", msgId);
-            mState = EDIT_STATE_SHOW_BTN2_DIALOG1ST;
+            mState = STATE_SHOW_BTN2_DIALOG1ST;
         }
 
         void SavedataEdit::anmSelectFadein() {
@@ -256,17 +238,17 @@ namespace ipl {
             while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL)
                 clear_anmpane(anmPane->getName());
 
-            mState = EDIT_STATE_SELECT_FADEIN;
+            mState = STATE_SELECT_FADEIN;
         }
         void SavedataEdit::anmSelectFadeout(u32 msgId) {
             set_textbox("T_Message_00", msgId);
-            mState = EDIT_STATE_SELECT_FADEOUT1ST;
+            mState = STATE_SELECT_FADEOUT1ST;
         }
 
         void SavedataEdit::anmTextFadein(u32 msgId) {
             mMsgId = msgId;
             do_animation(ANIM_TEXT_FADEIN, ANIM_TYPE_FORWARD, true);
-            mState = EDIT_STATE_TEXT_FADEIN;
+            mState = STATE_TEXT_FADEIN;
         }
         void SavedataEdit::anmTextFadeout() {
             do_animation(ANIM_TEXT_FADEOUT, ANIM_TYPE_FORWARD, true);
@@ -275,7 +257,7 @@ namespace ipl {
             sceneSettingButton->reserve(SettingButton::CMD_SET_TEXT, MESG_CMN_BACK_ALT);
             sceneSettingButton->reserve(SettingButton::CMD_SHOW_BTN, 0);
 
-            mState = EDIT_STATE_TEXT_FADEOUT;
+            mState = STATE_TEXT_FADEOUT;
         }
 
         void SavedataEdit::anmStartWaitAnm() {
@@ -301,8 +283,9 @@ namespace ipl {
             gui::PaneComponent* paneComponent = (gui::PaneComponent*)mpManager->getComponent(compId);
             const char* paneName = paneComponent->getPane()->GetName();
 
-            if (mState == EDIT_STATE_TRIG_DEL)
+            if (mState == STATE_TRIG_DEL) {
                 return;
+            }
 
             AnmPane* anmPane;
             switch (event) {
@@ -335,10 +318,10 @@ namespace ipl {
                             do_animation(ANIM_MOVE_FLASH, ANIM_TYPE_FORWARD, true);
                             Memory* sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
                             sceneMemory->onTrigMove();
-                        } else if (strcmp(anmPane->getName(), "B_Del_00") == 0 && mState != EDIT_STATE_TRIG_DEL) {
+                        } else if (strcmp(anmPane->getName(), "B_Del_00") == 0 && mState != STATE_TRIG_DEL) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
                             do_animation(ANIM_DEL_FLASH, ANIM_TYPE_FORWARD, true);
-                            mState = EDIT_STATE_TRIG_DEL;
+                            mState = STATE_TRIG_DEL;
                         }
                     }
                     break;
@@ -353,68 +336,73 @@ namespace ipl {
 
             switch (msgId) {
                 case MESG_CMN_BACK_ALT_3:
-                case MESG_CMN_BACK_ALT:
+                case MESG_CMN_BACK_ALT: {
                     sceneSettingButton->setSoundType(SettingButton::CANCEL);
                     break;
-
-                case MESG_CMN_OK:
+                }
+                case MESG_CMN_OK: {
                     sceneSettingButton->setSoundType(SettingButton::DECIDE);
                     break;
+                }
             }
         }
 
         void SavedataEdit::on_fadein() {
             mLinearInterp.calc();
             set_translate("N_Window", mLinearInterp.get());
-            if (is_animation(ANIM_MASK_IN))
+            if (is_animation(ANIM_MASK_IN)) {
                 return;
-            if (mLinearInterp.isPlaying())
+            }
+            if (mLinearInterp.isPlaying()) {
                 return;
-            mState = EDIT_STATE_IDLE;
+            }
+            mState = STATE_IDLE;
         }
-        WAIT_FOR_ANIM_STATE(SavedataEdit::on_fadeout, ANIM_MASK_OUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataEdit::on_fadeout, ANIM_MASK_OUT, mState = STATE_IDLE);
         void SavedataEdit::on_hide_btn0_dialog() {
             if (System::getDialog()->getLastResult() != DialogWindow::RESULT_PROGRESS &&
-                System::getDialog()->getLastResult() != DialogWindow::RESULT_TERMINATED)
+                System::getDialog()->getLastResult() != DialogWindow::RESULT_TERMINATED) {
                 return;
+            }
 
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         }
         WAIT_FOR_ANIM_STATE(SavedataEdit::on_show_btn2_dialog1st, ANIM_COPY_FLASH, {
             do_animation(ANIM_SELECT_OUT, ANIM_TYPE_FORWARD, true);
             SettingButton* sceneSettingButton = (SettingButton*)System::getScene(SCENE_SETTING_BUTTON);
             sceneSettingButton->hideBtn();
 
-            mState = EDIT_STATE_SHOW_BTN2_DIALOG2ND;
+            mState = STATE_SHOW_BTN2_DIALOG2ND;
         });
         WAIT_FOR_ANIM_STATE(SavedataEdit::on_show_btn2_dialog2nd, ANIM_SELECT_OUT, {
             System::getDialog()->callS2Btn2(MESG_CMN_NO, MESG_CMN_YES, true);
 
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         });
-        WAIT_FOR_ANIM_STATE(SavedataEdit::on_select_fadein, ANIM_SELECT_OUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataEdit::on_select_fadein, ANIM_SELECT_OUT, mState = STATE_IDLE);
         WAIT_FOR_ANIM_STATE(SavedataEdit::on_select_fadeout1st, ANIM_COPY_FLASH, {
             do_animation(ANIM_SELECT_OUT, ANIM_TYPE_FORWARD, true);
             change_button_text(MESG_CMN_OK);
 
-            mState = EDIT_STATE_SELECT_FADEOUT2ND;
+            mState = STATE_SELECT_FADEOUT2ND;
         });
-        WAIT_FOR_ANIM_STATE(SavedataEdit::on_select_fadeout2nd, ANIM_SELECT_OUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataEdit::on_select_fadeout2nd, ANIM_SELECT_OUT, mState = STATE_IDLE);
 
         void SavedataEdit::on_text_fadein() {
             if (get_animation(ANIM_TEXT_FADEIN)->animator->getCurrentFrame() >= 20.0f) {
                 set_textbox("T_Message_00", mMsgId);
             }
 
-            if (is_animation(ANIM_TEXT_FADEIN))
+            if (is_animation(ANIM_TEXT_FADEIN)) {
                 return;
+            }
 
             stop_animation(ANIM_TEXT_FADEIN);
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
         }
-        WAIT_FOR_ANIM_STATE(SavedataEdit::on_text_fadeout, ANIM_TEXT_FADEOUT, mState = EDIT_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataEdit::on_text_fadeout, ANIM_TEXT_FADEOUT, mState = STATE_IDLE);
         WAIT_FOR_ANIM_STATE(SavedataEdit::on_trig_del, ANIM_DEL_FLASH, {
-            mState = EDIT_STATE_IDLE;
+            mState = STATE_IDLE;
             Memory* sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
             sceneMemory->onTrigDel();
         });

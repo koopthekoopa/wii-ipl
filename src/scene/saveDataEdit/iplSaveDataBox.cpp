@@ -4,62 +4,55 @@
 
 namespace ipl {
     namespace scene {
-        enum SavedataBoxAnimIdx {
-            ANIM_DATA_IN = 0x0,         // 0x0
-            ANIM_DATA_OUT = 0x1,        // 0x1
-            ANIM_DATA_FOCUS_IN = 0x2,   // 0x2
-            ANIM_DATA_FOCUS_OUT = 0x3,  // 0x3
-        };
-
-        SavedataBox::SavedataBox(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName)
-            : AnmController(heap), ::gui::EventHandler(), mState(BOX_STATE_IDLE), pBannerFileInfo(NULL), pTextBalloon(NULL),
-              mTextBalloonInitialized(false) {
-            pLytObj = new (heap) layout::Object(heap, lytFile, lytFolder, lytFileName);
+        SavedataBox::SavedataBox(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName)
+            : AnmController(heap), ::gui::EventHandler(), mState(STATE_IDLE), mpBannerFileInfo(NULL), mpBalloon(NULL), mbInitBalloon(false) {
+            mpLayout = new (heap) layout::Object(heap, layoutFile, layoutDir, layoutFileName);
 
             add_animation("it_ObjCubeEdit_b_SaveDataIn.brlan", "G_Data");
             add_animation("it_ObjCubeEdit_b_SaveDataOut.brlan", "G_Data");
             add_animation("it_ObjCubeEdit_b_SaveDataFoucusIn.brlan", "G_Data");
             add_animation("it_ObjCubeEdit_b_SaveDataFoucusOut.brlan", "G_Data");
 
-            pLytObj->finishBinding();
+            mpLayout->finishBinding();
 
             set_visible("N_Data_00", false);
             set_visible("DataBanner_00", false);
 
-            pPaneManager = new ipl::gui::PaneManager(this, pLytObj->getDrawInfo(), NULL, NULL, true);
-            pPaneManager->createLayoutScene(*pLytObj->getNW4RLyt());
-            pPaneManager->setAllComponentTriggerTarget(false);
+            mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
+            mpGui->createLayoutScene(*mpLayout->getNW4RLyt());
+            mpGui->setAllComponentTriggerTarget(false);
 
-            pPaneManager->setTriggerTarget(pLytObj->FindPaneByName("B_Data_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Data_00"), true);
             add_anmpane("B_Data_00", get_animation(ANIM_DATA_FOCUS_IN), get_animation(ANIM_DATA_FOCUS_OUT));
         }
 
         SavedataBox::~SavedataBox() {
-            delete pLytObj;
-            delete pPaneManager;
+            delete mpLayout;
+            delete mpGui;
         }
 
         void SavedataBox::calc() {
-            Memory* sceneMemory;
+            Memory* memory;
             GXTexObj corruptIconTex;
 
             AnmPane* anmPane;
 
-            pLytObj->calc();
-            pPaneManager->calc();
+            mpLayout->calc();
+            mpGui->calc();
 
             anmPane = NULL;
-            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != 0)
+            while (anmPane = (AnmPane*)nw4r::ut::List_GetNext(&mPaneList, anmPane), anmPane != NULL) {
                 anmPane->calc();
+            }
 
-            if (mState != BOX_STATE_FADEOUT && pBannerFileInfo != NULL) {
+            if (mState != STATE_FADEOUT && mpBannerFileInfo != NULL) {
                 set_visible("DataBanner_00", true);
-                if (!pBannerFileInfo->isCorrupt()) {
-                    set_texture("DataBanner_00", *pBannerFileInfo->loadIconTexture());
-                    pBannerFileInfo->update();
+                if (!mpBannerFileInfo->isCorrupt()) {
+                    set_texture("DataBanner_00", *mpBannerFileInfo->loadIconTexture());
+                    mpBannerFileInfo->update();
                 } else {
-                    sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
-                    sceneMemory->getCorruptIconTexture(&corruptIconTex);
+                    memory = (Memory*)System::getScene(SCENE_MEMORY);
+                    memory->getCorruptIconTexture(&corruptIconTex);
                     set_texture("DataBanner_00", corruptIconTex);
                 }
             } else {
@@ -67,124 +60,139 @@ namespace ipl {
             }
 
             switch (mState) {
-                case BOX_STATE_IDLE:
+                case STATE_IDLE: {
                     break;
-                case BOX_STATE_FADEIN:
+                }
+                case STATE_FADEIN: {
                     on_fadein();
                     break;
-                case BOX_STATE_FADEOUT:
+                }
+                case STATE_FADEOUT: {
                     on_fadeout();
                     break;
+                }
             }
         }
 
         void SavedataBox::draw() {
-            pLytObj->draw();
+            mpLayout->draw();
         }
 
         void SavedataBox::update() {
-            pPaneManager->update();
+            mpGui->update();
         }
 
         void SavedataBox::anmFadein() {
             set_visible("N_Data_00", true);
             do_animation(ANIM_DATA_IN, ANIM_TYPE_FORWARD, true);
-            mState = BOX_STATE_FADEIN;
+            mState = STATE_FADEIN;
         }
 
         void SavedataBox::anmFadeout() {
-            if (pTextBalloon != NULL)
-                pTextBalloon->terminate();
+            if (mpBalloon != NULL)
+                mpBalloon->terminate();
             do_animation(ANIM_DATA_OUT, ANIM_TYPE_FORWARD, true);
-            mState = BOX_STATE_FADEOUT;
+            mState = STATE_FADEOUT;
         }
 
         void SavedataBox::onEvent(u32 compId, u32 event, void* data) {
             const char* paneName;
             gui::PaneComponent* paneComponent;
-            AnmPane* anmPane;
-            Memory* sceneMemory;
 
             paneComponent = (gui::PaneComponent*)mpManager->getComponent(compId);
             paneName = paneComponent->getPane()->GetName();
 
+            controller::Interface* con = (controller::Interface*)data;
+
+            AnmPane* anmPane;
+            Memory* memory;
+
             switch (event) {
-                case ON_POINT:
+                case ON_POINT: {
                     anmPane = get_anmpane(paneName);
-                    if (anmPane == NULL)
+                    if (anmPane == NULL) {
                         break;
-
+                    }
                     anmPane->incHoverCount();
-                    sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
-                    sceneMemory->onPoint(anmPane);
-                    if (pTextBalloon == NULL || pBannerFileInfo == NULL)
+                    ((Memory*)System::getScene(SCENE_MEMORY))->onPoint(anmPane);
+                    if (mpBalloon == NULL || mpBannerFileInfo == NULL) {
                         break;
-                    if (!pBannerFileInfo->isCorrupt()) {
-                        pTextBalloon->init(pBannerFileInfo->getSaveName());
-                    } else {
-                        pTextBalloon->init(L"???");
                     }
-                    mTextBalloonInitialized = true;
-                    pTextBalloon->fadein();
-                    break;
 
-                case ON_MOVE:
-                    anmPane = get_anmpane(paneName);
-                    if (anmPane == NULL)
-                        break;
-                    if (pTextBalloon == NULL || pBannerFileInfo == NULL)
-                        break;
-                    if (mTextBalloonInitialized)
-                        break;
-
-                    if (!pBannerFileInfo->isCorrupt()) {
-                        pTextBalloon->init(pBannerFileInfo->getSaveName());
+                    if (!mpBannerFileInfo->isCorrupt()) {
+                        mpBalloon->init(mpBannerFileInfo->getSaveName());
                     } else {
-                        pTextBalloon->init(L"???");
+                        mpBalloon->init(L"???");
                     }
-                    mTextBalloonInitialized = true;
-                    pTextBalloon->fadein();
-                    break;
 
-                case ON_LEFT:
+                    mbInitBalloon = true;
+                    mpBalloon->fadein();
+                    break;
+                }
+                case ON_MOVE: {
                     anmPane = get_anmpane(paneName);
-                    if (anmPane == NULL)
+                    if (anmPane == NULL) {
                         break;
+                    }
+                    if (mpBalloon == NULL || mpBannerFileInfo == NULL) {
+                        break;
+                    }
+                    if (mbInitBalloon) {
+                        break;
+                    }
+
+                    if (!mpBannerFileInfo->isCorrupt()) {
+                        mpBalloon->init(mpBannerFileInfo->getSaveName());
+                    } else {
+                        mpBalloon->init(L"???");
+                    }
+                    mbInitBalloon = true;
+                    mpBalloon->fadein();
+                    break;
+                }
+                case ON_LEFT: {
+                    anmPane = get_anmpane(paneName);
+                    if (anmPane == NULL) {
+                        break;
+                    }
 
                     anmPane->decHoverCount();
-                    sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
-                    sceneMemory->onLeft(anmPane);
-                    mTextBalloonInitialized = false;
+                    ((Memory*)System::getScene(SCENE_MEMORY))->onLeft(anmPane);
+                    mbInitBalloon = false;
 
-                    if (pTextBalloon == NULL || pBannerFileInfo == NULL)
+                    if (mpBalloon == NULL || mpBannerFileInfo == NULL) {
                         break;
-                    pTextBalloon->fadeout();
+                    }
+                    mpBalloon->fadeout();
                     break;
-
-                case ON_TRIG:
-                    if (!((controller::Interface*)data)->downTrg(controller::BTN_INTERACT))
+                }
+                case ON_TRIG: {
+                    if (!con->downTrg(controller::BTN_INTERACT)) {
                         break;
+                    }
                     anmPane = get_anmpane(paneName);
-                    if (anmPane == NULL)
+                    if (anmPane == NULL) {
                         break;
-                    if (pBannerFileInfo == NULL)
+                    }
+                    if (mpBannerFileInfo == NULL) {
                         break;
-                    sceneMemory = (Memory*)System::getScene(SCENE_MEMORY);
-                    sceneMemory->onTrig(this);
+                    }
+                    ((Memory*)System::getScene(SCENE_MEMORY))->onTrig(this);
                     break;
+                }
             }
         }
 
         void SavedataBox::clearEvent() {
             clear_anmpane("B_Data_00");
 
-            if (pTextBalloon != NULL) {
-                pTextBalloon->terminate();
-                mTextBalloonInitialized = false;
+            if (mpBalloon != NULL) {
+                mpBalloon->terminate();
+                mbInitBalloon = false;
             }
         }
 
-        WAIT_FOR_ANIM_STATE(SavedataBox::on_fadein, ANIM_DATA_IN, mState = BOX_STATE_IDLE);
-        WAIT_FOR_ANIM_STATE(SavedataBox::on_fadeout, ANIM_DATA_OUT, mState = BOX_STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataBox::on_fadein, ANIM_DATA_IN, mState = STATE_IDLE);
+        WAIT_FOR_ANIM_STATE(SavedataBox::on_fadeout, ANIM_DATA_OUT, mState = STATE_IDLE);
     }  // namespace scene
 }  // namespace ipl

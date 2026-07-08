@@ -13,7 +13,7 @@ namespace ipl {
     namespace scene {
         class SavedataEdit : public AnmController, public ::gui::EventHandler {
         public:
-            SavedataEdit(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName);
+            SavedataEdit(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName);
 
             virtual ~SavedataEdit();
 
@@ -41,11 +41,29 @@ namespace ipl {
 
             virtual void onEvent(u32 compId, u32 event, void* data) override;
 
-            void change_button_text(u32);
+            void change_button_text(u32 msgId);
 
-            inline bool isIdle() { return mState == EDIT_STATE_IDLE; }
+            inline bool isIdle() { return mState == STATE_IDLE; }
 
         private:
+            enum {
+                ANIM_MASK_IN = 0,
+                ANIM_MASK_OUT,
+                ANIM_COPY_IN,
+                ANIM_COPY_OUT,
+                ANIM_COPY_FLASH,
+                ANIM_DEL_IN,
+                ANIM_DEL_OUT,
+                ANIM_DEL_FLASH,
+                ANIM_SELECT_OUT,
+                ANIM_TEXT_FADEIN,
+                ANIM_TEXT_FADEOUT,
+                ANIM_WAIT,
+                ANIM_MOVE_IN,
+                ANIM_MOVE_OUT,
+                ANIM_MOVE_FLASH,
+            };
+
             void on_fadein();
             void on_fadeout();
             void on_hide_btn0_dialog();
@@ -58,27 +76,28 @@ namespace ipl {
             void on_text_fadeout();
             void on_trig_del();
 
-            enum State {
-                EDIT_STATE_IDLE = 0x0,                 // 0x0
-                EDIT_STATE_FADEIN = 0x1,               // 0x1
-                EDIT_STATE_FADEOUT = 0x2,              // 0x2
-                EDIT_STATE_HIDE_BTN0_DIALOG = 0x3,     // 0x3
-                EDIT_STATE_SHOW_BTN2_DIALOG1ST = 0x4,  // 0x4
-                EDIT_STATE_SHOW_BTN2_DIALOG2ND = 0x5,  // 0x5
-                EDIT_STATE_SELECT_FADEIN = 0x6,        // 0x6
-                EDIT_STATE_SELECT_FADEOUT1ST = 0x7,    // 0x7
-                EDIT_STATE_SELECT_FADEOUT2ND = 0x8,    // 0x8
-                EDIT_STATE_TEXT_FADEIN = 0x9,          // 0x9
-                EDIT_STATE_TEXT_FADEOUT = 0xa,         // 0xa
-                EDIT_STATE_TRIG_DEL = 0xb,             // 0xb
+            enum {
+                STATE_IDLE = 0,
+                STATE_FADEIN,
+                STATE_FADEOUT,
+                STATE_HIDE_BTN0_DIALOG,
+                STATE_SHOW_BTN2_DIALOG1ST,
+                STATE_SHOW_BTN2_DIALOG2ND,
+                STATE_SELECT_FADEIN,
+                STATE_SELECT_FADEOUT1ST,
+                STATE_SELECT_FADEOUT2ND,
+                STATE_TEXT_FADEIN,
+                STATE_TEXT_FADEOUT,
+                STATE_TRIG_DEL,
             };
 
         public:
             nw4r::ut::Link mLink;  // 0x34
+
         private:
-            State mState;                                // 0x3c
+            int mState;                                  // 0x3C
             math::LinearIntp<math::VEC3> mLinearInterp;  // 0x40
-            SavedataBox* pSavedataBox;                   // 0x78
+            SavedataBox* mpSavedataBox;                  // 0x78
             int mMsgId;                                  // 0x7c
         };
     }  // namespace scene

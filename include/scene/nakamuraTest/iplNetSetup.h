@@ -12,11 +12,11 @@ namespace ipl {
         public:
             enum NetSetupState {
                 NET_SETUP_NOT_STARTED = 0,
-                NET_SETUP_REQUESTED_STARTUP = 1,
-                NET_SETUP_RUNNING = 2,
-                NET_SETUP_SUCCESS = 3,
-                NET_SETUP_UNK_4 = 4,
-                NET_SETUP_ERROR = 5,
+                NET_SETUP_REQUESTED_STARTUP,
+                NET_SETUP_RUNNING,
+                NET_SETUP_SUCCESS,
+                NET_SETUP_UNK_4,
+                NET_SETUP_ERROR,
             };
 
             NetSetup();
@@ -44,14 +44,14 @@ namespace ipl {
             } StaticSOStartupInfo;
 
             NCDConfig mNcdCfg;      // 0x0004
-            u8 mProfileId;          // 0x1b60
-            u32 mConnType;          // 0x1b64
-            NCDIfConfig mNcdIfCfg;  // 0x1b68
-            NCDIpConfig mNcdIpCfg;  // 0x1cc8
-            NetSetupState mState;   // 0x248c
+            u8 mProfileId;          // 0x1B60
+            u32 mConnType;          // 0x1B64
+            NCDIfConfig mNcdIfCfg;  // 0x1B68
+            NCDIpConfig mNcdIpCfg;  // 0x1CC8
+            NetSetupState mState;   // 0x248C
             int mLastErr;           // 0x2490
             OSThread mThread;       // 0x2498
-            void* pThreadStack;     // 0x27b0
+            void* mpThreadStack;    // 0x27B0
 
             static MEMHeapHandle sHeap;
             static void* sHeapBuf;

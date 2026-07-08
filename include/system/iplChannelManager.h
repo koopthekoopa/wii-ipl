@@ -97,7 +97,9 @@ namespace ipl {
         static const int META_DISK_IN_MESSAGE_LENGTH = 376;
         static const int META_CURRENT_VERSION = 3;
 
-#define META_PAD 64
+        static const int META_RESERVED_PADDING = 64;
+
+#define IPL_META_MAGIC "IMET"
 
         typedef struct SMetaBlockHeader {
             char magic[4];   // 0x00 (Always "IMET"; "IPL Meta"?)
@@ -135,9 +137,11 @@ namespace ipl {
             };  // 0x18
         } SMetaBlockHeader;
 
+        static const int META_HEAD_BLOCK_SIZE = offsetof(SMetaBlockHeader, iconSize);
+
         typedef struct SChanMgrMetaHeader {
-            u8 reserved0[META_PAD];     // 0x00
-            SMetaBlockHeader blockHdr;  // 0x40
+            u8 reserved0[META_RESERVED_PADDING];  // 0x00
+            SMetaBlockHeader blockHdr;            // 0x40
 
             u16 names[SC_LANG_MAX][NAME_INDEX_MAX][META_CHANNEL_NAME_LENGTH + 1];  // 0x5C
 

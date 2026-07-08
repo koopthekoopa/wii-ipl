@@ -44,6 +44,7 @@ namespace ipl {
 
             void* args;  // 0x18
         } CommandData;
+
         typedef struct Command {
             CommandData data;  // 0x00
 

@@ -1,13 +1,13 @@
 #ifndef IPL_SCENE_CONTEST_H
 #define IPL_SCENE_CONTEST_H
 
+#include <revolution/ncd.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <revolution/ncd.h>
-
-void IPLContestInitialize(void*, NCDProxyProfile*);
+void IPLContestInitialize(void* heapBuf, NCDProxyProfile* proxy);
 void IPLContestStart();
 int IPLContestProcess();
 void IPLContestShutdown();

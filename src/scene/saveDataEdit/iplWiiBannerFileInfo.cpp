@@ -16,15 +16,15 @@ namespace ipl {
             mAnim_AltBackward = 0;
 
             // Init name
-            wmemset(mSaveName, 0, SAVE_NAME_LENGTH + 1);
-            wmemset(mSaveSubName, 0, SAVE_NAME_LENGTH + 1);
+            wmemset(mSaveName, 0, WII_SAVE_BANNER_LENGTH + 1);
+            wmemset(mSaveSubName, 0, WII_SAVE_BANNER_LENGTH + 1);
 
             // Init banner
-            memset(mpBannerData, 0, SAVE_BANNER_TEX_SIZE);
+            memset(mpBannerData, 0, WII_SAVE_BANNER_BNR_TEXSIZE);
 
             // Init icons
-            for (int i = 0; i < SAVE_ICON_COUNT; i++) {
-                memset(mpIconData[i], 0, SAVE_ICON_TEX_SIZE);
+            for (int i = 0; i < WII_SAVE_BANNER_ICON_COUNT; i++) {
+                memset(mpIconData[i], 0, WII_SAVE_BANNER_ICON_TEXSIZE);
             }
 
             // Init data
@@ -45,17 +45,17 @@ namespace ipl {
             resolve_icon();
 
             // Setup name
-            memcpy(mSaveName, mData.name, SAVE_NAME_LENGTH * sizeof(wchar_t));
-            memcpy(mSaveSubName, mData.subName, SAVE_NAME_LENGTH * sizeof(wchar_t));
+            memcpy(mSaveName, mData.name, WII_SAVE_BANNER_LENGTH * sizeof(wchar_t));
+            memcpy(mSaveSubName, mData.subName, WII_SAVE_BANNER_LENGTH * sizeof(wchar_t));
 
             // Setup banner
-            memcpy(mpBannerData, mData.bannerData, SAVE_BANNER_TEX_SIZE);
-            DCStoreRange(mpBannerData, SAVE_BANNER_TEX_SIZE);
+            memcpy(mpBannerData, mData.bannerData, WII_SAVE_BANNER_BNR_TEXSIZE);
+            DCStoreRange(mpBannerData, WII_SAVE_BANNER_BNR_TEXSIZE);
 
             // Setup icons
-            for (int i = 0; i < SAVE_ICON_COUNT; i++) {
-                memcpy(mpIconData[i], (&mData.iconData0)[i], SAVE_ICON_TEX_SIZE);
-                DCStoreRange(mpIconData[i], SAVE_ICON_TEX_SIZE);
+            for (int i = 0; i < WII_SAVE_BANNER_ICON_COUNT; i++) {
+                memcpy(mpIconData[i], (&mData.iconData)[i], WII_SAVE_BANNER_ICON_TEXSIZE);
+                DCStoreRange(mpIconData[i], WII_SAVE_BANNER_ICON_TEXSIZE);
             }
         }
 
@@ -66,7 +66,7 @@ namespace ipl {
             // If tick reached to last frame
             if (mAnim_FrameTick >= mAnim_MaxFrameTicks) {
                 // For alternate, play backwards
-                if (mAnim_AltFlag == FLAG_ALTERNATE_ANIMATION) {
+                if (mAnim_AltFlag == WII_SAVE_BANNER_FLAG_ALTERNATE) {
                     mAnim_FrameTick = (mAnim_MaxFrameTicks - mAnim_AltBackward) - 1;
                     mAnim_Incrementer = -1;
                 }
@@ -80,7 +80,7 @@ namespace ipl {
             // If tick reached to first frame
             if (mAnim_FrameTick < 0) {
                 // For alternate, play forwards
-                if (mAnim_AltFlag == FLAG_ALTERNATE_ANIMATION) {
+                if (mAnim_AltFlag == WII_SAVE_BANNER_FLAG_ALTERNATE) {
                     mAnim_FrameTick = mAnim_AltForward;
                 }
                 // For loop, reset to first frame
@@ -99,10 +99,11 @@ namespace ipl {
                 if (mAnim_FrameTick <= speed) {
                     break;
                 }
-            } while (i < SAVE_ICON_COUNT);
+            } while (i < WII_SAVE_BANNER_ICON_COUNT);
 
             // Init current frame texture
-            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], WII_SAVE_BANNER_ICON_WIDTH, WII_SAVE_BANNER_ICON_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP,
+                         GX_FALSE);
         }
 
         GXTexObj* WiiBannerFileInfo::loadIconTexture() {
@@ -115,10 +116,11 @@ namespace ipl {
                 if (mAnim_FrameTick <= speed) {
                     break;
                 }
-            } while (i < SAVE_ICON_COUNT);
+            } while (i < WII_SAVE_BANNER_ICON_COUNT);
 
             // Load current icon frame texture
-            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], WII_SAVE_BANNER_ICON_WIDTH, WII_SAVE_BANNER_ICON_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP,
+                         GX_FALSE);
             GXLoadTexObj(&mCurIconTex, GX_TEXMAP0);
 
             return &mCurIconTex;
@@ -126,7 +128,8 @@ namespace ipl {
 
         GXTexObj* WiiBannerFileInfo::loadBannerTexture() {
             // Load current banner texture
-            GXInitTexObj(&mCurBannerTex, mpBannerData, SAVE_BANNER_TEX_WIDTH, SAVE_BANNER_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurBannerTex, mpBannerData, WII_SAVE_BANNER_BNR_WIDTH, WII_SAVE_BANNER_BNR_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP,
+                         GX_FALSE);
             GXLoadTexObj(&mCurBannerTex, GX_TEXMAP0);
 
             return &mCurBannerTex;
@@ -142,7 +145,7 @@ namespace ipl {
 
             // Set max frame ticks
             int i = 0;
-            for (i = 0; i < SAVE_ICON_COUNT; i++) {
+            for (i = 0; i < WII_SAVE_BANNER_ICON_COUNT; i++) {
                 if (get_iconspeed(i) == 0)
                     break;  // A frame with the speed of 0 indicates the end.
                 mAnim_MaxFrameTicks += (get_iconspeed_ticks(i));
@@ -159,9 +162,9 @@ namespace ipl {
                         mFrameCount++;
                     }
                     i++;
-                } while (i < SAVE_ICON_COUNT);
+                } while (i < WII_SAVE_BANNER_ICON_COUNT);
 
-                mAnim_AltFlag = (mFlags & FLAG_ALTERNATE_ANIMATION);
+                mAnim_AltFlag = (mFlags & WII_SAVE_BANNER_FLAG_ALTERNATE);
                 mAnim_Incrementer = 1;
             }
         }
@@ -174,7 +177,7 @@ namespace ipl {
                 (01010101 01111111)
                 3, 3, 3, 1, 1, 1, 1, 1
             */
-            if (frame < 0 || frame > SAVE_ICON_COUNT) {
+            if (frame < 0 || frame > WII_SAVE_BANNER_ICON_COUNT) {
                 return 0;
             }
             return (mFrameSpeed >> (frame * 2)) & 0b00000011;

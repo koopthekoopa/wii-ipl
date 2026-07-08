@@ -5,26 +5,17 @@
 
 #include <revolution.h>
 
-#include "iplwww/www_js.h"
+#include "iplwww/www_browser.h"
 #include "iplwww/www_wiisetting.h"
 
-#include "iplwww/www_browser.h"
+#include <revolution/www.h>
 
 namespace www {
     namespace trasition {
-        // typedef struct ScrollState {
-        //     u8 unk_0x00[0x28];
-        //     ext_ead::www::BrowserThread* unk_0x28;
-        //     u32 unk_0x2c;
-        //     u32 unk_0x30;
-        //     u32 unk_0x34;
-        //     u32 unk_0x38;
-        // } ScrollState;
-
         enum ScrollState {
             SCROLL_RESET = 0,
-            SCROLL_LEFT = 1,
-            SCROLL_RIGHT = 2,
+            SCROLL_LEFT,
+            SCROLL_RIGHT,
         };
 
         static WWWJSCap cap;

@@ -4,41 +4,10 @@
 #include <revolution/os.h>
 #include <revolution/types.h>
 
-#include "iplwww/www_js.h"
 #include "iplwww/www_message.h"
 #include "iplwww/www_thread.h"
 
-typedef void (*WWWAddJSPluginFn)(const char*, WWWJSCap*, JSCallbackSet**);
-
-typedef u32 (*WWWProtocolWriteFn)(void* wwwInternal, const void* data, u32 dataSize);
-typedef u32 (*WWWProtocolFinalizeFn)(void*);
-typedef int (*WWWAddProtocolFn)(const char*);
-
-typedef void (*WWWBasicWindowFn)(WWWHandlewindow*);
-typedef void (*WWWSetBrowserWindowRectFn)(WWWHandlewindow*, WWWRect*);
-typedef void (*WWWSetImageModeFn)(WWWHandlewindow*, GXTexFmt);
-typedef void (*WWWSetRenderingModeFn)(WWWHandlewindow*, int);
-typedef BOOL (*WWWCreateBrowserWindowFn)(void*, WWWHandlewindow**, int);
-typedef BOOL (*WWWCloseBrowserWindowFn)(void*, WWWHandlewindow*);
-typedef void (*WWWOpenUrlFn)(WWWHandlewindow*, const char*);
-
-typedef void (*WWWGetBrowserAllocationFunctionsFn)(void* heapBuf, u32 heapBufSize, void** allocOut, void (**freeOut)(void*), int (**availOut)());
-typedef void (*WWWSetAllocationFunctionsFn)(void* allocA, void (*freeA)(void*), int (*avail)(), void* allocB, void (*freeB)(void*), void* allocC,
-                                            void (*freeC)(void*));
-
-typedef int (*WWWSurfaceInitFn)(int w, int h, u32 rowSize, int, void* rasterBuf);
-typedef int (*WWWSurfaceSetFlushCallbackFn)(void (*FlushCallback)(WWWRect*, int), int);
-typedef void (*WWWSurfaceAddFontFn)(const char*);
-typedef void (*WWWSurfaceUpdateScreenFn)(u32);
-typedef void (*WWWSurfaceKeyboardEvtFn)(WWWKeyBtnCmd cmd, WWWKeySym sym, u32 unk);
-typedef void (*WWWSurfaceMouseEvtFn)(WWWMouseCmd cmd, int x, int y, WWWMouseAttrib attrib, u32 unkA, u32 unkB);
-
-typedef void (*WWWCommitImeFn)(int imeID, const char* str);
-typedef void (*WWWUpdateImeFn)(int imeID, const char* str, u32 unk);
-
-typedef BOOL (*WWWNotifyCallbackFn)(WWWHandle* wwwBrowser, WWWHandlewindow* wwwWindow, WWWEvent event, WWWHandleEventData* eventData);
-typedef void (*WWWCreateBrowserFn)(WWWHandle** browser, WWWNotifyCallbackFn notifyCallback, const char** fonts, const char* arc);
-typedef BOOL (*WWWSimpleBrowserFn)(WWWHandle* browser);
+#include <revolution/www.h>
 
 extern WWWSurfaceInitFn WWWSurfaceInit;
 extern void* WWWSurfaceNewScreen;
@@ -153,13 +122,19 @@ extern WWWProtocolFinalizeFn WWWProtocolFinished;
 extern WWWProtocolFinalizeFn WWWProtocolFailed;
 extern WWWAddProtocolFn WWWAddProtocol;
 
+namespace www {
+    namespace arcreader {
+        class ArcContainer;
+    }  // namespace arcreader
+}  // namespace www
+
 namespace ext_ead {
     namespace www {
         typedef struct ImeData {
             u32 unk_0x00;   // 0x00
             u32 imeID;      // 0x04
             char* text;     // 0x08
-            u32 unk_0x0c;   // 0x0c
+            u32 unk_0x0C;   // 0x0c
             u32 unk_0x10;   // 0x10
             u32 unk_0x14;   // 0x14
             u32 unk_0x18;   // 0x18
@@ -191,7 +166,7 @@ namespace ext_ead {
                     struct {
                         u32 imeID;
                         char* str;
-                        u32 unk_0x0c;
+                        u32 unk_0x0C;
                     } updateIme;  // ID 4
                     u32 raw[6];
                 } data;
@@ -203,7 +178,7 @@ namespace ext_ead {
             virtual void* Run();
 
             void RegisterArcFile(void* arcData);
-            void RegisterIniFile(void*, u32);
+            void RegisterIniFile(void* iniData, u32 iniLen);
             void CreateThread(int w, int h, void* threadStack, u32 threadStackSize, int priority);
             void StopThread();
             bool IsThreadStopped();
@@ -214,12 +189,15 @@ namespace ext_ead {
 
             void CreateImeData(ImeData* data, const WWWIMEData* wwwData);
             void DisposeImeData(ImeData* data);
-            void CommitIme(ImeData* data, const char*);
+            void CommitIme(ImeData* data, const char* something);
 
             void CommitImeCmdPacket(const CmdPacket* data);
             void UpdateImeCmdPacket(const CmdPacket* data);
 
-            static void FlushCallback(WWWRect*, int);
+            static void FlushCallback(WWWRect* rect, int unk);
+
+            u32* GetRaster() { return mpRaster; }
+            WWWHandle* GetHandle() { return mpBrowserHandle; }
 
         private:
             static BOOL SNotifyCallback_(WWWHandle* wwwBrowser, WWWHandlewindow* wwwWindow, WWWEvent event, WWWHandleEventData* eventData);
@@ -227,32 +205,36 @@ namespace ext_ead {
 
             bool CheckThreadExit_();
             void InitSurface_();
-            void InitFonts_(const char*);
+            void InitFonts_(const char* unk);
 
             void SendKeyboardEvent_(u32 btnMask, u32 triggerFlag, u32 releaseFlag, WWWKeySym sym);
-            WWWKeySym GetKeyboardSym_(u32);
+            WWWKeySym GetKeyboardSym_(u32 input);
 
             int ExecDpdEvent_(const CmdPacket&);
             void ExecSpacialEvent_(const CmdPacket&);
             inline bool WaitForNextUIEvent_(CmdPacket*);
             void HandleUIEvent_();
 
-            OSMessageQueue mQueue;                         // 0x32c
-            OSMessage mQueueBuf[0x20];                     // 0x34c
+            OSMessageQueue mQueue;      // 0x32C
+            OSMessage mQueueBuf[0x20];  // 0x34C
+
             ut_message_cmd<CmdPacket, 8> mCmdPacketQueue;  // 0x510
             ut_message_cmd<ImeData, 8> mImeDataQueue;      // 0x510
-            u32* pRaster;                                  // 0x674
-            void* pOperaHeapBuf;                           // 0x678
-            WWWHandle* pWwwBrowser;                        // 0x67c
-        public:
-            void* pBrowserWindows[4];  // 0x680
-        private:
-            int mWidth;                      // 0x690
-            int mHeight;                     // 0x694
-            void* pIniData;                  // 0x698
-            u32 mIniLen;                     // 0x69c
-            void* pArcContainer;             // 0x6a0
-            void* pArcDecompressionScratch;  // 0x6a4
+
+            u32* mpRaster;               // 0x674
+            void* mpOperaHeapBuf;        // 0x678
+            WWWHandle* mpBrowserHandle;  // 0x67C
+
+            void* mpBrowserWindows[4];  // 0x680
+
+            int mWidth;   // 0x690
+            int mHeight;  // 0x694
+
+            void* mpIniData;  // 0x698
+            u32 mIniLen;      // 0x69C
+
+            ::www::arcreader::ArcContainer* mpArcContainer;  // 0x6a0
+            void* mpArcDecmpScratch;                         // 0x6a4
 
             static OSMutex runSliceMutex_;
             static int classInitialized_;

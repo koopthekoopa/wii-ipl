@@ -1,6 +1,10 @@
 #ifndef REVOLUTION_VF_H
 #define REVOLUTION_VF_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif  // __cplusplus
+
 #include <revolution/vf/types.h>
 
 void VFInit();
@@ -59,5 +63,9 @@ VFErr VFGetLastError();
 VFErr VFGetLastDeviceError(const char* drive);
 
 const char* VFGetApiErrorString(VFErr error);
+
+#ifdef __cplusplus
+}
+#endif  // __cplusplus
 
 #endif  // REVOLUTION_VF_H

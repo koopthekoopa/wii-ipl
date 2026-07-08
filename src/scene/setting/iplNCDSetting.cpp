@@ -14,6 +14,23 @@
 
 namespace ipl {
     namespace ncd {
+        // If you change one thing in this function, checkFlag will not match.
+        // Probably some stripped out function, but... I don't get MWCC
+#ifndef NON_MATCHING
+        void NCDSetting::matchHack() {
+            u16 myNewMode;
+
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
+                (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
+                myNewMode = 2;
+            }
+
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != myNewMode) {
+                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = myNewMode;
+            }
+        }
+#endif
+
         NCDConfig NCDSetting::mConfig;
         NCDConfig NCDSetting::mSaveConfig;
         u8 NCDSetting::mMac[0x20];
@@ -32,36 +49,20 @@ namespace ipl {
             mID = setID;
         }
 
-        // If you change one thing in this function, checkFlag will not match.
-        // Probably some stripped out function, but... I don't get MWCC
-#ifndef NON_MATCHING
-        void NCDSetting::matchHack() {
-            u16 sVar2;
-
-            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
-                (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
-                sVar2 = 2;
-            }
-
-            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
-                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
-            }
-        }
-#endif
-
         int NCDSetting::checkFlag(int id) {
             int ret = 0;
             int flags = mConfig.profiles[id].flags;
+
             if (flags & NCD_DHCP_FLAG) {
                 return 1;
             }
+
             if (mConfig.profiles[id].netif.wireless.config.manual.ssidLength == 0 && mConfig.profiles[id].netif.wireless.configMethod == 0 &&
                 mConfig.profiles[id].netif.wireless.config.manual.privacy.mode == 0) {
                 return 0;
             }
-            int bVar1 = mConfig.profiles[id].netif.wireless.configMethod;
 
-            switch (bVar1) {
+            switch (mConfig.profiles[id].netif.wireless.configMethod) {
                 case 0: {
                     ret = 2;
                     break;
@@ -88,7 +89,7 @@ namespace ipl {
 
         bool NCDSetting::checkAllFlag() {
             for (int i = 0; i < 3; i++) {
-                if (checkFlag(i) & 0xff) {
+                if (checkFlag(i) & 0xFF) {
                     return true;
                 }
             }
@@ -114,8 +115,8 @@ namespace ipl {
 
         void NCDSetting::checkDHCP_() {
             if (checkDNSFlag()) {
-                memset(&mConfig.profiles[mID].ip.dns1, 0, 4);
-                memset(&mConfig.profiles[mID].ip.dns2, 0, 4);
+                memset(&mConfig.profiles[mID].ip.dns1, 0, sizeof(mConfig.profiles[mID].ip.dns1));
+                memset(&mConfig.profiles[mID].ip.dns2, 0, sizeof(mConfig.profiles[mID].ip.dns2));
             } else {
                 // im sorry for this
                 int i = 0;
@@ -142,9 +143,9 @@ namespace ipl {
                 }
             }
             if (checkDHCPFlag()) {
-                memset(&mConfig.profiles[mID].ip.addr, 0, 4);
-                memset(&mConfig.profiles[mID].ip.netmask, 0, 4);
-                memset(&mConfig.profiles[mID].ip.gateway, 0, 4);
+                memset(&mConfig.profiles[mID].ip.addr, 0, sizeof(mConfig.profiles[mID].ip.addr));
+                memset(&mConfig.profiles[mID].ip.netmask, 0, sizeof(mConfig.profiles[mID].ip.netmask));
+                memset(&mConfig.profiles[mID].ip.gateway, 0, sizeof(mConfig.profiles[mID].ip.gateway));
             }
             return;
         }
@@ -162,7 +163,7 @@ namespace ipl {
             return (u8)(configMethod + (u8)-1) > 1;
         }
 
-        bool NCDSetting::convert16toASCII(char hexHi, char hexLo, unsigned char* byte) {
+        bool NCDSetting::convert16toASCII(char hexHi, char hexLo, u8* byte) {
             bool inRange = true;
 
             if (hexHi >= '0' && hexHi <= '9') {
@@ -206,7 +207,7 @@ namespace ipl {
                     } else if (keyLen == 64) {
                         for (int i = 0; i < 64; i++) {
                             char c = key[i];
-                            if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
+                            if ((c < '0' || '9' < c) && (c < 'A' || 'F' < c) && (c < 'a' || 'f' < c)) {
                                 return -1;
                             }
                         }
@@ -250,10 +251,12 @@ namespace ipl {
             int i;
 
             len = strlen(proxy);
-            if (len >= 256)
+            if (len >= 256) {
                 return false;
-            if (proxy[0] == '.')
+            }
+            if (proxy[0] == '.') {
                 return false;
+            }
 
             for (i = 0; i < len; i++) {
                 c = proxy[i];
@@ -315,22 +318,24 @@ namespace ipl {
         void NCDSetting::adjustSelectMedia_(int exclude) {
             u8 flag = checkFlag(exclude);
             switch (flag) {
-                case 1:
+                case 1: {
                     mConfig.selectedMedia = 2;
                     break;
+                }
                 case 2:
                 case 3:
                 case 4:
-                case 5:
+                case 5: {
                     mConfig.selectedMedia = 1;
                     break;
+                }
             }
         }
 
         void NCDSetting::adjustEnableFlag_(int exclude) {
             for (int i = 0; i < 3; i++) {
                 if (exclude != i) {
-                    mConfig.profiles[i].flags &= 0x7f;
+                    mConfig.profiles[i].flags &= 0x7F;
                 }
             }
         }
@@ -342,7 +347,7 @@ namespace ipl {
                     if (mID == i) {
                         mConfig.profiles[mID].flags |= 0x80;
                     } else {
-                        mConfig.profiles[i].flags &= 0x7f;
+                        mConfig.profiles[i].flags &= 0x7F;
                     }
                 }
             }
@@ -351,7 +356,7 @@ namespace ipl {
             NCDWriteConfig(&mConfig);
         }
 
-        void NCDSetting::setDHCPFlag(unsigned char newFlag) {
+        void NCDSetting::setDHCPFlag(u8 newFlag) {
             if (newFlag != 0) {
                 mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 2;
                 return;
@@ -359,7 +364,7 @@ namespace ipl {
             mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~2;
         }
 
-        void NCDSetting::setDNSFlag(unsigned char newFlag) {
+        void NCDSetting::setDNSFlag(u8 newFlag) {
             if (newFlag != 0) {
                 mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 4;
                 return;
@@ -367,7 +372,7 @@ namespace ipl {
             mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~4;
         }
 
-        void NCDSetting::setProxyFlag(unsigned char newFlag) {
+        void NCDSetting::setProxyFlag(u8 newFlag) {
             mConfig.profiles[mID].proxy.http.mode = newFlag;
             mConfig.profiles[mID].proxy.ssl.mode = newFlag;
             if (newFlag != 0) {
@@ -377,7 +382,7 @@ namespace ipl {
             mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~0x10;
         }
 
-        void NCDSetting::setBasicFlag(unsigned char newFlag) {
+        void NCDSetting::setBasicFlag(u8 newFlag) {
             mConfig.profiles[mID].proxy.http.authType = newFlag;
             mConfig.profiles[mID].proxy.ssl.authType = newFlag;
         }
@@ -390,7 +395,7 @@ namespace ipl {
         }
 
         void NCDSetting::setWireless(u8 configMethod) {
-            memset(&mConfig.profiles[mID], 0, 0x91c);
+            memset(&mConfig.profiles[mID], 0, sizeof(NCDProfile));
 
             mConfig.version = 0;
             mConfig.linkTimeout = 0;
@@ -415,35 +420,41 @@ namespace ipl {
         }
 
         void NCDSetting::setPrivacyMode(u16 newMode) {
-            u16 sVar2;
+            u16 myNewMode;
 
             switch (newMode) {
-                case 0:
-                    sVar2 = 0;
+                case 0: {
+                    myNewMode = 0;
                     break;
-                case 1:
+                }
+                case 1: {
                     if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
                         (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
-                        sVar2 = 2;
+                        myNewMode = 2;
                     } else {
-                        sVar2 = 1;
+                        myNewMode = 1;
                     }
                     break;
-                case 2:
-                    sVar2 = 4;
+                }
+                case 2: {
+                    myNewMode = 4;
                     break;
-                case 3:
-                    sVar2 = 6;
+                }
+                case 3: {
+                    myNewMode = 6;
                     break;
-                case 4:
-                    sVar2 = 5;
+                }
+                case 4: {
+                    myNewMode = 5;
                     break;
-                default:
-                    sVar2 = 0;
+                }
+                default: {
+                    myNewMode = 0;
                     break;
+                }
             }
-            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
-                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != myNewMode) {
+                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = myNewMode;
             }
         }
 
@@ -451,39 +462,48 @@ namespace ipl {
             u16 uVar1;
 
             switch (mode) {
-                case 0:
+                case 0: {
                     uVar1 = 0;
                     break;
-                case 1:
+                }
+                case 1: {
                     uVar1 = 1;
                     break;
-                case 2:
+                }
+                case 2: {
                     uVar1 = 2;
                     break;
-                case 4:
+                }
+                case 4: {
                     uVar1 = 4;
                     break;
-                case 5:
+                }
+                case 5: {
                     uVar1 = 5;
                     break;
-                case 6:
+                }
+                case 6: {
                     uVar1 = 6;
                     break;
-                case 7:
+                }
+                case 7: {
                     uVar1 = 4;
                     break;
-                case 8:
+                }
+                case 8: {
                     uVar1 = 1;
                     break;
-                default:
+                }
+                default: {
                     uVar1 = 0;
                     break;
+                }
             }
             memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
             mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
         }
 
-        void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
+        void NCDSetting::setPrivacy(u8* newKey, int len) {
             int i;
             u8 mode;
             mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0];
@@ -494,60 +514,65 @@ namespace ipl {
             } else {
                 switch (mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode) {
                     case 1:
-                    case 2:
+                    case 2: {
                         for (i = 0; i < 4; i++) {
                             if (len == 5) {
                                 mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 1;
-                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[i], newKey, 5);
+                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[i], newKey,
+                                       sizeof(mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[i]));
                             } else if (len == 0xd) {
                                 mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 2;
-                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[i], newKey, 13);
+                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[i], newKey,
+                                       sizeof(mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[i]));
                             }
                         }
                         break;
-                    case 4:
+                    }
+                    case 4: {
                         memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.key, newKey, len);
                         mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.keyLen = len;
                         break;
+                    }
                     case 5:
-                    case 6:
+                    case 6: {
                         memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.key, newKey, len);
                         mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen = len;
                         break;
+                    }
                 }
             }
         }
 
         void NCDSetting::setIP(NCDIpProfile* ip) {
-            memcpy(&mConfig.profiles[mID].ip.addr, ip->addr, 4);
-            memcpy(&mConfig.profiles[mID].ip.netmask, ip->netmask, 4);
-            memcpy(&mConfig.profiles[mID].ip.gateway, ip->gateway, 4);
+            memcpy(&mConfig.profiles[mID].ip.addr, ip->addr, sizeof(mConfig.profiles[mID].ip.addr));
+            memcpy(&mConfig.profiles[mID].ip.netmask, ip->netmask, sizeof(mConfig.profiles[mID].ip.netmask));
+            memcpy(&mConfig.profiles[mID].ip.gateway, ip->gateway, sizeof(mConfig.profiles[mID].ip.gateway));
         }
 
         void NCDSetting::setDNS(NCDIpProfile* ip) {
-            memcpy(&mConfig.profiles[mID].ip.dns1, ip->dns1, 4);
-            memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, 4);
+            memcpy(&mConfig.profiles[mID].ip.dns1, ip->dns1, sizeof(mConfig.profiles[mID].ip.dns1));
+            memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, sizeof(mConfig.profiles[mID].ip.dns2));
         }
 
-        void NCDSetting::setMTU(long mtu) {
+        void NCDSetting::setMTU(s32 mtu) {
             mConfig.profiles[mID].adjust.maxTransferUnit = mtu;
             mConfig.profiles[mID].adjust.tcpRetransTimeout = 0;
             mConfig.profiles[mID].adjust.dhcpRetransCount = 0;
         }
 
         void NCDSetting::setProxy(NCDProxyServerProfile* proxyServerProfile) {
-            memcpy(&mConfig.profiles[mID].proxy.http.server, proxyServerProfile->server, 256);
-            memcpy(&mConfig.profiles[mID].proxy.ssl.server, proxyServerProfile->server, 256);
+            memcpy(&mConfig.profiles[mID].proxy.http.server, proxyServerProfile->server, sizeof(mConfig.profiles[mID].proxy.http.server));
+            memcpy(&mConfig.profiles[mID].proxy.ssl.server, proxyServerProfile->server, sizeof(mConfig.profiles[mID].proxy.ssl.server));
 
             mConfig.profiles[mID].proxy.http.port = proxyServerProfile->port;
             mConfig.profiles[mID].proxy.ssl.port = proxyServerProfile->port;
         }
 
         void NCDSetting::setBasic(NCDProxyServerProfile* proxyServerProfile) {
-            memcpy(mConfig.profiles[mID].proxy.http.username, proxyServerProfile->username, 33);
-            memcpy(mConfig.profiles[mID].proxy.ssl.username, proxyServerProfile->username, 33);
-            memcpy(mConfig.profiles[mID].proxy.http.password, proxyServerProfile->password, 33);
-            memcpy(mConfig.profiles[mID].proxy.ssl.password, proxyServerProfile->password, 33);
+            memcpy(mConfig.profiles[mID].proxy.http.username, proxyServerProfile->username, sizeof(mConfig.profiles[mID].proxy.http.username));
+            memcpy(mConfig.profiles[mID].proxy.ssl.username, proxyServerProfile->username, sizeof(mConfig.profiles[mID].proxy.ssl.username));
+            memcpy(mConfig.profiles[mID].proxy.http.password, proxyServerProfile->password, sizeof(mConfig.profiles[mID].proxy.http.password));
+            memcpy(mConfig.profiles[mID].proxy.ssl.password, proxyServerProfile->password, sizeof(mConfig.profiles[mID].proxy.ssl.password));
         }
 
         void NCDSetting::clearData() {
@@ -576,11 +601,11 @@ namespace ipl {
         }
 
         void NCDSetting::backupData() {
-            memcpy(&mSaveConfig, &mConfig, 0x1b5c);
+            memcpy(&mSaveConfig, &mConfig, sizeof(mSaveConfig));
         }
 
         void NCDSetting::resetData() {
-            memcpy(&mConfig, &mSaveConfig, 0x1b5c);
+            memcpy(&mConfig, &mSaveConfig, sizeof(mConfig));
         }
 
         void NCDSetting::setUseProfileID() {
@@ -593,7 +618,7 @@ namespace ipl {
                         mConfig.selectedMedia = 1;
                     }
                 } else {
-                    mConfig.profiles[i].flags &= 0x7f;
+                    mConfig.profiles[i].flags &= 0x7F;
                 }
             }
             NCDWriteConfig(&mConfig);
@@ -608,7 +633,7 @@ namespace ipl {
         }
 
         u16 NCDSetting::getID() {
-            return mID & 0xff;
+            return mID & 0xFF;
         }
 
         NCDApConfig* NCDSetting::getSSID() {
@@ -616,12 +641,12 @@ namespace ipl {
         }
 
         u16 NCDSetting::getUseProfileID() {
-            if (!(checkAllFlag() & 0xff)) {
+            if (!(checkAllFlag() & 0xFF)) {
                 return 3;
             } else {
                 for (int i = 0; i < 3; i++) {
                     if (mConfig.profiles[i].flags & 0x80 && mConfig.profiles[i].flags & 0x20) {
-                        return i & 0xff;
+                        return i & 0xFF;
                     }
                 }
             }
@@ -633,28 +658,35 @@ namespace ipl {
             if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
                 u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
                 switch (mode) {
-                    case 0:
+                    case 0: {
                         ret = 0;
                         break;
-                    case 1:
+                    }
+                    case 1: {
                         ret = 1;
                         break;
-                    case 2:
+                    }
+                    case 2: {
                         ret = 1;
                         break;
-                    case 4:
+                    }
+                    case 4: {
                         ret = 2;
                         break;
-                    case 5:
+                    }
+                    case 5: {
                         ret = 4;
                         break;
-                    case 6:
+                    }
+                    case 6: {
                         ret = 3;
                         break;
-                    case 3:
-                    default:
-                        ret = 0;
-                        break;
+                    }
+                    case 3: {
+                        default:
+                            ret = 0;
+                            break;
+                    }
                 }
             }
             return ret;
@@ -740,7 +772,7 @@ namespace ipl {
 
             NCDErr err = NETGetWirelessMacAddress(macAddress);
             switch (err) {
-                case 0:
+                case NCD_RESULT_SUCCESS: {
                     sprintf(mac.str, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
                             macAddress[5]);
                     OSReport("MAC: %s\n", &mac);
@@ -753,15 +785,16 @@ namespace ipl {
                     mMacNum = mac.num % 100000000;
                     OSReport("%lld %d\n", mMacNum, mac.num, mMacNum);
                     return;
-
-                case -8:
-                case -4:
-                    OSPanic(__FILE__, 0x436, "try again!!");
+                }
+                case NCD_RESULT_INPROGRESS:
+                case NCD_RESULT_4: {
+                    OSHalt("try again!!", 1078);
                     return;
-
-                default:
-                    OSPanic(__FILE__, 0x43b, "Unrecoverable Error!!");
+                }
+                default: {
+                    OSHalt("Unrecoverable Error!!", 1083);
                     return;
+                }
             }
         }
 
@@ -804,7 +837,7 @@ namespace ipl {
             mConfig.nwc24Permission = 0;
             if (wcFlags && SCGetEULA()) {
                 mConfig.nwc24Permission |= 4;
-                if (!(parental::Parental::checkFlags() & 0xFF) || ((parental::Parental::checkFlags() & 0xFF) && !(contentRestrictions))) {
+                if (!(parental::Parental::checkFlags() & 0xFF) || ((parental::Parental::checkFlags() & 0xFF) && !contentRestrictions)) {
                     mConfig.nwc24Permission |= 3;
                 }
             }

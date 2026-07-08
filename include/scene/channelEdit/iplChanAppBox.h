@@ -12,7 +12,7 @@ namespace ipl {
 
         class ChanAppBox : public AnmController, public ::gui::EventHandler {
         public:
-            ChanAppBox(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName);
+            ChanAppBox(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName);
             virtual ~ChanAppBox();
 
             void calc();
@@ -27,40 +27,55 @@ namespace ipl {
 
             ChannelEdit* get_channel_edit();
 
-            Thumbnail* getThumbnail() const { return pThumbnail; }
-            void setThumbnail(Thumbnail* newThumbnail) { pThumbnail = newThumbnail; }
+            Thumbnail* getThumbnail() const { return mpThumbnail; }
+            void setThumbnail(Thumbnail* newThumbnail) { mpThumbnail = newThumbnail; }
 
             const nw4r::math::VEC3& getTranslate() { return get_translate("N_All"); }
             void setTranslate(const nw4r::math::VEC3& translate) { set_translate("N_All", translate); }
 
-            TextBalloon* getTextBalloon() { return pTextBalloon; }
-            void setTextBalloon(TextBalloon* balloon) { pTextBalloon = balloon; }
+            void terminateBalloon() {
+                mpBalloon->terminate();
+                mbInitBalloon = false;
+            }
 
-            bool getTextBalloonInitialized() { return mTextBalloonInitialized; }
-            void setTextBalloonInitialized(bool val) { mTextBalloonInitialized = val; }
+            TextBalloon* getTextBalloon() { return mpBalloon; }
+            void setTextBalloon(TextBalloon* balloon) { mpBalloon = balloon; }
 
-            inline bool isIdle() { return mState == BOX_STATE_IDLE; }
+            bool hasBalloonInitialized() { return mbInitBalloon; }
+
+            inline bool isIdle() { return mState == STATE_IDLE; }
 
             static char s_all_pane_name[6];
 
         private:
+            enum {
+                ANIM_DATA_IN = 0,
+                ANIM_DATA_OUT,
+                ANIM_DATA_FOCUS_IN,
+                ANIM_DATA_FOCUS_OUT,
+            };
+
             void on_fadein();
             void on_fadeout();
 
-            enum State {
-                BOX_STATE_HIDDEN = 0,  // 0x0
-                BOX_STATE_IDLE,        // 0x1
-                BOX_STATE_FADEIN,      // 0x2
-                BOX_STATE_FADEOUT,     // 0x3
+            enum {
+                STATE_HIDDEN = 0,
+                STATE_IDLE,
+                STATE_FADE_IN,
+                STATE_FADE_OUT,
             };
 
         public:
             nw4r::ut::Link mLink;  // 0x34
+
         private:
-            State mState;                  // 0x3c
-            Thumbnail* pThumbnail;         // 0x40
-            TextBalloon* pTextBalloon;     // 0x44
-            bool mTextBalloonInitialized;  // 0x48
+            int mState;              // 0x3C
+            Thumbnail* mpThumbnail;  // 0x40
+            TextBalloon* mpBalloon;  // 0x44
+            bool mbInitBalloon;      // 0x48
+
+            friend class ChannelEdit;
+            friend class Memory;
         };
     }  // namespace scene
 }  // namespace ipl

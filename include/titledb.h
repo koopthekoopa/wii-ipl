@@ -4,22 +4,31 @@
 #include <private/es/types.h>
 
 // clang-format off
-#define TITLE_TYPE_SYSTEM           0x00000001
-#define TITLE_TYPE_DISC             0x00010000
-#define TITLE_TYPE_CHANNEL          0x00010001
-#define TITLE_TYPE_SYSTEM_CHANNEL   0x00010002
-#define TITLE_TYPE_UNK3             0x00010003
-#define TITLE_TYPE_DISC_CHANNEL     0x00010004
-#define TITLE_TYPE_DLC              0x00010005
-#define TITLE_TYPE_UNK6             0x00010006
-#define TITLE_TYPE_UNK7             0x00010007
-#define TITLE_TYPE_HIDDEN_CHANNEL   0x00010008
+#define TITLE_HITYPE_SYSTEM         0x0000
+#define TITLE_HITYPE_USER           0x0001
+
+/* System */
+#define TITLE_TYPE_SYSTEM           ((TITLE_HITYPE_SYSTEM << 16) | 0x0001) /* 0x00000001 */
+
+/* User */
+#define TITLE_TYPE_DISC             ((TITLE_HITYPE_USER << 16) | 0x0000) /* 0x00010000 */
+#define TITLE_TYPE_CHANNEL          ((TITLE_HITYPE_USER << 16) | 0x0001) /* 0x00010001 */
+#define TITLE_TYPE_SYSTEM_CHANNEL   ((TITLE_HITYPE_USER << 16) | 0x0002) /* 0x00010002 */
+#define TITLE_TYPE_UNK3             ((TITLE_HITYPE_USER << 16) | 0x0003) /* 0x00010003 */
+#define TITLE_TYPE_DISC_CHANNEL     ((TITLE_HITYPE_USER << 16) | 0x0004) /* 0x00010004 */
+#define TITLE_TYPE_SHARED           ((TITLE_HITYPE_USER << 16) | 0x0005) /* 0x00010005 */
+#define TITLE_TYPE_UNK6             ((TITLE_HITYPE_USER << 16) | 0x0006) /* 0x00010006 */
+#define TITLE_TYPE_UNK7             ((TITLE_HITYPE_USER << 16) | 0x0007) /* 0x00010007 */
+#define TITLE_TYPE_HIDDEN_CHANNEL   ((TITLE_HITYPE_USER << 16) | 0x0008) /* 0x00010008 */
 
 #define TITLE_REGION_ALL            'A'
 #define TITLE_REGION_JPN            'J'
 #define TITLE_REGION_USA            'E'
 #define TITLE_REGION_EUR            'P'
 #define TITLE_REGION_KOR            'K'
+
+#define TITLE_TYPE_HI(x)            ((((u32)(x) >> 16) & 0xFFFF))
+#define TITLE_TYPE_LO(x)            (((u32)(x) & 0xFFFF))
 
 #define TITLE_NULL                  ((ESTitleId)0x0000000000000000)
 
@@ -79,6 +88,9 @@
 #define TITLE_PHOTO_2_CHECK         ES_TITLE_ID(TITLE_TYPE_DISC,              'HAZ\0')
 #define TITLE_PHOTO_2_CHECK_ALL     ((ESTitleId)(TITLE_PHOTO_2_CHECK | TITLE_REGION_ALL))
 #define TITLE_PHOTO_2_CHECK_KOR     ((ESTitleId)(TITLE_PHOTO_2_CHECK | TITLE_REGION_KOR)) /* does such title even exist? */
+
+/* Photo Channel 1.1 (Dummy) */
+#define TITLE_UPDATE_PART           ES_TITLE_ID(TITLE_TYPE_DISC,              '\0UP\0')
 
 #define TITLE_NOREGION_MASK         (0xFFFFFFFFFFFFFF00)
 #define TITLE_REGION_MASK           (0x00000000000000FF)

@@ -6,7 +6,7 @@
 #include <revolution/arc.h>
 #include <revolution/types.h>
 
-#include "iplwww/www_js.h"
+#include <revolution/www.h>
 
 namespace www {
     namespace arcreader {
@@ -25,7 +25,7 @@ namespace www {
         private:
             ARCHandle mHandles[4];
             bool mFlags[4];
-            void* pScratch;
+            void* mpScratch;
         };
 
         extern const char* sProtocolName;

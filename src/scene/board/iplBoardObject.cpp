@@ -117,7 +117,7 @@ namespace ipl {
         }
 
         void BoardObject::create(nand::LayoutFile* file, u8* recordData, u32 gameCode, const CDBId& cdbId, const CDBRecordKey& recordKey,
-                                 const ipl::utility::Date& date) {
+                                 const utility::Date& date) {
             mpRecordData = recordData;
             mpLayoutFile = file;
 
@@ -219,7 +219,7 @@ namespace ipl {
 
                 mMoveAnim.calc();
 
-                ipl::math::VEC2 finalPos = offsetPos + mBoardPos + mMoveSpeed + mMoveAnim.get2();
+                math::VEC2 finalPos = offsetPos + mBoardPos + mMoveSpeed + mMoveAnim.get();
                 finalPos.x *= locationAdjust;
                 mpLayout->GetRootPane()->SetTranslate(finalPos);
                 mpLayout->calc();

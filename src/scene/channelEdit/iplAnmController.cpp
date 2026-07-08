@@ -5,60 +5,66 @@
 namespace ipl {
     namespace scene {
         void AnmPane::calc() {
-            if (pAnmCurr != NULL && !pAnmCurr->animator->isPlaying()) {
-                pAnmCurr = NULL;
+            if (mpAnmCurr != NULL && !mpAnmCurr->animator->isPlaying()) {
+                mpAnmCurr = NULL;
                 on_cmd_recv(ANIM_CMD_CANCEL);
             }
             on_cmd_recv(mCurrCmd);
         }
+
         void AnmPane::on_cmd_recv(AnimCommand cmd) {
             if (cmd == ANIM_CMD_POINT || cmd == ANIM_CMD_LEFT) {
                 mCurrCmd = cmd;
             }
             switch (mCurrState) {
-                case ANIM_STATE_IDLE:
+                case ANIM_STATE_IDLE: {
                     if (cmd == ANIM_CMD_POINT) {
-                        pAnmCurr = pAnmIn;
-                        pAnmCurr->animator->play();
+                        mpAnmCurr = mpAnmIn;
+                        mpAnmCurr->animator->play();
 
                         mPrevState = mCurrState;
                         mCurrState = ANIM_STATE_POINT;
                     } else if (cmd == ANIM_CMD_LEFT) {
-                        pAnmCurr = pAnmOut;
-                        pAnmCurr->animator->play();
+                        mpAnmCurr = mpAnmOut;
+                        mpAnmCurr->animator->play();
 
                         mPrevState = mCurrState;
                         mCurrState = ANIM_STATE_LEFT;
                     }
                     break;
-
-                case ANIM_STATE_POINT:
-                    if (cmd != ANIM_CMD_CANCEL)
+                }
+                case ANIM_STATE_POINT: {
+                    if (cmd != ANIM_CMD_CANCEL) {
                         break;
+                    }
 
-                    if (mCurrCmd == ANIM_CMD_POINT)
+                    if (mCurrCmd == ANIM_CMD_POINT) {
                         mCurrCmd = ANIM_CMD_NONE;
+                    }
 
                     mPrevState = mCurrState;
                     mCurrState = ANIM_STATE_IDLE;
                     break;
-
-                case ANIM_STATE_LEFT:
-                    if (cmd != ANIM_CMD_CANCEL)
+                }
+                case ANIM_STATE_LEFT: {
+                    if (cmd != ANIM_CMD_CANCEL) {
                         break;
+                    }
 
-                    if (mCurrCmd == ANIM_CMD_LEFT)
+                    if (mCurrCmd == ANIM_CMD_LEFT) {
                         mCurrCmd = ANIM_CMD_NONE;
+                    }
 
                     mPrevState = mCurrState;
                     mCurrState = ANIM_STATE_IDLE;
                     break;
+                }
             }
         }
 
         void AnmController::add_animation(const char* brlan, const char* group) {
-            layout::GroupAnimator* animator = pLytObj->bindToGroup(brlan, group, false);
-            nw4r::ut::List_Append(&mAnmList, new (pHeap) Anm(animator));
+            layout::GroupAnimator* animator = mpLayout->bindToGroup(brlan, group, false);
+            nw4r::ut::List_Append(&mAnmList, new (mpHeap) Anm(animator));
         }
 
         void AnmController::do_animation(int idx, int anmType, bool calc) {
@@ -66,8 +72,9 @@ namespace ipl {
             anm->animator->setAnmType(anmType);
 
             anm->animator->play();
-            if (calc)
-                pLytObj->calc();
+            if (calc) {
+                mpLayout->calc();
+            }
         }
 
         void AnmController::stop_animation(int idx) {
@@ -85,7 +92,7 @@ namespace ipl {
         }
 
         void AnmController::add_anmpane(const char* name, Anm* anmIn, Anm* anmOut) {
-            nw4r::ut::List_Append(&mPaneList, new (pHeap) AnmPane(name, anmIn, anmOut));
+            nw4r::ut::List_Append(&mPaneList, new (mpHeap) AnmPane(name, anmIn, anmOut));
         }
 
         AnmPane* AnmController::get_anmpane(const char* name) {
@@ -101,7 +108,7 @@ namespace ipl {
 
         void AnmController::clear_anmpane(const char* name) {
             AnmPane* pane = get_anmpane(name);
-            pPaneManager->initPane(pLytObj->FindPaneByName(name));
+            mpGui->initPane(mpLayout->FindPaneByName(name));
             if (pane->hoverCount() >= 1) {
                 pane->on_cmd_recv(AnmPane::ANIM_CMD_LEFT);
             }
@@ -109,34 +116,37 @@ namespace ipl {
         }
 
         void AnmController::set_textbox(const char* name, u32 msgId) {
-            nw4r::lyt::TextBox* textbox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(pLytObj->FindPaneByName(name));
+            nw4r::lyt::TextBox* textbox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName(name));
             textbox->SetString(System::getMessage(msgId));
         }
+
         void AnmController::set_textbox(const char* name, const wchar_t* msg) {
-            nw4r::lyt::TextBox* textbox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(pLytObj->FindPaneByName(name));
+            nw4r::lyt::TextBox* textbox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName(name));
             textbox->SetString(msg);
         }
 
         void AnmController::set_texture(const char* name, const GXTexObj& tex) {
-            pLytObj->FindPaneByName(name)->FindMaterialByName(name)->SetTexture(0, tex);
+            mpLayout->FindPaneByName(name)->FindMaterialByName(name)->SetTexture(0, tex);
         }
 
         void AnmController::set_visible(const char* name, bool visibility) {
-            pLytObj->FindPaneByName(name)->SetVisible(visibility);
+            mpLayout->FindPaneByName(name)->SetVisible(visibility);
         }
+
         bool AnmController::get_visible(const char* name) {
-            return pLytObj->FindPaneByName(name)->IsVisible();
+            return mpLayout->FindPaneByName(name)->IsVisible();
         }
 
         void AnmController::set_translate(const char* name, const nw4r::math::VEC3& translate) {
-            pLytObj->FindPaneByName(name)->SetTranslate(translate);
+            mpLayout->FindPaneByName(name)->SetTranslate(translate);
         }
+
         const nw4r::math::VEC3& AnmController::get_translate(const char* name) {
-            return pLytObj->FindPaneByName(name)->GetTranslate();
+            return mpLayout->FindPaneByName(name)->GetTranslate();
         }
 
         const nw4r::math::VEC2& AnmController::get_scale(const char* name) {
-            return pLytObj->FindPaneByName(name)->GetScale();
+            return mpLayout->FindPaneByName(name)->GetScale();
         }
     }  // namespace scene
 }  // namespace ipl

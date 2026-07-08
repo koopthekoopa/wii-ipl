@@ -15,6 +15,12 @@ extern "C" {
 #define WAD_IMPORT_TYPE_SOFTWARE "Is" /* "Import software" */
 #define WAD_IMPORT_TYPE_BACKUP "Bk"   /* "Backup"*/
 
+enum {
+    WAD_ERROR_OK = 0,
+    WAD_ERROR_NOCOPY = -3002,           /*?*/
+    WAD_ERROR_INCORRECT_DEVICE = -3008, /*?*/
+};
+
 typedef struct WADHeader {
     u32 hdrSize;  // 0x00 (Always 32)
 
@@ -53,31 +59,34 @@ typedef struct WADBackupHeader {
 } WADBackupHeader;
 
 typedef enum {
-    WAD_LOC_DVD = 0x1,          // 0x1
-    WAD_LOC_NANDPRIVATE = 0x2,  // 0x2
-    WAD_LOC_SD_CARD = 0x3,      // 0x3
-    WAD_LOC_DVDCONTENT = 0x4,   // 0x4
-    WAD_LOC_NANDCONTENT = 0x5,  // 0x5
+    WAD_LOCATION_DVD = 1,
+    WAD_LOCATION_NAND,
+    WAD_LOCATION_SD_CARD,
+    WAD_LOCATION_CNT_DVD,
+    WAD_LOCATION_CNT_NAND,
 } WADLocation;
+
 typedef struct {
-    u16 unkBlocks;      // 0x0
-    u16 unkInodes;      // 0x2
-    u16 privateBlocks;  // 0x4
-    u16 privateInodes;  // 0x6
-    u16 sharedBlocks;   // 0x8
-    u16 sharedInodes;   // 0xa
-    u16 fileBlocks;     // 0xc
-    u16 fileInodes;     // 0xe
+    u16 unkBlocks;      // 0x00
+    u16 unkInodes;      // 0x02
+    u16 privateBlocks;  // 0x04
+    u16 privateInodes;  // 0x06
+    u16 sharedBlocks;   // 0x08
+    u16 sharedInodes;   // 0x0A
+    u16 fileBlocks;     // 0x0C
+    u16 fileInodes;     // 0x0E
 } WADBlocks;
 
-typedef void (*WADProgressCb)(u32 completed, u32 total, BOOL done);
+typedef void (*WADProcessCallback)(u32 completed, u32 total, BOOL done);
 
-int WADGetTitleVersionEx(char* path, u64* titleIdOut, u16* titleVersionOut, WADLocation location, u32 offset);
-int WADBackupEx(u64 titleId, u32 param_2, MEMAllocator* allocator, char* path, u32* sizeOut, WADLocation location, u32 param_7,
-                WADProgressCb progressCb);
+s32 WADGetTitleVersionEx(char* path, ESTitleId* titleId, u16* titleVersion, WADLocation location, u32 offset);
+s32 WADBackupEx(u64 titleId, u32 param_2, MEMAllocator* allocator, char* path, u32* sizeOut, WADLocation location, u32 param_7,
+                WADProcessCallback processCB);
 
-int WADImportGetBlocks(char* path, MEMAllocator* allocator, WADLocation location, u32 offset, u32 param_5, WADBlocks* blocksOut, u32* param_7);
-int WADImportEx(char* path, MEMAllocator* allocator, WADLocation location, u32 param_4, u32 param_5, WADProgressCb progressCb);
+s32 WADImportGetBlocks(char* path, MEMAllocator* allocator, WADLocation location, u32 offset, u32 param_5, WADBlocks* blocks, u32* param_7);
+s32 WADImportEx(char* path, MEMAllocator* allocator, WADLocation location, u32 param_4, u32 param_5, WADProcessCallback processCB);
+
+s32 WADGetInstalledVersion(ESTitleId titleID, u16* version);
 
 #ifdef __cplusplus
 }

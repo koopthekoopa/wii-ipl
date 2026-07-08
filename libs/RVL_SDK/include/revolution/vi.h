@@ -8,7 +8,6 @@ extern "C" {
 #include <revolution/vi/vifuncs.h>
 #include <revolution/vi/vitypes.h>
 
-
 #ifdef __cplusplus
 }
 #endif

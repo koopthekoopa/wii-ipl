@@ -23,10 +23,10 @@ namespace ext_ead {
             inline void init(void* mem1Buf, u32 mem1BufSize, void* mem2Buf, u32 mem2BufSize);
             inline void destroy();
 
-            extern MEMiHeapHead* hMem1;
-            extern MEMiHeapHead* hMem2;
+            extern MEMHeapHandle hMem1;
+            extern MEMHeapHandle hMem2;
             extern void* wwwalloc_;
-            extern void (*wwwfree_)(void*);
+            extern void (*wwwfree_)(void* buf);
             extern int (*wwwavail_)();
 
             extern u32 hFreeSize1;
@@ -52,29 +52,36 @@ namespace ext_ead {
             bool IsThreadStopped();
             void DisposeInstance_();
 
-            static SurfaceManager* Instance_;
+            BrowserThread* GetBrowserThread() { return mpBrowserThread; }
+
+            int GetWidth() { return mWidth; }
+            int GetHeight() { return mHeight; }
+
+            char* GetArcPath() { return mpArcPath; }
+
+            static SurfaceManager* GetInstance() { return Instance_; }
 
         private:
             SurfaceManager();
             virtual ~SurfaceManager();
 
-        public:
+            static SurfaceManager* Instance_;
+
             u32 mWidth;   // 0x04
             u32 mHeight;  // 0x08
-        private:
-            u32 unk_0x0c;    // 0x0c
-            OSMutex mMutex;  // 0x10
-        public:
-            BrowserThread* pBrowserThread;  // 0x28
-        private:
-            void* pOperaThreadStack;  // 0x2c
-            void* pBss;               // 0x30
-            void* pLibBuf;            // 0x34
-        public:
-            char* pArcPath;  // 0x38
+
+            u32 unk_0x0C;  // 0x0C
+
+            OSMutex mMutex;                  // 0x10
+            BrowserThread* mpBrowserThread;  // 0x28
+
+            void* mpOperaThreadStack;  // 0x2C
+            void* mpRSOBss;            // 0x30
+            void* mpLibBuffer;         // 0x34
+            char* mpArcPath;           // 0x38
         };
 
-        static RSOExportFuncTable rsoSymbolList[] = {
+        static RSOExportFuncTable RsoExports[] = {
             {"WWWSurfaceInit", (u32*)&WWWSurfaceInit},
             {"WWWSurfaceNewScreen", (u32*)&WWWSurfaceNewScreen},
             {"WWWSurfaceDeleteScreen", (u32*)&WWWSurfaceDeleteScreen},

@@ -1,5 +1,5 @@
-#ifndef IPL_SCENE_SAVEDATA_BASE_H
-#define IPL_SCENE_SAVEDATA_BASE_H
+#ifndef IPL_SCENE_STATE_BASE_H
+#define IPL_SCENE_STATE_BASE_H
 
 #include "scene/channelEdit/iplAnmController.h"
 
@@ -11,7 +11,7 @@ namespace ipl {
     namespace scene {
         class SavedataBase : public AnmController, public ::gui::EventHandler {
         public:
-            SavedataBase(EGG::Heap* heap, nand::LayoutFile* lytFile, const char* lytFolder, const char* lytFileName);
+            SavedataBase(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* layoutDir, const char* layoutFileName);
 
             virtual ~SavedataBase();
 
@@ -22,7 +22,7 @@ namespace ipl {
             void update();
 
             void anmFadein();
-            void anmFadeout(bool);
+            void anmFadeout(bool isErr);
 
             void anmChangeWiitoSD();
             void anmChangeSDtoWii();
@@ -36,10 +36,38 @@ namespace ipl {
             void anmArwAppear(bool arwR, bool arwL);
             void anmArwDisappear(bool arwR, bool arwL);
 
-            inline layout::Object* getLytObject() { return pLytObj; }
-            inline bool isIdle() { return mState == SAVEDATA_IDLE; }
+            inline layout::Object* getLytObject() { return mpLayout; }
+            inline bool isIdle() { return mState == STATE_IDLE; }
 
         private:
+            enum {
+                ANIM_SWITCH = 0,
+                ANIM_DATA_IN,
+                ANIM_DATA_OUT,
+                ANIM_SELECT_IN,
+                ANIM_SELECT_WII_IN,
+                ANIM_SELECT_WII_OUT,
+                ANIM_SELECT_WII_FLASH,
+                ANIM_SELECT_SD_IN,
+                ANIM_SELECT_SD_OUT,
+                ANIM_SELECT_SD_FLASH,
+                ANIM_ARROWS_MOVE_L,
+                ANIM_ARROWS_MOVE_R,
+                ANIM_ARROW_R_SELECT,
+                ANIM_ARROW_L_SELECT,
+                ANIM_ARROW_R_FOCUS_ON,
+                ANIM_ARROW_L_FOCUS_ON,
+                ANIM_ARROW_R_FOCUS_OFF,
+                ANIM_ARROW_L_FOCUS_OFF,
+                ANIM_ARROW_R_LOOP,
+                ANIM_ARROW_R_END,
+                ANIM_ARROW_L_END,
+                ANIM_ARROW_R_LOST,
+                ANIM_ARROW_L_LOST,
+                ANIM_ERROR_TEXT_IN,
+                ANIM_ERROR_TEXT_OUT,
+            };
+
             void on_fadein1st();
             void on_fadein2nd();
             void on_fadeout();
@@ -50,22 +78,24 @@ namespace ipl {
             void on_text_fadein();
             void on_text_fadeout();
 
-            enum State {
-                SAVEDATA_IDLE = 0x0,              // 0x0
-                SAVEDATA_FADEIN1ST = 0x1,         // 0x1
-                SAVEDATA_FADEIN2ND = 0x2,         // 0x2
-                SAVEDATA_FADEOUT = 0x3,           // 0x3
-                SAVEDATA_CHANGE_SD_TO_WII = 0x4,  // 0x4
-                SAVEDATA_CHANGE_WII_TO_SD = 0x5,  // 0x5
-                SAVEDATA_SCROLL_R = 0x8,          // 0x8
-                SAVEDATA_SCROLL_L = 0x9,          // 0x9
-                SAVEDATA_TEXT_FADEIN = 0xa,       // 0xa
-                SAVEDATA_TEXT_FADEOUT = 0xb,      // 0xb
+            enum {
+                STATE_IDLE = 0,
+                STATE_FADEIN1ST,
+                STATE_FADEIN2ND,
+                STATE_FADEOUT,
+                STATE_CHANGE_SD_TO_WII,
+                STATE_CHANGE_WII_TO_SD,
+                STATE_6,
+                STATE_7,
+                STATE_SCROLL_R,
+                STATE_SCROLL_L,
+                STATE_TEXT_FADEIN,
+                STATE_TEXT_FADEOUT,
             };
 
-            State mState;
+            int mState;
         };
     }  // namespace scene
 }  // namespace ipl
 
-#endif  // IPL_SCENE_SAVEDATA_BASE_H
+#endif  // IPL_SCENE_STATE_BASE_H

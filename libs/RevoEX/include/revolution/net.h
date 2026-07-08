@@ -10,6 +10,7 @@ extern "C" {
 
 int NETGetWirelessMacAddress(void* data);
 
+int NETGetStartupErrorCode(int);
 int NETGetStartupErrorCodeEx(int, int);
 
 #ifdef __cplusplus

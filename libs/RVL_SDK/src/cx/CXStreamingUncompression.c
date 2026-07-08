@@ -8,7 +8,7 @@ void CXInitUncompContextRL(CXUncompContextRL* context, u8* param_2) {
     context->unk_0x00 = param_2;
     context->unk_0x04 = 0;
     context->unk_0x0e = 0;
-    context->unk_0x0c = 0;
+    context->unk_0x0C = 0;
     context->unk_0x0f = 8;
     context->unk_0x08 = 0;
 }
@@ -18,7 +18,7 @@ void CXInitUncompContextLZ(CXUncompContextLZ* context, u8* param_2) {
     context->unk_0x04 = 0;
     context->unk_0x11 = 0;
     context->unk_0x12 = 0;
-    context->unk_0x0c = 0;
+    context->unk_0x0C = 0;
     context->unk_0x10 = 3;
     context->unk_0x13 = 8;
     context->unk_0x14 = 0;
@@ -66,10 +66,10 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
 
     while (context->unk_0x04 > 0) {
         if (!(context->unk_0x0e & 0x80)) {
-            while (context->unk_0x0c) {
+            while (context->unk_0x0C) {
                 *context->unk_0x00++ = *pSrc++;
 
-                context->unk_0x0c--;
+                context->unk_0x0C--;
                 context->unk_0x04--;
                 size--;
 
@@ -77,14 +77,14 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
                     return context->unk_0x04;
                 }
             }
-        } else if (context->unk_0x0c) {
+        } else if (context->unk_0x0C) {
             u8 b = *pSrc++;
             size--;
 
-            while (context->unk_0x0c) {
+            while (context->unk_0x0C) {
                 *context->unk_0x00++ = b;
 
-                context->unk_0x0c--;
+                context->unk_0x0C--;
                 context->unk_0x04--;
             }
 
@@ -95,20 +95,20 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
 
         context->unk_0x0e = *pSrc++;
         size--;
-        context->unk_0x0c = context->unk_0x0e & 0x7f;
+        context->unk_0x0C = context->unk_0x0e & 0x7f;
 
         if (context->unk_0x0e & 0x80) {
-            context->unk_0x0c += 3;
+            context->unk_0x0C += 3;
         } else {
-            context->unk_0x0c += 1;
+            context->unk_0x0C += 1;
         }
 
-        if (context->unk_0x0c > context->unk_0x04) {
+        if (context->unk_0x0C > context->unk_0x04) {
             if (!context->unk_0x08) {
                 return CX_STREAMING_ERR_BAD_FILE_SIZE;
             }
 
-            context->unk_0x0c = context->unk_0x04;
+            context->unk_0x0C = context->unk_0x04;
         }
 
         if (size) {
@@ -205,34 +205,34 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                 context->unk_0x10--;
 
                 if (!context->unk_0x14) {
-                    context->unk_0x0c = *pSrc++;
-                    context->unk_0x0c += 0x30;
+                    context->unk_0x0C = *pSrc++;
+                    context->unk_0x0C += 0x30;
                     context->unk_0x10 = 0;
                 } else {
                     switch (context->unk_0x10) {
                         case 2: {
-                            context->unk_0x0c = *pSrc++;
+                            context->unk_0x0C = *pSrc++;
 
-                            if (context->unk_0x0c >> 4 == 1) {
-                                context->unk_0x0c = (context->unk_0x0c & 0x0F) << 16;
-                                context->unk_0x0c += 0x1110;
-                            } else if (context->unk_0x0c >> 4 == 0) {
-                                context->unk_0x0c = (context->unk_0x0c & 0x0F) << 8;
-                                context->unk_0x0c += 0x110;
+                            if (context->unk_0x0C >> 4 == 1) {
+                                context->unk_0x0C = (context->unk_0x0C & 0x0F) << 16;
+                                context->unk_0x0C += 0x1110;
+                            } else if (context->unk_0x0C >> 4 == 0) {
+                                context->unk_0x0C = (context->unk_0x0C & 0x0F) << 8;
+                                context->unk_0x0C += 0x110;
                                 context->unk_0x10 = 1;
                             } else {
-                                context->unk_0x0c += 0x10;
+                                context->unk_0x0C += 0x10;
                                 context->unk_0x10 = 0;
                             }
 
                             break;
                         }
                         case 1: {
-                            context->unk_0x0c += *pSrc++ << 8;
+                            context->unk_0x0C += *pSrc++ << 8;
                             break;
                         }
                         case 0: {
-                            context->unk_0x0c += *pSrc++;
+                            context->unk_0x0C += *pSrc++;
                             break;
                         }
                     }
@@ -244,26 +244,26 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                 }
             }
 
-            a = (context->unk_0x0c & 0x0F) << 8;
-            context->unk_0x0c >>= 4;
+            a = (context->unk_0x0C & 0x0F) << 8;
+            context->unk_0x0C >>= 4;
 
             a = (a | *pSrc++) + 1;
             size--;
             context->unk_0x10 = 3;
 
-            if (context->unk_0x0c > context->unk_0x04) {
+            if (context->unk_0x0C > context->unk_0x04) {
                 if (!context->unk_0x08) {
                     return CX_STREAMING_ERR_BAD_FILE_SIZE;
                 }
 
-                context->unk_0x0c = context->unk_0x04;
+                context->unk_0x0C = context->unk_0x04;
             }
 
-            while (context->unk_0x0c > 0) {
+            while (context->unk_0x0C > 0) {
                 *context->unk_0x00 = context->unk_0x00[-a];
                 context->unk_0x00++;
                 context->unk_0x04--;
-                context->unk_0x0c--;
+                context->unk_0x0C--;
             }
 
         there:

@@ -14,25 +14,25 @@ namespace ipl {
         void* NetSetup::iSOStartupEXThread(void* param_1) {
             s32 cfgSetResult;
             int soStartupRes;
-            undefined* puVar3;
             SOInAddr soAddr;
 
             OSReport("NCDSetIpConfig()\n");
             cfgSetResult = NCDSetIpConfig(sSOStartupInfo.ipcfg);
             if (cfgSetResult != 0) {
                 switch (cfgSetResult) {
-                    case -3:
+                    case -3: {
                         sSOStartupInfo.state = NET_SETUP_ERROR;
                         sSOStartupInfo.lastErr = 50300;
                         break;
-
+                    }
                     case -1:
                     case -2:
                     case -4:
-                    default:
+                    default: {
                         sSOStartupInfo.state = NET_SETUP_ERROR;
                         sSOStartupInfo.lastErr = 50100;
                         break;
+                    }
                 }
                 return NULL;
             }
@@ -41,18 +41,19 @@ namespace ipl {
             cfgSetResult = NCDSetIfConfig(sSOStartupInfo.ifcfg);
             if (cfgSetResult != 0) {
                 switch (cfgSetResult) {
-                    case -3:
+                    case -3: {
                         sSOStartupInfo.state = NET_SETUP_ERROR;
                         sSOStartupInfo.lastErr = 50300;
                         break;
-
+                    }
                     case -1:
                     case -2:
                     case -4:
-                    default:
+                    default: {
                         sSOStartupInfo.state = NET_SETUP_ERROR;
                         sSOStartupInfo.lastErr = 50100;
                         break;
+                    }
                 }
                 return NULL;
             }
@@ -132,6 +133,7 @@ namespace ipl {
             } else {
                 mConnType = mProfileId + 40;
             }
+
             mState = NET_SETUP_REQUESTED_STARTUP;
             return TRUE;
         }
@@ -143,14 +145,18 @@ namespace ipl {
             SOLibraryConfig soLibCfg;
 
             switch (mState) {
-                case NET_SETUP_REQUESTED_STARTUP:
+                case NET_SETUP_REQUESTED_STARTUP: {
                     memset(&soLibCfg, 0, 8);
+
                     soLibCfg.alloc = allocfunc;
                     soLibCfg.free = freefunc;
+
                     SOInit(&soLibCfg);
-                    pThreadStack = (void*)allocfunc(0x4000, 0x20);
-                    stackEnd = (void*)((int)pThreadStack + 0x4000);
-                    if (OSCreateThread(&mThread, iSOStartupEXThread, (void*)mConnType, stackEnd, 0x4000, 0x11, 1) == 0) {
+
+                    mpThreadStack = (void*)allocfunc(0x4000, 0x20);
+                    stackEnd = (void*)((int)mpThreadStack + 0x4000);
+
+                    if (OSCreateThread(&mThread, iSOStartupEXThread, (void*)mConnType, stackEnd, 0x4000, 17, 1) == 0) {
                         mLastErr = -(-50100 + -mConnType);
                         mState = NET_SETUP_ERROR;
                         OSReport("OSCreateThread failed\n");
@@ -159,10 +165,10 @@ namespace ipl {
                         mState = NET_SETUP_RUNNING;
                     }
                     break;
-
-                case NET_SETUP_RUNNING:
+                }
+                case NET_SETUP_RUNNING: {
                     if (OSIsThreadTerminated(&mThread)) {
-                        threadStack = pThreadStack;
+                        threadStack = mpThreadStack;
                         mState = sSOStartupInfo.state;
                         mLastErr = sSOStartupInfo.lastErr;
                         if (threadStack != NULL) {
@@ -171,20 +177,21 @@ namespace ipl {
                                 MEMFreeToExpHeap(sHeap, threadStack);
                                 OSUnlockMutex(&sAllocLock);
                             }
-                            pThreadStack = NULL;
+                            mpThreadStack = NULL;
                         }
                     }
                     break;
-
-                case NET_SETUP_SUCCESS:
+                }
+                case NET_SETUP_SUCCESS: {
                     NCDGetLinkStatus();
                     break;
-
+                }
                 case NET_SETUP_NOT_STARTED:
                 case NET_SETUP_UNK_4:
                 case NET_SETUP_ERROR:
-                default:
+                default: {
                     break;
+                }
             }
             return mState;
         }
@@ -192,7 +199,7 @@ namespace ipl {
         void NetSetup::cleanup() {
             SOCleanup();
             SOFinish();
-            memset(&mNcdIfCfg, 0, 0x15e);
+            memset(&mNcdIfCfg, 0, sizeof(mNcdIfCfg));
             mNcdIfCfg.selectedMedia = 0;
             NCDSetIfConfig(&mNcdIfCfg);
             MEMDestroyExpHeap(sHeap);
@@ -202,13 +209,14 @@ namespace ipl {
             void* ptr = NULL;
             if (size > 0) {
                 OSLockMutex(&sAllocLock);
-                ptr = MEMAllocFromExpHeapEx(sHeap, size, 0x20);
+                ptr = MEMAllocFromExpHeapEx(sHeap, size, 32);
                 OSUnlockMutex(&sAllocLock);
             }
             return ptr;
         }
+
         void NetSetup::freefunc(u32, void* buf, s32) {
-            if (buf != (void*)0x0) {
+            if (buf != NULL) {
                 OSLockMutex(&sAllocLock);
                 MEMFreeToExpHeap(sHeap, buf);
                 OSUnlockMutex(&sAllocLock);

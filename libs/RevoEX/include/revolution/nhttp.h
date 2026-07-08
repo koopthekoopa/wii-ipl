@@ -1,8 +1,10 @@
 
-#ifndef D_NHTTP_H
-#define D_NHTTP_H
+#ifndef REVOLUTION_NHTTP_H
+#define REVOLUTION_NHTTP_H
 
 #include <revolution/types.h>
+
+#include <revolution/nhttp/nhttp_err.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,4 +54,4 @@ int NHTTPSetClientCertDefault(NHTTPRequest* request);
 }
 #endif  // __cplusplus
 
-#endif  // D_NHTTP_H
+#endif  // REVOLUTION_NHTTP_H

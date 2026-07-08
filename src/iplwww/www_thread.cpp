@@ -38,7 +38,7 @@ namespace ext_ead {
         BOOL ut_thread::WaitForThreadExit() {
             BOOL result = FALSE;
             if (OSJoinThread(&mThread, (void*)&result)) {
-                print::IPLWWWReport(3, "ut_thread: joined successfully.\n");
+                print::IPLWWWReport(print::WWW_DEBUG, "ut_thread: joined successfully.\n");
             }
             return result;
         }
