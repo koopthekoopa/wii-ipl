@@ -8,43 +8,10 @@
 #include <private/os.h>
 #include <revolution/enc.h>
 
-// mLangPath
-char lbl_81696250[] = "jpn";
-char lbl_81696254[] = "eng";
-char lbl_81696258[] = "ger";
-char lbl_8169625C[] = "fra";
-char lbl_81696260[] = "spa";
-char lbl_81696264[] = "ita";
-char lbl_81696268[] = "ned";
-char lbl_8169626C[] = "chn";
-char lbl_81696270[] = "kor";
-
 char* ipl::utility::Language::mLangPath[10] = {
-    lbl_81696250, lbl_81696254, lbl_81696258, lbl_8169625C,
-    lbl_81696260, lbl_81696264, lbl_81696268, lbl_8169626C,
-    lbl_81696254, lbl_81696270,
+    "jpn", "eng", "ger", "fra", "spa",
+    "ita", "ned", "chn", "eng", "kor"
 };
-
-// Scroll sound effect names
-char lbl_81641230[] = "WIPL_SE_B_SCROLL";
-char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
-
-// Wii id format string
-wchar_t lbl_81641258[] = L"%016llu";
-
-// Scroller
-const float lbl_81694600 = 0.0f;
-const float lbl_81694604 = -1.0f;
-const float lbl_81694608 = 1.0f;
-const float lbl_8169460C = 128.0f;
-const float lbl_81694620 = 0.6f;
-const float lbl_81694624 = 1.5f;
-const float lbl_81694628 = 20.0f;
-
-// Texture LOD bias range
-const float lbl_81694650 = -100.f;
-const float lbl_81694654 = 100.f;
-
 
 // Scroller
 float lbl_81696274 = 1.0f;
@@ -133,9 +100,9 @@ namespace ipl {
                     if (math::abs<float>(unk_0x08) < math::abs<float>(unk_0x0C)) {
                         f32 newVal;
                         if (unk_0x0C < 0.0f) {
-                            newVal = lbl_81694604;
+                            newVal = -1.0f;
                         } else {
-                            newVal = lbl_81694608;
+                            newVal = 1.0f;
                         }
                         unk_0x0C = newVal;
                         mSpeed = _get();
@@ -145,13 +112,13 @@ namespace ipl {
             }
 
             after_loop:
-            if (math::abs<float>(mSoundFreq) > lbl_8169460C) {
-                snd::sSystem.startSE(lbl_81641230);
+            if (math::abs<float>(mSoundFreq) > 128) {
+                snd::sSystem.startSE("WIPL_SE_B_SCROLL");
                 f32 newFreq;
-                if (mSoundFreq > lbl_81694600) {
-                    newFreq = mSoundFreq - lbl_8169460C;
+                if (mSoundFreq > 0.0f) {
+                    newFreq = mSoundFreq - 128;
                 } else {
-                    newFreq = mSoundFreq + lbl_8169460C;
+                    newFreq = mSoundFreq + 128;
                 }
                 mSoundFreq = newFreq;
             }
@@ -217,10 +184,10 @@ namespace ipl {
             unk_0x3C = 0.0f;
             mScroll = 0.0f;
             unk_0x44 = 0.0f;
-            unk_0x48 = lbl_81694620;
-            unk_0x4C = lbl_81694624;
+            unk_0x48 = 0.6f;
+            unk_0x4C = 1.5f;
 
-            anim.init(lbl_81696284, lbl_81696288, lbl_81694608, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+            anim.init(lbl_81696284, lbl_81696288, 1.0f, 0.0f, 0.0f, 0, 1.0f);
         }
 
         void Scroller::calc() {
@@ -241,14 +208,14 @@ namespace ipl {
                 break;
                 case STATE_SCROLL_BTN_UP:
                     unk_0x44 = oldScroll;
-                    anim.init(lbl_8169628C, lbl_81696290, lbl_81694628, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+                    anim.init(lbl_8169628C, lbl_81696290, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
                     break;
                 case STATE_SCROLL_BTN_DOWN:
                     unk_0x44 = oldScroll;
-                    anim.init(lbl_81696294, lbl_81696298, lbl_81694628, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+                    anim.init(lbl_81696294, lbl_81696298, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
@@ -259,7 +226,7 @@ namespace ipl {
                     mScroll = unk_0x44 + anim.get();
 
                     if (!anim.isPlaying()) {
-                        unk_0x3C = lbl_81694600;
+                        unk_0x3C = 0.0f;
                         anim.initFrame();
                         anim.calc();
                         mState = STATE_NORMAL;
@@ -273,8 +240,8 @@ namespace ipl {
             else if (mScroll < mUpLimit)
                 mScroll = mUpLimit;
 
-            if (ipl::math::abs<float>(oldScroll - mScroll) > lbl_81694608) {
-                ipl::snd::sSystem.holdSE(lbl_81641241);
+            if (ipl::math::abs<float>(oldScroll - mScroll) > 1.0f) {
+                ipl::snd::sSystem.holdSE("WIPL_SE_MESSAGE_SCROLL");
             }
         }
 
@@ -402,7 +369,7 @@ namespace ipl {
         }
 
         void CharacterCode::WiiIdToUTF16(wchar_t* dest, u64 wiiId) {
-            swprintf(dest, 17, lbl_81641258, wiiId);
+            swprintf(dest, 17, L"%016llu", wiiId);
         }
 
         void CharacterCode::changeEndian(wchar_t* dest, int count) {
@@ -597,7 +564,7 @@ namespace ipl {
                     r = FALSE;
                 else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
                     r = FALSE;
-                else if (mpTexHeader->LODBias < lbl_81694650 || mpTexHeader->LODBias > lbl_81694654)
+                else if (mpTexHeader->LODBias < -100.f || mpTexHeader->LODBias > 100.f)
                     r = FALSE;
                 else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
                     r = FALSE;
