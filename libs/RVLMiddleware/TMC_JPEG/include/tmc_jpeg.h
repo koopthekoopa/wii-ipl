@@ -32,9 +32,7 @@ typedef struct {
 } TMCCJPEGDecInitParam;
 
 typedef struct {
-    char* mImageName;            // 0x00
-    char* mMake;                 // 0x04
-    char* mModel;                // 0x08
+    u8    unk_0x00[0x0C];
     u16   mOrientation;          // 0x0C
     u32   mXResNum;              // 0x10
     u32   mXResDen;              // 0x14
