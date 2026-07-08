@@ -615,16 +615,16 @@ namespace ipl {
         }
 
         void Calendar::setCalendarTime(OSCalendarTime* newCalendar) {
+            // TODO: define constant? resolve address?
+            u32* busClk = reinterpret_cast<u32*>(0x800000F8);
+            u32 bias;
             u32 rtc;
 
-            // TODO: resolve address?
-            u32* busClk = (u32*)0x800000F8;
-            s32 bias = SCGetCounterBias();
+            bias = SCGetCounterBias();
             __OSGetRTC(&rtc);
 
-            u64 ticks = rtc + bias;
-            ticks *= *busClk / 4;
-            __OSSetTime(ticks);
+            s64 ticks = rtc + bias;
+            __OSSetTime(*busClk / 4 * ticks);
 
             OSSram* sram = __OSLockSram();
             sram->counterBias = bias;
