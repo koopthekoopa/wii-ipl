@@ -172,15 +172,15 @@ namespace ipl {
                 } else {
                     if (math::abs<float>(unk_0x08) < math::abs<float>(unk_0x0C)) {
                         f32 newVal;
-                        if (unk_0x0C >= 0.0f) {
-                            newVal = lbl_81694608;
-                        } else {
+                        if (unk_0x0C < 0.0f) {
                             newVal = lbl_81694604;
+                        } else {
+                            newVal = lbl_81694608;
                         }
                         unk_0x0C = newVal;
+                        mSpeed = _get();
+                        set_arw_param();
                     }
-                    mSpeed = _get();
-                    set_arw_param();
                 }
             }
 
