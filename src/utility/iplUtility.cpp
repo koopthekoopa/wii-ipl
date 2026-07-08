@@ -391,9 +391,8 @@ namespace ipl {
             int off = 0;
             for (int i = 0; i < len; i++) {
                 double exp = pow(10.0, len - i - 1);
-                double dig = src[i] - L'0';
-                double acc = result + dig * exp;
-                result = (u32)acc;
+                wchar_t in = src[i];
+                result += (in - L'0') * exp;
                 off += 2;
             }
             *dest = result;
