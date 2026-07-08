@@ -65,57 +65,6 @@ namespace ipl {
             mSoundFreq = 0.0f;
         }
 
-        BOOL BScroller::isYoungController(int channel) { return TRUE; }
-
-        bool BScroller::isActive() const { return (u32)(mState + 1) > 0; }
-
-        bool BScroller::isUp() const { return mSpeed < 0.0f; }
-
-        bool BScroller::isDown() const { return mSpeed > 0.0f; }
-
-        f32 BScroller::_get() {
-            f32 diff = unk_0x0C - unk_0x14;
-            f32 result = 0.f;
-            if (diff < -0.01f)
-                result = -10.0f * (diff * diff);
-            else if (diff > 0.01f)
-                result = 10.0f * (diff * diff);
-            return result;
-        }
-
-        BOOL YoungBScroller::isYoungController(int channel) {
-            controller::Interface* pController = System::getYoungController();
-            if (pController != NULL && pController->getChannel() == channel) {
-                return TRUE;
-            }
-            return FALSE;
-        }
-
-
-        void BScroller::set_arw_param() {
-            int direction = mSpeed >= 0.0f ? 1 : 0;
-            Pointer* ptr = System::getPointer();
-            ptr->mPointDirection = direction;
-
-            nw4r::ut::Rect rect;
-            System::getProjectionRect(&rect);
-
-            f32 diff = unk_0x14 - unk_0x0C;
-            f32 height = rect.bottom - rect.top;
-            f32 arrowLen = math::abs<float>(diff) * height;
-            ptr->setArrowLength(arrowLen);
-
-            ptr->mbScrolling = math::abs<float>(mSpeed) > 0.0f;
-        }
-
-        void BScroller::reset() {
-            if (mState >= 0) {
-                System::smArg.mpPointer->setState(mState, 0);
-                System::smArg.mpPointer->mIsScrolling = -1;
-            }
-            init();
-        }
-
         BOOL BScroller::calc() {
             BOOL result = FALSE;
 
@@ -197,6 +146,57 @@ namespace ipl {
             }
 
             return result;
+        }
+
+        BOOL BScroller::isYoungController(int channel) { return TRUE; }
+
+        bool BScroller::isActive() const { return (u32)(mState + 1) > 0; }
+
+        bool BScroller::isUp() const { return mSpeed < 0.0f; }
+
+        bool BScroller::isDown() const { return mSpeed > 0.0f; }
+
+        f32 BScroller::_get() {
+            f32 diff = unk_0x0C - unk_0x14;
+            f32 result = 0.f;
+            if (diff < -0.01f)
+                result = -10.0f * (diff * diff);
+            else if (diff > 0.01f)
+                result = 10.0f * (diff * diff);
+            return result;
+        }
+
+        BOOL YoungBScroller::isYoungController(int channel) {
+            controller::Interface* pController = System::getYoungController();
+            if (pController != NULL && pController->getChannel() == channel) {
+                return TRUE;
+            }
+            return FALSE;
+        }
+
+
+        void BScroller::set_arw_param() {
+            int direction = mSpeed >= 0.0f ? 1 : 0;
+            Pointer* ptr = System::getPointer();
+            ptr->mPointDirection = direction;
+
+            nw4r::ut::Rect rect;
+            System::getProjectionRect(&rect);
+
+            f32 diff = unk_0x14 - unk_0x0C;
+            f32 height = rect.bottom - rect.top;
+            f32 arrowLen = math::abs<float>(diff) * height;
+            ptr->setArrowLength(arrowLen);
+
+            ptr->mbScrolling = math::abs<float>(mSpeed) > 0.0f;
+        }
+
+        void BScroller::reset() {
+            if (mState >= 0) {
+                System::smArg.mpPointer->setState(mState, 0);
+                System::smArg.mpPointer->mIsScrolling = -1;
+            }
+            init();
         }
 
         Scroller::Scroller() {
