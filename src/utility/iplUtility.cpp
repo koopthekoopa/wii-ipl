@@ -13,18 +13,6 @@ char* ipl::utility::Language::mLangPath[10] = {
     "ita", "ned", "chn", "eng", "kor"
 };
 
-// Scroller
-float lbl_81696274 = 1.0f;
-float lbl_81696278 = 1.0f;
-float lbl_8169627C = 1.0f;
-float lbl_81696280 = 1.0f;
-float lbl_81696284 = 0.0f;
-float lbl_81696288 = 1.0f;
-float lbl_8169628C = 0.0f;
-float lbl_81696290 = -300.0f;
-float lbl_81696294 = 0.0f;
-float lbl_81696298 = 300.0f;
-
 namespace ipl {
     namespace utility {
         char* Language::getPath() {
@@ -60,8 +48,8 @@ namespace ipl {
 
                     mState = channel;
 
-                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, lbl_81696274);
-                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, lbl_81696278);
+                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
+                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
                     *(math::VEC2*)&unk_0x10 = *(math::VEC2*)&unk_0x08;
 
@@ -91,8 +79,8 @@ namespace ipl {
 
                 young_controller:
                 if (ctrl->isValidDpd()) {
-                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, lbl_8169627C);
-                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, lbl_81696280);
+                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
+                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
                     mSpeed = _get();
                     set_arw_param();
@@ -187,7 +175,7 @@ namespace ipl {
             unk_0x48 = 0.6f;
             unk_0x4C = 1.5f;
 
-            anim.init(lbl_81696284, lbl_81696288, 1.0f, 0.0f, 0.0f, 0, 1.0f);
+            anim.init(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0, 1.0f);
         }
 
         void Scroller::calc() {
@@ -208,14 +196,14 @@ namespace ipl {
                 break;
                 case STATE_SCROLL_BTN_UP:
                     unk_0x44 = oldScroll;
-                    anim.init(lbl_8169628C, lbl_81696290, 20.0f, 0.0f, 0.0f, 0, 1.0f);
+                    anim.init(0.0f, -300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
                     break;
                 case STATE_SCROLL_BTN_DOWN:
                     unk_0x44 = oldScroll;
-                    anim.init(lbl_81696294, lbl_81696298, 20.0f, 0.0f, 0.0f, 0, 1.0f);
+                    anim.init(0.0f, 300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
