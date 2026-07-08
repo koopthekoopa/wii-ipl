@@ -127,10 +127,10 @@ s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work)
 {
     u16 marker;
     s32 r;
-    const u8* zigzag;
     u32 off;
     u8* p;
     int i;
+    const u8* zigzag;
 
     zigzag = TMCJPEGDEC_Zigzag_data;
     work->mRestartInterval = 0;
@@ -146,8 +146,8 @@ s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work)
         p[0x45a] = (zigzag[2]  & 0x3F) << 2;
         p[0x45b] = (zigzag[3]  & 0x3F) << 2;
         p[0x45c] = (zigzag[4]  & 0x3F) << 2;
-        p[0x45d] = (zigzag[5]  & 0x3F) << 2;
         p[0x45e] = (zigzag[6]  & 0x3F) << 2;
+        p[0x45d] = (zigzag[5]  & 0x3F) << 2;
         p[0x45f] = (zigzag[7]  & 0x3F) << 2;
 
         p = (u8*)work + off;
