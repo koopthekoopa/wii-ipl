@@ -8,6 +8,23 @@
 #include <private/os.h>
 #include <revolution/enc.h>
 
+// mLangPath
+char lbl_81696250[] = "jpn";
+char lbl_81696254[] = "eng";
+char lbl_81696258[] = "ger";
+char lbl_8169625C[] = "fra";
+char lbl_81696260[] = "spa";
+char lbl_81696264[] = "ita";
+char lbl_81696268[] = "ned";
+char lbl_8169626C[] = "chn";
+char lbl_81696270[] = "kor";
+
+char* ipl::utility::Language::mLangPath[10] = {
+    lbl_81696250, lbl_81696254, lbl_81696258, lbl_8169625C,
+    lbl_81696260, lbl_81696264, lbl_81696268, lbl_8169626C,
+    lbl_81696254, lbl_81696270,
+};
+
 // Scroll sound effect names
 char lbl_81641230[] = "WIPL_SE_B_SCROLL";
 char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
@@ -28,16 +45,6 @@ const float lbl_81694628 = 20.0f;
 const float lbl_81694650 = -100.f;
 const float lbl_81694654 = 100.f;
 
-// mLangPath
-char lbl_81696250[] = "jpn";
-char lbl_81696254[] = "eng";
-char lbl_81696258[] = "ger";
-char lbl_8169625C[] = "fra";
-char lbl_81696260[] = "spa";
-char lbl_81696264[] = "ita";
-char lbl_81696268[] = "ned";
-char lbl_8169626C[] = "chn";
-char lbl_81696270[] = "kor";
 
 // Scroller
 float lbl_81696274 = 1.0f;
@@ -53,6 +60,10 @@ float lbl_81696298 = 300.0f;
 
 namespace ipl {
     namespace utility {
+        char* Language::getPath() {
+            return mLangPath[System::getLanguage()];
+        }
+
         BScroller::BScroller() { init(); }
 
         void BScroller::init() {
@@ -257,21 +268,13 @@ namespace ipl {
                 }
             }
 
-            f32 scroll = mScroll;
+            if (mScroll > mDownLimit)
+                mScroll = mDownLimit;
+            else if (mScroll < mUpLimit)
+                mScroll = mUpLimit;
 
-            if (!(scroll > mDownLimit)) goto checkUpL;
-            mScroll = mDownLimit;
-            goto soundCheckL;
-            checkUpL:
-            if (!(scroll < mUpLimit)) goto soundCheckL;
-            mScroll = mUpLimit;
-            soundCheckL:
-
-            {
-                f32 diff = oldScroll - mScroll;
-                if (ipl::math::abs<float>(diff) > lbl_81694608) {
-                    ipl::snd::sSystem.holdSE(lbl_81641241);
-                }
+            if (ipl::math::abs<float>(oldScroll - mScroll) > lbl_81694608) {
+                ipl::snd::sSystem.holdSE(lbl_81641241);
             }
         }
 
@@ -643,16 +646,6 @@ namespace ipl {
 
             __OSSetTime(OSCalendarTimeToTicks(newCalendar));
             NWC24iSynchronizeRtcCounter(0);
-        }
-
-        char* Language::mLangPath[10] = {
-            lbl_81696250, lbl_81696254, lbl_81696258, lbl_8169625C,
-            lbl_81696260, lbl_81696264, lbl_81696268, lbl_8169626C,
-            lbl_81696254, lbl_81696270,
-        };
-
-        char* Language::getPath() {
-            return mLangPath[System::getLanguage()];
         }
     }
 
