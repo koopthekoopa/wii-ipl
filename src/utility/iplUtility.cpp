@@ -10,16 +10,15 @@
 
 namespace ipl {
     namespace utility {
-        char* Language::mLangPath[10] = {
-            "jpn", "eng", "ger", "fra", "spa",
-            "ita", "ned", "chn", "eng", "kor"
-        };
-        
+        char* Language::mLangPath[10] = {"jpn", "eng", "ger", "fra", "spa", "ita", "ned", "chn", "eng", "kor"};
+
         char* Language::getPath() {
             return mLangPath[System::getLanguage()];
         }
 
-        BScroller::BScroller() { init(); }
+        BScroller::BScroller() {
+            init();
+        }
 
         void BScroller::init() {
             mState = -1;
@@ -72,8 +71,7 @@ namespace ipl {
                     System::smArg.mpPointer->setState(mState, 0);
                     System::smArg.mpPointer->mIsScrolling = -1;
                     init();
-                }
-                else if (ctrl->isValidDpd()) {
+                } else if (ctrl->isValidDpd()) {
                     unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
                     unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
@@ -108,21 +106,28 @@ namespace ipl {
             return result;
         }
 
-        BOOL BScroller::isYoungController(int channel) { return TRUE; }
+        BOOL BScroller::isYoungController(int channel) {
+            return TRUE;
+        }
 
-        bool BScroller::isActive() const { return (u32)(mState + 1) > 0; }
+        bool BScroller::isActive() const {
+            return (u32)(mState + 1) > 0;
+        }
 
-        bool BScroller::isUp() const { return mSpeed < 0.0f; }
+        bool BScroller::isUp() const {
+            return mSpeed < 0.0f;
+        }
 
-        bool BScroller::isDown() const { return mSpeed > 0.0f; }
+        bool BScroller::isDown() const {
+            return mSpeed > 0.0f;
+        }
 
         f32 BScroller::_get() {
             f32 diff = unk_0x0C - unk_0x14;
             f32 result = 0.f;
             if (diff < -0.01f) {
                 result = -10.0f * (diff * diff);
-            }
-            else if (diff > 0.01f) {
+            } else if (diff > 0.01f) {
                 result = 10.0f * (diff * diff);
             }
             return result;
@@ -135,7 +140,6 @@ namespace ipl {
             }
             return FALSE;
         }
-
 
         void BScroller::set_arw_param() {
             int direction = mSpeed >= 0.0f ? 1 : 0;
@@ -194,8 +198,8 @@ namespace ipl {
                     }
                     mScroll += unk_0x3C;
                     mState = STATE_NORMAL;
+                    break;
                 }
-                break;
                 case STATE_SCROLL_BTN_UP: {
                     unk_0x44 = oldScroll;
                     anim.init(0.0f, -300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
@@ -228,8 +232,7 @@ namespace ipl {
 
             if (mScroll > mDownLimit) {
                 mScroll = mDownLimit;
-            }
-            else if (mScroll < mUpLimit) {
+            } else if (mScroll < mUpLimit) {
                 mScroll = mUpLimit;
             }
 
@@ -238,7 +241,9 @@ namespace ipl {
             }
         }
 
-        f32 Scroller::get() const { return mScroll; }
+        f32 Scroller::get() const {
+            return mScroll;
+        }
 
         f32 Scroller::movable_pos(f32 speed) const {
             f32 newPos;
@@ -404,9 +409,13 @@ namespace ipl {
             }
         }  // namespace wpad
 
-        void timer::set_msec(int ms) { tick = OSGetTime() + OSMillisecondsToTicks((s64)ms); }
+        void timer::set_msec(int ms) {
+            tick = OSGetTime() + OSMillisecondsToTicks((s64)ms);
+        }
 
-        bool timer::operator()() { return OSGetTime() > tick; }
+        bool timer::operator()() {
+            return OSGetTime() > tick;
+        }
 
         int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize) {
             return (int)memcpy(dest, src, destSize < srcSize ? destSize : srcSize);
@@ -429,7 +438,7 @@ namespace ipl {
                 }
                 found = false;
 
-                check:
+            check:
                 pPane = found ? pPane : NULL;
                 ((nw4r::lyt::TextBox*)pPane)->AllocStringBuffer(wcslen(pStr));
                 ((nw4r::lyt::TextBox*)pPane)->SetString(pStr, 0);
@@ -444,7 +453,7 @@ namespace ipl {
                 src->GetTexture(&texObj, texMap);
                 dest->SetTexture(GX_TEXMAP0, texObj);
             }
-        } // namespace layout
+        }  // namespace layout
 
         math::VEC2 get_cursor_pos(const math::VEC2& basePos) {
             nw4r::ut::Rect rect16_9;
@@ -505,8 +514,7 @@ namespace ipl {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 mpTexDesc = pal->descriptorArray;
                 if (mpTexDesc == NULL) {
                     return;
@@ -523,15 +531,13 @@ namespace ipl {
             }
         }
 
-
         BOOL tpl_validity::is_valid_cmn() {
             u32 pal = (u32)mpPalette;
             BOOL r = TRUE;
 
-            if(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
+            if (mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
                 r = FALSE;
-            }
-            else {
+            } else {
                 u32 end = (u32)mpPalette + 0x100000;
                 if (mpTexDesc == NULL || mpTexHeader == NULL) {
                     r = FALSE;
@@ -545,9 +551,9 @@ namespace ipl {
                     r = FALSE;
                 } else if (mpTexHeader->height == 0 || mpTexHeader->width == 0) {
                     r = FALSE;
-                } else if (mpClutHeader == NULL &&
-                        mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
-                        mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6) {
+                } else if (mpClutHeader == NULL && mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 &&
+                           mpTexHeader->format != 3 && mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE &&
+                           mpTexHeader->format != 6) {
                     r = FALSE;
                 } else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9) {
                     r = FALSE;
@@ -561,8 +567,8 @@ namespace ipl {
                     r = FALSE;
                 } else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0) {
                     r = FALSE;
-                } else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
-                        mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5) {
+                } else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 && mpTexHeader->minFilter != 3 &&
+                           mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5) {
                     r = FALSE;
                 } else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1) {
                     r = FALSE;
@@ -574,7 +580,9 @@ namespace ipl {
             }
             return r;
         }
-        BOOL tpl_validity::is_valid() { return is_valid_cmn(); }
+        BOOL tpl_validity::is_valid() {
+            return is_valid_cmn();
+        }
 
         BOOL tpl_validity::is_valid_for_ltx() {
             BOOL r = is_valid_cmn();
@@ -622,7 +630,7 @@ namespace ipl {
             __OSSetTime(OSCalendarTimeToTicks(newCalendar));
             NWC24iSynchronizeRtcCounter(0);
         }
-    }
+    }  // namespace utility
 
     namespace math {
         template class HermiteIntp<f32>;
