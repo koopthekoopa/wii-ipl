@@ -37,14 +37,18 @@ namespace ipl {
             if (mState < 0) {
                 for (int channel = 0; channel < 4; channel++) {
                     controller::Interface* ctrl = System::getController(channel);
-                    if (ctrl == NULL)
+                    if (ctrl == NULL) {
                         continue;
-                    if (!ctrl->down(controller::REVO_BTN_B))
+                    }
+                    if (!ctrl->down(controller::REVO_BTN_B)) {
                         continue;
-                    if (!ctrl->isValidDpd())
+                    }
+                    if (!ctrl->isValidDpd()) {
                         continue;
-                    if (!isYoungController(channel))
+                    }
+                    if (!isYoungController(channel)) {
                         continue;
+                    }
 
                     mState = channel;
 
@@ -60,25 +64,16 @@ namespace ipl {
                     mSpeed = _get();
                     set_arw_param();
                     result = TRUE;
-                    goto after_loop;
+                    break;
                 }
             } else {
                 controller::Interface* ctrl = System::getController(mState);
-                if (ctrl == NULL)
-                    goto reset_state;
-                if (!ctrl->down(controller::REVO_BTN_B))
-                    goto reset_state;
-                if (isYoungController(mState))
-                    goto young_controller;
-
-                reset_state:
-                System::smArg.mpPointer->setState(mState, 0);
-                System::smArg.mpPointer->mIsScrolling = -1;
-                init();
-                goto after_loop;
-
-                young_controller:
-                if (ctrl->isValidDpd()) {
+                if (ctrl == NULL || !ctrl->down(controller::REVO_BTN_B) || !isYoungController(mState)) {
+                    System::smArg.mpPointer->setState(mState, 0);
+                    System::smArg.mpPointer->mIsScrolling = -1;
+                    init();
+                }
+                else if (ctrl->isValidDpd()) {
                     unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
                     unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
@@ -99,7 +94,6 @@ namespace ipl {
                 }
             }
 
-            after_loop:
             if (math::abs<float>(mSoundFreq) > 128) {
                 snd::sSystem.startSE("WIPL_SE_B_SCROLL");
                 f32 newFreq;
@@ -125,10 +119,12 @@ namespace ipl {
         f32 BScroller::_get() {
             f32 diff = unk_0x0C - unk_0x14;
             f32 result = 0.f;
-            if (diff < -0.01f)
+            if (diff < -0.01f) {
                 result = -10.0f * (diff * diff);
-            else if (diff > 0.01f)
+            }
+            else if (diff > 0.01f) {
                 result = 10.0f * (diff * diff);
+            }
             return result;
         }
 
@@ -182,35 +178,42 @@ namespace ipl {
             f32 oldScroll = mScroll;
 
             switch (mState) {
-                case STATE_SCROLL_CON_UP:
+                case STATE_SCROLL_CON_UP: {
                     unk_0x3C = unk_0x3C * unk_0x48 - unk_0x4C;
-                    if (unk_0x3C > 0.0f) unk_0x3C = 0.0f;
+                    if (unk_0x3C > 0.0f) {
+                        unk_0x3C = 0.0f;
+                    }
                     mScroll += unk_0x3C;
-                mState = STATE_NORMAL;
-                break;
-                case STATE_SCROLL_CON_DOWN:
+                    mState = STATE_NORMAL;
+                    break;
+                }
+                case STATE_SCROLL_CON_DOWN: {
                     unk_0x3C = unk_0x3C * unk_0x48 + unk_0x4C;
-                    if (unk_0x3C < 0.0f) unk_0x3C = 0.0f;
+                    if (unk_0x3C < 0.0f) {
+                        unk_0x3C = 0.0f;
+                    }
                     mScroll += unk_0x3C;
-                mState = STATE_NORMAL;
+                    mState = STATE_NORMAL;
+                }
                 break;
-                case STATE_SCROLL_BTN_UP:
+                case STATE_SCROLL_BTN_UP: {
                     unk_0x44 = oldScroll;
                     anim.init(0.0f, -300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
                     break;
-                case STATE_SCROLL_BTN_DOWN:
+                }
+                case STATE_SCROLL_BTN_DOWN: {
                     unk_0x44 = oldScroll;
                     anim.init(0.0f, 300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
                     mState = 5;
                     break;
+                }
                 case 5: {
                     anim.calc();
-
                     mScroll = unk_0x44 + anim.get();
 
                     if (!anim.isPlaying()) {
@@ -223,10 +226,12 @@ namespace ipl {
                 }
             }
 
-            if (mScroll > mDownLimit)
+            if (mScroll > mDownLimit) {
                 mScroll = mDownLimit;
-            else if (mScroll < mUpLimit)
+            }
+            else if (mScroll < mUpLimit) {
                 mScroll = mUpLimit;
+            }
 
             if (ipl::math::abs<float>(oldScroll - mScroll) > 1.0f) {
                 ipl::snd::sSystem.holdSE("WIPL_SE_MESSAGE_SCROLL");
@@ -262,7 +267,9 @@ namespace ipl {
             s32 size = length;
             s32 result = ENCConvertStringUnicodeToLatin1(dest, &size, (u16*)src, NULL);
             while (result != 0) {
-                if (result == -1) break;
+                if (result == -1) {
+                    break;
+                }
                 dest += size;
                 src += size + 1;
                 length -= size;
@@ -410,20 +417,16 @@ namespace ipl {
                 nw4r::lyt::Pane* pPane = pane;
                 const wchar_t* pStr = str;
                 const nw4r::ut::detail::RuntimeTypeInfo* textBoxType = &nw4r::lyt::TextBox::typeInfo;
-
                 const nw4r::ut::detail::RuntimeTypeInfo* info = pPane->GetRuntimeTypeInfo();
                 bool found;
-                goto entry;
 
-                body:
-                if (info == textBoxType) {
-                    found = true;
-                    goto check;
+                while (info != NULL) {
+                    if (info == textBoxType) {
+                        found = true;
+                        goto check;
+                    }
+                    info = info->mParentTypeInfo;
                 }
-                info = info->mParentTypeInfo;
-
-                entry:
-                if (info != NULL) goto body;
                 found = false;
 
                 check:
@@ -463,50 +466,61 @@ namespace ipl {
             mpTexData = NULL;
             mpClutData = NULL;
 
-            if (pal == NULL) return;
-            if (pal->versionNumber != 0x0020AF30) return;
-            if ((u32)pal->descriptorArray >= 0x80000000) goto absolute;
-            if ((u32)pal->descriptorArray >= palSize) return;
-            mpTexDesc = (TPLDescriptor*)((u32)pal->descriptorArray + (u32)pal);
-            if (mpTexDesc) {
-                if (mpTexDesc->textureHeader) {
-                    if ((u32)mpTexDesc->textureHeader < palSize) {
-                        mpTexHeader = (TPLHeader*)((u32)mpTexDesc->textureHeader + (u32)pal);
-                        if (mpTexHeader) {
-                            u32 dataOfs = (u32)mpTexHeader->data;
-                            if (dataOfs < palSize) {
-                                mpTexData = (char*)(dataOfs + (u32)pal);
+            if (pal == NULL) {
+                return;
+            }
+            if (pal->versionNumber != 0x0020AF30) {
+                return;
+            }
+            if ((u32)pal->descriptorArray < 0x80000000) {
+                if ((u32)pal->descriptorArray >= palSize) {
+                    return;
+                }
+
+                mpTexDesc = (TPLDescriptor*)((u32)pal->descriptorArray + (u32)pal);
+                if (mpTexDesc) {
+                    if (mpTexDesc->textureHeader) {
+                        if ((u32)mpTexDesc->textureHeader < palSize) {
+                            mpTexHeader = (TPLHeader*)((u32)mpTexDesc->textureHeader + (u32)pal);
+                            if (mpTexHeader) {
+                                u32 dataOfs = (u32)mpTexHeader->data;
+                                if (dataOfs < palSize) {
+                                    mpTexData = (char*)(dataOfs + (u32)pal);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (mpTexDesc) {
+                    if (mpTexDesc->CLUTHeader) {
+                        if ((u32)mpTexDesc->CLUTHeader < palSize) {
+                            mpClutHeader = (TPLClutHeader*)((u32)mpTexDesc->CLUTHeader + (u32)mpPalette);
+                            if (mpClutHeader) {
+                                u32 dataOfs = (u32)mpClutHeader->data;
+                                if (dataOfs < palSize) {
+                                    mpClutData = (char*)(dataOfs + (u32)mpPalette);
+                                }
                             }
                         }
                     }
                 }
             }
-
-            if (mpTexDesc) {
-                if (mpTexDesc->CLUTHeader) {
-                    if ((u32)mpTexDesc->CLUTHeader < palSize) {
-                        mpClutHeader = (TPLClutHeader*)((u32)mpTexDesc->CLUTHeader + (u32)mpPalette);
-                        if (mpClutHeader) {
-                            u32 dataOfs = (u32)mpClutHeader->data;
-                            if (dataOfs < palSize) {
-                                mpClutData = (char*)(dataOfs + (u32)mpPalette);
-                            }
-                        }
-                    }
+            else {
+                mpTexDesc = pal->descriptorArray;
+                if (mpTexDesc == NULL) {
+                    return;
                 }
+                mpTexHeader = mpTexDesc->textureHeader;
+                mpClutHeader = mpTexDesc->CLUTHeader;
+                if (mpTexHeader != NULL) {
+                    mpTexData = mpTexHeader->data;
+                }
+                if (mpClutHeader == NULL) {
+                    return;
+                }
+                mpClutData = mpClutHeader->data;
             }
-            return;
-
-            absolute:
-            mpTexDesc = pal->descriptorArray;
-            if (mpTexDesc == NULL) return;
-            mpTexHeader = mpTexDesc->textureHeader;
-            mpClutHeader = mpTexDesc->CLUTHeader;
-            if (mpTexHeader != NULL) {
-                mpTexData = mpTexHeader->data;
-            }
-            if (mpClutHeader == NULL) return;
-            mpClutData = mpClutHeader->data;
         }
 
 
@@ -519,43 +533,44 @@ namespace ipl {
             }
             else {
                 u32 end = (u32)mpPalette + 0x100000;
-                if (mpTexDesc == NULL || mpTexHeader == NULL)
+                if (mpTexDesc == NULL || mpTexHeader == NULL) {
                     r = FALSE;
-                else if ((u32)mpTexData & 0x1F)
+                } else if ((u32)mpTexData & 0x1F) {
                     r = FALSE;
-                else if ((u32)mpClutData & 0x1F)
+                } else if ((u32)mpClutData & 0x1F) {
                     r = FALSE;
-                else if ((u32)mpTexData < pal || (u32)mpTexData > end)
+                } else if ((u32)mpTexData < pal || (u32)mpTexData > end) {
                     r = FALSE;
-                else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end))
+                } else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end)) {
                     r = FALSE;
-                else if (mpTexHeader->height == 0 || mpTexHeader->width == 0)
+                } else if (mpTexHeader->height == 0 || mpTexHeader->width == 0) {
                     r = FALSE;
-                else if (mpClutHeader == NULL &&
+                } else if (mpClutHeader == NULL &&
                         mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
-                        mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6)
+                        mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6) {
                     r = FALSE;
-                else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9)
+                } else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9) {
                     r = FALSE;
-                else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2)
+                } else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2) {
                     r = FALSE;
-                else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000)
+                } else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000) {
                     r = FALSE;
-                else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2)
+                } else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2) {
                     r = FALSE;
-                else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2)
+                } else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2) {
                     r = FALSE;
-                else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0)
+                } else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0) {
                     r = FALSE;
-                else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
-                        mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5)
+                } else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
+                        mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5) {
                     r = FALSE;
-                else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
+                } else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1) {
                     r = FALSE;
-                else if (mpTexHeader->LODBias < -100.f || mpTexHeader->LODBias > 100.f)
+                } else if (mpTexHeader->LODBias < -100.f || mpTexHeader->LODBias > 100.f) {
                     r = FALSE;
-                else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
+                } else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1) {
                     r = FALSE;
+                }
             }
             return r;
         }
@@ -564,10 +579,15 @@ namespace ipl {
         BOOL tpl_validity::is_valid_for_ltx() {
             BOOL r = is_valid_cmn();
             if (r) {
-                if (mpPalette->numDescriptors != 1) r = FALSE;
-                else if (mpTexHeader->height > 0x100) r = FALSE;
-                else if (mpTexHeader->width > 0x200) r = FALSE;
-                else if (mpClutHeader == 0 && mpTexHeader->format == 6) r = FALSE;
+                if (mpPalette->numDescriptors != 1) {
+                    r = FALSE;
+                } else if (mpTexHeader->height > 0x100) {
+                    r = FALSE;
+                } else if (mpTexHeader->width > 0x200) {
+                    r = FALSE;
+                } else if (mpClutHeader == NULL && mpTexHeader->format == 6) {
+                    r = FALSE;
+                }
             }
             return r;
         }
