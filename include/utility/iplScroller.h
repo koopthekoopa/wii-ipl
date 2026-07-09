@@ -11,10 +11,11 @@ namespace ipl {
         public:
             BScroller();
 
-            virtual BOOL isYoungController();
+            virtual BOOL isYoungController(int channel);
 
             void init();
             BOOL calc();
+            void reset();
 
             bool isActive() const;
             bool isDown() const;
@@ -27,8 +28,11 @@ namespace ipl {
             f32 _get();
             void set_arw_param();
 
-            u8 unk_0x04[0x14];
-
+            int mState;      // 0x04
+            f32 unk_0x08;
+            f32 unk_0x0C;
+            f32 unk_0x10;
+            f32 unk_0x14;
             f32 mSpeed;      // 0x18
             f32 mSoundFreq;  // 0x1C
         };
@@ -37,7 +41,7 @@ namespace ipl {
         public:
             YoungBScroller() : BScroller() {}
 
-            virtual BOOL isYoungController();
+            virtual BOOL isYoungController(int channel);
         };
 
         class Scroller {

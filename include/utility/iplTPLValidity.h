@@ -17,7 +17,15 @@ namespace ipl {
             }
 
         private:
-            u8 unk_0x00[16];
+            BOOL is_valid_cmn();
+            BOOL is_valid();
+
+            TPLPalette* mpPalette;         // 0x00
+            TPLDescriptor* mpTexDesc;      // 0x04
+            TPLHeader* mpTexHeader;        // 0x08
+            TPLClutHeader* mpClutHeader;   // 0x0C
+            char* mpTexData;               // 0x10
+            char* mpClutData;              // 0x14
         };
     }  // namespace utility
 }  // namespace ipl
