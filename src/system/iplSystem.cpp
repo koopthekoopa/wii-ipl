@@ -1301,8 +1301,8 @@ namespace ipl {
     }
 
     void System::getBootArg(int argc, char** argv) {
-        smArg.mpNetSettingArg = NULL;
-        smArg.mpDataManageArg = NULL;
+        smArg.mspNetSettingArg = NULL;
+        smArg.mspDataManageArg = NULL;
 
         smArg.mbGoingToDataManager = false;
 
@@ -1314,15 +1314,15 @@ namespace ipl {
         if (smArg.mBS2BootType == BS2_BOOT_TYPE_RETURN_ARGS) {
             // Internet settings
             if (smArg.mBS2LaunchCode == LAUNCH_CODE_SETTING && BS2GetArgc() > 1) {
-                strncpy(smArg.mBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.mBS2FirstArgv));
-                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv) - 1] = 0;
-                smArg.mpNetSettingArg = smArg.mBS2FirstArgv;
+                strncpy(smArg.msBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.msBS2FirstArgv));
+                smArg.msBS2FirstArgv[sizeof(smArg.msBS2FirstArgv) - 1] = 0;
+                smArg.mspNetSettingArg = smArg.msBS2FirstArgv;
             }
             // Data management
             else if (smArg.mBS2LaunchCode == LAUNCH_CODE_DATA_MANAGER && BS2GetArgc() > 1) {
-                strncpy(smArg.mBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.mBS2FirstArgv));
-                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv) - 1] = 0;
-                smArg.mpDataManageArg = smArg.mBS2FirstArgv;
+                strncpy(smArg.msBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.msBS2FirstArgv));
+                smArg.msBS2FirstArgv[sizeof(smArg.msBS2FirstArgv) - 1] = 0;
+                smArg.mspDataManageArg = smArg.msBS2FirstArgv;
 
                 smArg.mbGoingToDataManager = true;
 

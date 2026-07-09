@@ -7,7 +7,7 @@
 namespace ipl {
     namespace scene {
         // clang-format off
-        const char* SDMenuButton::mscButtonName[] = {
+        const char* SDMenuButton::smButtonName[] = {
             "Ac",
         };
 
@@ -42,7 +42,7 @@ namespace ipl {
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
-            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[0]), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[0]), true);
 
             mpLayout->hide("N_Btn_On");
             mpLayout->show("N_Btn_Off");
@@ -224,7 +224,7 @@ namespace ipl {
         int SDMenuButton::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, mscButtonName[i]) == 0) {
+                if (strcmp(paneName, smButtonName[i]) == 0) {
                     num = i;
                     break;
                 }
@@ -249,7 +249,7 @@ namespace ipl {
                 }
 
                 // Init button pane
-                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(smButtonName[i]));
             }
         }
 

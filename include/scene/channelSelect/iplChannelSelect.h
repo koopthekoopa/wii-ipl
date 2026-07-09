@@ -265,8 +265,8 @@ namespace ipl {
 
             int mDiskState;       // 0xF0
             bool mbDiskInserted;  // 0xF4
-            char* mpDiskID;       // 0xF8
-            char* mpDiskMaker;    // 0xFC
+            char* mspDiskID;      // 0xF8
+            char* mspDiskMaker;   // 0xFC
 
             bool mbLeftArrowVisible;   // 0x100
             bool mbRightArrowVisible;  // 0x101

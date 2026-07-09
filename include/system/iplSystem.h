@@ -211,9 +211,9 @@ namespace ipl {
             u32 mBS2BootType;    // 0x21C
             u32 mBS2LaunchCode;  // 0x220
             u32 unk_0x224;
-            char* mpNetSettingArg;    // 0x228
-            char* mpDataManageArg;    // 0x22C
-            char mBS2FirstArgv[128];  // 0x230
+            char* mspNetSettingArg;    // 0x228
+            char* mspDataManageArg;    // 0x22C
+            char msBS2FirstArgv[128];  // 0x230
 
             volatile bool mbResLoaded;     // 0x2B0
             bool mbInitCreateAfter;        // 0x2B1
@@ -364,8 +364,8 @@ namespace ipl {
         static u32 getBS2LaunchCode() { return smArg.mBS2LaunchCode; }
         static ESTitleId getBS2LaunchTitle() { return smArg.mBS2LaunchTitle; }
 
-        static char* getNetSettingArg() { return smArg.mpNetSettingArg; }
-        static char* getDataManagerArg() { return smArg.mpDataManageArg; }
+        static char* getNetSettingArg() { return smArg.mspNetSettingArg; }
+        static char* getDataManagerArg() { return smArg.mspDataManageArg; }
 
         /*==============================*/
         /*        WII CONTROLLERS       */

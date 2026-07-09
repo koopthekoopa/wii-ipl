@@ -36,7 +36,11 @@ namespace ipl {
                 STATE_DONE,
             };
 
-            enum { BTN_WII = 0, BTN_EMAIL, BTN_MAX };
+            enum {
+                BTN_WII = 0,
+                BTN_EMAIL,
+                BTN_MAX
+            };
 
             enum {
                 ANIM_FADE_IN = 0,
@@ -73,7 +77,7 @@ namespace ipl {
 
             BOOL mbHovered[BTN_MAX];  // 0x74
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             friend class AddressAddSelEvent;
         };

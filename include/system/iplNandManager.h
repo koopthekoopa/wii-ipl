@@ -67,10 +67,10 @@ namespace ipl {
             // Big garbage data
             u8 unused_0x28[0x1FC];
 
-            char mNandPath[NAND_MAX_PATH + 1];  // 0x224
-            ESFd mDescriptor;                   // 0x268
-            u8* mpFSTBuffer;                    // 0x26C
-            ARCHandle mArc;                     // 0x270
+            char msNandPath[NAND_MAX_PATH + 1];  // 0x224
+            ESFd mDescriptor;                    // 0x268
+            u8* mpFSTBuffer;                     // 0x26C
+            ARCHandle mArc;                      // 0x270
         };
     }  // namespace nand
 }  // namespace ipl

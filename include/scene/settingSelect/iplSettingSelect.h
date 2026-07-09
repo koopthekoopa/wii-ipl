@@ -184,7 +184,7 @@ namespace ipl {
             u32 unk_0x90;
             u32 unk_0x94;
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
         };
     }  // namespace scene
 }  // namespace ipl

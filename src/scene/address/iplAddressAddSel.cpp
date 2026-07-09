@@ -10,7 +10,7 @@
 
 namespace ipl {
     namespace scene {
-        const char* AddressAddSel::mscButtonName[AddressAddSel::BTN_MAX] = {"B_btn_00", "B_btn_01"};
+        const char* AddressAddSel::smButtonName[AddressAddSel::BTN_MAX] = {"B_btn_00", "B_btn_01"};
 
         AddressAddSel::AddressAddSel(EGG::Heap* heap) : FaderSceneBase(heap), mState(STATE_NORMAL), mpLayout(NULL), mpEvent(NULL), mpGui(NULL) {
         }
@@ -41,7 +41,7 @@ namespace ipl {
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
 
             // Set text to buttons
@@ -205,7 +205,7 @@ namespace ipl {
         int AddressAddSel::get_button_no(const char* paneName) {
             int result = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(mscButtonName[i], paneName) == 0) {
+                if (strcmp(smButtonName[i], paneName) == 0) {
                     result = i;
                     break;
                 }

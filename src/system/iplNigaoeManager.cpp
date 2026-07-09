@@ -27,14 +27,14 @@ namespace ipl {
 
             {
                 // Init arrays
-                unsigned char mac[NCD_MAC_ADDRESS_LENGTH + 1];
+                u8 mac[NCD_MAC_ADDRESS_LENGTH + 1];
                 mac[6] = mac[5] = mac[4] = mac[3] = mac[2] = mac[1] = mac[0] = 0;
 
-                unsigned char temp[3];
+                u8 temp[3];
                 temp[2] = temp[1] = temp[0] = 0;
 
                 // Setup work
-                unsigned char* ncd_mac = ncd::NCDSetting::getMacAddr();
+                u8* ncd_mac = ncd::NCDSetting::getMacAddr();
 
                 // Get mac values
                 for (int i = 1; i < NCD_MAC_ADDRESS_LENGTH; i++) {

@@ -200,7 +200,7 @@ namespace ipl {
             TextBalloon* mpBalloons[MAX_BALLOONS];  // 0x2F0
             nand::LayoutFile* mpBalloonFile;        // 0x318
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             static const char* mscFacePane[BTN_MAX_FACE];
             static const char* mscLeftFacePane[BTN_MAX_FACE];

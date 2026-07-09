@@ -18,7 +18,7 @@ namespace ipl {
             MESG_SD_BUTTON_HELP,
         };
 
-        const char* SDButton::mscButtonName[BTN_MAX] = {
+        const char* SDButton::smButtonName[BTN_MAX] = {
             "B_Wiimenu",
             "B_Help",
             "B_ArwR",
@@ -95,7 +95,7 @@ namespace ipl {
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
 
             // Setup text balloons
@@ -359,7 +359,7 @@ namespace ipl {
                     break;
                 }
                 case IDANIM_ARROW_RIGHT_DISAPPEAR: {
-                    startLeftEvent(mscButtonName[BTN_ARROW_RIGHT]);
+                    startLeftEvent(smButtonName[BTN_ARROW_RIGHT]);
                     mpLayout->getAnim(ANIM_ARROW_RIGHT_IN)->stop();
                     anim = mpLayout->getAnim(ANIM_ARROW_RIGHT_OUT);
                     mbArrowVisible[ARROW_BTN_RIGHT] = false;
@@ -372,7 +372,7 @@ namespace ipl {
                     break;
                 }
                 case IDANIM_ARROW_LEFT_DISAPPEAR: {
-                    startLeftEvent(mscButtonName[BTN_ARROW_LEFT]);
+                    startLeftEvent(smButtonName[BTN_ARROW_LEFT]);
                     mpLayout->getAnim(ANIM_ARROW_LEFT_IN)->stop();
                     anim = mpLayout->getAnim(ANIM_ARROW_LEFT_OUT);
                     mbArrowVisible[ARROW_BTN_LEFT] = false;
@@ -428,7 +428,7 @@ namespace ipl {
         int SDButton::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, mscButtonName[i]) == 0) {
+                if (strcmp(paneName, smButtonName[i]) == 0) {
                     num = i;
                     break;
                 }
@@ -487,7 +487,7 @@ namespace ipl {
                 }
 
                 // Init button pane
-                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(smButtonName[i]));
             }
         }
 

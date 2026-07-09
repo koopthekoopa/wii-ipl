@@ -15,7 +15,7 @@
 namespace ipl {
     namespace scene {
         // clang-format off
-        const char* ParentalDialog::mscButtonName[ParentalDialog::BTN_MAX] = {
+        const char* ParentalDialog::smButtonName[ParentalDialog::BTN_MAX] = {
             "B_BtnA",
             "B_BtnB",
             "B_BtnC",
@@ -63,7 +63,7 @@ namespace ipl {
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
 
             // Set button text
@@ -329,7 +329,7 @@ namespace ipl {
         int ParentalDialog::get_button_no(const char* paneName) const {
             int result = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(mscButtonName[i], paneName) == 0) {
+                if (strcmp(smButtonName[i], paneName) == 0) {
                     result = i;
                     break;
                 }

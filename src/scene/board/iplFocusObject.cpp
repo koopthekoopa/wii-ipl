@@ -57,7 +57,7 @@ namespace ipl {
         };
         // clang-format on
 
-        const char* focus_object::mscButtonName[focus_object::BTN_MAX] = {
+        const char* focus_object::smButtonName[focus_object::BTN_MAX] = {
             "B_ArwR",
             "B_ArwL",
             "B_Pic",
@@ -1779,7 +1779,7 @@ namespace ipl {
         int focus_object::get_button_no(const char* paneName) const {
             int result = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(mscButtonName[i], paneName) == 0) {
+                if (strcmp(smButtonName[i], paneName) == 0) {
                     result = i;
                     break;
                 }
@@ -1794,7 +1794,7 @@ namespace ipl {
                 mpLayout->getAnim(anim)->play();
             }
 
-            mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[btnNo]));
+            mpGui->initPane(mpLayout->FindPaneByName(smButtonName[btnNo]));
         }
 
         int focus_object::check_network() {

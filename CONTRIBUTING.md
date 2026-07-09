@@ -41,29 +41,46 @@
      - Changes will be made to the repository, so make sure that you are checking out to the latest version!
    - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
 
-
 # Code Guidelines
 
-### Note: In some scenarios, some of these rules can be ignored if they either affect matching or relate to symbols or DWARF from ELF files.
+### Note: In some scenarios, some of these rules (mostly related to naming) can be ignored if they either affect matching or relate to original symbols or DWARF from ELF files.
 
 ### General
 
 - Style formatting is all done by `clang-format`.
   - It should automatically apply when using Visual Studio Code on saving a source file.
-- For checking on pointers, please use the `NULL` macro.
+- Hexadecimal values should be upper case. (`0xDEADBABE` instead of `0xdeadbabe`)
+- For checking on pointers, please use the `NULL` macro, unless if it affects code matching.
 ```cpp
-// Do this!
-if (myPointer == NULL) {
-    // ...
-}
+  // Do this!
+  if (myPointer == NULL) {
+      // ...
+  }
 
-// Don't do this!
-if (myPointer == 0) {
+  // Don't do this!
+  if (myPointer == 0) {
+      // ...
+  }
+```
+- You should always include curly braces (`{`, `}`) for statements and conditions, even if it's only one line. This is to help readability.
+```cpp
+  switch (myVariable) {
+      case 0: {
+          // ...
+      }
+  }
+  if (myVariable == 0) {
+      // ...
+  }
+  while (myVariable != 0) {
     // ...
-}
+  }
+  for (myVariable = 0; myVariable < 0; myVariable++) {
+    // ...
+  }
 ```
 
-- Look out for errors in the code, and try to add comments on them using the Doxygen command `@bug`.
+- Look out for bugs, typos and any other errors in the code, and try to add comments on them using the Doxygen command `@bug`.
 ```cpp
 // @bug Should use the full path
 nand::wrapper::Delete("cdb.vff");
@@ -77,7 +94,7 @@ nand::wrapper::Delete("cdb.vff");
 
 ### Header guards
 
-Despite the compiler that this project uses (CodeWarrior) has support for `#pragma once`, please use the standard way for header guards.
+Despite the compiler that this project uses (CodeWarrior) has support for `#pragma once`, please use the standard way for header guards. This is to help readability.
 
 ```cpp
 #ifndef {LIBRARY}_{NAME}_H
@@ -128,40 +145,51 @@ Make sure the guard names are uppercase SNAKE_CASE.
   - Even if the symbol has typos or does not follow the guidelines!
 - Function names with no known symbols should be written in camelCase.
   - This mostly applies to static local and inline functions.
-- Class members must start with the `m` prefix and should be in PascalCase.
-  - If the member is a pointer, then the starting prefix must be `mp`.
+- Struct members must be camelCase (and should not include the `m` prefix).
+- Class members must start with the `m` prefix and be in PascalCase.
+  - Some types have different prefixes:
+    - Static: `sm`
+    - Pointers: `mp`
+    - Booleans: `mb`
+    - Strings: `ms` (pointer: `msp`)
 ```cpp
-    int mMyValue1;
-    int* mpMyValue2;
+  class MyClass {
+      int mMyValue1;
+      int* mpMyValue2;
+      char msString[4];
+      char* mspStringPtr;
+
+	  static int smMyStaticValue = 1;
+  };
 ```
 
 ### Classes and structures
 
 - Offsets for fields and virtual functions must be commented.
-- For unknown structure/class fields, they must be referred to by their offset (in hex), prefixed by `unk_`.
+- For unknown structure/class fields, they must be referred to by their offset (in uppercase hex), prefixed by `unk_`.
 ```cpp
-    int mKnownValue;  // 0x00
-    int unk_0x04;
-    int mKnownValue1; // 0x08
+  int mKnownValue;  // 0x00
+  int unk_0x04;
+  int mKnownValue1; // 0x08
 
-    virtual ~VirtualDtor();      // 0x08
-    virtual void VirtualFunc0(); // 0x0C
-    virtual void VirtualFunc1(); // 0x10
+  virtual ~VirtualDtor();      // 0x08
+  virtual void VirtualFunc0(); // 0x0C
+  virtual void VirtualFunc1(); // 0x10
 ```
 
 ### Literals
 
 - For floating-point values, please be explicit with them. (they also affect matching)
 ```cpp
-// Do this!
-float value0 = 1.0f;
-float value1 = 2f;
-float value2 = 3.f;
+  // Do this!
+  float value0 = 1.0f;
+  float value1 = 2f;
+  float value2 = 3.f;
 
-// Don't do this! (they are implicitly double values!!)
-float value0 = 1.0;
-float value1 = 2;
-float value2 = 3.;
+  // Don't do this! (they are implicitly double values!!)
+  float value0 = 1.0;
+  float value1 = 2;
+  float value2 = 3.;
 ```
 
 # Conclusion

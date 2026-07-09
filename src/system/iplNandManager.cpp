@@ -26,7 +26,7 @@ namespace ipl {
             mpTask->setEndMessageQueue(&mMsgQueue);
 
             // Clear file name
-            strncpy(mNandPath, "", sizeof(mNandPath));
+            strncpy(msNandPath, "", sizeof(msNandPath));
 
             ES_SetUid(SYSMENU_TITLE_ID);
 
@@ -91,8 +91,8 @@ namespace ipl {
             char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
-            strncpy(fullName, mNandPath, sizeof(mNandPath));
-            strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
+            strncpy(fullName, msNandPath, sizeof(msNandPath));
+            strncat(fullName, fileName, sizeof(msNandPath) - strlen(fullName));
 
             File* file = new (heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
@@ -109,8 +109,8 @@ namespace ipl {
             char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
-            strncpy(fullName, mNandPath, sizeof(mNandPath));
-            strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
+            strncpy(fullName, msNandPath, sizeof(msNandPath));
+            strncat(fullName, fileName, sizeof(msNandPath) - strlen(fullName));
 
             File* file = new (heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
@@ -171,8 +171,8 @@ namespace ipl {
             char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
-            strncpy(fullName, mNandPath, sizeof(mNandPath));
-            strncat(fullName, "/layout", sizeof(mNandPath) - strlen(fullName));
+            strncpy(fullName, msNandPath, sizeof(msNandPath));
+            strncat(fullName, "/layout", sizeof(msNandPath) - strlen(fullName));
 
             LayoutFile* file = new (heap, 4) LayoutFile(heap, fullName, fileName, arc, bIsNand);
 
@@ -202,8 +202,8 @@ namespace ipl {
         File* Manager::write_(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms) {
             char fullName[NAND_MAX_PATH + 1];
 
-            strncpy(fullName, mNandPath, sizeof(mNandPath));
-            strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
+            strncpy(fullName, msNandPath, sizeof(msNandPath));
+            strncat(fullName, fileName, sizeof(msNandPath) - strlen(fullName));
 
             File* file = new (heap, 4) File(heap, fileName, (u8*)buffer, length, perms);
 

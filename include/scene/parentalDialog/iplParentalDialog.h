@@ -110,7 +110,7 @@ namespace ipl {
             bool mbInputPin;                                  // 0x8A
             int mAttempts;                                    // 0x8C
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             static const int ATTEMPTS_MAX = 3;
 

@@ -112,7 +112,7 @@ namespace ipl {
             void toggle_insert(BOOL bInserted);
             void show_balloon(int balloonId, const char* targetPaneName);
 
-            static const char* getButtonName(int id) { return mscButtonName[id]; }
+            static const char* getButtonName(int id) { return smButtonName[id]; }
 
         protected:
             enum {
@@ -135,7 +135,7 @@ namespace ipl {
             BOOL mbHovered[BTN_MAX];  // 0x0C
             bool mbEnabled;           // 0x10
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             friend class Button;
         };
@@ -288,7 +288,7 @@ namespace ipl {
             static int getButtonNo(const char* paneName);
 
             static int cmpButtonName(const char* name, int btnNo) {
-                return strcmp(name, mscButtonName[btnNo]);
+                return strcmp(name, smButtonName[btnNo]);
             }
 
             int hasReservedAnim() {
@@ -380,7 +380,7 @@ namespace ipl {
             int unused_0x184;
 
             static const char* mscTextPaneName[2];
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
             static const char* mscGroupName[BTN_MAX];
 
             static const char* mscArrowName[ARROW_BTN_MAX];

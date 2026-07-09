@@ -142,7 +142,7 @@ namespace ipl {
             MESG_BUTTON_CREATE
         };
 
-        const char* Button::mscButtonName[Button::BTN_MAX] = {
+        const char* Button::smButtonName[Button::BTN_MAX] = {
             "B_Bbs",
             "B_Ch",
             "B_Set",
@@ -250,7 +250,7 @@ namespace ipl {
             mpGui->setAllComponentTriggerTarget(false);
 
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
             for (int i = 0; i < ARROW_BTN_MAX; i++) {
                 mpLayout->FindPaneByName(mscArrowName[i])->SetVisible(false);
@@ -512,7 +512,7 @@ namespace ipl {
                     break;
                 }
                 case IDANIM_ARROW_RIGHT_DISAPPEAR: {
-                    startLeftEvent(mscButtonName[BTN_ARROW_RIGHT]);
+                    startLeftEvent(smButtonName[BTN_ARROW_RIGHT]);
                 }
                 case IDANIM_ARROW_RIGHT_APPEAR: {
                     anim = mpButtonAnim[ANIM_ARROW_R_END];
@@ -524,7 +524,7 @@ namespace ipl {
                     break;
                 }
                 case IDANIM_ARROW_LEFT_DISAPPEAR: {
-                    startLeftEvent(mscButtonName[BTN_ARROW_LEFT]);
+                    startLeftEvent(smButtonName[BTN_ARROW_LEFT]);
                 }
                 case IDANIM_ARROW_LEFT_APPEAR: {
                     anim = mpButtonAnim[ANIM_ARROW_L_END];
@@ -704,7 +704,7 @@ namespace ipl {
         int Button::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, mscButtonName[i]) == 0) {
+                if (strcmp(paneName, smButtonName[i]) == 0) {
                     num = i;
                     break;
                 }
@@ -788,7 +788,7 @@ namespace ipl {
                 }
 
                 // Init button pane
-                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(smButtonName[i]));
             }
             mSdMenuBtn.enableBtn();
         }
@@ -815,7 +815,7 @@ namespace ipl {
                 }
 
                 // Init button pane
-                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[btnNo]));
+                mpGui->initPane(mpLayout->FindPaneByName(smButtonName[btnNo]));
             }
         }
 

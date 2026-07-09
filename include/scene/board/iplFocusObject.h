@@ -386,7 +386,7 @@ namespace ipl {
             undefined unused_0x201[0x07];
 
             static const char* mAnimNames[BoardObject::TYPE_MAX][1 + ANIM_ARROW_MAX];
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             static const int PARSED_TEXT_LENGTH = 6000;
 

@@ -18,7 +18,7 @@ namespace ipl {
     mState = x
 
         // clang-format off
-        const char* SettingSelect::mscButtonName[SettingSelect::BTN_MAX] = {
+        const char* SettingSelect::smButtonName[SettingSelect::BTN_MAX] = {
             "B_DataManage_00",
             "B_Setting_00",
             "B_SaveData_00",
@@ -102,11 +102,11 @@ namespace ipl {
             mpGui->setAllComponentTriggerTarget(false);
 
             if (mSettingArg == SettingSelectArg::ARG_START_NORMAL) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_DATA_MANAGE]), true);
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SETTING]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_DATA_MANAGE]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SETTING]), true);
             } else {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), true);
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SAVEDATA]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_CHANNEL]), true);
             }
 
             set_text("T_Datamanage0_00", MESG_SETTING_SEL_DATA_MANAGE);
@@ -226,10 +226,10 @@ namespace ipl {
                     System::getFader()->fadeOut();
                     CHANGE_STATE(STATE_WAIT_BLACK_OUT);
                 } else {
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_DATA_MANAGE]), false);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SETTING]), false);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), true);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), true);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_DATA_MANAGE]), false);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SETTING]), false);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SAVEDATA]), true);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_CHANNEL]), true);
                     reset_gui();
 
                     mpLayout->getAnim(ANIM_SAVE_DATA_IN)->play();
@@ -251,10 +251,10 @@ namespace ipl {
                     CHANGE_STATE(STATE_WAIT_CHILD);
                     reset_gui();
                 } else {
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), false);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), false);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_WII_SAVE]), true);
-                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_GC_SAVE]), true);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SAVEDATA]), false);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_CHANNEL]), false);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_WII_SAVE]), true);
+                    mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_GC_SAVE]), true);
                     reset_gui();
 
                     mpLayout->getAnim(ANIM_WII_SAVE_DATA_IN)->play();
@@ -327,10 +327,10 @@ namespace ipl {
                             mpLayout->getAnim(ANIM_SAVE_DATA_OUT)->play();
                             mpLayout->getAnim(ANIM_CHANNEL_OUT)->play();
 
-                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), false);
-                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), false);
-                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_DATA_MANAGE]), true);
-                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SETTING]), true);
+                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SAVEDATA]), false);
+                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_CHANNEL]), false);
+                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_DATA_MANAGE]), true);
+                            mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SETTING]), true);
 
                             CHANGE_STATE(STATE_2ND_WAIT_BACK);
                         }
@@ -342,10 +342,10 @@ namespace ipl {
                         mpLayout->getAnim(ANIM_WII_SAVE_DATA_OUT)->play();
                         mpLayout->getAnim(ANIM_GC_SAVE_DATA_OUT)->play();
 
-                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_WII_SAVE]), false);
-                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_GC_SAVE]), false);
-                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), true);
-                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), true);
+                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_WII_SAVE]), false);
+                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_GC_SAVE]), false);
+                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_SAVEDATA]), true);
+                        mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[BTN_CHANNEL]), true);
 
                         if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
                             static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideBtn();
@@ -479,7 +479,7 @@ namespace ipl {
             int btnNo = -1;
 
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, mscButtonName[i]) == 0) {
+                if (strcmp(paneName, smButtonName[i]) == 0) {
                     btnNo = i;
                     break;
                 }

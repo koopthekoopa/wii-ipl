@@ -19,7 +19,7 @@ namespace ipl {
         }
 
         // clang-format off
-        const char* MailAddressSelect::mscButtonName[MailAddressSelect::BTN_MAX] = {
+        const char* MailAddressSelect::smButtonName[MailAddressSelect::BTN_MAX] = {
             "B_MailIn",
             "B_LetterIn",
             "B_AdressIn",
@@ -75,7 +75,7 @@ namespace ipl {
 
             // Set pane buttons
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
 
             set_textbox("T_Mail", MESG_TEXTWRITER_HEADER);
@@ -436,7 +436,7 @@ namespace ipl {
         int MailAddressSelect::get_button_no(const char* paneName) {
             int result = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(mscButtonName[i], paneName) == 0) {
+                if (strcmp(smButtonName[i], paneName) == 0) {
                     result = i;
                     break;
                 }

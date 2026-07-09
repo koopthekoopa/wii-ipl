@@ -162,8 +162,8 @@ namespace ipl {
             mChanThumbOff_Y = cfChanThumbOfss[SCGetAspectRatio()][1];
 
             mDiskState = DISK_STATE_READ;
-            mpDiskID = NULL;
-            mpDiskMaker = NULL;
+            mspDiskID = NULL;
+            mspDiskMaker = NULL;
 
             // mClock = clock();
 
@@ -1211,7 +1211,7 @@ namespace ipl {
                         if (state == bs2::IPL_STATE_RVL_GAME) {
                             void* thumb = System::getChannelManager()->getDiskThumbnail(mState != STATE_INACTIVE);
                             if (mState == STATE_INACTIVE) {
-                                System::getBS2Manager()->getDiskInfo(&mpDiskID, &mpDiskMaker);
+                                System::getBS2Manager()->getDiskInfo(&mspDiskID, &mspDiskMaker);
                             }
                             if (thumb != NULL) {
                                 mpDiskChanObj->createDiskLayout(thumb);
@@ -1568,15 +1568,15 @@ namespace ipl {
             if (System::getChannelManager()->isUnk_0x1B81()) {
                 if (System::getBS2Manager()->getIPLState() == bs2::IPL_STATE_RVL_GAME ||
                     System::getBS2Manager()->getIPLState() == bs2::IPL_STATE_DISK_UPDATE) {
-                    if (mpDiskID != NULL) {
-                        if (mpDiskMaker != NULL) {
+                    if (mspDiskID != NULL) {
+                        if (mspDiskMaker != NULL) {
                             // unused
                             char* diskID;
                             char* diskMaker;
                             System::getBS2Manager()->getDiskInfo((char**)&diskID, (char**)&diskMaker);
 
-                            if (strncmp(diskID, mpDiskID, 4) == 0) {
-                                if (strncmp(diskMaker, mpDiskMaker, 2) == 0) {
+                            if (strncmp(diskID, mspDiskID, 4) == 0) {
+                                if (strncmp(diskMaker, mspDiskMaker, 2) == 0) {
                                     System::getChannelManager()->setUnk_0x1B81(false);
                                 }
                             }

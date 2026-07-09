@@ -51,11 +51,25 @@ namespace ipl {
                 IDANIM_MAX,
             };
 
-            enum { BTN_WII_MENU = 0, BTN_HELP, BTN_ARROW_RIGHT, BTN_ARROW_LEFT, BTN_MAX };
+            enum {
+                BTN_WII_MENU = 0,
+                BTN_HELP,
+                BTN_ARROW_RIGHT,
+                BTN_ARROW_LEFT,
+                BTN_MAX
+            };
 
-            enum { ARROW_BTN_RIGHT = 0, ARROW_BTN_LEFT, ARROW_BTN_MAX };
+            enum {
+                ARROW_BTN_RIGHT = 0,
+                ARROW_BTN_LEFT,
+                ARROW_BTN_MAX
+            };
 
-            enum { BALLOON_WII_MENU = 0, BALLOON_HELP, BALLOON_MAX };
+            enum {
+                BALLOON_WII_MENU = 0,
+                BALLOON_HELP,
+                BALLOON_MAX
+            };
 
             SDButton(EGG::Heap * heap);
             virtual ~SDButton();
@@ -137,7 +151,7 @@ namespace ipl {
 
             bool mbEnabled;  // 0x82
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
             static const char* mscArrowName[ARROW_BTN_MAX];
 
             friend class SDArrow;

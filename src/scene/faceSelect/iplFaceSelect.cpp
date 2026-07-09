@@ -26,7 +26,7 @@
 namespace ipl {
     namespace scene {
         // clang-format off
-        const char* FaceSelect::mscButtonName[BTN_MAX] = {
+        const char* FaceSelect::smButtonName[BTN_MAX] = {
             "B_NigaoeSel0",
             "B_NigaoeSel1",
             "B_NigaoeSel2",
@@ -162,7 +162,7 @@ namespace ipl {
             mpGui->setAllComponentTriggerTarget(false);
 
             for (int i = 0; i < BTN_MAX; i++) {
-                mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
+                mpGui->setTriggerTarget(mpLayout->FindPaneByName(smButtonName[i]), true);
             }
 
             // Create event for button scene
@@ -652,7 +652,7 @@ namespace ipl {
         int FaceSelect::get_button_no(const char* paneName) {
             int result = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(mscButtonName[i], paneName) == 0) {
+                if (strcmp(smButtonName[i], paneName) == 0) {
                     result = i;
                     break;
                 }
@@ -692,7 +692,7 @@ namespace ipl {
 
         void FaceSelect::reset_gui() {
             for (int i = 0; i < BTN_MAX_FACE; i++) {
-                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(smButtonName[i]));
 
                 if (mbHovered[i] != FALSE) {
                     if (is_exist(i)) {

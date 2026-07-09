@@ -105,7 +105,7 @@ namespace ipl {
 
             bool mbParentalBypass;  // 0x88
 
-            static const char* mscButtonName[BTN_MAX];
+            static const char* smButtonName[BTN_MAX];
 
             friend class MailAddressEvent;
         };
