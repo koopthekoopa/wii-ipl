@@ -33,7 +33,7 @@ namespace EGG {
 
     private:
         GXFifoObj* mpFifoObj;  // 0x04
-        void* mpBuffer;        // 0x08
+        void* mpBufBase;       // 0x08
         u32 mBufSize;          // 0x0C
 
         static GraphicsFifo* sGraphicsFifo;

@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-static void OSInitFastCast() {
+inline void OSInitFastCast() {
     // clang-format off
 #ifdef __MWERKS__
     asm {

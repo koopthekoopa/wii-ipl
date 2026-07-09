@@ -1,6 +1,10 @@
 #ifndef REVOLUTION_AX_H
 #define REVOLUTION_AX_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <revolution/ax/AXAlloc.h>
 
 #include <revolution/ax/AXAux.h>
@@ -13,5 +17,9 @@
 
 void AXInit();
 void AXInitEx(u32 outputBufferMode);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // REVOLUTION_AX_H

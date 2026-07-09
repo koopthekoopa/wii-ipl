@@ -1143,7 +1143,7 @@ namespace ipl {
 
         // Cancel NAND task
         if (getNandManager() != NULL) {
-            thread = getNandManager()->getTask()->getMessageQueue()->queueSend.tail;
+            thread = getNandManager()->getTask()->getOSThread();
             if (!OSIsThreadTerminated(thread)) {
                 OSCancelThread(thread);
             }
@@ -1151,19 +1151,19 @@ namespace ipl {
 
         // Cancel system tasks
         if (getTask1() != NULL) {
-            thread = getTask1()->getMessageQueue()->queueSend.tail;
+            thread = getTask1()->getOSThread();
             if (!OSIsThreadTerminated(thread)) {
                 OSCancelThread(thread);
             }
         }
         if (getTask2() != NULL) {
-            thread = getTask2()->getMessageQueue()->queueSend.tail;
+            thread = getTask2()->getOSThread();
             if (!OSIsThreadTerminated(thread)) {
                 OSCancelThread(thread);
             }
         }
         if (getTask3() != NULL) {
-            thread = getTask3()->getMessageQueue()->queueSend.tail;
+            thread = getTask3()->getOSThread();
             if (!OSIsThreadTerminated(thread)) {
                 OSCancelThread(thread);
             }

@@ -4203,12 +4203,12 @@ libs/EGG/src/core/eggHeap.cpp:
 	.sbss       start:0x816C8EC0 end:0x816C8ED0
 
 libs/EGG/src/core/eggTaskThread.cpp:
-	.text       start:0x81621310 end:0x816217B0
+	.text       start:0x81621310 end:0x81621828
 	.data       start:0x816C2D98 end:0x816C2DB0
 
 libs/EGG/src/core/eggThread.cpp:
 	.bss        start:0x811C0CC0 end:0x811C0CD0
-	.text       start:0x816217B0 end:0x81621BA0
+	.text       start:0x81621828 end:0x81621BA0
 	.data       start:0x816C2DB0 end:0x816C2DC8
 
 libs/EGG/src/core/eggUnitHeap.cpp:

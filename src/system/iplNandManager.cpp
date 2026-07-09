@@ -23,7 +23,7 @@ namespace ipl {
             // Init task thread
             mpTask = EGG::TaskThread::create(0x80, 18, 0x10000, heap);
             OSInitMessageQueue(&mMsgQueue, &mMessage, 0x80);
-            mpTask->setMessageQueue(&mMsgQueue);
+            mpTask->setEndMessageQueue(&mMsgQueue);
 
             // Clear file name
             strncpy(mNandPath, "", sizeof(mNandPath));
@@ -223,7 +223,7 @@ namespace ipl {
 
         BOOL Manager::receiveToken(int* token) {
             BOOL result = FALSE;
-            OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getThreadMsgQueue(), &result);
+            OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getEndMessageQueue(), &result);
             if (result && msg != NULL) {
                 *token = reinterpret_cast<int>(msg);
             }

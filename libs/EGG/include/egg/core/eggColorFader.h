@@ -2,16 +2,21 @@
 #define EGG_CORE_COLOR_FADER_H
 
 #include <egg/core/eggFader.h>
+
+#include <egg/prim/eggBitFlag.h>
+
 #include <nw4r/ut.h>
 
 namespace EGG {
     class ColorFader : public Fader {
     public:
-        ColorFader(f32 left, f32 top, f32 right, f32 bottom, nw4r::ut::Color color = nw4r::ut::Color(0),
-                   EStatus status = EGG::ColorFader::PREPARE_IN);
+        ColorFader(f32 x, f32 y, f32 width, f32 height, nw4r::ut::Color color = nw4r::ut::Color(0), EStatus status = PREPARE_IN);
+
+        virtual ~ColorFader();  // 0x04
 
         virtual void setStatus(EStatus status);  // 0x08
-        virtual EStatus getStatus() const;       // 0x0C
+
+        virtual EStatus getStatus() const;  // 0x0C
 
         virtual bool fadeIn();   // 0x10
         virtual bool fadeOut();  // 0x14
@@ -19,13 +24,30 @@ namespace EGG {
         virtual bool calc();  // 0x18
         virtual void draw();  // 0x1C
 
-        virtual ~ColorFader();  // 0x20
+        void setFrame(u16 frame);
+        void setColor(nw4r::ut::Color color);
 
-    private: /* ? */
-        void setFrame(u16 value);
-        void setColor(nw4r::ut::Color value);
+    private:
+        enum {
+            BIT_FINISH_AFTER_IN,
+            BIT_FINISH_AFTER_OUT,
+            BIT_INIT,
+        };
 
-        u8 dummy[0x20];
+        static const u16 DEFAULT_FRAME = 20;
+
+    private:
+        EStatus mStatus;  // 0x04
+
+        TBitFlag<u8> mFlags;  // 0x08
+
+        u16 mFadeFrame;  // 0x0A
+        u16 mFrame;      // 0x0C
+
+        u8 unk_0x0E[2];
+
+        nw4r::ut::Color mColor;  // 0x10
+        nw4r::ut::Rect mSpace;   // 0x14
     };
 }  // namespace EGG
 

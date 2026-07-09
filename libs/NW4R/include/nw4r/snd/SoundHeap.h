@@ -27,7 +27,10 @@ namespace nw4r {
                 mFrameHeap.Clear();
             }
 
-            int SaveState();
+            int SaveState() NO_INLINE {
+                ut::detail::AutoLock<OSMutex> lock(mMutex);
+                return mFrameHeap.SaveState();
+            }
             void LoadState(int id);
 
             bool IsValid() { return mFrameHeap.IsValid(); }

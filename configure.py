@@ -519,7 +519,7 @@ def EGGLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "EGG",
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk,
+        "cflags": cflags_ipl,
         "progress_category": "egg",
         "objects": objects,
         "src_dir": "libs/EGG/src",
@@ -1899,23 +1899,23 @@ config.libs = [
     # EGG library (for Nintendo EAD software)
     EGGLib(
         [
-            Object(NonMatching, "core/eggAllocator.cpp"),
-            Object(NonMatching, "core/eggAudioArcPlayerMgr.cpp"),
-            Object(NonMatching, "core/eggAudioExpMgr.cpp"),
-            Object(NonMatching, "core/eggAudioFxMgr.cpp"),
-            Object(NonMatching, "core/eggAudioMgr.cpp"),
-            Object(NonMatching, "core/eggAudioHeapMgr.cpp"),
-            Object(NonMatching, "core/eggColorFader.cpp"),
-            Object(NonMatching, "core/eggDisposer.cpp"),
-            Object(NonMatching, "core/eggExpHeap.cpp"),
-            Object(NonMatching, "core/eggFrmHeap.cpp"),
-            Object(NonMatching, "core/eggGraphicsFifo.cpp"),
-            Object(NonMatching, "core/eggHeap.cpp"),
-            Object(NonMatching, "core/eggTaskThread.cpp"),
-            Object(NonMatching, "core/eggThread.cpp"),
-            Object(NonMatching, "core/eggUnitHeap.cpp"),
+            Object(Matching,    "core/eggAllocator.cpp"),
+            Object(Equivalent,  "core/eggAudioArcPlayerMgr.cpp"),
+            Object(Equivalent,  "core/eggAudioExpMgr.cpp"),
+            Object(Matching,    "core/eggAudioFxMgr.cpp"),
+            Object(Equivalent,  "core/eggAudioMgr.cpp"),
+            Object(Matching,    "core/eggAudioHeapMgr.cpp"),
+            Object(Matching,    "core/eggColorFader.cpp"),
+            Object(Matching,    "core/eggDisposer.cpp"),
+            Object(Matching,    "core/eggExpHeap.cpp"),
+            Object(Matching,    "core/eggFrmHeap.cpp"),
+            Object(Matching,    "core/eggGraphicsFifo.cpp"),
+            Object(Matching,    "core/eggHeap.cpp"),
+            Object(Matching,    "core/eggTaskThread.cpp"),
+            Object(Matching,    "core/eggThread.cpp"),
+            Object(Matching,    "core/eggUnitHeap.cpp"),
 
-            Object(NonMatching, "prim/eggAssert.cpp"),
+            Object(Matching,    "prim/eggAssert.cpp"),
         ]
     ),
     # Runtime library

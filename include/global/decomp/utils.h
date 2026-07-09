@@ -1,6 +1,10 @@
 #ifndef GLOBAL_HEADERS_DECOMP_UTILS_H
 #define GLOBAL_HEADERS_DECOMP_UTILS_H
 
+#if __cplusplus < 201103L
+#define noexcept throw()
+#endif
+
 #define DECL_WEAK __declspec(weak)
 
 #define __CONCAT(x, y) x##y

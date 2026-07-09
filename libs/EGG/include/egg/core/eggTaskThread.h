@@ -5,50 +5,64 @@
 #include <egg/core/eggThread.h>
 
 namespace EGG {
+    class Heap;
+
     class TaskThread : public Thread {
     public:
-        typedef void (*TFunction)(void*);
+        typedef void (*TFunction)(void* pTaskArg);
 
-        typedef struct TJob {
-            TFunction mFunction;  // 0x00
+        struct TJob {
+            TFunction pTask;    // 0x00
+            void* pTaskArg;     // 0x04
+            OSMessage endMesg;  // 0x08
 
-            void* unk_0x04;
-            OSMessage mMsg;  // 0x08
+            TFunction pOnEnter;  // 0x0C
+            TFunction pOnExit;   // 0x10
+            TFunction pOnDone;   // 0x14
 
-            TFunction mEnterFunction;  // 0x0C
-            TFunction mExitFunction;   // 0x10
-            TFunction unk_0x14;
+            TJob();
 
-            inline TJob() : mEnterFunction(NULL), mExitFunction(NULL), unk_0x14(NULL) {}
+            void clear_functions();
+        };
 
-            inline void clearFunctions() {
-                mFunction = NULL;
-                mEnterFunction = NULL;
-                mExitFunction = NULL;
-                unk_0x14 = NULL;
-            }
-        } TJob;
+    public:
+        static TaskThread* create(int capacity, int priority, u32 stackSize, Heap* pHeap);
+        static OSMessageQueue* createTaskEndMessageQueue(int size, Heap* pHeap);
 
-        TaskThread();
-        virtual ~TaskThread();
+        TaskThread(int capacity, int priority, u32 stackSize);
+        virtual ~TaskThread();  // 0x08
 
-        static TaskThread* create(int msgCount, int, u32 size, Heap* heap);
+        virtual void* run();  // 0x0C
 
-        void request(TFunction func, void* work, void*);
-        void requestJam(TFunction func, void* work, void*);
+        virtual void onEnter();  // 0x10
+        virtual void onExit();   // 0x14
 
-        OSMessageQueue* getThreadMsgQueue() { return mpMsgQueue; }
+        bool request(TFunction pTask, void* pTaskArg, OSMessage endMesg);
+        bool requestJam(TFunction pTask, void* pTaskArg, OSMessage endMesg);
 
-        void setMessageQueue(OSMessageQueue* queue) { mpMsgQueue = queue; }
+        bool isTaskExist() const;
 
-        static OSMessage waitQueueMessage(OSMessageQueue* queue, BOOL* result);
+        static OSMessage waitQueueMessage(OSMessageQueue* pQueue, BOOL* pSuccess);
+
+        bool isTaskWorking() const { return mpCurrentJob != NULL; }
+
+        void setEndMessageQueue(OSMessageQueue* pQueue) { mpEndMesgQueue = pQueue; }
+        OSMessageQueue* getEndMessageQueue() { return mpEndMesgQueue; }
+
+        OSMessage waitTaskEndMessage(BOOL* pSuccess) {
+            OSMessage msg;
+            *pSuccess = OSReceiveMessage(mpEndMesgQueue, &msg, 0);
+            return msg;
+        }
 
     private:
-        TJob* mCurrentJob;  // 0x44
-        TJob* mJobs;        // 0x48
-        int mJobCount;      // 0x4C
+        TJob* findBlank();
 
-        OSMessageQueue* mpMsgQueue;  // 0x50
+    private:
+        TJob* mpCurrentJob;              // 0x44
+        TJob* mpJobList;                 // 0x48
+        int mJobNum;                     // 0x4C
+        OSMessageQueue* mpEndMesgQueue;  // 0x50
 
         static OSMessage* sEndMesgBuffer;
         static int sEndMesgBufSize;

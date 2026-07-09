@@ -28,6 +28,8 @@ u32 AIGetDSPSampleRate();
 
 u32 AIGetDMABytesLeft();
 
+void AIInit(void* stack);
+
 #ifdef __cplusplus
 }
 #endif

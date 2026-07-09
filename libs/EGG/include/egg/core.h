@@ -16,6 +16,13 @@
 
 #include <egg/core/eggFader.h>
 #include <egg/core/eggColorFader.h>
+
+#include <egg/core/eggAudioHeapMgr.h>
+#include <egg/core/eggAudioArcPlayerMgr.h>
+#include <egg/core/eggAudioFxMgr.h>
+
+#include <egg/core/eggAudioMgr.h>
+#include <egg/core/eggAudioExpMgr.h>
 // clang-format on
 
-#endif // EGG_CORE_H
+#endif  // EGG_CORE_H

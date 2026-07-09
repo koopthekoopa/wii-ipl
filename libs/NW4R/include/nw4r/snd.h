@@ -10,6 +10,11 @@
 #include <nw4r/snd/SoundPlayer.h>
 #include <nw4r/snd/SoundSystem.h>
 
+#include <nw4r/snd/DvdSoundArchive.h>
+#include <nw4r/snd/McsSoundArchive.h>
+#include <nw4r/snd/MemorySoundArchive.h>
+#include <nw4r/snd/NandSoundArchive.h>
+
 #include <nw4r/snd/SoundArchive.h>
 #include <nw4r/snd/SoundArchivePlayer.h>
 
