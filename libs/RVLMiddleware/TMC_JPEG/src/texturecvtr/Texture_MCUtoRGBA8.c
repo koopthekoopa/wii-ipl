@@ -13,6 +13,16 @@ static void TMCJPEGDEC_converterYUV444toRGBA8edge(TMCCJPEGDecWork*, s32, s32);
 static void TMCJPEGDEC_converterYUV400toRGBA8(TMCCJPEGDecWork*, s32, s32);
 static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCCJPEGDecWork*, s32, s32);
 
+static s32 clampU8(s32 v) {
+    if (v > 0xFF) {
+        return 0xFF;
+    } else {
+        s32 t = v >> 31;
+        v &= ~t;
+        return v;
+    }
+}
+
 s32 TMCJPEGDEC_set_converterRGBA8(TMCCJPEGDecWork* work) {
     u8* ob = work->convBuf;
     u8 cc = work->componentCount;
@@ -191,24 +201,9 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[0] + ga;
                         bb = cb_row[0] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -224,24 +219,9 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[1] + ga;
                         bb = cb_row[1] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -257,24 +237,9 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[2] + ga;
                         bb = cb_row[2] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -290,24 +255,9 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[3] + ga;
                         bb = cb_row[3] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -410,21 +360,9 @@ static void TMCJPEGDEC_converterYUV411toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -513,24 +451,9 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[0] + ga;
                         bb = cb_row[0] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -546,24 +469,9 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[1] + ga;
                         bb = cb_row[1] + ba;
                         if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
+                            rr = clampU8(rr);
+                            gg = clampU8(gg);
+                            bb = clampU8(bb);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -666,21 +574,9 @@ static void TMCJPEGDEC_converterYUV422toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -764,24 +660,9 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[0] + ga;
                         bb = cb_row[0] + ba;
                         if ((bb | gg | rr) >> 8) {
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
+                            bb = clampU8(bb);
+                            gg = clampU8(gg);
+                            rr = clampU8(rr);
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
@@ -796,24 +677,9 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                         gg = cb_row[1] + ga;
                         bb = cb_row[1] + ba;
                         if ((bb | gg | rr) >> 8) {
-                            if (bb > 0xFF) {
-                                bb = 0xFF;
-                            } else {
-                                s32 t = bb >> 31;
-                                bb &= ~t;
-                            }
-                            if (gg > 0xFF) {
-                                gg = 0xFF;
-                            } else {
-                                s32 t = gg >> 31;
-                                gg &= ~t;
-                            }
-                            if (rr > 0xFF) {
-                                rr = 0xFF;
-                            } else {
-                                s32 t = rr >> 31;
-                                rr &= ~t;
-                            }
+                            bb = clampU8(bb);
+                            gg = clampU8(gg);
+                            rr = clampU8(rr);
                         }
                         xo = (x_pos + 1) & 3;
                         xg = ((x_pos + 1) >> 2) << 1;
@@ -920,21 +786,9 @@ static void TMCJPEGDEC_converterYUV420toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -1020,21 +874,9 @@ static void TMCJPEGDEC_converterYUV211toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -1136,21 +978,9 @@ static void TMCJPEGDEC_converterYUV211toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -1243,21 +1073,9 @@ static void TMCJPEGDEC_converterYUV444toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -1356,21 +1174,9 @@ static void TMCJPEGDEC_converterYUV444toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 bb = cbv + ba;
 
                 if ((rr | gg | bb) >> 8) {
-                    if (bb > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        bb &= ~(bb >> 31);
-                    }
-                    if (gg > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        gg &= ~(gg >> 31);
-                    }
-                    if (rr > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        rr &= ~(rr >> 31);
-                    }
+                    bb = clampU8(bb);
+                    gg = clampU8(gg);
+                    rr = clampU8(rr);
                 }
 
                 {
@@ -1440,24 +1246,9 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCCJPEGDecWork* work, s32 x, s32 
                 val = cb_row[0];
                 cb_row++;
                 if (val >> 8) {
-                    if (val > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        rr = val & ~s;
-                    }
-                    if (val > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        gg = val & ~s;
-                    }
-                    if (val > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        bb = val & ~s;
-                    }
+                    rr = clampU8(val);
+                    gg = clampU8(val);
+                    bb = clampU8(val);
                 } else {
                     rr = val;
                     gg = val;
@@ -1544,24 +1335,9 @@ static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCCJPEGDecWork* work, s32 x, 
                 val = cb_ptr[0];
                 cb_ptr += 1;
                 if (val >> 8) {
-                    if (val > 0xFF) {
-                        rr = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        rr = val & ~s;
-                    }
-                    if (val > 0xFF) {
-                        gg = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        gg = val & ~s;
-                    }
-                    if (val > 0xFF) {
-                        bb = 0xFF;
-                    } else {
-                        s32 s = val >> 31;
-                        bb = val & ~s;
-                    }
+                    rr = clampU8(val);
+                    gg = clampU8(val);
+                    bb = clampU8(val);
                 } else {
                     rr = val;
                     gg = val;
