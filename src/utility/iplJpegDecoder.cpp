@@ -1,8 +1,8 @@
 #include "utility/iplJpegDecoder.h"
-#include "utility/iplCapture.h"
-#include "utility/iplGraphics.h"
 #include "system/iplSystem.h"
 #include "system/odh.h"
+#include "utility/iplCapture.h"
+#include "utility/iplGraphics.h"
 
 #include <revolution/gx.h>
 #include <revolution/gx/GXEnum.h>
@@ -17,344 +17,337 @@ extern const u8 lbl_8169465B = 0xFF;
 namespace ipl {
     namespace utility {
 
-JpegDecoder::JpegDecoder(EGG::Heap* heap)
-    : mpData(NULL), mLength(0), mReadPos(0), mpCapture(NULL),
-      mInitResult(0), mStatus(0) {
-    mpBuf1 = reinterpret_cast<TMCJpegDecWork*>(new (heap, DEFAULT_ALIGN) u8[0x1C00]);
-    mpBuf2 = new (heap, DEFAULT_ALIGN) u8[0x10040];
+        JpegDecoder::JpegDecoder(EGG::Heap* heap) : mpData(NULL), mLength(0), mReadPos(0), mpCapture(NULL), mInitResult(0), mStatus(0) {
+            mpBuf1 = reinterpret_cast<TMCCJPEGDecWork*>(new (heap, DEFAULT_ALIGN) u8[0x1C00]);
+            mpBuf2 = new (heap, DEFAULT_ALIGN) u8[0x10040];
 
-    clear();
-    OSInitSemaphore(&mSemaphore, 0);
-}
+            clear();
+            OSInitSemaphore(&mSemaphore, 0);
+        }
 
-BOOL JpegDecoder::decodeJpg(EGG::Heap* heap, u8* buffer, u32 length) {
-    BOOL result = FALSE;
-    if (mStatus == 0) {
-        mpData = buffer;
-        mLength = length;
-        mReadPos = 0;
+        BOOL JpegDecoder::decodeJpg(EGG::Heap* heap, u8* buffer, u32 length) {
+            BOOL result = FALSE;
+            if (mStatus == 0) {
+                mpData = buffer;
+                mLength = length;
+                mReadPos = 0;
 
-        TMCCJPEGDecInitParam param;
-        param.mFlag1 = 0;
-        param.mFlag2 = 0;
-        param.mpBuf1 = mpBuf1;
-        param.mpBuf2 = mpBuf2;
-        param.mBuf2Size = 0x10040;
-        param.mDataSize = length;
-        param.mpCallback = readStreamCallback;
-        param.mpContext = this;
+                TMCCJPEGDecInitParam param;
+                param.unk_0x24 = 0;
+                param.unk_0x2C = 0;
+                param.pBuf1 = mpBuf1;
+                param.pBuf2 = mpBuf2;
+                param.buf2Size = 0x10040;
+                param.dataSize = length;
+                param.pCallback = readStreamCallback;
+                param.pContext = this;
 
-        mInitResult = TMCCJPEGDecInit(&mTMCState, &param);
+                mInitResult = TMCCJPEGDecInit(&mTMCState, &param);
 
-        if (mInitResult > 0)
-        {
-            u32 jpegW = mTMCState.mJpegWidth;
-            u32 jpegH = mTMCState.mJpegHeight;
+                if (mInitResult > 0) {
+                    u32 jpegW = mTMCState.jpegWidth;
+                    u32 jpegH = mTMCState.jpegHeight;
 
-            s32 scale = get_resolution(jpegW, jpegH);
-            if (scale < 0) {
-                clear();
+                    s32 scale = get_resolution(jpegW, jpegH);
+                    if (scale < 0) {
+                        clear();
+                        return FALSE;
+                    }
+
+                    if (scale > 0) {
+                        if (TMCCJPEGDecSetResolution(&mTMCState, (u8)scale) < 0) {
+                            clear();
+                            return FALSE;
+                        }
+                    }
+
+                    mTextureSize = ((mTMCState.jpegWidth + 7) & 0xFFF8) * ((mTMCState.jpegHeight + 7) & 0xFFF8) * 2;
+
+                    mpTextureBuffer = new (heap, DEFAULT_ALIGN) u8[mTextureSize];
+
+                    if (TMCCJPEGDecodeRGB565(&mTMCState, mInitResult, mpTextureBuffer) == 0) {
+                        mOrientation = get_orientation();
+                        DCStoreRange(mpTextureBuffer, mTextureSize);
+
+                        calc_capture_size(jpegW, jpegH);
+
+                        mpCapture = new (heap, DEFAULT_ALIGN) Capture(heap, 0, 0, mCaptureSizeW, mCaptureSizeH, GX_TF_RGB565);
+
+                        mStatus = 1;
+                        result = TRUE;
+                    } else {
+                        delete[] mpTextureBuffer;
+                        mpTextureBuffer = NULL;
+                        clear();
+                        return FALSE;
+                    }
+                }
+            }
+            return result;
+        }
+
+        BOOL JpegDecoder::encodeOdh(EGG::Heap* heap, u8* buffer, u32 length) {
+            u32 size = mpCapture->getCaptureWidth() * mpCapture->getCaptureHeight() * 3;
+            u8* work = new (heap, DEFAULT_ALIGN) u8[size];
+            if (work == NULL) {
                 return FALSE;
             }
 
-            if (scale > 0) {
-                if (TMCCJPEGDecSetResolution(&mTMCState, (u8)scale) < 0) {
-                    clear();
-                    return FALSE;
+            u32 w = mpCapture->getCaptureWidth();
+            u32 h = mpCapture->getCaptureHeight();
+            s32 ret = ODHEncodeRGB565(mpCapture->getTexBuffer(), buffer, w, h, length, 100, work);
+            delete[] work;
+            return ret;
+        }
+
+        void JpegDecoder::makeRawData() {
+            if (mStatus != 1) {
+                return;
+            }
+
+            f32 savedViewport[6];
+            GXGetViewportv(savedViewport);
+
+            f32 vpX = 0.0f;
+            f32 vpY = 0.0f;
+            f32 vpW = mCaptureSizeW;
+            f32 vpFar = 1.0f;
+            f32 vpH = mCaptureSizeH;
+            f32 vpNear = 0.0f;
+            GXSetViewport(vpX, vpY, vpW, vpH, vpNear, vpFar);
+
+            f32 projRect[4];
+            projRect[0] = 0.0f;
+            projRect[1] = 0.0f;
+            projRect[2] = 0.0f;
+            projRect[3] = 0.0f;
+            ipl::System::getProjectionRect4x3((nw4r::ut::Rect*)projRect);
+
+            Mtx44 projMtx;
+            f32 w = mCaptureSizeW;
+            f32 h = mCaptureSizeH;
+
+            C_MTXOrtho(projMtx, 0.f, h, 0.0f, w, -100.0f, 100.0f);
+            GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
+
+            Graphics::calcOrthoCamera();
+            Graphics::setCamera(0);
+
+            GXTexObj texObj;
+            GXInitTexObj(&texObj, mpTextureBuffer, mTMCState.jpegWidth, mTMCState.jpegHeight, GX_TF_RGB565, GX_CLAMP, GX_CLAMP, GX_FALSE);
+
+            f32 destH = mCaptureSizeH;
+            f32 destW = mCaptureSizeW;
+
+            int drawOri = 0;
+
+            GXColor col;
+            f32 destRect[4];
+
+            col.r = *(volatile u8*)&lbl_81694658;
+            destRect[0] = 0.0f;
+            col.g = *(volatile u8*)&lbl_81694659;
+            destRect[1] = 0.0f;
+            col.b = *(volatile u8*)&lbl_8169465A;
+            col.a = *(volatile u8*)&lbl_8169465B;
+            destRect[2] = destW;
+            destRect[3] = destH;
+
+            int orient = mOrientation + col.a - col.a;
+
+            switch (orient) {
+                case 1: {
+                    drawOri = 1;
+                    break;
+                }
+                case 2: {
+                    drawOri = 2;
+                    break;
+                }
+                default: {
+                    break;
                 }
             }
 
-            mTextureSize = ((mTMCState.mJpegWidth + 7) & 0xFFF8) *
-                            ((mTMCState.mJpegHeight + 7) & 0xFFF8) * 2;
+            Graphics::drawTexture(*(nw4r::ut::Rect*)destRect, texObj, col, 1, (Graphics::Orientation)drawOri);
 
-            mpTextureBuffer = new (heap, DEFAULT_ALIGN) u8[mTextureSize];
+            mpCapture->capture(TRUE);
 
-            if (TMCCJPEGDecodeRGB565(&mTMCState, mInitResult, mpTextureBuffer) == 0) {
-                mOrientation = get_orientation();
-                DCStoreRange(mpTextureBuffer, mTextureSize);
+            col.b = 0;
+            col.g = 0;
+            col.r = 0;
 
-                calc_capture_size(jpegW, jpegH);
+            Graphics::drawPolygon(*(nw4r::ut::Rect*)destRect, col);
 
-                mpCapture = new (heap, DEFAULT_ALIGN) Capture(heap, 0, 0, mCaptureSizeW,
-                                                               mCaptureSizeH, GX_TF_RGB565);
+            delete[] mpTextureBuffer;
+            mpTextureBuffer = NULL;
+            mTextureSize = 0;
+            mStatus = 2;
 
-                mStatus = 1;
-                result = TRUE;
+            GXSetViewport(savedViewport[0], savedViewport[1], savedViewport[2], savedViewport[3], savedViewport[4], savedViewport[5]);
+            OSSignalSemaphore(&mSemaphore);
+        }
+
+        BOOL JpegDecoder::waitCaptured() {
+            OSWaitSemaphore(&mSemaphore);
+            return mStatus - 2 == 0;
+        }
+
+        void JpegDecoder::clear() {
+            mStatus = 0;
+            mInitResult = 0;
+            mpData = NULL;
+            mLength = 0;
+            mReadPos = 0;
+            mpTextureBuffer = NULL;
+            mTextureSize = 0;
+            mCaptureSizeW = 0;
+            mCaptureSizeH = 0;
+            memset(&mTMCState, 0, 0x6D4);
+
+            if (mpCapture != NULL) {
+                delete mpCapture;
+                mpCapture = NULL;
             }
-            else {
-                delete[] mpTextureBuffer;
-                mpTextureBuffer = NULL;
-                clear();
-                return FALSE;
+
+            mOrientation = 0;
+        }
+
+        s32 JpegDecoder::readStreamCallback(void* ctx, u8* buf, unsigned int size) {
+            JpegDecoder* self = (JpegDecoder*)ctx;
+            memcpy(buf, self->mpData + self->mReadPos, size);
+            self->mReadPos += size;
+            return 0;
+        }
+
+        int JpegDecoder::get_orientation() {
+            int result = 0;
+
+            TMCCJPEGDecInitParam param;
+            param.unk_0x24 = 0;
+            param.unk_0x2C = 0;
+            param.pBuf1 = mpBuf1;
+            param.pBuf2 = mpBuf2;
+            param.buf2Size = 0x10040;
+            param.dataSize = mLength;
+            param.pCallback = readStreamCallback;
+            param.pContext = this;
+
+            mReadPos = 0;
+
+            u32 exifOffset;
+            u32 exifSize;
+
+            if (TMCCJPEGDecGetOffsetEXIF(&exifOffset, &exifSize, &param) == 0) {
+                param.unk_0x24 = 0;
+                param.unk_0x2C = 0;
+                param.pBuf1 = mpBuf1;
+                param.pBuf2 = mpData + exifOffset;
+                param.buf2Size = exifSize;
+                param.dataSize = mLength;
+                param.pCallback = NULL;
+                param.pContext = NULL;
+
+                TMCCJPEGDecExifInfo exifInfo;
+                if (TMCCJPEGDecGetInfoEXIF(&exifInfo, &param) == 0) {
+                    switch (exifInfo.exifData.orientation) {
+                        case 7: {
+                            break;
+                        }
+                        case 6: {
+                            result = 1;
+                            break;
+                        }
+                        case 8: {
+                            result = 2;
+                            break;
+                        }
+                    }
+                }
             }
+
+            return result;
         }
-    }
-    return result;
-}
 
-BOOL JpegDecoder::encodeOdh(EGG::Heap* heap, u8* buffer, u32 length) {
-    u32 size = mpCapture->getCaptureWidth() * mpCapture->getCaptureHeight() * 3;
-    u8* work = new (heap, DEFAULT_ALIGN) u8[size];
-    if (work == NULL) {
-        return FALSE;
-    }
+        int JpegDecoder::get_resolution(int w, int h) {
+            int scaleW = 0;
+            int scaleH = 0;
 
-    u32 w = mpCapture->getCaptureWidth();
-    u32 h = mpCapture->getCaptureHeight();
-    s32 ret = ODHEncodeRGB565(mpCapture->getTexBuffer(), buffer, w, h,
-                               length, 100, work);
-    delete[] work;
-    return ret;
-}
-
-void JpegDecoder::makeRawData() {
-    if (mStatus != 1) {
-        return;
-    }
-
-    f32 savedViewport[6];
-    GXGetViewportv(savedViewport);
-
-    f32 vpX = 0.0f;
-    f32 vpY = 0.0f;
-    f32 vpW = mCaptureSizeW;
-    f32 vpFar = 1.0f;
-    f32 vpH = mCaptureSizeH;
-    f32 vpNear = 0.0f;
-    GXSetViewport(vpX, vpY, vpW, vpH, vpNear, vpFar);
-
-    f32 projRect[4];
-    projRect[0] = 0.0f;
-    projRect[1] = 0.0f;
-    projRect[2] = 0.0f;
-    projRect[3] = 0.0f;
-    ipl::System::getProjectionRect4x3((nw4r::ut::Rect*)projRect);
-
-    Mtx44 projMtx;
-    f32 w = mCaptureSizeW;
-    f32 h = mCaptureSizeH;
-
-    C_MTXOrtho(projMtx,
-               0.f, h,
-               0.0f, w,
-               -100.0f, 100.0f);
-    GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
-
-    Graphics::calcOrthoCamera();
-    Graphics::setCamera(0);
-
-    GXTexObj texObj;
-    GXInitTexObj(&texObj, mpTextureBuffer,
-                 mTMCState.mJpegWidth, mTMCState.mJpegHeight,
-                 GX_TF_RGB565, GX_CLAMP, GX_CLAMP, GX_FALSE);
-
-    f32 destH = mCaptureSizeH;
-    f32 destW = mCaptureSizeW;
-
-    int drawOri = 0;
-
-    GXColor col;
-    f32 destRect[4];
-
-    col.r = *(volatile u8*)&lbl_81694658;
-    destRect[0] = 0.0f;
-    col.g = *(volatile u8*)&lbl_81694659;
-    destRect[1] = 0.0f;
-    col.b = *(volatile u8*)&lbl_8169465A;
-    col.a = *(volatile u8*)&lbl_8169465B;
-    destRect[2] = destW;
-    destRect[3] = destH;
-
-    int orient = mOrientation + col.a - col.a;
-
-    switch (orient) {
-    case 1:
-        drawOri = 1;
-        break;
-    case 2:
-        drawOri = 2;
-        break;
-    default:
-        break;
-    }
-
-    Graphics::drawTexture(*(nw4r::ut::Rect*)destRect, texObj,
-                          col, 1,
-                          (Graphics::Orientation)drawOri);
-
-    mpCapture->capture(TRUE);
-
-    col.b = 0;
-    col.g = 0;
-    col.r = 0;
-
-    Graphics::drawPolygon(*(nw4r::ut::Rect*)destRect, col);
-
-    delete[] mpTextureBuffer;
-    mpTextureBuffer = NULL;
-    mTextureSize = 0;
-    mStatus = 2;
-
-    GXSetViewport(savedViewport[0], savedViewport[1], savedViewport[2],
-                  savedViewport[3], savedViewport[4], savedViewport[5]);
-
-    OSSignalSemaphore(&mSemaphore);
-}
-
-BOOL JpegDecoder::waitCaptured() {
-    OSWaitSemaphore(&mSemaphore);
-    return mStatus - 2 == 0;
-}
-
-void JpegDecoder::clear() {
-    mStatus = 0;
-    mInitResult = 0;
-    mpData = NULL;
-    mLength = 0;
-    mReadPos = 0;
-    mpTextureBuffer = NULL;
-    mTextureSize = 0;
-    mCaptureSizeW = 0;
-    mCaptureSizeH = 0;
-    memset(&mTMCState, 0, 0x6D4);
-
-    if (mpCapture != NULL) {
-        delete mpCapture;
-        mpCapture = NULL;
-    }
-
-    mOrientation = 0;
-}
-
-s32 JpegDecoder::readStreamCallback(void* ctx, u8* buf, unsigned int size) {
-    JpegDecoder* self = (JpegDecoder*)ctx;
-    memcpy(buf, self->mpData + self->mReadPos, size);
-    self->mReadPos += size;
-    return 0;
-}
-
-int JpegDecoder::get_orientation() {
-    int result = 0;
-
-    TMCCJPEGDecInitParam param;
-    param.mFlag1 = 0;
-    param.mFlag2 = 0;
-    param.mpBuf1 = mpBuf1;
-    param.mpBuf2 = mpBuf2;
-    param.mBuf2Size = 0x10040;
-    param.mDataSize = mLength;
-    param.mpCallback = readStreamCallback;
-    param.mpContext = this;
-
-    mReadPos = 0;
-
-    u32 exifOffset;
-    u32 exifSize;
-
-    if (TMCCJPEGDecGetOffsetEXIF(&exifOffset, &exifSize, &param) == 0) {
-        param.mFlag1 = 0;
-        param.mFlag2 = 0;
-        param.mpBuf1 = mpBuf1;
-        param.mpBuf2 = mpData + exifOffset;
-        param.mBuf2Size = exifSize;
-        param.mDataSize = mLength;
-        param.mpCallback = NULL;
-        param.mpContext = NULL;
-
-        TMCCJPEGDecExifInfo exifInfo;
-        if (TMCCJPEGDecGetInfoEXIF(&exifInfo, &param) == 0) {
-            switch (exifInfo.mExifData.mOrientation) {
-            case 7:
-                break;
-            case 6:
-                result = 1;
-                break;
-            case 8:
-                result = 2;
-                break;
+            if (w > 0x1900) {
+                return -1;
             }
+
+            if (w > 0xC80) {
+                scaleW = 8;
+            } else if (w > 0x640) {
+                scaleW = 4;
+            } else if (w > 0x320) {
+                scaleW = 2;
+            }
+
+            if (h > 0x12C0) {
+                return -1;
+            }
+
+            if (h > 0x960) {
+                scaleH = 8;
+            } else if (h > 0x4B0) {
+                scaleH = 4;
+            } else if (h > 0x258) {
+                scaleH = 2;
+            }
+
+            if (scaleW > scaleH) {
+                return scaleW;
+            }
+            return scaleH;
         }
-    }
 
-    return result;
-}
+        void JpegDecoder::calc_capture_size(int w, int h) {
+            int tmp;
+            switch (mOrientation) {
+                case 1: {
+                    tmp = h;
+                    h = w;
+                    w = tmp;
+                    break;
+                }
+                case 2: {
+                    tmp = h;
+                    h = w;
+                    w = tmp;
+                }
+                default: {
+                    break;
+                }
+            }
 
-int JpegDecoder::get_resolution(int w, int h) {
-    int scaleW = 0;
-    int scaleH = 0;
+            if (w > 0x200) {
+                mCaptureSizeH = h * 0x200 / w;
+                mCaptureSizeW = 0x200;
+                if (mCaptureSizeH > 0x1C8) {
+                    int oldH = mCaptureSizeH;
+                    mCaptureSizeW = mCaptureSizeW * 0x1C8 / oldH;
+                    mCaptureSizeH = 0x1C8;
+                }
+            } else if (h > 0x1C8) {
+                int scaledW = w * 0x1C8;
+                scaledW /= h;
+                mCaptureSizeH = 0x1C8;
+                mCaptureSizeW = scaledW;
+                if (mCaptureSizeW > 0x200) {
+                    int oldW = mCaptureSizeW;
+                    mCaptureSizeH = mCaptureSizeH * 0x200 / oldW;
+                    mCaptureSizeW = 0x200;
+                }
+            } else {
+                mCaptureSizeW = w;
+                mCaptureSizeH = h;
+            }
 
-    if (w > 0x1900) {
-        return -1;
-    }
-
-    if (w > 0xC80) {
-        scaleW = 8;
-    } else if (w > 0x640) {
-        scaleW = 4;
-    } else if (w > 0x320) {
-        scaleW = 2;
-    }
-
-    if (h > 0x12C0) {
-        return -1;
-    }
-
-    if (h > 0x960) {
-        scaleH = 8;
-    } else if (h > 0x4B0) {
-        scaleH = 4;
-    } else if (h > 0x258) {
-        scaleH = 2;
-    }
-
-    if (scaleW > scaleH) {
-        return scaleW;
-    }
-    return scaleH;
-}
-
-void JpegDecoder::calc_capture_size(int w, int h) {
-    int tmp;
-    switch (mOrientation) {
-    case 1:
-        tmp = h;
-        h = w;
-        w = tmp;
-        break;
-    case 2:
-        tmp = h;
-        h = w;
-        w = tmp;
-    default:
-        break;
-    }
-
-    if (w > 0x200) {
-        mCaptureSizeH = h * 0x200 / w;
-        mCaptureSizeW = 0x200;
-        if (mCaptureSizeH > 0x1C8) {
-            int oldH = mCaptureSizeH;
-            mCaptureSizeW = mCaptureSizeW * 0x1C8 / oldH;
-            mCaptureSizeH = 0x1C8;
+            mCaptureSizeW = (mCaptureSizeW + 7) & ~7;
+            mCaptureSizeH = (mCaptureSizeH + 7) & ~7;
         }
-    } else if (h > 0x1C8) {
-        int scaledW = w * 0x1C8;
-        scaledW /= h;
-        mCaptureSizeH = 0x1C8;
-        mCaptureSizeW = scaledW;
-        if (mCaptureSizeW > 0x200) {
-            int oldW = mCaptureSizeW;
-            mCaptureSizeH = mCaptureSizeH * 0x200 / oldW;
-            mCaptureSizeW = 0x200;
-        }
-    } else {
-        mCaptureSizeW = w;
-        mCaptureSizeH = h;
-    }
-
-    mCaptureSizeW = (mCaptureSizeW + 7) & ~7;
-    mCaptureSizeH = (mCaptureSizeH + 7) & ~7;
-}
 
     }  // namespace utility
 }  // namespace ipl

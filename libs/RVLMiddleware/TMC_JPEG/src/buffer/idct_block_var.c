@@ -1,7 +1,7 @@
-#include <tmc_jpeg_internal.h>
 #include <string.h>
+#include <tmc_jpeg_internal.h>
 
-static u8 Clamp_U8(s32 v) {
+static u8 clampU8(s32 v) {
     s32 ok;
     ok = 0;
     if (v < 256 && v > -1) {
@@ -10,11 +10,11 @@ static u8 Clamp_U8(s32 v) {
     return (ok) ? v : ((v < 0) ? 0 : 255);
 }
 
-static s8 Clamp_S8(s32 v) {
+static s8 clampS8(s32 v) {
     return (v < 128 && v > -129) ? (s8)v : (v > 0) ? 127 : -128;
 }
 
-static s32 ScalingClamp_U8(s32 val) {
+static s32 scalingClampU8(s32 val) {
     s32 result = 0;
     if (val >> 19 != 0)
         result &= ~(val >> 31) & 0xFF;
@@ -117,7 +117,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
         ac = (u32)b4 | (u32)b6 | (u32)b2 | (u32)b1 | (u32)b7 | (u32)b5 | (u32)b3;
         out = conv_row_ptr + i;
         if (ac == 0) {
-            u8 val = Clamp_U8((*dst >> 11) + 0x80);
+            u8 val = clampU8((*dst >> 11) + 0x80);
             out[r] = val;
             out[pitch * 6] = val;
             out[z + pitch] = val;
@@ -145,14 +145,14 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
             p = z_factor + ((b5 - b3) * 0x8B >> 8);
             q = p + x;
 
-            out[0] = ScalingClamp_U8(w + n);
-            out[r] = ScalingClamp_U8(w - n);
-            out[pitch] = ScalingClamp_U8(v + o);
-            out[pitch * 6] = ScalingClamp_U8(v - o);
-            out[m] = ScalingClamp_U8(e + q);
-            out[z + pitch] = ScalingClamp_U8(e - q);
-            out[z - pitch] = ScalingClamp_U8(y + p);
-            out[z] = ScalingClamp_U8(y - p);
+            out[0] = scalingClampU8(w + n);
+            out[r] = scalingClampU8(w - n);
+            out[pitch] = scalingClampU8(v + o);
+            out[pitch * 6] = scalingClampU8(v - o);
+            out[m] = scalingClampU8(e + q);
+            out[z + pitch] = scalingClampU8(e - q);
+            out[z - pitch] = scalingClampU8(y + p);
+            out[z] = scalingClampU8(y - p);
         }
         dst--;
     }
@@ -171,13 +171,16 @@ void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigza
 
     if (zigzag == 0x11) {
         s32 val;
-        val = Clamp_S8(block[0] >> 11);
+        val = clampS8(block[0] >> 11);
         memset(conv_row_ptr, (s8)val, 0x40);
         return;
     }
 
     r = (zigzag >> 4) * 8;
-    if ((zigzag & 0xF) > 2) goto mode_gt_2;
+    if ((zigzag & 0xF) > 2) {
+        goto mode_gt_2;
+    }
+
     {
         s32 inner;
 
@@ -248,7 +251,7 @@ void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigza
                 block += 8;
             }
         }
-zero_fill:
+    zero_fill:
         dst = tmp + done;
         for (; done < 0x39; done += 8) {
             memset(dst, 0, 0x20);
@@ -349,7 +352,7 @@ epilogue:
         ac |= (u32)b3;
         if (ac == 0) {
             s32 val;
-            val = Clamp_S8(*dst >> 11);
+            val = clampS8(*dst >> 11);
             conv_row_ptr[i + 56] = (u8)val;
             conv_row_ptr[i + 48] = (u8)val;
             conv_row_ptr[i + 40] = (u8)val;
@@ -376,14 +379,14 @@ epilogue:
             p = z + ((b5 - b3) * 0x8B >> 8);
             q = p + x;
 
-            conv_row_ptr[i] = (u8)Clamp_S8((w + n) >> 11);
-            conv_row_ptr[i + 56] = (u8)Clamp_S8((w - n) >> 11);
-            conv_row_ptr[i + 8] = (u8)Clamp_S8((v + o) >> 11);
-            conv_row_ptr[i + 48] = (u8)Clamp_S8((v - o) >> 11);
-            conv_row_ptr[i + 16] = (u8)Clamp_S8((e + q) >> 11);
-            conv_row_ptr[i + 40] = (u8)Clamp_S8((e - q) >> 11);
-            conv_row_ptr[i + 24] = (u8)Clamp_S8((y + p) >> 11);
-            conv_row_ptr[i + 32] = (u8)Clamp_S8((y - p) >> 11);
+            conv_row_ptr[i] = (u8)clampS8((w + n) >> 11);
+            conv_row_ptr[i + 56] = (u8)clampS8((w - n) >> 11);
+            conv_row_ptr[i + 8] = (u8)clampS8((v + o) >> 11);
+            conv_row_ptr[i + 48] = (u8)clampS8((v - o) >> 11);
+            conv_row_ptr[i + 16] = (u8)clampS8((e + q) >> 11);
+            conv_row_ptr[i + 40] = (u8)clampS8((e - q) >> 11);
+            conv_row_ptr[i + 24] = (u8)clampS8((y + p) >> 11);
+            conv_row_ptr[i + 32] = (u8)clampS8((y - p) >> 11);
         }
         dst--;
     }
