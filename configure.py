@@ -284,6 +284,7 @@ cflags_includes = [
     "-i libs/NW4R/include",
     "-i libs/RVLMiddleware/eZiText/include",
     # "-i libs/RVLMiddleware/ATOKDict/include",
+    "-i libs/RVLMiddleware/TMC_JPEG/include",
     "-i libs/RVLFaceLib/include",
     "-i libs/EGG/include",
     "-i libs/OperaWWW/include",
@@ -405,6 +406,12 @@ cflags_eztx = [
     "-Cpp_exceptions off",
 ]
 
+# TMC JPEG Library
+cflags_sdk_jpeg = [
+    *cflags_sdk,
+    "-use_lmw_stmw on",
+]
+
 # Metroworks library flags
 cflags_runtime = [
     *cflags_base,
@@ -495,7 +502,7 @@ def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "TMC_JPEG",
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk,
+        "cflags": cflags_sdk_jpeg,
         "progress_category": "rvlmwm",
         "objects": objects,
         "src_dir": "libs/RVLMiddleware/TMC_JPEG/src",
@@ -669,7 +676,7 @@ config.libs = [
             Object(NonMatching, "utility/iplUtility.cpp"),
             Object(Matching,    "utility/iplThread.cpp"),
             Object(Matching,    "utility/iplMessageBase.cpp"),
-            Object(NonMatching, "utility/iplJpegDecoder.cpp"),
+            Object(Matching,    "utility/iplJpegDecoder.cpp"),
             Object(NonMatching, "utility/iplESMisc.cpp"),
             Object(Matching,    "utility/iplCSFlags.cpp"),
         ]
@@ -1191,20 +1198,19 @@ config.libs = [
     TMCJpegLib(
         [
             Object(NonMatching, "buffer/mkhdec3.c"),
-            Object(NonMatching, "buffer/buffer_system.c"),
-            Object(NonMatching, "buffer/getcode.c"),
+            Object(Matching,    "buffer/buffer_system.c"),
+            Object(Equivalent,  "buffer/getcode.c"),
             Object(NonMatching, "buffer/idct_block_var.c"),
-            Object(NonMatching, "buffer/decapi.c"),
 
-            Object(NonMatching, "api/decapi.c"),
+            Object(Matching,   "api/decapi.c"),
 
-            Object(NonMatching, "jpegdec/jdec.c"),
+            Object(Matching,    "jpegdec/jdec.c"),
             Object(NonMatching, "jpegdec/jdec_main.c"),
-            Object(NonMatching, "jpegdec/jpformat.c"),
+            Object(Matching,    "jpegdec/jpformat.c"),
 
             Object(NonMatching, "exif/exif_parse.c"),
 
-            Object(NonMatching, "reschange/iqdec_resolution_change_a3.c"),
+            Object(Equivalent,  "reschange/iqdec_resolution_change_a3.c"),
             Object(NonMatching, "reschange/idct_resolution_change_var.c"),
 
             Object(NonMatching, "texturecvtr/Texture_MCUtoY8U8V8.c"),
