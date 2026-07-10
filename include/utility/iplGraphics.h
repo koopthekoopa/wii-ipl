@@ -22,12 +22,14 @@ namespace ipl {
 
                 math::VEC3 mOrthoTrans;  // 0x70
                 math::VEC2 mOrthoScale;  // 0x7C
+
                 friend class Graphics;
             };
+
             typedef enum Orientation {
                 ORI_NONE = 0,
-                ORI_90_CLOCKWISE,
-                ORI_90_ANTICLOCKWISE
+                ORI_90CW,
+                ORI_90CCW
             } Orientation;
 
             static nw4r::math::MTX34& getViewMtx() { return mArg.mViewMtx; }

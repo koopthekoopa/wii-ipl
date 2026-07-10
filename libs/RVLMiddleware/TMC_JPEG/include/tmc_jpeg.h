@@ -13,21 +13,23 @@
 extern "C" {
 #endif
 
+#define TMCC_JPEG_DEC_WORK_SIZE 0x1C00
+
 typedef struct TMCCJPEGDecWork_t TMCCJPEGDecWork;
 
 typedef s32(TMCCReadCallback)(void*, u8*, unsigned int);
 
 typedef struct {
     u8 unk_0x00[0x10];
-    void* pBuf2;                 // 0x10
-    u32 buf2Size;                // 0x14
-    u32 dataSize;                // 0x18
-    TMCCReadCallback* pCallback; // 0x1C
-    void* pContext;              // 0x20
-    u8 unk_0x24;                 // 0x24
+    void* pBuf2;                  // 0x10
+    u32 buf2Size;                 // 0x14
+    u32 dataSize;                 // 0x18
+    TMCCReadCallback* pCallback;  // 0x1C
+    void* pContext;               // 0x20
+    u8 unk_0x24;                  // 0x24
     u8 pad_0x25[0x03];
-    TMCCJPEGDecWork* pBuf1;      // 0x28
-    u8 unk_0x2C;                 // 0x2C
+    TMCCJPEGDecWork* pBuf1;  // 0x28
+    u8 unk_0x2C;             // 0x2C
     u8 pad_0x2D[0x03];
 } TMCCJPEGDecInitParam;
 
@@ -48,42 +50,42 @@ typedef struct {
     s8 flashPixVer[4];         // 0x644
     u16 colorSpace;            // 0x648
     u8 unk_0x64A[0x02];
-    u32 pixelXDim;             // 0x64C
-    u32 pixelYDim;             // 0x650
-    u16 compressionIfd1;       // 0x654
+    u32 pixelXDim;        // 0x64C
+    u32 pixelYDim;        // 0x650
+    u16 compressionIfd1;  // 0x654
     u8 unk_0x656[0x02];
-    u32 xResNumIfd1;           // 0x658
-    u32 xResDenIfd1;           // 0x65C
-    u32 planarConfigIfd1;      // 0x660
-    u32 yResDenIfd1;           // 0x664
-    u16 resUnitIfd1;           // 0x668
+    u32 xResNumIfd1;       // 0x658
+    u32 xResDenIfd1;       // 0x65C
+    u32 planarConfigIfd1;  // 0x660
+    u32 yResDenIfd1;       // 0x664
+    u16 resUnitIfd1;       // 0x668
     u8 unk_0x66A[0x02];
-    u32 thumbnailOffset;       // 0x66C
-    u32 thumbnailLength;       // 0x670
-    u8* thumbnailData;         // 0x674
-    u8* dataEnd;               // 0x678
+    u32 thumbnailOffset;  // 0x66C
+    u32 thumbnailLength;  // 0x670
+    u8* thumbnailData;    // 0x674
+    u8* dataEnd;          // 0x678
 } TMCCJPEGDecExifData;
 
 typedef struct {
     u8 unk_0x00[0x04];
-    s32 position;                 // 0x04
+    s32 position;  // 0x04
     u8 unk_0x08[0x04];
-    u32 state;                    // 0x0C
+    u32 state;  // 0x0C
     u8 unk_0x10[0x10];
-    u8 exifFlags;                 // 0x20
-    u8 thumbFlag;                 // 0x21
+    u8 exifFlags;  // 0x20
+    u8 thumbFlag;  // 0x21
     u8 unk_0x22[0x2A];
-    TMCCJPEGDecExifData exifData; // 0x4C
-    TMCCJPEGDecWork* pWorkBuf;    // 0x6C8
+    TMCCJPEGDecExifData exifData;  // 0x4C
+    TMCCJPEGDecWork* pWorkBuf;     // 0x6C8
     u8 unk_0x6CC[0x04];
-    u8 converterType;             // 0x6D0
+    u8 converterType;  // 0x6D0
     u8 unk_0x6D1[0x03];
 } TMCCJPEGDecExifInfo;
 
 typedef struct {
-    u16 posX;           // 0x00
-    u16 posY;           // 0x02
-    s32 position;       // 0x04
+    u16 posX;      // 0x00
+    u16 posY;      // 0x02
+    s32 position;  // 0x04
     u8 unk_0x08[0x04];
     u32 result;         // 0x0C
     u16 maxX;           // 0x10
@@ -107,9 +109,9 @@ typedef struct {
     u8 unk_0x34[0x14];  // 0x34
     void* pTexBuffer;   // 0x48
     u8 unk_0x4C[0x67C];
-    TMCCJPEGDecWork* pWorkBuf; // 0x6C8
-    s32 decodeResult;   // 0x6CC
-    u8 converterType;   // 0x6D0
+    TMCCJPEGDecWork* pWorkBuf;  // 0x6C8
+    s32 decodeResult;           // 0x6CC
+    u8 converterType;           // 0x6D0
     u8 unk_0x6D1[0x03];
 } TMCCJPEGDecState;
 

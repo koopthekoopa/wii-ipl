@@ -725,6 +725,8 @@ namespace ipl {
 
             channel->state = CHAN_STATE_LOADED;
         }
+
+        // uhh
 #pragma push
 #pragma ppc_iro_level 0
         void Manager::loadMetaHeaderAsync(int page, int index) {

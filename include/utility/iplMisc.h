@@ -19,8 +19,8 @@ namespace ipl {
 
         class Language {
         public:
-            static char* getPath();
-            static char* mLangPath[10];
+            static const char* getPath();
+            static const char* mLangPath[10];
         };
 
         template <typename T>
@@ -34,7 +34,7 @@ namespace ipl {
             *b &= ~(T)(1 << pos);
         }
 
-        int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize);
+        void* memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize);
     }  // namespace utility
 }  // namespace ipl
 

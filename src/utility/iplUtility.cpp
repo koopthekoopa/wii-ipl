@@ -1,18 +1,50 @@
 #include "iplUtility.h"
+
 #include "iplSystem.h"
+
 #include "sound/iplSound.h"
-#include "system/iplController.h"
-#include "system/iplPointer.h"
+
 #include "utility/iplTPLValidity.h"
-#include <private/nwc24/NWC24Time.h>
+
+#include <private/nwc24.h>
 #include <private/os.h>
+
 #include <revolution/enc.h>
 
 namespace ipl {
     namespace utility {
-        char* Language::mLangPath[10] = {"jpn", "eng", "ger", "fra", "spa", "ita", "ned", "chn", "eng", "kor"};
+        const char* Language::mLangPath[10] = {"jpn", "eng", "ger", "fra", "spa", "ita", "ned", "chn", "eng", "kor"};
 
-        char* Language::getPath() {
+        void Calendar::setCalendarTime(OSCalendarTime* newCalendar) {
+            u32 bias;
+            u32 rtc;
+
+            bias = SCGetCounterBias();
+            __OSGetRTC(&rtc);
+
+            __OSSetTime(OSSecondsToTicks((OSTime)(rtc + bias)));
+
+            OSSram* sram = __OSLockSram();
+            sram->counterBias = bias;
+            sram->flags |= 0x20;
+            __OSUnlockSram(TRUE);
+
+            while (!__OSSyncSram()) {
+            }
+
+            rtc = 0;
+            if (!__OSGetRTC(&rtc) || rtc & RTC_FLAGS_DISC_31) {
+                __OSSetRTC(rtc);
+            }
+
+            s32 newBias = (s32)OSTicksToSeconds(OSCalendarTimeToTicks(newCalendar)) - (s32)rtc;
+            SCSetCounterBias(newBias);
+
+            __OSSetTime(OSCalendarTimeToTicks(newCalendar));
+            NWC24iSynchronizeRtcCounter(FALSE);
+        }
+
+        const char* Language::getPath() {
             return mLangPath[System::getLanguage()];
         }
 
@@ -22,12 +54,20 @@ namespace ipl {
 
         void BScroller::init() {
             mState = -1;
-            unk_0x08 = 0.0f;
-            unk_0x0C = 0.0f;
-            unk_0x10 = 0.0f;
-            unk_0x14 = 0.0f;
+            unk_0x08.x = 0.0f;
+            unk_0x08.y = 0.0f;
+            unk_0x10.x = 0.0f;
+            unk_0x10.y = 0.0f;
             mSpeed = 0.0f;
             mSoundFreq = 0.0f;
+        }
+
+        void BScroller::reset() {
+            if (mState >= 0) {
+                System::smArg.mpPointer->setState(mState, 0);
+                System::smArg.mpPointer->mIsScrolling = -1;
+            }
+            init();
         }
 
         BOOL BScroller::calc() {
@@ -51,10 +91,10 @@ namespace ipl {
 
                     mState = channel;
 
-                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
-                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
+                    unk_0x08.x = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
+                    unk_0x08.y = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
-                    *(math::VEC2*)&unk_0x10 = *(math::VEC2*)&unk_0x08;
+                    unk_0x10 = unk_0x08;
 
                     System::smArg.mpPointer->setState(mState, 1);
                     System::smArg.mpPointer->mIsScrolling = mState;
@@ -72,20 +112,20 @@ namespace ipl {
                     System::smArg.mpPointer->mIsScrolling = -1;
                     init();
                 } else if (ctrl->isValidDpd()) {
-                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
-                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
+                    unk_0x08.x = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
+                    unk_0x08.y = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
                     mSpeed = _get();
                     set_arw_param();
                 } else {
-                    if (math::abs<float>(unk_0x08) < math::abs<float>(unk_0x0C)) {
+                    if (math::abs<float>(unk_0x08.x) < math::abs<float>(unk_0x08.y)) {
                         f32 newVal;
-                        if (unk_0x0C < 0.0f) {
+                        if (unk_0x08.y < 0.0f) {
                             newVal = -1.0f;
                         } else {
                             newVal = 1.0f;
                         }
-                        unk_0x0C = newVal;
+                        unk_0x08.y = newVal;
                         mSpeed = _get();
                         set_arw_param();
                     }
@@ -106,9 +146,39 @@ namespace ipl {
             return result;
         }
 
-        BOOL BScroller::isYoungController(int channel) {
-            return TRUE;
+        f32 BScroller::_get() {
+            f32 diff = unk_0x08.y - unk_0x10.y;
+            f32 result = 0.f;
+            if (diff < -0.01f) {
+                result = -10.0f * (diff * diff);
+            } else if (diff > 0.01f) {
+                result = 10.0f * (diff * diff);
+            }
+            return result;
         }
+
+        // uhh
+#pragma push
+#pragma ppc_iro_level 0
+        void BScroller::set_arw_param() {
+            int direction;
+            if (mSpeed < 0.0f) {
+                direction = 0;
+            } else {
+                direction = 1;
+            }
+            System::getPointer()->mPointDirection = direction;
+
+            nw4r::ut::Rect rect;
+            System::getProjectionRect(&rect);
+
+            f32 arrowLen = math::abs<float>(unk_0x10.y - unk_0x08.y) * rect.GetHeight();
+            System::getPointer()->setArrowLength(arrowLen);
+
+            bool scrolling = math::abs<float>(mSpeed) > 0.0f;
+            System::getPointer()->mbScrolling = scrolling;
+        }
+#pragma pop
 
         bool BScroller::isActive() const {
             return (u32)(mState + 1) > 0;
@@ -122,47 +192,12 @@ namespace ipl {
             return mSpeed > 0.0f;
         }
 
-        f32 BScroller::_get() {
-            f32 diff = unk_0x0C - unk_0x14;
-            f32 result = 0.f;
-            if (diff < -0.01f) {
-                result = -10.0f * (diff * diff);
-            } else if (diff > 0.01f) {
-                result = 10.0f * (diff * diff);
-            }
-            return result;
-        }
-
         BOOL YoungBScroller::isYoungController(int channel) {
             controller::Interface* pController = System::getYoungController();
             if (pController != NULL && pController->getChannel() == channel) {
                 return TRUE;
             }
             return FALSE;
-        }
-
-        void BScroller::set_arw_param() {
-            int direction = mSpeed >= 0.0f ? 1 : 0;
-            Pointer* ptr = System::getPointer();
-            ptr->mPointDirection = direction;
-
-            nw4r::ut::Rect rect;
-            System::getProjectionRect(&rect);
-
-            f32 diff = unk_0x14 - unk_0x0C;
-            f32 height = rect.bottom - rect.top;
-            f32 arrowLen = math::abs<float>(diff) * height;
-            ptr->setArrowLength(arrowLen);
-
-            ptr->mbScrolling = math::abs<float>(mSpeed) > 0.0f;
-        }
-
-        void BScroller::reset() {
-            if (mState >= 0) {
-                System::smArg.mpPointer->setState(mState, 0);
-                System::smArg.mpPointer->mIsScrolling = -1;
-            }
-            init();
         }
 
         Scroller::Scroller() {
@@ -176,6 +211,19 @@ namespace ipl {
             unk_0x4C = 1.5f;
 
             anim.init(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0, 1.0f);
+        }
+
+        f32 Scroller::movable_pos(f32 speed) const {
+            f32 newPos;
+            f32 curScroll = mScroll;
+            newPos = curScroll + speed;
+            if (newPos > mDownLimit) {
+                return mDownLimit - curScroll;
+            }
+            if (newPos < mUpLimit) {
+                return mUpLimit - curScroll;
+            }
+            return speed;
         }
 
         void Scroller::calc() {
@@ -213,10 +261,10 @@ namespace ipl {
                     anim.init(0.0f, 300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
-                    mState = 5;
+                    mState = STATE_5;
                     break;
                 }
-                case 5: {
+                case STATE_5: {
                     anim.calc();
                     mScroll = unk_0x44 + anim.get();
 
@@ -236,26 +284,13 @@ namespace ipl {
                 mScroll = mUpLimit;
             }
 
-            if (ipl::math::abs<float>(oldScroll - mScroll) > 1.0f) {
-                ipl::snd::sSystem.holdSE("WIPL_SE_MESSAGE_SCROLL");
+            if (math::abs<float>(oldScroll - mScroll) > 1.0f) {
+                snd::sSystem.holdSE("WIPL_SE_MESSAGE_SCROLL");
             }
         }
 
         f32 Scroller::get() const {
             return mScroll;
-        }
-
-        f32 Scroller::movable_pos(f32 speed) const {
-            f32 newPos;
-            f32 curScroll = mScroll;
-            newPos = curScroll + speed;
-            if (newPos > mDownLimit) {
-                return mDownLimit - curScroll;
-            }
-            if (newPos < mUpLimit) {
-                return mUpLimit - curScroll;
-            }
-            return speed;
         }
 
         void CharacterCode::shiftJISToUTF16(wchar_t* dest, const u8* src, s32 length) {
@@ -383,42 +418,12 @@ namespace ipl {
             }
         }
 
-        namespace wpad {
-            u32 getWpadConnectedMask() {
-                u32 mask = 0;
-                u32 info[1];
-                for (int i = 0; i < 4; i++) {
-                    if (WPADProbe(i, info) == 0 && info[0] != 0xFD) {
-                        mask |= 1 << i;
-                    }
-                }
-                return mask;
-            }
-
-            BOOL isIncreaseConnectedWpad(u32 prevMask, u32 nextMask) {
-                for (u32 i = 4; i > 0; i--) {
-                    if (!(prevMask & 1)) {
-                        if ((nextMask & 1) == 1) {
-                            return TRUE;
-                        }
-                    }
-                    prevMask >>= 1;
-                    nextMask >>= 1;
-                }
-                return FALSE;
-            }
-        }  // namespace wpad
-
         void timer::set_msec(int ms) {
             tick = OSGetTime() + OSMillisecondsToTicks((s64)ms);
         }
 
         bool timer::operator()() {
             return OSGetTime() > tick;
-        }
-
-        int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize) {
-            return (int)memcpy(dest, src, destSize < srcSize ? destSize : srcSize);
         }
 
         namespace layout {
@@ -456,15 +461,12 @@ namespace ipl {
         }  // namespace layout
 
         math::VEC2 get_cursor_pos(const math::VEC2& basePos) {
-            nw4r::ut::Rect rect16_9;
-            System::getProjectionRect(&rect16_9);
-            nw4r::ut::Rect rect4_3;
-            System::getProjectionRect4x3(&rect4_3);
+            nw4r::ut::Rect rect16x9;
+            System::getProjectionRect(&rect16x9);
+            nw4r::ut::Rect rect4x3;
+            System::getProjectionRect4x3(&rect4x3);
 
-            f32 width16_9 = rect16_9.right - rect16_9.left;
-            f32 width4_3 = rect4_3.right - rect4_3.left;
-            // TODO: Non-matching VEC2 ctor call. When moving the math::VEC2(f32,f32) implementation into this TU, it matches 100% for some reason
-            return math::VEC2(basePos.x * (width4_3 / width16_9), -basePos.y);
+            return math::VEC2(basePos.x * (rect4x3.GetWidth() / rect16x9.GetWidth()), -basePos.y);
         }
 
         tpl_validity::tpl_validity(TPLPalette* pal, u32 palSize) {
@@ -600,39 +602,42 @@ namespace ipl {
             return r;
         }
 
-        void Calendar::setCalendarTime(OSCalendarTime* newCalendar) {
-            // TODO: define constant? resolve address?
-            u32* busClk = reinterpret_cast<u32*>(0x800000F8);
-            u32 bias;
-            u32 rtc;
+        void* memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize) {
+            return memcpy(dest, src, destSize < srcSize ? destSize : srcSize);
+        }
 
-            bias = SCGetCounterBias();
-            __OSGetRTC(&rtc);
-
-            s64 ticks = rtc + bias;
-            __OSSetTime(*busClk / 4 * ticks);
-
-            OSSram* sram = __OSLockSram();
-            sram->counterBias = bias;
-            sram->flags |= 0x20;
-            __OSUnlockSram(TRUE);
-
-            while (!__OSSyncSram()) {}
-
-            rtc = 0;
-            if (__OSGetRTC(&rtc) == 0 || rtc & 0x80000000) {
-                __OSSetRTC(rtc);
+        namespace wpad {
+            BOOL isIncreaseConnectedWpad(u32 prevMask, u32 nextMask) {
+                for (u32 i = 4; i > 0; i--) {
+                    if (!(prevMask & 1)) {
+                        if ((nextMask & 1) == 1) {
+                            return TRUE;
+                        }
+                    }
+                    prevMask >>= 1;
+                    nextMask >>= 1;
+                }
+                return FALSE;
             }
 
-            s32 newBias = (s32)(OSCalendarTimeToTicks(newCalendar) / (s64)(*busClk / 4)) - (s32)rtc;
-            SCSetCounterBias(newBias);
+            u32 getWpadConnectedMask() {
+                u32 mask = 0;
+                u32 info[1];
+                for (int i = 0; i < 4; i++) {
+                    if (WPADProbe(i, info) == 0 && info[0] != 0xFD) {
+                        mask |= 1 << i;
+                    }
+                }
+                return mask;
+            }
+        }  // namespace wpad
 
-            __OSSetTime(OSCalendarTimeToTicks(newCalendar));
-            NWC24iSynchronizeRtcCounter(0);
-        }
     }  // namespace utility
 
-    namespace math {
-        template class HermiteIntp<f32>;
+#ifndef NON_MATCHING
+    math::VEC2 ForceCTORWeak() {
+        return math::VEC2(NULL, NULL);
     }
+#endif  // NON_MATCHING
+
 }  // namespace ipl

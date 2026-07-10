@@ -18,6 +18,7 @@ BOOL __OSClearRTCFlags();
 enum {
     RTC_FLAGS_EJECT_DISC = (1 << 0),
     RTC_FLAGS_DISC_CHANGED = (1 << 1),
+    RTC_FLAGS_DISC_31 = (1 << 31),
 };
 
 #ifdef __cplusplus

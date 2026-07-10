@@ -132,7 +132,7 @@ namespace ipl {
                     rightTop_y = 0;
                     break;
                 }
-                case ORI_90_CLOCKWISE: {
+                case ORI_90CW: {
                     leftTop_x = 0;
                     rightBottom_y = 0;
                     rightTop_x = 0;
@@ -143,7 +143,7 @@ namespace ipl {
                     rightBottom_x = texScale;
                     break;
                 }
-                case ORI_90_ANTICLOCKWISE: {
+                case ORI_90CCW: {
                     leftTop_x = texScale;
                     leftTop_y = 0;
                     leftBottom_x = 0;

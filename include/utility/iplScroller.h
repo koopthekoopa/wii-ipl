@@ -4,6 +4,7 @@
 #include <revolution/types.h>
 
 #include "math/iplInterporation.h"
+#include "math/iplMathTypes.h"
 
 namespace ipl {
     namespace utility {
@@ -11,7 +12,7 @@ namespace ipl {
         public:
             BScroller();
 
-            virtual BOOL isYoungController(int channel);
+            virtual BOOL isYoungController(int channel) { return TRUE; }
 
             void init();
             BOOL calc();
@@ -28,11 +29,9 @@ namespace ipl {
             f32 _get();
             void set_arw_param();
 
-            int mState;      // 0x04
-            f32 unk_0x08;
-            f32 unk_0x0C;
-            f32 unk_0x10;
-            f32 unk_0x14;
+            int mState;  // 0x04
+            math::VEC2 unk_0x08;
+            math::VEC2 unk_0x10;
             f32 mSpeed;      // 0x18
             f32 mSoundFreq;  // 0x1C
         };
@@ -52,6 +51,7 @@ namespace ipl {
                 STATE_SCROLL_CON_DOWN,
                 STATE_SCROLL_BTN_UP,
                 STATE_SCROLL_BTN_DOWN,
+                STATE_5,
             };
 
         public:

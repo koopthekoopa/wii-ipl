@@ -95,7 +95,7 @@ namespace ipl {
         }
 
         int Base::decide() const {
-            return (unk_0x08 - 5) == 0;
+            return unk_0x08 == 5;
         }
 
         int Base::rumble(int type) {
@@ -206,8 +206,8 @@ namespace ipl {
         }
 
         Classic::Classic(int arg0, KPADStatus& arg1) : Revolution(arg0, arg1) {
-            unk_0x24.y = 0.01f;
             unk_0x24.x = 0.01f;
+            unk_0x24.y = 0.01f;
             unk_0x2C = 0;
         }
 

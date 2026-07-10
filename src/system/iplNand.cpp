@@ -340,7 +340,7 @@ namespace ipl {
 
             mpCommonFile = new (heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
 
-            char* langPath = utility::Language::getPath();
+            const char* langPath = utility::Language::getPath();
 
             // Open the language exclusive file
             strncpy(fullName, dirName, NAND_MAX_PATH + 1);
@@ -353,17 +353,21 @@ namespace ipl {
         }
 
         LangFile::~LangFile() {
-            if (mpCommonFile)
+            if (mpCommonFile) {
                 delete mpCommonFile;
-            if (mpLangFile)
+            }
+            if (mpLangFile) {
                 delete mpLangFile;
+            }
         }
 
         void LangFile::read() {
-            if (mpCommonFile)
+            if (mpCommonFile) {
                 mpCommonFile->read();
-            if (mpLangFile)
+            }
+            if (mpLangFile) {
                 mpLangFile->read();
+            }
         }
 
         // `LayoutFile` is literally `LangFile` lol.

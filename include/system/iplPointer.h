@@ -19,7 +19,9 @@
 
 namespace ipl {
     class Pointer;
-    namespace utility { class BScroller; }
+    namespace utility {
+        class BScroller;
+    }
 
     class PointerType {
     public:
