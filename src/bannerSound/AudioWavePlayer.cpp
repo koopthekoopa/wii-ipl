@@ -68,8 +68,8 @@ void SimpleWavePlayer::wavePacketCallback(WavePacketCallbackStatus status, WaveP
 }
 
 SimpleWavePlayer::SimpleWavePlayer() {
-    unk_0x0b5 = 1;
-    unk_0x0b0 = 0;
+    unk_0x0b5 = true;
+    unk_0x0b0 = false;
     mIsSetData = false;
     mIsPlaying = false;
     mIsSetBuf = false;
@@ -80,8 +80,6 @@ SimpleWavePlayer::SimpleWavePlayer() {
 
 SimpleWavePlayer::~SimpleWavePlayer() {
 }
-
-#define wsize 0x3000
 
 void SimpleWavePlayer::setBuffer(s16* wavebuf, u32 wavebufsize) {
     int offset = 0;
@@ -188,7 +186,7 @@ void SimpleWavePlayer::stop() {
 
 void SimpleWavePlayer::update() {
     if (mIsPlaying) {
-        if (unk_0x0b5 == 0) {
+        if (!unk_0x0b5) {
             for (int i = 0; i < 3; i++) {
                 if (mWavePackets[i].getAppendFlag())
                     continue;
@@ -240,4 +238,9 @@ u32 AudioWavePlayer_8140D938(u32 a, u32 b, int mode) {
             break;
     }
     return out;
+}
+
+void FORCE_GEN_nw4r_ut_AutoInterrupLock() {
+    nw4r::ut::AutoInterruptLock lock;
+    nw4r::ut::AutoInterruptLock lock2;
 }

@@ -902,7 +902,7 @@ config.libs = [
             Object(Equivalent, "bannerSound/AudioWavePlayer.cpp"),
             Object(NonMatching, "bannerSound/AxAdpcmPlayer.cpp"),
             Object(Matching, "bannerSound/BannerSoundPlayer.cpp"),
-            Object(Equivalent, "bannerSound/AudioWaveUtility.cpp"),
+            Object(Matching, "bannerSound/AudioWaveUtility.cpp"),
         ]
     ),
     # it decides to do fast optimization for this one

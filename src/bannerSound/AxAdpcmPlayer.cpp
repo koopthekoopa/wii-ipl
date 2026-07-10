@@ -43,64 +43,64 @@ inline bool getSomething(VoiceInfo* currVoice) {
 }
 
 void AudioFrameCallback() {
-    u32 uVar7;
-    bool bVar2;
+    u32 voiceI;
+    bool isDone;
 
-    bVar2 = false;
+    isDone = false;
     if (AxAdpcmSimplePlayer::sCallback != NULL) {
         (*AxAdpcmSimplePlayer::sCallback)();
     }
 
-    for (uVar7 = 0; uVar7 < 0x60; uVar7++) {
-        VoiceInfo* currVoice = Voices + uVar7;
-        if (currVoice->getAXVPB() != 0 || currVoice->getUnk_x0c() == 2) {
-            bool bVar1 = getSomething(currVoice);
-            if (bVar1) {
-                bVar2 = true;
-            } else {
-                switch (Voices[uVar7].getState()) {
-                    case 1:
+    for (voiceI = 0; voiceI < 0x60; voiceI++) {
+        VoiceInfo* currVoice = &Voices[voiceI];
+        if (currVoice->getAXVPB() == NULL && currVoice->getUnk_x0c() != 2)
+            continue;
+
+        if (getSomething(currVoice)) {
+            isDone = true;
+        } else {
+            switch (Voices[voiceI].getState()) {
+                case 1:
+                    AXSetVoiceState(currVoice->getAXVPB(), 1);
+                    currVoice->setState(2);
+                    break;
+                case 2:
+                    currVoice->setState(3);
+                    break;
+                case 3:
+                    if (currVoice->getAXVPB()->pb.state == 0) {
+                        isDone = true;
+                    } else if (AxAdpcmSimplePlayer::sSysPauseFlag != '\0') {
+                        currVoice->setState(4);
+                    }
+                    break;
+                case 7:
+                    isDone = true;
+                    break;
+                case 4:
+                    AXSetVoiceState(currVoice->getAXVPB(), 0);
+                    currVoice->setState(5);
+                    break;
+                case 5:
+                    if (!AxAdpcmSimplePlayer::sSysPauseFlag) {
                         AXSetVoiceState(currVoice->getAXVPB(), 1);
-                        currVoice->setState(2);
-                        break;
-                    case 2:
-                        currVoice->setState(3);
-                        break;
-                    case 3:
-                        if (currVoice->getAXVPB()->pb.state == 0) {
-                            bVar2 = true;
-                        } else if (AxAdpcmSimplePlayer::sSysPauseFlag != '\0') {
-                            currVoice->setState(4);
-                        }
-                        break;
-                    case 7:
-                        bVar2 = true;
-                        break;
-                    case 4:
-                        AXSetVoiceState(currVoice->getAXVPB(), 0);
-                        currVoice->setState(5);
-                        break;
-                    case 5:
-                        if (!AxAdpcmSimplePlayer::sSysPauseFlag) {
-                            AXSetVoiceState(currVoice->getAXVPB(), 1);
-                            currVoice->setState(6);
-                        }
-                        break;
-                    case 6:
-                        currVoice->setState(3);
-                        break;
-                }
+                        currVoice->setState(6);
+                    }
+                    break;
+                case 6:
+                    currVoice->setState(3);
+                    break;
             }
-            if (bVar2) {
-                AXSetVoiceState(currVoice->getAXVPB(), 0);
-                AXFreeVoice(currVoice->getAXVPB());
-                currVoice->setAXVPB(NULL);
-                bVar2 = false;
-                currVoice->setState(0);
-                currVoice->setUnk_x08(0);
-            }
-            currVoice->setUnk_x0c(0);
         }
+        if (isDone) {
+            AXSetVoiceState(currVoice->getAXVPB(), 0);
+            AXFreeVoice(currVoice->getAXVPB());
+            currVoice->setAXVPB(NULL);
+            isDone = false;
+            currVoice->setState(0);
+            currVoice->setUnk_x08(0);
+        }
+        currVoice->setUnk_x0c(0);
     }
     return;
 }
@@ -196,8 +196,8 @@ inline int AxAdpcmSimplePlayer::setupChannels(Header* head, u32 length, AxAdpcmH
     ChannelInfo* chanInfoBufA[2];
     ChannelInfo* chanInfoBufB[2];
     ChannelConfig* chanCfgBuf[2];
-    Coeffs* coeffsBufA[2];
-    Coeffs* coeffsBufB[2];
+    AdpcmCoeffs* coeffsBufA[2];
+    AdpcmCoeffs* coeffsBufB[2];
 
     if (head->byteOrder != 0xfeff)
         return 0;
@@ -222,8 +222,8 @@ inline int AxAdpcmSimplePlayer::setupChannels(Header* head, u32 length, AxAdpcmH
     ChannelInfo** pChanInfoBufA = chanInfoBufA;
     ChannelInfo** pChanInfoBufB = chanInfoBufB;
     ChannelConfig** pChanCgfBuf = chanCfgBuf;
-    Coeffs** pCoeffsBufA = coeffsBufA;
-    Coeffs** pCoeffsBufB = coeffsBufB;
+    AdpcmCoeffs** pCoeffsBufA = coeffsBufA;
+    AdpcmCoeffs** pCoeffsBufB = coeffsBufB;
     AXVPB** pAxvpbBuf = axVoiceBuf;
     for (int chanI = 0; channelCount = infoBlock->channelCount, chanI < infoBlock->channelCount; chanI++) {
         int chanStartOffs = channelStartOffsets[chanI];
@@ -234,12 +234,12 @@ inline int AxAdpcmSimplePlayer::setupChannels(Header* head, u32 length, AxAdpcmH
         pChanInfoBufA[chanI] = chanInfo;
         pChanInfoBufB[chanI] = chanInfo;
         pChanCgfBuf[chanI] = ADD_OFFSET(ChannelConfig, dataBlockDataBase, chanStart);
-        pCoeffsBufA[chanI] = ADD_OFFSET(Coeffs, infoBlockDataBase, coeffStart);
-        pCoeffsBufB[chanI] = ADD_OFFSET(Coeffs, infoBlockDataBase, coeffStart);
+        pCoeffsBufA[chanI] = ADD_OFFSET(AdpcmCoeffs, infoBlockDataBase, coeffStart);
+        pCoeffsBufB[chanI] = ADD_OFFSET(AdpcmCoeffs, infoBlockDataBase, coeffStart);
 
-        AXVPB* pAVar5 = AXAcquireVoice(0x1f, VoiceCallback, 0);
-        pAxvpbBuf[chanI] = pAVar5;
-        if (pAVar5 == NULL)
+        // AXVPB* pAVar5 =
+        pAxvpbBuf[chanI] = AXAcquireVoice(0x1f, VoiceCallback, NULL);
+        if (pAxvpbBuf[chanI] == NULL)
             return 0;
 
         axAddr->loopFlag = infoBlock->hasLoop;
@@ -297,15 +297,15 @@ inline int AxAdpcmSimplePlayer::setupChannels(Header* head, u32 length, AxAdpcmH
         axSrc->last_samples[1] = 0;
         axSrc->last_samples[2] = 0;
         axSrc->last_samples[3] = 0;
-        AXSetVoiceType(pAVar6, 0);
+        AXSetVoiceType(pAVar6, AX_VOICE_NORMAL);
         AXSetVoiceAddr(pAVar6, axAddr);
         AXSetVoiceAdpcm(pAVar6, axAdpcm);
         AXSetVoiceAdpcmLoop(pAVar6, axLoop);
 
         VoiceInfo::initAXPBMIX(Voices[pAVar6->index].getMix());
         if (infoBlock->channelCount == 2) {
-            if (SCGetSoundMode() == 0) {
-                Voices[pAVar6->index].getMix()->vL = 0b0101101010000010;
+            if (SCGetSoundMode() == SC_SOUND_MODE_MONO) {
+                Voices[pAVar6->index].getMix()->vL = 0x5a82;
                 Voices[pAVar6->index].getMix()->vR = 0x5a82;
             } else if (chanI == 0) {
                 Voices[pAVar6->index].getMix()->vR = 0;
@@ -317,7 +317,7 @@ inline int AxAdpcmSimplePlayer::setupChannels(Header* head, u32 length, AxAdpcmH
         AXSetVoiceMix(vpb, Voices[pAVar6->index].getMix());
         static AXPBVE voiceVe = {0x8000, 0x0000};
         AXSetVoiceVe(vpb, &voiceVe);
-        AXSetVoiceSrcType(vpb, 1);
+        AXSetVoiceSrcType(vpb, AX_SRC_TYPE_LINEAR);
         AXSetVoiceSrc(vpb, axSrc);
     }
     return channelCount;
@@ -336,11 +336,11 @@ int AxAdpcmSimplePlayer::start(void* data, u32 length, AxAdpcmHandle* handle) {
     AXPBADDR axAddr;
     AXVPB* axVoiceBuf[2];
     AXPBADPCMLOOP axLoop;
-    int res = setupChannels(head, length, handle, &axAdpcm, &axSrc, &axAddr, axVoiceBuf, &axLoop);
+    int channelCnt = setupChannels(head, length, handle, &axAdpcm, &axSrc, &axAddr, axVoiceBuf, &axLoop);
 
 CLEANUP:
-    if (res != 0) {
-        for (u32 i = 0; i < res; i++) {
+    if (channelCnt != 0) {
+        for (u32 i = 0; i < channelCnt; i++) {
             if (axVoiceBuf[i] == NULL)
                 return -1;
             Voices[axVoiceBuf[i]->index].setAXVPB(axVoiceBuf[i]);
@@ -348,14 +348,14 @@ CLEANUP:
             Voices[axVoiceBuf[i]->index].setUnk_x0c(1);
         }
         if (handle != NULL) {
-            for (u32 i = 0; i < res; i++) {
+            for (u32 i = 0; i < channelCnt; i++) {
                 handle->setVoice(i, &Voices[axVoiceBuf[i]->index]);
             }
         }
         sPlayingFlag = true;
         handle->setVolume(mVolume);
     }
-    return res;
+    return channelCnt;
 }
 // int AxAdpcmSimplePlayer::start(void* data, u32 length, AxAdpcmHandle* handle) {
 //     Header* head = (Header*)data;

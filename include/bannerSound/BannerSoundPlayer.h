@@ -6,8 +6,7 @@
 #include "bannerSound/AudioWavePlayer.h"
 #include "bannerSound/AxAdpcmPlayer.h"
 
-// #include <nw4r/snd.h>
-
+// Used for interpolating between different volume values
 class SndMoveValueF32 {
 public:
     SndMoveValueF32();
@@ -68,5 +67,7 @@ private:
     u8 unk_0x510;                      // 0x510
     f32 mMasterVolume;                 // 0x514
 };
+
+extern s16* pBSWaveBuffer;
 
 #endif  // BANNER_SOUND_PLAYER_H

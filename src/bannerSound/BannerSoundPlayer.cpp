@@ -1,28 +1,7 @@
 #include "bannerSound/BannerSoundPlayer.h"
 
-// class BannerSoundPlayer {
-//     public:
-//         void init(s32);
-//         void calc();
-
-//         void pause(bool flag);
-
-//         void start(void*, u32);
-//         void stop(u32);
-
-//         void setMasterVolume(f32 volume);
-
-//         bool checkHeader(void* data, u32 length);
-//         bool checkData(void* data, u32 length, bool);
-
-//         int getUnk_0x00() const { return unk_0x00[0]; }
-
-//     private:
-//         u8  unk_0x00[0x518];
-// };
-
 static u8 s_player_thread_stack[0x4000];
-static s16* pBSWaveBuffer = NULL;
+s16* pBSWaveBuffer = NULL;
 
 BannerSoundPlayer::BannerSoundPlayer() : mSndMoveValue(), mWavePlayer(), mAdpcmPlayer(), mAdpcmHandle(), unk_0x510(0) {
     mIsInitialized = 0;
@@ -34,14 +13,12 @@ BannerSoundPlayer::~BannerSoundPlayer() {
 }
 
 void BannerSoundPlayer::init(s32 prio) {
-    int iVar1;
-
     mIsStarted = 0;
     mSoundType = SOUND_TYPE_UNINIT;
     if (prio >= 0) {
         mWavePlayer.makeThread(prio, s_player_thread_stack, 0x4000);
     }
-    mWavePlayer.setBuffer(pBSWaveBuffer, 0x3000);
+    mWavePlayer.setBuffer(pBSWaveBuffer, SimpleWavePlayer::wsize);
     mAdpcmPlayer.init();
     mIsInitialized = 1;
 }

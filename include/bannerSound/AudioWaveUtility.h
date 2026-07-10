@@ -1,26 +1,27 @@
 #ifndef AUDIO_WAVE_UTILITY_H
 #define AUDIO_WAVE_UTILITY_H
 
+#include <nw4r/snd/WavePlayer.h>
 #include <revolution/types.h>
 
 class WaveFile {
 public:
-    virtual ~WaveFile() {}
+    virtual ~WaveFile() {};
 
-    virtual u32 getBit() const;
-    virtual int getChannels() const;
-    virtual f64 getSamplingRate() const;
-    virtual s32 getFrames() const;
+    virtual u32 getBit() const = 0;
+    virtual int getChannels() const = 0;
+    virtual f64 getSamplingRate() const = 0;
+    virtual s32 getFrames() const = 0;
 
-    virtual void* getDataBase() const;
-    virtual void* getDataCur() const;
+    virtual void* getDataBase() const = 0;
+    virtual void* getDataCur() const = 0;
 
-    virtual bool isLoop() const;
-    virtual s32 getLoopStart() const;
-    virtual s32 getLoopEnd() const;
+    virtual bool isLoop() const = 0;
+    virtual s32 getLoopStart() const = 0;
+    virtual s32 getLoopEnd() const = 0;
 
-    virtual s32 readData(s16* samples, s32 numSamples);
-    virtual void setDataCur(u32 sampleOffset);
+    virtual s32 readData(s16* samples, s32 numSamples) = 0;
+    virtual void setDataCur(u32 sampleOffset) = 0;
 
 private:
     undefined4 unk_0x4;  // 0x4

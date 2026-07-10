@@ -27,6 +27,8 @@ public:
     WaveFileWav* getWav() { return &mWav; }
     WaveFileAiff* getAiff() { return &mAiff; }
 
+    static const u32 wsize = 0x3000;
+
 private:
     static void MakeWave(nw4r::snd::WavePlayer* player, nw4r::snd::WavePlayer::WavePacket* packet, void* self);
     static void wavePacketCallback(WavePacketCallbackStatus, WavePlayer*, WavePacket*, void*);
@@ -34,12 +36,12 @@ private:
 
 private:
     SetupParam mSetupParam;                             // 0x09c
-    u8 unk_0x0b0;                                       // 0x0b0
+    bool unk_0x0b0;                                     // 0x0b0
     bool mIsSetData;                                    // 0x0b1
     bool mIsPlaying;                                    // 0x0b2
     bool mIsSetBuf;                                     // 0x0b3
     bool mThreadRunning;                                // 0x0b4
-    u8 unk_0x0b5;                                       // 0x0b5
+    bool unk_0x0b5;                                     // 0x0b5
     WaveFileAiff mAiff;                                 // 0x0b8
     WaveFileWav mWav;                                   // 0x0e8
     WaveFile* pFile;                                    // 0x114

@@ -108,7 +108,7 @@ private:
         u16 loopYn2;        // 0xc
         u16 loopPadding;    // 0xe
     };
-    struct Coeffs {
+    struct AdpcmCoeffs {
         u16 a[8][2];
         ChannelConfig cfg;
     };
