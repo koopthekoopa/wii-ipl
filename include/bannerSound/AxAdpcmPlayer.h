@@ -94,8 +94,8 @@ private:
         u32 offsToChannelStart;  // 0x18
     };
     struct ChannelInfo {
-        u32 chanStart;   // 0x0
-        u32 coeffStart;  // 0x4
+        u32 dataOff;   // 0x0
+        u32 coeffOff;  // 0x4
     };
 
     struct ChannelConfig {
@@ -131,16 +131,8 @@ private:
         BlockInfo dataHead;  // 0x18
     };
 
-    // AXPBADPCM axAdpcm;
-    // AXPBSRC axSrc;
-    // AXPBADDR axAddr;
-    // AXVPB* axVoiceBuf[2];
-    // AXPBADPCMLOOP axAdpcmLoop;
-    int setupChannels(Header* head, u32 length, AxAdpcmHandle* handle, AXPBADPCM* axAdpcm, AXPBSRC* axSrc, AXPBADDR* axAddr, AXVPB** axVoiceBuf,
-                      AXPBADPCMLOOP* axLoop);
-
-    void* pBnsData;  // 0x0
-    f32 mVolume;     // 0x4
+    Header* pBnsData;  // 0x0
+    f32 mVolume;       // 0x4
 
 public:
     static bool sSysInit;

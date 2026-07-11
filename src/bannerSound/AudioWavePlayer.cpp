@@ -224,23 +224,23 @@ bool SimpleWavePlayer::makeThread(s32 prio, void* stack, u32 stackSize) {
     return wasCreated == true;
 }
 
-u32 AudioWavePlayer_8140D938(u32 a, u32 b, int mode) {
-    u32 out = 0;
+void* SimpleWavePlayer::convertDSPAddr(void* addr, u32 offset, int mode) {
+    void* out = 0;
     switch (mode) {
         case 0:
-            out = a * 2 + b % 14 + b / 14 * 16 + 2;
+            out = (void*)((u32)addr * 2 + offset % 14 + offset / 14 * 16 + 2);
             break;
         case 25:
-            out = a + b;
+            out = (void*)((u32)addr + offset);
             break;
         case 10:
-            out = a / 2 + b;
+            out = (void*)((u32)addr / 2 + offset);
             break;
     }
     return out;
 }
 
-void FORCE_GEN_nw4r_ut_AutoInterrupLock() {
+void FORCE_GEN_nw4r_ut_AutoInterruptLock() {
     nw4r::ut::AutoInterruptLock lock;
     nw4r::ut::AutoInterruptLock lock2;
 }

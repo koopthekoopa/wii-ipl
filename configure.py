@@ -900,7 +900,7 @@ config.libs = [
     ),
     IPLSection("bannerSound", [
             Object(Equivalent, "bannerSound/AudioWavePlayer.cpp"),
-            Object(NonMatching, "bannerSound/AxAdpcmPlayer.cpp"),
+            Object(Equivalent, "bannerSound/AxAdpcmPlayer.cpp"),
             Object(Matching, "bannerSound/BannerSoundPlayer.cpp"),
             Object(Matching, "bannerSound/AudioWaveUtility.cpp"),
         ]

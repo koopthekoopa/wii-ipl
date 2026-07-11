@@ -27,6 +27,8 @@ public:
     WaveFileWav* getWav() { return &mWav; }
     WaveFileAiff* getAiff() { return &mAiff; }
 
+    static void* convertDSPAddr(void* addr, u32 offset, int mode);
+
     static const u32 wsize = 0x3000;
 
 private:
@@ -54,8 +56,8 @@ private:
     OSMessage mQueueBuf[8];                             // 0x4c8
 };
 
-extern "C" {
-u32 AudioWavePlayer_8140D938(u32 a, u32 b, int mode);
-}
+// extern "C" {
+// void* AudioWavePlayer_8140D938(void* a, u32 b, int mode);
+// }
 
 #endif  // AUDIO_WAVE_PLAYER_H
