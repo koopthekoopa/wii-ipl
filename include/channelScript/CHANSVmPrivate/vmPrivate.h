@@ -14,14 +14,13 @@ typedef struct SrcLineEntry {
 } SrcLineEntry;
 
 typedef struct SrcDbg {
-    vmU32 unk_00;
-    void* table;
-    vmU32 unk_08;
-    vmU32 codesize;
-    vmU32 unk_10;
-    vmU16 unk_14[24];
-    SrcLineEntry* entries;
-
+    vmU32 unk_00;       // 0x00
+    vmU32 unk_04;       // 0x04
+    vmU32 unk_08;       // 0x08
+    vmU32 codesize;     // 0x0C
+    void* table;        // 0x10
+    vmU16 unk_14[24];   // 0x14
+    SrcLineEntry* entries; // 0x44
 } SrcDbg;
 
 typedef struct CHANSVmUnk1 {
