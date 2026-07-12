@@ -3041,32 +3041,15 @@ static PackFormatEntry vmBlobPackFormatList[25] = {
 };
 static u64 CHANSVm_814540E0(u32 low, u32 high)
 {
-    u32 a;
-    u32 b;
-    u32 c;
-    u32 d;
-    u32 e;
-    u32 f;
-
-    a = low << 24;
-    b = low << 8;
-
-    c = high >> 8;
-    d = high << 8;
-
-    b = (b & 0xFFFFFF00) | (high >> 24);
-    a = (a & 0xFF00FFFF) | (high << 24);
-
-    e = c & 0x0000FF00;
-    f = d & 0x00FF0000;
-
-    c = low >> 24;
-    d = low >> 8;
-
-    e |= c;
-    f |= d;
-
-    return ((u64)(a | f) << 32) | (b | e);
+    u64 x = ((u64)low << 32) | high;
+    return (((x >> 56) & 0x00000000000000ffULL) |
+            ((x >> 40) & 0x000000000000ff00ULL) |
+            ((x >> 24) & 0x0000000000ff0000ULL) |
+            ((x >>  8) & 0x00000000ff000000ULL) |
+            ((x <<  8) & 0x000000ff00000000ULL) |
+            ((x << 24) & 0x0000ff0000000000ULL) |
+            ((x << 40) & 0x00ff000000000000ULL) |
+            ((x << 56) & 0xff00000000000000ULL));
 }
 static u32 vmBlobParsePackFormatString(u32* out_nextPos, u32* out_elemSize, u32* out_elemType, u32* out_paramValue, const wchar_t* fmtStr, u32 fmtLen, u32 curPos) {
     u32 paramValue;
@@ -3873,10 +3856,10 @@ second_size_ge_5: {
         buf_area[1] = c0;
         memcpy(buf_area, srcBlob->pData + srcBlob->offset, outType);
 
-        if ((s32)outSize >= 8) {
-            goto byte_swap_block;
-        } else {
+        if ((s32)outSize < 8) {
             goto done_set_val;
+        } else {
+            goto byte_swap_block;
         }
 
     byte_swap_block:
@@ -3949,23 +3932,23 @@ second_size_ge_5: {
         goto fail;
 
     extract_s8:
-        setVal = (u32)(s32)(s8)*(u8*)buf_area;
+        setVal = (u32)(s32)(s8)*(u8*)bufAreaBase;
         valHigh = (s32)setVal >> 31;
         goto merge_point;
 
     extract_s16:
-        setVal = (u32)(s32)(s16)*(u16*)buf_area;
+        setVal = (u32)(s32)(s16)*(u16*)bufAreaBase;
         valHigh = (s32)setVal >> 31;
         goto merge_point;
 
     extract_s32:
-        setVal = buf_area[0];
+        setVal = bufAreaBase[0];
         valHigh = (s32)setVal >> 31;
         goto merge_point;
 
     extract_s64:
-        valHigh = buf_area[0];
-        setVal = buf_area[1];
+        valHigh = bufAreaBase[0];
+        setVal = bufAreaBase[1];
         goto merge_point;
 
     unsigned_extract:
@@ -3985,17 +3968,17 @@ second_size_ge_5: {
         goto extract_u32;
 
     extract_u8:
-        setVal = *(u8*)buf_area;
+        setVal = *(u8*)bufAreaBase;
         valHigh = 0;
         goto merge_point;
 
     extract_u16:
-        setVal = *(u16*)buf_area;
+        setVal = *(u16*)bufAreaBase;
         valHigh = 0;
         goto merge_point;
 
     extract_u32:
-        setVal = buf_area[0];
+        setVal = bufAreaBase[0];
         valHigh = 0;
         goto merge_point;
 
@@ -4221,18 +4204,29 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
     cHi = lbl_81694F28;
 
     while (choice-- != 0) {
+        CHANSVmUnk1* pUnk1;
+        u32 val20;
+        u32 val28;
+        u32 val2C;
+        u32 val24;
+
         if (pVm->updatedSignal != 0 && ((u8*)pVm)[0x4E] == 0) {
             pVm->updatedSignal = 0;
             return CHANS_VM_ERR_SIGNAL;
         }
 
-        if (pVm->unk_0x60 == NULL) goto error_code_range;
-        if (pVm->unk_0x60->unk_0x04 == 0) goto error_code_range;
-        if (pVm->unk_0x60->unk_0x10 < 1) goto error_code_range;
-        if (pVm->unk_0x60->unk_0x10 < pVm->unk_0x60->unk_0x04->codesize) {} else goto error_code_range;
-        if (*(u32*)((u8*)pVm + 0x28) < *(u32*)((u8*)pVm + 0x20)) goto error_3e2;
-        if (*(u32*)((u8*)pVm + 0x24) >= *(u32*)((u8*)pVm + 0x2C)) {} else goto error_3e2;
-        opcode = *(u8*)((u8*)pVm->unk_0x60->unk_0x04->table + pVm->unk_0x60->unk_0x10);
+        pUnk1 = pVm->unk_0x60;
+        if (pUnk1 == NULL) goto error_code_range;
+        if (pUnk1->unk_0x04 == 0) goto error_code_range;
+        if (pUnk1->unk_0x10 < 1) goto error_code_range;
+        if (pUnk1->unk_0x10 < pUnk1->unk_0x04->codesize) {} else goto error_code_range;
+        val20 = *(u32*)((u8*)pVm + 0x20);
+        val28 = *(u32*)((u8*)pVm + 0x28);
+        if (val28 < val20) goto error_3e2;
+        val2C = *(u32*)((u8*)pVm + 0x2C);
+        val24 = *(u32*)((u8*)pVm + 0x24);
+        if (val24 >= val2C) {} else goto error_3e2;
+        opcode = *(u8*)((u8*)pUnk1->unk_0x04->table + pUnk1->unk_0x10);
         if (((u8*)pVm)[0x4F] != 0) {
             opcode = 0;
         }
@@ -4903,14 +4897,13 @@ end_branch_check:
         if (result != 0) break;
         if (step == 0xFFFFFFFF) break;
         {
-            CHANSVmUnk1* pUnk1_end;
             u32 newPos;
-            pUnk1_end = pVm->unk_0x60;
-            if (pUnk1_end == NULL) break;
-            if (pUnk1_end->unk_0x04 == 0) break;
-            newPos = pUnk1_end->unk_0x10 + step;
-            if (newPos >= pUnk1_end->unk_0x04->codesize) break;
-            pUnk1_end->unk_0x10 = newPos;
+            pUnk1 = pVm->unk_0x60;
+            if (pUnk1 == NULL) break;
+            if (pUnk1->unk_0x04 == 0) break;
+            newPos = pUnk1->unk_0x10 + step;
+            if (newPos >= pUnk1->unk_0x04->codesize) break;
+            pUnk1->unk_0x10 = newPos;
         }
     }
 
