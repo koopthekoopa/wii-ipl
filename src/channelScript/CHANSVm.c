@@ -936,13 +936,16 @@ vmU32 CHANSVmGetFreeExeSize(CHANSVm* vm) {
 
 static u8* VmGetOperand(CHANSVm* vm, u32 num, u32 offset) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
-    SrcDbg* dbg = pVm->unk_0x60->unk_0x04;
     u32 pc = pVm->unk_0x60->unk_0x10;
+    SrcDbg* dbg = pVm->unk_0x60->unk_0x04;
 
     if (pc + offset >= dbg->codesize) {
         return NULL;
     }
-    return (u8*)dbg->unk_10 + pc + num;
+    {
+    u32 addr = pc + num;
+    return (u8*)dbg->unk_10 + addr;
+    }
 }
 
 static void VmLoadImmInteger(CHANSVm* vm, CHANSVmObjHdr* obj, const u8* buf, s32 count) {
@@ -951,7 +954,7 @@ static void VmLoadImmInteger(CHANSVm* vm, CHANSVmObjHdr* obj, const u8* buf, s32
 
     while (count--) {
         u8 byte = *buf++;
-        high = (high << 8) | (low >> 24) | ((u32)((s32)((u32)(u8)byte) >> 31));
+        high = ((high << 8) | (low >> 24));
         low = (low << 8) | byte;
     }
 
@@ -3067,10 +3070,10 @@ static u64 CHANSVm_814540E0(u32 low, u32 high)
     return ((u64)(a | f) << 32) | (b | e);
 }
 static u32 vmBlobParsePackFormatString(u32* out_nextPos, u32* out_elemSize, u32* out_elemType, u32* out_paramValue, const wchar_t* fmtStr, u32 fmtLen, u32 curPos) {
-    u32 elemSize;
-    u32 elemType;
-    u32 flags;
     u32 paramValue;
+    u32 flags;
+    u32 elemType;
+    u32 elemSize;
     u32 i;
     const PackFormatEntry* p;
     wchar_t ch;
@@ -3101,19 +3104,19 @@ static u32 vmBlobParsePackFormatString(u32* out_nextPos, u32* out_elemSize, u32*
         if (elemSize == 2) goto case23;
         if (elemSize != 3) goto param_processing;
 case23:
-         if (elemSize == 3) {
-                u32 cnt = fmtLen - curPos;
-                if (curPos < fmtLen) {
-                    do {
-                        u32 c2 = fmtStr[curPos];
-                        if (c2 == L'\r' || c2 == L'\n')
-                            break;
-                        curPos++;
-                    } while (--cnt != 0);
+        if (elemSize == 3) {
+            u32 cnt = fmtLen - curPos;
+            if (curPos < fmtLen) {
+                for (; cnt != 0; --cnt) {
+                    u32 c2 = fmtStr[curPos];
+                    if (c2 == L'\r' || c2 == L'\n')
+                        break;
+                    curPos++;
                 }
             }
-            curPos++;
-            continue;
+        }
+        curPos++;
+        continue;
     }
 
     elemSize = 1;
@@ -3127,36 +3130,38 @@ param_processing:
         paramValue = 0;
         {
             u32 cnt = fmtLen - curPos;
-            for (; cnt != 0; --cnt) {
-                u32 d2 = fmtStr[curPos];
+            if (curPos < fmtLen) {
+                for (; cnt != 0; --cnt) {
+                    u32 d2 = fmtStr[curPos];
 
-                if (!hasParam) {
-                    if (d2 == 0x2A) {
-                        if (flags & 1) {
-                            paramValue = (u32)-1;
-                            curPos++;
-                            goto exit_func;
-                        } else {
-                            elemSize = 0;
+                    if (!hasParam) {
+                        if (d2 == 0x2A) {
+                            if (flags & 1) {
+                                paramValue = (u32)-1;
+                                curPos++;
+                                goto exit_func;
+                            } else {
+                                elemSize = 0;
+                                elemType = 1;
+                                paramValue = 0;
+                                goto exit_func;
+                            }
+                        }
+                    }
+
+                    if (d2 >= 0x30 && d2 <= 0x39) {
+                        hasParam = 1;
+                        paramValue = paramValue * 10 + d2 - 0x30;
+                        if ((s32)paramValue < 0) {
                             elemType = 1;
+                            elemSize = 0;
                             paramValue = 0;
                             goto exit_func;
                         }
+                        curPos++;
+                    } else {
+                        break;
                     }
-                }
-
-                if (d2 >= 0x30 && d2 <= 0x39) {
-                    hasParam = 1;
-                    paramValue = paramValue * 10 + d2 - 0x30;
-                    if ((s32)paramValue < 0) {
-                        elemType = 1;
-                        elemSize = 0;
-                        paramValue = 0;
-                        goto exit_func;
-                    }
-                    curPos++;
-                } else {
-                    break;
                 }
             }
         }
@@ -3633,31 +3638,38 @@ fail:
 
 VmMethodDefine(Blob, Unpack) {
     BlobHeader* srcBlob;
+    CHANSVmObjHdr* argStr;
     wchar_t* fmtStr;
     u32 fmtLen;
-    u32 blobOff;
-    u32 argCount;
-    u32 fmtPos;
-    u32 count;
     u32 c0;
     u32 c1;
+    u32 blobOff;
+    u32 argCount;
+    s32 valHigh;
+    u32 setVal;
+    u32 fmtPos;
+    u32 outPos;
+    u32 count;
+    u32* bufAreaBase;
+    u32 elemIdx;
+    u32 outType;
+    u32 outSize;
+    s32 outVal;
+    u32 iterIdx;
     u32 buf_area[2];
-    {
-    CHANSVmObjHdr* argStr;
     srcBlob = (BlobHeader*)VmGetStrFromObjHdr(VmParentObj);
     argStr = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(VmInst, 0));
     fmtStr = (wchar_t*)VmGetStrFromObjHdr(argStr);
     fmtLen = (u32)VmGetIntFromObjHdr(argStr) >> 1;
-    }
 
     if (srcBlob == NULL || fmtStr == NULL)
         return 0;
 
-    c0 = 0;
-    c1 = 1;
     blobOff = srcBlob->offset;
     argCount = 0;
     fmtPos = 0;
+    c0 = 0;
+    c1 = 1;
 
     while (1) {
         u32 tmpPos;
@@ -3761,16 +3773,15 @@ VmMethodDefine(Blob, Unpack) {
         u32 elemCount = argCount;
         if (CHANSVmNewArrayObject(VmInst, VmReturnObj, 1, &elemCount) == NULL)
             goto fail;
+        bufAreaBase = buf_area;
     }
 
     fmtPos = 0;
 
-    {
-    u32 elemIdx = 0;
-    u32 outPos;
-    s32 outType = 1;
-    u32 outSize = 0;
-    s32 outVal = 1;
+    elemIdx = 0;
+    outType = 1;
+    outSize = 0;
+    outVal = 1;
     goto second_loop;
 
 second_loop:
@@ -3843,8 +3854,6 @@ second_size_eq_5:
 
 second_size_ge_5: {
     CHANSVmObjHdr* arrElem;
-    u32 iterIdx;
-    s32 valHigh;
     count = outVal;
     if ((s32)count < 0) {
         s32 remaining = (s32)(srcBlob->size - srcBlob->offset);
@@ -3865,86 +3874,71 @@ second_size_ge_5: {
         buf_area[1] = c0;
         memcpy(buf_area, srcBlob->pData + srcBlob->offset, outType);
 
-        if ((s32)outSize < 8)
-            goto byte_swap_done;
-        if ((s32)outSize >= 10)
-            goto byte_swap_done;
-        if (outType == 4)
-            goto byte_swap_32;
-        if ((s32)outType >= 4)
-            goto byte_swap_chk_64;
-        if (outType == 2)
-            goto byte_swap_16;
-        goto byte_swap_done;
-    byte_swap_chk_64:
-        if (outType != 8)
-            goto byte_swap_done;
-        {
-            u64 tmpVal = CHANSVm_814540E0(buf_area[0], buf_area[1]);
-            buf_area[0] = (u32)tmpVal;
-            buf_area[1] = (u32)(tmpVal >> 32);
+        if ((s32)outSize >= 8) {
+            if ((s32)outSize >= 10)
+                goto done_set_val;
+            if (outType == 4) {
+                u32 tmp = buf_area[0];
+                buf_area[0] = ((tmp >> 24) & 0xFF) | ((tmp >> 8) & 0xFF00) | ((tmp << 8) & 0xFF0000) | (tmp << 24);
+                goto done_set_val;
+            }
+            if ((s32)outType >= 4) {
+                if (outType != 8)
+                    goto done_set_val;
+                {
+                    u64 tmpVal = CHANSVm_814540E0(buf_area[0], buf_area[1]);
+                    buf_area[0] = (u32)tmpVal;
+                    buf_area[1] = (u32)(tmpVal >> 32);
+                }
+                goto done_set_val;
+            }
+            if (outType == 2) {
+                u16 tmp = *(u16*)buf_area;
+                *(u16*)buf_area = (tmp >> 8) | (tmp << 8);
+                goto done_set_val;
+            }
+            goto done_set_val;
         }
-        goto byte_swap_done;
-    byte_swap_32:
-        {
-            u32 tmp = buf_area[0];
-            buf_area[0] = ((tmp >> 24) & 0xFF) | ((tmp >> 8) & 0xFF00) | ((tmp << 8) & 0xFF0000) | (tmp << 24);
+    done_set_val:
+        if ((s32)outSize == 8 || (s32)outSize == 6) {
+            if (outType == 1) {
+                setVal = (u32)(s32)(s8)*(u8*)buf_area;
+                valHigh = (s32)setVal >> 31;
+            } else if (outType == 2) {
+                setVal = (u32)(s32)(s16)*(u16*)buf_area;
+                valHigh = (s32)setVal >> 31;
+            } else if (outType == 4) {
+                setVal = *(u32*)buf_area;
+                valHigh = (s32)setVal >> 31;
+            } else {
+                valHigh = buf_area[0];
+                setVal = buf_area[1];
+            }
+        } else {
+            if (outType == 1) {
+                setVal = *(u8*)buf_area;
+                valHigh = 0;
+            } else if (outType == 2) {
+                setVal = *(u16*)buf_area;
+                valHigh = 0;
+            } else if (outType == 4) {
+                setVal = buf_area[0];
+                valHigh = 0;
+            } else {
+                valHigh = buf_area[0];
+                setVal = buf_area[1];
+            }
         }
-        goto byte_swap_done;
-    byte_swap_16:
-        {
-            u16 tmp = *(u16*)buf_area;
-            *(u16*)buf_area = (tmp >> 8) | (tmp << 8);
-        }
-        goto byte_swap_done;
-    byte_swap_done:
 
         arrElem = CHANSVmGetArrayElement(VmInst, VmReturnObj, elemIdx);
         if (arrElem == NULL)
             goto fail;
+        elemIdx++;
 
-        if ((s32)outSize == 8 || (s32)outSize == 6) {
-            u32 setVal;
-            if (outType == 1)
-                setVal = (s32)(s8)*(u8*)buf_area;
-            else if (outType == 2)
-                setVal = (s32)(s16)*(u16*)buf_area;
-            else if (outType == 4)
-                setVal = *(s32*)buf_area;
-            else {
-                setVal = buf_area[0];
-                valHigh = buf_area[1];
-                if (CHANSVmSetInteger(VmInst, arrElem, (vmInteger)(((u64)valHigh << 32) | setVal)) != CHANS_VM_OK)
-                    goto fail;
-                srcBlob->offset += outType;
-                elemIdx++;
-                continue;
-            }
-            if (CHANSVmSetInteger(VmInst, arrElem, (vmInteger)((u64)(s64)setVal)) != CHANS_VM_OK)
-                goto fail;
-        } else {
-            u32 setVal;
-            if (outType == 1)
-                setVal = *(u8*)buf_area;
-            else if (outType == 2)
-                setVal = *(u16*)buf_area;
-            else if (outType == 4)
-                setVal = buf_area[0];
-            else {
-                setVal = buf_area[0];
-                valHigh = buf_area[1];
-                if (CHANSVmSetInteger(VmInst, arrElem, (vmInteger)(((u64)valHigh << 32) | setVal)) != CHANS_VM_OK)
-                    goto fail;
-                srcBlob->offset += outType;
-                elemIdx++;
-                continue;
-            }
-            if (CHANSVmSetInteger(VmInst, arrElem, (vmInteger)((u64)setVal)) != CHANS_VM_OK)
-                goto fail;
-        }
+        if (CHANSVmSetInteger(VmInst, arrElem, (vmInteger)(((u64)(u32)valHigh << 32) | setVal)) != CHANS_VM_OK)
+            goto fail;
 
         srcBlob->offset += outType;
-        elemIdx++;
     }
     goto second_loop;
 }
@@ -4072,7 +4066,6 @@ second_hex_string: {
 second_success:
     return 1;
     }
-    }
 
     return 1;
 
@@ -4107,8 +4100,6 @@ vmBool CHANSVmStep(CHANSVm* vm, int choice) {
     CHANSVmPrivate* pVm;
     CHANSVmObjHdr* pConstObj;
     CHANSVmErr result;
-    CHANSVmObjHdr* pVmObj;
-    CHANSVmObjHdr* pTmpBuf;
     CHANSVmUnk1* pUnk1;
     u32 opcode;
     u32 step;
@@ -4126,10 +4117,11 @@ vmBool CHANSVmStep(CHANSVm* vm, int choice) {
     u32 local_e8;
     double cLo;
     double cHi;
-    int etypes[10];
-    u8 pad[0x30];
-    CHANSVmObjHdr tmpObj;
+    int etypes[2];
     CHANSVmObjHdr tmpCopyObj;
+    CHANSVmObjHdr tmpStoreBuf;
+    CHANSVmObjHdr tmpLoadBuf;
+    CHANSVmObjHdr tmpObj;
     CHANSVmObjHdr* leftOp;
     CHANSVmObjHdr* rightOp;
     CHANSVmObjHdr* foundObj;
@@ -4138,20 +4130,18 @@ vmBool CHANSVmStep(CHANSVm* vm, int choice) {
     u16* operandBuf16;
     u64 tmp64;
     s32 tmpCmp;
+    u8 pad[0x20];
 
     pConstObj = &CHANSVmConstStringObjectUndefined;
     pVm = (CHANSVmPrivate*)vm;
 
     if (choice == 0) {
         choice = 1;
-        memset(&tmpObj, 0, sizeof(tmpObj));
     }
-
-    pVmObj = &pVm->unk_0x50;
+    memset(&tmpObj, 0, sizeof(tmpObj));
 
     cZero = 0;
     cNeg2 = -2;
-    pTmpBuf = (CHANSVmObjHdr*)((u8*)pVm + 0x60);
     opFunc = NULL;
     operandBuf = NULL;
     unk_r26 = 0;
@@ -4185,32 +4175,32 @@ vmBool CHANSVmStep(CHANSVm* vm, int choice) {
             case 0x18:
                 step = 2;
                 operandBuf = VmGetOperand(vm, 1, 2);
-                VmLoadImmInteger(vm, pVmObj, operandBuf, 1);
+                VmLoadImmInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), operandBuf, 1);
                 break;
 
             case 0x27:
                 step = 3;
                 operandBuf = VmGetOperand(vm, 1, 3);
-                VmLoadImmInteger(vm, pVmObj, operandBuf, 2);
+                VmLoadImmInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), operandBuf, 2);
                 break;
 
             case 0x28:
                 step = 5;
                 operandBuf = VmGetOperand(vm, 1, 5);
-                VmLoadImmInteger(vm, pVmObj, operandBuf, 4);
+                VmLoadImmInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), operandBuf, 4);
                 break;
 
             case 0x29:
                 step = 9;
                 operandBuf = VmGetOperand(vm, 1, 9);
-                VmLoadImmInteger(vm, pVmObj, operandBuf, 8);
+                VmLoadImmInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), operandBuf, 8);
                 break;
 
             case 0x2A:
                 step = 9;
                 operandBuf = VmGetOperand(vm, 1, 9);
                 memcpy(&tmp64, operandBuf, 8);
-                result = CHANSVmSetFloat(vm, pVmObj, *(double*)&tmp64);
+                result = CHANSVmSetFloat(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), *(double*)&tmp64);
                 break;
 
             case 0x19:
@@ -4244,7 +4234,7 @@ vmBool CHANSVmStep(CHANSVm* vm, int choice) {
 
 binary_imm:
                 step = 2;
-                leftOp = pVmObj;
+                leftOp = (CHANSVmObjHdr*)((u8*)pVm + 0x50);
                 rightOp = &tmpObj;
                 operandBuf = VmGetOperand(vm, 1, 2);
                 if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
@@ -4306,16 +4296,16 @@ binary_typecheck: {
 
                 if ((leftOp == NULL) || (rightOp == NULL)) { result = CHANS_VM_ERR_RESULT_TYPE; break; }
 
-                result = ((s32 (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))opFunc)(vm, unk_r19, pVmObj, leftOp, rightOp);
+                result = ((s32 (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))opFunc)(vm, unk_r19, (CHANSVmObjHdr*)((u8*)pVm + 0x50), leftOp, rightOp);
 
                 if (result == 0) {
                     result = CHANSVmDeleteObject(vm, &tmpObj);
-                    if ((result == 0) && (leftOp != pVmObj) && (leftOp != &tmpObj) &&
+                    if ((result == 0) && (leftOp != (CHANSVmObjHdr*)((u8*)pVm + 0x50)) && (leftOp != &tmpObj) &&
                         ((((u8*)leftOp)[9] & 0x80) == 0) &&
                         ((result = CHANSVmDeleteObject(vm, leftOp), result == 0))) {
                         CHANSVmFree(vm, leftOp, 0x20);
                     }
-                    if ((result == 0) && (rightOp != pVmObj) && (rightOp != &tmpObj) &&
+                    if ((result == 0) && (rightOp != (CHANSVmObjHdr*)((u8*)pVm + 0x50)) && (rightOp != &tmpObj) &&
                         ((((u8*)rightOp)[9] & 0x80) == 0) &&
                         ((result = CHANSVmDeleteObject(vm, rightOp), result == 0))) {
                         CHANSVmFree(vm, rightOp, 0x20);
@@ -4330,7 +4320,7 @@ binary_typecheck: {
                     CHANSVmObjHdr* hdr = CHANSVmNewObjHdr(vm, 1);
                     resultObj = NULL;
                     if (hdr != NULL) {
-                        resultObj = CHANSVmCopyObject(vm, hdr, pVmObj);
+                        resultObj = CHANSVmCopyObject(vm, hdr, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                         if (resultObj != NULL) {
                             pUnk1->unk_0x0C++;
                         }
@@ -4345,7 +4335,7 @@ binary_typecheck: {
             }
 
             case 5:
-                result = CHANSVmPopObject(vm, pVmObj);
+                result = CHANSVmPopObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 break;
 
             case 6:
@@ -4383,13 +4373,13 @@ binary_typecheck: {
 
 binary_pop:
                 leftOp = &tmpObj;
-                rightOp = pVmObj;
+                rightOp = (CHANSVmObjHdr*)((u8*)pVm + 0x50);
                 result = CHANSVmPopObject(vm, &tmpObj);
                 if (result != 0) break;
                 goto binary_typecheck;
 
             case 0:
-                result = CHANSVmDeleteObject(vm, pVmObj);
+                result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result == 0) {
                     result = VmReturnWithValue(vm, 0);
                 }
@@ -4402,7 +4392,7 @@ binary_pop:
                 break;
 
             case 0x16: {
-                double* pVal = (double*)pVmObj;
+                double* pVal = (double*)(CHANSVmObjHdr*)((u8*)pVm + 0x50);
                 u64 tmp64_16;
                 if (((u8*)pVm)[0x58] == 2) {
                     double absVal = fabs(*pVal);
@@ -4426,27 +4416,27 @@ binary_pop:
                     }
                 }
                 tmp64_16 = ~tmp64_16;
-                result = CHANSVmSetInteger(vm, pVmObj, (vmInteger)tmp64_16);
+                result = CHANSVmSetInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), (vmInteger)tmp64_16);
                 break;
             }
 
             case 0x17:
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, pVmObj);
+                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result == 0) {
                     u32 boolVal = (local_e8) ? 0 : 1;
-                    result = CHANSVmSetInteger(vm, pVmObj, (vmInteger)(u64)boolVal);
+                    result = CHANSVmSetInteger(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), (vmInteger)(u64)boolVal);
                 }
                 break;
 
             case 0x3E:
                 result = CHANS_VM_ERR_LOAD_INDIRECT;
                 if (((u8*)pVm)[0x58] == 5) {
-                    tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, pVmObj);
+                    tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                     if (tmpCmp != 0) {
                         foundObj = VmGetArrayElement(vm, &tmpCopyObj, unk_r25, 0);
-                        result = VmStore(vm, pVmObj, foundObj);
+                        result = VmStore(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), foundObj);
                         if (result == 0) {
-                            result = CHANSVmDeleteObject(vm, pVmObj);
+                            result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                         }
                     }
                 }
@@ -4494,14 +4484,14 @@ binary_pop:
             case 0x3F:
                 result = CHANS_VM_ERR_STORE_INDIRECT;
                 if (((u8*)pVm)[0x58] == 5) {
-                    tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, pVmObj);
+                    tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                     if (tmpCmp != 0) {
-                        result = CHANSVmPopObject(vm, pVmObj);
+                        result = CHANSVmPopObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                         if (result == 0) {
                             foundObj = VmGetArrayElement(vm, &tmpCopyObj, unk_r25, 1);
-                            result = VmStore(vm, foundObj, pVmObj);
+                            result = VmStore(vm, foundObj, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                             if (result == 0) {
-                                result = CHANSVmDeleteObject(vm, pVmObj);
+                                result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                             }
                         }
                     }
@@ -4513,7 +4503,7 @@ binary_pop:
                 operandBuf16 = (u16*)VmGetOperand(vm, 1, 3);
                 if (operandBuf16 == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
                 unk_r26 = *operandBuf16;
-                result = CHANSVmDeleteObject(vm, pVmObj);
+                result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result == 0) {
                     u32* pUnk1_04 = (u32*)pUnk1->unk_0x04;
                     if ((unk_r26 < pUnk1_04[12]) &&
@@ -4521,7 +4511,7 @@ binary_pop:
                          *(u32*)(pUnk1_04[15] + intTemp) != 0)) {
                         ((u8*)pVm)[0x58] = 3;
                         ((u8*)pVm)[0x5A] = 1;
-                        pVmObj->value.int_v = *(u32*)(pUnk1_04[15] + intTemp);
+                        ((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.int_v = *(u32*)(pUnk1_04[15] + intTemp);
                     } else {
                         result = CHANS_VM_ERR_LOAD_STRING_CONST;
                     }
@@ -4529,12 +4519,14 @@ binary_pop:
                 break;
 
             case 0x2D: {
-                s32 valHigh;
-                u32 valLow;
+                s32 cmpHigh;
+                u32 cmpLow;
+                u64 cmpVal;
+                s64 fullVal;
                 result = CHANS_VM_ERR_SET_INDEX;
-                tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, pVmObj);
+                tmpCmp = (s32)CHANSVmCopyObject(vm, &tmpCopyObj, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (tmpCmp == 0) break;
-                result = CHANSVmPopObject(vm, pVmObj);
+                result = CHANSVmPopObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result != 0) break;
 
                 if (((u8*)pVm)[0x58] == 4) {
@@ -4547,32 +4539,35 @@ binary_pop:
                         }
                     } else if (typeByte < 2) {
                         if (typeByte != 0) {
-                            valHigh = (s32)(((u32*)&tmpCopyObj)[0]);
-                            valLow = ((u32*)&tmpCopyObj)[1];
-                            if (valHigh == 0) {
-                                unk_r25 = valLow;
-                                goto done_2d;
-                            }
+                            cmpHigh = cZero;
+                            cmpLow = cNeg2;
+                            cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
+                            fullVal = ((s64)(u32)((u32*)&tmpCopyObj)[0] << 32) | ((u64)(u32)((u32*)&tmpCopyObj)[1]);
+                            if ((u64)(s64)fullVal > cmpVal) goto done_2d_error;
+                            unk_r25 = ((u32*)&tmpCopyObj)[1];
+                            goto done_2d;
                         }
                     } else if (typeByte < 4) {
                         if (CHANSVmParseInt(&tmpCopyObj, 10, &tmp64) != 0) {
-                            valHigh = (s32)(tmp64 >> 32);
-                            valLow = (u32)tmp64;
-                            if (valHigh == 0) {
-                                unk_r25 = valLow;
-                                goto done_2d;
-                            }
+                            cmpHigh = cZero;
+                            cmpLow = cNeg2;
+                            cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
+                            fullVal = ((s64)(u32)(tmp64 >> 32) << 32) | (u64)(u32)tmp64;
+                            if ((u64)(s64)fullVal > cmpVal) goto done_2d_error;
+                            unk_r25 = (u32)tmp64;
+                            goto done_2d;
                         }
                     }
                 }
+done_2d_error:
                 result = CHANS_VM_ERR_SET_INDEX;
                 break;
 
 done_2d:
                 result = 0;
-                pVmObj->value.int_v = (vmInteger)unk_r25;
+                ((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.int_v = (vmInteger)unk_r25;
                 ((u8*)pVm)[0x58] = 5;
-                result = CHANSVmDeleteObject(vm, pVmObj);
+                result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 break;
             }
 
@@ -4605,15 +4600,15 @@ done_2d:
                     }
                     if (result != 0) {
                         idx = 0;
-                        result = CHANSVmDeleteObject(vm, pVmObj);
+                        result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                         if (result == 0) {
-                            CHANSVmNewObject(vm, 0, pVmObj, 3, 0x80);
+                            CHANSVmNewObject(vm, 0, (CHANSVmObjHdr*)((u8*)pVm + 0x50), 3, 0x80);
                             if (result != 0) {
-                                char* s = (char*)pVmObj->value.string_v->str;
+                                char* s = (char*)((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.string_v->str;
                                 s32 snpLen = snprintf(s, 0x40, lbl_81697591);
                                 CHANSVmStrCpyToU16FromU8((wchar_t*)s, s, snpLen);
-                                pVmObj->value.string_v->len = snpLen * 2;
-                                if (pVmObj->value.string_v->len != 0) {
+                                ((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.string_v->len = snpLen * 2;
+                                if (((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.string_v->len != 0) {
                                     result = 0;
                                 }
                             }
@@ -4651,15 +4646,15 @@ done_2d:
                 operandBuf16 = (u16*)VmGetOperand(vm, 1, 3);
                 if (operandBuf16 == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
                 unk_r26 = *operandBuf16;
-                result = CHANSVmDeleteObject(vm, pVmObj);
+                result = CHANSVmDeleteObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result == 0) {
                     result = VmPushFuncReturnInfo(vm, unk_r26, unk_r26, 0);
                     if (result == CHANS_VM_OK) {
                         ((u8*)pVm)[0x58] = 4;
                         *(u32*)((u8*)pVm + 0x5C) = *(u32*)((u8*)pVm + 0x40);
-                        if (CHANSVmNewObjData(vm, pVmObj, 0x18) != NULL) {
+                        if (CHANSVmNewObjData(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), 0x18) != NULL) {
                             if (unk_r26 != 0) {
-                                result = VmArrayExpandCommon(vm, pVmObj, unk_r26, 0, 1);
+                                result = VmArrayExpandCommon(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), unk_r26, 0, 1);
                                 if (result == 0) { result = -0x3ab; break; }
                             }
                             result = VmReturnWithValue(vm, 0);
@@ -4689,7 +4684,7 @@ done_2d:
                 break;
 
             case 0x2B:
-                result = VmStore(vm, pVmObj, (CHANSVmObjHdr*)((u8*)pConstObj + 0xa0));
+                result = VmStore(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), (CHANSVmObjHdr*)((u8*)pConstObj + 0xa0));
                 break;
 
             case 0x36:
@@ -4703,7 +4698,7 @@ done_2d:
             case 0x37:
                 result = CHANS_VM_ERR_DELETE_INDIRECT;
                 if (((u8*)pVm)[0x58] == 5) {
-                    foundObj = VmGetArrayElement(vm, pVmObj, *(u32*)((u8*)pVm + 0x54), 0);
+                    foundObj = VmGetArrayElement(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), *(u32*)((u8*)pVm + 0x54), 0);
                     result = VmDeleteCommon(vm, foundObj);
                 }
                 break;
@@ -4720,10 +4715,10 @@ done_2d:
             unk_r26 = (opcode & 0x1F) << 8 | operandBuf[1];
             if (uintTemp == 0x20) {
                 foundObj = CHANSVm_81455654(vm, unk_r26);
-                result = VmStore(vm, foundObj, pVmObj);
+                result = VmStore(vm, foundObj, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
             } else if (uintTemp == 0) {
                 foundObj = CHANSVm_81455654(vm, unk_r26);
-                result = VmStore(vm, pVmObj, foundObj);
+                result = VmStore(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50), foundObj);
             } else {
                 result = CHANS_VM_ERR_CODE_RANGE; break;
             }
@@ -4733,12 +4728,12 @@ done_2d:
             if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
             uintTemp = opcode & 0x60;
             if (uintTemp == 0x40) {
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, pVmObj);
+                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
             } else if (uintTemp == 0x60) {
                 result = 0;
                 local_e4 = 1;
             } else if (uintTemp == 0x20) {
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, pVmObj);
+                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                 if (result == 0) {
                     local_e4 = (local_e8) ? 0 : 1;
                 }
@@ -4757,9 +4752,9 @@ done_2d:
                         break;
                     case 1: {
                         u32 low1 = *(u32*)(*(CHANSVmObjHdr**)((u8*)pVm + 0x2C));
-                        u32 low2 = *(u32*)pVmObj;
+                        u32 low2 = *(u32*)(CHANSVmObjHdr*)((u8*)pVm + 0x50);
                         u32 high1 = *(u32*)((*(CHANSVmObjHdr**)((u8*)pVm + 0x2C)) + 4);
-                        u32 high2 = *(u32*)((u8*)pVmObj + 4);
+                        u32 high2 = *(u32*)((u8*)(CHANSVmObjHdr*)((u8*)pVm + 0x50) + 4);
                         u32 xor1 = low1 ^ low2;
                         u32 xor2 = high1 ^ high2;
                         unk_r23 = (xor1 | xor2) >> 31;
@@ -4767,7 +4762,7 @@ done_2d:
                     }
                     case 2: {
                         double d1 = *(double*)(*(CHANSVmObjHdr**)((u8*)pVm + 0x2C));
-                        double d2 = *(double*)pVmObj;
+                        double d2 = *(double*)(CHANSVmObjHdr*)((u8*)pVm + 0x50);
                         unk_r23 = (d1 == d2) ? 1 : 0;
                         break;
                     }
@@ -4776,13 +4771,13 @@ done_2d:
                         CHANSVmObjHdr* stackObj3 = *(CHANSVmObjHdr**)((u8*)pVm + 0x2C);
                         unk_r23 = 0;
                         len1_u32 = stackObj3->value.wstring_v->len;
-                        len2_u32 = pVmObj->value.wstring_v->len;
+                        len2_u32 = ((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.wstring_v->len;
                         if (len1_u32 == len2_u32) {
                             s32 cmpResult;
                             if ((len1_u32 == 0) ||
                                 ((cmpResult = memcmp(
                                     (void*)stackObj3->value.wstring_v->str,
-                                    (void*)pVmObj->value.wstring_v->str, len1_u32), cmpResult == 0))) {
+                                    (void*)((CHANSVmObjHdr*)((u8*)pVm + 0x50))->value.wstring_v->str, len1_u32), cmpResult == 0))) {
                                 unk_r23 = 1;
                             }
                         }
@@ -4796,7 +4791,7 @@ done_2d:
                                 ((u8*)pVm)[0x5A] &&
                             ((((u8*)(*(CHANSVmObjHdr**)((u8*)pVm + 0x2C)))[0x0A] == 0) ||
                              (*(u32*)(*(CHANSVmObjHdr**)((u8*)pVm + 0x2C)) ==
-                              *(u32*)pVmObj))) {
+                              *(u32*)(CHANSVmObjHdr*)((u8*)pVm + 0x50)))) {
                             unk_r23 = 1;
                         }
                         break;
@@ -4810,7 +4805,7 @@ end_branch_check:
                         result = 0;
                         local_e4 = unk_r23;
                         if (unk_r23 != 0) {
-                            result = CHANSVmPopObject(vm, pVmObj);
+                            result = CHANSVmPopObject(vm, (CHANSVmObjHdr*)((u8*)pVm + 0x50));
                         }
                     }
                 }
