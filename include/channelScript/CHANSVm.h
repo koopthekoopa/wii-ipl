@@ -32,7 +32,7 @@ vmPtr CHANSVmGetFreeExeBufp(CHANSVm* vm);
 
 vmBool CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1);
 
-vmBool CHANSVmStep(CHANSVm* vm, int unk);
+CHANSVmErr CHANSVmStep(CHANSVm* vm, int unk);
 
 vmU16 CHANSVmGetSourceLine(CHANSVm* vm);
 
