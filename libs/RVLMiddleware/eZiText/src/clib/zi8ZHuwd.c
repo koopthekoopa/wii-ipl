@@ -8,8 +8,9 @@ ziU32 Zi8GetZHuwdPtr(ziU32* arg0, ziU16* arg1 ZI_NEED_WORK) {
         Zi8LogError(0x1A5, ZI_WORK);
         return 0;
     } else {
+        // ((u8*)ZI_WORK + ZI_WORK->unk_0x12C *)[ZI_WORK->unk_0x12C]
         *arg1 = ZI_WORK->unk_0x124[ZI_WORK->unk_0x12C - 1][1] / 3;
-        *arg0 = ZI_WORK->unk_0x124[ZI_WORK->unk_0x12C - 1][0];
+        *arg0 = (ziU32)ZI_WORK->unk_0x124[ZI_WORK->unk_0x12C - 1];
         *arg0 += 8;
         Zi8LogError(0x64, ZI_WORK);
         return 1;
