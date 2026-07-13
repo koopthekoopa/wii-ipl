@@ -42,13 +42,14 @@ BOOL CHANSVmDebugVerboseMode = vmFalse;
 #define VM_ALIGN(x) ROUNDUP(x, VM_ALIGNMENT)
 
 const u64 VmNaN = 0x7FFFFFFFFFFFFFFFULL;
-const float VmMinusZero = -0.0f;
+const u64 VmMinusZero = 0x8000000000000000ULL;
 const u64 VmInf = 0x7FF0000000000000ULL;
 const u64 VmMinusInf = 0xFFF0000000000000ULL;
 
-#define VM_NAN *(float*)&VmNaN
-#define VM_INF *(float*)&VmInf
-#define VM_NEG_INF *(float*)&VmMinusInf
+#define VM_NAN *(f64*)&VmNaN
+#define VM_NEG_ZERO *(f64*)&VmMinusZero
+#define VM_INF *(f64*)&VmInf
+#define VM_NEG_INF *(f64*)&VmMinusInf
 
 void CHANSVmDebugPrintf(const vmString format, ...) {
     va_list args;
@@ -666,7 +667,7 @@ CHANSVmObjHdr* CHANSVmConvertToIntFromArray(CHANSVm* vm, CHANSVmObjType type, CH
 CHANSVmObjHdr* CHANSVm_8144B430(CHANSVm* vm) {
     CHANSVmObjHdr* result = CHANSVmNewObject(vm, 0, NULL, 2, 0);
     if (result != NULL) {
-        *(vmFloat*)result = -1.0f;
+        *(vmFloat*)result = VM_NAN;
     }
     return result;
 }
@@ -853,7 +854,7 @@ CHANSVmErr CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, vmFloat value) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
         object->type = CHANS_VM_OBJ_TYPE_FLOAT;
-        if (value == VmMinusZero) {
+        if (value == VM_NEG_ZERO) {
             value = 0.0f;
         }
         object->value.float_v = value;
@@ -1741,6 +1742,7 @@ vmBoolInt CHANSVmCheckNativeInstance(CHANSVmObjHdr* obj, const char* className) 
 }
 
 // TODO: array functions partially missing
+
 static CHANSVmObjHdr* VmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 index, s32 mode);
 
 CHANSVmObjHdr* CHANSVmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 index) {
