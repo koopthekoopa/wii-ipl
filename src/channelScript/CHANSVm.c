@@ -4740,63 +4740,198 @@ VmCtorDefine(Image) {
 vmBoolInt VmWinEmuWrite(CHANSVm* vm, CHANSVmObjHdr* parent, CHANSVmObjHdr* ret) {
     CHANSVmObjHdr* strObj;
     u32 offset;
-    u32 totalLen;
+    u32 totalLength;
     u8 buf[0x80];
-    u32 charCount;
     s32 outLen;
     s32 inLen;
     s32 result;
     u32 remaining;
 
     strObj = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(vm, 0));
-    if (strObj == NULL) goto exit;
-    if (((u8*)strObj)[0x08] != 3) goto exit;
-
-    {
-        u8* wstr = *(u8**)((u8*)strObj + 0x00);
+    if (strObj != NULL && strObj->type == CHANS_VM_OBJ_TYPE_STRING) {
         offset = 0;
-        totalLen = *(u32*)(wstr + 4) & ~1;
-    }
+        totalLength = strObj->value.wstring_v->len & ~1;
 
-    goto check;
+        while (offset < totalLength) {
+            remaining = totalLength - offset;
+            outLen = 0x80;
+            if (remaining < 0x80) {
+                inLen = remaining;
+            } else {
+                inLen = 0x80;
+            }
+            inLen >>= 1;
 
-    while (1) {
-        u8* wstr;
-        u16* str;
+            result = ENCConvertStringUnicodeToSjis(buf, &outLen, (u16*)((u8*)strObj->value.wstring_v->str + offset), &inLen);
+            if (result == 0) {
+                buf[outLen] = 0;
+                buf[outLen + 1] = 0;
+                OSReport("%s", buf);
+            } else {
+                OSReport("document.write(): conversion error (%d)\n", result);
+                break;
+            }
 
-        remaining = totalLen - offset;
-        outLen = 0x80;
-        if (remaining < 0x80) {
-            charCount = remaining;
-        } else {
-            charCount = 0x80;
+            offset += 0x80;
         }
-        charCount >>= 1;
-        inLen = charCount;
-
-        wstr = *(u8**)((u8*)strObj + 0x00);
-        str = *(u16**)(wstr + 0);
-        result = ENCConvertStringUnicodeToSjis(buf, &outLen, (u16*)((u8*)str + offset), &inLen);
-        if (result == 0) {
-            buf[outLen] = 0;
-            buf[outLen + 1] = 0;
-            OSReport("%s", buf);
-        } else {
-            OSReport("document.write(): conversion error (%d)\n", result);
-            goto exit;
-        }
-
-        offset += 0x80;
-        check:
-                if (offset < totalLen) continue;
-        break;
     }
-
-    exit:
-        return TRUE;
+    return TRUE;
 }
 
-// TODO: CHANSVmInit
+extern const CHANSVmPropertyList lbl_81694FAC;
+
+vmBoolInt VmArrayCtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmArrayDtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmDateCtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmDateDtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmStringCtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmBlobCtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmBlobDtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+vmBoolInt VmImageCtor(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+CHANSVmErr VmPushFuncReturnInfo(CHANSVm* vm, u32 a, u32 b, u32 c);
+
+CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
+    u32 alignedBase;
+    u32 alignedSize;
+    u8* base;
+    vmS32 result;
+    CHANSVmNativeClass* cls;
+
+    base = (u8*)&CHANSVmConstStringObjectUndefined;
+    memset(vm, 0, 0x270);
+
+    alignedBase = ((u32)work + 0x1f) & ~0x1f;
+    alignedSize = (((u32)((u8*)work + size)) & ~0x1f) - alignedBase;
+
+    *(vu32*)((u8*)vm + 0x08) = alignedBase;
+    *(vu32*)((u8*)vm + 0x0C) = alignedSize;
+    *(vu32*)((u8*)vm + 0x68) = 0x820;
+
+    if (alignedSize < 0x820) {
+        return -0x3E6;
+    }
+
+    {
+    u32 exeStart = alignedBase + 0x820;
+    u32 exeSize = alignedSize - 0x820;
+
+    *(vu32*)((u8*)vm + 0x64) = alignedBase;
+    *(vu32*)((u8*)vm + 0x08) = exeStart;
+    *(vu32*)((u8*)vm + 0x0C) = exeSize;
+    *(vu32*)((u8*)vm + 0x20) = exeStart;
+    *(vu32*)((u8*)vm + 0x24) = exeStart + exeSize;
+    *(vu32*)((u8*)vm + 0x28) = exeStart;
+    *(vu32*)((u8*)vm + 0x2C) = exeStart + exeSize;
+    }
+
+    result = VmPushFuncReturnInfo(vm, 0, 0, 0);
+    if (result != 0) {
+        goto cleanup;
+    }
+
+    /* Array class */
+    cls = CHANSVmAddNativeClass2(vm, "Array", (CHANSVmFunction)VmArrayCtor,
+        (CHANSVmFunction)VmArrayDtor, (CHANSVmFunction)VmArrayCtor);
+    if (cls != NULL) {
+        if ((void*)(base + 0x214) != NULL) {
+            if (CHANSVmAddNativePropertyAccessorsList(vm, cls,
+                (CHANSVmPropertyList*)(base + 0x214), 1) != 0)
+                goto class_fail;
+        }
+        if ((void*)(base + 0x220) != NULL) {
+            if (CHANSVmAddNativeMethodList(vm, cls,
+                (CHANSVmMethodList*)(base + 0x220), 7) != 0)
+                goto class_fail;
+        }
+        cls = CHANSVmFindNativeClass(vm, "Array");
+        if (cls != NULL) {
+            ((CHANSVmPrivate*)vm)->arrayCls = cls;
+        } else {
+            goto class_fail;
+        }
+    } else {
+        goto class_fail;
+    }
+
+    /* Date class */
+    cls = CHANSVmAddNativeClass2(vm, "Date", (CHANSVmFunction)VmDateCtor,
+        (CHANSVmFunction)VmDateDtor, NULL);
+    if (cls != NULL) {
+        if (CHANSVmAddNativeMethodList(vm, cls,
+            (CHANSVmMethodList*)(base + 0x268), 0xA) != 0) {
+            goto class_fail;
+        }
+    } else {
+        goto class_fail;
+    }
+
+    /* Math class */
+    if (CHANSVmNewBuiltinObject(vm, "@Math", NULL, NULL, NULL,
+        "Math", NULL,
+        (CHANSVmPropertyList*)(base + 0x2B8), 8,
+        (CHANSVmMethodList*)(base + 0x318), 0x12) == 0) {
+        goto class_fail;
+    }
+
+    /* String class */
+    if (CHANSVmNewBuiltinObject(vm, "String", (CHANSVmFunction)VmStringCtor,
+        NULL, (CHANSVmFunction)VmStringCtor, NULL, NULL,
+        (CHANSVmPropertyList*)(base + 0x3A8), 1,
+        (CHANSVmMethodList*)(base + 0x3B4), 0xC) != 0) {
+        cls = CHANSVmFindNativeClass(vm, "String");
+        if (cls != NULL) {
+            ((CHANSVmPrivate*)vm)->stringCls = cls;
+        } else {
+            goto class_fail;
+        }
+    } else {
+        goto class_fail;
+    }
+
+    /* Blob class */
+    cls = CHANSVmAddNativeClass2(vm, "Blob", (CHANSVmFunction)VmBlobCtor,
+        (CHANSVmFunction)VmBlobDtor, NULL);
+    if (cls != NULL) {
+        if (CHANSVmAddNativePropertyAccessorsList(vm, cls,
+            (CHANSVmPropertyList*)(base + 0x414), 2) != 0) {
+            goto class_fail;
+        }
+        if (CHANSVmAddNativeMethodList(vm, cls,
+            (CHANSVmMethodList*)(base + 0x42C), 0x29) != 0) {
+            goto class_fail;
+        }
+    } else {
+        goto class_fail;
+    }
+
+    /* Image class */
+    VmImageAllocCallback = NULL;
+    VmImageCtorCallback = NULL;
+    if (CHANSVmNewBuiltinObject(vm, "Image", NULL, NULL, NULL,
+        NULL, NULL,
+        (CHANSVmPropertyList*)(base + 0x574), 3,
+        NULL, 0) == 0) {
+        goto class_fail;
+    }
+
+    /* Screen (@WinEmu) class */
+    if (CHANSVmNewBuiltinObject(vm, "@WinEmu", NULL, NULL, NULL,
+        "document", NULL,
+        NULL, 0,
+        (CHANSVmMethodList*)&lbl_81694FAC, 1) == 0) {
+        goto class_fail;
+    }
+
+    result = 0;
+    goto cleanup;
+
+class_fail:
+    result = -0x3DA;
+
+cleanup:
+    memset((u8*)vm + 0x50, 0, 0x10);
+    return result;
+}
 
 vmPtr CHANSVmGetFreeExeBufp(CHANSVm* vm) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
@@ -4986,7 +5121,7 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
     if (choice == 0) {
         choice = 1;
         memset(&tmpObj, 0, sizeof(tmpObj));
-        cLo = 30.0f;
+        cLo = 4294967294.0f; // U64_MAX
         cHi = 0.0f;
         stackPtr = &tmpCopyObj;
         cZero = 0;

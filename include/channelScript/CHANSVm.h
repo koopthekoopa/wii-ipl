@@ -18,7 +18,7 @@ extern "C" {
 
 #define CHANS_VM_CLASS_NAME_LEN 32
 
-void CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size);
+CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size);
 vmBool CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0);
 
 void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal);
