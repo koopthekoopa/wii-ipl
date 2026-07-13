@@ -1,5 +1,6 @@
+#include <zi8clib/zaddress.h>
+
 #include <zi8clib/zierror.h>
-#include <zi8clib/zitypes.h>
 
 ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
     ziU8 i;
@@ -46,7 +47,7 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
     ziU8 langIdx;
     ziU32 offset = 0;
     ziU8* tableData;
-    volatile ziU32 unkTableDataValue;
+    volatile ziU32 tableAddrOffset;
 
     Zi8LogError(0x64, ZI_WORK);
 
@@ -63,9 +64,9 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
         }
         switch (memberId) {
             case ziTableAddress: {
-                unkTableDataValue = ((tableData[(tableIdx * ZI8_TABLE_SIZE) + 7] << 0x10) + (tableData[(tableIdx * ZI8_TABLE_SIZE) + 8] << 8) +
-                                     (tableData[(tableIdx * ZI8_TABLE_SIZE) + 9]));
-                return (ziU32)tableData + unkTableDataValue;
+                tableAddrOffset = ((tableData[(tableIdx * ZI8_TABLE_SIZE) + 7] << 0x10) + (tableData[(tableIdx * ZI8_TABLE_SIZE) + 8] << 8) +
+                                   (tableData[(tableIdx * ZI8_TABLE_SIZE) + 9]));
+                return (ziU32)tableData + tableAddrOffset;
             }
             case ziTableSize: {
                 tableData = tableData + ((tableIdx * ZI8_TABLE_SIZE) + 4);
