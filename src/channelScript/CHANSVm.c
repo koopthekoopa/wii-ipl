@@ -1741,6 +1741,8 @@ vmBoolInt CHANSVmCheckNativeInstance(CHANSVmObjHdr* obj, const char* className) 
 
 // TODO: array functions partially missing
 
+static const char ArrayClassName[] = "Array";
+
 static CHANSVmObjHdr* VmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 index, s32 mode);
 
 CHANSVmObjHdr* CHANSVmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 index) {
@@ -2237,6 +2239,7 @@ VmMethodDefine(Math, tan) {
     return result;
 }
 
+static const char StringClassName[] = "String";
 
 VmCtorDefine(String) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
@@ -2302,6 +2305,9 @@ static void VmBlobInitValue(BlobHeader* blob, u32 size) {
     blob->pData = (u8*)(blob + 1);
 }
 
+
+static const char BlobClassName[] = "Blob";
+
 #pragma push
 #pragma auto_inline off
 static CHANSVmObjHdr* VmBlobCreateDirect(CHANSVm* vm, CHANSVmObjHdr* obj, u32 size) {
@@ -2318,7 +2324,7 @@ static CHANSVmObjHdr* VmBlobCreateDirect(CHANSVm* vm, CHANSVmObjHdr* obj, u32 si
         goto ret_null;
     }
 
-    cls = CHANSVmFindNativeClass(vm, "Blob");
+    cls = CHANSVmFindNativeClass(vm, BlobClassName);
     obj->parentCls = cls;
 
     if (cls == NULL) {
@@ -2334,7 +2340,7 @@ static CHANSVmObjHdr* VmBlobCreateDirect(CHANSVm* vm, CHANSVmObjHdr* obj, u32 si
 static u8* VmBlobGetDataBufferDirect(CHANSVmObjHdr* obj) {
     BlobHeader* blob;
 
-    if (CHANSVmCheckNativeInstance(obj, "Blob")) {
+    if (CHANSVmCheckNativeInstance(obj, BlobClassName)) {
         blob = (BlobHeader*)VmGetStrFromObjHdr(obj);
     } else {
         blob = NULL;
@@ -2501,7 +2507,7 @@ VmMethodDefine(Blob, SetLength) {
         goto _fail_size;
     }
 
-    if (CHANSVmCheckNativeInstance(VmParentObj, "Blob")) {
+    if (CHANSVmCheckNativeInstance(VmParentObj, BlobClassName)) {
         blob = (BlobHeader*)VmGetStrFromObjHdr(VmParentObj);
     } else {
         blob = NULL;
@@ -2708,7 +2714,7 @@ VmMethodDefine(Blob, IsEqual) {
     CHANSVmObjHdr* arg = CHANSVmGetArg(VmInst, 0);
     BlobHeader* other;
 
-    if (CHANSVmCheckNativeInstance(arg, "Blob")) {
+    if (CHANSVmCheckNativeInstance(arg, BlobClassName)) {
         other = (BlobHeader*)VmGetStrFromObjHdr(arg);
     } else {
         other = NULL;
@@ -2748,7 +2754,7 @@ VmMethodDefine(Blob, CopyRangeFrom) {
     srcOffObj = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_INTEGER, CHANSVmGetArg(VmInst, 2));
     countObj = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_INTEGER, CHANSVmGetArg(VmInst, 3));
 
-    if (CHANSVmCheckNativeInstance(srcObj, "Blob")) {
+    if (CHANSVmCheckNativeInstance(srcObj, BlobClassName)) {
         srcBlob = (BlobHeader*)VmGetStrFromObjHdr(srcObj);
     } else {
         srcBlob = NULL;
@@ -2825,7 +2831,7 @@ VmMethodDefine(Blob, SetBlob) {
     u32 logicalSize;
     u32 copySize;
 
-    if (CHANSVmCheckNativeInstance(srcObj, "Blob")) {
+    if (CHANSVmCheckNativeInstance(srcObj, BlobClassName)) {
         srcObj = (CHANSVmObjHdr*)VmGetStrFromObjHdr(srcObj);
     } else {
         srcObj = NULL;
@@ -3137,7 +3143,7 @@ VmMethodDefine(Blob, CalcHMAC) {
     u8* digest;
     CHANSVmObjHdr* newObj;
 
-    if (CHANSVmCheckNativeInstance(arg0, "Blob")) {
+    if (CHANSVmCheckNativeInstance(arg0, BlobClassName)) {
         keyBlob = (BlobHeader*)VmGetStrFromObjHdr(arg0);
     } else {
         keyBlob = NULL;
@@ -3172,7 +3178,7 @@ VmMethodDefine(Blob, CalcRangeHMAC) {
     CHANSVmObjHdr* arg0 = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_INTEGER, CHANSVmGetArg(VmInst, 1));
     CHANSVmObjHdr* arg1 = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_INTEGER, CHANSVmGetArg(VmInst, 2));
 
-    if (CHANSVmCheckNativeInstance(argKey, "Blob")) {
+    if (CHANSVmCheckNativeInstance(argKey, BlobClassName)) {
         keyBlob = (BlobHeader*)VmGetStrFromObjHdr(argKey);
     } else {
         keyBlob = NULL;
@@ -3712,7 +3718,7 @@ L_fmtOk:
             } else {
                 obj = CHANSVmGetArg(VmInst, argCount + 1);
             }
-            if (CHANSVmCheckNativeInstance(obj, "Blob")) {
+            if (CHANSVmCheckNativeInstance(obj, BlobClassName)) {
                 srcBlob = (BlobHeader*)VmGetStrFromObjHdr(obj);
             } else {
                 srcBlob = NULL;
@@ -3803,7 +3809,7 @@ L_fmtOk:
 
     if (flag != 0) {
         VmReturnObj = VmBlobCreateDirect(VmInst, VmReturnObj, totalSize);
-        if (CHANSVmCheckNativeInstance(VmReturnObj, "Blob")) {
+        if (CHANSVmCheckNativeInstance(VmReturnObj, BlobClassName)) {
             destBlob = (BlobHeader*)VmGetStrFromObjHdr(VmReturnObj);
         } else {
             destBlob = NULL;
@@ -3854,7 +3860,7 @@ L_fmtOk:
         } else {
             obj = CHANSVmGetArg(VmInst, argCount + 1);
         }
-        if (CHANSVmCheckNativeInstance(obj, "Blob")) {
+        if (CHANSVmCheckNativeInstance(obj, BlobClassName)) {
             srcBlob = (BlobHeader*)VmGetStrFromObjHdr(obj);
         } else {
             srcBlob = NULL;
@@ -4617,7 +4623,7 @@ CHANSVmObjHdr* CHANSVmNewBlobObject(CHANSVm* VmInst, CHANSVmObjHdr* obj, u32 siz
         return NULL;
 
     if (src != NULL && count != 0) {
-        if (CHANSVmCheckNativeInstance(obj, "Blob")) {
+        if (CHANSVmCheckNativeInstance(obj, BlobClassName)) {
             blob = (BlobHeader*)VmGetStrFromObjHdr(obj);
         } else {
             blob = NULL;
@@ -4830,7 +4836,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     }
 
     /* Array class */
-    cls = CHANSVmAddNativeClass2(vm, "Array", (CHANSVmFunction)VmArrayCtor,
+    cls = CHANSVmAddNativeClass2(vm, ArrayClassName, (CHANSVmFunction)VmArrayCtor,
         (CHANSVmFunction)VmArrayDtor, (CHANSVmFunction)VmArrayCtor);
     if (cls != NULL) {
         if ((void*)(base + 0x214) != NULL) {
@@ -4843,7 +4849,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
                 (CHANSVmMethodList*)(base + 0x220), 7) != 0)
                 goto class_fail;
         }
-        cls = CHANSVmFindNativeClass(vm, "Array");
+        cls = CHANSVmFindNativeClass(vm, ArrayClassName);
         if (cls != NULL) {
             pVm->pArrayCls = cls;
         } else {
@@ -4874,11 +4880,11 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     }
 
     /* String class */
-    if (CHANSVmNewBuiltinObject(vm, "String", (CHANSVmFunction)VmStringCtor,
+    if (CHANSVmNewBuiltinObject(vm, StringClassName, (CHANSVmFunction)VmStringCtor,
         NULL, (CHANSVmFunction)VmStringCtor, NULL, NULL,
         (CHANSVmPropertyList*)(base + 0x3A8), 1,
         (CHANSVmMethodList*)(base + 0x3B4), 0xC) != 0) {
-        cls = CHANSVmFindNativeClass(vm, "String");
+        cls = CHANSVmFindNativeClass(vm, StringClassName);
         if (cls != NULL) {
             pVm->pStringCls = cls;
         } else {
@@ -4889,7 +4895,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     }
 
     /* Blob class */
-    cls = CHANSVmAddNativeClass2(vm, "Blob", (CHANSVmFunction)VmBlobCtor,
+    cls = CHANSVmAddNativeClass2(vm, BlobClassName, (CHANSVmFunction)VmBlobCtor,
         (CHANSVmFunction)VmBlobDtor, NULL);
     if (cls != NULL) {
         if (CHANSVmAddNativePropertyAccessorsList(vm, cls,
