@@ -23,42 +23,45 @@ typedef struct SrcDbg {
     SrcLineEntry* entries; // 0x44
 } SrcDbg;
 
-typedef struct CHANSVmUnk1 {
+typedef struct CHANSVmExecutionCtx {
     vmU32 unk_0x00;
-    SrcDbg* unk_0x04;
-    vmWString* argv;
-    vmS32 unk_0x0C;
-    vmU32 unk_0x10;
-    vmU16 argc;
-} CHANSVmUnk1;
+    SrcDbg* dbg; // 0x04
+    vmWString* argv; // 0x08
+    vmS32 stackDepth; // 0x0C
+    vmU32 pc; // 0x10
+    vmU16 argc; // 0x14
+} CHANSVmExecutionCtx;
 
 typedef struct CHANSVmPrivate {
     vmU8 unk_0x00[0x06 - 0x00];
     vmBool hasStar;  // 0x06
-    vmU8 unk_0x07[0x0C - 0x07];
-    CHANSVmFunction* unk_0x0C;
+    vmU8 pad_0x07;                    // 0x07
+    vmU32 exeStart;                  // 0x08
+    vmU32 unk_0x0C;
     vmS32 unk_0x10;
     vmU8 unk_0x14[0x1C - 0x14];
-    vmU32 unk_0x1C;
-    vmU32* unk_0x20;
-    CHANSVmObjHdr* unk_0x24;
+    vmU32 minFreeHeapSize; // 0x1C
+    vmU32* pHeapStart; // 0x20
+    CHANSVmObjHdr* pHeapEnd; // 0x24
     vmU8* freeExeBuf;  // 0x28
-    vmU8* unk_0x2C;
+    vmU8* objStackTopBuf; // 0x2C
     CHANSVmNativeClass* nativeClasses;  // 0x30
-    vmU8 unk_0x34[0x3C - 0x34];
-    vmU32* unk_0x3C;
-    CHANSVmNativeClass* arrayCls;   // 0x40
-    CHANSVmNativeClass* stringCls;  // 0x44
-    vmBool* curSignal;              // 0x48
-    vmU8 unk_0x4C;
-    vmBool updatedSignal;  // 0x4D
-    vmU8 unk_0x4E;
-    vmU8 unk_0x4F;
-    CHANSVmObjHdr unk_0x50;
-    CHANSVmUnk1* unk_0x60;
+    void* mpMethodNameList;           // 0x34
+    void* mpGlobalObjList;            // 0x38
+    vmU32* pFreeList; // 0x3C
+    CHANSVmNativeClass* pArrayCls;   // 0x40
+    CHANSVmNativeClass* pStringCls;  // 0x44
+    vmBool* pSignalPending;          // 0x48
+    vmU8 bAllocBlocked;  // 0x4C
+    vmBool bSignalUpdated;  // 0x4D
+    vmU8 bSignalBlocked;
+    vmU8 bSuspendStep;
+    CHANSVmObjHdr accumulator;
+    CHANSVmExecutionCtx* execContext; // 0x60
     vmU32 unk_0x64;
     vmS32 minWorkSize;  // 0x68
-    vmU8 unk_0x40[0x270 - 0x6C];
+    vmU32 mNextChunkIdx;               // 0x6C
+    void* mChunks[0x80];              // 0x70-0x26F
 } CHANSVmPrivate;
 
 #ifdef __cplusplus

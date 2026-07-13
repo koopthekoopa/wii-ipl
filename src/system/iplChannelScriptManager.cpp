@@ -182,7 +182,7 @@ namespace ipl {
                 }
 
                 // CHANSVm is awaiting for render
-                if (result == CHANS_VM_ERR_SIGNAL && ((CHANSVmPrivate*)&smCSVm)->curSignal == &VmSystemBeginRenderFlag) {
+                if (result == CHANS_VM_ERR_SIGNAL && ((CHANSVmPrivate*)&smCSVm)->pSignalPending == &VmSystemBeginRenderFlag) {
                     if (smCSState == CHANS_VM_STATE_UNK1) {
                         smCSState = CHANS_VM_STATE_UNK2;
 
@@ -200,7 +200,7 @@ namespace ipl {
                 }
 
                 // CHANSVm is awaiting for retrace
-                if (result == CHANS_VM_ERR_SIGNAL && ((CHANSVmPrivate*)&smCSVm)->curSignal == &VmSystemWaitForRetraceFlag) {
+                if (result == CHANS_VM_ERR_SIGNAL && ((CHANSVmPrivate*)&smCSVm)->pSignalPending == &VmSystemWaitForRetraceFlag) {
                     if (smCSState == CHANS_VM_STATE_UNK3) {
                         msgState = CHANS_VM_MSG_STATE_UNK2;
                         OSSendMessage(smpThread->getCalcQueue(), &msgState, OS_MESSAGE_BLOCK);
