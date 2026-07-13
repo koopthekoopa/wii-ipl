@@ -175,13 +175,20 @@ typedef struct _ziLanguageEntry {
 struct __zi8_work_data_s {
     ziU8 unk_0x00;                   // 0x000
     ziLanguageEntry* langEntries;    // 0x004
-    ziU32 unk_0x08;                  // 0x008
-    ziU32 unk_0x0C;                  // 0x00C
+    ziU8 unk_0x08;                   // 0x008
+    ziU8 unk_0x09;                   // 0x009
+    ziU8 maxWordLen;                 // 0x00A
+    ziU16 unk_0x0C;                  // 0x00C
     ziU32 unk_0x10;                  // 0x010
-    ziU32 unk_0x14;                  // 0x014
+    ziU16 unk_0x14;                  // 0x014
+    ziU8 unk_0x16;                   // 0x016
+    ziU8 unk_0x17;                   // 0x017
     ziU8 unk_0x18;                   // 0x018
     ziU16 unk_0x1a;                  // 0x01a
-    ziU8 unk_0x1C[0x108];            // 0x01C
+    ziU8 unk_0x1C[4];                // 0x01C
+    ziU16 unk_0x20[0x40];            // 0x020
+    ziU16 unk_0xA0[0x40];            // 0x0A0
+    ziU8 unk_0x120[4];               // 0x120
     ziU16* unk_0x124[2];             // 0x124
     ziU8 unk_0x12C;                  // 0x12C
     ziU16 unk_0x12E;                 // 0x12E
