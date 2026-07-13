@@ -49,6 +49,8 @@ CHANSVmErr CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, vmInteger val);
 CHANSVmErr CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, vmFloat value);
 CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, vmWString str, vmSize strLen);
 
+int CHANSVmStrCpyToU8FromStringObject(u8* output, CHANSVmObjHdr* stringObj, vmSize length);
+
 vmU32 CHANSVmGetArgc(CHANSVm* vm);
 CHANSVmObjHdr* CHANSVmGetArg(CHANSVm* vm, vmU32 argIdx);
 CHANSVmObjHdr* CHANSVmGetArgInteger(CHANSVm* vm, vmU32 argIdx);
@@ -67,7 +69,7 @@ CHANSVmObjHdr* CHANSVmGetArrayElement2DFloat(CHANSVm* vm, vmFloat* array, vmS32 
 
 #define CHANSVmMethodCount(x) (sizeof(x) / sizeof(CHANSVmMethodList))
 
-vmBool CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmMethodList* methods, vmSize methodCount);
+CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmMethodList* methods, vmSize methodCount);
 
 /************************/
 /***  CHANS Property  ***/
@@ -75,7 +77,7 @@ vmBool CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CH
 
 #define CHANSVmPropertyCount(x) (sizeof(x) / sizeof(CHANSVmPropertyList))
 
-vmBool CHANSVmAddNativePropertyAccessorsList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmPropertyList* properties, vmSize propertyCount);
+CHANSVmErr CHANSVmAddNativePropertyAccessorsList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmPropertyList* properties, vmSize propertyCount);
 
 /************************/
 /***    CHANS Class   ***/
