@@ -1447,7 +1447,7 @@ CHANSVmErr CHANSVmFindAndAddNativeProperty(void* cls, void* property, u32 propIn
     }
 
     while (1) {
-        if (propIndex == *(u16*)((u8*)node + 0x04)) return -0x3dd;
+        if (propIndex == *(u16*)((u8*)node + 0x04)) return CHANS_VM_ERR_ALREADY_DEFINED;
         if (*(void**)((u8*)node + 0x00) == NULL) break;
         node = *(void**)((u8*)node + 0x00);
     }
@@ -1472,7 +1472,7 @@ CHANSVmErr CHANSVmFindAndAddNativeMethod(void* cls, void* method, u32 methodInde
 
     while (1) {
         if (methodIndex == *(u16*)((u8*)node + 0x04)) {
-            return -0x3dd;
+            return CHANS_VM_ERR_ALREADY_DEFINED;
         }
         if (*(void**)((u8*)node + 0x00) == NULL) break;
         node = *(void**)((u8*)node + 0x00);
@@ -1512,7 +1512,7 @@ CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, cons
         if (CHANSVmFindAndAddNativeProperty(cls, NULL, methodIndex) == 0) {
             void* node = CHANSVmAlloc(vm, 0x20);
             if (node == NULL) {
-                result = -0x3e6;
+                result = CHANS_VM_ERR_NO_MEMORY;
                 goto next;
             }
             *(u16*)((u8*)node + 0x04) = (u16)methodIndex;
@@ -1523,7 +1523,7 @@ CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, cons
         goto next;
 
 error:
-        result = -0x3c4;
+        result = CHANS_VM_ERR_ADD_NATIVE_METHOD;
 
 next:
         methods++;
@@ -1542,17 +1542,17 @@ CHANSVmErr CHANSVmAddNativePropertyAccessors(CHANSVm* vm, CHANSVmNativeClass* cl
     void* node;
 
     flag = 0;
-    if (cls == NULL) return -0x3b9;
+    if (cls == NULL) return CHANS_VM_ERR_ADD_NATIVE_PROPERTY;
 
     if (*name == '*') { flag = 1; name++; }
 
     methodIndex = CHANSVmAddNativeMethodName(vm, name, strlen(name));
-    if (methodIndex == 0) return -0x3b9;
+    if (methodIndex == 0) return CHANS_VM_ERR_ADD_NATIVE_PROPERTY;
 
-    if (CHANSVmFindAndAddNativeMethod(cls, NULL, methodIndex) != 0) return -0x3b9;
+    if (CHANSVmFindAndAddNativeMethod(cls, NULL, methodIndex) != 0) return CHANS_VM_ERR_ADD_NATIVE_PROPERTY;
 
     node = CHANSVmAlloc(vm, 0x20);
-    if (node == NULL) return -0x3e6;
+    if (node == NULL) return CHANS_VM_ERR_NO_MEMORY;
 
     *(u16*)((u8*)node + 0x04) = methodIndex;
     *(void**)((u8*)node + 0x08) = getter;
@@ -1627,7 +1627,7 @@ CHANSVmObjHdr* CHANSVmConstructGlobalObject(CHANSVm* vm, const char* name, CHANS
 CHANSVmErr CHANSVmSetObjectAsNativeInstance(CHANSVm* vm, CHANSVmObjHdr* obj, CHANSVmNativeClass* cls, const char* className) {
     CHANSVmErr result;
 
-    result = -0x3bd;
+    result = CHANS_VM_ERR_SET_OBJECT_NATIVE_CLASS;
     if (obj == NULL) goto exit;
 
     if ((cls == NULL) && (className != NULL)) {
@@ -1649,7 +1649,7 @@ set_type:
     goto exit;
 
 exit_err:
-    result = -0x3dd;
+    result = CHANS_VM_ERR_ALREADY_DEFINED;
 
 exit:
     return result;
@@ -4814,7 +4814,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     pVm->minWorkSize = 0x820;
 
     if (alignedSize < 0x820) {
-        return -0x3E6;
+        return CHANS_VM_ERR_NO_MEMORY;
     }
 
     {
@@ -4932,7 +4932,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     goto cleanup;
 
 class_fail:
-    result = -0x3DA;
+    result = CHANS_VM_ERR_NATIVE_METHOD_INIT;
 
 cleanup:
     memset(&pVm->accumulator, 0, sizeof(CHANSVmObjHdr));
@@ -5162,7 +5162,7 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
 codesize_ok:
         if ((u32)pVm->freeExeBuf < (u32)pVm->pHeapStart) goto error_3e2;
         if ((u32)pVm->pHeapEnd >= (u32)pVm->objStackTopBuf) goto range_ok;
-        return -0x3e2;
+        return CHANS_VM_ERR_HEAP_RANGE;
 range_ok:
         opcodeVal = *(u8*)((u8*)pVm->execContext->dbg->table + pVm->execContext->pc);
         if (pVm->bSuspendStep != 0) {
@@ -5649,11 +5649,11 @@ done_2d:
                         if (CHANSVmNewObjData(vm, &pVm->accumulator, 0x18) != NULL) {
                             if (unk_r26 != 0) {
                                 result = VmArrayExpandCommon(vm, &pVm->accumulator, unk_r26, 0, 1);
-                                if (result == 0) { result = -0x3ab; break; }
+                                if (result == 0) { result = CHANS_VM_ERR_CALL_NEW_ARRAY; break; }
                             }
                             result = VmReturnWithValue(vm, 0);
                         } else {
-                            result = -0x3ab;
+                            result = CHANS_VM_ERR_CALL_NEW_ARRAY;
                         }
                     }
                 }
@@ -5844,5 +5844,5 @@ error_code_range:
     return CHANS_VM_ERR_CODE_RANGE;
 
 error_3e2:
-    return -0x3e2;
+    return CHANS_VM_ERR_HEAP_RANGE;
 }
