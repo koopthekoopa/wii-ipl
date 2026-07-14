@@ -827,11 +827,11 @@ ziU8 Zi8GetCharInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, zi
 }
 
 ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 hetMode, ziWChar* elements, ziU8 elementCount ZI_NEED_WORK) {
-    ziChar* table1Data;
+    TableEntry* tableData;
     ziU8* table34Data;
-    ziU8* table5Data;
+    Table5Entry* table5Data;
 
-    ziU16 tempVal;
+    ziU16 ord;
     ziU8 isOkToFinish;
 
     ziU8 scratchBuf[12];
@@ -857,10 +857,10 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         hetMode &= 0x7F;
         if (Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) >= 4) {
             tableCount = Zi8GetTableCount(ZI8_LANG_ZH, 0x19, ZI_WORK);
-            table1Data = (ziChar*)Zi8GetTableAddress(ZI8_LANG_ZH, 0x19, ZI_WORK);
+            tableData = (TableEntry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0x19, ZI_WORK);
         } else {
             tableCount = 0;
-            table1Data = 0;
+            tableData = 0;
         }
         if (hetMode == 1) {
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 3, ZI_WORK);
@@ -872,9 +872,10 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
                 chHi = (ch >> 8) & 0xFF;
                 chLo = ch;
                 for (i = 0; i < tableCount;) {
-                    if (chHi == table1Data[0] && chLo == table1Data[1]) {
-                        tempVal = ((table1Data[2] & 0x1F) << 8 | table1Data[3]) << 1;
-                        code = table34Data[tempVal] + (ziU16)((ziU16)table34Data[tempVal + 1] << 8) + (ziU16)((table1Data[2] >> 5) & 0x7);
+                    if (chHi == tableData->tables->t19.chHi && chLo == tableData->tables->t19.chLo) {
+                        ord = GET_TABLE19_ENTRY_TABLE34_IDX(&tableData->tables->t19);
+                        code = table34Data[ord] + (ziU16)((ziU16)table34Data[ord + 1] << 8) + (tableData->tables->t19.codeOffs & 0xFFFF);
+
                         if (hetMode == CHAR_INFO_HET_UNK_x01) {
                             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
                         } else {
@@ -897,35 +898,35 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
                         return scratchDataLen;
                     }
                     i++;
-                    table1Data += 4;
+                    tableData += 4;
                 }
             }
         }
     }
 
-    tempVal = Zi8Uni2Ptr(ch, scratchBufPtr, ZI_WORK);
-    if (tempVal == 0xFFFF) {
+    ord = Zi8Uni2Ptr(ch, (Table0Entry*)scratchBufPtr, ZI_WORK);
+    if (ord == 0xFFFF) {
         scratchDataLen = 0;
         goto FINISH;
     }
-    table1Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
-    table1Data += (scratchBufPtr[11] | (scratchBufPtr[10] << 0x8) | ((scratchBufPtr[9] & 0x0F) << 0x10));
+    tableData = (TableEntry*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
+    tableData += GET_TABLE0_ENTRY_TABLE1_OFFS((Table0Entry*)scratchBufPtr);
     ZI_WORK->unk_0x16 = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
     if (ZI_WORK->unk_0x16 != 0 && hetMode != CHAR_INFO_HET_UNK_x07 && hetMode != CHAR_INFO_HET_UNK_x0A && hetMode != CHAR_INFO_HET_UNK_x08 &&
         hetMode != CHAR_INFO_HET_UNK_x09) {
-        switch (*table1Data & 7) {
+        switch (tableData->raw[0] & 7) {
             case 2:
-                table1Data += 2;
+                tableData += 2;
                 break;
             case 3:
             case 4:
-                table1Data += 3;
+                tableData += 3;
                 break;
             case 5:
-                table1Data += 4;
+                tableData += 4;
                 break;
             default:
-                table1Data += 1;
+                tableData += 1;
                 break;
         }
     }
@@ -934,7 +935,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         case CHAR_INFO_HET_UNK_x08:
         case CHAR_INFO_HET_UNK_x09:
         case CHAR_INFO_HET_UNK_x0A:
-            scratchDataLen = Zi8GetCJInfo(table1Data, charInfoBuffer, maxInfoBufSize, ZI_WORK);
+            scratchDataLen = Zi8GetCJInfo(tableData->raw, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             if ((hetMode == CHAR_INFO_HET_UNK_x09 || hetMode == CHAR_INFO_HET_UNK_x0A) && scratchDataLen > 2) {
                 charInfoBuffer[1] = charInfoBuffer[scratchDataLen - 1];
                 charInfoBuffer[2] = 0;
@@ -944,7 +945,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         case CHAR_INFO_HET_UNK_x00:
         case CHAR_INFO_HET_UNK_x10:
         case CHAR_INFO_HET_UNK_x11:
-            scratchDataLen = Zi8GetSInfo(scratchBufPtr, table1Data, charInfoBuffer, maxInfoBufSize, ZI_WORK);
+            scratchDataLen = Zi8GetSInfo(scratchBufPtr, tableData->raw, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
         case CHAR_INFO_HET_UNK_x01:
         case CHAR_INFO_HET_UNK_x03:
@@ -964,13 +965,13 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
     }
     if (elementCount == 0 || (scratchBufPtr[0] & 0x80) == 0 || (hetMode != CHAR_INFO_HET_UNK_x03 && hetMode != CHAR_INFO_HET_UNK_x04))
         goto FINISH;
-    table5Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 5, ZI_WORK);
+    table5Data = (Table5Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 5, ZI_WORK);
     table5Rem = Zi8GetTableCount(ZI8_LANG_ZH, 5, ZI_WORK);
     for (; table5Rem != 0;) {
-        if (tempVal == (((ziU16)table5Data[1] << 8) | (ziU16)table5Data[0]))
+        if (ord == GET_TABLE5_ENTRY_ORD(table5Data))
             break;
         table5Rem--;
-        table5Data += 4;
+        table5Data++;
     }
 
     while (1) {
@@ -996,13 +997,13 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         }
         if (table5Rem == 0)
             goto FINISH;
-        if (tempVal != (((ziU16)table5Data[1] << 8) | (ziU16)table5Data[0]))
+        if (ord != GET_TABLE5_ENTRY_ORD(table5Data))
             goto FINISH;
 
-        code = ((ziU16)table5Data[2] | ((ziU16)table5Data[3] & 1) << 8) << 1;
-        code = table34Data[code] + ((ziU16)table34Data[code + 1] << 8) + (((ziU16)table5Data[3] & 0xF0) >> 4);
+        code = GET_TABLE5_ENTRY_TABLE34_IDX(table5Data);
+        code = table34Data[code] + ((ziU16)table34Data[code + 1] << 8) + GET_TABLE5_ENTRY_CODE_OFFS(table5Data);
         table5Rem--;
-        table5Data += 4;
+        table5Data++;
 
         if (hetMode == CHAR_INFO_HET_UNK_x03) {
             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);

@@ -109,6 +109,59 @@ typedef void* ziPtr;
 #define ZI8_LANG_MAX 128
 #endif  // ZI8_LANGS_DEFINED
 
+typedef struct {
+    ziU8 unk_0x0;          // 0x0
+    ziU8 unk_0x1;          // 0x1
+    ziU8 unk_0x2;          // 0x2
+    ziU8 unk_0x3;          // 0x3
+    ziU8 unk_0x4;          // 0x4
+    ziU8 unk_0x5;          // 0x5
+    ziU8 chHi;             // 0x6
+    ziU8 chLo;             // 0x7
+    ziU8 unk_0x8;          // 0x8
+    ziU8 unk_0x9 : 4;      // 0x9 : 0bXXXX0000
+    ziU8 tabl1OffsHi : 4;  // 0x9 : 0b0000XXXX
+    ziU8 tabl1OffsMid;     // 0xA
+    ziU8 tab1OffsLo;       // 0xB
+} Table0Entry;
+
+#define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tabl1OffsMid << 0x8) | ((ENTRY)->tabl1OffsHi << 0x10))
+
+typedef struct {
+    ziU8 ordHi;        // 0x0
+    ziU8 ordLo;        // 0x1
+    ziU8 tabl34IdxLo;  // 0x2
+    ziU8 tabl34IdxHi;  // 0x3
+} Table5Entry;
+#define GET_TABLE5_ENTRY_ORD(ENTRY) (((ziU16)(ENTRY)->ordLo << 8) | (ziU16)(ENTRY)->ordHi)
+#define GET_TABLE5_ENTRY_TABLE34_IDX(ENTRY) ((ziU16)(ENTRY)->tabl34IdxLo | ((ziU16)(ENTRY)->tabl34IdxHi & 1) << 8) << 1
+#define GET_TABLE5_ENTRY_CODE_OFFS(ENTRY) (((ziU16)(ENTRY)->tabl34IdxHi & 0xF0) >> 4)
+
+typedef struct {
+    ziU8 chHi;             // 0x0
+    ziU8 chLo;             // 0x1
+    ziU8 codeOffs : 3;     // 0x2 : 0bXXX_____
+    ziU8 tabl34IdxHi : 5;  // 0x2 : 0b___XXXXX
+    ziU8 tabl34IdxLo;      // 0x3
+} Table19Entry;
+// #define GET_TABLE19_ENTRY_TABLE34_OFFS(ENTRY) \
+//     ((((ENTRY))[offsetof(Table19Entry, tabl34IdxHi)] & 0x1F) << 8 | ((ENTRY))[offsetof(Table19Entry, tabl34IdxLo)]) << 1
+#define GET_TABLE19_ENTRY_TABLE34_IDX(ENTRY) ((ENTRY)->tabl34IdxHi << 8 | (ENTRY)->tabl34IdxLo) << 1
+#define GET_TABLE19_ENTRY_CODE_OFFS(ENTRY) ((ENTRY)->codeOffs & 0xFFFF)
+
+typedef union {
+    ziU8 byte;
+    union {
+        ziU8 raw[];
+    };
+    union {
+        Table0Entry t0;
+        Table19Entry t19;
+    } tables[];
+    // Table19Entry table19[];
+    // ziU8 raw[];
+} TableEntry;
+
 typedef struct ziFuzzyPYPairs {
     int ziDefault : 1;
 
@@ -194,7 +247,15 @@ struct __zi8_work_data_s {
     ziU16 unk_0x12E;                 // 0x12E
     ziU8 unk_0x130[0x10D0];          // 0x130
     ziU32 unk_0x1200[ZI8_LANG_MAX];  // 0x1200
-    ziU8 unk_0x1400[0x744];          // 0x1400
+    ziU8 unk_0x1400[0x718];          // 0x1400
+    ziU16* unk_0x1B18;               // 0x1B18
+    ziU16 unkRangeALo;               // 0x1B1C
+    ziU16 unkRangeAHi;               // 0x1B1E
+    ziU16 unkRangeBLo;               // 0x1B20
+    ziU16 unkRangeBHi;               // 0x1B22
+    ziU8 unk_0x1B24;                 // 0x1B24
+    ziU32 unk_0x1B28;                // 0x1B28
+    ziU8 unk_0x1B2C[0x18];           // 0x1B2C
 };
 
 #define ZI_WORK ((struct __zi8_work_data_s*)__zi8_work_data)
