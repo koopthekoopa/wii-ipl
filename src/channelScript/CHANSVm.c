@@ -5124,12 +5124,17 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
     CHANSVmObjHdr tmpCopyObj;
     u32 etypes[8];
     CHANSVmObjHdr tmpObj;
+    u32 _pad[4];
 
     pConstObj = &CHANSVmConstStringObjectUndefined;
 
     if (choice == 0) {
         choice = 1;
         memset(&tmpObj, 0, sizeof(tmpObj));
+        _pad[0] = 0;
+        _pad[1] = 0;
+        _pad[2] = 0;
+        _pad[3] = 0;
         cLo = 4294967294.0f; // U64_MAX
         cHi = 0.0f;
         stackPtr = &tmpCopyObj;
@@ -5243,18 +5248,20 @@ binary_imm:
                 result = VmLoadImmInteger(vm, &tmpObj, operandBuf, 1);
                 goto binary_typecheck;
 
-binary_typecheck: {
+            binary_typecheck: {
+                u32 rightTypeByte;
                 u32 typeIdx;
-                    for (typeIdx = 0; typeIdx < 2; typeIdx++) {
-                        if (CHANSVmGetEnumedType((CHANSVmObjType*)&etypes[typeIdx], (s32)((u8*)((typeIdx == 0) ? leftOp : rightOp))[8]) == 0) {
-                                if (CHANSVmDebugVerboseMode) {
-                                    CHANSVmDebugPrintf("%s: no table for op '%c'\n", "VmGetResultType", unk_r23);
-                                }
-                                result = CHANS_VM_ERR_RESULT_TYPE;
-                                break;
-                        }
+                u32 leftTypeByte;
+                u32 typeOffset;
+                rightTypeByte = ((u8*)rightOp)[8];
+                typeIdx = 0;
+                leftTypeByte = ((u8*)leftOp)[8];
+                typeOffset = 0;
+                for (; typeIdx < 2; typeIdx++, typeOffset += 4) {
+                    if (CHANSVmGetEnumedType((CHANSVmObjType*)((u8*)etypes + typeOffset), (s32)((typeIdx == 0) ? leftTypeByte : rightTypeByte)) == 0) {
+                        goto error_setter;
                     }
-                if (result != 0) break;
+                }
 
                 {
                     const u8* convTbl;
@@ -5273,13 +5280,19 @@ binary_typecheck: {
                         if (CHANSVmDebugVerboseMode) {
                             CHANSVmDebugPrintf("%s: no table for op '%c'\n", "VmGetResultType", unk_r23);
                         }
-                        result = CHANS_VM_ERR_RESULT_TYPE;
-                        break;
+                        goto error_setter;
                     }
-                    if (result != 0) break;
 
+                    result = 0;
                     unk_r19 = convTbl[etypes[0] * 6 + etypes[1]];
+                    goto result_check;
                 }
+
+error_setter:
+                result = CHANS_VM_ERR_RESULT_TYPE;
+
+result_check:
+                if (result != 0) break;
 
                 if (((unk_r23 != 0x43) && (unk_r23 != 0x3D)) || (unk_r19 != 0)) {
                     leftOp = CHANSVmConvertObjectType(vm, unk_r19, leftOp);
@@ -5303,8 +5316,9 @@ binary_typecheck: {
                         CHANSVmFree(vm, rightOp, 0x20);
                     }
                 }
-                break;
             }
+
+            break;
 
             case 4: {
                 CHANSVmObjHdr* resultObj;
