@@ -144,8 +144,6 @@ typedef struct {
     ziU8 tabl34IdxHi : 5;  // 0x2 : 0b___XXXXX
     ziU8 tabl34IdxLo;      // 0x3
 } Table19Entry;
-// #define GET_TABLE19_ENTRY_TABLE34_OFFS(ENTRY) \
-//     ((((ENTRY))[offsetof(Table19Entry, tabl34IdxHi)] & 0x1F) << 8 | ((ENTRY))[offsetof(Table19Entry, tabl34IdxLo)]) << 1
 #define GET_TABLE19_ENTRY_TABLE34_IDX(ENTRY) ((ENTRY)->tabl34IdxHi << 8 | (ENTRY)->tabl34IdxLo) << 1
 #define GET_TABLE19_ENTRY_CODE_OFFS(ENTRY) ((ENTRY)->codeOffs & 0xFFFF)
 
@@ -163,38 +161,38 @@ typedef union {
 } TableEntry;
 
 typedef struct ziFuzzyPYPairs {
-    int ziDefault : 1;
+    ziU32 ziDefault : 1;
 
-    int cANDch : 1;
-    int sANDsh : 1;
-    int zANDzh : 1;
+    ziU32 cANDch : 1;
+    ziU32 sANDsh : 1;
+    ziU32 zANDzh : 1;
 
-    int anANDang : 1;
-    int enANDeng : 1;
-    int inANDing : 1;
+    ziU32 anANDang : 1;
+    ziU32 enANDeng : 1;
+    ziU32 inANDing : 1;
 
-    int nANDl : 1;
-    int lANDr : 1;
-    int fANDh : 1;
+    ziU32 nANDl : 1;
+    ziU32 lANDr : 1;
+    ziU32 fANDh : 1;
 } ziFuzzyPYPairs;
 
 typedef struct ziFuzzyZYPairs {
-    int ziDefault : 1;
+    ziU32 ziDefault : 1;
 
-    int cANDch : 1;
-    int sANDsh : 1;
-    int zANDzh : 1;
+    ziU32 cANDch : 1;
+    ziU32 sANDsh : 1;
+    ziU32 zANDzh : 1;
 
-    int anANDang : 1;
-    int enANDeng : 1;
+    ziU32 anANDang : 1;
+    ziU32 enANDeng : 1;
 
-    int nANDl : 1;
-    int lANDr : 1;
-    int fANDh : 1;
+    ziU32 nANDl : 1;
+    ziU32 lANDr : 1;
+    ziU32 fANDh : 1;
 
-    int rANDn : 1;
-    int bANDp : 1;
-    int gANDk : 1;
+    ziU32 rANDn : 1;
+    ziU32 bANDp : 1;
+    ziU32 gANDk : 1;
 } ziFuzzyZYPairs;
 
 typedef struct _ziGetParam {
@@ -239,8 +237,9 @@ struct __zi8_work_data_s {
     ziU8 unk_0x16;                   // 0x016
     ziU8 unk_0x17;                   // 0x017
     ziU8 unk_0x18;                   // 0x018
-    ziU16 unk_0x1a;                  // 0x01a
-    ziU8 unk_0x1C[3];                // 0x01C
+    ziU16 unk_0x1A;                  // 0x01a
+    ziU8 unk_0x1C[2];                // 0x01C
+    ziU8 unk_0x1E;                   // 0x01E
     ziU8 unk_0x1F;                   // 0x01F
     ziU16 unk_0x20[0x40];            // 0x020
     ziU16 unk_0xA0[0x40];            // 0x0A0
@@ -253,18 +252,48 @@ struct __zi8_work_data_s {
     ziU16 oemDictLen;                // 0x324
     ziU32 unk_0x328;                 // 0x328
     ziPtr oemDictData;               // 0x32C
-    ziU8 unk_0x330[0xED0];           // 0x330
+    ziU8 unk_0x330[0x200];           // 0x330
+    ziU8 unk_0x530[8];               // 0x530
+    ziU8 unk_0x538;                  // 0x538
+    ziU8 unk_0x539[3];               // 0x539
+    ziU8 unk_0x53C[0xCC4];           // 0x53C
     ziU32 unk_0x1200[ZI8_LANG_MAX];  // 0x1200
-    ziU8 unk_0x1400[0x718];          // 0x1400
+    ziU8 unk_0x1400[0x18];           // 0x1400
+    ziU8 unk_0x1418[2];              // 0x1418
+    ziU16 unk_0x141A;                // 0x141A
+    ziU8 unk_0x141C[0x458];          // 0x141C
+    ziU16 unk_0x1874;                // 0x1874
+    ziU8 unk_0x1876[2];              // 0x1876
+    ziU8 unk_0x1878[0x2A0];          // 0x1878
     ziU16* unk_0x1B18;               // 0x1B18
     ziU16 unkRangeALo;               // 0x1B1C
     ziU16 unkRangeAHi;               // 0x1B1E
     ziU16 unkRangeBLo;               // 0x1B20
     ziU16 unkRangeBHi;               // 0x1B22
     ziU8 unk_0x1B24;                 // 0x1B24
-    ziU32 unk_0x1B28;                // 0x1B28
-    ziU8 unk_0x1B2C[0x18];           // 0x1B2C
+    ziFuzzyPYPairs pyFuzzyPairs;     // 0x1B28
+    ziFuzzyZYPairs zyFuzzyPairs;     // 0x1B2C
+    ziU8 unk_0x1B30;                 // 0x1B30
+    ziU16 unk_0x1B32;                // 0x1B32
+    ziU16 unk_0x1B34;                // 0x1B34
+    ziU16 unk_0x1B36;                // 0x1B36
+    ziU16 unk_0x1B38;                // 0x1B38
+    ziU8 unk_0x1B3A;                 // 0x1B3A
+    ziU8 unk_0x1B3B;                 // 0x1B3B
+    ziU8 unk_0x1B3C;                 // 0x1B3C
+    ziU8 unk_0x1B3D[0x3];            // 0x1B3D
+    ziU16 unk_0x1B40;                // 0x1B40
 };
+
+// ZI_WORK->unk_0x1B30 = 0;
+// ZI_WORK->unk_0x1B3A = 0;
+// ZI_WORK->unk_0x1B36 = 0;
+// ZI_WORK->unk_0x1B32 = 0;
+// ZI_WORK->unk_0x1B34 = 0;
+// ZI_WORK->unk_0x1B3B = 0;
+// ZI_WORK->unk_0x1B3C = 0;
+// ZI_WORK->unk_0x1B40 = 0;
+// ZI_WORK->unk_0x1B38 = 0;
 
 #define ZI_WORK ((struct __zi8_work_data_s*)__zi8_work_data)
 #define ZI_NEED_WORK , ziPtr __zi8_work_data
