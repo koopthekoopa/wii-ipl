@@ -55,31 +55,38 @@ typedef enum CHANSVmObjType {
     CHANS_VM_TYPE_UNK5,
     CHANS_VM_TYPE_UNK6,
     CHANS_VM_TYPE_UNK7,     // Array of some kind?
-    CHANS_VM_TYPE_POINTER,  // Builtins
+    CHANS_VM_TYPE_POINTER,  // Pointer to class instance
+    CHANS_VM_TYPE_UNK9,     // Raw pointer?
     CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
 
 typedef struct CHANSVmObjHdr CHANSVmObjHdr;
 typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
+typedef struct {
+    vmU8 unk_0x00;  // ?
+    vmS32 val;
+} vmInt32ObjVal;
+
+typedef struct {
+    vmWString str;
+    vmSize len;
+} vmWStringObjVal;
+
+typedef struct {
+    vmString str;
+    vmSize len;
+} vmStringObjVal;
+
 struct CHANSVmObjHdr {
     union {
         vmBoolInt bool_v;
         vmInteger int_v;
-        struct {
-            vmU8 unk_0x00;  // ?
-            vmS32 val;
-        }* int32_v;
+        vmInt32ObjVal* int32_v;
         vmFloat float_v;
         vmFloat32 float32_v;
-        struct {
-            vmWString str;
-            vmSize len;
-        }* wstring_v;
-        struct {
-            vmString str;
-            vmSize len;
-        }* string_v;
+        vmWStringObjVal* wstring_v;
+        vmStringObjVal* string_v;
         vmPtr* array_v;
         vmFloat** float_array_v;
         vmPtr* ptr_v;
@@ -106,11 +113,12 @@ struct CHANSVmObjHdr {
 };
 
 typedef struct CHANSVmImage {
-    u32 unk_0x00;
-    u32 unk_0x04;
-    u16 width;   // 0x08
-    u16 height;  // 0x0A
-    u8 format;   // 0x0C
+    u32 unk_0x00;  // 0x00
+    u32 unk_0x04;  // 0x04
+    u16 width;     // 0x08
+    u16 height;    // 0x0A
+    u8 format;     // 0x0C
+    u8 bpp;        // 0x0D
 } CHANSVmImage;
 
 /* CLASSES & METHODS */
@@ -144,7 +152,7 @@ struct CHANSVmNativeClass {
     CHANSVmFunction init;  // 0x0C
 
     CHANSVmNativeMethod* nativeMethods;      // 0x10
-    CHANSVmNativeProperty* nativProperties;  // 0x14
+    CHANSVmNativeProperty* nativeProperties;  // 0x14
 
     vmSize nameLength;  // 0x18
     vmString name;      // 0x1C

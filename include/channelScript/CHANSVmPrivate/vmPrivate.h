@@ -24,13 +24,61 @@ typedef struct SrcDbg {
 } SrcDbg;
 
 typedef struct CHANSVmExecutionCtx {
-    vmU32 unk_0x00;
-    SrcDbg* dbg; // 0x04
-    vmWString* argv; // 0x08
-    vmS32 stackDepth; // 0x0C
-    vmU32 pc; // 0x10
-    vmU16 argc; // 0x14
+    vmU32 unk_0x00;       // 0x00
+    SrcDbg* dbg;          // 0x04
+    vmWString* argv;      // 0x08
+    vmS32 stackDepth;     // 0x0C
+    vmU32 pc;             // 0x10
+    vmU16 argc;           // 0x14
+    vmU8 pad_16[2];       // 0x16
+    vmU16 mCountB;        // 0x18
+    vmU8 mType2;          // 0x1A
+    vmU8 pad_1B[5];       // 0x1B
 } CHANSVmExecutionCtx;
+
+typedef struct FreeBlock {
+    struct FreeBlock* next;  // 0x00
+    vmU32 size;       // 0x04
+} FreeBlock;
+
+typedef struct PropListNode {
+    struct PropListNode* next;  // 0x00
+    u16 index;                  // 0x04
+    u8 flag;                    // 0x06
+    u8 pad_07;
+    CHANSVmFunction getter;     // 0x08
+    CHANSVmFunction setter;     // 0x0C
+} PropListNode;
+
+typedef struct MethodListNode {
+    struct MethodListNode* next;  // 0x00
+    u16 index;                    // 0x04
+    u8 flag;                      // 0x06
+    u8 pad_07;
+    CHANSVmFunction func;         // 0x08
+} MethodListNode;
+
+typedef struct ModuleEntry {
+    void* ptr;      // 0x00
+    u8 pad_04[8];   // 0x04
+    u8 type;        // 0x08
+    u8 flags;       // 0x09
+    u8 pad_0A[2];
+    void* ptr2;     // 0x0C
+} ModuleEntry;
+
+typedef struct NameListNode {
+    struct NameListNode* next;  // 0x00
+    u32 nameLength;             // 0x04
+    char name[];                // 0x08 (variable)
+} NameListNode;
+
+typedef struct GlobalNameListNode {
+    CHANSVmObjHdr hdr;                      // 0x00 (16 bytes)
+    struct GlobalNameListNode* next;        // 0x10
+    u32 nameLength;                          // 0x14
+    char name[];                              // 0x18 (variable)
+} GlobalNameListNode;
 
 typedef struct CHANSVmPrivate {
     vmU8 unk_0x00[0x06 - 0x00];
@@ -46,9 +94,9 @@ typedef struct CHANSVmPrivate {
     vmU8* freeExeBuf;  // 0x28
     vmU8* objStackTopBuf; // 0x2C
     CHANSVmNativeClass* nativeClasses;  // 0x30
-    void* mpMethodNameList;           // 0x34
-    void* mpGlobalObjList;            // 0x38
-    vmU32* pFreeList; // 0x3C
+    NameListNode* mpMethodNameList;           // 0x34
+    GlobalNameListNode* mpGlobalObjList;            // 0x38
+    FreeBlock* pFreeList; // 0x3C
     CHANSVmNativeClass* pArrayCls;   // 0x40
     CHANSVmNativeClass* pStringCls;  // 0x44
     vmBool* pSignalPending;          // 0x48
