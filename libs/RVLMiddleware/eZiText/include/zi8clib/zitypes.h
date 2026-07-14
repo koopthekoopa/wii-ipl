@@ -225,6 +225,8 @@ typedef struct _ziLanguageEntry {
     ziU8* tableData;  // 0x04
 } ziLanguageEntry;
 
+typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
+
 struct __zi8_work_data_s {
     ziU8 unk_0x00;                   // 0x000
     ziLanguageEntry* langEntries;    // 0x004
@@ -238,14 +240,20 @@ struct __zi8_work_data_s {
     ziU8 unk_0x17;                   // 0x017
     ziU8 unk_0x18;                   // 0x018
     ziU16 unk_0x1a;                  // 0x01a
-    ziU8 unk_0x1C[4];                // 0x01C
+    ziU8 unk_0x1C[3];                // 0x01C
+    ziU8 unk_0x1F;                   // 0x01F
     ziU16 unk_0x20[0x40];            // 0x020
     ziU16 unk_0xA0[0x40];            // 0x0A0
     ziU8 unk_0x120[4];               // 0x120
     ziU16* unk_0x124[2];             // 0x124
     ziU8 unk_0x12C;                  // 0x12C
     ziU16 unk_0x12E;                 // 0x12E
-    ziU8 unk_0x130[0x10D0];          // 0x130
+    ziU8 unk_0x130[0x1F0];           // 0x130
+    Zi8OemSearchDict oemSearchDict;  // 0x320
+    ziU16 oemDictLen;                // 0x324
+    ziU32 unk_0x328;                 // 0x328
+    ziPtr oemDictData;               // 0x32C
+    ziU8 unk_0x330[0xED0];           // 0x330
     ziU32 unk_0x1200[ZI8_LANG_MAX];  // 0x1200
     ziU8 unk_0x1400[0x718];          // 0x1400
     ziU16* unk_0x1B18;               // 0x1B18
