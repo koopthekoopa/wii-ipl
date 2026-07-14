@@ -52,6 +52,94 @@ const u64 VmMinusZero = 0x8000000000000000ULL;
 const u64 VmInf = 0x7FF0000000000000ULL;
 const u64 VmMinusInf = 0xFFF0000000000000ULL;
 
+wchar_t lbl_81669070[] = L"undefined";
+wchar_t lbl_81669083[] = L"Infinity";
+wchar_t lbl_81669094[] = L"-Infinity";
+char lbl_816690A7[] = "Infinity";
+char lbl_816690B0[] = "+Infinity";
+char lbl_816690BA[] = "-Infinity";
+char lbl_816690C4[] = "CHANSVmConvertObjectTypeError";
+char lbl_816690E2[] = "%s %d, type to %d from %d\n";
+char lbl_81669128[] = "VmGetResultType";
+char lbl_816691A8[] = "CHANS_VM_ERR_NO_1000";
+char lbl_816691BD[] = "CHANS_VM_ERR_EXIT";
+char lbl_816691CF[] = "CHANS_VM_ERR_NO_MEMORY";
+char lbl_816691E6[] = "CHANS_VM_ERR_INVALID_EXE_FORMAT";
+char lbl_81669206[] = "CHANS_VM_ERR_ARG";
+char lbl_81669217[] = "CHANS_VM_ERR_CODE_RANGE";
+char lbl_8166922F[] = "CHANS_VM_ERR_HEAP_RANGE";
+char lbl_81669247[] = "CHANS_VM_ERR_OBJECT_NOT_FOUND";
+char lbl_81669265[] = "CHANS_VM_ERR_ALIGNMENT";
+char lbl_8166927C[] = "CHANS_VM_ERR_RESULT_TYPE";
+char lbl_81669295[] = "CHANS_VM_ERR_TOO_MANY_DEFINED";
+char lbl_816692B3[] = "CHANS_VM_ERR_ALREADY_DEFINED";
+char lbl_816692D0[] = "CHANS_VM_ERR_LINK_FAILED";
+char lbl_816692E9[] = "CHANS_VM_ERR_IN_METHOD_REGISTRATION";
+char lbl_8166930C[] = "CHANS_VM_ERR_NATIVE_METHOD_ERROR";
+char lbl_8166932C[] = "CHANS_VM_ERR_LOAD_OBJECT";
+char lbl_81669345[] = "CHANS_VM_ERR_STORE_OBJECT";
+char lbl_8166935F[] = "CHANS_VM_ERR_DIVISION_BY_ZERO";
+char lbl_8166937D[] = "CHANS_VM_ERR_DELETE_OBJECT";
+char lbl_81669398[] = "CHANS_VM_ERR_DELETE_NATIVE";
+char lbl_816693B3[] = "CHANS_VM_ERR_DELETE_READONLY";
+char lbl_816693CF[] = "CHANS_VM_ERR_POP_OBJECT";
+char lbl_816693E7[] = "CHANS_VM_ERR_STR_U8_OVERFLOW";
+char lbl_81669402[] = "CHANS_VM_ERR_SET_INTEGER";
+char lbl_8166941B[] = "CHANS_VM_ERR_SET_FLOAT";
+char lbl_81669432[] = "CHANS_VM_ERR_ADD";
+char lbl_81669443[] = "CHANS_VM_ERR_SUB";
+char lbl_81669454[] = "CHANS_VM_ERR_MUL";
+char lbl_81669465[] = "CHANS_VM_ERR_DIV";
+char lbl_81669476[] = "CHANS_VM_ERR_MOD";
+char lbl_81669487[] = "CHANS_VM_ERR_ULSHIFT";
+char lbl_8166949C[] = "CHANS_VM_ERR_ARSHIFT";
+char lbl_816694B1[] = "CHANS_VM_ERR_BIT_AND";
+char lbl_816694C6[] = "CHANS_VM_ERR_BIT_OR";
+char lbl_816694DA[] = "CHANS_VM_ERR_BIT_XOR";
+char lbl_816694EF[] = "CHANS_VM_ERR_CMP";
+char lbl_81669500[] = "CHANS_VM_ERR_ADD_NATIVE_CLASS";
+char lbl_8166951F[] = "CHANS_VM_ERR_SET_LOCAL_OBJECT";
+char lbl_8166953F[] = "CHANS_VM_ERR_PUSH_FUNC_RETURN_INFO";
+char lbl_81669562[] = "CHANS_VM_ERR_LOAD_IMM_INT";
+char lbl_81669578[] = "CHANS_VM_ERR_LOAD_CONST";
+char lbl_81669590[] = "CHANS_VM_ERR_LOAD_STRING";
+char lbl_816695A4[] = "CHANS_VM_ERR_LOAD_INDIRECT";
+char lbl_816695B8[] = "CHANS_VM_ERR_STORE_INDIRECT";
+char lbl_816695DD[] = "CHANS_VM_ERR_CALL_FUNCTION";
+char lbl_81669605[] = "CHANS_VM_ERR_RESERVED_OPCODE";
+char lbl_81669632[] = "CHANS_VM_ERR_SET_INDEX";
+char lbl_81669643[] = "CHANS_VM_ERR_OUT_OF_MEMORY";
+char lbl_81669664[] = "CHANS_VM_ERR_SET_PROPERTY";
+char lbl_8166967D[] = "CHANS_VM_ERR_GET_PROPERTY";
+char lbl_8166968F[] = "CHANS_VM_ERR_NO_PROPERTY_NAME";
+char lbl_816696B2[] = "CHANS_VM_ERR_GET_PROPERTY_NAME";
+char lbl_816696CD[] = "CHANS_VM_ERR_DELETE_INDIRECT";
+char lbl_816696E8[] = "CHANS_VM_ERR_CALL_NEW_ARRAY";
+char lbl_81669701[] = "CHANS_VM_ERR_INVALID_OBJECT_TYPE";
+char lbl_8166971D[] = "CHANS_VM_ERR_CHECK_STRICT_EQUALITY";
+char lbl_8166973C[] = "CHANS_VM_ERR_SIGNAL";
+char lbl_81669750[] = "CHANS_VM_ERR_ADD_METHOD";
+char lbl_8166976C[] = "CHANS_VM_ERR_ADD_PROPERTY";
+char lbl_81669783[] = "CHANS_VM_ERR_LOOKUP_METHOD_NAME";
+char lbl_816697A2[] = "CHANS_VM_ERR_SET_PROPERTY_LIST";
+char lbl_816697BA[] = "CHANS_VM_ERR_NO_PROPERTY_LIST";
+char lbl_816697D6[] = "CHANS_VM_ERR_FIND_PROPERTY";
+char lbl_816697F2[] = "CHANS_VM_ERR_ADD_METHOD_LIST";
+char lbl_81669813[] = "CHANS_VM_ERR_DUPLICATE_CLASS";
+char lbl_81669830[] = "CHANS_VM_ERR_CONSTRUCT_GLBL_OBJ";
+char lbl_8166984D[] = "CHANS_VM_ERR_CONSTRUCT_GLOBAL_CLASS";
+char lbl_81669873[] = "CHANS_VM_ERR_BUILTIN_OBJECT";
+char lbl_81669897[] = "CHANS_VM_ERR_CALL_METHOD";
+char lbl_816698AD[] = "CHANS_VM_ERR_IMAGE_OBJECT";
+char lbl_816698C9[] = "CHANS_VM_ERR_IMAGE_ALLOC_FAILED";
+char lbl_816698EA[] = "CHANS_VM_ERR_IMAGE_REGISTER";
+char lbl_81669908[] = "CHANS_VM_ERR_UNSUPPORTED_IMAGE";
+char lbl_81669924[] = "CHANS_VM_ERR_IMAGE_HEADER_SIZE";
+char lbl_81669947[] = "CHANS_VM_ERR_IMAGE_HEADER_ERROR";
+char lbl_8166996A[] = "CHANS_VM_ERR_INVALID_SOURCE_LINE";
+char lbl_81669988[] = "CHANS_VM_ERR_IMAGE_ERROR";
+char lbl_816699A6[] = "CHANS_VM_ERR_IMAGE_MEMORY";
+
 #define VM_NAN *(f64*)&VmNaN
 #define VM_NEG_ZERO *(f64*)&VmMinusZero
 #define VM_INF *(f64*)&VmInf
@@ -411,7 +499,7 @@ vmPtr CHANSVmNewObjData(CHANSVm* vm, CHANSVmObjHdr* object, u32 length) {
         return NULL;
 }
 
-const char CHANSVmConstStringDataEmpty[10] = "";
+extern const char CHANSVmConstStringDataEmpty[16];
 
 CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmS32 unk, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize len) {
     CHANSVmObjHdr* temp_r3;
@@ -681,14 +769,52 @@ CHANSVmObjHdr* CHANSVm_8144B470(CHANSVm* vm, CHANSVmObjHdr* unused, CHANSVmObjHd
 
 // TODO: CHANSVm_8144B4D4
 
-CHANSVmObjHdr CHANSVmConstStringObjectUndefined = {
-    {0},  // value union
-    0,    // typeAndFlag
-    0     // parentCls
-};
+typedef struct {
+    u32 ptr;
+    u32 len;
+    u32 typeAndFlag;
+    void* parentCls;
+} RawObjHdr;
 
+extern u32 lbl_816976E4;
+extern u32 lbl_816976E8;
+
+extern wchar_t lbl_81669070[];
+extern wchar_t lbl_81669083[];
+extern wchar_t lbl_81669094[];
+extern wchar_t lbl_81697578[];
+extern wchar_t lbl_8169757F[];
+extern wchar_t lbl_81697582[];
+
+const RawObjHdr CHANSVmConstStringObjectUndefined = {
+    (u32)(vmPtr)lbl_81669070, 18, 0, NULL
+};
+const RawObjHdr lbl_81616C88 = {
+    (u32)(vmPtr)lbl_81697578, 6, 0, NULL
+};
+const RawObjHdr lbl_81616C98 = {
+    (u32)(vmPtr)lbl_81669083, 16, 0, NULL
+};
+const RawObjHdr lbl_81616CA8 = {
+    (u32)(vmPtr)lbl_81669094, 18, 0, NULL
+};
+const RawObjHdr lbl_81616CB8 = {
+    (u32)(vmPtr)lbl_8169757F, 2, 0, NULL
+};
+const char CHANSVmConstStringDataEmpty[16] = "";
+const RawObjHdr CHANSVmConstStringObjectUndefined_[5] = {
+    { 0, 0, 0x03800100, NULL },
+    { 0, 0, 0x03800100, NULL },
+    { 0, 0, 0x03800100, NULL },
+    { 0, 0, 0x03800100, NULL },
+    { 0, 0, 0x00800000, NULL }
+};
+const RawObjHdr lbl_81616D28[2] = {
+    { 0, 0, 0, NULL },
+    { 0, 0, 0, NULL }
+};
 CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, int type, CHANSVmObjHdr* object) {
-    return &CHANSVmConstStringObjectUndefined;
+    return (CHANSVmObjHdr*)&CHANSVmConstStringObjectUndefined;
 }
 
 s32 CHANSVm_8144B62C(u16* buf, u32 len, vmFloat val) {
@@ -727,7 +853,7 @@ CHANSVmObjHdr* CHANSVm_8144B734(CHANSVm* vm, CHANSVmObjHdr* unused, double* valu
     CHANSVmObjHdr* newObj;
     s32 result;
 
-    base = &CHANSVmConstStringObjectUndefined;
+    base = (CHANSVmObjHdr*)&CHANSVmConstStringObjectUndefined;
     if (VmIsNan(*value)) {
         return base + 7;
     }
@@ -809,7 +935,7 @@ vmBoolInt CHANSVmGetEnumedType(CHANSVmObjType* eType, vmS32 iType) NO_INLINE {
 
 // temporary
 // clang-format off
-VmConvertEntry VmTypeConvertFuncTbl[] = {
+const VmConvertEntry VmTypeConvertFuncTbl[5] = {
     { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
     { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
     { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
@@ -2306,6 +2432,82 @@ BOOL CHANSVm_81451348(BlobHeader* blob, s64 size);
 CHANSVmObjHdr* CHANSVmNewBlobObject(CHANSVm* VmInst, CHANSVmObjHdr* obj, u32 size, void* src, u32 count);
 static u64 CHANSVm_814540E0(u32 low, u32 high);
 
+wchar_t lbl_81697578[] = L"NaN";
+wchar_t lbl_8169757F[] = L",";
+wchar_t lbl_81697582[] = L"";
+char lbl_81697583[] = "%s";
+char lbl_81697586[] = "Infinity";
+char lbl_8169758A[] = "%.16lg";
+char lbl_81697591[] = "%lld";
+char lbl_81697596[] = "length";
+char lbl_8169759D[] = "join";
+char lbl_816975A2[] = "new2d";
+char lbl_816975A8[] = "pop";
+char lbl_816975AC[] = "push";
+char lbl_816975B1[] = "shift";
+char lbl_816975B7[] = "slice";
+char lbl_816975BD[] = "unshift";
+wchar_t lbl_816975C5[] = L"UTC";
+char lbl_816975CC[] = "Sun";
+char lbl_816975D0[] = "Mon";
+char lbl_816975D4[] = "Tue";
+char lbl_816975D8[] = "Wed";
+char lbl_816975DC[] = "Thu";
+char lbl_816975E0[] = "Fri";
+char lbl_816975E4[] = "Sat";
+char lbl_816975E8[] = "Jan";
+char lbl_816975EC[] = "Feb";
+char lbl_816975F0[] = "Mar";
+char lbl_816975F4[] = "Apr";
+char lbl_816975F8[] = "May";
+char lbl_816975FC[] = "Jun";
+char lbl_81697600[] = "Jul";
+char lbl_81697604[] = "Aug";
+char lbl_81697608[] = "Sep";
+char lbl_8169760C[] = "Oct";
+char lbl_81697610[] = "Nov";
+char lbl_81697614[] = "Dec";
+char lbl_81697618[] = "getDate";
+char lbl_81697620[] = "getDay";
+char lbl_81697627[] = "getTime";
+char lbl_8169762F[] = "getRTC";
+char lbl_81697636[] = "E";
+char lbl_81697638[] = "LN10";
+char lbl_8169763D[] = "LN2";
+char lbl_81697641[] = "LOG2E";
+char lbl_81697647[] = "LOG10E";
+char lbl_8169764E[] = "PI";
+char lbl_81697651[] = "SQRT1_2";
+char lbl_81697659[] = "SQRT2";
+char lbl_8169765F[] = "abs";
+char lbl_81697663[] = "acos";
+char lbl_81697668[] = "asin";
+char lbl_8169766D[] = "atan";
+char lbl_81697672[] = "atan2";
+char lbl_81697678[] = "ceil";
+char lbl_8169767D[] = "cos";
+char lbl_81697681[] = "exp";
+char lbl_81697685[] = "floor";
+char lbl_8169768B[] = "log";
+char lbl_8169768F[] = "max";
+char lbl_81697693[] = "min";
+char lbl_81697697[] = "pow";
+char lbl_8169769B[] = "random";
+char lbl_816976A2[] = "round";
+char lbl_816976A8[] = "sin";
+char lbl_816976AC[] = "sqrt";
+char lbl_816976B1[] = "tan";
+char lbl_816976B5[] = "getLength";
+char lbl_816976BC[] = "getOffset";
+char lbl_816976C4[] = "seek";
+char lbl_816976CC[] = "skip";
+char lbl_816976D4[] = "fill";
+char lbl_816976DB[] = "isEqual";
+
+char lbl_816976EC[] = "getBlob";
+char lbl_816976F3[] = "setBlob";
+char lbl_816976FB[] = "getHexString";
+
 static void VmBlobInitValue(BlobHeader* blob, u32 size) {
     if (blob == NULL)
         return;
@@ -2812,8 +3014,6 @@ fail_0:
     return 0;
 }
 
-extern const char* lbl_816976E4;
-extern u32 lbl_816976E8;
 
 VmMethodDefine(Blob, GetBlob) {
     BlobHeader* blob = (BlobHeader*)VmGetStrFromObjHdr(VmParentObj);
@@ -2899,7 +3099,7 @@ VmMethodDefine(Blob, GetHexString) {
             u8* pData = blob->pData;
             u32 destOff = 0;
             u32 i = 0;
-            const char* hexTbl = lbl_816976E4;
+            const char* hexTbl = (const char*)lbl_816976E4;
             u8* src;
             u32 idx2;
             u32 loop_i;
@@ -4787,7 +4987,7 @@ vmBoolInt VmWinEmuWrite(CHANSVm* vm, CHANSVmObjHdr* parent, CHANSVmObjHdr* ret) 
     return TRUE;
 }
 
-char lbl_816977A6[] = "write";
+extern char lbl_816977A6[];
 
 const CHANSVmPropertyList lbl_81694FAC = {
     lbl_816977A6,
@@ -5663,7 +5863,7 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
     CHANSVmObjHdr tmpObj;
     u32 _pad[4];
 
-    pConstObj = &CHANSVmConstStringObjectUndefined;
+    pConstObj = (CHANSVmObjHdr*)&CHANSVmConstStringObjectUndefined;
 
     if (choice == 0) {
         choice = 1;
@@ -5672,8 +5872,8 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
         _pad[1] = 0;
         _pad[2] = 0;
         _pad[3] = 0;
-        cLo = 4294967294.0f; // U64_MAX
-        cHi = 0.0f;
+        cLo = 4294967294.0; // U32_MAX - 1
+        cHi = 0.0;
         stackPtr = &tmpCopyObj;
         cZero = 0;
         cNeg2 = -2;
@@ -6397,3 +6597,210 @@ error_code_range:
 error_3e2:
     return CHANS_VM_ERR_HEAP_RANGE;
 }
+
+// === .data additional error/format strings ===
+char lbl_81669B12[] = "VmArrayJoinEstimateStrSize";
+char lbl_81669B2D[] = "%s %d: unsupported type 0x%x\n";
+char lbl_81669B4B[] = "VmArrayJoinSub";
+char lbl_81669B5A[] = "VmDateCommon";
+char lbl_81669B67[] = "internal error in %s line %d\n";
+char lbl_81669C0F[] = "getFullYear";
+char lbl_81669C1B[] = "getHours";
+char lbl_81669C24[] = "getMilliseconds";
+char lbl_81669C34[] = "getMinutes";
+char lbl_81669C3F[] = "getMonth";
+char lbl_81669C48[] = "getSeconds";
+char lbl_81669DB8[] = "charCodeAt";
+char lbl_81669DC3[] = "*fromCharCode";
+char lbl_81669DD1[] = "lastIndexOf";
+char lbl_81669DDD[] = "toLowerCase";
+char lbl_81669DE9[] = "toUpperCase";
+char lbl_81669DF5[] = "0123456789abcdef";
+char lbl_81669F98[] = "getLength";
+char lbl_81669FA2[] = "setLength";
+char lbl_81669FAC[] = "getString";
+char lbl_81669FB6[] = "getWString";
+char lbl_81669FC1[] = "setString";
+char lbl_81669FCB[] = "setWString";
+char lbl_81669FD6[] = "getHexString";
+char lbl_81669FE3[] = "copyRangeFrom";
+char lbl_81669FF1[] = "calcSHA1Digest";
+char lbl_8166A000[] = "calcMD5Digest";
+char lbl_8166A00E[] = "calcCRC16";
+char lbl_8166A018[] = "calcCRC32";
+char lbl_8166A022[] = "calcHMAC";
+char lbl_8166A02B[] = "calcRangeSHA1Digest";
+char lbl_8166A03F[] = "calcRangeMD5Digest";
+char lbl_8166A052[] = "calcRangeCRC16";
+char lbl_8166A061[] = "calcRangeCRC32";
+char lbl_8166A070[] = "calcRangeHMAC";
+char lbl_8166A07E[] = "document.write()";
+char lbl_8166A0A7[] = "document";
+char lbl_8166A0B0[] = "%s: no table for op '%c'\n";
+
+// === .sdata additional strings ===
+char lbl_81697700[] = "skip";
+char lbl_81697705[] = "isEqual";
+char lbl_8169770D[] = "fill";
+char lbl_81697712[] = "getU8";
+char lbl_81697718[] = "getU16";
+char lbl_8169771F[] = "getU32";
+char lbl_81697726[] = "getS8";
+char lbl_8169772C[] = "getS16";
+char lbl_81697733[] = "getS32";
+char lbl_8169773A[] = "getS64";
+char lbl_81697741[] = "setU8";
+char lbl_81697747[] = "setU16";
+char lbl_8169774E[] = "setU32";
+char lbl_81697755[] = "setS8";
+char lbl_8169775B[] = "setS16";
+char lbl_81697762[] = "setS32";
+char lbl_81697769[] = "setS64";
+char lbl_81697770[] = "getBlob";
+char lbl_81697778[] = "setBlob";
+char lbl_81697780[] = "pack";
+char lbl_81697785[] = "unpack";
+char lbl_8169778C[] = "Image";
+char lbl_81697792[] = "width";
+char lbl_81697798[] = "height";
+char lbl_8169779F[] = "format";
+char lbl_816977A6[] = "write";
+char lbl_816977AC[] = "Date";
+char lbl_816977B1[] = "@Math";
+char lbl_816977B7[] = "Math";
+char lbl_816977BC[] = "@WinEmu";
+char lbl_816977C4[] = "RCHE";
+
+// === lbl_81616ED0: function-addr+name table ===
+// TODO: Replace NULL function pointers with actual function references
+//       as those functions get implemented.
+typedef struct {
+    const char* name;
+    void* func;
+} NameFuncEntry;
+
+const NameFuncEntry lbl_81616ED0[] = {
+    { (const char*)lbl_816975C5, (void*)6 },
+    { NULL, NULL },
+    { "getDate", (void*)VmDateGetDate },
+    { "getDay", (void*)VmDateGetDay },
+    { "getFullYear", (void*)VmDateGetFullYear },
+    { "getHours", (void*)VmDateGetHours },
+    { "getMilliseconds", (void*)VmDateGetMilliseconds },
+    { "getMinutes", (void*)VmDateGetMinutes },
+    { "getMonth", (void*)VmDateGetMonth },
+    { "getSeconds", (void*)VmDateGetSeconds },
+    { "getTime", (void*)VmDateGetTime },
+    { "getRTC", (void*)VmDateGetRTC },
+    { "E", (void*)VmMathE },
+    { "LN10", (void*)VmMathLN10 },
+    { "LN2", (void*)VmMathLN2 },
+    { "LOG2E", (void*)VmMathLOG2E },
+    { "LOG10E", (void*)VmMathLOG10E },
+    { "PI", (void*)VmMathPI },
+    { "SQRT1_2", (void*)VmMathSQRT1_2 },
+    { "SQRT2", (void*)VmMathSQRT2 },
+    { "abs", (void*)VmMathabs },
+    { "acos", (void*)VmMathacos },
+    { "asin", (void*)VmMathasin },
+    { "atan", (void*)VmMathatan },
+    { "atan2", (void*)VmMathatan2 },
+    { "ceil", (void*)VmMathceil },
+    { "cos", (void*)VmMathcos },
+    { "exp", (void*)VmMathexp },
+    { "floor", (void*)VmMathfloor },
+    { "log", (void*)VmMathlog },
+    { "max", (void*)VmMathmax },
+    { "min", (void*)VmMathmin },
+    { "pow", (void*)VmMathpow },
+    { "random", (void*)VmMathrandom },
+    { "round", (void*)VmMathround },
+    { "sin", (void*)VmMathsin },
+    { "sqrt", (void*)VmMathsqrt },
+    { "tan", (void*)VmMathtan },
+    { "length", (void*)NULL },       // TODO: VmStringGetLength
+    { "charAt", (void*)NULL },       // TODO: VmStringCharAt
+    { "charCodeAt", (void*)NULL },   // TODO: VmStringCharCodeAt
+    { "fromCharCode", (void*)NULL }, // TODO: VmStringFromCharCode
+    { "format", (void*)NULL },       // TODO: VmStringFormat
+    { "indexOf", (void*)NULL },      // TODO: VmStringIndexOf
+    { "lastIndexOf", (void*)NULL },  // TODO: VmStringLastIndexOf
+    { "replace", (void*)NULL },      // TODO: VmStringReplace
+    { "search", (void*)NULL },       // TODO: VmStringSearch
+    { "splice", (void*)NULL },       // TODO: VmStringSplice
+    { "split", (void*)NULL },        // TODO: VmStringSplit
+    { "toLowerCase", (void*)NULL },  // TODO: VmStringToLowerCase
+    { "toUpperCase", (void*)NULL },  // TODO: VmStringToUpperCase
+    { "getBlob", (void*)NULL },      // TODO: VmBlobGetOffset
+    { "seek", (void*)NULL },         // TODO: VmBlobSeek
+    { "shift", (void*)VmBlobGetLength },
+    { "setLength", (void*)VmBlobSetLength },
+    { "setBlob", (void*)NULL },      // TODO: VmBlobCreate
+    { "getHexString", (void*)NULL }, // TODO: VmBlobSeek (dup)
+    { "setHexString", (void*)NULL }, // TODO: VmBlobSkip
+    { "pack", (void*)NULL },         // TODO: VmBlobIsEqual
+    { "getLength", (void*)VmBlobGetLength },
+    { "setLength", (void*)VmBlobSetLength },
+    { "fill", (void*)VmBlobFill },
+    { "getU8", (void*)VmBlobGetU8 },
+    { "getU16", (void*)VmBlobGetU16 },
+    { "getU32", (void*)VmBlobGetU32 },
+    { "getS8", (void*)VmBlobGetS8 },
+    { "getS16", (void*)VmBlobGetS16 },
+    { "getS32", (void*)VmBlobGetS32 },
+    { "getS64", (void*)VmBlobGetS64 },
+    { "setU8", (void*)VmBlobSetU8 },
+    { "setU16", (void*)VmBlobSetU16 },
+    { "setU32", (void*)VmBlobSetU32 },
+    { "setS8", (void*)VmBlobSetS8 },
+    { "setS16", (void*)VmBlobSetS16 },
+    { "setS32", (void*)VmBlobSetS32 },
+    { "setS64", (void*)VmBlobSetS64 },
+    { "getString", (void*)NULL },     // TODO: VmBlobGetString
+    { "getWString", (void*)NULL },    // TODO: VmBlobGetWString
+    { "setString", (void*)NULL },     // TODO: VmBlobSetString
+    { "setWString", (void*)NULL },    // TODO: VmBlobSetWString
+    { "getBlob", (void*)VmBlobGetBlob },
+    { "setBlob", (void*)VmBlobSetBlob },
+    { "getHexString", (void*)NULL },  // TODO: VmBlobGetHexString
+    { "copyRangeFrom", (void*)VmBlobCopyRangeFrom },
+    { "calcSHA1Digest", (void*)NULL },      // TODO: VmBlobCalcSHA1Digest
+    { "calcMD5Digest", (void*)NULL },       // TODO: VmBlobCalcMD5Digest
+    { "calcCRC16", (void*)NULL },           // TODO: VmBlobCalcCRC16
+    { "calcCRC32", (void*)NULL },           // TODO: VmBlobCalcCRC32
+    { "calcHMAC", (void*)NULL },            // TODO: VmBlobCalcHMAC
+    { "calcRangeSHA1Digest", (void*)NULL }, // TODO: VmBlobCalcRangeSHA1Digest
+    { "calcRangeMD5Digest", (void*)NULL },  // TODO: VmBlobCalcRangeMD5Digest
+    { "calcRangeCRC16", (void*)NULL },      // TODO: VmBlobCalcRangeCRC16
+    { "calcRangeCRC32", (void*)NULL },      // TODO: VmBlobCalcRangeCRC32
+    { "calcRangeHMAC", (void*)NULL },       // TODO: VmBlobCalcRangeHMAC
+    { "pack", (void*)NULL },                // TODO: VmBlobPack
+    { "unpack", (void*)NULL },              // TODO: VmBlobUnpack
+    { "width", (void*)NULL },               // TODO: VmImageWidth
+    { "height", (void*)NULL },              // TODO: VmImageHeight
+    { "format", (void*)NULL },              // TODO: VmImageFormat
+};
+
+// === vmErrorList: maps error codes to strings ===
+const char* vmErrorList[] = {
+    lbl_816691A8, lbl_816691BD, lbl_816691CF, lbl_816691E6,
+    lbl_81669206, lbl_81669217, lbl_8166922F, lbl_81669247,
+    lbl_81669265, lbl_8166927C, lbl_81669295, lbl_816692B3,
+    lbl_816692D0, lbl_816692E9, lbl_8166930C, lbl_8166932C,
+    lbl_81669345, lbl_8166935F, lbl_8166937D, lbl_81669398,
+    lbl_816693B3, lbl_816693CF, lbl_816693E7, lbl_81669402,
+    lbl_8166941B, lbl_81669432, lbl_81669443, lbl_81669454,
+    lbl_81669465, lbl_81669476, lbl_81669487, lbl_8166949C,
+    lbl_816694B1, lbl_816694C6, lbl_816694DA, lbl_816694EF,
+    lbl_81669500, lbl_8166951F, lbl_8166953F, lbl_81669562,
+    lbl_81669578, lbl_81669590, lbl_816695A4, lbl_816695B8,
+    lbl_816695DD, lbl_81669605, lbl_81669632, lbl_81669643,
+    lbl_81669664, lbl_8166967D, lbl_8166968F, lbl_816696B2,
+    lbl_816696CD, lbl_816696E8, lbl_81669701, lbl_8166971D,
+    lbl_8166973C, lbl_81669750, lbl_8166976C, lbl_81669783,
+    lbl_816697A2, lbl_816697BA, lbl_816697D6, lbl_816697F2,
+    lbl_81669813, lbl_81669830, lbl_8166984D, lbl_81669873,
+    lbl_81669897, lbl_816698AD, lbl_816698C9, lbl_816698EA,
+    lbl_81669908, lbl_81669924, lbl_81669947, lbl_8166996A,
+    lbl_81669988, lbl_816699A6,
+};
