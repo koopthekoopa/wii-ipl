@@ -1910,11 +1910,12 @@ extern const NameFuncEntry lbl_81616ED0[];
 extern char lbl_81669B5A[];
 extern char lbl_81669B67[];
 
+// TODO: cleanup
 int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
     u32 argc;
-    OSCalendarTime nettime;
     u32 i;
-    s64 time;
+    OSCalendarTime nettime;
+    u64 time;
 
     if (out == NULL) {
         goto ret0;
@@ -1933,7 +1934,7 @@ int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
             if (arg->value.wstring_v->len == 6 && memcmp(arg->value.wstring_v->str, lbl_81616ED0[0].name, 6) == 0) {
                 NETGetUniversalCalendar(&nettime);
                 time = OSCalendarTimeToTicks(&nettime);
-                time = time / ((__OSBusClock >> 2) / 1000);
+                time = (u64)((s64)time / ((__OSBusClock >> 2) / 1000));
                 goto finalize;
             }
         }
@@ -1959,33 +1960,38 @@ int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
             break;
         }
 
-        switch (i) {
-            case 0:
-                nettime.year = (s32)arg->value.int_v;
-                break;
-            case 1:
-                nettime.mon = (s32)arg->value.int_v;
-                break;
-            case 2:
-                nettime.mday = (s32)arg->value.int_v;
-                break;
-            case 3:
-                nettime.hour = (s32)arg->value.int_v;
-                break;
-            case 4:
-                nettime.min = (s32)arg->value.int_v;
-                break;
-            case 5:
-                nettime.sec = (s32)arg->value.int_v;
-                break;
-            case 6:
-                nettime.msec = (s32)arg->value.int_v;
-                break;
-            default:
-                if (CHANSVmDebugVerboseMode) {
-                    CHANSVmDebugPrintf(lbl_81669B67, lbl_81669B5A, 0xd3);
-                }
-                return vmFalse;
+        {
+            int* dst;
+            switch (i) {
+                case 0:
+                    dst = &nettime.year;
+                    break;
+                case 1:
+                    dst = &nettime.mon;
+                    break;
+                case 2:
+                    dst = &nettime.mday;
+                    break;
+                case 3:
+                    dst = &nettime.hour;
+                    break;
+                case 4:
+                    dst = &nettime.min;
+                    break;
+                case 5:
+                    dst = &nettime.sec;
+                    break;
+                case 6:
+                    dst = &nettime.msec;
+                    break;
+                default:
+                    if (CHANSVmDebugVerboseMode) {
+                        CHANSVmDebugPrintf(lbl_81669B67, lbl_81669B5A, 0xd3);
+                    }
+                    return vmFalse;
+            }
+
+            *dst = (s32)arg->value.int_v;
         }
     }
 
@@ -1997,16 +2003,16 @@ int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
     }
 
     time = OSCalendarTimeToTicks(&nettime);
-    time = time / ((__OSBusClock >> 2) / 1000);
+    time = (u64)((s64)time / ((__OSBusClock >> 2) / 1000));
     goto finalize;
 
 osgettime:
     time = OSGetTime();
-    time = time / ((__OSBusClock >> 2) / 1000);
+    time = (u64)((s64)time / ((__OSBusClock >> 2) / 1000));
 
 finalize:
     time = time * ((__OSBusClock >> 2) / 1000);
-    OSTicksToCalendarTime(time, out);
+    OSTicksToCalendarTime((s64)time, out);
     return vmTrue;
 
 ret0:
@@ -5001,10 +5007,10 @@ typedef struct ModuleHeader {
 typedef struct SectionHeader {
     u32 field_0x00;
     u32 field_0x04;
-    u8 pad_08[8];
+    u32 field_0x08;
     u32 field_0x0C;
-    u16 field_0x14;   // count of something
-    u16 pad_16;
+    u32 field_0x10;
+    u32 field_0x14;   // count of something
     u32 field_0x18;   // offset/pointer
     u32 pad_1C;
     u32 count;        // 0x20
@@ -5026,15 +5032,12 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
     ModuleHeader* mod = (ModuleHeader*)pVm->freeExeBuf;
     SectionHeader* header;
     u32 maxEnd;
-    u32 count;
-    u32 offs;
+    u32 size;
 
     (void)unk0;
 
-    if (mod->magic != 0x52434845) {
-        return CHANS_VM_ERR_INVALID_EXE_FORMAT;
-    }
-    if (mod->size < 0x80 || (mod->size & 0x1F)) {
+    size = mod->size;
+    if (memcmp(mod, "RCHE", 4) != 0 || size < 0x80 || (size & 0x1F)) {
         return CHANS_VM_ERR_INVALID_EXE_FORMAT;
     }
     if (mod->type != (u32)unk1) {
@@ -5043,66 +5046,75 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
     if (mod->opcodeVersion != 3) {
         return CHANS_VM_ERR_OPCODE_VERSION;
     }
-    if (CHANSVmGetFreeExeSize(vm) < mod->size) {
+    if (CHANSVmGetFreeExeSize(vm) < size) {
         return CHANS_VM_ERR_NO_MEMORY;
     }
 
-    pVm->freeExeBuf = pVm->freeExeBuf + mod->size;
+    pVm->freeExeBuf = pVm->freeExeBuf + size;
     mod->field_0x20 = 0;
-    mod->field_0x24 = mod->size - 0x20;
+    mod->field_0x24 = size - 0x20;
     mod->field_0x28 = (u32)mod;
 
     header = (SectionHeader*)((u8*)mod + 0x20);
-    maxEnd = header->field_0x00 + header->field_0x0C;
+    maxEnd = header->field_0x10 + header->field_0x0C;
 
+    if (header->field_0x10 < 0x60) {
+        return CHANS_VM_ERR_INVALID_EXE_FORMAT;
+    }
+    if (header->field_0x04 < header->field_0x10) {
+        return CHANS_VM_ERR_INVALID_EXE_FORMAT;
+    }
+    if (header->field_0x04 < header->field_0x0C) {
+        return CHANS_VM_ERR_INVALID_EXE_FORMAT;
+    }
     if (header->field_0x04 < maxEnd) {
         return CHANS_VM_ERR_INVALID_EXE_FORMAT;
     }
     {
-        u32 count;
-        u32 offs;
+        u32 cnt;
+        u32 ofs;
 
-        count = header->count;
-        if (count) {
-            offs = header->offs;
-            if (offs < maxEnd || header->field_0x04 < offs) {
+        cnt = header->count;
+        if (cnt) {
+            ofs = header->offs;
+            if (ofs < maxEnd || header->field_0x04 < ofs) {
                 return CHANS_VM_ERR_INVALID_EXE_FORMAT;
             }
-            maxEnd = offs + count * 8;
+            maxEnd = ofs + cnt * 8;
             if (header->field_0x04 < maxEnd) {
                 return CHANS_VM_ERR_INVALID_EXE_FORMAT;
             }
         }
-        count = header->field_0x28;
-        if (count) {
-            offs = header->field_0x2C;
-            if (offs < maxEnd || header->field_0x04 < offs) {
+        cnt = header->field_0x28;
+        if (cnt) {
+            ofs = header->field_0x2C;
+            if (ofs < maxEnd || header->field_0x04 < ofs) {
                 return CHANS_VM_ERR_INVALID_EXE_FORMAT;
             }
-            maxEnd = offs + count * 4;
-            if (*(u32*)(header + 0x04) < maxEnd) {
-                return CHANS_VM_ERR_INVALID_EXE_FORMAT;
-            }
-        }
-        count = *(u32*)(header + 0x30);
-        if (count) {
-            offs = *(u32*)(header + 0x34);
-            if (offs < maxEnd || *(u32*)(header + 0x04) < offs) {
-                return CHANS_VM_ERR_INVALID_EXE_FORMAT;
-            }
-            maxEnd = offs + count * 2;
-            if (*(u32*)(header + 0x04) < maxEnd) {
+            maxEnd = ofs + cnt * 4;
+            if (header->field_0x04 < maxEnd) {
                 return CHANS_VM_ERR_INVALID_EXE_FORMAT;
             }
         }
-        count = *(u32*)(header + 0x44);
-        if (count) {
-            if (count < maxEnd || *(u32*)(header + 0x04) < count) {
+        cnt = header->count2;
+        if (cnt) {
+            ofs = header->offs2;
+            if (ofs < maxEnd || header->field_0x04 < ofs) {
+                return CHANS_VM_ERR_INVALID_EXE_FORMAT;
+            }
+            maxEnd = ofs + cnt * 2;
+            if (header->field_0x04 < maxEnd) {
+                return CHANS_VM_ERR_INVALID_EXE_FORMAT;
+            }
+        }
+        cnt = header->field_0x44;
+        if (cnt) {
+            if (cnt < maxEnd || header->field_0x04 < cnt) {
                 return CHANS_VM_ERR_INVALID_EXE_FORMAT;
             }
             {
-                u32 clsSize = ((*(u32*)(header + 0x0C) + 0xFF) >> 8) * 0x24;
-                if (*(u32*)(header + 0x04) < count + clsSize) {
+                u32 clsSize = ((header->field_0x0C + 0xFF) >> 8) * 0x24;
+                if (header->field_0x04 < cnt + clsSize) {
                     return CHANS_VM_ERR_INVALID_EXE_FORMAT;
                 }
             }
@@ -5118,12 +5130,8 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
         if (ctx == NULL) {
             pVm->execContext = (CHANSVmExecutionCtx*)header;
         } else {
-            while (1) {
-                CHANSVmExecutionCtx* next = (CHANSVmExecutionCtx*)(vmU32)ctx->unk_0x00;
-                if (next == NULL) {
-                    break;
-                }
-                ctx = next;
+            while (ctx->unk_0x00 != 0) {
+                ctx = (CHANSVmExecutionCtx*)(vmU32)ctx->unk_0x00;
                 depth++;
             }
             ctx->unk_0x00 = (vmU32)header;
@@ -5131,44 +5139,44 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
         pVm->unk_0x10 = depth;
     }
     {
-        u32 count;
+        u32 cnt;
 
-        count = *(u32*)(header + 0x14);
-        if (count) {
-            u32 allocSize = (count * 0x10 + 0x1F) & ~0x1F;
-            *(u32*)(header + 0x18) = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
+        cnt = header->field_0x14;
+        if (cnt) {
+            u32 allocSize = (cnt * 0x10 + 0x1F) & ~0x1F;
+            header->field_0x18 = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
         }
 
-        count = *(u32*)(header + 0x28);
-        if (count) {
-            u32 allocSize = (count * 4 + 0x1F) & ~0x1F;
-            *(u32*)(header + 0x38) = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
+        cnt = header->field_0x28;
+        if (cnt) {
+            u32 allocSize = (cnt * 4 + 0x1F) & ~0x1F;
+            header->field_0x38 = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
         }
 
-        count = *(u32*)(header + 0x30);
-        if (count) {
-            u32 allocSize = (count * 0x10 + 0x1F) & ~0x1F;
-            *(u32*)(header + 0x3C) = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
+        cnt = header->count2;
+        if (cnt) {
+            u32 allocSize = (cnt * 0x10 + 0x1F) & ~0x1F;
+            header->field_0x3C = (u32)(vmU32)CHANSVmAlloc(vm, allocSize);
         }
     }
     {
         u32 cnt;
 
-        cnt = *(u32*)(header + 0x14);
+        cnt = header->field_0x14;
         if (cnt) {
-            if (*(u32*)(header + 0x18) == 0) {
+            if (header->field_0x18 == 0) {
                 return CHANS_VM_ERR_NO_MEMORY;
             }
         }
-        cnt = *(u32*)(header + 0x28);
+        cnt = header->field_0x28;
         if (cnt) {
-            if (*(u32*)(header + 0x38) == 0) {
+            if (header->field_0x38 == 0) {
                 return CHANS_VM_ERR_NO_MEMORY;
             }
         }
-        cnt = *(u32*)(header + 0x30);
+        cnt = header->count2;
         if (cnt) {
-            if (*(u32*)(header + 0x3C) == 0) {
+            if (header->field_0x3C == 0) {
                 return CHANS_VM_ERR_NO_MEMORY;
             }
         }
@@ -5177,8 +5185,8 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
         u32 i;
         u32 tblOffs;
 
-        for (i = 0, tblOffs = 0; i < *(u32*)(header + 0x14); i++) {
-            memset((void*)(vmU32)(*(u32*)(header + 0x18) + tblOffs), 0, 0x10);
+        for (i = 0, tblOffs = 0; i < header->field_0x14; i++) {
+            memset((void*)(vmU32)(header->field_0x18 + tblOffs), 0, 0x10);
             tblOffs += 0x10;
         }
     }
@@ -5188,10 +5196,10 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
     {
         u32 i;
         u32 tblOffs;
-        u8* methodTable = (u8*)(vmU32)*(u32*)(header + 0x2C);
-        u8* bufEnd = (u8*)(vmU32)(*(u32*)(header + 0x04) + (u32)(vmU32)header);
+        u8* methodTable = (u8*)(vmU32)header->field_0x2C;
+        u8* bufEnd = (u8*)(vmU32)(header->field_0x04 + (u32)(vmU32)header);
 
-        for (i = 0, tblOffs = 0; i < *(u32*)(header + 0x28); i++, tblOffs += 4) {
+        for (i = 0, tblOffs = 0; i < header->field_0x28; i++, tblOffs += 4) {
             u32 entry = *(u32*)(methodTable + tblOffs);
             u32 nameLen = entry >> 24;
 
@@ -5202,7 +5210,7 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
                 if ((u8*)(vmU32)((u32)(vmU32)nameAddr + nameLen) <= bufEnd) {
                     CHANSVmObjHdr* method = (CHANSVmObjHdr*)(vmU32)CHANSVmAddNativeMethodName(vm, (const char*)nameAddr, (vmSize)nameLen);
                     if (method) {
-                        *(u32*)(*(u32*)(header + 0x38) + tblOffs) = (u32)(vmU32)method;
+                        *(u32*)(header->field_0x38 + tblOffs) = (u32)(vmU32)method;
                         continue;
                     }
                 }
@@ -5213,10 +5221,10 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
     {
         u32 i;
         u32 tblOffs;
-        u8* strPtr = (u8*)(vmU32)*(u32*)(header + 0x34);
-        u8* bufEnd = (u8*)(vmU32)(*(u32*)(header + 0x04) + (u32)(vmU32)header);
+        u8* strPtr = (u8*)(vmU32)header->offs2;
+        u8* bufEnd = (u8*)(vmU32)(header->field_0x04 + (u32)(vmU32)header);
 
-        for (i = 0, tblOffs = 0; i < *(u32*)(header + 0x30); i++) {
+        for (i = 0, tblOffs = 0; i < header->count2; i++) {
             u32 len = ((u32)strPtr[0] << 8) | (u32)strPtr[1];
             strPtr += 2;
 
@@ -5224,8 +5232,8 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
                 u8* strAddr = strPtr + len;
 
                 if ((u8*)(vmU32)((u32)(vmU32)strAddr) <= bufEnd) {
-                    *(u32*)(*(u32*)(header + 0x3C) + tblOffs) = (u32)(vmU32)strPtr;
-                    *(u32*)(*(u32*)(header + 0x3C) + tblOffs + 0x04) = len;
+                    *(u32*)(header->field_0x3C + tblOffs) = (u32)(vmU32)strPtr;
+                    *(u32*)(header->field_0x3C + tblOffs + 0x04) = len;
                     strPtr = strAddr;
                     tblOffs += 0x10;
                     continue;
@@ -5234,6 +5242,7 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1) {
             return CHANS_VM_ERR_INVALID_EXE_FORMAT;
         }
     }
+
     return CHANS_VM_OK;
 }
 
@@ -5688,8 +5697,323 @@ CHANSVmErr VmDeleteCommon(CHANSVm* vm, CHANSVmObjHdr* object) {
     return result;
 }
 
-// TODO: VmCallMethod
-static CHANSVmErr VmCallMethod(CHANSVm* vm, u32 a, u32 b, u32 c);
+static CHANSVmErr VmCallMethod(CHANSVm* vm, u32 a, u32 b, u32 c) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    CHANSVmObjHdr* acc;
+    u32 retVal;
+    u32 target;
+    u32 x;
+    u32 y;
+    u32 newPC;
+    void* pConstObj;
+    CHANSVmObjHdr localBuf;
+    s32 type;
+
+    acc = &pVm->accumulator;
+    retVal = 0;
+    target = 0;
+    x = 0;
+    y = 0;
+
+    type = acc->type;
+    if (type >= 7) {
+        goto types_ge_7;
+    }
+    if (type == 4) {
+        goto case4;
+    }
+    if (type >= 4) {
+        goto error_check_b;
+    }
+    if (type >= 3) {
+        goto case3;
+    }
+    goto error_check_b;
+
+types_ge_7:
+    if (type == 9) {
+        goto case9;
+    }
+    if (type >= 9) {
+        goto error_check_b;
+    }
+    target = (u32)acc->parentCls;
+    if (target == 0) {
+        return CHANS_VM_ERR_INVALID_OBJECT;
+    }
+    goto main_cont;
+
+case4:
+    target = (u32)pVm->pArrayCls;
+    if (target == 0) {
+        return CHANS_VM_ERR_INVALID_OBJECT;
+    }
+    goto main_cont;
+
+case3:
+    target = (u32)pVm->pStringCls;
+    if (target == 0) {
+        return CHANS_VM_ERR_INVALID_OBJECT;
+    }
+    goto main_cont;
+
+case9:
+    {
+        CHANSVmExecutionCtx* ec = pVm->execContext;
+        void* dbg = ec->dbg;
+        u32 idx = (u32)acc->value.int32_v;
+
+        if (idx >= *(u32*)((u8*)dbg + 0x20)) {
+            return CHANS_VM_ERR_INVALID_OBJECT;
+        }
+        x = *(u8*)(*(u32*)((u8*)dbg + 0x24) + idx * 8 + 6);
+        y = *(u8*)(*(u32*)((u8*)dbg + 0x24) + idx * 8 + 7);
+    }
+    goto main_cont;
+
+error_check_b:
+    if (b == 1) {
+        retVal = CHANS_VM_ERR_NO_SUCH_FUNCTION;
+        goto return_label;
+    }
+    if (b == 0) {
+        retVal = CHANS_VM_ERR_NO_SUCH_METHOD;
+        goto return_label;
+    }
+    retVal = CHANS_VM_ERR_NO_SUCH_PROPERTY;
+    goto return_label;
+
+main_cont:
+
+    {
+        CHANSVmExecutionCtx* ec = pVm->execContext;
+        void* dbg = ec->dbg;
+        u32 pc = ec->pc;
+        u32 dbgTableVal = *(u32*)((u8*)dbg + 0x10);
+
+        newPC = pc + a;
+        pConstObj = (void*)(dbgTableVal + pc);
+
+        if (newPC < pc || newPC > *(u32*)((u8*)dbg + 0x0C)) {
+            return CHANS_VM_ERR_CODE_RANGE;
+        }
+        if (target == 0) {
+            ec->pc = newPC;
+        }
+    }
+
+    memset(&localBuf, 0, 0x10);
+
+    if (b != 1) {
+        goto method_table_lookup;
+    }
+    target = 0;
+    goto method_dispatch;
+
+method_table_lookup:
+    {
+        CHANSVmExecutionCtx* ec = pVm->execContext;
+        void* dbg = ec->dbg;
+        u8 byte1 = *(u8*)((u8*)pConstObj + 1);
+        u32 methodTable = *(u32*)((u8*)dbg + 0x38);
+        u16 methodId = (*(u8*)((u8*)pConstObj + 2)) | (byte1 << 8);
+        u32 methodCount = *(u32*)((u8*)dbg + 0x28);
+
+        if (methodTable == 0) {
+            goto error_check_b;
+        }
+        if (methodId >= methodCount) {
+            goto error_check_b;
+        }
+
+        if (methodId != 0) {
+            if (target == 0) {
+                goto error_check_b;
+            }
+            retVal = *(u32*)(methodTable + methodId * 4);
+        }
+    }
+
+method_dispatch:
+    {
+        u32 bMinus2 = b - 2;
+
+        if (bMinus2 <= 1) {
+            {
+                void* entry;
+                u32 bMinus3 = b - 3;
+                u32 isB3;
+                u32 isMethodNull;
+
+                bMinus3 = *(u32*)&bMinus3;
+                isMethodNull = (retVal == 0) ? 1 : 0;
+                isMethodNull = *(u32*)&isMethodNull;
+                isB3 = (bMinus3 == 0) ? 1 : 0;
+                isB3 = *(u32*)&isB3;
+
+                entry = (void*)((CHANSVmNativeClass*)target)->nativeProperties;
+                isB3 >>= 5;
+                isMethodNull >>= 5;
+
+                if (isMethodNull == 0) {
+                    if (entry != 0) {
+                        goto method_list_check;
+                    }
+                    return CHANS_VM_ERR_NO_SUCH_PROPERTY;
+                }
+                return CHANS_VM_ERR_NO_SUCH_PROPERTY;
+
+method_list_check:
+                if (acc->type == 7) {
+                    if (*(u8*)((u8*)entry + 6) == 0) {
+                        return CHANS_VM_ERR_FORBIDDEN_CLASS_PROPERTY;
+                    }
+                }
+                if (b == 2) {
+                    retVal = *(u32*)((u8*)entry + 8);
+                    if (retVal == 0) {
+                        return CHANS_VM_ERR_NOT_READABLE_PROPERTY;
+                    }
+                } else {
+                    retVal = *(u32*)((u8*)entry + 12);
+                    if (retVal == 0) {
+                        return CHANS_VM_ERR_NOT_WRITABLE_PROPERTY;
+                    }
+                }
+                goto method_found;
+            }
+        }
+
+        {
+            u8 argType;
+
+            argType = *(u8*)((u8*)pConstObj + a - 1);
+            if (retVal == 0) {
+                goto method_no_target;
+            }
+
+            {
+                void* node = (void*)((CHANSVmNativeClass*)target)->nativeMethods;
+                goto method_node_check;
+
+method_node_check:
+                if (node == 0) {
+                    return CHANS_VM_ERR_NO_SUCH_METHOD;
+                }
+                if (((MethodListNode*)node)->index == retVal) {
+                    if (acc->type == 7) {
+                        if (((MethodListNode*)node)->flag == 0) {
+                            return CHANS_VM_ERR_FORBIDDEN_CLASS_METHOD;
+                        }
+                    }
+                    retVal = (u32)((MethodListNode*)node)->func;
+                    goto method_found;
+                }
+                node = ((MethodListNode*)node)->next;
+                goto method_node_check;
+            }
+        }
+    }
+
+    retVal = 0;
+    goto method_found;
+
+method_no_target:
+    if (target == 0) {
+        goto method_found;
+    }
+    if (acc->type == 7) {
+        if (c == 0) {
+            retVal = (u32)((CHANSVmNativeClass*)target)->init;
+            if (retVal == 0) {
+                return CHANS_VM_ERR_NEED_NEW;
+            }
+        } else {
+            retVal = (u32)((CHANSVmNativeClass*)target)->ctor;
+            if (retVal == 0) {
+                return CHANS_VM_ERR_NOT_CONSTRUCTOR;
+            }
+        }
+        goto method_found;
+    }
+    if (b == 0) {
+        return CHANS_VM_ERR_NO_SUCH_FUNCTION;
+    }
+    return CHANS_VM_ERR_NO_SUCH_METHOD;
+
+method_found:
+    if (target != 0) {
+        x = a;
+    }
+
+    if (VmPushFuncReturnInfo(vm, 0, x, y) != 0) {
+        retVal = /* error */ 0;
+        goto return_label;
+    }
+
+    if (target != 0) {
+        if (retVal != 0) {
+            ((CHANSVmFunction)retVal)(vm, acc, &localBuf);
+            if (/* function returned 0 */ 1) {
+                if (c == 0) {
+                    retVal = CHANS_VM_ERR_IN_METHOD_OR_PROPERTY;
+                } else {
+                    retVal = CHANS_VM_ERR_NEW;
+                }
+                goto return_check;
+            }
+        }
+        retVal = VmReturnWithValue(vm, (b == 3) ? 1 : 0);
+        if (retVal != 0) {
+            goto return_check;
+        }
+        if (b == 3) {
+            goto return_check;
+        }
+        if (CHANSVmDeleteObject(vm, acc) != 0) {
+            retVal = /* error */ 0;
+            goto return_check;
+        }
+        memcpy(acc, &localBuf, 0x10);
+        acc->flags.raw &= 0x7F;
+        memset(&localBuf, 0, 0x10);
+    } else {
+        u32 gobjIdx;
+        void* dbg2;
+        void* gobjEntry;
+        u32 entryValue;
+
+        gobjIdx = (u32)acc->value.int32_v;
+        dbg2 = pVm->execContext->dbg;
+        gobjEntry = *(void**)((u8*)dbg2 + 0x24);
+        entryValue = *(u32*)((u8*)gobjEntry + gobjIdx * 8);
+
+        if (entryValue < 1) {
+            retVal = CHANS_VM_ERR_CODE_RANGE;
+            goto return_label;
+        }
+        if (entryValue >= *(u32*)((u8*)dbg2 + 0x0C)) {
+            retVal = CHANS_VM_ERR_CODE_RANGE;
+            goto return_label;
+        }
+        pVm->execContext->pc = entryValue;
+        if (CHANSVmDeleteObject(vm, acc) != 0) {
+            retVal = /* error */ 0;
+            goto return_label;
+        }
+        goto return_check;
+    }
+
+return_check:
+    if (retVal != 0) {
+        goto return_label;
+    }
+    pVm->execContext->pc = newPC;
+    goto return_label;
+
+return_label:
+    return retVal;
+}
 
 void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
@@ -6519,7 +6843,6 @@ char lbl_816977AC[] = "Date";
 char lbl_816977B1[] = "@Math";
 char lbl_816977B7[] = "Math";
 char lbl_816977BC[] = "@WinEmu";
-char lbl_816977C4[] = "RCHE";
 
 // === lbl_81616ED0: function-addr+name table ===
 // TODO: Replace NULL function pointers with actual function references
