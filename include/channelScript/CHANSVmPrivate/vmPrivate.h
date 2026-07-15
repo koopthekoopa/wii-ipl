@@ -19,12 +19,13 @@ typedef struct SrcDbg {
     vmU32 unk_08;       // 0x08
     vmU32 codesize;     // 0x0C
     void* table;        // 0x10
-    vmU16 unk_14[24];   // 0x14
+    vmU32 unk_14;       // 0x14
+    vmU16 unk_18[22];   // 0x18
     SrcLineEntry* entries; // 0x44
 } SrcDbg;
 
 typedef struct CHANSVmExecutionCtx {
-    vmU32 unk_0x00;       // 0x00
+    struct CHANSVmExecutionCtx* next;       // 0x00
     SrcDbg* dbg;          // 0x04
     vmWString* argv;      // 0x08
     vmS32 stackDepth;     // 0x0C
@@ -85,9 +86,10 @@ typedef struct CHANSVmPrivate {
     vmBool hasStar;  // 0x06
     vmU8 pad_0x07;                    // 0x07
     vmU32 exeStart;                  // 0x08
-    vmU32 unk_0x0C;
-    vmS32 unk_0x10;
-    vmU8 unk_0x14[0x1C - 0x14];
+    vmU32 exeSize;
+    vmS32 depth;
+    vmU8 unk_0x14[0x18 - 0x14];
+    CHANSVmExecutionCtx* contextListHead; // 0x18
     vmU32 minFreeHeapSize; // 0x1C
     vmU32* pHeapStart; // 0x20
     CHANSVmObjHdr* pHeapEnd; // 0x24
@@ -105,7 +107,7 @@ typedef struct CHANSVmPrivate {
     vmU8 bSignalBlocked;
     vmU8 bSuspendStep;
     CHANSVmObjHdr accumulator;
-    CHANSVmExecutionCtx* execContext; // 0x60
+    CHANSVmExecutionCtx* activeCtx; // 0x60
     vmU32 unk_0x64;
     vmS32 minWorkSize;  // 0x68
     vmU32 mNextChunkIdx;               // 0x6C

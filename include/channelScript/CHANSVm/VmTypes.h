@@ -113,8 +113,8 @@ struct CHANSVmObjHdr {
 };
 
 typedef struct CHANSVmImage {
-    u32 unk_0x00;  // 0x00
-    u32 unk_0x04;  // 0x04
+    u8* data;  // 0x00
+    u32 size;  // 0x04
     u16 width;     // 0x08
     u16 height;    // 0x0A
     u8 format;     // 0x0C
