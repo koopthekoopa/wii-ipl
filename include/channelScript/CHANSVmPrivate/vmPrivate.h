@@ -81,7 +81,14 @@ typedef struct GlobalNameListNode {
     char name[];                              // 0x18 (variable)
 } GlobalNameListNode;
 
-
+typedef struct ArrayChunk {
+    struct ArrayChunk* prev;   // 0x00
+    struct ArrayChunk* next;   // 0x04
+    u32 capacity;                // 0x08
+    u32 count;                   // 0x0C
+    u32 start;                   // 0x10
+    u32 pad;                     // 0x14
+} ArrayChunk;
 
 typedef struct SectionHeader {
     u32 field_0x00;
