@@ -1528,7 +1528,7 @@ CHANSVmNativeClass* CHANSVmAddNativeClass2(CHANSVm* vm, const char* clsName, CHA
     if (CHANSVmFindNativeClass(vm, clsName) == vmNull) {
         clsNameLen = strlen(clsName);
         if (clsNameLen != 0) {
-            cls = (CHANSVmNativeClass*)CHANSVmAlloc(vm, clsNameLen + sizeof(CHANSVmNativeClass) - 1 & -32);
+            cls = (CHANSVmNativeClass*)CHANSVmAlloc(vm, VM_ALIGN(clsNameLen + sizeof(CHANSVmNativeClass) - 0x20));
             if (cls != vmNull) {
                 if (pVm->nativeClasses == vmNull) {
                     pVm->nativeClasses = cls;
@@ -1686,6 +1686,7 @@ CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, cons
                     continue;
                 }
 
+                // TODO: MethodListNode struct should be 0x20 long?
                 node = CHANSVmAlloc(vm, 0x20);
                 if (node == NULL) {
                     result = CHANS_VM_ERR_NO_MEMORY;
@@ -1727,6 +1728,7 @@ CHANSVmErr CHANSVmAddNativePropertyAccessors(CHANSVm* vm, CHANSVmNativeClass* cl
 
     result = CHANSVmFindAndAddNativeMethod(cls, NULL, methodIndex);
     if (result == 0) {
+        // TODO: MethodListNode struct should be 0x20 long?
         PropListNode* node = CHANSVmAlloc(vm, 0x20);
         if (node == NULL) {
             return CHANS_VM_ERR_NO_MEMORY;
@@ -2362,7 +2364,6 @@ char lbl_816975AC[] = "push";
 char lbl_816975B1[] = "shift";
 char lbl_816975B7[] = "slice";
 char lbl_816975BD[] = "unshift";
-wchar_t lbl_816975C5[] = L"UTC";
 char lbl_816975CC[] = "Sun";
 char lbl_816975D0[] = "Mon";
 char lbl_816975D4[] = "Tue";
@@ -2382,43 +2383,12 @@ char lbl_81697608[] = "Sep";
 char lbl_8169760C[] = "Oct";
 char lbl_81697610[] = "Nov";
 char lbl_81697614[] = "Dec";
-char lbl_81697618[] = "getDate";
-char lbl_81697620[] = "getDay";
-char lbl_81697627[] = "getTime";
-char lbl_8169762F[] = "getRTC";
-char lbl_81697636[] = "E";
-char lbl_81697638[] = "LN10";
-char lbl_8169763D[] = "LN2";
-char lbl_81697641[] = "LOG2E";
-char lbl_81697647[] = "LOG10E";
-char lbl_8169764E[] = "PI";
-char lbl_81697651[] = "SQRT1_2";
-char lbl_81697659[] = "SQRT2";
-char lbl_8169765F[] = "abs";
-char lbl_81697663[] = "acos";
-char lbl_81697668[] = "asin";
-char lbl_8169766D[] = "atan";
-char lbl_81697672[] = "atan2";
-char lbl_81697678[] = "ceil";
-char lbl_8169767D[] = "cos";
-char lbl_81697681[] = "exp";
-char lbl_81697685[] = "floor";
-char lbl_8169768B[] = "log";
-char lbl_8169768F[] = "max";
-char lbl_81697693[] = "min";
-char lbl_81697697[] = "pow";
-char lbl_8169769B[] = "random";
-char lbl_816976A2[] = "round";
-char lbl_816976A8[] = "sin";
-char lbl_816976AC[] = "sqrt";
-char lbl_816976B1[] = "tan";
 char lbl_816976B5[] = "getLength";
 char lbl_816976BC[] = "getOffset";
 char lbl_816976C4[] = "seek";
 char lbl_816976CC[] = "skip";
 char lbl_816976D4[] = "fill";
 char lbl_816976DB[] = "isEqual";
-
 char lbl_816976EC[] = "getBlob";
 char lbl_816976F3[] = "setBlob";
 char lbl_816976FB[] = "getHexString";
@@ -4924,42 +4894,10 @@ vmU32 CHANSVmGetFreeExeSize(CHANSVm* vm) {
     return size;
 }
 
-typedef struct SectionHeader {
-    u32 field_0x00;
-    u32 field_0x04;
-    u32 field_0x08;
-    u32 field_0x0C;
-    u32 field_0x10;
-    u32 field_0x14;   // count of something
-    u32 field_0x18;   // offset/pointer
-    u32 pad_1C;
-    u32 count;        // 0x20
-    u32 offs;         // 0x24
-    u32 field_0x28;
-    u32 field_0x2C;
-    u32 count2;       // 0x30
-    u32 offs2;        // 0x34
-    u32 field_0x38;
-    u32 field_0x3C;
-    u8 pad_40[4];
-    u32 field_0x44;
-} SectionHeader;
-
-typedef struct ModuleHeader {
-    u32 magic;         // 0x00 = 0x52434845 "RCHE"
-    u8 opcodeVersion;  // 0x04
-    u8 pad_05[3];      // 0x05
-    u32 size;          // 0x08
-    u8 type;           // 0x0C
-    u8 pad_0D[0x13];
-    SectionHeader* field_0x20;    // 0x20
-    u32 field_0x24;    // 0x24
-    u32 field_0x28;    // 0x28
-} ModuleHeader;
-
-void CHANSConvertModuleOfsToPtr(vmU8* ptr);
+void CHANSConvertModuleOfsToPtr(SectionHeader* ptr);
 
 CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 execCtx) {
+    // TODO: needs cleanup
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     ModuleHeader* mod = (ModuleHeader*)pVm->freeExeBuf;
     SectionHeader* header;
@@ -5108,7 +5046,7 @@ CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 execCtx) {
         }
     }
 
-    CHANSConvertModuleOfsToPtr((vmU8*)header);
+    CHANSConvertModuleOfsToPtr(header);
 
     {
         u32 i;
@@ -5170,20 +5108,20 @@ static void VmOffs00U32ToPtr(vmPtr ptr) {
     }
 }
 
-static void VmOffsU32ToPtr(vmPtr ptr, vmU32 offset) NO_INLINE {
+static void VmOffsU32ToPtr(vmPtr ptr, vmPtr offset) NO_INLINE {
     if (*(vmU32*)ptr != 0) {
-        *(vmU32*)ptr += offset;
+        *(vmU32*)ptr += (vmU32)offset;
     }
 }
 
-void CHANSConvertModuleOfsToPtr(vmU8* ptr) {
+void CHANSConvertModuleOfsToPtr(SectionHeader* ptr) {
     VmOffs00U32ToPtr(ptr);
-    VmOffsU32ToPtr((ptr + 0x10), (vmU32)ptr);
-    VmOffsU32ToPtr((ptr + 0x24), (vmU32)ptr);
-    VmOffsU32ToPtr((ptr + 0x2C), (vmU32)ptr);
-    VmOffsU32ToPtr((ptr + 0x34), (vmU32)ptr);
-    VmOffsU32ToPtr((ptr + 0x40), (vmU32)ptr);
-    VmOffsU32ToPtr((ptr + 0x44), (vmU32)ptr);
+    VmOffsU32ToPtr(&ptr->field_0x10, ptr);
+    VmOffsU32ToPtr(&ptr->offs, ptr);
+    VmOffsU32ToPtr(&ptr->field_0x2C, ptr);
+    VmOffsU32ToPtr(&ptr->offs2, ptr);
+    VmOffsU32ToPtr(&ptr->unk_0x40, ptr);
+    VmOffsU32ToPtr(&ptr->field_0x44, ptr);
 }
 
 static CHANSVmObjHdr* CHANSVm_81455654(CHANSVm* vm, u32 id) {
@@ -5232,6 +5170,7 @@ static CHANSVmObjHdr* CHANSVm_81455654(CHANSVm* vm, u32 id) {
 }
 
 static CHANSVmErr VmPushFuncReturnInfo(CHANSVm* vm, u32 a, u32 b, u32 c) {
+    // TODO: needs cleanup
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     vmU8* block;
     CHANSVmErr result;
@@ -5384,6 +5323,7 @@ static CHANSVmErr VmReturnWithValue(CHANSVm* vm, u32 val) {
 }
 
 CHANSVmErr CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0) {
+    // TODO: needs cleanup
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     u8* module;
     u32 modIdx;
@@ -5557,11 +5497,8 @@ static u8* VmGetOperand(CHANSVm* vm, u32 num, u32 offset) {
 }
 
 static CHANSVmErr VmLoadImmInteger(CHANSVm* vm, CHANSVmObjHdr* obj, u8* buf, s32 count) {
-    u32 low;
-    u32 high;
-
-    low = 0;
-    high = 0;
+    u32 low = 0;
+    u32 high = 0;
 
     while (count != 0) {
         u32 byte = *buf;
@@ -5573,7 +5510,7 @@ static CHANSVmErr VmLoadImmInteger(CHANSVm* vm, CHANSVmObjHdr* obj, u8* buf, s32
         count--;
     }
 
-    return CHANSVmSetInteger(vm, obj, ((s64)(u32)high << 32) | low);
+    return CHANSVmSetInteger(vm, obj, ((s64)high << 32) | low);
 }
 
 CHANSVmErr VmStore(CHANSVm* vm, CHANSVmObjHdr* dest, CHANSVmObjHdr* src) {
@@ -5594,15 +5531,13 @@ CHANSVmErr VmStore(CHANSVm* vm, CHANSVmObjHdr* dest, CHANSVmObjHdr* src) {
 }
 
 CHANSVmErr VmDeleteCommon(CHANSVm* vm, CHANSVmObjHdr* object) {
-    CHANSVmErr result;
-
-    result = CHANS_VM_ERR_DELETE_OBJECT;
+    CHANSVmErr result = CHANS_VM_ERR_DELETE_OBJECT;
     if (object != NULL) {
         CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
         result = CHANSVmDeleteObject(vm, object);
         if (result == CHANS_VM_OK) {
             if (object->type == 0) {
-                result = CHANSVmSetInteger(vm, (CHANSVmObjHdr*)&pVm->accumulator, 1);
+                result = CHANSVmSetInteger(vm, &pVm->accumulator, 1);
             } else {
                 result = CHANS_VM_ERR_DELETE_OBJECT;
             }
@@ -5612,6 +5547,7 @@ CHANSVmErr VmDeleteCommon(CHANSVm* vm, CHANSVmObjHdr* object) {
 }
 
 static CHANSVmErr VmCallMethod(CHANSVm* vm, u32 a, u32 b, u32 c) {
+    // TODO: needs cleanup
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     CHANSVmObjHdr* acc;
     u32 retVal;
@@ -5937,6 +5873,7 @@ void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal) {
 }
 
 CHANSVmErr CHANSVmStep(CHANSVm* vm, int choice) {
+    // TODO: needs cleanup
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     CHANSVmObjHdr* pConstObj;
     u32 cZero;
@@ -6692,71 +6629,13 @@ char lbl_81669B2D[] = "%s %d: unsupported type 0x%x\n";
 char lbl_81669B4B[] = "VmArrayJoinSub";
 char lbl_81669B5A[] = "VmDateCommon";
 char lbl_81669B67[] = "internal error in %s line %d\n";
-char lbl_81669C0F[] = "getFullYear";
-char lbl_81669C1B[] = "getHours";
-char lbl_81669C24[] = "getMilliseconds";
-char lbl_81669C34[] = "getMinutes";
-char lbl_81669C3F[] = "getMonth";
-char lbl_81669C48[] = "getSeconds";
-char lbl_81669DB8[] = "charCodeAt";
 char lbl_81669DC3[] = "*fromCharCode";
-char lbl_81669DD1[] = "lastIndexOf";
-char lbl_81669DDD[] = "toLowerCase";
-char lbl_81669DE9[] = "toUpperCase";
 char lbl_81669DF5[] = "0123456789abcdef";
-char lbl_81669F98[] = "getLength";
-char lbl_81669FA2[] = "setLength";
-char lbl_81669FAC[] = "getString";
-char lbl_81669FB6[] = "getWString";
-char lbl_81669FC1[] = "setString";
-char lbl_81669FCB[] = "setWString";
-char lbl_81669FD6[] = "getHexString";
-char lbl_81669FE3[] = "copyRangeFrom";
-char lbl_81669FF1[] = "calcSHA1Digest";
-char lbl_8166A000[] = "calcMD5Digest";
-char lbl_8166A00E[] = "calcCRC16";
-char lbl_8166A018[] = "calcCRC32";
-char lbl_8166A022[] = "calcHMAC";
-char lbl_8166A02B[] = "calcRangeSHA1Digest";
-char lbl_8166A03F[] = "calcRangeMD5Digest";
-char lbl_8166A052[] = "calcRangeCRC16";
-char lbl_8166A061[] = "calcRangeCRC32";
-char lbl_8166A070[] = "calcRangeHMAC";
-char lbl_8166A07E[] = "document.write()";
-char lbl_8166A0A7[] = "document";
-char lbl_8166A0B0[] = "%s: no table for op '%c'\n";
 
 // === .sdata additional strings ===
 char lbl_81697700[] = "skip";
 char lbl_81697705[] = "isEqual";
 char lbl_8169770D[] = "fill";
-char lbl_81697712[] = "getU8";
-char lbl_81697718[] = "getU16";
-char lbl_8169771F[] = "getU32";
-char lbl_81697726[] = "getS8";
-char lbl_8169772C[] = "getS16";
-char lbl_81697733[] = "getS32";
-char lbl_8169773A[] = "getS64";
-char lbl_81697741[] = "setU8";
-char lbl_81697747[] = "setU16";
-char lbl_8169774E[] = "setU32";
-char lbl_81697755[] = "setS8";
-char lbl_8169775B[] = "setS16";
-char lbl_81697762[] = "setS32";
-char lbl_81697769[] = "setS64";
-char lbl_81697770[] = "getBlob";
-char lbl_81697778[] = "setBlob";
-char lbl_81697780[] = "pack";
-char lbl_81697785[] = "unpack";
-char lbl_8169778C[] = "Image";
-char lbl_81697792[] = "width";
-char lbl_81697798[] = "height";
-char lbl_8169779F[] = "format";
-char lbl_816977A6[] = "write";
-char lbl_816977AC[] = "Date";
-char lbl_816977B1[] = "@Math";
-char lbl_816977B7[] = "Math";
-char lbl_816977BC[] = "@WinEmu";
 
 // === lbl_81616ED0: function-addr+name table ===
 // TODO: Replace NULL function pointers with actual function references

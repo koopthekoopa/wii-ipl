@@ -81,6 +81,42 @@ typedef struct GlobalNameListNode {
     char name[];                              // 0x18 (variable)
 } GlobalNameListNode;
 
+
+
+typedef struct SectionHeader {
+    u32 field_0x00;
+    u32 field_0x04;
+    u32 field_0x08;
+    u32 field_0x0C;
+    u32 field_0x10;
+    u32 field_0x14;   // count of something
+    u32 field_0x18;   // offset/pointer
+    u32 pad_1C;
+    u32 count;        // 0x20
+    u32 offs;         // 0x24
+    u32 field_0x28;
+    u32 field_0x2C;
+    u32 count2;       // 0x30
+    u32 offs2;        // 0x34
+    u32 field_0x38;
+    u32 field_0x3C;
+    u8 unk_0x40[4];
+    u32 field_0x44;
+} SectionHeader;
+
+typedef struct ModuleHeader {
+    u32 magic;         // 0x00 = 0x52434845 "RCHE"
+    u8 opcodeVersion;  // 0x04
+    u8 pad_05[3];      // 0x05
+    u32 size;          // 0x08
+    u8 type;           // 0x0C
+    u8 pad_0D[0x13];
+    SectionHeader* field_0x20;    // 0x20
+    u32 field_0x24;    // 0x24
+    u32 field_0x28;    // 0x28
+} ModuleHeader;
+
+
 typedef struct CHANSVmPrivate {
     vmU8 unk_0x00[0x06 - 0x00];
     vmBool hasStar;  // 0x06
