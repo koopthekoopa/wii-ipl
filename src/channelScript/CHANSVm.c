@@ -3391,8 +3391,7 @@ VmMethodDefine(String, ToUpperCase) {
 // TODO: needs cleanup
 CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 {
-    u16 charVal;
-    u8 pad0[6];
+    u8 pad0[8];
     u8 tempBuf[16];
     u8 fmtBufData[32];
     u8* fmtBuf;
@@ -3483,6 +3482,7 @@ found_format:
     goto flag_check;
 
 parse_flag_check:
+    
     {
         u8 c = str[strPos + 1];
         {
@@ -3501,11 +3501,13 @@ parse_flag_check:
                 goto flag_check;
             }
         }
+        goto width_check;
     }
 
 flag_check:
     if (strPos >= strLen) goto width_check;
     if (str[strPos] == 0) goto parse_flag_check;
+    goto width_check;
 
 width_loop:
     if (fmtBufPos + 1 >= 32) goto main_scan;
@@ -3531,6 +3533,7 @@ after_width:
     goto prec_done;
 
 prec_loop:
+    
     if (fmtBufPos + 1 >= 32) goto main_scan;
     fmtBuf[fmtBufPos++] = str[strPos + 1];
     strPos += 2;
@@ -3546,14 +3549,20 @@ lenMod:
     strPos += 2;
 
 type_done:
+    if (strPos >= strLen) goto type_done_switch;
+    if (str[strPos] != 0) goto type_done_switch;
+
+    if (str[strPos + 1] == 0x68) goto lenMod;
+    if (str[strPos + 1] == 0x6C) goto lenMod;
+    if (str[strPos + 1] == 0x4C) goto lenMod;
+    if (str[strPos + 1] == 0x76) goto lenMod;
+
+type_done_switch:
     if (strPos >= strLen) goto loop_test;
     if (str[strPos] != 0) goto loop_test;
+
     {
         u8 tc = str[strPos + 1];
-        if (tc == 0x68) goto lenMod;
-        if (tc == 0x6C) goto lenMod;
-        if (tc == 0x4C) goto lenMod;
-        if (tc == 0x76) goto lenMod;
         switch (tc) {
         case 0x41:
         case 0x42:
@@ -3613,7 +3622,7 @@ output_section:
         litLen = isEscaped * 2;
         if (outputBuf != NULL) {
             if (outputPos + litLen > totalLen) goto null_return;
-CHANSVmStrCpyToU16FromU8((wchar_t*)(outputBuf + outputPos), (char*)tmpBuf, isEscaped);
+CHANSVmStrCpyToU16FromU8((wchar_t*)(outputBuf + outputPos), (char*)tmpBuf, litLen >> 1);
             outputPos += litLen;
         } else {
             if (maxLitLen < litLen) maxLitLen = litLen;
@@ -3621,7 +3630,7 @@ CHANSVmStrCpyToU16FromU8((wchar_t*)(outputBuf + outputPos), (char*)tmpBuf, isEsc
         }
         goto loop_hint;
 
-float_body:
+    float_body:
         if (fmtBufPos + 2 >= 32) goto main_scan;
         fmtBuf[fmtBufPos++] = 0x6C;
         fmtBuf[fmtBufPos++] = tc;
@@ -3634,10 +3643,10 @@ c_body:
         cv = CHANSVmConvertObjectType(vm, 1, CHANSVmGetArg(vm, arg + argIdxCounter));
         argIdxCounter++;
         if (cv == NULL) goto loop_hint;
-        isEscaped = 0;
-        charVal = (u16)((CHANSVmObjHdr*)cv)->value.int_v;
-        litLen = (u32)&charVal;
-        *(u16*)pad0 = 0;
+        isEscaped = (u32)pad0;
+        litLen = 0;
+        *(u16*)pad0 = ((CHANSVmObjHdr*)cv)->value.int_v;
+        *(u16*)(pad0 + 2) = 0;
         goto format_copy;
 
 s_body:
