@@ -30,7 +30,7 @@ void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal);
 vmU32 CHANSVmGetFreeExeSize(CHANSVm* vm);
 vmPtr CHANSVmGetFreeExeBufp(CHANSVm* vm);
 
-CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1);
+CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, CHANSVm* execCtx);
 
 CHANSVmErr CHANSVmStep(CHANSVm* vm, int unk);
 

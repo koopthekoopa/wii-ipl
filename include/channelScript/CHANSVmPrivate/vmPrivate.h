@@ -61,7 +61,7 @@ typedef struct MethodListNode {
 
 typedef struct ModuleEntry {
     void* ptr;      // 0x00
-    u8 pad_04[8];   // 0x04
+    u8 pad_04[4];   // 0x04
     u8 type;        // 0x08
     u8 flags;       // 0x09
     u8 pad_0A[2];
