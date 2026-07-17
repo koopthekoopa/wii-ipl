@@ -70,7 +70,7 @@ namespace ipl {
                 mLastRumbleTime = 0;
                 mRumbleType = -1;
                 mChan = chan;
-                unk_0x18 = 2;
+                mType = 2;
                 unk_0x1C = 0;
 
                 KPADEnableDPD(chan);
@@ -132,7 +132,7 @@ namespace ipl {
             OSTick mLastRumbleTime;  // 0xC
             s32 mRumbleType;         // 0x10
             u32 mChan;               // 0x14
-            u32 unk_0x18;            // 0x18
+            u32 mType;               // 0x18
             u8 unk_0x1C;
             u8 unk_0x1D;           // 0x1D
             u8 unk_0x1E;           // 0x1E
@@ -148,6 +148,9 @@ namespace ipl {
             virtual int down(u32 button) const override;         // 0x10
             virtual int downTrg(u32 button) const override;      // 0x18
             virtual int pinch() const override;                  // 0x1C
+            virtual int getClassicHoldFlag() const override;     // 0x48
+            virtual int getClassicTrigFlag() const override;     // 0x4C
+            virtual int getClassicReleaseFlag() const override;  // 0x50
             virtual KPADStatus* getKPADStatus() const override;  // 0x64
             virtual bool isValidBtn() const override;            // 0x6C
         };
@@ -172,11 +175,15 @@ namespace ipl {
         public:
             Classic(int arg0, KPADStatus& arg1);
 
-            virtual int getClassicHoldFlag() const override;  // 0x48
+            virtual int getClassicHoldFlag() const override;     // 0x48
+            virtual int getClassicTrigFlag() const override;     // 0x4C
+            virtual int getClassicReleaseFlag() const override;  // 0x50
 
             virtual math::VEC2 getDpdPos() const override;            // 0x54
             virtual math::VEC2 getDpdProjectionPos() const override;  // 0x58
             virtual math::VEC2 getHorizon() const override;           // 0x5C
+
+            virtual bool isValidDpd() const override; // 0x70
 
             virtual void read() override;  // 0x88
 
