@@ -109,23 +109,45 @@ typedef void* ziPtr;
 #define ZI8_LANG_MAX 128
 #endif  // ZI8_LANGS_DEFINED
 
-typedef struct {
-    ziU8 unk_0x0;          // 0x0
-    ziU8 unk_0x1;          // 0x1
-    ziU8 unk_0x2;          // 0x2
-    ziU8 unk_0x3;          // 0x3
-    ziU8 unk_0x4;          // 0x4
-    ziU8 unk_0x5;          // 0x5
-    ziU8 chHi;             // 0x6
-    ziU8 chLo;             // 0x7
-    ziU8 unk_0x8;          // 0x8
-    ziU8 unk_0x9 : 4;      // 0x9 : 0bXXXX0000
-    ziU8 tabl1OffsHi : 4;  // 0x9 : 0b0000XXXX
-    ziU8 tabl1OffsMid;     // 0xA
-    ziU8 tab1OffsLo;       // 0xB
-} Table0Entry;
+// Not Chinese:
+// Table  3 - Data Signature
 
-#define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tabl1OffsMid << 0x8) | ((ENTRY)->tabl1OffsHi << 0x10))
+// Chinese:
+// Table  0 - Character table?
+// Table  1 - Mask Table?
+// Table  2 - Component table
+// Table  3 - Pinyin Table?
+// Table  4 - Bopomofo Table?
+// Table  6 - Unsigned Char to Wide Char
+// Table 1E - Data Signature
+
+typedef struct {
+    ziU8 maskBytes[4];  // 0x0
+    ziU8 nextIdxHi;     // 0x4
+    ziU8 nextIdxLo;     // 0x5
+    ziU8 chHi;          // 0x6
+    ziU8 chLo;          // 0x7
+    ziU8 tabl34IdxHi;   // 0x8
+    union {
+        ziU8 tabl34IdxLo;  // 0x9 (relevant: 0bX0000000)
+        ziU8 codeOffs;     // 0x9 (relevant: 0b0XXX0000)
+        ziU8 tabl1OffsHi;  // 0x9 (relevant: 0b0000XXXX)
+    };
+    ziU8 tabl1OffsMid;  // 0xA
+    ziU8 tab1OffsLo;    // 0xB
+} Table0Entry;
+#define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tabl1OffsMid << 0x8) | (((ENTRY)->tabl1OffsHi & 0x0F) << 0x10))
+
+typedef struct {
+    ziU8 maskByte0;  // 0x0
+    ziU8 maskByte1;  // 0x1
+    ziU8 maskByte2;  // 0x2
+    ziU8 maskByte3;  // 0x3
+    ziU8 unk_0x4;    // 0x4
+    ziU8 unk_0x5;    // 0x5
+    ziU8 nextIdxHi;  // 0x6
+    ziU8 nextIdxLo;  // 0x7
+} Table2Entry;
 
 typedef struct {
     ziU8 ordHi;        // 0x0
@@ -194,6 +216,14 @@ typedef struct ziFuzzyZYPairs {
     ziU32 bANDp : 1;
     ziU32 gANDk : 1;
 } ziFuzzyZYPairs;
+
+enum {
+    ZI8_GET_MODE_UNK_x00 = 0x00,   // 0x00
+    ZI8_GET_MODE_PINYIN_A = 0x01,  // 0x01
+    ZI8_GET_MODE_UNK_x05 = 0x05,   // 0x05
+    ZI8_GET_MODE_PINYIN_B = 0x0c,  // 0x0c
+    ZI8_GET_MODE_UNK_x10 = 0x10,   // 0x10
+};
 
 typedef struct _ziGetParam {
     ziU8 language;     // 0x00

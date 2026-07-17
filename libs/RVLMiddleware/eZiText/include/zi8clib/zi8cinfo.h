@@ -26,7 +26,7 @@ enum CharInfoHetMode {
 
 ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
 ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
-ziU8 Zi8GetSInfo(ziU8* strokeInfoA, ziU8* strokeInfoB, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
+ziU8 Zi8GetSInfo(Table0Entry* strokeInfoA, ziU8* strokeInfoB, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
 ziU8 Zi8GetCJInfo(ziU8* cangjieData, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
 ziU16 Zi81KeyPYinfo(ziWChar ch ZI_NEED_WORK);
 ziU16 Zi81KeyZYinfo(ziWChar ch ZI_NEED_WORK);

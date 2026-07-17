@@ -3,6 +3,6 @@
 
 #include <zi8clib/zitypes.h>
 
-ziWChar Zi8GetPCode(ziU8* param_1, ziU8* param_2);
+ziWChar Zi8GetPCode(ziU8* table34, Table0Entry* table0Entry);
 
 #endif  // ZI8_CLIB_MATCH_H
