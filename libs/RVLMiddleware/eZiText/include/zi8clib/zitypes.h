@@ -150,12 +150,12 @@ typedef struct {
 } Table2Entry;
 
 typedef struct {
-    ziU8 ordHi;        // 0x0
-    ziU8 ordLo;        // 0x1
+    ziU8 ordLo;        // 0x0
+    ziU8 ordHi;        // 0x1
     ziU8 tabl34IdxLo;  // 0x2
     ziU8 tabl34IdxHi;  // 0x3
 } Table5Entry;
-#define GET_TABLE5_ENTRY_ORD(ENTRY) (((ziU16)(ENTRY)->ordLo << 8) | (ziU16)(ENTRY)->ordHi)
+#define GET_TABLE5_ENTRY_ORD(ENTRY) (((ziU16)(ENTRY)->ordHi << 8) | (ziU16)(ENTRY)->ordLo)
 #define GET_TABLE5_ENTRY_TABLE34_IDX(ENTRY) ((ziU16)(ENTRY)->tabl34IdxLo | ((ziU16)(ENTRY)->tabl34IdxHi & 1) << 8) << 1
 #define GET_TABLE5_ENTRY_CODE_OFFS(ENTRY) (((ziU16)(ENTRY)->tabl34IdxHi & 0xF0) >> 4)
 
