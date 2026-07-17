@@ -15,4 +15,6 @@ void Zi8Memset(ziPtr dst, ziS32 fill, ziU32 size);
 
 ziBool Zi8SetMaxWordLength(ziU8 length ZI_NEED_WORK);
 
+ziU8 _Zi8GetCandidates(void* local_40 ZI_NEED_WORK);
+
 #endif  // ZI8_CLIB_GET_CANDIDATE_2_H

@@ -211,11 +211,11 @@ typedef struct _ziGetParam {
     ziWChar* candidates;     // 0x18
     ziU8 maxCandidates;      // 0x1C
     ziWChar firstCandidate;  // 0x1E
-    ziU8 wordCandidates;     // 0x1F
+    ziU8 wordCandidates;     // 0x20
 
-    ziU8 count;     // 0x20
-    ziU8 letters;   // 0x21
-    ziU8* scratch;  // 0x22
+    ziU8 count;     // 0x21
+    ziU8 letters;   // 0x22
+    ziU8* scratch;  // 0x24
 } ziGetParam;
 
 typedef struct _ziLanguageEntry {
