@@ -8,6 +8,13 @@ extern "C" {
 #include "channelScript/CHANSVm.h"
 #include "channelScript/CHANSVm/VmTypes.h"
 
+typedef struct NameTblEntry {
+    u32 codeAddr;    // 0x00
+    u16 field_0x04;  // 0x04
+    u8 pushCount;    // 0x06
+    u8 headerCount;  // 0x07
+} NameTblEntry;
+
 typedef struct SrcLineEntry {
     s32 baseLine;       // 0x00
     u8 bitfield[0x20];  // 0x04 (32 bytes = 0x20)
@@ -18,9 +25,19 @@ typedef struct SrcDbg {
     vmU32 unk_04;       // 0x04
     vmU32 unk_08;       // 0x08
     vmU32 codesize;     // 0x0C
-    void* table;        // 0x10
+    u8* table;          // 0x10
     vmU32 unk_14;       // 0x14
-    vmU16 unk_18[22];   // 0x18
+    CHANSVmObjHdr* objTable;   // 0x18
+    vmU32 nameTblBase;  // 0x1C
+    vmU32 nameTblCount; // 0x20
+    NameTblEntry* nameTbl;      // 0x24
+    vmU32 methodCount;  // 0x28
+    vmU32 unk_0x2C;     // 0x2C
+    vmU32 unk_0x30;     // 0x30
+    vmU32 field_0x34;   // 0x34
+    vmU32* methodTbl;     // 0x38
+    vmU32 unk_0x3C;     // 0x3C
+    vmU32 field_0x40;   // 0x40
     SrcLineEntry* entries; // 0x44
 } SrcDbg;
 
@@ -31,33 +48,17 @@ typedef struct CHANSVmExecutionCtx {
     vmS32 stackDepth;     // 0x0C
     vmU32 pc;             // 0x10
     vmU16 argc;           // 0x14
-    vmU8 pad_16[2];       // 0x16
+    vmU16 unk_0x16;       // 0x16
     vmU16 mCountB;        // 0x18
-    vmU8 mType2;          // 0x1A
-    vmU8 pad_1B[5];       // 0x1B
+    vmU8 headerCount;     // 0x1A
+    vmU8 pad_0x1B[5];      // 0x1B
+    CHANSVmObjHdr headers[]; // 0x20 (variable)
 } CHANSVmExecutionCtx;
 
 typedef struct FreeBlock {
     struct FreeBlock* next;  // 0x00
     vmU32 size;       // 0x04
 } FreeBlock;
-
-typedef struct PropListNode {
-    struct PropListNode* next;  // 0x00
-    u16 index;                  // 0x04
-    u8 flag;                    // 0x06
-    u8 pad_07;
-    CHANSVmFunction getter;     // 0x08
-    CHANSVmFunction setter;     // 0x0C
-} PropListNode;
-
-typedef struct MethodListNode {
-    struct MethodListNode* next;  // 0x00
-    u16 index;                    // 0x04
-    u8 flag;                      // 0x06
-    u8 pad_07;
-    CHANSVmFunction func;         // 0x08
-} MethodListNode;
 
 typedef struct ModuleEntry {
     void* ptr;      // 0x00
@@ -88,27 +89,30 @@ typedef struct ArrayChunk {
     u32 count;                   // 0x0C
     u32 start;                   // 0x10
     u32 pad;                     // 0x14
+    CHANSVmObjHdr elements[];    // 0x18 (variable)
 } ArrayChunk;
 
+typedef struct ModuleHeader ModuleHeader;
+
 typedef struct SectionHeader {
-    u32 field_0x00;
-    u32 field_0x04;
-    u32 field_0x08;
-    u32 field_0x0C;
-    u32 field_0x10;
-    u32 field_0x14;   // count of something
-    u32 field_0x18;   // offset/pointer
-    u32 pad_1C;
-    u32 count;        // 0x20
-    u32 offs;         // 0x24
-    u32 field_0x28;
-    u32 field_0x2C;
-    u32 count2;       // 0x30
-    u32 offs2;        // 0x34
-    u32 field_0x38;
-    u32 field_0x3C;
-    u8 unk_0x40[4];
-    u32 field_0x44;
+    struct SectionHeader* next;  // 0x00
+    u32 regionSize;             // 0x04
+    ModuleHeader* modulePtr;    // 0x08
+    u32 classSizeBase;          // 0x0C
+    void* dataStart;            // 0x10
+    u32 moduleEntryCount;       // 0x14
+    ModuleEntry* moduleEntryTbl;// 0x18
+    u32 pad_0x1C;               // 0x1C
+    u32 nameCount;              // 0x20
+    NameTblEntry* nameOffs;     // 0x24
+    u32 methodRefCount;         // 0x28
+    u32* methodRefOffs;         // 0x2C
+    u32 stringCount;            // 0x30
+    void* stringOffs;           // 0x34
+    u32* methodIdxTbl;          // 0x38
+    void* stringEntryTbl;       // 0x3C
+    u32* dispatchTableOffs;     // 0x40
+    void* classDataOffs;        // 0x44
 } SectionHeader;
 
 typedef struct ModuleHeader {
@@ -118,11 +122,7 @@ typedef struct ModuleHeader {
     u32 size;          // 0x08
     u8 type;           // 0x0C
     u8 pad_0D[0x13];
-    SectionHeader* field_0x20;    // 0x20
-    u32 field_0x24;    // 0x24
-    u32 field_0x28;    // 0x28
 } ModuleHeader;
-
 
 typedef struct ChunkEntry {
     void* pData;  // 0x00
@@ -158,7 +158,7 @@ typedef struct CHANSVmPrivate {
     vmU8 bSuspendStep;
     CHANSVmObjHdr accumulator;
     CHANSVmExecutionCtx* activeCtx; // 0x60
-    vmU32 unk_0x64;
+    vmU32 pBase;
     vmS32 minWorkSize;  // 0x68
     vmU32 mNextChunkIdx;               // 0x6C
     ChunkEntry* mChunks[0x80];              // 0x70-0x26F

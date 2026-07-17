@@ -60,6 +60,14 @@ typedef enum CHANSVmObjType {
     CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
 
+typedef enum CHANSVmCallType {
+    CHANS_VM_CALL_TYPE_METHOD = 0,
+    CHANS_VM_CALL_TYPE_FUNCTION,
+    CHANS_VM_CALL_TYPE_PROP_GET,
+    CHANS_VM_CALL_TYPE_PROP_SET,
+    CHANS_VM_CALL_TYPE_MAX,
+} CHANSVmCallType;
+
 typedef struct CHANSVmObjHdr CHANSVmObjHdr;
 typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
@@ -80,8 +88,12 @@ typedef struct {
 
 struct CHANSVmObjHdr {
     union {
-        vmBoolInt bool_v;
+        struct {
+            void* ptr;  // 0x00
+            u32 len;    // 0x04
+        } data;   // 0x00
         vmInteger int_v;
+        vmBoolInt bool_v;
         vmInt32ObjVal* int32_v;
         vmFloat float_v;
         vmFloat32 float32_v;
@@ -93,6 +105,7 @@ struct CHANSVmObjHdr {
     } value;  // 0x00
 
     union {
+        vmS32 typeAndFlag;
         struct {
             vmU8 type;  // 0x08
 
@@ -106,7 +119,6 @@ struct CHANSVmObjHdr {
             vmU8 unk_0x0A;
             vmU8 unk_0x0B;
         };
-        vmS32 typeAndFlag;
     };
 
     CHANSVmNativeClass* parentCls;  // 0x0C
@@ -131,7 +143,12 @@ typedef struct CHANSVmMethodList {
 } CHANSVmMethodList;
 
 typedef struct CHANSVmNativeMethod {
-    undefined unk_0x00[0x20];
+    struct CHANSVmNativeMethod* next;  // 0x00
+    u16 index;                         // 0x04
+    u8 flag;                           // 0x06
+    u8 pad_0x07;                       // 0x07
+    CHANSVmFunction func;              // 0x08
+    undefined unk_0x0B[0x14];
 } CHANSVmNativeMethod;
 
 typedef struct CHANSVmPropertyList {
@@ -141,7 +158,13 @@ typedef struct CHANSVmPropertyList {
 } CHANSVmPropertyList;
 
 typedef struct CHANSVmNativeProperty {
-    undefined unk_0x00[0x20];
+    struct CHANSVmNativeProperty* next;  // 0x00
+    u16 index;                           // 0x04
+    u8 flag;                             // 0x06
+    u8 pad_0x07;                         // 0x07
+    CHANSVmFunction getter;              // 0x08
+    CHANSVmFunction setter;              // 0x0C
+    undefined unk_0x10[0x10];            // 0x10
 } CHANSVmNativeProperty;
 
 struct CHANSVmNativeClass {
