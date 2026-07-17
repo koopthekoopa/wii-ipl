@@ -124,6 +124,13 @@ typedef struct ModuleHeader {
 } ModuleHeader;
 
 
+typedef struct ChunkEntry {
+    void* pData;  // 0x00
+    u32 size;     // 0x04
+    u32 alloc;    // 0x08
+    u32 inUse;    // 0x0C
+} ChunkEntry;
+
 typedef struct CHANSVmPrivate {
     vmU8 unk_0x00[0x06 - 0x00];
     vmBool hasStar;  // 0x06
@@ -154,7 +161,7 @@ typedef struct CHANSVmPrivate {
     vmU32 unk_0x64;
     vmS32 minWorkSize;  // 0x68
     vmU32 mNextChunkIdx;               // 0x6C
-    void* mChunks[0x80];              // 0x70-0x26F
+    ChunkEntry* mChunks[0x80];              // 0x70-0x26F
 } CHANSVmPrivate;
 
 #ifdef __cplusplus

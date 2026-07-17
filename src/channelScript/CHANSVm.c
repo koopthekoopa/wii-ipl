@@ -28,20 +28,6 @@ static void NETHMACGetDigest(NETHMACContext* ctx, void* digest);
 
 #define CHANSVmDebugLength 1024
 
-typedef struct CHANSVmUnk0 {
-    vmPtr unk_0x00;
-    vmU32 unk_0x04;
-    vmU32 unk_0x08;
-    vmU32 unk_0x0C;
-} CHANSVmUnk0;
-
-typedef struct ChunkEntry {
-    void* pData;  // 0x00
-    u32 size;     // 0x04
-    u32 alloc;    // 0x08
-    u32 inUse;    // 0x0C
-} ChunkEntry;
-
 CHANSVmImageCtorCallback VmImageCtorCallback = vmNull;
 CHANSVmImageAllocatorCallback VmImageAllocCallback = vmNull;
 
@@ -294,16 +280,15 @@ CHANSVmErr CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object) {
     if (object != vmNull) {
         if (!(object->flags.raw & 0x80)) {
             if (object->unk_0x0A) {
-                CHANSVmUnk0* unk = (CHANSVmUnk0*)object->value.ptr_v;
+                ChunkEntry* unk = (ChunkEntry*)object->value.ptr_v;
                 int val;
 
-                if (unk->unk_0x08 == 0) {
+                if (unk->alloc == 0) {
                     val = 1;
                 } else {
-                    if (unk->unk_0x0C != 0) {
-                        // TODO: based on this unk_0x0C should be signed, but VmCopyObject will lose accuracy because it starts using cmpwi instead of li+cmplw
-                        val = unk->unk_0x0C - 1;
-                        unk->unk_0x0C = val;
+                    if (unk->inUse != 0) {
+                        val = unk->inUse - 1;
+                        unk->inUse = val;
                     } else {
                         val = -1;
                     }
@@ -312,8 +297,8 @@ CHANSVmErr CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object) {
                 if (val == 0) {
                     if (object->parentCls == vmNull || object->parentCls->dtor == vmNull ||
                         object->parentCls->dtor(vm, object, vmNull)) {
-                        CHANSVmFree(vm, unk->unk_0x00, unk->unk_0x08);
-                        memset(unk, 0, sizeof(CHANSVmUnk0));
+                        CHANSVmFree(vm, unk->pData, unk->alloc);
+                        memset(unk, 0, sizeof(ChunkEntry));
                     }
                     else {
                         goto error;
@@ -331,84 +316,76 @@ CHANSVmErr CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object) {
 }
 
 vmPtr CHANSVmNewObjData(CHANSVm* vm, CHANSVmObjHdr* object, u32 length) {
-    // TODO: needs cleanup
-    CHANSVmPrivate* pVm;
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     u32 idx;
     u32 chunkIdx;
     union { u32 off; ChunkEntry* entry; } u;
-    void* chunk;
+    ChunkEntry* chunk;
     u32 memSize;
 
-    pVm = (CHANSVmPrivate*)vm;
-
-    if (object == NULL) goto error;
-    if (((u8*)object)[0x0A] != 0) goto error;
-    if (length == 0) goto error;
+    if (object == NULL || object->unk_0x0A != 0 || length == 0) {
+        goto error;
+    }
 
     idx = pVm->mNextChunkIdx;
-    chunk = pVm->mChunks[idx >> 10];
-    if (chunk != NULL) {
-        if (((ChunkEntry*)((u8*)chunk + ((idx & 0x3FF) << 4)))->inUse == 0) {
-            goto found;
-        }
-    }
-
-    chunkIdx = 0;
-    u.off = 0;
-    while (chunkIdx < 0x80) {
-        chunk = pVm->mChunks[chunkIdx];
-        if (chunk == NULL) {
-            chunk = (void*)CHANSVmAlloc(vm, 0x4000);
-            if (chunk == NULL) goto error;
-            pVm->mChunks[chunkIdx] = chunk;
-        }
-
-        idx = 0;
-        while (idx < 0x400) {
-            if (((ChunkEntry*)((u8*)chunk + idx * 0x10))->inUse == 0) {
-                u.off = idx + (chunkIdx << 10);
-                idx = u.off;
-                goto found;
+    chunk = pVm->mChunks[idx / 1024];
+    if (chunk == NULL || chunk[idx & 0x3FF].inUse != 0) {
+        chunkIdx = 0;
+        u.off = 0;
+        while (chunkIdx < 0x80) {
+            chunk = pVm->mChunks[chunkIdx];
+            if (chunk == NULL) {
+                chunk = CHANSVmAlloc(vm, 0x4000);
+                if (chunk == NULL) {
+                    goto error;
+                }
+                pVm->mChunks[chunkIdx] = chunk;
             }
-            idx++;
+
+            idx = 0;
+            while (idx < 0x400) {
+                if (chunk[idx].inUse == 0) {
+                    u.off = idx + (chunkIdx << 10);
+                    idx = u.off;
+                    goto found;
+                }
+                idx++;
+            }
+
+            chunkIdx++;
+            u.off += 4;
         }
-
-        chunkIdx++;
-        u.off += 4;
+        u.off = 0;
+        goto check_entry;
     }
-    u.off = 0;
-    goto check_entry;
 
-    found:
-    {
-        u32 newIdx;
+found:
+    pVm->mNextChunkIdx = (idx + 1 > 0x1FFFF) ? 0 : idx + 1;
+    u.entry = &chunk[idx & 0x3FF];
+    memset(u.entry, 0, 0x10);
+    u.entry->inUse = 1;
 
-        newIdx = idx + 1;
-        pVm->mNextChunkIdx = (newIdx > 0x1FFFF) ? 0 : newIdx;
-
-        u.entry = (ChunkEntry*)((u8*)chunk + ((idx & 0x3FF) << 4));
-        memset(u.entry, 0, 0x10);
-        u.entry->inUse = 1;
-    }
 
 check_entry:
-    if (u.entry == NULL) goto error;
+    if (u.entry == NULL) {
+        goto error;
+    }
 
     memSize = VM_ALIGN(length);
     {
-        void* pData = (void*)CHANSVmAlloc(vm, memSize);
-        if (pData == NULL) goto error;
-
-        *(u32*)((u8*)object) = (u32)u.entry;
-        ((u8*)object)[0x0A] = 1;
-        u.entry->pData = pData;
-        u.entry->size = length;
-        u.entry->alloc = memSize;
-        return (vmPtr)pData;
+        void* pData = CHANSVmAlloc(vm, memSize);
+        if (pData != NULL) {
+            *(u32*)(u8*)object = (u32)u.entry;
+            object->unk_0x0A = 1;
+            u.entry->pData = pData;
+            u.entry->size = length;
+            u.entry->alloc = memSize;
+            return pData;
+        }
     }
 
-    error:
-        return NULL;
+error:
+    return NULL;
 }
 
 extern const char CHANSVmConstStringDataEmpty[16];
@@ -463,15 +440,15 @@ CHANSVmObjHdr* CHANSVmCopyObject(CHANSVm* vm, CHANSVmObjHdr* outObj, CHANSVmObjH
 
         outObj->flags.raw = outObj->flags.reserved;
         if (outObj->unk_0x0A != 0) {
-            CHANSVmUnk0* unk = (CHANSVmUnk0*)outObj->value.ptr_v;
+            ChunkEntry* unk = (ChunkEntry*)outObj->value.ptr_v;
             int val;
 
-            if (unk->unk_0x08 == 0) {
+            if (unk->alloc == 0) {
                 val = 1;
             } else {
-                if (unk->unk_0x0C < -1) {
-                    val = unk->unk_0x0C + 1;
-                    unk->unk_0x0C = val;
+                if (unk->inUse < -1) {
+                    val = unk->inUse + 1;
+                    unk->inUse = val;
                 } else {
                     val = 0;
                 }
@@ -692,10 +669,6 @@ typedef struct {
     const char* str;
     const double* val;
 } FloatTableEntry;
-
-extern char lbl_81669DF5[];
-char* lbl_816976E4 = lbl_81669DF5;
-char* lbl_816976E8 = lbl_81669DF5;
 
 // The 16-bit strings use a single null byte for termination for some reason. Because of that, L"..." cannot be used.
 u8 lbl_81669070[19] = { 0x00, 'u', 0x00, 'n', 0x00, 'd', 0x00, 'e', 0x00, 'f', 0x00, 'i', 0x00, 'n', 0x00, 'e', 0x00, 'd', 0x00 };
@@ -918,11 +891,18 @@ vmBoolInt CHANSVmGetEnumedType(CHANSVmObjType* eType, vmU32 iType) NO_INLINE {
 char lbl_81669128[] = "VmGetResultType";
 
 const VmConvertEntry VmTypeConvertFuncTbl[] = {
-    { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
-    { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
-    { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
-    { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
-    { vmNull, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
+    {(VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError },
+    {(VmConvertFunc)CHANSVm_8144B30C, (VmConvertFunc)CHANSVmConvertToIntFromStr, (VmConvertFunc)CHANSVmConvertToIntFromArray, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVm_8144B430, (VmConvertFunc)CHANSVm_8144B470 },
+    {(VmConvertFunc)CHANSVm_8144B4D4, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertToStrFromUndefined, (VmConvertFunc)CHANSVmConvertToStrFromInt, (VmConvertFunc)CHANSVm_8144B734 },
+    {(VmConvertFunc)CHANSVmConvertToStrFromArray, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError },
+    {(VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError, (VmConvertFunc)CHANSVmConvertObjectTypeError },
+    {(VmConvertFunc)0x00020203, (VmConvertFunc)0x00000201, (VmConvertFunc)0x02030300, (VmConvertFunc)0x02020203, (VmConvertFunc)0x03000303, (VmConvertFunc)0x03030300 },
+    {(VmConvertFunc)0x00030303, (VmConvertFunc)0x03000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00020202, (VmConvertFunc)0x00000201 },
+    {(VmConvertFunc)0x02020000, (VmConvertFunc)0x02020202, (VmConvertFunc)0x00000202, (VmConvertFunc)0x02020000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000 },
+    {(VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000001, (VmConvertFunc)0x02020000, (VmConvertFunc)0x00020202, (VmConvertFunc)0x00000002 },
+    {(VmConvertFunc)0x02030300, (VmConvertFunc)0x00000003, (VmConvertFunc)0x03000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000001 },
+    {(VmConvertFunc)0x02020000, (VmConvertFunc)0x00020202, (VmConvertFunc)0x00000002, (VmConvertFunc)0x02030300, (VmConvertFunc)0x00000003, (VmConvertFunc)0x04000000 },
+    {(VmConvertFunc)0x01010000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000, (VmConvertFunc)0x00000000 },
 };
 
 CHANSVmObjHdr* CHANSVmConvertObjectType(CHANSVm* vm, vmU32 type, CHANSVmObjHdr* object) {
@@ -1462,7 +1442,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_SET_FLOAT",                         /* -976 */
     "CHANS_VM_ERR_ADD",                               /* -975 */
     "CHANS_VM_ERR_SUB",                               /* -974 */
-    "CHANS_VM_ERR_MUL",                               /* -973 */
+    "CHANS_VM_ERR_MU",                               /* -973 */
     "CHANS_VM_ERR_DIV",                               /* -972 */
     "CHANS_VM_ERR_MOD",                               /* -971 */
     "CHANS_VM_ERR_ULSHIFT",                           /* -970 */
@@ -1479,7 +1459,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_RETURN",                            /* -959 */
     "CHANS_VM_ERR_STRCAT",                            /* -958 */
     "CHANS_VM_ERR_SET_OBJECT_NATIVE_CLASS",           /* -957 */
-    "CHANS_VM_ERR_RESOLVE_NATIVE_METHOD_CALL",        /* -956 */
+    "CHANS_VM_ERR_RESOLVE_NATIVE_METHOD_CAL",        /* -956 */
     "CHANS_VM_ERR_RESOLVE_GLOBAL_OBJECT_REFERENCE",   /* -955 */
     "CHANS_VM_ERR_NEW",                               /* -954 */
     "CHANS_VM_ERR_ADD_NATIVE_PROPERTY",               /* -953 */
@@ -1491,7 +1471,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_CALL_METHOD",                       /* -947 */
     "CHANS_VM_ERR_STORE_INDIRECT",                    /* -946 */
     "CHANS_VM_ERR_LOAD_STRING_CONST",                 /* -945 */
-    "CHANS_VM_ERR_SIGNAL",                            /* -944 */
+    "CHANS_VM_ERR_SIGNA",                            /* -944 */
     "CHANS_VM_ERR_STORE_READONLY",                    /* -943 */
     "CHANS_VM_ERR_SET_INDEX",                         /* -942 */
     "CHANS_VM_ERR_GET_PROPERTY_NAME",                 /* -941 */
@@ -1516,8 +1496,9 @@ const char* vmErrorList[] = {
 };
 
 // These should have been part of vmErrorList. However, they need to be directly inserted as literals after the relocation block for the other error codes.
-DECOMP_FORCE_ACTIVE(CHANSVM_c, "CHANS_VM_OK")
-DECOMP_FORCE_ACTIVE(CHANSVM_c, "(unknown)")
+// TODO: add to symbols.txt?
+const char* vmNoError = "CHANS_VM_OK";
+const char* vmUnknownError = "(unknown)";
 
 CHANSVmNativeClass* CHANSVmFindNativeClass(CHANSVm* vm, const char* clsName) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
@@ -1679,12 +1660,13 @@ CHANSVmErr CHANSVmFindAndAddNativeMethod(CHANSVmNativeClass* cls, MethodListNode
 }
 
 CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmMethodList* methods, vmSize methodCount) {
-    u32 flag;
+
+    u32 methodIndex;
     const char* name;
     CHANSVmFunction methodFunc;
+
     CHANSVmErr result = 0;
-    u32 methodIndex;
-    MethodListNode* node;
+    u32 flag;
 
     for (; methodCount != 0 && methods != vmNull && result == 0; methods++, methodCount--) {
         flag = 0;
@@ -1700,28 +1682,28 @@ CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, cons
             methodIndex = CHANSVmAddNativeMethodName(vm, name, strlen(name));
 
             if (methodIndex != 0) {
-                if (CHANSVmFindAndAddNativeProperty(cls, NULL, methodIndex) != 0) {
+                result = (CHANSVmErr)CHANSVmFindAndAddNativeProperty(cls, NULL, methodIndex);
+                if (result != 0) {
                     continue;
                 }
 
-                // TODO: MethodListNode struct should be 0x20 long?
-                node = CHANSVmAlloc(vm, 0x20);
-                if (node == NULL) {
-                    result = CHANS_VM_ERR_NO_MEMORY;
+                {
+                    MethodListNode* node;
+                    node = (MethodListNode*)CHANSVmAlloc(vm, 0x20);
+                    if (node == NULL) {
+                        result = CHANS_VM_ERR_NO_MEMORY;
+                    } else {
+                        node->index = (u16)methodIndex;
+                        node->func = methodFunc;
+                        node->flag = (u8)flag;
+                        result = CHANSVmFindAndAddNativeMethod(cls, node, methodIndex);
+                    }
                     continue;
                 }
-
-                node->index = (u16)methodIndex;
-                node->func = methodFunc;
-                node->flag = (u8)flag;
-                result = CHANSVmFindAndAddNativeMethod(cls, node, methodIndex);
-                continue;
             }
         }
-
         result = CHANS_VM_ERR_ADD_NATIVE_METHOD;
     }
-
     return result;
 }
 
@@ -1746,7 +1728,7 @@ CHANSVmErr CHANSVmAddNativePropertyAccessors(CHANSVm* vm, CHANSVmNativeClass* cl
 
     result = CHANSVmFindAndAddNativeMethod(cls, NULL, methodIndex);
     if (result == 0) {
-        // TODO: MethodListNode struct should be 0x20 long?
+        // TODO: PropListNode struct should be 0x20 long?
         PropListNode* node = CHANSVmAlloc(vm, 0x20);
         if (node == NULL) {
             return CHANS_VM_ERR_NO_MEMORY;
@@ -1858,9 +1840,9 @@ vmBoolInt CHANSVmNewBuiltinObject(
     CHANSVmFunction clsInit,
     const char* globalName,
     CHANSVmFunction globalCtor,
-    CHANSVmPropertyList* propAccessors,
+    const CHANSVmPropertyList* propAccessors,
     vmU32 propCount,
-    CHANSVmMethodList* methods,
+    const CHANSVmMethodList* methods,
     vmU32 methodCount
 ) {
     CHANSVmNativeClass* cls = CHANSVmAddNativeClass2(vm, className, clsCtor, clsDtor, clsInit);
@@ -2000,6 +1982,8 @@ CHANSVmObjHdr* CHANSVmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 ind
 
     return NULL;
 }
+
+const static char ArrayClassName[] = "Array";
 
 VmCtorDefine(Array)
 {
@@ -2468,15 +2452,33 @@ error:
     return FALSE;
 }
 
+const CHANSVmPropertyList ArrayPropertyList[] = {
+    { "length", VmArrayGetLength, VmArraySetLength },
+};
+const CHANSVmMethodList ArrayMethodList[] = {
+    { "join", VmArrayJoin },
+    { "new2d", VmArrayNew2d },
+    { "pop", VmArrayPop },
+    { "push", VmArrayPush },
+    { "shift", VmArrayShift },
+    { "slice", VmArraySlice },
+    { "unshift", VmArrayUnshift },
+};
+
 typedef struct {
     const char* name;
     void* func;
 } NameFuncEntry;
 
-extern const NameFuncEntry lbl_81616ED0[];
+const NameFuncEntry lbl_81616ED0[] = {
+     // Avoid L".." because it inserts two null terminator bytes, but the original only used one, despite it being a wide string.
+    { (const char*)"\0U\0T\0C", (void*)6 },
+    { NULL, NULL }
+};
+
 
 // Ensures that this string is defined before the error messages below
-DECOMP_FORCE_ACTIVE(CHANSVm_c, "VmDateCommon")
+const char* vmDateCommonFunctionName = "VmDateCommon";
 
 vmBoolInt CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
     u32 argc;
@@ -2675,6 +2677,18 @@ VmMethodDefine(Date, GetRTC) {
     return CHANSVmSetInteger(VmInst, VmReturnObj, val) == CHANS_VM_OK;
 }
 
+const CHANSVmMethodList DateMethodList[] = {
+    { "getDate", VmDateGetDate },
+    { "getDay", VmDateGetDay },
+    { "getFullYear", VmDateGetFullYear },
+    { "getHours", VmDateGetHours },
+    { "getMilliseconds", VmDateGetMilliseconds },
+    { "getMinutes", VmDateGetMinutes },
+    { "getMonth", VmDateGetMonth },
+    { "getSeconds", VmDateGetSeconds },
+    { "getTime", VmDateGetTime },
+    { "getRTC", VmDateGetRTC },
+};
 
 VmMethodDefine(Math, E) {
     return CHANSVmSetFloat(VmInst, VmReturnObj, M_E) == CHANS_VM_OK;
@@ -2855,6 +2869,39 @@ VmMethodDefine(Math, tan) {
     CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     return arg != vmNull && CHANSVmSetFloat(VmInst, VmReturnObj, tan(arg->value.float_v)) == CHANS_VM_OK;
 }
+
+const CHANSVmPropertyList MathPropertyList[] = {
+    { "E", VmMathE, NULL },
+    { "LN10", VmMathLN10, NULL },
+    { "LN2", VmMathLN2, NULL },
+    { "LOG2E", VmMathLOG2E, NULL },
+    { "LOG10E", VmMathLOG10E, NULL },
+    { "PI", VmMathPI, NULL },
+    { "SQRT1_2", VmMathSQRT1_2, NULL },
+    { "SQRT2", VmMathSQRT2, NULL },
+};
+const CHANSVmMethodList MathMethodList[] = {
+    { "abs", VmMathabs },
+    { "acos", VmMathacos },
+    { "asin", VmMathasin },
+    { "atan", VmMathatan },
+    { "atan2", VmMathatan2 },
+    { "ceil", VmMathceil },
+    { "cos", VmMathcos },
+    { "exp", VmMathexp },
+    { "floor", VmMathfloor },
+    { "log", VmMathlog },
+    { "max", VmMathmax },
+    { "min", VmMathmin },
+    { "pow", VmMathpow },
+    { "random", VmMathrandom },
+    { "round", VmMathround },
+    { "sin", VmMathsin },
+    { "sqrt", VmMathsqrt },
+    { "tan", VmMathtan },
+};
+
+const static char StringClassName[] = "String";
 
 VmCtorDefine(String) {
     vmBoolInt ok;
@@ -3750,6 +3797,24 @@ VmMethodDefine(String, Format) {
     return 0;
 }
 
+const CHANSVmPropertyList StringPropertyList[] = {
+    { "length", VmStringGetLength, NULL },
+};
+const CHANSVmMethodList StringMethodList[] = {
+    { "charAt", VmStringCharAt },
+    { "charCodeAt", VmStringCharCodeAt },
+    { "*fromCharCode", VmStringFromCharCode },
+    { "*format", VmStringFormat },
+    { "indexOf", VmStringIndexOf },
+    { "lastIndexOf", VmStringLastIndexOf },
+    { "replace", VmStringReplace },
+    { "search", VmStringSearch },
+    { "slice", VmStringSplice },
+    { "split", VmStringSplit },
+    { "toLowerCase", VmStringToLowerCase },
+    { "toUpperCase", VmStringToUpperCase },
+};
+
 vmString VmGetStrFromObjHdr(CHANSVmObjHdr* object) {
     if (object != vmNull && object->value.string_v != vmNull) {
         return object->value.string_v->str;
@@ -3775,24 +3840,6 @@ BOOL CHANSVm_81451348(BlobHeader* blob, s64 size);
 CHANSVmObjHdr* CHANSVmNewBlobObject(CHANSVm* VmInst, CHANSVmObjHdr* obj, u32 size, void* src, u32 count);
 static u64 CHANSVm_814540E0(u32 upper, u32 lower);
 
-char lbl_81697596[] = "length";
-char lbl_8169759D[] = "join";
-char lbl_816975A2[] = "new2d";
-char lbl_816975A8[] = "pop";
-char lbl_816975AC[] = "push";
-char lbl_816975B1[] = "shift";
-char lbl_816975B7[] = "slice";
-char lbl_816975BD[] = "unshift";
-char lbl_816976B5[] = "getLength";
-char lbl_816976BC[] = "getOffset";
-char lbl_816976C4[] = "seek";
-char lbl_816976CC[] = "skip";
-char lbl_816976D4[] = "fill";
-char lbl_816976DB[] = "isEqual";
-char lbl_816976EC[] = "getBlob";
-char lbl_816976F3[] = "setBlob";
-char lbl_816976FB[] = "getHexString";
-
 static void VmBlobInitValue(BlobHeader* blob, u32 size) {
     if (blob != NULL) {
         blob->offset = 0;
@@ -3802,6 +3849,10 @@ static void VmBlobInitValue(BlobHeader* blob, u32 size) {
 }
 
 static const char BlobClassName[] = "Blob";
+
+char lbl_81669DF5[] = "0123456789abcdef";
+char* lbl_816976E4 = lbl_81669DF5;
+char* lbl_816976E8 = lbl_81669DF5;
 
 static CHANSVmObjHdr* VmBlobCreateDirect(CHANSVm* vm, CHANSVmObjHdr* obj, u32 size) NO_INLINE {
     CHANSVmNativeClass* cls;
@@ -4161,12 +4212,12 @@ VmMethodDefine(Blob, IsEqual) {
 
 VmMethodDefine(Blob, CopyRangeFrom) {
     // TODO: needs cleanup after match
-    BlobHeader* destBlob;
-    CHANSVmObjHdr* destOffObj;
-    CHANSVmObjHdr* srcObj;
-    CHANSVmObjHdr* srcOffObj;
-    CHANSVmObjHdr* countObj;
     BlobHeader* srcBlob;
+    BlobHeader* destBlob;
+    CHANSVmObjHdr* srcOffObj;
+    CHANSVmObjHdr* srcObj;
+    CHANSVmObjHdr* destOffObj;
+    CHANSVmObjHdr* countObj;
     u32 srcOff;
     u32 destOff;
     u32 count;
@@ -4617,7 +4668,6 @@ VmMethodDefine(Blob, CalcRangeHMAC) {
         return 0;
     }
 }
-
 
 VmMethodDefine(Blob, GetU8) {
     BlobHeader* blob = (BlobHeader*)VmGetStrFromObjHdr(VmParentObj);
@@ -5980,6 +6030,54 @@ CHANSVmObjHdr* CHANSVmNewBlobObject(CHANSVm* VmInst, CHANSVmObjHdr* obj, u32 siz
     return obj;
 }
 
+const CHANSVmPropertyList BlobPropertyList[] = {
+    { "offset", VmBlobGetOffset, VmBlobSeek },
+    { "length", VmBlobGetLength, VmBlobSetLength },
+};
+const CHANSVmMethodList BlobMethodList[] = {
+    { "*create", VmBlobCreate },
+    { "seek", VmBlobSeek },
+    { "skip", VmBlobSkip },
+    { "isEqual", VmBlobIsEqual },
+    { "getLength", VmBlobGetLength },
+    { "setLength", VmBlobSetLength },
+    { "fill", VmBlobFill },
+    { "getU8", VmBlobGetU8 },
+    { "getU16", VmBlobGetU16 },
+    { "getU32", VmBlobGetU32 },
+    { "getS8", VmBlobGetS8 },
+    { "getS16", VmBlobGetS16 },
+    { "getS32", VmBlobGetS32 },
+    { "getS64", VmBlobGetS64 },
+    { "setU8", VmBlobSetU8 },
+    { "setU16", VmBlobSetU16 },
+    { "setU32", VmBlobSetU32 },
+    { "setS8", VmBlobSetS8 },
+    { "setS16", VmBlobSetS16 },
+    { "setS32", VmBlobSetS32 },
+    { "setS64", VmBlobSetS64 },
+    { "getString", VmBlobGetString },
+    { "getWString", VmBlobGetWString },
+    { "setString", VmBlobSetString },
+    { "setWString", VmBlobSetWString },
+    { "getBlob", VmBlobGetBlob },
+    { "setBlob", VmBlobSetBlob },
+    { "getHexString", VmBlobGetHexString },
+    { "copyRangeFrom", VmBlobCopyRangeFrom },
+    { "calcSHA1Digest", VmBlobCalcSHA1Digest },
+    { "calcMD5Digest", VmBlobCalcMD5Digest },
+    { "calcCRC16", VmBlobCalcCRC16 },
+    { "calcCRC32", VmBlobCalcCRC32 },
+    { "calcHMAC", VmBlobCalcHMAC },
+    { "calcRangeSHA1Digest", VmBlobCalcRangeSHA1Digest },
+    { "calcRangeMD5Digest", VmBlobCalcRangeMD5Digest },
+    { "calcRangeCRC16", VmBlobCalcRangeCRC16 },
+    { "calcRangeCRC32", VmBlobCalcRangeCRC32 },
+    { "calcRangeHMAC", VmBlobCalcRangeHMAC },
+    { "pack", VmBlobPack },
+    { "unpack", VmBlobUnpack },
+};
+
 VmMethodDefine(Image, Width) {
     CHANSVmImage* image = *VmParentObj->value.ptr_v;
     return CHANSVmSetInteger(VmInst, VmReturnObj, image->width) == CHANS_VM_OK;
@@ -6077,7 +6175,13 @@ VmCtorDefine(Image) {
     return result;
 }
 
-vmBoolInt VmWinEmuWrite(CHANSVm* vm, CHANSVmObjHdr* parent, CHANSVmObjHdr* ret) {
+const CHANSVmPropertyList ImagePropertyList[] = {
+    { "width", VmImageWidth, NULL },
+    { "height", VmImageHeight, NULL },
+    { "format", VmImageFormat, NULL },
+};
+
+static vmBoolInt VmWinEmuWrite(CHANSVm* vm, CHANSVmObjHdr* parent, CHANSVmObjHdr* ret) {
     CHANSVmObjHdr* strObj;
     u32 offset;
     u32 totalLength;
@@ -6113,17 +6217,15 @@ vmBoolInt VmWinEmuWrite(CHANSVm* vm, CHANSVmObjHdr* parent, CHANSVmObjHdr* ret) 
     return TRUE;
 }
 
-const CHANSVmPropertyList lbl_81694FAC = {
+const CHANSVmMethodList lbl_81694FAC[] = {
     "write",
-    VmWinEmuWrite,
-    NULL
+    VmWinEmuWrite
 };
 
-CHANSVmErr VmPushFuncReturnInfo(CHANSVm* vm, u32 a, u32 b, u32 c);
+static CHANSVmErr VmPushFuncReturnInfo(CHANSVm* vm, u32 a, u32 b, u32 c);
 
 CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
-    u8* base;
     u32 alignedBase;
     u32 alignedSize;
     u32 exeSize;
@@ -6132,7 +6234,6 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     CHANSVmNativeClass* cls;
     CHANSVmErr ok;
 
-    base = (u8*)&CHANSVmConstStringObjectUndefined; // <- this points to .rodata@0x0
     memset(vm, 0, sizeof(CHANSVm));
 
     alignedBase = VM_ALIGN((u32)work);
@@ -6141,7 +6242,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     pVm->exeStart = alignedBase;
     pVm->exeSize = alignedSize;
     pVm->minWorkSize = 0x820;
-    if (alignedSize < 0x820) {
+    if (alignedSize < pVm->minWorkSize) {
         return CHANS_VM_ERR_NO_MEMORY;
     }
 
@@ -6160,12 +6261,12 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
     // TODO: this needs to be cleaned up
     if (result == 0) {
         /* Array class */
-        cls = CHANSVmAddNativeClass2(vm, "Array", VmArrayCtor, VmArrayDtor, VmArrayCtor);
+        cls = CHANSVmAddNativeClass2(vm, ArrayClassName, VmArrayCtor, VmArrayDtor, VmArrayCtor);
         if (cls == NULL)
             goto array_a_fail;
-        if ((void*)(base + 0x214) != NULL && CHANSVmAddNativePropertyAccessorsList(vm, cls, (CHANSVmPropertyList*)(base + 0x214), 1) != 0)
+        if (CHANSVmAddNativePropertyAccessorsList(vm, cls, ArrayPropertyList, 1) != 0)
             goto array_a_fail;
-        if ((void*)(base + 0x220) != NULL && CHANSVmAddNativeMethodList(vm, cls, (CHANSVmMethodList*)(base + 0x220), 7) != 0)
+        if (CHANSVmAddNativeMethodList(vm, cls, ArrayMethodList, 7) != 0)
             goto array_a_fail;
         ok = TRUE;
         goto array_a_check;
@@ -6176,7 +6277,7 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
                 goto class_fail;
 
         /* Array class (find) */
-        cls = CHANSVmFindNativeClass(vm, "Array");
+        cls = CHANSVmFindNativeClass(vm, ArrayClassName);
         if (cls != NULL) {
             pVm->pArrayCls = cls;
             ok = TRUE;
@@ -6187,11 +6288,11 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
             goto class_fail;
 
         /* Date class */
-        cls = CHANSVmAddNativeClass2(vm, "Date", VmDateCtor, VmDateDtor, NULL);
+        cls = CHANSVmAddNativeClass2(vm, "Date", VmDateCtor, (CHANSVmFunction)0, VmDateDtor);
         if (cls == NULL) {
             ok = FALSE;
         } else {
-            ok = (CHANSVmAddNativeMethodList(vm, cls, (CHANSVmMethodList*)(base + 0x268), 0xA) == 0);
+            ok = (CHANSVmAddNativeMethodList(vm, cls, DateMethodList, 0xA) == 0);
         }
         if (!ok)
             goto class_fail;
@@ -6199,18 +6300,18 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
         /* Math class */
         if (CHANSVmNewBuiltinObject(vm, "@Math", NULL, NULL, NULL,
             "Math", NULL,
-            (CHANSVmPropertyList*)(base + 0x2B8), 8,
-            (CHANSVmMethodList*)(base + 0x318), 0x12) == 0) {
+            MathPropertyList, 8,
+            MathMethodList, 0x12) == 0) {
             goto class_fail;
             }
 
         /* String class */
 
-        if (CHANSVmNewBuiltinObject(vm, "String", VmStringCtor, NULL, VmStringCtor, NULL, NULL, (CHANSVmPropertyList*)(base + 0x3A8), 1,
-                                    (CHANSVmMethodList*)(base + 0x3B4), 0xC) == 0) {
+        if (CHANSVmNewBuiltinObject(vm, StringClassName, VmStringCtor, NULL, VmStringCtor, NULL, NULL, StringPropertyList, 1,
+                                    StringMethodList, 0xC) == 0) {
             goto class_fail;
                                     }
-        cls = CHANSVmFindNativeClass(vm, "String");
+        cls = CHANSVmFindNativeClass(vm, StringClassName);
         if (cls != NULL) {
             pVm->pStringCls = cls;
             ok = TRUE;
@@ -6224,22 +6325,18 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
         cls = CHANSVmAddNativeClass2(vm, BlobClassName, VmBlobCtor, VmBlobDtor, NULL);
         if (cls == NULL) {
             ok = FALSE;
-        } else {
-            result = CHANSVmAddNativePropertyAccessorsList(vm, cls, (CHANSVmPropertyList*)(base + 0x414), 2);
-            if (result == 0) {
-                result = CHANSVmAddNativeMethodList(vm, cls, (CHANSVmMethodList*)(base + 0x42C), 0x29);
-            }
-            ok = (result == 0);
-        }
-        if (!ok)
+        } else if (CHANSVmAddNativePropertyAccessorsList(vm, cls, BlobPropertyList, 2) != 0) {
+            ok = FALSE;
+        } else if (CHANSVmAddNativeMethodList(vm, cls, BlobMethodList, 0x29) == 0) {
             goto class_fail;
+        }
 
         /* Image class */
         VmImageAllocCallback = NULL;
         VmImageCtorCallback = NULL;
-        if (CHANSVmNewBuiltinObject(vm, "Image", NULL, NULL, NULL,
+        if (CHANSVmNewBuiltinObject(vm, "Image", NULL, VmImageCtor, NULL,
             NULL, NULL,
-            (CHANSVmPropertyList*)(base + 0x574), 3,
+            ImagePropertyList, 3,
             NULL, 0) == 0) {
             goto class_fail;
         }
@@ -8030,116 +8127,3 @@ error_code_range:
 error_3e2:
     return CHANS_VM_ERR_HEAP_RANGE;
 }
-
-// === .data additional error/format strings ===
-char lbl_81669DC3[] = "*fromCharCode";
-char lbl_81669DF5[] = "0123456789abcdef";
-
-// === .sdata additional strings ===
-char lbl_81697700[] = "skip";
-char lbl_81697705[] = "isEqual";
-char lbl_8169770D[] = "fill";
-
-// === lbl_81616ED0: function-addr+name table ===
-const NameFuncEntry lbl_81616ED0[] = {
-    { (const char*)L"UTC", (void*)6 },
-    { NULL, NULL },
-    { "getDate", (void*)VmDateGetDate },
-    { "getDay", (void*)VmDateGetDay },
-    { "getFullYear", (void*)VmDateGetFullYear },
-    { "getHours", (void*)VmDateGetHours },
-    { "getMilliseconds", (void*)VmDateGetMilliseconds },
-    { "getMinutes", (void*)VmDateGetMinutes },
-    { "getMonth", (void*)VmDateGetMonth },
-    { "getSeconds", (void*)VmDateGetSeconds },
-    { "getTime", (void*)VmDateGetTime },
-    { "getRTC", (void*)VmDateGetRTC },
-    { "E", (void*)VmMathE },
-    { "LN10", (void*)VmMathLN10 },
-    { "LN2", (void*)VmMathLN2 },
-    { "LOG2E", (void*)VmMathLOG2E },
-    { "LOG10E", (void*)VmMathLOG10E },
-    { "PI", (void*)VmMathPI },
-    { "SQRT1_2", (void*)VmMathSQRT1_2 },
-    { "SQRT2", (void*)VmMathSQRT2 },
-    { "abs", (void*)VmMathabs },
-    { "acos", (void*)VmMathacos },
-    { "asin", (void*)VmMathasin },
-    { "atan", (void*)VmMathatan },
-    { "atan2", (void*)VmMathatan2 },
-    { "ceil", (void*)VmMathceil },
-    { "cos", (void*)VmMathcos },
-    { "exp", (void*)VmMathexp },
-    { "floor", (void*)VmMathfloor },
-    { "log", (void*)VmMathlog },
-    { "max", (void*)VmMathmax },
-    { "min", (void*)VmMathmin },
-    { "pow", (void*)VmMathpow },
-    { "random", (void*)VmMathrandom },
-    { "round", (void*)VmMathround },
-    { "sin", (void*)VmMathsin },
-    { "sqrt", (void*)VmMathsqrt },
-    { "tan", (void*)VmMathtan },
-    { "length", (void*)VmStringGetLength },
-    { "charAt", (void*)VmStringCharAt },
-    { "charCodeAt", (void*)VmStringCharCodeAt },
-    { "fromCharCode", (void*)VmStringFromCharCode },
-    { "format", (void*)VmStringFormat },
-    { "indexOf", (void*)VmStringIndexOf },
-    { "lastIndexOf", (void*)VmStringLastIndexOf },
-    { "replace", (void*)VmStringReplace },
-    { "search", (void*)VmStringSearch },
-    { "splice", (void*)VmStringSplice },
-    { "split", (void*)VmStringSplit },
-    { "toLowerCase", (void*)VmStringToLowerCase },
-    { "toUpperCase", (void*)VmStringToUpperCase },
-    // TODO: this is wrong; verify this whole list
-    { "getBlob", (void*)NULL },
-    { "seek", (void*)NULL },
-    { "shift", (void*)VmBlobGetLength },
-    { "setLength", (void*)VmBlobSetLength },
-    { "setBlob", (void*)NULL },
-    { "getHexString", (void*)NULL },
-    { "setHexString", (void*)NULL },
-    { "pack", (void*)NULL },
-    { "getLength", (void*)VmBlobGetLength },
-    { "setLength", (void*)VmBlobSetLength },
-    { "fill", (void*)VmBlobFill },
-    { "getU8", (void*)VmBlobGetU8 },
-    { "getU16", (void*)VmBlobGetU16 },
-    { "getU32", (void*)VmBlobGetU32 },
-    { "getS8", (void*)VmBlobGetS8 },
-    { "getS16", (void*)VmBlobGetS16 },
-    { "getS32", (void*)VmBlobGetS32 },
-    { "getS64", (void*)VmBlobGetS64 },
-    { "setU8", (void*)VmBlobSetU8 },
-    { "setU16", (void*)VmBlobSetU16 },
-    { "setU32", (void*)VmBlobSetU32 },
-    { "setS8", (void*)VmBlobSetS8 },
-    { "setS16", (void*)VmBlobSetS16 },
-    { "setS32", (void*)VmBlobSetS32 },
-    { "setS64", (void*)VmBlobSetS64 },
-    { "getString", (void*)VmBlobGetString },
-    { "getWString", (void*)VmBlobGetWString },
-    { "setString", (void*)VmBlobSetString },
-    { "setWString", (void*)VmBlobSetWString },
-    { "getBlob", (void*)VmBlobGetBlob },
-    { "setBlob", (void*)VmBlobSetBlob },
-    { "getHexString", (void*)VmBlobGetHexString },
-    { "copyRangeFrom", (void*)VmBlobCopyRangeFrom },
-    { "calcSHA1Digest", (void*)VmBlobCalcSHA1Digest },
-    { "calcMD5Digest", (void*)VmBlobCalcMD5Digest },
-    { "calcCRC16", (void*)VmBlobCalcCRC16 },
-    { "calcCRC32", (void*)VmBlobCalcCRC32 },
-    { "calcHMAC", (void*)VmBlobCalcHMAC },
-    { "calcRangeSHA1Digest", (void*)VmBlobCalcRangeSHA1Digest },
-    { "calcRangeMD5Digest", (void*)VmBlobCalcRangeMD5Digest },
-    { "calcRangeCRC16", (void*)VmBlobCalcRangeCRC16 },
-    { "calcRangeCRC32", (void*)VmBlobCalcRangeCRC32 },
-    { "calcRangeHMAC", (void*)VmBlobCalcRangeHMAC },
-    { "pack", (void*)VmBlobPack },
-    { "unpack", (void*)VmBlobUnpack },
-    { "width", (void*)VmImageWidth },
-    { "height", (void*)VmImageHeight },
-    { "format", (void*)VmImageFormat },
-};

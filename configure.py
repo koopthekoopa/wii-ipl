@@ -940,7 +940,7 @@ config.libs = [
         ]
     ),
     IPLSection("channelScript", [
-            Object(NonMatching, "channelScript/CHANSVm.c", extra_cflags=["-sdata2 12"]),
+            Object(NonMatching, "channelScript/CHANSVm.c"),
             Object(NonMatching, "channelScript/systemmenu/VmSystem.c"),
             Object(Matching,    "channelScript/systemmenu/iplCSSystem.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSLayout.cpp"),
