@@ -47,16 +47,16 @@ typedef struct CHANSVm {
 /* OBJECT HEADER & DATA */
 
 typedef enum CHANSVmObjType {
-    CHANS_VM_OBJ_TYPE_BLANK = 0,  // Generic
-    CHANS_VM_OBJ_TYPE_INTEGER,
-    CHANS_VM_OBJ_TYPE_FLOAT,
-    CHANS_VM_OBJ_TYPE_STRING,
-    CHANS_VM_TYPE_OBJECT,  // Class Instance, C++ Apis
-    CHANS_VM_TYPE_UNK5,
-    CHANS_VM_TYPE_UNK6,
-    CHANS_VM_TYPE_UNK7,     // Array of some kind?
-    CHANS_VM_TYPE_POINTER,  // Pointer to class instance
-    CHANS_VM_TYPE_UNK9,     // Raw pointer?
+    CHANS_VM_OBJ_TYPE_BLANK = 0, // Undefined/null
+    CHANS_VM_OBJ_TYPE_INTEGER,   // 64-bit signed integer
+    CHANS_VM_OBJ_TYPE_FLOAT,     // 64-bit float
+    CHANS_VM_OBJ_TYPE_STRING,    // UTF-16 string
+    CHANS_VM_TYPE_ARRAY,         // Array instance
+    CHANS_VM_TYPE_INDEX_REF,     // Array index accessor (only used by accumulator; not a stored object type)
+    CHANS_VM_TYPE_GLOBAL_REF,    // Resolved global object reference (only used by ModuleEntry; not a stored object type)
+    CHANS_VM_TYPE_CLASS_REF,     // Native class reference
+    CHANS_VM_TYPE_OBJECT,        // Native C class instance (Blob, Image, etc.)
+    CHANS_VM_TYPE_METHOD_REF,    // Method/function reference (name table index)
     CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
 

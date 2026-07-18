@@ -14,7 +14,7 @@ namespace ipl {
                 if (data != NULL) {
                     data->width = width;
                     data->height = height;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Size");
                     result = VmObj->parentCls != NULL;
                 }

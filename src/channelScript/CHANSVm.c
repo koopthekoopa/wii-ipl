@@ -856,14 +856,14 @@ vmBoolInt CHANSVmGetEnumedType(CHANSVmObjType* eType, vmU32 iType) NO_INLINE {
             break;
         }
         case 4: {
-            type = CHANS_VM_TYPE_OBJECT;
+            type = CHANS_VM_TYPE_ARRAY;
             break;
         }
         case 6:
         case 7:
         case 8:
         case 9: {
-            type = CHANS_VM_TYPE_UNK5;
+            type = CHANS_VM_TYPE_INDEX_REF;
             break;
         }
         default: {
@@ -1187,9 +1187,9 @@ CHANSVmErr VmCmpEq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
     case CHANS_VM_OBJ_TYPE_BLANK: {
         u8 tmpType = left->type;
         if (tmpType == right->type) {
-            if (tmpType == CHANS_VM_TYPE_UNK7 || tmpType == CHANS_VM_TYPE_POINTER)
+            if (tmpType == CHANS_VM_TYPE_CLASS_REF || tmpType == CHANS_VM_TYPE_OBJECT)
                 goto handleObjectType;
-            if (tmpType == CHANS_VM_TYPE_UNK9) {
+            if (tmpType == CHANS_VM_TYPE_METHOD_REF) {
                 isEqual = left->value.ptr_v == right->value.ptr_v;
                 break;
             }
@@ -1222,7 +1222,7 @@ CHANSVmErr VmCmpEq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
         }
         break;
     }
-    case CHANS_VM_TYPE_OBJECT: {
+    case CHANS_VM_TYPE_ARRAY: {
     handleObjectType:
         isEqual = vmFalse;
         if (left->parentCls == right->parentCls &&
@@ -1254,8 +1254,8 @@ CHANSVmErr VmCmpLt(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
     u32 leftLen, rightLen, maxLen;
     switch (type) {
         case CHANS_VM_OBJ_TYPE_BLANK:
-        case CHANS_VM_TYPE_OBJECT:
-        case CHANS_VM_TYPE_POINTER: {
+        case CHANS_VM_TYPE_ARRAY:
+        case CHANS_VM_TYPE_OBJECT: {
             result = vmFalse;
             break;
         }
@@ -1300,8 +1300,8 @@ CHANSVmErr VmCmpLeq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* le
     u32 leftLen, rightLen, maxLen;
     switch (type) {
         case CHANS_VM_OBJ_TYPE_BLANK:
-        case CHANS_VM_TYPE_OBJECT:
-        case CHANS_VM_TYPE_POINTER: {
+        case CHANS_VM_TYPE_ARRAY:
+        case CHANS_VM_TYPE_OBJECT: {
             result = vmFalse;
             break;
         }
@@ -1363,10 +1363,10 @@ CHANSVmErr CHANSVmGetBoolean(CHANSVmObjHdr* ret, CHANSVmObjHdr* val) {
             result = val->value.string_v->len != 0;
             break;
         }
+        case CHANS_VM_TYPE_ARRAY:
+        case CHANS_VM_TYPE_CLASS_REF:
         case CHANS_VM_TYPE_OBJECT:
-        case CHANS_VM_TYPE_UNK7:
-        case CHANS_VM_TYPE_POINTER:
-        case CHANS_VM_TYPE_UNK9: {
+        case CHANS_VM_TYPE_METHOD_REF: {
             result = vmTrue;
             break;
         }
@@ -1797,9 +1797,9 @@ CHANSVmErr CHANSVmSetObjectAsNativeInstance(CHANSVm* vm, CHANSVmObjHdr* obj, CHA
         }
 
         if (cls != NULL) {
-            if (obj->type == CHANS_VM_OBJ_TYPE_BLANK || obj->type == CHANS_VM_TYPE_POINTER &&
+            if (obj->type == CHANS_VM_OBJ_TYPE_BLANK || obj->type == CHANS_VM_TYPE_OBJECT &&
                 (obj->parentCls == NULL || obj->parentCls == cls)) {
-                obj->type = CHANS_VM_TYPE_POINTER;
+                obj->type = CHANS_VM_TYPE_OBJECT;
                 obj->parentCls = cls;
                 result = CHANS_VM_OK;
             }
@@ -1849,7 +1849,7 @@ vmBoolInt CHANSVmNewBuiltinObject(
 }
 
 vmBoolInt CHANSVmCheckNativeInstance(CHANSVmObjHdr* obj, const char* className) {
-    if (obj != NULL && obj->type == CHANS_VM_TYPE_POINTER) {
+    if (obj != NULL && obj->type == CHANS_VM_TYPE_OBJECT) {
         CHANSVmNativeClass* nativeClass = obj->parentCls;
         if (nativeClass != NULL && className != NULL && nativeClass->nameLength == strlen(className) &&
             strncmp(nativeClass->name, className, nativeClass->nameLength) == 0) {
@@ -1966,7 +1966,7 @@ static CHANSVmObjHdr* VmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 i
 }
 
 CHANSVmObjHdr* CHANSVmGetArrayElement(CHANSVm* vm, CHANSVmObjHdr* array, u32 index) {
-    if (array != NULL && array->type == CHANS_VM_TYPE_OBJECT) {
+    if (array != NULL && array->type == CHANS_VM_TYPE_ARRAY) {
         CHANSVmObjHdr* result = VmGetArrayElement(vm, array, index, FALSE);
         if (result != NULL) {
             return result;
@@ -1995,7 +1995,7 @@ VmCtorDefine(Array)
         }
     }
 
-    VmReturnObj->type = CHANS_VM_TYPE_OBJECT;
+    VmReturnObj->type = CHANS_VM_TYPE_ARRAY;
     VmReturnObj->parentCls = pVm->pArrayCls;
 
     if (CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(ArrayChunk)) != NULL) {
@@ -2040,7 +2040,7 @@ CHANSVmObjHdr* CHANSVmGetArrayElement2DFloat(CHANSVm* vm, vmFloat* array, vmS32 
 }
 
 u32 CHANSVmGetArrayLength(CHANSVm* vm, CHANSVmObjHdr* array) {
-    if (array != NULL && array->type == CHANS_VM_TYPE_OBJECT) {
+    if (array != NULL && array->type == CHANS_VM_TYPE_ARRAY) {
         return VmArrayGetLengthInternal(array);
     }
     return 0;
@@ -2071,7 +2071,7 @@ static u32 VmArrayJoinEstimateStrSize(CHANSVmObjHdr* object, u32 sepLen)
                     total += 0x80;
                     break;
                 }
-                case CHANS_VM_TYPE_OBJECT: {
+                case CHANS_VM_TYPE_ARRAY: {
                     u32 strLen = VmArrayJoinEstimateStrSize(&chunk->elements[countInChunk], sepLen);
                     total += strLen;
                     break;
@@ -2142,7 +2142,7 @@ static u32 VmArrayJoinSub(CHANSVmObjHdr* obj, CHANSVmObjHdr* array, wchar_t* sep
                     elemLen = CHANSVm_8144B62C((vmWString)((u8*)(*obj->value.ptr_v) + offset), 0x80, chunk->elements[countInChunk].value.float_v);
                     break;
                 }
-                case CHANS_VM_TYPE_OBJECT: {
+                case CHANS_VM_TYPE_ARRAY: {
                     elemLen = 0;
                     offset = VmArrayJoinSub(obj, &chunk->elements[countInChunk], separator, sepLen, bufSize, offset);
                     break;
@@ -2272,7 +2272,7 @@ CHANSVmObjHdr* CHANSVmNewArrayObject(CHANSVm* vm, CHANSVmObjHdr* object, vmU32 d
         goto error;
     }
 
-    object = CHANSVmNewObject(vm, 0, object, CHANS_VM_TYPE_OBJECT, 0x18);
+    object = CHANSVmNewObject(vm, 0, object, CHANS_VM_TYPE_ARRAY, 0x18);
     if (object == NULL) {
         goto error;
     }
@@ -2909,7 +2909,7 @@ VmMethodDefine(String, FromCharCode) {
     u32 ch;
     u32 i;
 
-    if (VmParentObj != NULL && VmParentObj->type == CHANS_VM_TYPE_UNK7) {
+    if (VmParentObj != NULL && VmParentObj->type == CHANS_VM_TYPE_CLASS_REF) {
         argc = ((CHANSVmPrivate*)VmInst)->pActiveCtx->argc;
         if (CHANSVmNewObject(VmInst, vmFalse, VmReturnObj, CHANS_VM_OBJ_TYPE_STRING, argc * 2)) {
             i = 0;
@@ -3770,7 +3770,7 @@ null_return:
 
 VmMethodDefine(String, Format) {
     CHANSVmObjHdr* result;
-    if (VmParentObj != NULL && VmParentObj->type == CHANS_VM_TYPE_UNK7) {
+    if (VmParentObj != NULL && VmParentObj->type == CHANS_VM_TYPE_CLASS_REF) {
         result = CHANSVm_8145049C(VmInst, VmReturnObj, 0);
         return result != NULL;
     }
@@ -3835,7 +3835,7 @@ static CHANSVmObjHdr* VmBlobCreateDirect(CHANSVm* vm, CHANSVmObjHdr* obj, u32 si
         return NULL;
     }
 
-    obj = CHANSVmNewObject(vm, vmFalse, obj, CHANS_VM_TYPE_POINTER, size + sizeof(BlobHeader));
+    obj = CHANSVmNewObject(vm, vmFalse, obj, CHANS_VM_TYPE_OBJECT, size + sizeof(BlobHeader));
     if (obj != NULL) {
         cls = CHANSVmFindNativeClass(vm, VmBlobClassName);
         obj->parentCls = cls;
@@ -5047,7 +5047,7 @@ static vmBoolInt VmBlobPackCommon(CHANSVm* VmInst, CHANSVmObjHdr* VmParentObj, C
     argStr = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(VmInst, 0));
     fmtStr = (const wchar_t*)VmGetStrFromObjHdr(argStr);
     fmtLen = (u32)VmGetIntFromObjHdr(argStr) / 2;
-    argArr = CHANSVmConvertObjectType(VmInst, CHANS_VM_TYPE_OBJECT, CHANSVmGetArg(VmInst, 1));
+    argArr = CHANSVmConvertObjectType(VmInst, CHANS_VM_TYPE_ARRAY, CHANSVmGetArg(VmInst, 1));
 
     if (fmtStr == NULL) {
         return vmFalse;
@@ -6092,7 +6092,7 @@ CHANSVmObjHdr* CHANSVmNewImageObject(CHANSVm* vm, CHANSVmObjHdr* object, vmPtr s
     datasize = ((u32)width * (u32)height * bpp) / 8;
     allocSize = (datasize & ~(-(VmImageAllocCallback != NULL))) + 0x20;
 
-    object = CHANSVmNewObject(vm, vmFalse, object, CHANS_VM_TYPE_POINTER, allocSize);
+    object = CHANSVmNewObject(vm, vmFalse, object, CHANS_VM_TYPE_OBJECT, allocSize);
     if (object == NULL || CHANSVmSetObjectAsNativeInstance(vm, object, NULL, "Image") != CHANS_VM_OK) {
         goto error;
     }
@@ -6545,7 +6545,7 @@ static CHANSVmObjHdr* CHANSVm_81455654(CHANSVm* vm, u32 id) {
     if (id < dbg->moduleCount) {
         data = (CHANSVmObjHdr*)dbg->pModuleTbl;
         data += id;
-        if (data->type != CHANS_VM_TYPE_UNK6) {
+        if (data->type != CHANS_VM_TYPE_GLOBAL_REF) {
             return data;
         }
         return *(CHANSVmObjHdr**)data;
@@ -6757,7 +6757,7 @@ CHANSVmErr CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0) {
                         result = CHANS_VM_ERR_RESOLVE_GLOBAL_OBJECT_REFERENCE;
                         goto post_pass1;
                     }
-                    module->pModuleTbl[i].type = CHANS_VM_TYPE_UNK6;
+                    module->pModuleTbl[i].type = CHANS_VM_TYPE_GLOBAL_REF;
                     module->pModuleTbl[i].pGlobalObj = gIter;
                     module->pModuleTbl[i].flags = 0x80;
                 }
@@ -6791,7 +6791,7 @@ CHANSVmErr CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0) {
                         result = CHANS_VM_ERR_RESOLVE_NATIVE_METHOD_CALL;
                         goto post_pass2;
                     }
-                    module->pModuleTbl[i].type = CHANS_VM_TYPE_UNK7;
+                    module->pModuleTbl[i].type = CHANS_VM_TYPE_CLASS_REF;
                     module->pModuleTbl[i].pNativeClass = nIter;
                     module->pModuleTbl[i].flags = 0x80;
                 }
@@ -6818,7 +6818,7 @@ CHANSVmErr CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0) {
                 goto post_pass3;
 
             pass3_success:
-                obj->type = CHANS_VM_TYPE_UNK9;
+                obj->type = CHANS_VM_TYPE_METHOD_REF;
                 obj->value.bool_v = (vmBoolInt)i;
                 obj->flags.raw = 0x80;
                 continue;
@@ -6931,22 +6931,22 @@ static CHANSVmErr VmCallMethod(CHANSVm* vm, u32 instructionSize, u32 callType, u
     headerCount = 0;
 
     switch (acc->type) {
-        case CHANS_VM_TYPE_OBJECT: {
+        case CHANS_VM_TYPE_ARRAY: {
             target = pVm->pArrayCls;
             if (target == 0) {
                 return CHANS_VM_ERR_INVALID_OBJECT;
             }
             break;
         }
-        case CHANS_VM_TYPE_UNK7:
-        case CHANS_VM_TYPE_POINTER: {
+        case CHANS_VM_TYPE_CLASS_REF:
+        case CHANS_VM_TYPE_OBJECT: {
             target = acc->parentCls;
             if (target == NULL) {
                 return CHANS_VM_ERR_INVALID_OBJECT;
             }
             break;
         }
-        case CHANS_VM_TYPE_UNK9: {
+        case CHANS_VM_TYPE_METHOD_REF: {
             CHANSVmExecutionCtx* ec = pVm->pActiveCtx;
             CHANSVmModule* dbg = ec->pDbg;
             u32 idx = (u32)acc->value.int32_v;
@@ -7033,7 +7033,7 @@ error_check:
                 return CHANS_VM_ERR_NO_SUCH_PROPERTY;
             }
             if (entry->index == retVal) {
-                if (acc->type == CHANS_VM_TYPE_UNK7) {
+                if (acc->type == CHANS_VM_TYPE_CLASS_REF) {
                     if (entry->flag == 0) {
                         return CHANS_VM_ERR_FORBIDDEN_CLASS_PROPERTY;
                     }
@@ -7064,7 +7064,7 @@ error_check:
                     return CHANS_VM_ERR_NO_SUCH_METHOD;
                 }
                 if (node->index == retVal) {
-                    if (acc->type == CHANS_VM_TYPE_UNK7 && node->flag == 0) {
+                    if (acc->type == CHANS_VM_TYPE_CLASS_REF && node->flag == 0) {
                         return CHANS_VM_ERR_FORBIDDEN_CLASS_METHOD;
                     }
                     funcPtr = node->func;
@@ -7075,7 +7075,7 @@ error_check:
             retVal = 0;
         }
         else if (target != NULL) {
-            if (acc->type != CHANS_VM_TYPE_UNK7) {
+            if (acc->type != CHANS_VM_TYPE_CLASS_REF) {
                 if (callType == CHANS_VM_CALL_TYPE_METHOD) {
                     return CHANS_VM_ERR_NO_SUCH_METHOD;
                 }
@@ -7083,7 +7083,7 @@ error_check:
             }
             if (ctorFlag != vmFalse) {
                 localBuf.parentCls = target;
-                localBuf.type = CHANS_VM_TYPE_POINTER;
+                localBuf.type = CHANS_VM_TYPE_OBJECT;
                 funcPtr = target->ctor;
                 if (funcPtr == NULL) {
                     return CHANS_VM_ERR_NOT_CONSTRUCTOR;
@@ -7477,7 +7477,7 @@ binary_pop:
 
             case 0x3E:
                 result = CHANS_VM_ERR_LOAD_INDIRECT;
-                if (pVm->accumulator.type == CHANS_VM_TYPE_UNK5) {
+                if (pVm->accumulator.type == CHANS_VM_TYPE_INDEX_REF) {
                     tmpCmp = (s32)CHANSVmCopyObject(vm, stackPtr, &pVm->accumulator);
                     if (tmpCmp != 0) {
                         foundObj = VmGetArrayElement(vm, stackPtr, unk_r25, FALSE);
@@ -7497,7 +7497,7 @@ binary_pop:
                 break;
 
             case 2:
-                if (pVm->accumulator.type == CHANS_VM_TYPE_UNK7) {
+                if (pVm->accumulator.type == CHANS_VM_TYPE_CLASS_REF) {
                     result = 1;
                 } else {
                     result = CHANS_VM_ERR_INVALID_OBJECT_TYPE;
@@ -7530,7 +7530,7 @@ binary_pop:
 
             case 0x3F:
                 result = CHANS_VM_ERR_STORE_INDIRECT;
-                if (pVm->accumulator.type == CHANS_VM_TYPE_UNK5) {
+                if (pVm->accumulator.type == CHANS_VM_TYPE_INDEX_REF) {
                     tmpCmp = (s32)CHANSVmCopyObject(vm, stackPtr, &pVm->accumulator);
                     if (tmpCmp != 0) {
                         result = CHANSVmPopObject(vm, &pVm->accumulator);
@@ -7577,7 +7577,7 @@ binary_pop:
                 result = CHANSVmPopObject(vm, &pVm->accumulator);
                 if (result != CHANS_VM_OK) break;
 
-                if (pVm->accumulator.type == CHANS_VM_TYPE_OBJECT) {
+                if (pVm->accumulator.type == CHANS_VM_TYPE_ARRAY) {
                     u8 typeByte = ((u8*)stackPtr)[8];
                     if (typeByte == 2) {
                         double d = (double)((vmInteger)*(u64*)stackPtr);
@@ -7614,7 +7614,7 @@ done_2d_error:
 done_2d:
                 result = CHANS_VM_OK;
                 (&pVm->accumulator)->value.int_v = (vmInteger)unk_r25;
-                pVm->accumulator.type = CHANS_VM_TYPE_UNK5;
+                pVm->accumulator.type = CHANS_VM_TYPE_INDEX_REF;
                 result = CHANSVmDeleteObject(vm, &pVm->accumulator);
                 break;
             }
@@ -7696,7 +7696,7 @@ done_2d:
                 if (result == CHANS_VM_OK) {
                     result = VmPushFuncReturnInfo(vm, unk_r26, unk_r26, 0);
                     if (result == CHANS_VM_OK) {
-                        pVm->accumulator.type = CHANS_VM_TYPE_OBJECT;
+                        pVm->accumulator.type = CHANS_VM_TYPE_ARRAY;
                         pVm->accumulator.parentCls = pVm->pArrayCls;
                         if (CHANSVmNewObjData(vm, &pVm->accumulator, 0x18) != NULL) {
                             if (unk_r26 != 0) {
@@ -7741,7 +7741,7 @@ done_2d:
 
             case 0x37:
                 result = CHANS_VM_ERR_DELETE_INDIRECT;
-                if (pVm->accumulator.type == CHANS_VM_TYPE_UNK5) {
+                if (pVm->accumulator.type == CHANS_VM_TYPE_INDEX_REF) {
                     foundObj = VmGetArrayElement(vm, &pVm->accumulator, *((u32*)&pVm->accumulator.value + 1), FALSE);
                     result = VmDeleteCommon(vm, foundObj);
                 }
@@ -7831,10 +7831,10 @@ done_2d:
                         }
                         break;
                     }
+                    case CHANS_VM_TYPE_ARRAY:
+                    case CHANS_VM_TYPE_CLASS_REF:
                     case CHANS_VM_TYPE_OBJECT:
-                    case CHANS_VM_TYPE_UNK7:
-                    case CHANS_VM_TYPE_POINTER:
-                    case CHANS_VM_TYPE_UNK9: {
+                    case CHANS_VM_TYPE_METHOD_REF: {
                         unk_r23 = 0;
                         if ((*(u32*)(stackTop + 0xC)) ==
                                 (u32)pVm->accumulator.parentCls &&
