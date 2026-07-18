@@ -6466,7 +6466,7 @@ fail_format:
 
     cnt = header->stringCount;
     if (cnt) {
-        header->stringEntryTbl = CHANSVmAlloc(vm, VM_ALIGN(cnt * 0x10));
+        header->stringEntryTbl = (StringTblEntry*)CHANSVmAlloc(vm, VM_ALIGN(cnt * sizeof(StringTblEntry)));
     }
 
     cnt = header->moduleEntryCount;
@@ -6531,18 +6531,17 @@ check_method:
     }
     {
         u32 i;
-        u32 tblOffs;
         u8* strPtr = (u8*)header->stringOffs;
         int ok;
 
-        for (i = 0, tblOffs = 0; i < header->stringCount; i++, tblOffs += 0x10) {
+        for (i = 0; i < header->stringCount; i++) {
             u32 len = (u32)strPtr[0] << 8 | (u32)strPtr[1];
             strPtr += 2;
 
             if ((len & 1) == 0) {
                 if ((u8*)(strPtr + len) <= (u8*)(header->regionSize + (vmU32)header)) {
-                    *(u32*)((u8*)header->stringEntryTbl + tblOffs) = (vmU32)strPtr;
-                    *(u32*)((u8*)header->stringEntryTbl + tblOffs + 4) = len;
+                    header->stringEntryTbl[i].strPtr = strPtr;
+                    header->stringEntryTbl[i].length = len;
                     strPtr += len;
                     continue;
                 }

@@ -93,6 +93,7 @@ typedef struct ArrayChunk {
 } ArrayChunk;
 
 typedef struct ModuleHeader ModuleHeader;
+typedef struct StringTblEntry StringTblEntry;
 
 typedef struct SectionHeader {
     struct SectionHeader* next;  // 0x00
@@ -110,7 +111,7 @@ typedef struct SectionHeader {
     u32 stringCount;            // 0x30
     void* stringOffs;           // 0x34
     u32* methodIdxTbl;          // 0x38
-    void* stringEntryTbl;       // 0x3C
+    StringTblEntry* stringEntryTbl;  // 0x3C
     u32* dispatchTableOffs;     // 0x40
     void* classDataOffs;        // 0x44
 } SectionHeader;
@@ -123,6 +124,12 @@ typedef struct ModuleHeader {
     u8 type;           // 0x0C
     u8 pad_0D[0x13];
 } ModuleHeader;
+
+typedef struct StringTblEntry {
+    u8* strPtr;   // 0x00
+    u32 length;   // 0x04
+    u32 pad[2];   // 0x08
+} StringTblEntry;
 
 typedef struct ChunkEntry {
     void* pData;  // 0x00
