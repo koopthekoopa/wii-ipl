@@ -64,6 +64,7 @@ void CHANSVmDebugPrintf(const vmString format, ...) {
     if (CHANSVmDebugVerboseMode)                                                                                                                     \
     CHANSVmDebugPrintf("%s %d" msg, __FUNCTION__, line, __VA_ARGS__)
 #define CHANS_VM_PRINT (line, msg, ...) if (CHANSVmDebugVerboseMode) CHANSVmDebugPrintf("%s %d" msg, __FUNCTION__, line)
+#define CHANS_VM_PRINTF_CUSTOM(msg, ...) if (CHANSVmDebugVerboseMode) CHANSVmDebugPrintf(msg, __VA_ARGS__);
 
 vmU16 CHANSVmGetSourceLine(CHANSVm* vm) {
     CHANSVmExecutionCtx* ctx = ((CHANSVmPrivate*)vm)->pActiveCtx;
@@ -2460,10 +2461,7 @@ const NameFuncEntry VmDateConstantTbl[] = {
     { NULL, NULL }
 };
 
-// Ensures that this string is defined before the error messages below
-const char* vmDateCommonFunctionName = "VmDateCommon";
-
-vmBoolInt CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
+vmBoolInt VmDateCommon(CHANSVm* vm, OSCalendarTime* out) {
     u32 argc;
     u32 i;
     OSCalendarTime nettime;
@@ -2532,10 +2530,7 @@ vmBoolInt CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
                     dst = &nettime.msec;
                     break;
                 default:
-                    // Doesn't match the PRINTF macro
-                    if (CHANSVmDebugVerboseMode) {
-                        CHANSVmDebugPrintf("internal error in %s line %d\n", vmDateCommonFunctionName, 211);
-                    }
+                    CHANS_VM_PRINTF_CUSTOM("internal error in %s line %d\n", 211, __FUNCTION__);
                     return vmFalse;
             }
 
@@ -2566,7 +2561,7 @@ vmBoolInt CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
 }
 
 VmCtorDefine(Date) {
-    return CHANS_8144E21(VmInst, CHANSVmNewObjData(VmInst, VmReturnObj, 0x28));
+    return VmDateCommon(VmInst, CHANSVmNewObjData(VmInst, VmReturnObj, 0x28));
 }
 
 #define RANGE(val, min, max) ((val) >= (min) && (val) <= (max))
@@ -2581,7 +2576,7 @@ VmDtorDefine(Date) {
 
     memset(&date, 0, sizeof(OSCalendarTime));
 
-    if (CHANS_8144E21(VmInst, &date) &&
+    if (VmDateCommon(VmInst, &date) &&
         RANGE(date.sec, 0, 61) &&
         RANGE(date.min, 0, 59) &&
         RANGE(date.hour, 0, 23) &&
@@ -7315,11 +7310,8 @@ binary_imm:
                     case 0x42: case 0x53:
                         convTbl = (const u8*)((u8*)pConstObj + 0x1f0); break;
                     default:
-                            // TODO: this is an inlined function called "VmGetResultType"
-                        // use CHANS_VM_PRINTF?
-                        if (CHANSVmDebugVerboseMode) {
-                            CHANSVmDebugPrintf("%s: no table for op '%c'\n", lbl_81669128, unk_r23);
-                        }
+                        // TODO: this is an inlined function called "VmGetResultType"
+                        CHANS_VM_PRINTF_CUSTOM("%s: no table for op '%c'\n", lbl_81669128, unk_r23);
                         goto error_setter;
                     }
 
