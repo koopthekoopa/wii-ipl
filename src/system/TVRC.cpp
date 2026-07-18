@@ -100,7 +100,6 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
     char dirName[16];
 
     ARCFileInfo file;
-    int fileLen;
 
     if (_isInitialized == FALSE || _database.archiveStartAddr == NULL) {
         return FALSE;
@@ -117,7 +116,11 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
         _lastError = 6;
         return FALSE;
     }
-    while (ARCReadDir(&dir, &dirEntry) && typeNo >= 0) {
+    int curType = typeNo;
+    while (ARCReadDir(&dir, &dirEntry)) {
+        if (--curType < 0) {
+            break;
+        }
     }
     ARCCloseDir(&dir);
 
@@ -125,7 +128,7 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
         _lastError = 6;
         return FALSE;
     }
-    fileLen = ARCGetLength(&file);
+    int fileLen = ARCGetLength(&file);
     if (fileLen > length) {
         _lastError = 7;
         return FALSE;
