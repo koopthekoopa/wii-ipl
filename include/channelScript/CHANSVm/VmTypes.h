@@ -137,6 +137,23 @@ typedef struct CHANSVmImage {
 
 typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
 
+typedef struct CHANSVmIntConstantList {
+    const char* name; // 0x00
+    u32 value;        // 0x04
+} CHANSVmIntConstantList;
+
+typedef struct CHANSVmFloatConstantList {
+    const char* name; // 0x00
+    double* value;    // 0x04
+} CHANSVmFloatConstantList;
+
+typedef struct CHANSVmBlobPackFormatList {
+    u32 charCode; // 0x00
+    u32 size;     // 0x04
+    u32 type;     // 0x08
+    u32 flags;    // 0x0C
+} CHANSVmBlobPackFormatList;
+
 typedef struct CHANSVmMethodList {
     const char* name;        // 0x00
     CHANSVmFunction method;  // 0x04
