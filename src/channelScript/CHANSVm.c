@@ -1549,8 +1549,8 @@ CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const char* clsName, CHAN
 
 vmU32 CHANSVmAddNativeMethodName(CHANSVm* vm, const char* methodName, vmSize nameLength) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
-    NameListNode* listPtr;
-    NameListNode* allocPtr;
+    MethodListNode* listPtr;
+    MethodListNode* allocPtr;
     u32 allocSize;
     vmU32 index = 1;
 
@@ -1560,7 +1560,7 @@ vmU32 CHANSVmAddNativeMethodName(CHANSVm* vm, const char* methodName, vmSize nam
 
     listPtr = pVm->pMethodNameList;
     if (listPtr == NULL) {
-        listPtr = (NameListNode*)&pVm->pMethodNameList;
+        listPtr = (MethodListNode*)&pVm->pMethodNameList;
     }
     else {
         while (vmTrue) {
@@ -1582,8 +1582,8 @@ vmU32 CHANSVmAddNativeMethodName(CHANSVm* vm, const char* methodName, vmSize nam
         }
     }
 
-    allocSize = VM_ALIGN(nameLength + sizeof(NameListNode));
-    allocPtr = (NameListNode*)CHANSVmAlloc(vm, allocSize);
+    allocSize = VM_ALIGN(nameLength + sizeof(MethodListNode));
+    allocPtr = (MethodListNode*)CHANSVmAlloc(vm, allocSize);
     listPtr->next = allocPtr;
     if (allocPtr != NULL) {
         allocPtr->nameLength = nameLength;
