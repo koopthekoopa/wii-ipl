@@ -1,4 +1,5 @@
 #include "scene/kitayamaTest/iplKitayamaTest.h"
+#include "scene/kitayamaTest/iplNandSDWorker_AutoTest.h"
 
 #include "scene/iplSceneCreator.h"
 #include "scene/setting/iplSetting.h"
@@ -8,34 +9,14 @@
 #include "iplSystem.h"
 #include "utility/iplGraphics.h"
 
-#include "system/iplSaveBanner.h"
-
-namespace ipl {
-    namespace kitayama {
-        class NandSDWorker_AutoTest {
-        public:
-            NandSDWorker_AutoTest();
-            ~NandSDWorker_AutoTest();
-            void start_save_test(void*, void*, int);
-            void start_initialize_nand(void*, int);
-            void start_app_test(void*, void*, int);
-            int process();
-            int get_result();
-
-        private:
-            u8 unk_0x00[0x289C0];
-        };
-    }  // namespace kitayama
-}  // namespace ipl
-
 namespace ipl {
     namespace scene {
-        KitayamaTest::KitayamaTest(EGG::Heap* heap, int unk) : FaderSceneBase(heap) {
-            unk_0x58 = heap;
-            unk_0x5C = unk;
-            unk_0x68 = 0;
-            unk_0x6C = 0;
-            unk_0x60 = 0;
+        KitayamaTest::KitayamaTest(EGG::Heap* heap, int opt) : FaderSceneBase(heap) {
+            pHeap = heap;
+            mOption = (KitayamaTestOpt)opt;
+            pWorkerWork = NULL;
+            pWorkerCacheBuf = NULL;
+            mState = KITAYAMA_STATE_IDLE;
         }
 
         KitayamaTest::~KitayamaTest() {
@@ -47,33 +28,33 @@ namespace ipl {
         void KitayamaTest::create() {
             OSReport("Kitayamatest scene created.\n");
 
-            unk_0x64 = new (unk_0x58, 4) kitayama::NandSDWorker_AutoTest;
+            pAutoTest = new (pHeap, 4) kitayama::NandSDWorker_AutoTest;
 
-            switch (unk_0x5C) {
-                case 0: {
-                    unk_0x60 = 1;
+            switch (mOption) {
+                case KITAYAMA_OPT_CHOOSE: {
+                    mState = KITAYAMA_STATE_CHOOSE_PROCESS;
                     break;
                 }
-                case 1: {
-                    unk_0x60 = 2;
+                case KITAYAMA_OPT_TESTS: {
+                    mState = KITAYAMA_STATE_SETUP_FOR_TESTS;
                     break;
                 }
-                case 2: {
-                    unk_0x60 = 7;
+                case KITAYAMA_OPT_INIT_NAND: {
+                    mState = KITAYAMA_STATE_SETUP_FOR_NAND_INIT;
                     break;
                 }
             }
         }
 
         void KitayamaTest::destroy() {
-            delete unk_0x64;
+            delete pAutoTest;
 
-            if (unk_0x68 != 0) {
-                System::getMem2App()->free((void*)unk_0x68);
+            if (pWorkerWork != NULL) {
+                System::getMem2App()->free(pWorkerWork);
             }
 
-            if (unk_0x6C != 0) {
-                System::getMem2App()->free((void*)unk_0x6C);
+            if (pWorkerCacheBuf != NULL) {
+                System::getMem2App()->free(pWorkerCacheBuf);
             }
 
             OSReport("Kitayamatest scene destroyed.\n");
@@ -86,147 +67,153 @@ namespace ipl {
             FaderSceneCommand command = FADER_SCN_CONTINUE;
             controller::Interface* controller = System::getMasterController();
 
-            switch (unk_0x60) {
-                case 1: {
+            switch (mState) {
+                case KITAYAMA_STATE_CHOOSE_PROCESS: {
                     if (controller->downTrg(controller::REVO_BTN_A)) {
-                        unk_0x60 = 2;
+                        mState = KITAYAMA_STATE_SETUP_FOR_TESTS;
                     } else if (controller->downTrg(controller::REVO_BTN_B)) {
-                        unk_0x60 = 7;
+                        mState = KITAYAMA_STATE_SETUP_FOR_NAND_INIT;
                     }
                     break;
                 }
-                case 2: {
+
+                case KITAYAMA_STATE_SETUP_FOR_TESTS: {
                     s32 result;
                     NANDFileInfo bannerInfo;
                     NANDFileInfo testInfo;
-                    u8* buffer;
+                    WIISaveBannerFile* buffer;
 
-                    ES_SetUid((ESTitleId)0x0001000030303030ULL);
+                    ES_SetUid(0x0001000030303030ULL);
                     ISFS_CloseLib();
                     ISFS_OpenLib();
 
                     nand::wrapper::Delete("/title/00010000/30303030/data/banner.bin");
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/banner.bin", NAND_PERM_ALL_RW, 0);
-                    if (result == 0) {
-                        result = nand::wrapper::Open("/title/00010000/30303030/data/banner.bin", &bannerInfo, NAND_ACCESS_WRITE);
-                        if (result != 0) {
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/banner.bin", 0x3F, 0);
+                    if (result == NAND_RESULT_OK) {
+                        result = nand::wrapper::Open("/title/00010000/30303030/data/banner.bin", &bannerInfo, 2);
+                        if (result != NAND_RESULT_OK) {
                             OSReport(" NANDOpen failed: %d\n", result);
-                            OSHalt("Terminated.\n", 173);
+                            OSPanic("iplKitayamaTest.cpp", 0xAD, "Terminated.\n");
                         }
 
-                        buffer = (u8*)unk_0x58->alloc(sizeof(WIISaveBannerFile), 32);
+                        buffer = (WIISaveBannerFile*)pHeap->alloc(sizeof(WIISaveBannerFile), 0x20);
                         memset(buffer, 0x55, sizeof(WIISaveBannerFile));
-                        ((u32*)buffer)[0] = 'WBIN';
-                        ((u32*)buffer)[1] = 0;
+                        buffer->signature = 'WIBN';
+                        buffer->flags = 0;
 
-                        u32 read = nand::wrapper::Write(&bannerInfo, buffer, sizeof(WIISaveBannerFile));
-                        if (read != sizeof(WIISaveBannerFile)) {
-                            OSReport(" NANDWrite failed: %d\n", read);
-                            OSHalt("Terminated.\n", 184);
+                        result = nand::wrapper::Write(&bannerInfo, buffer, sizeof(WIISaveBannerFile));
+                        if ((u32)result != sizeof(WIISaveBannerFile)) {
+                            OSReport(" NANDWrite failed: %d\n", result);
+                            OSPanic("iplKitayamaTest.cpp", 0xB8, "Terminated.\n");
                         }
 
                         result = nand::wrapper::Close(&bannerInfo);
                         if (result != NAND_RESULT_OK) {
                             OSReport(" NANDClose failed: %d\n", result);
-                            OSHalt("Terminated.\n", 190);
+                            OSPanic("iplKitayamaTest.cpp", 0xBE, "Terminated.\n");
                         }
 
-                        unk_0x58->free(buffer);
+                        pHeap->free(buffer);
                     } else if (result == NAND_RESULT_EXISTS) {
                         OSReport("banner.bin already exist.\n");
                     } else {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSHalt("Terminated.\n", 198);
+                        OSPanic("iplKitayamaTest.cpp", 0xC6, "Terminated.\n");
                     }
 
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/test1.bin", NAND_PERM_ALL_RW, 0);
-                    if (result == 0) {
-                        result = nand::wrapper::Open("/title/00010000/30303030/data/test1.bin", &testInfo, NAND_ACCESS_WRITE);
-                        if (result != 0) {
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/test1.bin", 0x3F, 0);
+                    if (result == NAND_RESULT_OK) {
+                        result = nand::wrapper::Open("/title/00010000/30303030/data/test1.bin", &testInfo, 2);
+                        if (result != NAND_RESULT_OK) {
                             OSReport(" NANDOpen failed: %d\n", result);
-                            OSHalt("Terminated.\n", 213);
+                            OSPanic("iplKitayamaTest.cpp", 0xD5, "Terminated.\n");
                         }
 
-                        buffer = (u8*)unk_0x58->alloc(sizeof(WIISaveBannerFile), 32);
+                        buffer = (WIISaveBannerFile*)pHeap->alloc(sizeof(WIISaveBannerFile), 0x20);
                         memset(buffer, 0x55, sizeof(WIISaveBannerFile));
-                        ((u32*)buffer)[0] = 'WBIN';
-                        ((u32*)buffer)[1] = 0;
+                        buffer->signature = 'WIBN';
+                        buffer->flags = 0;
 
-                        u32 read = nand::wrapper::Write(&testInfo, buffer, sizeof(WIISaveBannerFile));
-                        if (read != sizeof(WIISaveBannerFile)) {
-                            OSReport(" NANDWrite failed: %d\n", read);
-                            OSHalt("Terminated.\n", 224);
+                        result = nand::wrapper::Write(&testInfo, buffer, sizeof(WIISaveBannerFile));
+                        if ((u32)result != sizeof(WIISaveBannerFile)) {
+                            OSReport(" NANDWrite failed: %d\n", result);
+                            OSPanic("iplKitayamaTest.cpp", 0xE0, "Terminated.\n");
                         }
 
                         result = nand::wrapper::Close(&testInfo);
-                        if (result != 0) {
+                        if (result != NAND_RESULT_OK) {
                             OSReport(" NANDClose failed: %d\n", result);
-                            OSHalt("Terminated.\n", 230);
+                            OSPanic("iplKitayamaTest.cpp", 0xE6, "Terminated.\n");
                         }
 
-                        unk_0x58->free(buffer);
+                        pHeap->free(buffer);
                     } else if (result == NAND_RESULT_EXISTS) {
                         OSReport("test1.bin already exist.\n");
                     } else {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSHalt("Terminated.\n", 238);
+                        OSPanic("iplKitayamaTest.cpp", 0xEE, "Terminated.\n");
                     }
 
-                    result = nand::wrapper::CreateDir("/title/00010000/30303030/data/nocopy", NAND_PERM_ALL_RW, 0);
-                    if (result != 0 && result != NAND_RESULT_EXISTS) {
+                    result = nand::wrapper::CreateDir("/title/00010000/30303030/data/nocopy", 0x3F, 0);
+                    if (result != NAND_RESULT_OK && result != NAND_RESULT_EXISTS) {
                         OSReport(" NANDCreateDir failed: %d\n", result);
-                        OSHalt("Terminated.\n", 248);
+                        OSPanic("iplKitayamaTest.cpp", 0xF8, "Terminated.\n");
                     }
 
-                    result = nand::wrapper::Create("/title/00010000/30303030/data/nocopy/test1.txt", NAND_PERM_ALL_RW, 0);
-                    if (result != 0 && result != NAND_RESULT_EXISTS) {
+                    result = nand::wrapper::Create("/title/00010000/30303030/data/nocopy/test1.txt", 0x3F, 0);
+                    if (result != NAND_RESULT_OK && result != NAND_RESULT_EXISTS) {
                         OSReport(" NANDCreate failed: %d\n", result);
-                        OSHalt("Terminated.\n", 254);
+                        OSPanic("iplKitayamaTest.cpp", 0xFE, "Terminated.\n");
                     }
 
                     ES_SetUid(SYSMENU_TITLE_ID);
                     ISFS_CloseLib();
                     ISFS_OpenLib();
 
-                    unk_0x68 = (u32)System::getMem2App()->alloc(0x3EA60, 0x40);
-                    result = MEMCalcHeapSizeForUnitHeap(0x19620, 0x60, 0x20);
-                    unk_0x6C = (u32)System::getMem2App()->alloc(result + 0x40000, 0x20);
-                    unk_0x60 = 3;
+                    pWorkerWork = System::getMem2App()->alloc(NandSDWorker::workerWorkSize(), 0x40);
+                    pWorkerCacheBuf = System::getMem2App()->alloc(NandSDWorker::heapSizeForAppWorker(), 0x20);
+                    mState = KITAYAMA_STATE_DO_SAVE_TEST;
                     break;
                 }
-                case 3: {
-                    unk_0x64->start_save_test((void*)unk_0x68, (void*)unk_0x6C, 0x18);
-                    unk_0x60 = 4;
+
+                case KITAYAMA_STATE_DO_SAVE_TEST: {
+                    pAutoTest->start_save_test(pWorkerWork, pWorkerCacheBuf, 0x18);
+                    mState = KITAYAMA_STATE_WAIT_SAVE_TEST_DONE;
                     break;
                 }
-                case 4: {
-                    if (unk_0x64->process() == 0x51) {
-                        unk_0x60 = 12;
-                    } else if (unk_0x64->process() == 0x52) {
-                        unk_0x60 = 5;
+
+                case KITAYAMA_STATE_WAIT_SAVE_TEST_DONE: {
+                    if (pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_ERR) {
+                        mState = KITAYAMA_STATE_DONE_ERR;
+                    } else if (pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_OK) {
+                        mState = KITAYAMA_STATE_DO_APP_TEST;
                     }
                     break;
                 }
-                case 5: {
-                    unk_0x64->start_app_test((void*)unk_0x68, (void*)unk_0x6C, 0x18);
-                    unk_0x60 = 6;
+
+                case KITAYAMA_STATE_DO_APP_TEST: {
+                    pAutoTest->start_app_test(pWorkerWork, pWorkerCacheBuf, 0x18);
+                    mState = KITAYAMA_STATE_WAIT_APP_TEST_DONE;
                     break;
                 }
-                case 6: {
-                    if (unk_0x64->process() == 0x51) {
-                        unk_0x60 = 12;
-                    } else if (unk_0x64->process() == 0x52) {
-                        unk_0x60 = 11;
+
+                case KITAYAMA_STATE_WAIT_APP_TEST_DONE: {
+                    if (pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_ERR) {
+                        mState = KITAYAMA_STATE_DONE_ERR;
+                    } else if (pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_OK) {
+                        mState = KITAYAMA_STATE_DONE_OK;
                     }
                     break;
                 }
-                case 7: {
+
+                case KITAYAMA_STATE_SETUP_FOR_NAND_INIT: {
                     System::stopReceiveSchedule();
-                    unk_0x68 = (u32)System::getMem2App()->alloc(0x3EA60, 0x40);
-                    unk_0x60 = 8;
+                    pWorkerWork = System::getMem2App()->alloc(NandSDWorker::workerWorkSize(), 0x40);
+                    mState = KITAYAMA_STATE_DO_NAND_INIT;
                     break;
                 }
-                case 8: {
+
+                case KITAYAMA_STATE_DO_NAND_INIT: {
                     if (System::isReceiveScheduleStopped()) {
                         System::getNandManager()->closeContentsAll();
 
@@ -237,36 +224,40 @@ namespace ipl {
                         s32 result = CDBUninit();
                         OSReport("CDBERR: %d\n", result);
                         __OSStopPlayRecord();
-                        unk_0x64->start_initialize_nand((void*)unk_0x68, 0x13);
-                        unk_0x60 = 9;
+                        pAutoTest->start_initialize_nand(pWorkerWork, 0x13);
+                        mState = KITAYAMA_STATE_WAIT_NAND_INIT_DONE;
                     } else {
                         OSReport("Wait for stop schedule...\n");
                     }
                     break;
                 }
-                case 9: {
-                    if (unk_0x64->process() == 0x51 || unk_0x64->process() == 0x52) {
-                        unk_0x60 = 10;
+
+                case KITAYAMA_STATE_WAIT_NAND_INIT_DONE: {
+                    if (pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_ERR ||
+                        pAutoTest->process() == kitayama::NandSDWorker_AutoTest::PROCESS_STATE_DONE_OK) {
+                        mState = KITAYAMA_STATE_HANDLE_NAND_INIT_RESULT;
                     }
                     break;
                 }
-                case 10: {
-                    int result = unk_0x64->get_result();
+
+                case KITAYAMA_STATE_HANDLE_NAND_INIT_RESULT: {
+                    int result = pAutoTest->get_result();
                     System::getNandManager()->openContentsAll();
 
-                    if (unk_0x5C != 0) {
+                    if (mOption != KITAYAMA_OPT_CHOOSE) {
                         static_cast<Setting*>(System::getSceneManager()->getScene(SCENE_SETTING))->setInitializeResult(true, result);
-                        unk_0x60 = 11;
+                        mState = KITAYAMA_STATE_DONE_OK;
                         command = FADER_SCN_NEXT;
                     } else if (result == 0) {
-                        unk_0x60 = 11;
+                        mState = KITAYAMA_STATE_DONE_OK;
                     } else {
-                        unk_0x60 = 12;
+                        mState = KITAYAMA_STATE_DONE_ERR;
                     }
                     break;
                 }
-                case 11:
-                case 12: {
+
+                case KITAYAMA_STATE_DONE_OK:
+                case KITAYAMA_STATE_DONE_ERR: {
                     if (controller->downTrg(controller::REVO_BTN_1)) {
                         System::getFader()->fadeOut();
                         reserveAllSceneDestruction(SCENE_BOARD, NULL);
@@ -282,7 +273,7 @@ namespace ipl {
         }
 
         FaderSceneCommand KitayamaTest::calcFadeout() {
-            if (unk_0x5C == 2) {
+            if (mOption == KITAYAMA_OPT_INIT_NAND) {
                 return FADER_SCN_NEXT;
             }
 

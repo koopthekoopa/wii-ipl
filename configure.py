@@ -783,8 +783,8 @@ config.libs = [
         ]
     ),
     IPLSection("kitayamaTest", [
-            Object(NonMatching, "scene/kitayamaTest/iplKitayamaTest.cpp"),
-            Object(NonMatching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
+            Object(Equivalent, "scene/kitayamaTest/iplKitayamaTest.cpp"),
+            Object(Matching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
         ]
     ),
     IPLSection("letterWriter", [
