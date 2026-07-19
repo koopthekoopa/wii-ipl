@@ -74,6 +74,18 @@ namespace ipl {
             }
         }
 
+        int Base::getType() const {
+            return mType;
+        }
+
+        int Base::getChannel() const {
+            return mChan;
+        }
+
+        bool Base::setForceInvalid(bool flag) {
+            unk_0x1C = flag;
+        }
+
         bool Interface::isValidBtn() const {
             return false;
         }
@@ -87,6 +99,18 @@ namespace ipl {
         }
 
         int Interface::down(u32 mButton) const {
+            return 0;
+        }
+
+        int Interface::getClassicHoldFlag() const {
+            return 0;
+        }
+
+        int Interface::getClassicTrigFlag() const {
+            return 0;
+        }
+
+        int Interface::getClassicReleaseFlag() const {
             return 0;
         }
 
@@ -244,8 +268,28 @@ namespace ipl {
             Revolution::read();
         }
 
+        bool Classic::isValidDpd() const {
+            if (unk_0x1C != 0) {
+              return false;
+            }
+
+            return (Revolution::isValidDpd() != 0) || (unk_0x2C != 0);
+        }
+
+        BOOL Classic::isValidDpdClassic() const {
+            return unk_0x2C != 0;
+        }
+
         int Classic::getClassicHoldFlag() const {
             return unk_0x20->ex_status.cl.hold;
+        }
+
+        int Classic::getClassicTrigFlag() const {
+            return unk_0x20->ex_status.cl.trig;
+        }
+
+        int Classic::getClassicReleaseFlag() const {
+            return unk_0x20->ex_status.cl.release;
         }
 
         math::VEC2 Classic::getHorizon() const {
