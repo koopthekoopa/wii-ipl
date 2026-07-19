@@ -899,10 +899,10 @@ config.libs = [
         ]
     ),
     IPLSection("bannerSound", [
-            Object(NonMatching, "bannerSound/AudioWavePlayer.cpp"),
-            Object(NonMatching, "bannerSound/AxAdpcmPlayer.cpp"),
-            Object(NonMatching, "bannerSound/BannerSoundPlayer.cpp"),
-            Object(NonMatching, "bannerSound/AudioWaveUtility.cpp"),
+            Object(Equivalent, "bannerSound/AudioWavePlayer.cpp"),
+            Object(Equivalent, "bannerSound/AxAdpcmPlayer.cpp"),
+            Object(Matching, "bannerSound/BannerSoundPlayer.cpp"),
+            Object(Matching, "bannerSound/AudioWaveUtility.cpp"),
         ]
     ),
     # it decides to do fast optimization for this one
