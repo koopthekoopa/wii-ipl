@@ -13,6 +13,9 @@
 #include <private/sc.h>
 #include <revolution.h>
 #include <revolution/net/NETMisc.h>
+
+extern const double lbl_81694F28 = 0.0;
+extern const double lbl_81694FB8 = 4294967294.0;
 #include <revolution/net/NETDigest.h>
 
 // TODO: Not yet in the SDK
@@ -176,16 +179,16 @@ CHANSVmObjHdr* CHANSVmNewObjHdr(CHANSVm* vm, vmBoolInt noAlloc) {
 
 vmPtr CHANSVmAlloc(CHANSVm* vm, vmSize size) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    vmPtr result = NULL;
 
-    vmU8* ptr;
-    vmU8* allocBuf = vmNull;
+    if (size != 0 && (size & 0x1F) == 0) {
 
-    if (size != 0 && VM_ALIGNED(size)) {
-        allocBuf = CHANSVmAllocFromGarbage(vm, size);
-        if (allocBuf == vmNull) {
-            ptr = pVm->pFreeExeBuf;
+        result = CHANSVmAllocFromGarbage(vm, size);
+
+        if (result == NULL) {
+            vmU8* ptr = pVm->pFreeExeBuf;
             if ((vmU32)pVm->pObjStackTopBuf - (vmU32)ptr >= size) {
-                allocBuf = ptr;
+                result = ptr;
                 pVm->pFreeExeBuf = ptr + size;
 
                 CHANSVmUpdateSmallestFreeHeapSize(vm);
@@ -194,7 +197,7 @@ vmPtr CHANSVmAlloc(CHANSVm* vm, vmSize size) {
         }
     }
 
-    return allocBuf;
+    return result;
 }
 
 void CHANSVmFree(CHANSVm* vm, vmPtr ptr, vmSize size) NO_INLINE {
@@ -466,11 +469,12 @@ error:
 
 CHANSVmErr CHANSVmPopObject(CHANSVm* vm, CHANSVmObjHdr* object) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
-    CHANSVmObjHdr* stackTop = (CHANSVmObjHdr*)pVm->pObjStackTopBuf;
+    CHANSVmObjHdr* nextUnk;
     CHANSVmErr err = CHANS_VM_ERR_POP_OBJECT;
+    CHANSVmObjHdr* stackTop = (CHANSVmObjHdr*)pVm->pObjStackTopBuf;
 
     if (pVm->pActiveCtx->stackDepth != 0) {
-        CHANSVmObjHdr* nextUnk = (CHANSVmObjHdr*)((vmU8*)stackTop + sizeof(CHANSVmObjHdr));
+        nextUnk = (CHANSVmObjHdr*)((vmU8*)stackTop + sizeof(CHANSVmObjHdr));
         if (nextUnk <= pVm->pHeapEnd) {
             err = CHANS_VM_OK;
 
@@ -498,17 +502,16 @@ CHANSVmErr CHANSVmPopObject(CHANSVm* vm, CHANSVmObjHdr* object) {
 }
 
 void CHANSVmStrCpyToU16FromU8(vmWString output, vmString input, vmSize length) {
-    u8* destPtr;
-    vmSize i;
+    u8* src = (u8*)input + length;
+    u32 offset = VM_STR_LENGTH(length);
 
-    u8* srcPtr = (u8*)input + length;
-    s32 offset = VM_STR_LENGTH(length);
-
-    for (i = length; i != 0; i--) {
+    while (length > 0) {
+        u8 val;
         offset -= 2;
-        destPtr = (u8*)output + offset;
-        destPtr[1] = *--srcPtr;
-        destPtr[0] = 0;
+        val = *--src;
+        ((u8*)output)[offset + 1] = val;
+        ((u8*)output)[offset] = 0;
+        length--;
     }
 }
 
@@ -580,14 +583,15 @@ vmFloat VmIntToFloat(vmU64 integer) {
 }
 
 static s32 CHANSVmParseInt(CHANSVmObjHdr* obj, s32 base, u64* out) {
-    char buf[0x40];
-    char* endPtr;
+    u8 type = obj->type;
     u32 stringLength;
     u32 charCount;
     u64 number;
+    char buf[0x40];
+    char* endPtr;
 
     endPtr = NULL;
-    if (obj->type == CHANS_VM_OBJ_TYPE_STRING) {
+    if (type == CHANS_VM_OBJ_TYPE_STRING) {
         stringLength = obj->value.wstring_v->len;
 
         if (stringLength != 0 && stringLength <= 0x80) {
@@ -634,7 +638,7 @@ CHANSVmObjHdr* CHANSVmConvertToIntFromArray(CHANSVm* vm, CHANSVmObjType type, CH
     return NULL;
 }
 
-CHANSVmObjHdr* CHANSVm_8144B430(CHANSVm* vm) {
+CHANSVmObjHdr* CHANSVm_8144B430(CHANSVm* vm, CHANSVmObjType type, CHANSVmObjHdr* object) {
     CHANSVmObjHdr* result = CHANSVmNewObject(vm, vmFalse, NULL, CHANS_VM_OBJ_TYPE_FLOAT, 0);
     if (result != NULL) {
         result->value.float_v = VM_NAN;
@@ -642,7 +646,7 @@ CHANSVmObjHdr* CHANSVm_8144B430(CHANSVm* vm) {
     return result;
 }
 
-CHANSVmObjHdr* CHANSVm_8144B470(CHANSVm* vm, CHANSVmObjHdr* unused, CHANSVmObjHdr* intObj) {
+CHANSVmObjHdr* CHANSVm_8144B470(CHANSVm* vm, CHANSVmObjType type, CHANSVmObjHdr* intObj) {
     CHANSVmObjHdr* result = CHANSVmNewObject(vm, vmFalse, NULL, CHANS_VM_OBJ_TYPE_FLOAT, 0);
     if (result != NULL) {
         result->value.float_v = VmIntToFloat(intObj->value.int_v);
@@ -700,15 +704,16 @@ CHANSVmObjHdr* CHANSVm_8144B4D4(CHANSVm* vm, CHANSVmObjType type, CHANSVmObjHdr*
     // Convert string keyword into float value
     CHANSVmObjHdr* newObj;
     u32 charCount;
-    u32 endPtr;
+    volatile u32 endPtr;
     double result;
     vmBool r;
 
     newObj = CHANSVmNewObject(vm, vmFalse, NULL, CHANS_VM_OBJ_TYPE_FLOAT, 0);
     if (newObj != NULL) {
+        u32 inType = object->type;
         endPtr = 0;
 
-        if (object->type == CHANS_VM_OBJ_TYPE_STRING) {
+        if (inType == CHANS_VM_OBJ_TYPE_STRING) {
             u32 stringLength = object->value.wstring_v->len;
             if (stringLength != 0 && stringLength <= 0x80) {
                 u8 buf[0x40];
@@ -761,7 +766,7 @@ exit:
     return newObj;
 }
 
-CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, int type, CHANSVmObjHdr* object) {
+CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, CHANSVmObjType type, CHANSVmObjHdr* object) {
     return (CHANSVmObjHdr*)CHANSVmConstStringObjectUndefined_;
 }
 
@@ -793,25 +798,25 @@ error:
     return vmNull;
 }
 
-CHANSVmObjHdr* CHANSVm_8144B734(CHANSVm* vm, CHANSVmObjHdr* unused, double* value) {
+CHANSVmObjHdr* CHANSVm_8144B734(CHANSVm* vm, CHANSVmObjType type, CHANSVmObjHdr* value) {
     const CHANSVmObjHdr* base;
     CHANSVmObjHdr* newObj;
     s32 result;
 
     base = &CHANSVmConstStringObjectUndefined; // .rodata@0x0
-    if (VmIsNan(*value)) {
+    if (VmIsNan(*(double*)value)) {
         return (CHANSVmObjHdr*) &base[7]; // .rodata@0x70
     }
-    if (*value == VM_INF) {
+    if (*(double*)value == VM_INF) {
         return (CHANSVmObjHdr*) &base[8]; // .rodata@0x80
     }
-    if (*value == VM_NEG_INF) {
+    if (*(double*)value == VM_NEG_INF) {
         return (CHANSVmObjHdr*) &base[9]; // .rodata@0x90
     }
 
     newObj = CHANSVmNewObject(vm, vmFalse, NULL, CHANS_VM_OBJ_TYPE_STRING, 0x80);
     if (newObj != NULL) {
-        result = CHANSVm_8144B62C(newObj->value.wstring_v->str, 0x80, *value);
+        result = CHANSVm_8144B62C(newObj->value.wstring_v->str, 0x80, *(double*)value);
         newObj->value.wstring_v->len = result;
         if (newObj->value.wstring_v->len == 0) {
             goto error;
@@ -836,31 +841,30 @@ CHANSVmObjHdr* CHANSVmConvertObjectTypeError(CHANSVm* vm, CHANSVmObjType type, C
 vmBoolInt CHANSVmGetEnumedType(CHANSVmObjType* eType, vmU32 iType) NO_INLINE {
     CHANSVmObjType type;
     switch (iType) {
-        case 0: {
-            type = CHANS_VM_OBJ_TYPE_BLANK;
+        case CHANS_VM_OBJ_TYPE_BLANK: {
+            type = 0;
             break;
         }
-        case 1: {
-            type = CHANS_VM_OBJ_TYPE_INTEGER;
+        case CHANS_VM_OBJ_TYPE_INTEGER: {
+            type = 1;
             break;
         }
-        case 2: {
-            type = CHANS_VM_OBJ_TYPE_FLOAT;
+        case CHANS_VM_OBJ_TYPE_FLOAT: {
+            type = 2;
             break;
         }
-        case 3: {
-            type = CHANS_VM_OBJ_TYPE_STRING;
+        case CHANS_VM_OBJ_TYPE_STRING: {
+            type = 3;
             break;
         }
-        case 4: {
-            type = CHANS_VM_TYPE_ARRAY;
+        case CHANS_VM_TYPE_ARRAY: {
+            type = 4;
             break;
         }
-        case 6:
-        case 7:
-        case 8:
-        case 9: {
-            type = CHANS_VM_TYPE_INDEX_REF;
+        case CHANS_VM_TYPE_GLOBAL_REF:
+        case CHANS_VM_TYPE_CLASS_REF:
+        case CHANS_VM_TYPE_METHOD_REF: {
+            type = 5;
             break;
         }
         default: {
@@ -878,22 +882,70 @@ vmBoolInt CHANSVmGetEnumedType(CHANSVmObjType* eType, vmU32 iType) NO_INLINE {
 
 char lbl_81669128[] = "VmGetResultType";
 
-// TODO: this needs to be split into two fields
-const u32 VmTypeConvertFuncTbl[] = {
-    (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError,
-    (u32)CHANSVm_8144B30C, (u32)CHANSVmConvertToIntFromStr, (u32)CHANSVmConvertToIntFromArray, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVm_8144B430, (u32)CHANSVm_8144B470,
-    (u32)CHANSVm_8144B4D4, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertToStrFromUndefined, (u32)CHANSVmConvertToStrFromInt, (u32)CHANSVm_8144B734,
-    (u32)CHANSVmConvertToStrFromArray, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError,
-    (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError, (u32)CHANSVmConvertObjectTypeError,
-    0x00020203, 0x00000201, 0x02030300, 0x02020203, 0x03000303, 0x03030300,
-    0x00030303, 0x03000000, 0x00000000, 0x00020202, 0x00000201, 0x02020000,
-    0x02020000, 0x02020202, 0x00000202, 0x02020000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000001, 0x02020000, 0x00020202, 0x00000002,
-    0x02030300, 0x00000003, 0x03000000, 0x00000000, 0x00000000, 0x00000001,
-    0x02020000, 0x00020202, 0x00000002, 0x02030300, 0x00000003, 0x04000000,
-    0x01010000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00010101, 0x00000101, 0x01010000, 0x01010101, 0x00000101, 0x01010000,
-    0x00000101, 0x01010000, 0x00000000,
+const VmConvertEntry VmTypeConvertFuncTbl[] = {
+    {  CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
+    { CHANSVm_8144B30C, CHANSVmConvertToIntFromStr, CHANSVmConvertToIntFromArray, CHANSVmConvertObjectTypeError, CHANSVm_8144B430, CHANSVm_8144B470},
+    { CHANSVm_8144B4D4, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertToStrFromUndefined, CHANSVmConvertToStrFromInt, CHANSVm_8144B734 },
+    { CHANSVmConvertToStrFromArray, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
+    { CHANSVmConvertObjectTypeError,  CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError },
+    { CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError, CHANSVmConvertObjectTypeError }
+};
+
+// Each table is a 6x6 u8 matrix indexed [left_enumed][right_enumed].
+// left/right are CHANSVmObjType mapped to 0-5 by CHANSVmGetEnumedType.
+// The table value determines to the type of the result of an operation with two operands.
+typedef u8 VmResultTypeMatrix[6][6];
+
+typedef struct {
+    VmResultTypeMatrix add;     // 0x00
+    VmResultTypeMatrix arith;   // 0x24
+    VmResultTypeMatrix cmp;     // 0x48
+    VmResultTypeMatrix eq;      // 0x6C
+    VmResultTypeMatrix bitShift;// 0x90
+} VmResultTypeData;
+
+// TODO: this field is still merged with VmTypeConvertFuncTbl in symbols.txt, update it
+const VmResultTypeData VmResultTypeTbl = {
+    /* add[6][6] = */ {
+        0x00,0x02,0x02, 0x03,0x00,0x00,
+        0x02,0x01,0x02, 0x03,0x03,0x00,
+        0x02,0x02,0x02, 0x03,0x03,0x00,
+        0x03,0x03,0x03, 0x03,0x03,0x00,
+        0x00,0x03,0x03, 0x03,0x03,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+    },
+    /* arith[6][6] = */ {
+        0x00,0x02,0x02, 0x02,0x00,0x00,
+        0x02,0x01,0x02, 0x02,0x00,0x00,
+        0x02,0x02,0x02, 0x02,0x00,0x00,
+        0x02,0x02,0x02, 0x02,0x00,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+    },
+    /* cmp[6][6] = */ {
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+        0x00,0x01,0x02, 0x02,0x00,0x00,
+        0x00,0x02,0x02, 0x02,0x00,0x00,
+        0x00,0x02,0x02, 0x03,0x03,0x00,
+        0x00,0x00,0x00, 0x03,0x03,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+    },
+    /* eq[6][6] = */ {
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+        0x00,0x01,0x02, 0x02,0x00,0x00,
+        0x00,0x02,0x02, 0x02,0x00,0x00,
+        0x00,0x02,0x02, 0x03,0x03,0x00,
+        0x00,0x00,0x00, 0x03,0x04,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+    },
+    /* bitShift[6][6] = */ {
+        0x00,0x01,0x01, 0x01,0x00,0x00,
+        0x01,0x01,0x01, 0x01,0x00,0x00,
+        0x01,0x01,0x01, 0x01,0x00,0x00,
+        0x01,0x01,0x01, 0x01,0x00,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+        0x00,0x00,0x00, 0x00,0x00,0x00,
+    },
 };
 
 CHANSVmObjHdr* CHANSVmConvertObjectType(CHANSVm* vm, vmU32 type, CHANSVmObjHdr* object) {
@@ -1433,7 +1485,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_SET_FLOAT",                         /* -976 */
     "CHANS_VM_ERR_ADD",                               /* -975 */
     "CHANS_VM_ERR_SUB",                               /* -974 */
-    "CHANS_VM_ERR_MU",                               /* -973 */
+    "CHANS_VM_ERR_MUL",                               /* -973 */
     "CHANS_VM_ERR_DIV",                               /* -972 */
     "CHANS_VM_ERR_MOD",                               /* -971 */
     "CHANS_VM_ERR_ULSHIFT",                           /* -970 */
@@ -1450,7 +1502,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_RETURN",                            /* -959 */
     "CHANS_VM_ERR_STRCAT",                            /* -958 */
     "CHANS_VM_ERR_SET_OBJECT_NATIVE_CLASS",           /* -957 */
-    "CHANS_VM_ERR_RESOLVE_NATIVE_METHOD_CAL",        /* -956 */
+    "CHANS_VM_ERR_RESOLVE_NATIVE_METHOD_CALL",        /* -956 */
     "CHANS_VM_ERR_RESOLVE_GLOBAL_OBJECT_REFERENCE",   /* -955 */
     "CHANS_VM_ERR_NEW",                               /* -954 */
     "CHANS_VM_ERR_ADD_NATIVE_PROPERTY",               /* -953 */
@@ -1462,7 +1514,7 @@ const char* vmErrorList[] = {
     "CHANS_VM_ERR_CALL_METHOD",                       /* -947 */
     "CHANS_VM_ERR_STORE_INDIRECT",                    /* -946 */
     "CHANS_VM_ERR_LOAD_STRING_CONST",                 /* -945 */
-    "CHANS_VM_ERR_SIGNA",                            /* -944 */
+    "CHANS_VM_ERR_SIGNAL",                            /* -944 */
     "CHANS_VM_ERR_STORE_READONLY",                    /* -943 */
     "CHANS_VM_ERR_SET_INDEX",                         /* -942 */
     "CHANS_VM_ERR_GET_PROPERTY_NAME",                 /* -941 */
@@ -2559,24 +2611,26 @@ const char* VmDateDayTbl[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 const char* VmDateMonthTbl[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 VmDtorDefine(Date) {
-    OSCalendarTime date;
     char buffer[32];
     unsigned int uv;
+    OSCalendarTime date;
+    OSCalendarTime* datePtr;
 
-    memset(&date, 0, sizeof(OSCalendarTime));
+    datePtr = &date;
+    memset(datePtr, 0, sizeof(OSCalendarTime));
 
-    if (VmDateCommon(VmInst, &date) &&
-        RANGE(date.sec, 0, 61) &&
-        RANGE(date.min, 0, 59) &&
-        RANGE(date.hour, 0, 23) &&
-        RANGE(date.mday, 1, 31) &&
-        RANGE(date.mon, 0, 11) &&
-        RANGE(date.year, 1900, 9999) &&
-        RANGE(date.wday, 0, 6)) {
+    if (VmDateCommon(VmInst, datePtr) &&
+        RANGE(datePtr->sec, 0, 61) &&
+        RANGE(datePtr->min, 0, 59) &&
+        RANGE(datePtr->hour, 0, 23) &&
+        RANGE(datePtr->mday, 1, 31) &&
+        RANGE(datePtr->mon, 0, 11) &&
+        RANGE(datePtr->year, 1900, 9999) &&
+        RANGE(datePtr->wday, 0, 6)) {
 
         uv = snprintf(buffer, 0x20, "%s %s %02d %02d:%02d:%02d %04d",
-                      VmDateDayTbl[date.wday], VmDateMonthTbl[date.mon],
-                      date.mday, date.hour, date.min, date.sec, date.year);
+                      VmDateDayTbl[datePtr->wday], VmDateMonthTbl[datePtr->mon],
+                      datePtr->mday, datePtr->hour, datePtr->min, datePtr->sec, datePtr->year);
 
         if (uv <= 0x20) {
             return CHANSVmSetU16StringFromU8(VmInst, VmReturnObj, buffer, uv) == CHANS_VM_OK;
@@ -2681,8 +2735,9 @@ VmMethodDefine(Math, SQRT2) {
     return CHANSVmSetFloat(VmInst, VmReturnObj, M_SQRT2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, abs) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
-    return (arg != vmNull && CHANSVmSetFloat(VmInst, VmReturnObj, fabs(arg->value.float_v)) == CHANS_VM_OK);
+    // u32 cast needed to avoid extra neg-instruction.
+    u32 arg = (u32)CHANSVmGetArgFloat(VmInst, 0);
+    return (arg != 0 && CHANSVmSetFloat(VmInst, VmReturnObj, fabs(((CHANSVmObjHdr*)arg)->value.float_v)) == CHANS_VM_OK);
 }
 VmMethodDefine(Math, acos) {
     CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
@@ -3465,6 +3520,8 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
         argIdxCounter = 1;
 
         while (strPos < strLen) {
+            // Label allows to continue without checking the condition
+            format_continue: ;
             if (str[strPos] != 0 || str[strPos + 1] != '%') {
                 strPos += 2;
                 if (strPos < strLen) {
@@ -3509,7 +3566,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
                 while (strPos < strLen && str[strPos] == 0) {
                     switch (str[strPos + 1] - 32) {
                         case 32: {
-                            continue;
+                            goto format_continue;
                         }
                         case 3: {
                             flag = TRUE;
@@ -3519,7 +3576,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
                         case 13:
                         case 16: {
                             if (fmtBufPos + 1 >= sizeof(fmtBufData))
-                                continue;
+                                 goto format_continue;
                             fmtBuf[fmtBufPos++] = str[strPos + 1];
                             strPos += 2;
                             continue;
@@ -3530,7 +3587,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                 while (strPos < strLen && str[strPos] == 0 && str[strPos + 1] >= '0' && str[strPos + 1] <= '9') {
                     if (fmtBufPos + 1 >= sizeof(fmtBufData)) {
-                        continue;
+                         goto format_continue;
                     }
                     fmtBuf[fmtBufPos++] = str[strPos + 1];
                     strPos += 2;
@@ -3538,14 +3595,14 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                 if (strPos < strLen && str[strPos] == 0 && str[strPos + 1] == '.') {
                     if (fmtBufPos + 1 >= sizeof(fmtBufData)) {
-                        continue;
+                        goto format_continue;
                     }
                     fmtBuf[fmtBufPos++] = str[strPos + 1];
                     strPos += 2;
 
                     while (strPos < strLen && str[strPos] == 0 && str[strPos + 1] >= '0' && str[strPos + 1] <= '9') {
                         if (fmtBufPos + 1 >= sizeof(fmtBufData)) {
-                            continue;
+                             goto format_continue;
                         }
                         fmtBuf[fmtBufPos++] = str[strPos + 1];
                         strPos += 2;
@@ -3604,7 +3661,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                 int_body: {
                     if (fmtBufPos + 3 >= (s32)sizeof(fmtBufData)) {
-                        continue;
+                        goto format_continue;
                     }
                     fmtBuf[fmtBufPos++] = 'l';
                     fmtBuf[fmtBufPos++] = 'l';
@@ -3626,7 +3683,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
                     }
 
                     if ((s32)isEscaped < 0) {
-                        continue;
+                        goto format_continue;
                     }
                     litLen = isEscaped * 2;
                     if (outputBuf != NULL) {
@@ -3645,7 +3702,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                 float_body: {
                     if (fmtBufPos + 2 >= sizeof(fmtBufData))
-                        continue;
+                        goto format_continue;
                     fmtBuf[fmtBufPos++] = 'l';
                     fmtBuf[fmtBufPos++] = tc;
                     fmtBuf[fmtBufPos] = 0;
@@ -3689,7 +3746,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                 common_string_format:
                     if (flag || fmtBufPos + 2 >= sizeof(fmtBufData)) {
-                        continue;
+                        goto format_continue;
                     }
                     fmtBuf[fmtBufPos++] = 'l';
                     fmtBuf[fmtBufPos++] = 's';
@@ -3700,7 +3757,7 @@ CHANSVmObjHdr* CHANSVm_8145049C(CHANSVm* vm, CHANSVmObjHdr* obj, u32 arg)
 
                     isEscaped = swprintf((wchar_t*)tmpBuf, halfMaxSize, wideFmt, (void*)isEscaped);
                     if ((s32)isEscaped < 0) {
-                        continue;
+                        goto format_continue;
                     }
 
                     if (litLen != 0) {
@@ -3753,10 +3810,10 @@ null_return:
 }
 
 VmMethodDefine(String, Format) {
-    CHANSVmObjHdr* result;
+    u32 result;
     if (VmParentObj != NULL && VmParentObj->type == CHANS_VM_TYPE_CLASS_REF) {
-        result = CHANSVm_8145049C(VmInst, VmReturnObj, 0);
-        return result != NULL;
+        result = (u32)CHANSVm_8145049C(VmInst, VmReturnObj, 0);
+        return result != 0;
     }
     return 0;
 }
@@ -3924,7 +3981,7 @@ VmMethodDefine(Blob, Seek) {
         return 0;
     }
 
-    return CHANSVmCopyObject(VmInst, VmReturnObj, VmParentObj) != NULL;
+    return (u32)CHANSVmCopyObject(VmInst, VmReturnObj, VmParentObj) != 0;
 }
 
 VmMethodDefine(Blob, Skip) {
@@ -3947,7 +4004,7 @@ VmMethodDefine(Blob, Skip) {
         return 0;
     }
 
-    return CHANSVmCopyObject(VmInst, VmReturnObj, VmParentObj) != NULL;
+    return (u32)CHANSVmCopyObject(VmInst, VmReturnObj, VmParentObj) != 0;
 }
 
 VmMethodDefine(Blob, GetLength) {
@@ -4170,14 +4227,14 @@ VmMethodDefine(Blob, IsEqual) {
 VmMethodDefine(Blob, CopyRangeFrom) {
     BlobHeader* srcBlob;
     BlobHeader* destBlob;
-    CHANSVmObjHdr* srcOffObj;
-    CHANSVmObjHdr* srcObj;
-    CHANSVmObjHdr* destOffObj;
-    CHANSVmObjHdr* countObj;
     u32 srcOff;
     u32 destOff;
     u32 count;
     vmBoolInt okFlag;
+    CHANSVmObjHdr* destOffObj;
+    CHANSVmObjHdr* srcObj;
+    CHANSVmObjHdr* srcOffObj;
+    CHANSVmObjHdr* countObj;
 
     destBlob = (BlobHeader*)VmGetStrFromObjHdr(VmParentObj);
     destOffObj = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_INTEGER, CHANSVmGetArg(VmInst, 0));
@@ -4201,23 +4258,23 @@ VmMethodDefine(Blob, CopyRangeFrom) {
 
     if (CHANSVm_81450D14(destBlob, destOffObj->value.int_v, &destOff) != 0 && CHANSVm_81450D14(srcBlob, srcOffObj->value.int_v, &srcOff) != 0) {
         count = CHANSVm_81451314(srcBlob, countObj, srcOff);
-        if ((s64)okFlag < (s64)count) {
+        if ((s64)destBlob->size >= (s64)count) {
             u32 available = destBlob->size - destOff;
-            if ((s64)count < (s64)available) {
+            if ((s64)count >= (s64)available) {
                 okFlag = TRUE;
             }
         }
 
         if (okFlag) {
-            vmBoolInt okFlag2 = FALSE;
-            if ((s64)okFlag2 < (s64)count) {
+            okFlag = FALSE;
+            if ((s64)count >= 0) {
                 u32 available = srcBlob->size - srcOff;
-                if ((s64)count < (s64)available) {
-                    okFlag2 = TRUE;
+                if ((s64)count >= (s64)available) {
+                    okFlag = TRUE;
                 }
             }
 
-            if (okFlag2) {
+            if (okFlag) {
                 memmove(destBlob->pData + destOff, srcBlob->pData + srcOff, count);
                 return CHANSVmSetInteger(VmInst, VmReturnObj, (vmInteger)(u64)count) == CHANS_VM_OK;
             }
@@ -4305,17 +4362,19 @@ VmMethodDefine(Blob, GetHexString) {
         return vmFalse;
     }
 
-    count = arg != NULL ? CHANSVm_81451314(blob, arg, blob->offset) : vmFalse;
+    count = blob != NULL ? CHANSVm_81451314(blob, arg, blob->offset) : 0;
 
     if (CHANSVm_81451348(blob, count) && CHANSVmNewObject(VmInst, vmFalse, VmReturnObj, CHANS_VM_OBJ_TYPE_STRING, count * 4) != NULL) {
         wchar_t* dest = (wchar_t*)VmGetStrFromObjHdr(VmReturnObj);
-        u8* src;
-        u32 loop_i;
+        u8* src = blob->pData;
+        u32 offset = blob->offset;
         u32 destOff = 0;
         u32 i = 0;
         char* hexTbl = lbl_816976E4;
+        u32 loop_i;
 
-        src = blob->pData + blob->offset;
+        src += offset;
+
         for (loop_i = 0; loop_i < count; loop_i++) {
             u32 idx2 = i + 1;
             i += 2;
@@ -6039,9 +6098,9 @@ void CHANSVmImageRegisterAllocator(CHANSVmImageAllocatorCallback allocCb, CHANSV
 }
 
 CHANSVmObjHdr* CHANSVmNewImageObject(CHANSVm* vm, CHANSVmObjHdr* object, vmPtr srcData, vmU16 width, vmU16 height, s32 format) {
-    CHANSVmImage* image;
     u32 bpp;
-    u32 datasize;
+    CHANSVmImage* image;
+    u32 dataSize;
     u32 allocSize;
 
     if ((width & 7) != 0 || (height & 7) != 0) {
@@ -6060,42 +6119,45 @@ CHANSVmObjHdr* CHANSVmNewImageObject(CHANSVm* vm, CHANSVmObjHdr* object, vmPtr s
             bpp = 16;
             break;
         }
+        case 6:
         default: {
             bpp = 32;
             break;
         }
     }
 
-    datasize = ((u32)width * (u32)height * bpp) / 8;
-    allocSize = (datasize & ~(-(VmImageAllocCallback != NULL))) + 0x20;
+    dataSize = (u32)height * bpp * (u32)width / 8;
+    allocSize = (dataSize & ~(-(VmImageAllocCallback != NULL))) + 0x20;
 
     object = CHANSVmNewObject(vm, vmFalse, object, CHANS_VM_TYPE_OBJECT, allocSize);
-    if (object == NULL || CHANSVmSetObjectAsNativeInstance(vm, object, NULL, "Image") != CHANS_VM_OK) {
+    if (object == NULL) {
+        goto ret;
+    }
+    if (CHANSVmSetObjectAsNativeInstance(vm, object, NULL, "Image") != CHANS_VM_OK) {
         goto error;
     }
-
     image = (CHANSVmImage*)((u32*)object->value.ptr_v)[0];
     image->width = width;
     image->height = height;
     image->format = (u8)format;
     image->bpp = (u8)bpp;
 
-    if (datasize != 0) {
+    if (dataSize != 0) {
         if (VmImageAllocCallback != NULL) {
-            image->data = VmImageAllocCallback(vm, datasize);
+            image->data = VmImageAllocCallback(vm, dataSize);
         } else {
             image->data = (u8*)image + 0x20;
         }
         if (image->data == 0) {
             goto error;
         }
-        image->size = datasize;
+        image->size = dataSize;
         if (srcData != NULL) {
-            memcpy(image->data, srcData, datasize);
-            DCStoreRange(image->data, datasize);
+            memcpy(image->data, srcData, dataSize);
+            DCStoreRange(image->data, dataSize);
         }
     }
-
+ret:
     return object;
 
 error:
@@ -6245,13 +6307,14 @@ CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size) {
 
         if (CHANSVmNewBuiltinObject(vm, VmStringClassName, VmStringCtor, NULL, VmStringCtor, NULL, NULL, VmStringPropertyTbl, CHANSVmPropertyCount(VmStringPropertyTbl),
                                     VmStringMethodTbl, CHANSVmMethodCount(VmStringMethodTbl)) == 0) {
-            goto class_fail;
+            goto class_string_fail;
          }
         cls = CHANSVmFindNativeClass(vm, VmStringClassName);
         if (cls != NULL) {
             pVm->pStringCls = cls;
             ok = TRUE;
         } else {
+        class_string_fail:
             ok = FALSE;
         }
         if (!ok)
@@ -6840,20 +6903,17 @@ static u8* VmGetOperand(CHANSVm* vm, u32 num, u32 offset) {
 }
 
 static CHANSVmErr VmLoadImmInteger(CHANSVm* vm, CHANSVmObjHdr* obj, u8* buf, s32 count) {
-    u32 low = 0;
-    u32 high = 0;
+    s64 acc = 0;
+    u8* p = buf;
 
     while (count != 0) {
-        u32 byte = *buf;
-        u32 newLow = (low << 8) | byte;
-        u32 newHigh = (high << 8) | (low >> 24);
-        low = newLow;
-        high = newHigh | ((s32)byte >> 31);
-        buf++;
+        s32 val = (s8)*p;
+        acc = (acc << 8) | (val & 0xFF);
+        p++;
         count--;
     }
 
-    return CHANSVmSetInteger(vm, obj, ((s64)high << 32) | low);
+    return CHANSVmSetInteger(vm, obj, acc);
 }
 
 CHANSVmErr VmStore(CHANSVm* vm, CHANSVmObjHdr* dest, CHANSVmObjHdr* src) {
@@ -7124,31 +7184,39 @@ void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal) {
     pVm->bSignalUpdated = vmTrue;
 }
 
+// TODO: temporarily using a struct to directly access data in .rodata.
+// The original takes .rodata@0x00 as a base pointer and uses offsets from there.
+typedef struct VmConstData {
+    CHANSVmObjHdr undefined;             // 0x00
+    CHANSVmObjHdr unk_0x10[5];           // 0x10
+    CHANSVmObjHdr undefinedArray[5];     // 0x60
+    u8 pad_0xB0[0x20];                   // 0xB0 (CHANSVmFloatConstantList)
+    VmConvertEntry convFuncs[6];         // 0xD0
+    u8 resultTypeAdd[6 * 6];             // 0x160
+    u8 resultTypeArith[6 * 6];           // 0x184
+    u8 resultTypeCmp[6 * 6];             // 0x1A8
+    u8 resultTypeEq[6 * 6];              // 0x1CC
+    u8 resultTypeBitShift[6 * 6];        // 0x1F0
+} VmConstData;
+
 CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
-    // TODO: needs cleanup
+    VmConstData* pConstObj = (VmConstData*)&CHANSVmConstStringObjectUndefined;
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
-    CHANSVmObjHdr* pConstObj;
     u32 cZero;
     u32 cNeg2;
-    double cHi;
-    double cLo;
     CHANSVmObjHdr* stackPtr;
     CHANSVmErr result;
     CHANSVmObjHdr tmpObj;
     u32 etypes[8];
     CHANSVmObjHdr tmpCopyObj;
 
-    pConstObj = (CHANSVmObjHdr*)&CHANSVmConstStringObjectUndefined;
-
     if (stepCount == 0) {
         stepCount = 1;
     }
     memset(&tmpObj, 0, sizeof(tmpObj));
-    cHi = 0.0;
-    stackPtr = &tmpCopyObj;
-    cLo = 4294967294.0;
     cZero = 0;
     cNeg2 = -2;
+    stackPtr = &tmpCopyObj;
 
     while (stepCount-- != 0) {
         s32 step;
@@ -7167,23 +7235,21 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
             return CHANS_VM_ERR_SIGNAL;
         }
 
-        if (pVm->pActiveCtx == NULL) goto error_code_range;
-        if (pVm->pActiveCtx->pDbg == NULL) goto error_code_range;
-        if (pVm->pActiveCtx->pc < 1) goto error_code_range;
-        if (pVm->pActiveCtx->pc < pVm->pActiveCtx->pDbg->codeSize) goto codesize_ok;
-        return CHANS_VM_ERR_CODE_RANGE;
-codesize_ok:
-        if ((u32)pVm->pFreeExeBuf < (u32)pVm->pHeapStart) goto error_3e2;
-        if ((u32)pVm->pHeapEnd >= (u32)pVm->pObjStackTopBuf) goto range_ok;
-        return CHANS_VM_ERR_HEAP_RANGE;
-range_ok:
+        if (pVm->pActiveCtx == NULL || pVm->pActiveCtx->pDbg == NULL || pVm->pActiveCtx->pc < 1 || pVm->pActiveCtx->pc >= pVm->pActiveCtx->pDbg->codeSize) {
+            return CHANS_VM_ERR_CODE_RANGE;
+        }
+
+        if ((u32)pVm->pFreeExeBuf < (u32)pVm->pHeapStart || (u32)pVm->pHeapEnd < (u32)pVm->pObjStackTopBuf) {
+            return CHANS_VM_ERR_HEAP_RANGE;
+        }
+
         opcodeVal = *((u8*)pVm->pActiveCtx->pDbg->pData + pVm->pActiveCtx->pc);
         if (pVm->bSuspendStep != vmFalse) {
             opcodeVal = 0;
         }
 
-        if ((opcodeVal & 0xc0) == 0) {
-            u32 unk_r23;
+        if (VM_OPCLASS(opcodeVal) == VM_OPCLASS_BASE) {
+            u32 opKind;
             u32 unk_r19;
             CHANSVmObjHdr* leftOp;
             CHANSVmObjHdr* rightOp;
@@ -7220,51 +7286,50 @@ shared_load_imm:
                 break;
 
             case CHANS_VM_OP_ADD_IMM:
-                unk_r23 = 0x2B; opFunc = (CHANSVmErr (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))VmAdd; goto binary_imm;
+                opKind = VM_OPKIND_ADD; opFunc = (CHANSVmErr (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))VmAdd; goto binary_imm;
             case CHANS_VM_OP_SUB_IMM:
-                unk_r23 = 0x2D; opFunc = VmSub; goto binary_imm;
+                opKind = VM_OPKIND_SUB; opFunc = VmSub; goto binary_imm;
             case CHANS_VM_OP_MUL_IMM:
-                unk_r23 = 0x2A; opFunc = VmMul; goto binary_imm;
+                opKind = VM_OPKIND_MUL; opFunc = VmMul; goto binary_imm;
             case CHANS_VM_OP_DIV_IMM:
-                unk_r23 = 0x2F; opFunc = VmDiv; goto binary_imm;
+                opKind = VM_OPKIND_DIV; opFunc = VmDiv; goto binary_imm;
             case CHANS_VM_OP_MOD_IMM:
-                unk_r23 = 0x25; opFunc = VmMod; goto binary_imm;
+                opKind = VM_OPKIND_MOD; opFunc = VmMod; goto binary_imm;
             case CHANS_VM_OP_AND_IMM:
-                unk_r23 = 0x42; opFunc = VmBitAnd; goto binary_imm;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitAnd; goto binary_imm;
             case CHANS_VM_OP_OR_IMM:
-                unk_r23 = 0x42; opFunc = VmBitOr; goto binary_imm;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitOr; goto binary_imm;
             case CHANS_VM_OP_XOR_IMM:
-                unk_r23 = 0x42; opFunc = VmBitXor; goto binary_imm;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitXor; goto binary_imm;
             case CHANS_VM_OP_CMP_EQ_IMM:
-                unk_r23 = 0x3D; opFunc = VmCmpEq; goto binary_imm;
+                opKind = VM_OPKIND_EQ; opFunc = VmCmpEq; goto binary_imm;
             case CHANS_VM_OP_CMP_NEQ_IMM:
-                unk_r23 = 0x3D; opFunc = VmCmpNeq; goto binary_imm;
+                opKind = VM_OPKIND_EQ; opFunc = VmCmpNeq; goto binary_imm;
             case CHANS_VM_OP_CMP_LT_IMM:
-                unk_r23 = 0x43; opFunc = VmCmpLt; goto binary_imm;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpLt; goto binary_imm;
             case CHANS_VM_OP_CMP_GT_IMM:
-                unk_r23 = 0x43; opFunc = VmCmpGt; goto binary_imm;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpGt; goto binary_imm;
             case CHANS_VM_OP_CMP_LEQ_IMM:
-                unk_r23 = 0x43; opFunc = VmCmpLeq; goto binary_imm;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpLeq; goto binary_imm;
             case CHANS_VM_OP_CMP_GEQ_IMM:
-                unk_r23 = 0x43; opFunc = VmCmpGeq;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpGeq;
 
-binary_imm:
-                step = 2;
+            binary_imm:
                 leftOp = &pVm->accumulator;
                 rightOp = &tmpObj;
+                step = 2;
                 operandBuf = VmGetOperand(vm, 1, 2);
                 result = VmLoadImmInteger(vm, &tmpObj, operandBuf, 1);
+binary_typecheck:
                 if (result != CHANS_VM_OK) goto error_setter;
-                goto binary_typecheck;
-
-            binary_typecheck: {
+                {
                 u32 rightTypeByte;
                 u32 typeIdx;
                 u32 leftTypeByte;
                 u32 typeOffset;
-                rightTypeByte = ((u8*)rightOp)[8];
+                rightTypeByte = rightOp->type;
                 typeIdx = 0;
-                leftTypeByte = ((u8*)leftOp)[8];
+                leftTypeByte = leftOp->type;
                 typeOffset = 0;
                 for (; typeIdx < 2; typeIdx++, typeOffset += 4) {
                     if (CHANSVmGetEnumedType((CHANSVmObjType*)((u8*)etypes + typeOffset), (s32)((typeIdx == 0) ? leftTypeByte : rightTypeByte)) == 0) {
@@ -7272,22 +7337,25 @@ binary_imm:
                     }
                 }
 
-                {
+                { // INLINED: VmGetResultType
                     const u8* convTbl;
-                    switch (unk_r23) {
-                    case 0x2B:
-                        convTbl = (const u8*)((u8*)pConstObj + 0x160); break;
-                    case 0x25: case 0x2A: case 0x2D: case 0x2F:
-                        convTbl = (const u8*)((u8*)pConstObj + 0x184); break;
-                    case 0x43:
-                        convTbl = (const u8*)((u8*)pConstObj + 0x1a8); break;
-                    case 0x3D:
-                        convTbl = (const u8*)((u8*)pConstObj + 0x1cc); break;
-                    case 0x42: case 0x53:
-                        convTbl = (const u8*)((u8*)pConstObj + 0x1f0); break;
+                    switch (opKind) {
+                    case VM_OPKIND_ADD:
+                        convTbl = pConstObj->resultTypeAdd; break;
+                    case VM_OPKIND_MOD:
+                    case VM_OPKIND_MUL:
+                    case VM_OPKIND_SUB:
+                    case VM_OPKIND_DIV:
+                        convTbl = pConstObj->resultTypeArith; break;
+                    case VM_OPKIND_CMP:
+                        convTbl = pConstObj->resultTypeCmp; break;
+                    case VM_OPKIND_EQ:
+                        convTbl = pConstObj->resultTypeEq; break;
+                    case VM_OPKIND_BIT: case VM_OPKIND_SHIFT:
+                        convTbl = pConstObj->resultTypeBitShift; break;
                     default:
                         // TODO: this is an inlined function called "VmGetResultType"
-                        CHANS_VM_PRINTF_CUSTOM("%s: no table for op '%c'\n", lbl_81669128, unk_r23);
+                        CHANS_VM_PRINTF_CUSTOM("%s: no table for op '%c'\n", lbl_81669128, opKind);
                         goto error_setter;
                     }
 
@@ -7300,26 +7368,31 @@ error_setter:
                 result = CHANS_VM_ERR_RESULT_TYPE;
 
 result_check:
-                if (result != CHANS_VM_OK) break;
+                if (result != CHANS_VM_OK) {
+        break;
+    }
 
-                if (((unk_r23 != 0x43) && (unk_r23 != 0x3D)) || (unk_r19 != 0)) {
+    if (((opKind != VM_OPKIND_CMP) && (opKind != VM_OPKIND_EQ)) || (unk_r19 != 0)) {
                     leftOp = CHANSVmConvertObjectType(vm, unk_r19, leftOp);
                     rightOp = CHANSVmConvertObjectType(vm, unk_r19, rightOp);
                 }
 
-                if ((leftOp == NULL) || (rightOp == NULL)) { result = CHANS_VM_ERR_RESULT_TYPE; break; }
+                if ((leftOp == NULL) || (rightOp == NULL)) {
+                    result = CHANS_VM_ERR_RESULT_TYPE;
+                    break;
+                }
 
                 result = opFunc(vm, unk_r19, &pVm->accumulator, leftOp, rightOp);
 
                 if (result == CHANS_VM_OK) {
                     result = CHANSVmDeleteObject(vm, &tmpObj);
                     if ((result == CHANS_VM_OK) && (leftOp != &pVm->accumulator) && (leftOp != &tmpObj) &&
-                        ((((u8*)leftOp)[9] & 0x80) == 0) &&
+                        ((leftOp->flags.raw & 0x80) == 0) &&
                         ((result = CHANSVmDeleteObject(vm, leftOp), result == CHANS_VM_OK))) {
                         CHANSVmFree(vm, leftOp, 0x20);
                     }
                     if ((result == CHANS_VM_OK) && (rightOp != &pVm->accumulator) && (rightOp != &tmpObj) &&
-                        ((((u8*)rightOp)[9] & 0x80) == 0) &&
+                        (rightOp->flags.raw & 0x80) == 0 &&
                         ((result = CHANSVmDeleteObject(vm, rightOp), result == CHANS_VM_OK))) {
                         CHANSVmFree(vm, rightOp, 0x20);
                     }
@@ -7353,43 +7426,45 @@ result_check:
                 break;
 
             case CHANS_VM_OP_ADD:
-                unk_r23 = 0x2B; opFunc = (CHANSVmErr (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))VmAdd; goto binary_pop;
+                opKind = VM_OPKIND_ADD; opFunc = (CHANSVmErr (*)(CHANSVm*, int, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*))VmAdd; goto binary_pop;
             case CHANS_VM_OP_SUB:
-                unk_r23 = 0x2D; opFunc = VmSub; goto binary_pop;
+                opKind = VM_OPKIND_SUB; opFunc = VmSub; goto binary_pop;
             case CHANS_VM_OP_MUL:
-                unk_r23 = 0x2A; opFunc = VmMul; goto binary_pop;
+                opKind = VM_OPKIND_MUL; opFunc = VmMul; goto binary_pop;
             case CHANS_VM_OP_DIV:
-                unk_r23 = 0x2F; opFunc = VmDiv; goto binary_pop;
+                opKind = VM_OPKIND_DIV; opFunc = VmDiv; goto binary_pop;
             case CHANS_VM_OP_MOD:
-                unk_r23 = 0x25; opFunc = VmMod; goto binary_pop;
+                opKind = VM_OPKIND_MOD; opFunc = VmMod; goto binary_pop;
             case CHANS_VM_OP_BIT_AND:
-                unk_r23 = 0x42; opFunc = VmBitAnd; goto binary_pop;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitAnd; goto binary_pop;
             case CHANS_VM_OP_BIT_OR:
-                unk_r23 = 0x42; opFunc = VmBitOr; goto binary_pop;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitOr; goto binary_pop;
             case CHANS_VM_OP_BIT_XOR:
-                unk_r23 = 0x42; opFunc = VmBitXor; goto binary_pop;
+                opKind = VM_OPKIND_BIT; opFunc = VmBitXor; goto binary_pop;
             case CHANS_VM_OP_ULSHIFT:
-                unk_r23 = 0x53; opFunc = VmULShift; goto binary_pop;
+                opKind = VM_OPKIND_SHIFT; opFunc = VmULShift; goto binary_pop;
             case CHANS_VM_OP_ARSHIFT:
-                unk_r23 = 0x53; opFunc = VmARShift; goto binary_pop;
+                opKind = VM_OPKIND_SHIFT; opFunc = VmARShift; goto binary_pop;
             case CHANS_VM_OP_CMP_EQ:
-                unk_r23 = 0x43; opFunc = VmCmpEq; goto binary_pop;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpEq; goto binary_pop;
             case CHANS_VM_OP_CMP_NEQ:
-                unk_r23 = 0x43; opFunc = VmCmpNeq; goto binary_pop;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpNeq; goto binary_pop;
             case CHANS_VM_OP_CMP_LT:
-                unk_r23 = 0x43; opFunc = VmCmpLt; goto binary_pop;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpLt; goto binary_pop;
             case CHANS_VM_OP_CMP_GT:
-                unk_r23 = 0x43; opFunc = VmCmpGt; goto binary_pop;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpGt; goto binary_pop;
             case CHANS_VM_OP_CMP_LEQ:
-                unk_r23 = 0x43; opFunc = VmCmpLeq; goto binary_pop;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpLeq; goto binary_pop;
             case CHANS_VM_OP_CMP_GEQ:
-                unk_r23 = 0x43; opFunc = VmCmpGeq;
+                opKind = VM_OPKIND_CMP; opFunc = VmCmpGeq;
 
 binary_pop:
                 leftOp = &tmpObj;
                 rightOp = &pVm->accumulator;
                 result = CHANSVmPopObject(vm, &tmpObj);
-                if (result != CHANS_VM_OK) break;
+                if (result != CHANS_VM_OK) {
+                    break;
+                }
                 goto binary_typecheck;
 
             case CHANS_VM_OP_RETURN:
@@ -7408,15 +7483,12 @@ binary_pop:
             case CHANS_VM_OP_BIT_NOT: {
                 CHANSVmObjHdr* pObj = &pVm->accumulator;
                 u64 tmp64_16;
-                switch (pVm->accumulator.type) {
-                case CHANS_VM_OBJ_TYPE_BLANK:
-                    tmp64_16 = 0;
-                    break;
+                switch (pObj->type) {
                 case CHANS_VM_OBJ_TYPE_INTEGER:
                     tmp64_16 = *(u64*)pObj;
                     break;
                 case CHANS_VM_OBJ_TYPE_FLOAT:
-                    tmp64_16 = (u64)(CHANSVm_8144B1D8(*(double*)pObj) * floor(fabs(*(double*)pObj)));
+                    tmp64_16 = (s64)(CHANSVm_8144B1D8(*(double*)pObj) * floor(fabs(*(double*)pObj)));
                     break;
                 case CHANS_VM_OBJ_TYPE_STRING:
                 {
@@ -7428,31 +7500,31 @@ binary_pop:
                     tmp64_16 = 0;
                     break;
                 }
-                tmp64_16 = ~tmp64_16;
-                result = CHANSVmSetInteger(vm, pObj, (vmInteger)tmp64_16);
+                result = CHANSVmSetInteger(vm, pObj, (vmInteger)(~tmp64_16));
                 break;
             }
 
             case CHANS_VM_OP_LOG_NOT: {
+                CHANSVmObjHdr* pAcc = &pVm->accumulator;
                 u32 local_e8;
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, &pVm->accumulator);
-                if (result == CHANS_VM_OK) {
-                    u32 boolVal = (local_e8) ? 0 : 1;
-                    result = CHANSVmSetInteger(vm, &pVm->accumulator, (vmInteger)(u64)boolVal);
+                if (CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, pAcc) == CHANS_VM_OK) {
+                    s32 boolVal = (local_e8) ? 0 : 1;
+                    result = CHANSVmSetInteger(vm, pAcc, (vmInteger)boolVal);
                 }
                 break;
             }
 
             case CHANS_VM_OP_LOAD_INDIRECT: {
+                CHANSVmObjHdr* pAcc = &pVm->accumulator;
                 CHANSVmObjHdr loadTmp;
                 result = CHANS_VM_ERR_LOAD_INDIRECT;
-                if (pVm->accumulator.type == CHANS_VM_TYPE_INDEX_REF) {
-                    tmpCmp = (s32)CHANSVmCopyObject(vm, &loadTmp, &pVm->accumulator);
+                if (pAcc->type == CHANS_VM_TYPE_INDEX_REF) {
+                    tmpCmp = (s32)CHANSVmCopyObject(vm, &loadTmp, pAcc);
                     if (tmpCmp != 0) {
                         foundObj = VmGetArrayElement(vm, &loadTmp, unk_r25, FALSE);
-                        result = VmStore(vm, &pVm->accumulator, foundObj);
+                        result = VmStore(vm, pAcc, foundObj);
                         if (result == CHANS_VM_OK) {
-                            result = CHANSVmDeleteObject(vm, &pVm->accumulator);
+                            result = CHANSVmDeleteObject(vm, pAcc);
                         }
                     }
                 }
@@ -7461,25 +7533,30 @@ binary_pop:
 
             case CHANS_VM_OP_CALL_METHOD:
                 operandBuf = VmGetOperand(vm, 1, 4);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                result = VmCallMethod(vm, 4, CHANS_VM_CALL_TYPE_METHOD, vmFalse);
-                step = 0;
-                break;
-
-            case CHANS_VM_OP_IS_CLASS:
-                if (pVm->accumulator.type == CHANS_VM_TYPE_CLASS_REF) {
-                    result = 1;
-                } else {
-                    result = CHANS_VM_ERR_INVALID_OBJECT_TYPE;
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
                 }
+                result = VmCallMethod(vm, 4, CHANS_VM_CALL_TYPE_METHOD, vmFalse);
                 step = 0;
                 break;
 
             case CHANS_VM_OP_CALL_FUNCTION:
                 result = CHANS_VM_OK;
+                goto call_function_common;
+            case CHANS_VM_OP_IS_CLASS:
+                if (pVm->accumulator.type == CHANS_VM_TYPE_CLASS_REF) {
+                    result = 1;
+                } else {
+                    result = CHANS_VM_ERR_INVALID_OBJECT_TYPE;
+                    step = 0;
+                    break;
+                }
+call_function_common:
                 operandBuf = VmGetOperand(vm, 1, 2);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                result = VmCallMethod(vm, 2, CHANS_VM_CALL_TYPE_FUNCTION, vmFalse);
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
+                }
+                result = VmCallMethod(vm, 2, CHANS_VM_CALL_TYPE_FUNCTION, result);
                 step = 0;
                 break;
 
@@ -7487,54 +7564,66 @@ binary_pop:
             case CHANS_VM_OP_PROP_SET: {
                 u32 callMode;
                 operandBuf = VmGetOperand(vm, 1, 3);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                if (opcodeVal == CHANS_VM_OP_PROP_GET) {
-                    callMode = CHANS_VM_CALL_TYPE_PROP_GET;
-                } else {
-                    callMode = CHANS_VM_CALL_TYPE_PROP_SET;
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
                 }
+                callMode = (opcodeVal == CHANS_VM_OP_PROP_GET)
+                    ? CHANS_VM_CALL_TYPE_PROP_GET
+                    : CHANS_VM_CALL_TYPE_PROP_SET;
                 result = VmCallMethod(vm, 3, callMode, vmFalse);
                 step = 0;
                 break;
             }
 
-            case CHANS_VM_OP_STORE_INDIRECT:
+            case CHANS_VM_OP_STORE_INDIRECT: {
+                CHANSVmObjHdr* pAcc = &pVm->accumulator;
                 result = CHANS_VM_ERR_STORE_INDIRECT;
-                if (pVm->accumulator.type == CHANS_VM_TYPE_INDEX_REF) {
-                    tmpCmp = (s32)CHANSVmCopyObject(vm, stackPtr, &pVm->accumulator);
+                if (pAcc->type == CHANS_VM_TYPE_INDEX_REF) {
+                    tmpCmp = (s32)CHANSVmCopyObject(vm, stackPtr, pAcc);
                     if (tmpCmp != 0) {
-                        result = CHANSVmPopObject(vm, &pVm->accumulator);
+                        result = CHANSVmPopObject(vm, pAcc);
                         if (result == CHANS_VM_OK) {
-                            foundObj = VmGetArrayElement(vm, stackPtr, unk_r25, TRUE);
-                            result = VmStore(vm, foundObj, &pVm->accumulator);
+                            foundObj = VmGetArrayElement(vm, stackPtr, tmpCopyObj.value.data.len, TRUE);
+                            result = VmStore(vm, foundObj, pAcc);
                             if (result == CHANS_VM_OK) {
-                                result = CHANSVmDeleteObject(vm, &pVm->accumulator);
+                                result = CHANSVmDeleteObject(vm, stackPtr);
                             }
                         }
                     }
                 }
                 break;
+            }
 
-            case CHANS_VM_OP_LOAD_STRING_CONST:
+            case CHANS_VM_OP_LOAD_STRING_CONST: {
+                CHANSVmExecutionCtx* pLSCtx;
+                CHANSVmModule* pLDbg;
                 step = 3;
                 operandBuf = VmGetOperand(vm, 1, 3);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                unk_r26 = *(u16*)operandBuf;
-                result = CHANSVmDeleteObject(vm, &pVm->accumulator);
-                if (result == CHANS_VM_OK) {
-                    CHANSVmExecutionCtx* pUnk1_2c = pVm->pActiveCtx;
-                    u32* pUnk1_04 = (u32*)pUnk1_2c->pDbg;
-                    if ((unk_r26 < pUnk1_04[12]) &&
-                        (intTemp = unk_r26 * 0x10,
-                         *(u32*)(pUnk1_04[15] + intTemp) != 0)) {
-                        pVm->accumulator.type = CHANS_VM_OBJ_TYPE_STRING;
-                        pVm->accumulator.hasData = vmTrue;
-                        (&pVm->accumulator)->value.int_v = *(u32*)(pUnk1_04[15] + intTemp);
-                    } else {
-                        result = CHANS_VM_ERR_LOAD_STRING_CONST;
-                    }
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
                 }
+                if (CHANSVmDeleteObject(vm, &pVm->accumulator) != CHANS_VM_OK) {
+                    break;
+                }
+                unk_r26 = (operandBuf[0] << 8) | operandBuf[1];
+                pLSCtx = pVm->pActiveCtx;
+                pLDbg = pLSCtx->pDbg;
+                if (unk_r26 >= pLDbg->stringCount) {
+                    goto load_str_err;
+                }
+                intTemp = unk_r26 * sizeof(StringTblEntry);
+                if (pLDbg->pStringTbl[unk_r26].pStringData != NULL) {
+                    goto load_str_ok;
+                }
+            load_str_err:
+                result = CHANS_VM_ERR_LOAD_STRING_CONST;
                 break;
+load_str_ok:
+                pVm->accumulator.type = CHANS_VM_OBJ_TYPE_STRING;
+                pVm->accumulator.hasData = vmTrue;
+                pVm->accumulator.value.int_v = (vmInteger)pLDbg->pStringTbl[unk_r26].pStringData;
+                break;
+            }
 
             case CHANS_VM_OP_SET_INDEX: {
                 s32 cmpHigh;
@@ -7548,30 +7637,42 @@ binary_pop:
                 if (result != CHANS_VM_OK) break;
 
                 if (pVm->accumulator.type == CHANS_VM_TYPE_ARRAY) {
-                    u8 typeByte = ((u8*)stackPtr)[8];
-                    if (typeByte == 2) {
-                        double d = (double)((vmInteger)*(u64*)stackPtr);
-                        if ((cLo <= d) && (d <= cHi)) {
+                    int typeByte = stackPtr->type;
+                    if (typeByte == 2) goto float_handling;
+                    if (typeByte >= 2) goto string_handling;
+                    if (typeByte >= 1) goto integer_handling;
+                    goto done_2d_error;
+
+string_handling:
+                    if (typeByte >= 4) goto done_2d_error;
+                    goto string_body;
+
+integer_handling:
+                    cmpHigh = 0;
+                    cmpLow = -2;
+                    cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
+                    fullVal = stackPtr->value.int_v;
+                    if ((u64)(s64)fullVal > cmpVal) goto done_2d_error;
+                    unk_r25 = (u32)stackPtr->value.int_v;
+                    goto done_2d;
+
+float_handling:
+                    {
+                        double d = *(double*)stackPtr;
+                        if ((lbl_81694F28 <= d) && (d <= lbl_81694FB8)) {
                             unk_r25 = (u32)d;
                             goto done_2d;
                         }
-                    } else if (typeByte < 2) {
-                        if (typeByte != 0) {
-                            cmpHigh = cZero;
-                            cmpLow = cNeg2;
-                            cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
-                            fullVal = ((s64)(u32)((u32*)stackPtr)[0] << 32) | ((u64)(u32)((u32*)stackPtr)[1]);
-                            if ((u64)(s64)fullVal > cmpVal) goto done_2d_error;
-                            unk_r25 = ((u32*)stackPtr)[1];
-                            goto done_2d;
-                        }
-                    } else if (typeByte < 4) {
-                        if (CHANSVmParseInt(stackPtr, 10, &tmp64) != 0) {
-                            cmpHigh = cZero;
-                            cmpLow = cNeg2;
-                            cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
-                            fullVal = ((s64)(u32)(tmp64 >> 32) << 32) | (u64)(u32)tmp64;
-                            if ((u64)(s64)fullVal > cmpVal) goto done_2d_error;
+                    }
+                    goto done_2d_error;
+
+string_body:
+                    if (CHANSVmParseInt(stackPtr, 10, &tmp64) != 0) {
+                        cmpHigh = 0;
+                        cmpLow = -2;
+                        cmpVal = ((u64)(u32)cmpHigh << 32) | (u64)cmpLow;
+                        fullVal = ((s64)(u32)(tmp64 >> 32) << 32) | (u64)(u32)tmp64;
+                        if ((u64)(s64)fullVal <= cmpVal) {
                             unk_r25 = (u32)tmp64;
                             goto done_2d;
                         }
@@ -7582,10 +7683,9 @@ done_2d_error:
                 break;
 
 done_2d:
-                result = CHANS_VM_OK;
-                (&pVm->accumulator)->value.int_v = (vmInteger)unk_r25;
+                pVm->accumulator.value.data.len = unk_r25;
                 pVm->accumulator.type = CHANS_VM_TYPE_INDEX_REF;
-                result = CHANSVmDeleteObject(vm, &pVm->accumulator);
+                result = CHANSVmDeleteObject(vm, stackPtr);
                 break;
             }
 
@@ -7595,117 +7695,145 @@ done_2d:
                 u32 found;
                 step = 5;
                 operandBuf = VmGetOperand(vm, 1, 5);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
+                if (operandBuf == NULL) { return CHANS_VM_ERR_CODE_RANGE; }
                 result = CHANS_VM_ERR_GET_PROPERTY_NAME;
                 unk_r25 = 0;
-                foundObj = CHANSVm_81455654(vm, *(u16*)operandBuf);
+                unk_r26 = (operandBuf[0] << 8) | operandBuf[1];
+                foundObj = CHANSVm_81455654(vm, unk_r26);
                 if ((foundObj != NULL) && (pVm->accumulator.type == CHANS_VM_OBJ_TYPE_INTEGER) &&
                     (uintTemp = *((u32*)&pVm->accumulator.value + 1),
-                     (u32)(0xFFFFFFFE < uintTemp) + *(s32*)&pVm->accumulator.value == 0)) {
-                    if (((u8*)foundObj)[0x0A] == 4) {
+                     (u64)pVm->accumulator.value.int_v <= (u64)0xFFFFFFFE)) {
+                    CHANSVmObjHdr* pAcc = &pVm->accumulator;
+                    if ((s32)foundObj->type == CHANS_VM_TYPE_ARRAY) {
                         u32 len = VmArrayGetLengthInternal(foundObj);
                         idx = 0;
-                        found = 0;
-                        while ((idx < len) &&
-                               (tmpCmp = (s32)CHANSVmGetArrayElement(vm, foundObj, idx),
-                                tmpCmp != 0)) {
-                            if (((u8*)tmpCmp)[8] != 0) {
-                                uintTemp--;
+                        while (idx < len) {
+                            tmpCmp = (s32)CHANSVmGetArrayElement(vm, foundObj, idx);
+                            if (tmpCmp == 0) {
+                                break;
+                            }
+                            if (*((u8*)tmpCmp + 8) != 0) {
+                                if (uintTemp == 0) {
+                                    unk_r25 = idx;
+                                    goto found_entry;
+                                } else {
+                                    uintTemp--;
+                                }
                             }
                             idx++;
                         }
-                        unk_r25 = idx;
-                    }
-                    if (result != CHANS_VM_OK) {
-                        idx = 0;
-                        result = CHANSVmDeleteObject(vm, &pVm->accumulator);
-                        if (result == CHANS_VM_OK) {
-                            CHANSVmNewObject(vm, vmFalse, &pVm->accumulator, CHANS_VM_OBJ_TYPE_STRING, 0x80);
-                            if (result != CHANS_VM_OK) {
-                                char* s = (char*)(&pVm->accumulator)->value.string_v->str;
-                                s32 snpLen = snprintf(s, 0x40, "%lld");
-                                CHANSVmStrCpyToU16FromU8((wchar_t*)s, s, snpLen);
-                                (&pVm->accumulator)->value.string_v->len = VM_STR_LENGTH(snpLen);
-                                if ((&pVm->accumulator)->value.string_v->len != 0) {
-                                    result = CHANS_VM_OK;
+                        tmpCmp = 0;
+found_entry:
+                        if (tmpCmp != 0) {
+                            found = 1;
+                            result = CHANSVmDeleteObject(vm, &pVm->accumulator);
+                            if (result == CHANS_VM_OK) {
+                                CHANSVmNewObject(vm, vmFalse, &pVm->accumulator, CHANS_VM_OBJ_TYPE_STRING, 0x80);
+                                if (result != CHANS_VM_OK) {
+                                    char* s = (char*)(&pVm->accumulator)->value.string_v->str;
+                                    s32 snpLen = snprintf(s, 0x40, "%lld", (u64)unk_r25);
+                                    CHANSVmStrCpyToU16FromU8((wchar_t*)s, s, snpLen);
+                                    (&pVm->accumulator)->value.string_v->len = VM_STR_LENGTH(snpLen);
+                                    if ((&pVm->accumulator)->value.string_v->len != 0) {
+                                        result = CHANS_VM_OK;
+                                    }
                                 }
                             }
+                            if (result != CHANS_VM_OK) {
+                                result = CHANS_VM_ERR_GET_PROPERTY_NAME;
+                                break;
+                            }
+                        } else {
+                            found = 0;
                         }
-                        if (result != CHANS_VM_OK) {
-                            result = CHANS_VM_ERR_GET_PROPERTY_NAME;
-                            break;
-                        }
+                    } else {
+                        found = 0;
                     }
-                    unk_r25 = idx;
+                    result = CHANS_VM_OK;
+                    unk_r25 = 0;
                 }
-                if ((result != CHANS_VM_OK) || (idx != 0)) {
-                    result = CHANS_VM_ERR_GET_PROPERTY_NAME;
-                }
-                if (result == CHANS_VM_OK) {
+                if (result == CHANS_VM_OK && found == 0) {
                     u8* pOpData = operandBuf;
-                    uintTemp = (pOpData[2] << 8 & 0x1F00) | pOpData[3];
-                    if (pOpData[2] << 8 & 0x1000) {
-                        uintTemp = (uintTemp + pVm->pActiveCtx->pc) - 0x1FFC;
+                    uintTemp = ((pOpData[2] << 8) | pOpData[3]) & CHANS_VM_OP_BRANCH_OFFSET_BIAS;
+                    if (((pOpData[2] << 8) | pOpData[3]) & CHANS_VM_OP_BRANCH_OFFSET_SIGN) {
+                        uintTemp = (uintTemp + pVm->pActiveCtx->pc) - CHANS_VM_OP_BRANCH_OFFSET_BIAS_5;
                     } else {
                         uintTemp += pVm->pActiveCtx->pc + 5;
                     }
-                    if ((uintTemp == 0) ||
-                        (uintTemp >= pVm->pActiveCtx->pDbg->codeSize)) { result = CHANS_VM_ERR_CODE_RANGE; break; }
+                    if ((uintTemp < 1) ||
+                        (uintTemp >= pVm->pActiveCtx->pDbg->codeSize)) {
+                        result = CHANS_VM_ERR_CODE_RANGE;
+                        break;
+                    }
                     pVm->pActiveCtx->pc = uintTemp;
                     step = 0;
                 }
                 break;
             }
 
-            case CHANS_VM_OP_NEW_ARRAY:
+            case CHANS_VM_OP_NEW_ARRAY: {
                 step = 3;
                 operandBuf = VmGetOperand(vm, 1, 3);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                unk_r26 = *(u16*)operandBuf;
-                result = CHANSVmDeleteObject(vm, &pVm->accumulator);
-                if (result == CHANS_VM_OK) {
-                    result = VmPushFuncReturnInfo(vm, unk_r26, unk_r26, 0);
+                if (operandBuf == NULL) { return CHANS_VM_ERR_CODE_RANGE; }
+                unk_r26 = (operandBuf[0] << 8) | operandBuf[1];
+                {
+                    CHANSVmObjHdr* pAcc = &pVm->accumulator;
+                    result = CHANSVmDeleteObject(vm, pAcc);
                     if (result == CHANS_VM_OK) {
-                        pVm->accumulator.type = CHANS_VM_TYPE_ARRAY;
-                        pVm->accumulator.parentCls = pVm->pArrayCls;
-                        if (CHANSVmNewObjData(vm, &pVm->accumulator, 0x18) != NULL) {
-                            if (unk_r26 != 0) {
-                                result = VmArrayExpandCommon(vm, &pVm->accumulator, unk_r26, 0, TRUE);
-                                if (result == CHANS_VM_OK) { result = CHANS_VM_ERR_CALL_NEW_ARRAY; break; }
+                        result = VmPushFuncReturnInfo(vm, unk_r26, unk_r26, 0);
+                        if (result == CHANS_VM_OK) {
+                            pAcc->type = CHANS_VM_TYPE_ARRAY;
+                            pAcc->parentCls = pVm->pArrayCls;
+                            if (CHANSVmNewObjData(vm, pAcc, 0x18) != NULL) {
+                                if (unk_r26 != 0) {
+                                    result = VmArrayExpandCommon(vm, pAcc, unk_r26, 0, TRUE);
+                                    if (result == CHANS_VM_OK) {
+                                        result = CHANS_VM_ERR_CALL_NEW_ARRAY;
+                                        break;
+                                    }
+                                }
+                                result = VmReturnWithValue(vm, 0);
+                            } else {
+                                result = CHANS_VM_ERR_CALL_NEW_ARRAY;
                             }
-                            result = VmReturnWithValue(vm, 0);
-                        } else {
-                            result = CHANS_VM_ERR_CALL_NEW_ARRAY;
                         }
                     }
                 }
                 break;
+            }
 
             case CHANS_VM_OP_JUMP:
                 operandBuf = VmGetOperand(vm, 1, 4);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                uintTemp = operandBuf[2] | (operandBuf[1] << 8) | (operandBuf[0] << 16);
-                if (operandBuf[0] << 16 & 0x800000) {
-                    uintTemp = uintTemp + pVm->pActiveCtx->pc - 0xFFFFFF;
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
+                }
+                uintTemp = (operandBuf[0] << 16) | (operandBuf[1] << 8) | operandBuf[2];
+                if (uintTemp & CHANS_VM_OP_JUMP_OFFSET_SIGN) {
+                    uintTemp = uintTemp + pVm->pActiveCtx->pc - CHANS_VM_OP_JUMP_OFFSET_BIAS;
                 } else {
                     uintTemp += pVm->pActiveCtx->pc + 4;
                 }
-                if ((uintTemp == 0) ||
-                    (uintTemp >= pVm->pActiveCtx->pDbg->codeSize)) { result = CHANS_VM_ERR_CODE_RANGE; break; }
+                if ((uintTemp < 1) ||
+                    (uintTemp >= pVm->pActiveCtx->pDbg->codeSize)) {
+                    result = CHANS_VM_ERR_CODE_RANGE;
+                    break;
+                }
                 pVm->pActiveCtx->pc = uintTemp;
                 step = 0;
                 result = CHANS_VM_OK;
                 break;
 
             case CHANS_VM_OP_STORE_UNDEFINED:
-                result = VmStore(vm, &pVm->accumulator, (CHANSVmObjHdr*)((u8*)pConstObj + 0xa0));
+                result = VmStore(vm, &pVm->accumulator, (CHANSVmObjHdr*)&pConstObj->undefinedArray[4]);
                 break;
 
             case CHANS_VM_OP_DELETE_SYMBOL:
                 step = 3;
                 operandBuf = VmGetOperand(vm, 1, 3);
-                if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-                foundObj = CHANSVm_81455654(vm, (operandBuf[0] & 0x1F) << 8 | operandBuf[1]);
+                if (operandBuf == NULL) {
+                    return CHANS_VM_ERR_CODE_RANGE;
+                }
+                foundObj = CHANSVm_81455654(vm, ((operandBuf[0] << 8) | operandBuf[1]) & 0x1FFF);
                 result = VmDeleteCommon(vm, foundObj);
                 break;
 
@@ -7721,44 +7849,38 @@ done_2d:
                 result = CHANS_VM_ERR_RESERVED_OPCODE;
                 break;
             }
-        } else if ((opcodeVal & 0xc0) == 0x40) {
+        } else if (VM_OPCLASS(opcodeVal) == VM_OPCLASS_SYMBOL) {
             step = 2;
             operandBuf = VmGetOperand(vm, 0, 2);
-            if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-            uintTemp = opcodeVal & 0x20;
-            unk_r26 = (opcodeVal & 0x1F) << 8 | operandBuf[1];
-            if (uintTemp == 0x20) {
+            if (operandBuf == NULL) {
+                return CHANS_VM_ERR_CODE_RANGE;
+            }
+            unk_r26 = ((opcodeVal << 8) | operandBuf[1]) & 0x1FFF;
+            if ((s32)(opcodeVal & CHANS_VM_OP_SYMBOL_STORE) != CHANS_VM_OP_SYMBOL_STORE) {
+                if ((s32)(opcodeVal & CHANS_VM_OP_SYMBOL_STORE) > CHANS_VM_OP_SYMBOL_STORE) {
+                    result = CHANS_VM_ERR_RESERVED_OPCODE;
+                } else {
+                    foundObj = CHANSVm_81455654(vm, unk_r26);
+                    result = VmStore(vm, &pVm->accumulator, foundObj);
+                }
+            } else {
                 foundObj = CHANSVm_81455654(vm, unk_r26);
                 result = VmStore(vm, foundObj, &pVm->accumulator);
-            } else if (uintTemp == 0) {
-                foundObj = CHANSVm_81455654(vm, unk_r26);
-                result = VmStore(vm, &pVm->accumulator, foundObj);
-            } else {
-                result = CHANS_VM_ERR_CODE_RANGE; break;
             }
-        } else {
+        } else {  // VM_OPCLASS_BRANCH (0x80-0xFF)
             u32 local_e4;
-            u32 local_e8;
             u32 unk_r23;
             step = 2;
             operandBuf = VmGetOperand(vm, 0, 2);
-            if (operandBuf == NULL) { result = CHANS_VM_ERR_CODE_RANGE; break; }
-            uintTemp = opcodeVal & 0x60;
-            if (uintTemp == 0x40) {
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, &pVm->accumulator);
-            } else if (uintTemp == 0x60) {
-                result = CHANS_VM_OK;
-                local_e4 = 1;
-            } else if (uintTemp == 0x20) {
-                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e8, &pVm->accumulator);
-                if (result == CHANS_VM_OK) {
-                    local_e4 = (local_e8) ? 0 : 1;
-                }
-            } else if (uintTemp == 0) {
+            if (operandBuf == NULL) {
+                return CHANS_VM_ERR_CODE_RANGE;
+            }
+            switch ((int)opcodeVal & CHANS_VM_OP_BRANCH_COND_MASK) {
+            case CHANS_VM_OP_BRANCH_CASE:
                 result = CHANS_VM_ERR_CASE;
                 if ((pVm->pActiveCtx->stackDepth != 0) &&
-                    (pVm->pHeapEnd >=
-                     (CHANSVmObjHdr*)pVm->pObjStackTopBuf + 2)) {
+                    ((CHANSVmObjHdr*)pVm->pObjStackTopBuf + 1 <=
+                     pVm->pHeapEnd)) {
                     CHANSVmObjHdr* stackTop = (CHANSVmObjHdr*)pVm->pObjStackTopBuf;
                     unk_r23 = 0;
                     if (pVm->accumulator.type != stackTop->type) {
@@ -7767,7 +7889,7 @@ done_2d:
                     switch (stackTop->type) {
                     case CHANS_VM_OBJ_TYPE_BLANK:
                         unk_r23 = 1;
-                        break;
+                        goto end_branch_check;
                     case CHANS_VM_OBJ_TYPE_INTEGER: {
                         u32 low1 = *(u32*)stackTop;
                         u32 low2 = *(u32*)&pVm->accumulator;
@@ -7775,79 +7897,95 @@ done_2d:
                         u32 high2 = *((u32*)&pVm->accumulator + 1);
                         u32 xor1 = low1 ^ low2;
                         u32 xor2 = high1 ^ high2;
-                        unk_r23 = (xor1 | xor2) >> 31;
-                        break;
+                        unk_r23 = !(xor1 | xor2);
+                        goto end_branch_check;
                     }
                     case CHANS_VM_OBJ_TYPE_FLOAT: {
                         double d1 = *(double*)stackTop;
                         double curChar = *(double*)&pVm->accumulator;
                         unk_r23 = (d1 == curChar) ? 1 : 0;
-                        break;
+                        goto end_branch_check;
                     }
                     case CHANS_VM_OBJ_TYPE_STRING: {
                         u32 len1_u32, len2_u32;
                         CHANSVmObjHdr* stackObj3 = (CHANSVmObjHdr*)pVm->pObjStackTopBuf;
+                        s32 cmpResult;
                         unk_r23 = 0;
                         len1_u32 = stackObj3->value.wstring_v->len;
                         len2_u32 = pVm->accumulator.value.wstring_v->len;
                         if (len1_u32 == len2_u32) {
-                            s32 cmpResult;
-                            if ((len1_u32 == 0) ||
-                                ((cmpResult = memcmp(
-                                    (void*)stackObj3->value.wstring_v->str,
-                                    (void*)pVm->accumulator.value.wstring_v->str, len1_u32), cmpResult == 0))) {
+                            if (len1_u32 == 0) {
                                 unk_r23 = 1;
+                            } else {
+                                cmpResult = 0;
+                                cmpResult = memcmp(
+                                    (void*)stackObj3->value.wstring_v->str,
+                                    (void*)pVm->accumulator.value.wstring_v->str, len1_u32);
+                                if (cmpResult == 0) {
+                                    unk_r23 = 1;
+                                }
                             }
                         }
-                        break;
+                        goto end_branch_check;
                     }
                     case CHANS_VM_TYPE_ARRAY:
                     case CHANS_VM_TYPE_CLASS_REF:
                     case CHANS_VM_TYPE_OBJECT:
                     case CHANS_VM_TYPE_METHOD_REF: {
                         unk_r23 = 0;
-                        if ((*(u32*)(stackTop + 0xC)) ==
+                        if ((u32)stackTop->parentCls ==
                                 (u32)pVm->accumulator.parentCls &&
-                            ((u8*)stackTop)[0x0A] ==
+                            stackTop->hasData ==
                                 pVm->accumulator.hasData &&
-                            ((((u8*)stackTop)[0x0A] == 0) ||
-                             (*(u32*)stackTop ==
-                              *(u32*)&pVm->accumulator))) {
+                            ((stackTop->hasData == 0) ||
+                             (*(u32*)&stackTop->value ==
+                              *(u32*)&pVm->accumulator.value))) {
                             unk_r23 = 1;
                         }
-                        break;
+                        goto end_branch_check;
                     }
                     default:
                         result = CHANS_VM_ERR_CHECK_STRICT_EQUALITY;
-                        break;
+                        goto done_with_switch;
                     }
 end_branch_check:
-                    if (result == CHANS_VM_OK) {
-                        result = CHANS_VM_OK;
-                        local_e4 = unk_r23;
-                        if (unk_r23 != 0) {
-                            result = CHANSVmPopObject(vm, &pVm->accumulator);
-                        }
+                    local_e4 = unk_r23;
+                    result = CHANS_VM_OK;
+done_with_switch:
+                    if (result == CHANS_VM_OK && local_e4 != 0) {
+                        result = CHANSVmPopObject(vm, NULL);
                     }
                 }
-            } else {
-                result = CHANS_VM_ERR_RESERVED_OPCODE; break;
+                break;
+            case CHANS_VM_OP_BRANCH_FALSE:
+                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e4, &pVm->accumulator);
+                if (result == CHANS_VM_OK) {
+                    local_e4 = !local_e4;
+                }
+                break;
+            case CHANS_VM_OP_BRANCH_TRUE:
+                result = CHANSVmGetBoolean((CHANSVmObjHdr*)&local_e4, &pVm->accumulator);
+                break;
+            case CHANS_VM_OP_BRANCH_ALWAYS:
+                result = CHANS_VM_OK;
+                local_e4 = 1;
+                break;
+            default:
+                return 0x1182;
             }
 
-                if ((result == CHANS_VM_OK) && (local_e4 != 0)) {
-                uintTemp = (opcodeVal << 8 & 0x1F00) | operandBuf[1];
-                if (opcodeVal << 8 & 0x1000) {
-                    uintTemp = (uintTemp + pVm->pActiveCtx->pc) - 0x1FFF;
+            if (result == CHANS_VM_OK && local_e4 != 0) {
+                uintTemp = ((opcodeVal << 8) | operandBuf[1]) & CHANS_VM_OP_BRANCH_OFFSET_BIAS;
+                if (((opcodeVal << 8) | operandBuf[1]) & CHANS_VM_OP_BRANCH_OFFSET_SIGN) {
+                    uintTemp = (uintTemp + pVm->pActiveCtx->pc) - CHANS_VM_OP_BRANCH_OFFSET_BIAS;
                 } else {
                     uintTemp += pVm->pActiveCtx->pc + 2;
                 }
-                if ((uintTemp != 0) &&
-                    (uintTemp < pVm->pActiveCtx->pDbg->codeSize)) {
-                    pVm->pActiveCtx->pc = uintTemp;
-                    step = 0;
-                } else {
-                    result = CHANS_VM_ERR_CODE_RANGE; break;
+                if (uintTemp < 1 || uintTemp >= pVm->pActiveCtx->pDbg->codeSize) {
+                    return CHANS_VM_ERR_CODE_RANGE;
                 }
+                pVm->pActiveCtx->pc = uintTemp;
+                step = 0;
             }
         }
 
@@ -7859,8 +7997,9 @@ end_branch_check:
         }
         {
             u32 newPos;
-            if (pVm->pActiveCtx == NULL) break;
-            if (pVm->pActiveCtx->pDbg == 0) break;
+            if (pVm->pActiveCtx == NULL || pVm->pActiveCtx->pDbg == 0) {
+                return CHANS_VM_ERR_CODE_RANGE;
+            }
             newPos = pVm->pActiveCtx->pc + step;
             if (newPos >= pVm->pActiveCtx->pDbg->codeSize) {
                 return CHANS_VM_ERR_CODE_RANGE;
@@ -7871,9 +8010,5 @@ end_branch_check:
 
     return CHANS_VM_OK;
 
-error_code_range:
-    return CHANS_VM_ERR_CODE_RANGE;
 
-error_3e2:
-    return CHANS_VM_ERR_HEAP_RANGE;
 }

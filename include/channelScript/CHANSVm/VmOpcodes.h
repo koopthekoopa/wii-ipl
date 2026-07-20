@@ -91,12 +91,40 @@ enum CHANSVmOpcode {
     /* 0x80-0xFF: Branch instructions (opcode & 0xC0 == 0x80) */
     CHANS_VM_OP_BRANCH_COND_MASK    = 0x60,  // Bits 5-6: condition type
     CHANS_VM_OP_BRANCH_CASE         = 0x00,  // 0x80-0x9F: strict-equality case match
-    CHANS_VM_OP_BRANCH_FALSE        = 0x20,  // 0xA0-0xBF: branch if falsy
-    CHANS_VM_OP_BRANCH_TRUE         = 0x40,  // 0xC0-0xDF: branch if truthy
+    CHANS_VM_OP_BRANCH_FALSE        = 0x20,  // 0xA0-0xBF: branch if false
+    CHANS_VM_OP_BRANCH_TRUE         = 0x40,  // 0xC0-0xDF: branch if true
     CHANS_VM_OP_BRANCH_ALWAYS       = 0x60,  // 0xE0-0xFF: unconditional branch
 };
 
 // clang-format on
+
+/* Opcode class decode (top 2 bits of opcode byte) */
+#define VM_OPCLASS(op)          ((op) & 0xC0)
+#define VM_OPCLASS_BASE         0x00
+#define VM_OPCLASS_SYMBOL       0x40
+#define VM_OPCLASS_BRANCH       0x80
+
+/* Branch offset extraction (applied to u8 << 8, not raw opcode) */
+#define CHANS_VM_OP_BRANCH_OFFSET_MASK     0x1F00  // (u8 << 8) & this = offset[12:8]
+#define CHANS_VM_OP_BRANCH_OFFSET_SIGN     0x1000  // (u8 << 8) & this = sign (1 = backward)
+#define CHANS_VM_OP_BRANCH_OFFSET_BIAS     0x1FFF  // backward: pc + offset - bias (2-byte instr)
+#define CHANS_VM_OP_BRANCH_OFFSET_BIAS_5   0x1FFC  // same, for 5-byte GET_PROPERTY_NAME instr
+
+/* JUMP 24-bit signed offset (3 operand bytes) */
+#define CHANS_VM_OP_JUMP_OFFSET_SIGN     0x800000  // (u8 << 16) & this = sign (1 = backward)
+#define CHANS_VM_OP_JUMP_OFFSET_BIAS     0xFFFFFF  // backward: pc + offset - bias
+
+enum VmOpKind {
+    VM_OPKIND_ADD   = 0x2B,
+    VM_OPKIND_SUB   = 0x2D,
+    VM_OPKIND_MUL   = 0x2A,
+    VM_OPKIND_DIV   = 0x2F,
+    VM_OPKIND_MOD   = 0x25,
+    VM_OPKIND_CMP   = 0x43,
+    VM_OPKIND_EQ    = 0x3D,
+    VM_OPKIND_BIT   = 0x42,
+    VM_OPKIND_SHIFT = 0x53,
+};
 
 #ifdef __cplusplus
 }
