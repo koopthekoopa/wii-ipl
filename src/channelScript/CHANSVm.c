@@ -14,8 +14,6 @@
 #include <revolution.h>
 #include <revolution/net/NETMisc.h>
 
-extern const double lbl_81694F28 = 0.0;
-extern const double lbl_81694FB8 = 4294967294.0;
 #include <revolution/net/NETDigest.h>
 
 // TODO: Not yet in the SDK
@@ -7214,9 +7212,9 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
         stepCount = 1;
     }
     memset(&tmpObj, 0, sizeof(tmpObj));
+    stackPtr = &tmpCopyObj;
     cZero = 0;
     cNeg2 = -2;
-    stackPtr = &tmpCopyObj;
 
     while (stepCount-- != 0) {
         s32 step;
@@ -7659,7 +7657,7 @@ integer_handling:
 float_handling:
                     {
                         double d = *(double*)stackPtr;
-                        if ((lbl_81694F28 <= d) && (d <= lbl_81694FB8)) {
+                        if ((0.0 <= d) && (d <= 4294967294.0)) {
                             unk_r25 = (u32)d;
                             goto done_2d;
                         }
@@ -7728,15 +7726,14 @@ found_entry:
                             found = 1;
                             result = CHANSVmDeleteObject(vm, &pVm->accumulator);
                             if (result == CHANS_VM_OK) {
-                                CHANSVmNewObject(vm, vmFalse, &pVm->accumulator, CHANS_VM_OBJ_TYPE_STRING, 0x80);
-                                if (result != CHANS_VM_OK) {
+                                CHANSVmObjHdr* hdr = CHANSVmNewObject(vm, vmFalse, &pVm->accumulator, CHANS_VM_OBJ_TYPE_STRING, 0x80);
+                                if (hdr != NULL) {
                                     char* s = (char*)(&pVm->accumulator)->value.string_v->str;
                                     s32 snpLen = snprintf(s, 0x40, "%lld", (u64)unk_r25);
                                     CHANSVmStrCpyToU16FromU8((wchar_t*)s, s, snpLen);
                                     (&pVm->accumulator)->value.string_v->len = VM_STR_LENGTH(snpLen);
-                                    if ((&pVm->accumulator)->value.string_v->len != 0) {
-                                        result = CHANS_VM_OK;
-                                    }
+                                } else {
+                                    result = CHANS_VM_ERR_GET_PROPERTY_NAME;
                                 }
                             }
                             if (result != CHANS_VM_OK) {
