@@ -81,8 +81,8 @@ typedef struct StringEntry {
 } StringTblEntry;
 
 typedef struct DispatchEntry {
-    u32 nameLength : 8;  // (bits 31-24)
-    u32 offset : 24;     // (bits 23-0)
+    u32 nameLength : 8;  // 0x00
+    u32 offset : 24;     // 0x01
 } DispatchEntry;
 
 typedef struct NameTblEntry {
@@ -94,7 +94,7 @@ typedef struct NameTblEntry {
 
 typedef struct SrcLineEntry {
     s32 baseLine;      // 0x00
-    u8 bitfield[0x20]; // 0x04 (32 bytes = 0x20)
+    u8 bitfield[0x20]; // 0x04
 } SrcLineEntry;
 
 typedef struct CHANSVmModule {
@@ -102,7 +102,7 @@ typedef struct CHANSVmModule {
     u32 regionSize;                 // 0x04
     ModuleHeader* pModule;          // 0x08
     u32 codeSize;                   // 0x0C
-    void* pData;                    // 0x10
+    u8* pData;                      // 0x10
     u32 moduleCount;                // 0x14
     ModuleEntry* pModuleTbl;        // 0x18
     u32 nameTblBase;                // 0x1C
@@ -126,17 +126,15 @@ typedef struct ChunkEntry {
 } ChunkEntry;
 
 typedef struct CHANSVmPrivate {
-    vmU8 unk_0x00[6];                      // 0x00
-    vmBool bHasStar;                       // 0x06
-    vmU8 pad_0x07;                         // 0x07
+    vmU8 unk_0x00[8];                      // 0x00
     vmU32 exeStart;                        // 0x08
     vmU32 exeSize;                         // 0x0C
     vmS32 depth;                           // 0x10
     vmU8 unk_0x14[4];                      // 0x14
     CHANSVmExecutionCtx* pContextListHead; // 0x18
     vmU32 minFreeHeapSize;                 // 0x1C
-    vmU32* pHeapStart;                     // 0x20
-    CHANSVmObjHdr* pHeapEnd;               // 0x24
+    vmU8* pHeapStart;                      // 0x20
+    vmU8* pHeapEnd;                        // 0x24
     vmU8* pFreeExeBuf;                     // 0x28
     vmU8* pObjStackTopBuf;                 // 0x2C
     CHANSVmNativeClass* pNativeClasses;    // 0x30

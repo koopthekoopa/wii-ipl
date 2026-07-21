@@ -136,6 +136,7 @@ typedef struct CHANSVmImage {
 /* CLASSES & METHODS */
 
 typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+typedef CHANSVmErr (*CHANSVmOpFunction)(CHANSVm*, CHANSVmObjType, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*);
 
 typedef struct CHANSVmIntConstantList {
     const char* name; // 0x00
@@ -162,7 +163,7 @@ typedef struct CHANSVmMethodList {
 typedef struct CHANSVmNativeMethod {
     struct CHANSVmNativeMethod* next;  // 0x00
     u16 index;                         // 0x04
-    u8 flag;                           // 0x06
+    u8 hasStar;                        // 0x06
     u8 pad_0x07;                       // 0x07
     CHANSVmFunction func;              // 0x08
     undefined unk_0x0C[0x14];            // 0x0C
