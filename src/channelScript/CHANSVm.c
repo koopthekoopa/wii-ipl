@@ -1,7 +1,6 @@
 #include "channelScript/CHANSVm.h"
 #include "channelScript/CHANSVm/CHANSVmInternal.h"
 #include "channelScript/CHANSVmPrivate.h"
-#include <revolution/enc.h>
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -12,8 +11,8 @@
 
 #include <private/sc.h>
 #include <revolution.h>
+#include <revolution/enc.h>
 #include <revolution/net/NETMisc.h>
-
 #include <revolution/net/NETDigest.h>
 
 // TODO: Not yet in the SDK
@@ -7054,24 +7053,8 @@ void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal) {
     pVm->bSignalUpdated = vmTrue;
 }
 
-// TODO: temporarily using a struct to directly access data in .rodata.
-// The original takes .rodata@0x00 as a base pointer and uses offsets from there.
-typedef struct VmConstData {
-    CHANSVmObjHdr undefined;               // 0x00
-    CHANSVmObjHdr unk_0x10[5];             // 0x10
-    CHANSVmObjHdr undefinedArray[5];       // 0x60
-    u8 pad_0xB0[0x20];                     // 0xB0 (CHANSVmFloatConstantList)
-    VmConvertEntry convFuncs[6];           // 0xD0
-    VmResultTypeMatrix resultTypeAdd;      // 0x160
-    VmResultTypeMatrix resultTypeArith;    // 0x184
-    VmResultTypeMatrix resultTypeCmp;      // 0x1A8
-    VmResultTypeMatrix resultTypeEq;       // 0x1CC
-    VmResultTypeMatrix resultTypeBitShift; // 0x1F0
-} VmConstData;
-
 CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
     CHANSVmObjHdr* stackPtr;
-    VmConstData* pConstObj;
     CHANSVmPrivate* pVm;
     s32 cmpHigh;
     u32 cmpLow;
@@ -7079,7 +7062,6 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
     CHANSVmObjHdr tmpCopyObj;
     u32 etypes[8];
 
-    pConstObj = (VmConstData*)&CHANSVmConstStringObjectUndefined;
     pVm = (CHANSVmPrivate*)vm;
 
     if (stepCount == 0) {
@@ -7126,12 +7108,12 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
         if (VM_OPCLASS(opcodeVal) == VM_OPCLASS_BASE) {
             u32 convTypeIdx;
             CHANSVmObjHdr* leftOp;
-            CHANSVmObjHdr* rightOp;
             u32 opKind;
-            u32 typeIdx;
+            CHANSVmObjHdr* rightOp;
             CHANSVmOpFunction opFunc;
             u32 leftTypeByte;
             u32 rightTypeByte;
+            u32 typeIdx;
             u32 typeOffset;
             opSize = 1;
             switch (opcodeVal) {
@@ -7243,7 +7225,7 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
                     result = VmLoadImmInteger(vm, &tmpObj, operandBuf, 1);
                 binary_typecheck:
                     if (result != CHANS_VM_OK) {
-                        goto error_setter;
+                        break;
                     }
 
                     rightTypeByte = rightOp->type;
@@ -7261,27 +7243,27 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
                         const u8* convTbl;
                         switch (opKind) {
                             case VM_OPKIND_ADD: {
-                                convTbl = (u8*)pConstObj->resultTypeAdd;
+                                convTbl = (u8*)VmResultTypeTbl.add;
                                 break;
                             }
                             case VM_OPKIND_MOD:
                             case VM_OPKIND_MUL:
                             case VM_OPKIND_SUB:
                             case VM_OPKIND_DIV: {
-                                convTbl = (u8*)pConstObj->resultTypeArith;
+                                convTbl = (u8*)VmResultTypeTbl.arith;
                                 break;
                             }
                             case VM_OPKIND_CMP: {
-                                convTbl = (u8*)pConstObj->resultTypeCmp;
+                                convTbl = (u8*)VmResultTypeTbl.cmp;
                                 break;
                             }
                             case VM_OPKIND_EQ: {
-                                convTbl = (u8*)pConstObj->resultTypeEq;
+                                convTbl = (u8*)VmResultTypeTbl.arith;
                                 break;
                             }
                             case VM_OPKIND_BIT:
                             case VM_OPKIND_SHIFT: {
-                                convTbl = (u8*)pConstObj->resultTypeBitShift;
+                                convTbl = (u8*)VmResultTypeTbl.bitShift;
                                 break;
                             }
                             default: {
@@ -7806,7 +7788,7 @@ CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount) {
                 }
 
                 case CHANS_VM_OP_STORE_UNDEFINED: {
-                    result = VmStore(vm, &pVm->accumulator, &pConstObj->undefinedArray[4]);
+                    result = VmStore(vm, &pVm->accumulator, (CHANSVmObjHdr*)&CHANSVmConstStringObjectUndefined_[4]);
                     break;
                 }
 
