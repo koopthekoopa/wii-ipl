@@ -29,7 +29,7 @@ typedef BOOL vmBoolInt;
 
 typedef void* vmPtr;
 
-typedef long long int vmInteger;
+typedef signed long long int vmInteger;
 typedef double vmFloat;
 typedef float vmFloat32;
 typedef size_t vmSize;
@@ -85,6 +85,8 @@ typedef struct {
     vmString str;
     vmSize len;
 } vmStringObjVal;
+
+#define CHANSVM_OBJ_FLAG_READONLY 0x80
 
 struct CHANSVmObjHdr {
     union {

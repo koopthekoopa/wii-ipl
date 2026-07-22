@@ -29,8 +29,8 @@ typedef struct FreeBlock {
 
 typedef struct MethodListNode {
     struct MethodListNode* next; // 0x00
-    u32 nameLength;            // 0x04
-    char name[];               // 0x08 (variable)
+    u32 nameLength;              // 0x04
+    char name[];                 // 0x08 (variable)
 } MethodListNode;
 
 typedef struct GlobalObjListNode {
@@ -41,7 +41,7 @@ typedef struct GlobalObjListNode {
 } GlobalObjListNode;
 
 typedef struct ModuleEntry {
-    GlobalObjListNode* pGlobalObj;   // 0x00
+    GlobalObjListNode* pGlobalObj;    // 0x00
     u8 pad_0x04[4];                   // 0x04
     u8 type;                          // 0x08
     u8 flags;                         // 0x09
