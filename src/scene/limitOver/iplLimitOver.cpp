@@ -37,7 +37,8 @@ namespace ipl {
             LANG_CHN
         };
 
-        static const char* wide_pane_names[3][4] = {
+        // from iplChannelTitle.cpp
+        static const char* scWidePanes[3][4] = {
             {
                 "Fre_a",
                 "Fre_d",
@@ -186,9 +187,9 @@ namespace ipl {
                 mpLayout->FindPaneByName("Picture_05")->GetMaterial()->GetTexture(&texObj[1], 0);
                 mpLayout->FindPaneByName("Picture_06")->GetMaterial()->GetTexture(&texObj[2], 0);
 
-                for (int i = 0; i < (int)ARRAY_LENGTH(wide_pane_names); i++) {
-                    for (int j = 0; j < (int)ARRAY_LENGTH(wide_pane_names[0]); j++) {
-                        mpLayout->FindPaneByName(wide_pane_names[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
+                for (int i = 0; i < (int)ARRAY_LENGTH(scWidePanes); i++) {
+                    for (int j = 0; j < (int)ARRAY_LENGTH(scWidePanes[0]); j++) {
+                        mpLayout->FindPaneByName(scWidePanes[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
                     }
                 }
             }

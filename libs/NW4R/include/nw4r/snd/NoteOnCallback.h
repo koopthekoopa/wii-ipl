@@ -18,7 +18,7 @@ namespace nw4r {
 
                 Channel::ChannelCallback channelCallback;  // 0x1C
                 u32 channelCallbackData;                   // 0x20
-            };
+            } NoteOnInfo;
 
             class SeqPlayer;
             class NoteOnCallback {

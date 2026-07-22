@@ -33,8 +33,12 @@ typedef unsigned int uBOOL;
 typedef volatile BOOL vBOOL;
 typedef volatile uBOOL vuBOOL;
 
+#ifndef TRUE
 #define TRUE 1
+#endif
+#ifndef FALSE
 #define FALSE 0
+#endif
 
 #ifndef NULL
 #ifdef __cplusplus

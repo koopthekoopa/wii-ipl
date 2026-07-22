@@ -8,7 +8,11 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             namespace WaveFile {
-                typedef enum Format { FORMAT_PCM8 = 0, FORMAT_PCM16, FORMAT_ADPCM } Format;
+                typedef enum Format {
+                    FORMAT_PCM8 = 0,
+                    FORMAT_PCM16,
+                    FORMAT_ADPCM
+                } Format;
 
                 typedef struct WaveInfo {
                     u8 format;                   // 0x00

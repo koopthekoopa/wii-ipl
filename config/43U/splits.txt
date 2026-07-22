@@ -632,7 +632,7 @@ src/scene/kitayamaTest/iplKitayamaTest.cpp:
 	.text       start:0x813BE010 end:0x813BE9E8
 	.data       start:0x8164FB08 end:0x8164FD80
 
-src/scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp:
+src/scene/kitayamaTest/nandsdworker_autotest.cpp:
 	.text       start:0x813BE9E8 end:0x813C02F8
 	.data       start:0x8164FD80 end:0x81650380
 

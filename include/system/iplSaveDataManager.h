@@ -57,6 +57,8 @@ namespace ipl {
             channel::SInfo& getChanInfo(int page, int index) { return mData.chanInfo[page][index]; }
             textinput::extend::savedata::MemoSetting getMemoSetting() { return mData.memoSetting; }
 
+            void iplSavedata_813596B8(ESTitleId titleId);
+
         private:
             BOOL checkValidApp(ESTitleId titleId);
 

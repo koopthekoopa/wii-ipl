@@ -37,23 +37,27 @@ private:
     static void* makeWaveProc(void*);
 
 private:
-    SetupParam mSetupParam;                             // 0x09c
-    bool unk_0x0b0;                                     // 0x0b0
-    bool mIsSetData;                                    // 0x0b1
-    bool mIsPlaying;                                    // 0x0b2
-    bool mIsSetBuf;                                     // 0x0b3
-    bool mThreadRunning;                                // 0x0b4
-    bool unk_0x0b5;                                     // 0x0b5
-    WaveFileAiff mAiff;                                 // 0x0b8
-    WaveFileWav mWav;                                   // 0x0e8
-    WaveFile* pFile;                                    // 0x114
+    SetupParam mSetupParam;  // 0x9C
+    bool unk_0xB0;           // 0xB0
+    bool mIsSetData;         // 0xB1
+    bool mIsPlaying;         // 0xB2
+    bool mIsSetBuf;          // 0xB3
+    bool mThreadRunning;     // 0xB4
+    bool unk_0xB5;           // 0xB5
+
+    WaveFileAiff mAiff;  // 0xB8
+    WaveFileWav mWav;    // 0xE8
+
+    WaveFile* mpFile;                                   // 0x114
     nw4r::snd::WavePlayer::WavePacket mWavePackets[3];  // 0x118
-    s16* mBuffers[3];                                   // 0x178
-    u32 mCurrSampleIdx;                                 // 0x184
-    undefined4 mDataStarvedCount;                       // 0x188
-    OSThread mThread;                                   // 0x190
-    OSMessageQueue mQueue;                              // 0x4a8
-    OSMessage mQueueBuf[8];                             // 0x4c8
+    s16* mpBuffers[3];                                  // 0x178
+
+    u32 mCurrSampleIdx;     // 0x184
+    u32 mDataStarvedCount;  // 0x188
+
+    OSThread mThread;        // 0x190
+    OSMessageQueue mQueue;   // 0x4a8
+    OSMessage mQueueBuf[8];  // 0x4c8
 };
 
 // extern "C" {

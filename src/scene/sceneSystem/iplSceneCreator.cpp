@@ -43,7 +43,7 @@ namespace ipl {
                 case SCENE_MEMORY:
                 case SCENE_MEMORY_CARD:
                 case SCENE_UNUSED_16:
-                case SCENE_UNUSED_17:
+                case SCENE_UNLOCKED_TITLE:
                 case SCENE_SETTING:
                 case SCENE_SETTING_SELECT:
                 case SCENE_NAKAMURA_TEST:
@@ -52,7 +52,7 @@ namespace ipl {
                 case SCENE_LIMIT_OVER:
                 case SCENE_SD_CHANNEL_SELECT:
                 case SCENE_SD_CHANNEL_TITLE: {
-                    return SCENE_BIG_SIZE;
+                    return BIG_SIZE;
                 }
                 case SCENE_BUTTON:
                 case SCENE_MAIL_ADDRESS_SELECT:
@@ -63,21 +63,21 @@ namespace ipl {
                 case SCENE_FACE_SELECT:
                 case SCENE_BACK_MENU:
                 case SCENE_SD_BUTTON: {
-                    return SCENE_MEDIUM_SIZE;
+                    return MEDIUM_SIZE;
                 }
                 case SCENE_NONE:
                 case SCENE_ROOT:
                 case SCENE_ARROW:
                 case SCENE_TEXT_WRITER:
                 case SCENE_LETTER_WRITER:
-                case SCENE_UNUSED_15:
+                case SCENE_DISK_CHANNEL:
                 case SCENE_SETTING_BG:
                 case SCENE_ADDRESS_EDIT:
                 case SCENE_ADDRESS_ADD_SELECT:
                 case SCENE_REBOOT:
-                case SCENE_UNUSED_33:
+                case SCENE_LOCKED_TITLE:
                 default: {
-                    return SCENE_SMALL_SIZE;
+                    return SMALL_SIZE;
                 }
             }
         }

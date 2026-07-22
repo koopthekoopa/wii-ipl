@@ -4,7 +4,69 @@
 
 #include <math.h>
 
-#include <prim/eggAssert.h>
+#include <egg/prim.h>
+
+static void memcpy_s(void* _dest, void* _src, u32 size) {
+    u8* src = (u8*)_src;
+    u32 srcAlign, destAlign;
+    srcAlign = reinterpret_cast<u32>(src) & 3;
+    destAlign = reinterpret_cast<u32>(_dest) & 3;
+    if (srcAlign == destAlign && (size & 0x0f) == 0) {
+        u8* dest = (u8*)_dest;
+        EGG_ASSERTLINE(70, (reinterpret_cast<u32>(src) & 0x03) == 0);
+        EGG_ASSERTLINE(71, (reinterpret_cast<u32>(dest) & 0x03) == 0);
+        EGG_ASSERTLINE(72, (size & 0x0f) == 0);
+
+        u32* src32 = (u32*)src;
+        u32* dest32 = (u32*)dest;
+        for (int steps = size / 16; steps != 0; steps--) {
+            u32 w3, w2, w1, w0;
+            w0 = src32[0];
+            w1 = src32[1];
+            w2 = src32[2];
+            w3 = src32[3];
+            src32 += 4;
+
+            dest32[0] = w0;
+            dest32[1] = w1;
+            dest32[2] = w2;
+            dest32[3] = w3;
+            dest32 += 4;
+        }
+    } else if (srcAlign == destAlign && size >= 0x10) {
+        u8* dest = (u8*)_dest;
+        if ((reinterpret_cast<u32>(src) & 0x03) != 0) {
+            for (u8 steps = 4 - (reinterpret_cast<u32>(src) & 3); steps != 0; steps--) {
+                size--;
+                u8 b = *src++;
+                *dest = b;
+                dest++;
+            }
+        }
+
+        for (; size >= 4; size -= 4) {
+            u32 w = *(u32*)src;
+            src += 4;
+
+            *(u32*)dest = w;
+            dest += 4;
+        }
+        if (size != 0) {
+            for (; size != 0; size--) {
+                u8 b = *src++;
+                *dest = b;
+                dest++;
+            }
+        }
+    } else {
+        u8* dest = (u8*)_dest;
+        for (; size != 0; size--) {
+            u8 b = *src++;
+            *dest = b;
+            dest++;
+        }
+    }
+}
 
 /* For AIFF */
 
@@ -190,17 +252,18 @@ f32 pow2(f32 x) {
 }
 
 WaveFileAiff::WaveFileAiff() {
-    pDataBase = NULL;
-    pDataCur = NULL;
+    mpDataBase = NULL;
+    mpDataCur = NULL;
 }
 
 bool WaveFileAiff::init(const void* dataOffset, u32 dataLen) {
     BinaryReader reader((u8*)dataOffset);
 
     u32 chunkID = reader.readTag();
-    EGG_ASSERT(chunkID == 'FORM', 0xd6);
-    if (chunkID != 'FORM')
+    EGG_ASSERTLINE(214, chunkID == 'FORM');
+    if (chunkID != 'FORM') {
         return false;
+    }
 
     u32 fileSize = reader.read32();
     u32 format = reader.readTag();
@@ -208,23 +271,26 @@ bool WaveFileAiff::init(const void* dataOffset, u32 dataLen) {
     u16 markerIdBegin, markerIdEnd;
     u8* fileEnd = (u8*)dataOffset + fileSize;
 
-    EGG_ASSERT(format == 'AIFF', 0xdd);
-    if (format != 'AIFF')
+    EGG_ASSERTLINE(221, format == 'AIFF');
+    if (format != 'AIFF') {
         return false;
+    }
 
     u32 offsetAfterHdr = reader.getOffset();
 
     BOOL ret = reader.seekChunk('COMM', fileEnd);
-    EGG_ASSERT(ret, 0xe4);
-    if (!ret)
+    EGG_ASSERTLINE(228, ret);
+    if (!ret) {
         return false;
+    }
 
     mNumChans = reader.read16();
     mFrames = reader.read32();
     mBits = reader.read16();
-    EGG_ASSERT(mBits == 16, 0xef);
-    if (mBits != 16)
+    EGG_ASSERTLINE(239, mBits == 16);
+    if (mBits != 16) {
         return false;
+    }
 
     // Why did Apple choose an 80-bit float for this?
     // If it was a 64-bit floating point number, it literally would've taken the
@@ -243,24 +309,21 @@ bool WaveFileAiff::init(const void* dataOffset, u32 dataLen) {
         markerIdEnd = reader.read16();
 
         switch (loopMode) {
-            case 0:  // No looping
+            case 0: {  // No looping
                 mIsLoop = false;
                 break;
-
+            }
             case 1: {  // Forward looping
                 mIsLoop = true;
 
                 reader.seekTo(offsetAfterHdr);
                 ret = reader.seekChunk('MARK', fileEnd);
-                EGG_ASSERT(ret, 0x10c);
+                EGG_ASSERTLINE(268, ret);
 
                 int markerCount = reader.read16();
-                // reader.advance(2);
                 for (int i = 0; i < markerCount; i++) {
                     int markerId = reader.read16();
-                    // reader.advance(2);
                     u32 position = reader.read32();
-                    // reader.advance(6);
                     u8 pstringLen = reader.read8();
                     if (markerId == markerIdBegin) {
                         mLoopStart = position;
@@ -272,13 +335,12 @@ bool WaveFileAiff::init(const void* dataOffset, u32 dataLen) {
                 }
                 break;
             }
-
             case 2:  // Forward backward looping
-            default:
-                // reader.advance(0xe);
-                system_print(true, __FILE__, "Unsupported LoopMode %d", loopMode);
+            default: {
+                EGG_PRINT("Unsupported LoopMode %d", loopMode);
                 mIsLoop = false;
                 break;
+            }
         }
     } else {
         mIsLoop = false;
@@ -286,20 +348,22 @@ bool WaveFileAiff::init(const void* dataOffset, u32 dataLen) {
 
     reader.seekTo(offsetAfterHdr);
     ret = reader.seekChunk('SSND', fileEnd);
-    EGG_ASSERT(ret, 0x130);
+    EGG_ASSERTLINE(304, ret);
 
     dataOffset = (void*)reader.read32();
     u32 dataBlockSize = reader.read32();
 
-    EGG_ASSERT(dataOffset == 0, 0x134);
-    EGG_ASSERT(dataBlockSize == 0, 0x135);
-    if (dataOffset != 0)
+    EGG_ASSERTLINE(308, dataOffset == 0);
+    EGG_ASSERTLINE(309, dataBlockSize == 0);
+    if (dataOffset != 0) {
         return false;
-    if (dataBlockSize != 0)
+    }
+    if (dataBlockSize != 0) {
         return false;
+    }
 
-    pDataCur = (s16*)reader.getRead();
-    pDataBase = pDataCur;
+    mpDataCur = (s16*)reader.getRead();
+    mpDataBase = mpDataCur;
 
     return true;
 }
@@ -324,36 +388,43 @@ bool WaveFileAiff::checkFile(const void* _data, u32 _dataLen, bool ignoreSize) {
     BinaryReader reader((u8*)data);
 
     chunkID = reader.readTag();
-    if (chunkID != 'FORM')
+    if (chunkID != 'FORM') {
         return false;
+    }
 
     fileSize = reader.read32();
-    if (!ignoreSize && ROUNDUP(fileSize + 8, 0x20) != ROUNDUP(dataLen, 0x20))
+    if (!ignoreSize && OSRoundUp32B(fileSize + 8) != OSRoundUp32B(dataLen)) {
         return false;
+    }
 
     format = reader.readTag();
     fileEnd = (u8*)data + fileSize;
-    if (format != 'AIFF')
+    if (format != 'AIFF') {
         return false;
+    }
 
     offsetAfterHdr = reader.getOffset();
 
     ret = reader.seekChunk('COMM', fileEnd);
-    if (!ret)
+    if (!ret) {
         return false;
+    }
 
     self->mNumChans = reader.read16();
 
     // Either 1 or 2 channels
-    if (self->mNumChans == 0)
+    if (self->mNumChans == 0) {
         return false;
-    if (self->mNumChans > 2)
+    }
+    if (self->mNumChans > 2) {
         return false;
+    }
 
     self->mFrames = reader.read32();
     self->mBits = reader.read16();
-    if (self->mBits != 16)
+    if (self->mBits != 16) {
         return false;
+    }
 
     // Why did apple choose an 80-bit float for this?
     // If it was a 64-bit floating point number, it literally would've taken the
@@ -363,9 +434,10 @@ bool WaveFileAiff::checkFile(const void* _data, u32 _dataLen, bool ignoreSize) {
     u32 f80_mantissaLo = reader.read32();
     self->mSamplingRate = self->decodeIeeeExtended(f80_signExpon, f80_mantissaHi, f80_mantissaLo);
 
-    // Sampling rate between 4000hz and 48khz
-    if (self->mSamplingRate > 48000 || self->mSamplingRate < 4000)
+    // Sampling rate between 4khz and 48khz
+    if (self->mSamplingRate > 48000 || self->mSamplingRate < 4000) {
         return false;
+    }
 
     reader.seekTo(offsetAfterHdr);
     if (reader.seekChunk('INST', fileEnd)) {
@@ -379,13 +451,12 @@ bool WaveFileAiff::checkFile(const void* _data, u32 _dataLen, bool ignoreSize) {
             case 0:  // No looping
                 self->mIsLoop = false;
                 break;
-
             case 1: {  // Forward looping
                 self->mIsLoop = true;
 
                 reader.seekTo(offsetAfterHdr);
                 ret = reader.seekChunk('MARK', fileEnd);
-                EGG_ASSERT(ret, 0x180);
+                EGG_ASSERTLINE(384, ret);
 
                 for (i = 0, markerCount = reader.read16(); i < markerCount; i++) {
                     int markerId = reader.read16();
@@ -401,13 +472,12 @@ bool WaveFileAiff::checkFile(const void* _data, u32 _dataLen, bool ignoreSize) {
                 }
                 break;
             }
-
             case 2:  // Forward backward looping
-            default:
-                // reader.advance(0xe);
-                system_print(true, __FILE__, "Unsupported LoopMode %d", loopMode);
+            default: {
+                EGG_PRINT("Unsupported LoopMode %d", loopMode);
                 self->mIsLoop = false;
                 break;
+            }
         }
     } else {
         self->mIsLoop = false;
@@ -415,115 +485,60 @@ bool WaveFileAiff::checkFile(const void* _data, u32 _dataLen, bool ignoreSize) {
 
     reader.seekTo(offsetAfterHdr);
     ret = reader.seekChunk('SSND', fileEnd);
-    if (!ret)
+    if (!ret) {
         return false;
+    }
 
     u32 dataOffset = reader.read32();
     u32 dataBlockSize = reader.read32();
 
-    EGG_ASSERT(dataOffset == 0, 0x1a8);
-    EGG_ASSERT(dataBlockSize == 0, 0x1a9);
-    if (dataOffset != 0)
+    EGG_ASSERTLINE(424, dataOffset == 0);
+    EGG_ASSERTLINE(425, dataBlockSize == 0);
+    if (dataOffset != 0) {
         return false;
-    if (dataBlockSize != 0)
+    }
+    if (dataBlockSize != 0) {
         return false;
+    }
 
-    self->pDataCur = (s16*)reader.getRead();
-    self->pDataBase = self->pDataCur;
+    self->mpDataCur = (s16*)reader.getRead();
+    self->mpDataBase = self->mpDataCur;
 
-    if ((dataLen - ((u8*)self->pDataCur - (u8*)data)) / (self->mNumChans * 2) < self->mFrames)
+    if ((dataLen - ((u8*)self->mpDataCur - (u8*)data)) / (self->mNumChans * 2) < self->mFrames) {
         return false;
+    }
 
     if (self->mIsLoop != false) {
         // Loop start must be before end, start must be before end of data, end must
         // be at or before end of data
-        if (self->mLoopStart >= self->mLoopEnd)
+        if (self->mLoopStart >= self->mLoopEnd) {
             return false;
-        if (self->mLoopStart >= self->mFrames)
+        }
+        if (self->mLoopStart >= self->mFrames) {
             return false;
-        if (self->mLoopEnd > self->mFrames)
+        }
+        if (self->mLoopEnd > self->mFrames) {
             return false;
+        }
     }
 
     return true;
 }
 
-static void memcpy_a(void* _dest, void* _src, u32 size) {
-    u8* src = (u8*)_src;
-    u32 srcAlign, destAlign;
-    srcAlign = reinterpret_cast<u32>(src) & 3;
-    destAlign = reinterpret_cast<u32>(_dest) & 3;
-    if (srcAlign == destAlign && (size & 0x0f) == 0) {
-        u8* dest = (u8*)_dest;
-        EGG_ASSERT((reinterpret_cast<u32>(src) & 0x03) == 0, 0x46);
-        EGG_ASSERT((reinterpret_cast<u32>(dest) & 0x03) == 0, 0x47);
-        EGG_ASSERT((size & 0x0f) == 0, 0x48);
-
-        u32* src32 = (u32*)src;
-        u32* dest32 = (u32*)dest;
-        for (int steps = size / 16; steps != 0; steps--) {
-            u32 w3, w2, w1, w0;
-            w0 = src32[0];
-            w1 = src32[1];
-            w2 = src32[2];
-            w3 = src32[3];
-            src32 += 4;
-
-            dest32[0] = w0;
-            dest32[1] = w1;
-            dest32[2] = w2;
-            dest32[3] = w3;
-            dest32 += 4;
-        }
-    } else if (srcAlign == destAlign && size >= 0x10) {
-        u8* dest = (u8*)_dest;
-        if ((reinterpret_cast<u32>(src) & 0x03) != 0) {
-            for (u8 steps = 4 - (reinterpret_cast<u32>(src) & 3); steps != 0; steps--) {
-                size--;
-                u8 b = *src++;
-                *dest = b;
-                dest++;
-            }
-        }
-
-        for (; size >= 4; size -= 4) {
-            u32 w = *(u32*)src;
-            src += 4;
-
-            *(u32*)dest = w;
-            dest += 4;
-        }
-        // }
-        if (size != 0) {
-            for (; size != 0; size--) {
-                u8 b = *src++;
-                *dest = b;
-                dest++;
-            }
-        }
-    } else {
-        u8* dest = (u8*)_dest;
-        for (; size != 0; size--) {
-            u8 b = *src++;
-            *dest = b;
-            dest++;
-        }
-    }
-}
-
 s32 WaveFileAiff::readData(s16* dataOut, s32 numSamples) {
-    if (pDataCur == NULL)
+    if (mpDataCur == NULL) {
         return 0;
+    }
 
-    u32 offset = pDataCur - pDataBase;
+    u32 offset = mpDataCur - mpDataBase;
     s32 remainingSamples = mFrames * mNumChans - offset;
     if (numSamples > remainingSamples) {
         numSamples = remainingSamples;
     }
 
-    memcpy_a(dataOut, pDataCur, numSamples << 1);
+    memcpy_s(dataOut, mpDataCur, numSamples << 1);
 
-    pDataCur += numSamples;
+    mpDataCur += numSamples;
     return numSamples;
 }
 
@@ -538,7 +553,7 @@ f64 WaveFileAiff::decodeIeeeExtended(u16 signExpon, u32 mantissaHi, u32 mantissa
         val = 0.0;
     } else {
         // Assert not infinity or NaN
-        EGG_ASSERT(expon != 0x7FFF, 0x1d5);
+        EGG_ASSERTLINE(469, expon != 0x7FFF);
 
         // Combine mantissas
         int power = expon - 16414;
@@ -549,8 +564,8 @@ f64 WaveFileAiff::decodeIeeeExtended(u16 signExpon, u32 mantissaHi, u32 mantissa
 }
 
 WaveFileWav::WaveFileWav() {
-    pDataBase = NULL;
-    pDataCur = NULL;
+    mpDataBase = NULL;
+    mpDataCur = NULL;
 }
 
 bool WaveFileWav::init(const void* data, u32 dataLen) {
@@ -558,14 +573,16 @@ bool WaveFileWav::init(const void* data, u32 dataLen) {
 
     u32 riffTag = reader.peekTag();
     reader.advance(4);
-    if (riffTag != 'RIFF')
+    if (riffTag != 'RIFF') {
         return false;
+    }
 
     u32 fileSize = reader.read32();
     u8* fileEnd = (u8*)data + fileSize;
 
-    if (reader.readTag() != 'WAVE')
+    if (reader.readTag() != 'WAVE') {
         return false;
+    }
 
     u32 offsetAfterRiffChunk = reader.getOffset();
 
@@ -581,20 +598,22 @@ bool WaveFileWav::init(const void* data, u32 dataLen) {
 
     mBits = reader.read16();
 
-    if (audioFmt != 1)
+    if (audioFmt != 1) {
         return false;
-    if (mBits != 16)
+    }
+    if (mBits != 16) {
         return false;
+    }
 
     reader.seekTo(offsetAfterRiffChunk);
     if (reader.seekChunk('smpl', fileEnd)) {
-        reader.seekTo(reader.getOffset() + 0x1c);
-        // reader.advance(0x1c);
+        reader.seekTo(reader.getOffset() + 0x1C);
+        // reader.advance(0x1C);
 
         // sample_loop_count
         if (reader.read32() > 0) {
             mIsLoop = true;
-            reader.seekTo(reader.getOffset() + 0xc);
+            reader.seekTo(reader.getOffset() + 0x0C);
             mLoopStart = reader.read32();
             mLoopEnd = reader.read32() + 1;
         } else {
@@ -613,8 +632,8 @@ bool WaveFileWav::init(const void* data, u32 dataLen) {
     u32 dataSize = reader.read32();
     mFrames = dataSize / mNumChans / (mBits / 8);
 
-    pDataCur = (s16*)reader.getRead();
-    pDataBase = pDataCur;
+    mpDataCur = (s16*)reader.getRead();
+    mpDataBase = mpDataCur;
 
     return true;
 }
@@ -622,17 +641,20 @@ bool WaveFileWav::init(const void* data, u32 dataLen) {
 bool WaveFileWav::checkFile(const void* data, u32 dataLen, bool ignoreSize) {
     BinaryReaderLittleEndian reader((u8*)data);
 
-    if (reader.readTag() != 'RIFF')
+    if (reader.readTag() != 'RIFF') {
         return false;
+    }
 
     u32 fileSize = reader.read32();
-    if (!ignoreSize && ROUNDUP(fileSize + 8, 0x20) != ROUNDUP(dataLen, 0x20))
+    if (!ignoreSize && OSRoundUp32B(fileSize + 8) != OSRoundUp32B(dataLen)) {
         return false;
+    }
 
     u8* fileEnd = (u8*)data + fileSize;
 
-    if (reader.readTag() != 'WAVE')
+    if (reader.readTag() != 'WAVE') {
         return false;
+    }
 
     u32 offsetAfterRiffChunk = reader.getOffset();
 
@@ -649,14 +671,17 @@ bool WaveFileWav::checkFile(const void* data, u32 dataLen, bool ignoreSize) {
     mBits = reader.read16();
 
     // Audio format as PCM only (no floats)
-    if (audioFmt != 1)
+    if (audioFmt != 1) {
         return false;
+    }
 
     // Either 1 or 2 channels
-    if (mNumChans == 0)
+    if (mNumChans == 0) {
         return false;
-    if (mNumChans > 2)
+    }
+    if (mNumChans > 2) {
         return false;
+    }
 
     // Sampling rate between 4000hz and 48khz
     if (mSamplingRate > 48000 || mSamplingRate < 4000) {
@@ -664,18 +689,18 @@ bool WaveFileWav::checkFile(const void* data, u32 dataLen, bool ignoreSize) {
     }
 
     // 16-bit bit depth only
-    if (mBits != 16)
+    if (mBits != 16) {
         return false;
+    }
 
     reader.seekTo(offsetAfterRiffChunk);
     if (reader.seekChunk('smpl', fileEnd)) {
-        reader.seekTo(reader.getOffset() + 0x1c);
-        // reader.advance(0x1c);
+        reader.seekTo(reader.getOffset() + 0x1C);
 
         // sample_loop_count
         if (reader.read32() > 0) {
             mIsLoop = true;
-            reader.seekTo(reader.getOffset() + 0xc);
+            reader.seekTo(reader.getOffset() + 0x0C);
             mLoopStart = reader.read32();
             mLoopEnd = reader.read32() + 1;
         } else {
@@ -686,48 +711,54 @@ bool WaveFileWav::checkFile(const void* data, u32 dataLen, bool ignoreSize) {
     }
 
     reader.seekTo(offsetAfterRiffChunk);
-    if (reader.seekChunk('data', fileEnd) == FALSE)
+    if (reader.seekChunk('data', fileEnd) == FALSE) {
         return false;
+    }
 
     reader.seekTo(reader.getOffset() - 4);
 
     u32 dataSize = reader.read32();
     mFrames = dataSize / mNumChans / (mBits / 8);
 
-    pDataCur = (s16*)reader.getRead();
-    pDataBase = pDataCur;
+    mpDataCur = (s16*)reader.getRead();
+    mpDataBase = mpDataCur;
 
-    if ((dataLen - ((u8*)pDataCur - (u8*)data)) / (mNumChans * 2) < mFrames)
+    if ((dataLen - ((u8*)mpDataCur - (u8*)data)) / (mNumChans * 2) < mFrames) {
         return false;
+    }
 
     // Loop start must be before end, start must be before end of data, end must
     // be at or before end of data
     if (mIsLoop != false) {
-        if (mLoopStart >= mLoopEnd)
+        if (mLoopStart >= mLoopEnd) {
             return false;
-        if (mLoopStart >= mFrames)
+        }
+        if (mLoopStart >= mFrames) {
             return false;
-        if (mLoopEnd > mFrames)
+        }
+        if (mLoopEnd > mFrames) {
             return false;
+        }
     }
 
     return true;
 }
 
 s32 WaveFileWav::readData(s16* dataOut, s32 numSamples) {
-    if (pDataCur == NULL)
+    if (mpDataCur == NULL) {
         return 0;
+    }
 
-    u32 offset = pDataCur - pDataBase;
+    u32 offset = mpDataCur - mpDataBase;
     s32 remainingSamples = mFrames * mNumChans - offset;
     if (numSamples > remainingSamples) {
         numSamples = remainingSamples;
     }
 
     for (s32 i = 0; i < numSamples; i++) {
-        u16 sample = *pDataCur;
+        u16 sample = *mpDataCur;
         *dataOut++ = (u16)(sample << 8) | (sample >> 8);
-        pDataCur++;
+        mpDataCur++;
     }
     return numSamples;
 }
@@ -735,24 +766,31 @@ s32 WaveFileWav::readData(s16* dataOut, s32 numSamples) {
 s32 WaveFileWav::getLoopEnd() const {
     return mIsLoop ? mLoopEnd : -1;
 }
+
 s32 WaveFileWav::getLoopStart() const {
     return mIsLoop ? mLoopStart : -1;
 }
+
 bool WaveFileWav::isLoop() const {
     return mIsLoop;
 }
+
 void WaveFileWav::setDataCur(u32 sampleOffset) {
-    pDataCur = pDataBase + sampleOffset;
+    mpDataCur = mpDataBase + sampleOffset;
 }
+
 void* WaveFileWav::getDataCur() const {
-    return pDataCur;
+    return mpDataCur;
 }
+
 void* WaveFileWav::getDataBase() const {
-    return pDataBase;
+    return mpDataBase;
 }
+
 s32 WaveFileWav::getFrames() const {
     return mFrames;
 }
+
 u32 WaveFileWav::getBit() const {
     return mBits;
 }
@@ -760,24 +798,31 @@ u32 WaveFileWav::getBit() const {
 s32 WaveFileAiff::getLoopEnd() const {
     return mIsLoop ? mLoopEnd : -1;
 }
+
 s32 WaveFileAiff::getLoopStart() const {
     return mIsLoop ? mLoopStart : -1;
 }
+
 bool WaveFileAiff::isLoop() const {
     return mIsLoop;
 }
+
 void WaveFileAiff::setDataCur(u32 sampleOffset) {
-    pDataCur = pDataBase + sampleOffset;
+    mpDataCur = mpDataBase + sampleOffset;
 }
+
 void* WaveFileAiff::getDataCur() const {
-    return pDataCur;
+    return mpDataCur;
 }
+
 void* WaveFileAiff::getDataBase() const {
-    return pDataBase;
+    return mpDataBase;
 }
+
 s32 WaveFileAiff::getFrames() const {
     return mFrames;
 }
+
 u32 WaveFileAiff::getBit() const {
     return mBits;
 }

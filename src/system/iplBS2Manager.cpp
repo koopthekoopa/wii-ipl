@@ -15,8 +15,8 @@ namespace ipl {
     namespace bs2 {
         Manager::Manager(EGG::Heap* pHeap)
             : mIPLState(IPL_STATE_NO_DISK), mState(BS2_STT_NO_DISK), unk_0x0C(true), unk_0x0D(false), unk_0x0E(false), unk_0x0F(false),
-              mbIsDiagDisc(false), unk_0x11(false), mbHasBanner(FALSE), mUnlockedState(BS2_STT_NO_DISK), mbStartUpdate(false), mEntries(NULL),
-              mEntrySize(1), mEntryOffset(0) {
+              mbIsDiagDisc(false), mbIncludesSeatTitles(false), mbHasBanner(FALSE), mUnlockedState(BS2_STT_NO_DISK), mbStartUpdate(false),
+              mEntries(NULL), mEntrySize(1), mEntryOffset(0) {
             mpBannerBuffer = new (pHeap, DEFAULT_ALIGN) u8[BS2_DEFAULT_BANNER_SIZE];
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
@@ -40,7 +40,7 @@ namespace ipl {
                 BOOL old = OSDisableInterrupts();
 
                 mState = BS2Tick();
-                unk_0x11 = BS2Update_813801D4();
+                mbIncludesSeatTitles = BS2ContainsSeatTitles();
 
                 splashTick(mState);
                 execTick(mState);

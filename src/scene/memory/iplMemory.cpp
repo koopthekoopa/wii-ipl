@@ -710,7 +710,7 @@ namespace ipl {
                             mpSavedataEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = STATE_ON_VERIFY1ST;
                         } else {
-                            mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
+                            mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_DIALOG);
                             mState = STATE_ON_VERIFY_DEL;
                         }
                         break;
@@ -722,7 +722,7 @@ namespace ipl {
                     }
                 }
             } else {
-                mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
+                mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_DIALOG);
                 mState = STATE_ON_VERIFY_DEL;
             }
         }
@@ -979,7 +979,7 @@ namespace ipl {
                     mpSavedataEdit->anmSelectFadeout(MESG_DATA_ALREADY_EXISTS_WII);
                     mState = STATE_ON_VERIFY1ST;
                 } else {
-                    mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_Q);
+                    mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_DIALOG);
                     mState = STATE_ON_VERIFY_COPY;
                 }
             }
@@ -1320,12 +1320,12 @@ namespace ipl {
             if (mpNandSDCardManager->getAsyncResult() == 0) {
                 switch (mActionIntent) {
                     case MEMORY_INTENT_COPY: {
-                        mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_Q);
+                        mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_DIALOG);
                         mState = STATE_ON_VERIFY_COPY;
                         break;
                     }
                     case MEMORY_INTENT_MOVE: {
-                        mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_Q);
+                        mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_DIALOG);
                         mState = STATE_ON_VERIFY_MOVE;
                         break;
                     }
@@ -1372,7 +1372,7 @@ namespace ipl {
 
             if (mPage == MEMORY_PAGE_WII) {
                 if (mpCurrentBox->getBanner()->getFilePerms() == 2) {
-                    mpSavedataEdit->anmSelectFadeout(MESG_DATA_NO_MOVE_BC_COPY_BAN);
+                    mpSavedataEdit->anmSelectFadeout(MESG_DATA_PARTIAL_COPY_ERROR);
                     mState = STATE_ON_VERIFY1ST;
                     return;
                 }
@@ -1425,7 +1425,7 @@ namespace ipl {
                             mpSavedataEdit->anmSelectFadeout(MESG_DATA_ALREADY_EXISTS_WII);
                             mState = STATE_ON_VERIFY1ST;
                         } else {
-                            mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_Q);
+                            mpSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_DIALOG);
                             mState = STATE_ON_VERIFY_MOVE;
                         }
                         break;

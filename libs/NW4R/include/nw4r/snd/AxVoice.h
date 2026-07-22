@@ -34,11 +34,25 @@ namespace nw4r {
                     SYNC_AX_BIQUAD = (1 << 8),
                 } VoiceSyncFlag;
 
-                typedef enum Format { FORMAT_PCM16 = 10, FORMAT_PCM8 = 25, FORMAT_ADPCM = 0 } Format;
+                typedef enum Format {
+                    FORMAT_PCM16 = 10,
+                    FORMAT_PCM8 = 25,
+                    FORMAT_ADPCM = 0
+                } Format;
 
-                typedef enum VoiceType { VOICE_TYPE_NORMAL = 0, VOICE_TYPE_STREAM } VoiceType;
+                typedef enum VoiceType {
+                    VOICE_TYPE_NORMAL = 0,
+                    VOICE_TYPE_STREAM
+                } VoiceType;
 
-                typedef enum SrcType { SRC_NONE = 0, SRC_LINEAR, SRC_4TAP_8K, SRC_4TAP_12K, SRC_4TAP_16K, SRC_4TAP_AUTO } SrcType;
+                typedef enum SrcType {
+                    SRC_NONE = 0,
+                    SRC_LINEAR,
+                    SRC_4TAP_8K,
+                    SRC_4TAP_12K,
+                    SRC_4TAP_16K,
+                    SRC_4TAP_AUTO
+                } SrcType;
 
                 typedef void (*AxVoiceCallback)(AxVoice* drovoice, CallbackStatus status, void* callbackArg);
 

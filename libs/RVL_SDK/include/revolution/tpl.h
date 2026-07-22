@@ -5,10 +5,11 @@
 #include <revolution/gx/GXStruct.h>
 #include <revolution/types.h>
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define TPL_MAGIC 0x0020AF30
 
 typedef struct TPLHeader {
     u16 height;  // 0x00
@@ -24,10 +25,10 @@ typedef struct TPLHeader {
     GXTexFilter minFilter;  // 0x14
     GXTexFilter magFilter;  // 0x18
 
-    f32 LODBias;       // 0x1C
-    u8 edgeLODEnable;  // 0x20
-    u8 minLOD;         // 0x21
-    u8 maxLOD;         // 0x22
+    f32 LODBias;           // 0x1C
+    GXBool edgeLODEnable;  // 0x20
+    u8 minLOD;             // 0x21
+    u8 maxLOD;             // 0x22
 
     u8 unpacked;  // 0x23
 } TPLHeader;

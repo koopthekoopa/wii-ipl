@@ -771,7 +771,7 @@ config.libs = [
         ]
     ),
     IPLSection("channelTitle", [
-            Object(NonMatching, "scene/channelTitle/iplChannelTitle.cpp"),
+            Object(Equivalent,  "scene/channelTitle/iplChannelTitle.cpp"),
         ]
     ),
     IPLSection("faceSelect", [
@@ -784,7 +784,7 @@ config.libs = [
     ),
     IPLSection("kitayamaTest", [
             Object(Equivalent, "scene/kitayamaTest/iplKitayamaTest.cpp"),
-            Object(Matching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
+            Object(Matching, "scene/kitayamaTest/nandsdworker_autotest.cpp"),
         ]
     ),
     IPLSection("letterWriter", [
@@ -899,10 +899,10 @@ config.libs = [
         ]
     ),
     IPLSection("bannerSound", [
-            Object(Equivalent, "bannerSound/AudioWavePlayer.cpp"),
-            Object(Equivalent, "bannerSound/AxAdpcmPlayer.cpp"),
-            Object(Matching, "bannerSound/BannerSoundPlayer.cpp"),
-            Object(Matching, "bannerSound/AudioWaveUtility.cpp"),
+            Object(Equivalent,  "bannerSound/AudioWavePlayer.cpp"),
+            Object(Equivalent,  "bannerSound/AxAdpcmPlayer.cpp"),
+            Object(Matching,    "bannerSound/BannerSoundPlayer.cpp"),
+            Object(Matching,    "bannerSound/AudioWaveUtility.cpp"),
         ]
     ),
     # it decides to do fast optimization for this one

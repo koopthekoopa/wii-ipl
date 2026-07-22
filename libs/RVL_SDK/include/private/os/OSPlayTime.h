@@ -7,6 +7,10 @@
 
 #include <revolution/esp.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum OSPlayTimeType {
     OS_PLAYTIME_PERMANENT = 0,
     OS_PLAYTIME_TIME_LIMIT = 1,
@@ -22,5 +26,9 @@ BOOL __OSWriteExpiredFlagIfSet();
 s32 __OSPlayTimeGetConsumption(ESTicketView* ticket, ESLpEntry* lpEntry, u32* entries);
 
 s32 __OSGetPlayTime(ESTicketView* ticket, OSPlayTimeType* type, u32* arg);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // PRIVATE_OS_PLAYTIME_H

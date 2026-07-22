@@ -10,7 +10,12 @@ namespace nw4r {
         namespace detail {
             class TaskManager {
             public:
-                typedef enum TaskPriority { PRIORITY_LOW = 0, PRIORITY_MIDDLE, PRIORITY_HIGH, PRIORITY_MAX } TaskPriority;
+                typedef enum TaskPriority {
+                    PRIORITY_LOW = 0,
+                    PRIORITY_MIDDLE,
+                    PRIORITY_HIGH,
+                    PRIORITY_MAX
+                } TaskPriority;
 
             public:
                 static TaskManager& GetInstance();

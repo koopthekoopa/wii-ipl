@@ -20,26 +20,26 @@
 >  [!NOTE]
 > At least version 12.0 is required!
 
- - Head to [ghidra.decomp.dev](https://ghidra.decomp.dev/) then create an account and/or login from there.
- - On the "Repository Access" window, select:
-   - Repository: `Wii_IPL_Ghidra`
-   - Role: If you would like to make changes, select `Write`. Otherwise select `Read`.
+- Head to [ghidra.decomp.dev](https://ghidra.decomp.dev/) then create an account and/or login from there.
+- On the "Repository Access" window, select:
+  - Repository: `Wii_IPL_Ghidra`
+  - Role: If you would like to make changes, select `Write`. Otherwise select `Read`.
 - Click Request then wait for your request to be accepted.
 
 ### Opening the repository
 
- - Goto File > New Project
- - Select "Shared Project"
- - You would need to input the following:
-   - Server Name: `ghidra.decomp.dev`
-   - Port Number: `13100`
- - The list of existing servers should show `Wii_IPL_Ghidra`. Select that one.
- - Input where you want the shared project to be saved.
- - You are now ready to open a program! (for now, its just `ipl_v4_3_usa.dol`)
-   - If you have write access and want to make changes to the program, right click on the program that you want to open, and click "Check out".
-     - Do not check the "Request exclusive checkout" option!
-     - Changes will be made to the repository, so make sure that you are checking out to the latest version!
-   - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
+- Goto File > New Project
+- Select "Shared Project"
+- You would need to input the following:
+  - Server Name: `ghidra.decomp.dev`
+  - Port Number: `13100`
+- The list of existing servers should show `Wii_IPL_Ghidra`. Select that one.
+- Input where you want the shared project to be saved.
+- You are now ready to open a program! (for now, its just `ipl_v4_3_usa.dol`)
+  - If you have write access and want to make changes to the program, right click on the program that you want to open, and click "Check out".
+    - Do not check the "Request exclusive checkout" option!
+    - Changes will be made to the repository, so make sure that you are checking out to the latest version!
+  - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
 
 # Code Guidelines
 
@@ -145,13 +145,15 @@ Make sure the guard names are uppercase SNAKE_CASE.
   - Even if the symbol has typos or does not follow the guidelines!
 - Function names with no known symbols should be written in camelCase.
   - This mostly applies to static local and inline functions.
+- Labels must be snake_case.
 - Struct members must be camelCase (and should not include the `m` prefix).
 - Class members must start with the `m` prefix and be in PascalCase.
   - Some types have different prefixes:
     - Static: `sm`
-    - Pointers: `mp`
+    - Pointers (including typedef pointers): `mp`
+	  - `OSMessage` is an exception however. Although it is a typedef `void*`, it's not normally treated as a pointer, and is so it can be casted as anything.
     - Booleans: `mb`
-    - Strings: `ms` (pointer: `msp`)
+    - Strings (including wide strings): `ms` (pointer: `msp`)
 ```cpp
   class MyClass {
       int mMyValue1;

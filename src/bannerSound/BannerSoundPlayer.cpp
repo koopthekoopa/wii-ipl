@@ -4,7 +4,7 @@ static u8 s_player_thread_stack[0x4000];
 s16* pBSWaveBuffer = NULL;
 
 BannerSoundPlayer::BannerSoundPlayer() : mSndMoveValue(), mWavePlayer(), mAdpcmPlayer(), mAdpcmHandle(), unk_0x510(0) {
-    mIsInitialized = 0;
+    mIsInitialized = false;
     mMasterVolume = 1.0f;
 }
 
@@ -13,14 +13,14 @@ BannerSoundPlayer::~BannerSoundPlayer() {
 }
 
 void BannerSoundPlayer::init(s32 prio) {
-    mIsStarted = 0;
+    mIsStarted = false;
     mSoundType = SOUND_TYPE_UNINIT;
     if (prio >= 0) {
         mWavePlayer.makeThread(prio, s_player_thread_stack, 0x4000);
     }
     mWavePlayer.setBuffer(pBSWaveBuffer, SimpleWavePlayer::wsize);
     mAdpcmPlayer.init();
-    mIsInitialized = 1;
+    mIsInitialized = true;
 }
 
 BannerSoundPlayer::SoundType BannerSoundPlayer::checkHeader(void* data, u32 dataLen) {
@@ -36,12 +36,12 @@ BannerSoundPlayer::SoundType BannerSoundPlayer::checkHeader(void* data, u32 data
     return SOUND_TYPE_UNSUPPORTED;
 }
 
-bool BannerSoundPlayer::checkData(void* data, u32 length, bool unk) {
+bool BannerSoundPlayer::checkData(void* data, u32 length, bool ignoreSize) {
     if (*(u32*)data == 'RIFF') {
-        return mWavePlayer.getWav()->checkFile(data, length, unk);
+        return mWavePlayer.getWav()->checkFile(data, length, ignoreSize);
     }
     if (*(u32*)data == 'FORM') {
-        return mWavePlayer.getAiff()->checkFile(data, length, unk);
+        return mWavePlayer.getAiff()->checkFile(data, length, ignoreSize);
     }
     if (*(u32*)data == 'BNS ') {
         return mAdpcmPlayer.checkFile(data, length);
@@ -50,80 +50,95 @@ bool BannerSoundPlayer::checkData(void* data, u32 length, bool unk) {
 }
 
 bool BannerSoundPlayer::start(void* data, u32 length) {
-    bool startSuccess = 0;
+    bool startSuccess = false;
 
     stop(0);
     mSoundType = checkHeader(data, length);
     mSndMoveValue.init();
     switch (mSoundType) {
-        case SOUND_TYPE_WAV:
-            mWavePlayer.setVolume(mMasterVolume);
+        case SOUND_TYPE_WAV: {
+            mWavePlayer.SetVolume(mMasterVolume);
             mWavePlayer.setWavData(data, length);
             startSuccess = mWavePlayer.start();
             break;
-        case SOUND_TYPE_AIFF:
-            mWavePlayer.setVolume(mMasterVolume);
+        }
+        case SOUND_TYPE_AIFF: {
+            mWavePlayer.SetVolume(mMasterVolume);
             mWavePlayer.setAiffData(data, length);
             startSuccess = mWavePlayer.start();
             break;
-        case SOUND_TYPE_ADPCM:
+        }
+        case SOUND_TYPE_ADPCM: {
             mAdpcmPlayer.setVolume(&mAdpcmHandle, mMasterVolume);
             startSuccess = mAdpcmPlayer.start(data, length, &mAdpcmHandle) > 0;
             break;
-
+        }
         case SOUND_TYPE_UNSUPPORTED:
-        default:
+        default: {
             break;
+        }
     }
 
     mIsStarted = startSuccess;
     return startSuccess;
 }
 
-void BannerSoundPlayer::stop(u32 fadeoutSteps) {
-    if (mSoundType == SOUND_TYPE_UNSUPPORTED)
+void BannerSoundPlayer::stop(u32 fadeOut) {
+    if (mSoundType == SOUND_TYPE_UNSUPPORTED) {
         return;
-    if (mSoundType == SOUND_TYPE_UNINIT || !mIsStarted)
+    }
+    if (mSoundType == SOUND_TYPE_UNINIT || !mIsStarted) {
         return;
+    }
 
-    if (fadeoutSteps == 0) {
+    if (fadeOut == 0) {
         switch (mSoundType) {
-            case SOUND_TYPE_WAV:
+            case SOUND_TYPE_WAV: {
                 mWavePlayer.stop();
                 break;
-            case SOUND_TYPE_AIFF:
+            }
+            case SOUND_TYPE_AIFF: {
                 mWavePlayer.stop();
                 break;
-            case SOUND_TYPE_ADPCM:
+            }
+            case SOUND_TYPE_ADPCM: {
                 mAdpcmPlayer.stop(&mAdpcmHandle);
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
         mIsStarted = false;
     } else {
-        mSndMoveValue.moveValue(0.0f, fadeoutSteps);
+        mSndMoveValue.moveValue(0.0f, fadeOut);
     }
 }
 
 void BannerSoundPlayer::pause(bool flag) {
-    if (mSoundType == SOUND_TYPE_UNSUPPORTED)
+    if (mSoundType == SOUND_TYPE_UNSUPPORTED) {
         return;
-    if (mSoundType == SOUND_TYPE_UNINIT || !mIsStarted)
+    }
+    if (mSoundType == SOUND_TYPE_UNINIT || !mIsStarted) {
         return;
+    }
 
     switch (mSoundType) {
-        case SOUND_TYPE_WAV:
+        case SOUND_TYPE_WAV: {
             mWavePlayer.Pause(flag);
             break;
-        case SOUND_TYPE_AIFF:
+        }
+        case SOUND_TYPE_AIFF: {
             mWavePlayer.Pause(flag);
             break;
-        case SOUND_TYPE_ADPCM:
+        }
+        case SOUND_TYPE_ADPCM: {
             mAdpcmPlayer.pause(flag);
             break;
-        default:
+        }
+        default: {
             break;
+        }
     }
 }
 
@@ -133,17 +148,21 @@ void BannerSoundPlayer::calc() {
             stop(0);
         } else {
             switch (mSoundType) {
-                case SOUND_TYPE_WAV:
-                    mWavePlayer.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
+                case SOUND_TYPE_WAV: {
+                    mWavePlayer.SetVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
                     break;
-                case SOUND_TYPE_AIFF:
-                    mWavePlayer.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
+                }
+                case SOUND_TYPE_AIFF: {
+                    mWavePlayer.SetVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
                     break;
-                case SOUND_TYPE_ADPCM:
+                }
+                case SOUND_TYPE_ADPCM: {
                     mAdpcmHandle.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
                     break;
-                default:
+                }
+                default: {
                     break;
+                }
             }
         }
     }
@@ -153,14 +172,17 @@ void BannerSoundPlayer::calc() {
     if (mIsStarted) {
         switch (mSoundType) {
             case SOUND_TYPE_WAV:
-            case SOUND_TYPE_AIFF:
+            case SOUND_TYPE_AIFF: {
                 mIsStarted = mWavePlayer.isPlaying();
                 break;
-            case SOUND_TYPE_ADPCM:
+            }
+            case SOUND_TYPE_ADPCM: {
                 mIsStarted = mAdpcmHandle.isPlaying();
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
     }
 }
@@ -168,17 +190,21 @@ void BannerSoundPlayer::calc() {
 void BannerSoundPlayer::setMasterVolume(f32 newVolume) {
     mMasterVolume = newVolume;
     switch (mSoundType) {
-        case SOUND_TYPE_WAV:
-            mWavePlayer.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
+        case SOUND_TYPE_WAV: {
+            mWavePlayer.SetVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
             break;
-        case SOUND_TYPE_AIFF:
-            mWavePlayer.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
+        }
+        case SOUND_TYPE_AIFF: {
+            mWavePlayer.SetVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
             break;
-        case SOUND_TYPE_ADPCM:
+        }
+        case SOUND_TYPE_ADPCM: {
             mAdpcmHandle.setVolume(mSndMoveValue.getVolumeScale() * mMasterVolume);
             break;
-        default:
+        }
+        default: {
             break;
+        }
     }
 }
 
@@ -198,9 +224,9 @@ void SndMoveValueF32::moveValue(f32 targetVal, u32 steps) {
 bool SndMoveValueF32::update() {
     if (mStepsLeft != 0) {
         if (--mStepsLeft != 0) {
-            this->mVolumeScale -= this->mStepSize;
+            mVolumeScale -= mStepSize;
         } else {
-            this->mVolumeScale = mFinalVal;
+            mVolumeScale = mFinalVal;
         }
         return true;
     }

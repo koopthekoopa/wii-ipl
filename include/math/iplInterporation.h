@@ -47,9 +47,9 @@ namespace ipl {
         template <typename T>
         class HermiteIntp : public Interporation<T> {
         public:
-            HermiteIntp() NO_INLINE {}
+            HermiteIntp() {}
 
-            void init(const T& start, const T& end, f32 maxFrame, f32 param_5, f32 param_6, int playback, f32 speed = 1.0f) {
+            void init(const T& start, const T& end, f32 maxFrame, f32 param_5, f32 param_6, int playback = ANIM_TYPE_FORWARD, f32 speed = 1.0f) {
                 mStart = start;
                 mEnd = end;
                 utility::FrameController::init(playback, maxFrame, 0.0f, speed);

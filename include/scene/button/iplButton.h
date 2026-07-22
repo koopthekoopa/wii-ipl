@@ -309,6 +309,10 @@ namespace ipl {
                 return mbArrowVisible[i];
             }
 
+            void setUnk_0x105(bool flag) {
+                unk_0x105 = flag;
+            }
+
         protected:
             typedef struct Command {
                 enum {

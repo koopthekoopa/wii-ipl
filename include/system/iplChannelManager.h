@@ -14,6 +14,10 @@
 #include "system/iplNandMeta.h"
 #include "system/iplNandShared.h"
 
+#include "scene/iplSceneCreator.h"
+
+#include <wchar.h>
+
 #define CHANNEL_INFO(primary, second, flags, titleId)                                                                                                \
     { primary, second, 0, 0, flags, ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId) }
 
@@ -43,11 +47,6 @@ namespace ipl {
         enum {
             SECONARY_TYPE_NORMAL = 0,
             SECONARY_TYPE_SYSTEM,
-        };
-
-        enum {
-            SCENE_ID_WAD_CHANNEL = 0x0E,  // ?
-            SCENE_ID_DISK_CHANNEL = 0x0F,
         };
 
         static const int MAX_ANIMS = 16;
@@ -101,6 +100,12 @@ namespace ipl {
 
 #define IPL_META_MAGIC "IMET"
 
+        // :/
+        enum {
+            META_BLOCKHDR_FLAG_USE_ALT_SOUND = 0x4000,  // useAltSound
+            META_BLOCKHDR_FLAG_NET_SETTING = 0x100      // needNetSetting
+        };
+
         typedef struct SMetaBlockHeader {
             char magic[4];   // 0x00 (Always "IMET"; "IPL Meta"?)
             u32 headerSize;  // 0x04
@@ -118,13 +123,13 @@ namespace ipl {
                     u32 iconCSIdx : 4;     // 0x01:00000000111100000000000000000000
                     u32 bannerCSIdx : 4;   // 0x01:00000000000011110000000000000000
                     u32 unk_15 : 1;        // 0x02:00000000000000001000000000000000
-                    u32 unk_14 : 1;        // 0x02:00000000000000000100000000000000
+                    u32 useAltSound : 1;   // 0x02:00000000000000000100000000000000
                     u32 unk_13 : 1;        // 0x02:00000000000000000010000000000000
                     u32 unk_12 : 1;        // 0x02:00000000000000000001000000000000
                     u32 unk_11 : 1;        // 0x02:00000000000000000000100000000000
                     u32 unk_10 : 1;        // 0x02:00000000000000000000010000000000
                     u32 unk_09 : 1;        // 0x02:00000000000000000000001000000000
-                    u32 unk_08 : 1;        // 0x02:00000000000000000000000100000000
+                    u32 netSetting : 1;    // 0x02:00000000000000000000000100000000
                     u32 unk_07 : 1;        // 0x03:00000000000000000000000010000000
                     u32 unk_06 : 1;        // 0x03:00000000000000000000000001000000
                     u32 unk_05 : 1;        // 0x03:00000000000000000000000000100000
@@ -143,7 +148,7 @@ namespace ipl {
             u8 reserved0[META_RESERVED_PADDING];  // 0x00
             SMetaBlockHeader blockHdr;            // 0x40
 
-            u16 names[SC_LANG_MAX][NAME_INDEX_MAX][META_CHANNEL_NAME_LENGTH + 1];  // 0x5C
+            wchar_t names[SC_LANG_MAX][NAME_INDEX_MAX][META_CHANNEL_NAME_LENGTH + 1];  // 0x5C
 
             u8 reserved1[588];  // 0x3A4
 
@@ -182,7 +187,7 @@ namespace ipl {
         } SEntry;
 
         typedef struct SChanMgrDiskInMessages {
-            u16 messages[SC_LANG_MAX][META_DISK_IN_MESSAGE_LENGTH];  // 0x00
+            wchar_t messages[SC_LANG_MAX][META_DISK_IN_MESSAGE_LENGTH];  // 0x00
         } SDiskInMessages;
 
         enum {
@@ -233,11 +238,11 @@ namespace ipl {
             void loadLockedMsgAsync(int page, int index);
             BOOL isLoadedLockedMsg();
 
-            u16* getLockedMsg();
+            wchar_t* getLockedMsg();
 
             void moveChannelInfo(int page1, int index1, int page2, int index2);
 
-            u16* getLockedMsgFromBuf(const SDiskInMessages* diskInMsgs) const;
+            wchar_t* getLockedMsgFromBuf(const SDiskInMessages* diskInMsgs) const;
 
             BOOL checkNeedUpdate(int page, int index) const;
             BOOL isParentalRestricted(int page, int index) const;
@@ -262,28 +267,51 @@ namespace ipl {
             SEntry& getChannel(int page, int index) { return mChannels[page][index]; }
 
             ESTitleId getTitleID(int page, int index) const;
-            u16* getTitleName(int page, int index, int nameIndex) const;
+            wchar_t* getTitleName(int page, int index, int nameIndex) const;
 
             /* SEntry */
             bool hasLoadedBnr(int page, int index) const { return mChannels[page][index].loadedBnr; }
             int getSceneID(int page, int index) const { return mChannels[page][index].loadedBnr ? mChannels[page][index].info.sceneID : 0; }
 
             /* SMetaBlockHeader */
-            u32 getMetaHdr_IconRSOIdx(int page, int index) const {
+            u32 getIconRSOIdx(int page, int index) const {
                 return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconRSOIdx : 0;
             }
-            u32 getMetaHdr_IconCSIdx(int page, int index) const {
+            u32 getIconCSIdx(int page, int index) const {
                 return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconCSIdx : 0;
             }
-            u32 getMetaHdr_BannerRSOIdx(int page, int index) const {
+
+            u32 getBannerRSOIdx(int page, int index) const {
                 return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerRSOIdx : 0;
             }
-            u32 getMetaHdr_BannerCSIdx(int page, int index) const {
+            u32 getBannerCSIdx(int page, int index) const {
                 return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerCSIdx : 0;
             }
-            bool isNormalChannel(int page, int index) const {
-                return mChannels[page][index].loadedBnr && mChannels[page][index].info.sceneID != SCENE_ID_DISK_CHANNEL;
+
+            u32 getSoundSize(int page, int index) const {
+                return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.soundSize : 0;
             }
+
+            BOOL checkUseAltSound(int page, int index) const {
+                if (mChannels[page][index].loadedBnr && (mChannels[page][index].metaHdr->blockHdr.flags & META_BLOCKHDR_FLAG_USE_ALT_SOUND) != 0) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+
+            BOOL checkNetSetting(int page, int index) const {
+                if (mChannels[page][index].loadedBnr && (mChannels[page][index].metaHdr->blockHdr.flags & META_BLOCKHDR_FLAG_NET_SETTING) != 0) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+
+            bool isNormalChannel(int page, int index) const {
+                return mChannels[page][index].loadedBnr && mChannels[page][index].info.sceneID != SCENE_DISK_CHANNEL;
+            }
+            bool isMissingTicket(int page, int index) const { return mChannels[page][index].missingTicket; }
 
             int updateInitState();
             int updateWaitSCFlush();
@@ -334,6 +362,10 @@ namespace ipl {
 
             void setUnk_0x1B81(bool flag) { unk_0x1B81 = flag; }
             bool isUnk_0x1B81() { return unk_0x1B81; }
+
+            void resetChJumpLoad() { mbLoadedChJump = false; }
+            bool hasLoadedChJump() { return mbLoadedChJump; }
+            char* getChJumpData() { return mChJumpData; }
 
         private:
             typedef struct MD5Head {

@@ -575,7 +575,7 @@ namespace ipl {
         }
 
         void Calendar::set_textbox_date(int unk, const utility::Date& date) {
-            s32 lang = System::getLanguage();  // unused
+            u32 lang = System::getLanguage();  // unused
             int week = utility::Calendar::getWeek(date.year, date.month, 1);
             int maxDays = utility::Calendar::getDays(date.year, date.month);
 

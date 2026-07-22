@@ -30,7 +30,13 @@ namespace nw4r {
 
                 class SeqLoadCallback {
                 public:
-                    typedef enum Result { RESULT_SUCCESS = 0, RESULT_FAILED, RESULT_CANCELED, RESULT_ASYNC, RESULT_RETRY } Result;
+                    typedef enum Result {
+                        RESULT_SUCCESS = 0,
+                        RESULT_FAILED,
+                        RESULT_CANCELED,
+                        RESULT_ASYNC,
+                        RESULT_RETRY
+                    } Result;
 
                     virtual ~SeqLoadCallback() {}
 

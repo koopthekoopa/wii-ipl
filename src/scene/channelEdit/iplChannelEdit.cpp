@@ -720,7 +720,7 @@ namespace ipl {
                             mpChanAppEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = STATE_ON_VERIFY1ST;
                         } else {
-                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
+                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_DIALOG);
                             mState = STATE_ON_VERIFY_DEL;
                         }
                         break;
@@ -732,7 +732,7 @@ namespace ipl {
                     }
                 }
             } else {
-                mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
+                mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_DIALOG);
                 mState = STATE_ON_VERIFY_DEL;
             }
         }
@@ -996,7 +996,7 @@ namespace ipl {
                             mpChanAppEdit->anmSelectFadeout(MESG_DATA_TOO_FEW_RESOURCES);
                             mState = STATE_ON_VERIFY1ST;
                         } else {
-                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_Q);
+                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_DIALOG);
                             mState = STATE_ON_VERIFY_COPY;
                         }
                     } else {
@@ -1004,7 +1004,7 @@ namespace ipl {
                         mState = STATE_ON_VERIFY1ST;
                     }
                 } else {
-                    mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_Q);
+                    mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_DIALOG);
                     mState = STATE_ON_VERIFY_COPY;
                 }
             }
@@ -1270,9 +1270,9 @@ namespace ipl {
                 } else if (result == NandSDWorker::RESULT_UNK_N12) {
                     mpChanAppEdit->anmTextFadein(MESG_DATA_FILENAME_CONFLICT);
                 } else if (result == NandSDWorker::RESULT_NOT_TRANSFERRABLE) {
-                    mpChanAppEdit->anmTextFadein(mProcessType == PROC_MOV ? MESG_DATA_CANT_MOV_CHAN_2_WII : MESG_DATA_CANT_CPY_CHAN_2_WII);
+                    mpChanAppEdit->anmTextFadein(mProcessType == PROC_MOV ? MESG_DATA_CANT_MOVE_TO_DEVICE : MESG_DATA_CANT_COPY_TO_DEVICE);
                 } else if (result == NandSDWorker::RESULT_VERSION_ERR) {
-                    mpChanAppEdit->anmTextFadein(mProcessType == PROC_MOV ? MESG_DATA_CANT_MOV_VERSION_ERR : MESG_DATA_CANT_CPY_VERSION_ERR);
+                    mpChanAppEdit->anmTextFadein(mProcessType == PROC_MOV ? MESG_DATA_CANT_MOVE_VERSION_ERR : MESG_DATA_CANT_COPY_VERSION_ERR);
                 } else {
                     OSReport("fail:  async result = %d\n", result);
                     switch (mProcessType) {
@@ -1327,12 +1327,12 @@ namespace ipl {
             if (mpNandSDCardManager->getAsyncResult() == 0) {
                 switch (mActionIntent) {
                     case INTENT_COPY: {
-                        mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_Q);
+                        mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_DIALOG);
                         mState = STATE_ON_VERIFY_COPY;
                         break;
                     }
                     case INTENT_MOVE: {
-                        mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_Q);
+                        mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_DIALOG);
                         mState = STATE_ON_VERIFY_MOVE;
                         break;
                     }
@@ -1438,7 +1438,7 @@ namespace ipl {
                                     mpChanAppEdit->anmSelectFadeout(MESG_DATA_TOO_FEW_RESOURCES);
                                     mState = STATE_ON_VERIFY1ST;
                                 } else {
-                                    mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_Q);
+                                    mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_DIALOG);
                                     mState = STATE_ON_VERIFY_MOVE;
                                 }
                             } else {
@@ -1446,7 +1446,7 @@ namespace ipl {
                                 mState = STATE_ON_VERIFY1ST;
                             }
                         } else {
-                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_Q);
+                            mpChanAppEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_DIALOG);
                             mState = STATE_ON_VERIFY_MOVE;
                         }
                         break;

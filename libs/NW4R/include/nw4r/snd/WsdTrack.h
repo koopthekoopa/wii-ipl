@@ -7,7 +7,6 @@
 #include <nw4r/snd/Lfo.h>
 #include <nw4r/snd/WsdFile.h>
 
-
 namespace nw4r {
     namespace snd {
         namespace detail {
@@ -22,7 +21,10 @@ namespace nw4r {
                                                   int index, int noteIndex, u32 userData) const;
                 };
 
-                typedef enum StartOffsetType { START_OFFSET_TYPE_SAMPLE = 0, START_OFFSET_TYPE_MILLISEC } StartOffsetType;
+                typedef enum StartOffsetType {
+                    START_OFFSET_TYPE_SAMPLE = 0,
+                    START_OFFSET_TYPE_MILLISEC
+                } StartOffsetType;
 
                 WsdTrack() : mWsdPlayer(NULL) {}
 

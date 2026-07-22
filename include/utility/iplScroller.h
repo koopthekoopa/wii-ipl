@@ -6,6 +6,8 @@
 #include "math/iplInterporation.h"
 #include "math/iplMathTypes.h"
 
+#include "system/iplPointer.h"
+
 namespace ipl {
     namespace utility {
         class BScroller {
@@ -44,16 +46,6 @@ namespace ipl {
         };
 
         class Scroller {
-        protected:
-            enum {
-                STATE_NORMAL = 0,
-                STATE_SCROLL_CON_UP,
-                STATE_SCROLL_CON_DOWN,
-                STATE_SCROLL_BTN_UP,
-                STATE_SCROLL_BTN_DOWN,
-                STATE_5,
-            };
-
         public:
             Scroller();
 
@@ -70,17 +62,17 @@ namespace ipl {
 
             f32 movable_pos(f32 speed) const;
 
-            void scrollUpByCon() { mState = STATE_SCROLL_CON_UP; }
-            void scrollDownByCon() { mState = STATE_SCROLL_CON_DOWN; }
-            void scrollUpByBtn() { mState = STATE_SCROLL_BTN_UP; }
-            void scrollDownByBtn() { mState = STATE_SCROLL_BTN_DOWN; }
+            void scrollUpByCon() { mState = Pointer::SCROLL_CON_UP; }
+            void scrollDownByCon() { mState = Pointer::SCROLL_CON_DOWN; }
+            void scrollUpByBtn() { mState = Pointer::SCROLL_BTN_UP; }
+            void scrollDownByBtn() { mState = Pointer::SCROLL_BTN_DOWN; }
 
             void setDownLimit(f32 v) { mDownLimit = v; }
             void setUpLimit(f32 v) { mUpLimit = v; }
 
             void addScroll(f32 v) { mScroll += v; }
 
-            bool isActive() const { return mState == STATE_NORMAL; }
+            bool isActive() const { return mState == Pointer::SCROLL; }
 
             bool isDownEnd() const { return mScroll == mDownLimit; }
             bool isUpEnd() const { return mScroll == mUpLimit; }

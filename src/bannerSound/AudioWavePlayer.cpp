@@ -1,6 +1,6 @@
 #include "bannerSound/AudioWavePlayer.h"
 
-#include <prim/eggAssert.h>
+#include <egg/prim.h>
 
 void SimpleWavePlayer::MakeWave(nw4r::snd::WavePlayer* player, nw4r::snd::WavePlayer::WavePacket* packet, void* _self) {
     SimpleWavePlayer* self = (SimpleWavePlayer*)_self;
@@ -11,10 +11,10 @@ void SimpleWavePlayer::MakeWave(nw4r::snd::WavePlayer* player, nw4r::snd::WavePl
 
     u32 samplesToRead = packet->GetWaveBuffer().bufferSize / sizeof(s16);
 
-    if (!self->pFile->isLoop()) {
-        u32 frames = self->pFile->getFrames();
-        int channels = self->pFile->getChannels();
-        int dataOff = (u8*)self->pFile->getDataCur() - (u8*)self->pFile->getDataBase();
+    if (!self->mpFile->isLoop()) {
+        u32 frames = self->mpFile->getFrames();
+        int channels = self->mpFile->getChannels();
+        int dataOff = (u8*)self->mpFile->getDataCur() - (u8*)self->mpFile->getDataBase();
 
         int remaining = frames - dataOff / 2 / channels;
         if (samplesToRead > remaining) {
@@ -24,28 +24,28 @@ void SimpleWavePlayer::MakeWave(nw4r::snd::WavePlayer* player, nw4r::snd::WavePl
             self->mDataStarvedCount++;
         }
     } else {
-        self->pFile->getDataBase();
-        self->pFile->getDataCur();
-        self->pFile->getChannels();
-        self->pFile->getLoopEnd();
+        self->mpFile->getDataBase();
+        self->mpFile->getDataCur();
+        self->mpFile->getChannels();
+        self->mpFile->getLoopEnd();
     }
 
-    for (int sampleI = 0; sampleI < samplesToRead; sampleI++) {
-        self->pFile->readData(samples, self->pFile->getChannels());
+    for (int i = 0; i < samplesToRead; i++) {
+        self->mpFile->readData(samples, self->mpFile->getChannels());
 
-        for (int channelI = 0; channelI < self->pFile->getChannels(); channelI++) {
-            waveBufs[channelI][sampleI] = samples[channelI];
+        for (int j = 0; j < self->mpFile->getChannels(); j++) {
+            waveBufs[j][i] = samples[j];
         }
         self->mCurrSampleIdx++;
 
-        if (self->pFile->isLoop() && self->mCurrSampleIdx >= self->pFile->getLoopEnd()) {
-            self->mCurrSampleIdx = self->pFile->getLoopStart();
-            self->pFile->setDataCur(self->mCurrSampleIdx * self->pFile->getChannels());
+        if (self->mpFile->isLoop() && self->mCurrSampleIdx >= self->mpFile->getLoopEnd()) {
+            self->mCurrSampleIdx = self->mpFile->getLoopStart();
+            self->mpFile->setDataCur(self->mCurrSampleIdx * self->mpFile->getChannels());
         }
     }
 
-    for (int channelI = 0; channelI < self->pFile->getChannels(); channelI++) {
-        DCFlushRange(waveBufs[channelI], samplesToRead * sizeof(s16));
+    for (int i = 0; i < self->mpFile->getChannels(); i++) {
+        DCFlushRange(waveBufs[i], samplesToRead * sizeof(s16));
     }
     if (self->mDataStarvedCount == 0) {
         player->AppendWavePacket(packet);
@@ -55,21 +55,23 @@ void SimpleWavePlayer::MakeWave(nw4r::snd::WavePlayer* player, nw4r::snd::WavePl
 void SimpleWavePlayer::wavePacketCallback(WavePacketCallbackStatus status, WavePlayer* player, WavePacket* packet, void* _self) {
     SimpleWavePlayer* self = (SimpleWavePlayer*)_self;
 
-    if (status != WAVE_PACKET_CALLBACK_STATUS_FINISH)
+    if (status != WAVE_PACKET_CALLBACK_STATUS_FINISH) {
         return;
+    }
 
     if (self->mThreadRunning != false) {
         OSSendMessage(&self->mQueue, packet, 0);
         return;
     }
-    if (self->unk_0x0b5) {
+
+    if (self->unk_0xB5) {
         MakeWave(player, packet, self);
     }
 }
 
-SimpleWavePlayer::SimpleWavePlayer() {
-    unk_0x0b5 = true;
-    unk_0x0b0 = false;
+SimpleWavePlayer::SimpleWavePlayer() : mSetupParam(1, nw4r::snd::SAMPLE_FORMAT_PCM_S16, 32000, 1.0f, 1) {
+    unk_0xB5 = true;
+    unk_0xB0 = false;
     mIsSetData = false;
     mIsPlaying = false;
     mIsSetBuf = false;
@@ -85,23 +87,26 @@ void SimpleWavePlayer::setBuffer(s16* wavebuf, u32 wavebufsize) {
     int offset = 0;
 
     // clang-format off
-    EGG_ASSERT(wavebufsize>=wsize, 0x6d);
+    EGG_ASSERTLINE(109, wavebufsize>=wsize);
     // clang-format on
 
     for (int i = 0; i < 3; i++) {
-        mBuffers[i] = wavebuf + offset;
+        mpBuffers[i] = wavebuf + offset;
         offset += 0x400;
     }
-    mIsSetBuf = 1;
+
+    mIsSetBuf = true;
+
     return;
 }
 
 bool SimpleWavePlayer::setWavData(void* buf, u32 bufSize) {
-    EGG_ASSERT(mIsSetBuf, 0x7a);
+    EGG_ASSERTLINE(122, mIsSetBuf);
 
     bool initRes = mWav.init(buf, bufSize);
-    if (!initRes)
+    if (!initRes) {
         return initRes;
+    }
 
     mSetupParam.channelCount = mWav.getChannels();
     mSetupParam.sampleFormat = nw4r::snd::SAMPLE_FORMAT_PCM_S16;
@@ -115,23 +120,24 @@ bool SimpleWavePlayer::setWavData(void* buf, u32 bufSize) {
         for (int i = 0; i < 3; i++) {
             newWaveBuffer.channelCount = mSetupParam.channelCount;
             for (int j = 0; j < newWaveBuffer.channelCount; j++) {
-                newWaveBuffer.bufferAddress[j] = mBuffers[i] + j * 0x800 / (mWav.getChannels() * 2);
+                newWaveBuffer.bufferAddress[j] = mpBuffers[i] + j * 0x800 / (mWav.getChannels() * 2);
             }
             newWaveBuffer.bufferSize = 0x800 / (mWav.getChannels() * 2) * 2;
             mWavePackets[i].SetWaveBuffer(newWaveBuffer);
         }
-        pFile = &mWav;
+        mpFile = &mWav;
         mIsSetData = true;
     }
     return setupRes;
 }
 
 bool SimpleWavePlayer::setAiffData(void* buf, u32 bufSize) {
-    EGG_ASSERT(mIsSetBuf, 0x9c);
+    EGG_ASSERTLINE(156, mIsSetBuf);
 
     bool initRes = mAiff.init(buf, bufSize);
-    if (!initRes)
+    if (!initRes) {
         return initRes;
+    }
 
     mSetupParam.channelCount = mAiff.getChannels();
     mSetupParam.sampleFormat = nw4r::snd::SAMPLE_FORMAT_PCM_S16;
@@ -145,12 +151,12 @@ bool SimpleWavePlayer::setAiffData(void* buf, u32 bufSize) {
         for (int i = 0; i < 3; i++) {
             newWaveBuffer.channelCount = mSetupParam.channelCount;
             for (int j = 0; j < newWaveBuffer.channelCount; j++) {
-                newWaveBuffer.bufferAddress[j] = mBuffers[i] + j * 0x800 / (mAiff.getChannels() * 2);
+                newWaveBuffer.bufferAddress[j] = mpBuffers[i] + j * 0x800 / (mAiff.getChannels() * 2);
             }
             newWaveBuffer.bufferSize = 0x800 / (mAiff.getChannels() * 2) * 2;
             mWavePackets[i].SetWaveBuffer(newWaveBuffer);
         }
-        pFile = &mAiff;
+        mpFile = &mAiff;
         mIsSetData = true;
     }
     return setupRes;
@@ -186,10 +192,11 @@ void SimpleWavePlayer::stop() {
 
 void SimpleWavePlayer::update() {
     if (mIsPlaying) {
-        if (!unk_0x0b5) {
+        if (!unk_0xB5) {
             for (int i = 0; i < 3; i++) {
-                if (mWavePackets[i].getAppendFlag())
+                if (mWavePackets[i].GetAppendFlag()) {
                     continue;
+                }
 
                 MakeWave(this, &mWavePackets[i], this);
                 break;
@@ -207,8 +214,9 @@ void* SimpleWavePlayer::makeWaveProc(void* arg) {
     SimpleWavePlayer* self = (SimpleWavePlayer*)arg;
     while (true) {
         OSReceiveMessage(&self->mQueue, &msg, 1);
-        if (msg == NULL)
+        if (msg == NULL) {
             break;
+        }
         MakeWave(self, (nw4r::snd::WavePlayer::WavePacket*)msg, self);
     }
     return NULL;
@@ -227,15 +235,18 @@ bool SimpleWavePlayer::makeThread(s32 prio, void* stack, u32 stackSize) {
 void* SimpleWavePlayer::convertDSPAddr(void* addr, u32 offset, int mode) {
     void* out = 0;
     switch (mode) {
-        case 0:
+        case 0: {
             out = (void*)((u32)addr * 2 + offset % 14 + offset / 14 * 16 + 2);
             break;
-        case 25:
+        }
+        case 25: {
             out = (void*)((u32)addr + offset);
             break;
-        case 10:
+        }
+        case 10: {
             out = (void*)((u32)addr / 2 + offset);
             break;
+        }
     }
     return out;
 }

@@ -5,7 +5,7 @@
 void TPLBind(TPLPalette* pal) {
     u16 i;
 
-    OSAssertMsg(pal->versionNumber == 0x20AF30, "invalid version number for texture palette", 25);
+    OSAssertMsg(pal->versionNumber == TPL_MAGIC, "invalid version number for texture palette", 25);
 
     pal->descriptorArray = (TPLDescriptor*)(((u32)(pal->descriptorArray)) + ((u32)pal));
 

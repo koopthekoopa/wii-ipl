@@ -363,7 +363,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = getMetaHdr_IconRSOIdx(page, index);
+                u32 rsoIndex = getIconRSOIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -378,7 +378,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = getMetaHdr_BannerRSOIdx(page, index);
+                u32 rsoIndex = getBannerRSOIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -393,7 +393,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = getMetaHdr_IconCSIdx(page, index);
+                u32 rsoIndex = getIconCSIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -408,7 +408,7 @@ namespace ipl {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
             } else {
-                u32 rsoIndex = getMetaHdr_BannerCSIdx(page, index);
+                u32 rsoIndex = getBannerCSIdx(page, index);
 
                 if (rsoIndex == 0) {
                     return NULL;
@@ -438,7 +438,7 @@ namespace ipl {
             return mpLockedMsgFile->isFinished();
         }
 
-        u16* Manager::getLockedMsg() {
+        wchar_t* Manager::getLockedMsg() {
             if (mpLockedMsgFile->checkData() != nand::RESULT_SUCCESS) {
                 return NULL;
             }
@@ -462,7 +462,7 @@ namespace ipl {
             System::getSaveData()->setChanInfo(page1, index1, blankInfo);
         }
 
-        u16* Manager::getTitleName(int page, int index, int nameIndex) const {
+        wchar_t* Manager::getTitleName(int page, int index, int nameIndex) const {
             if (!mChannels[page][index].loadedBnr) {
                 return NULL;
             }
@@ -543,7 +543,7 @@ namespace ipl {
             *page = *index = 0;
             for (int i = 0; i < MAX_CHANNEL_PAGE; i++) {
                 for (int j = 0; j < MAX_CHANNEL_INDEX; j++) {
-                    if (mChannels[i][j].info.sceneID == SCENE_ID_DISK_CHANNEL) {
+                    if (mChannels[i][j].info.sceneID == SCENE_DISK_CHANNEL) {
                         *page = i;
                         *index = j;
                         return;
@@ -653,7 +653,7 @@ namespace ipl {
 
             // It is a normal channel
             mTmpChannel.info.primaryType = PRIMARY_TYPE_CHANNEL;
-            mTmpChannel.info.sceneID = SCENE_ID_WAD_CHANNEL;
+            mTmpChannel.info.sceneID = SCENE_NORMAL_CHANNEL;
 
             s32 ret = utility::ESMisc::GetValidTicketIndex(System::getMem2Sys(), titleId);
             if (ret == -1) {
@@ -745,7 +745,7 @@ namespace ipl {
             } else if (mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 // Load disk banner
                 mChannels[page][index].loadedBnr = true;
-                if (mChannels[page][index].info.sceneID == SCENE_ID_DISK_CHANNEL) {
+                if (mChannels[page][index].info.sceneID == SCENE_DISK_CHANNEL) {
                     if (mChannels[page][index].metaHdr == NULL) {
                         mChannels[page][index].metaHdr = &mDiskChanMetaHdr;
                     }
@@ -1109,10 +1109,10 @@ namespace ipl {
             *outIndex = -1;
         }
 
-        u16* Manager::getLockedMsgFromBuf(const SDiskInMessages* diskInMsgs) const {
+        wchar_t* Manager::getLockedMsgFromBuf(const SDiskInMessages* diskInMsgs) const {
             // Get message via language
             if (diskInMsgs->messages[System::getLanguage()][0] != 0) {
-                return (u16*)diskInMsgs->messages[System::getLanguage()];
+                return (wchar_t*)diskInMsgs->messages[System::getLanguage()];
             }
 
             // If that failed? Load any available message
@@ -1122,7 +1122,7 @@ namespace ipl {
             for (int i = 0; i < ARRAY_LENGTH(scLangLookup[0]); i++) {
                 u32 lang = lookup[i];
                 if (diskInMsgs->messages[lang][0] != 0) {
-                    return (u16*)diskInMsgs->messages[lang];
+                    return (wchar_t*)diskInMsgs->messages[lang];
                 }
 
                 if (lookup[i] == -1) {
@@ -1131,13 +1131,12 @@ namespace ipl {
             }
 
             // If that also failed? Force to load japanese message.
-            return (u16*)diskInMsgs->messages[lookup[SC_LANG_JAPANESE]];
+            return (wchar_t*)diskInMsgs->messages[lookup[SC_LANG_JAPANESE]];
         }
 
 // Unused?!!! force.
 #pragma push
 #pragma force_active on
-
         BOOL Manager::nand_error_handling(int code) {
             BOOL result = FALSE;
 
@@ -1219,7 +1218,7 @@ namespace ipl {
 
         BOOL Manager::fn_8133A5F0(ESTitleId titleId) {
             SEntry* channel = fn_8133A4E0(titleId);
-            if (channel != NULL && (channel->metaHdr->blockHdr.unk_08 << 8)) {
+            if (channel != NULL && (channel->metaHdr->blockHdr.netSetting << 8)) {
                 return TRUE;
             } else {
                 return FALSE;
@@ -1228,7 +1227,7 @@ namespace ipl {
 
         BOOL Manager::fn_8133A634(ESTitleId titleId) {
             SEntry* channel = fn_8133A4E0(titleId);
-            if (channel != NULL && (channel->metaHdr->blockHdr.unk_14 << 14)) {
+            if (channel != NULL && (channel->metaHdr->blockHdr.useAltSound << 14)) {
                 return TRUE;
             } else {
                 return FALSE;

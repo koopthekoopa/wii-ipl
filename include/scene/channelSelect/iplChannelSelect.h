@@ -151,7 +151,7 @@ namespace ipl {
                 return !unk_0x185 || unk_0x180 == 3;
             }
             void setSomething() {
-                unk_0x184 = true;
+                mbModuleSceneChange = true;
                 unk_0x185 = 1;
             }
 
@@ -284,7 +284,7 @@ namespace ipl {
 
             int unk_0x180;
 
-            bool unk_0x184;
+            bool mbModuleSceneChange;  // 0x184
             bool unk_0x185;
             ChannelObj* mpCurrentRsoChanObj;  // 0x188
             ChannelObj* unk_0x18C;

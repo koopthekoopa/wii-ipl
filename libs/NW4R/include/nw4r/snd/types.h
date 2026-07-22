@@ -63,11 +63,26 @@ namespace nw4r {
             OUTPUT_LINE_REMOTE_N = (1 << 1),
         } OutputLineFlag;
 
-        typedef enum OutputMode { OUTPUT_MODE_STEREO = 0, OUTPUT_MODE_SURROUND, OUTPUT_MODE_DPL2, OUTPUT_MODE_MONO } OutputMode;
+        typedef enum OutputMode {
+            OUTPUT_MODE_STEREO = 0,
+            OUTPUT_MODE_SURROUND,
+            OUTPUT_MODE_DPL2,
+            OUTPUT_MODE_MONO
+        } OutputMode;
 
-        typedef enum AuxBus { AUX_A = 0, AUX_B, AUX_C, AUX_BUS_NUM } AuxBus;
+        typedef enum AuxBus {
+            AUX_A = 0,
+            AUX_B,
+            AUX_C,
+            AUX_BUS_NUM
+        } AuxBus;
 
-        typedef enum SampleFormat { SAMPLE_FORMAT_PCM_S32 = 0, SAMPLE_FORMAT_PCM_S16, SAMPLE_FORMAT_PCM_S8, SAMPLE_FORMAT_DSP_ADPCM } SampleFormat;
+        typedef enum SampleFormat {
+            SAMPLE_FORMAT_PCM_S32 = 0,
+            SAMPLE_FORMAT_PCM_S16,
+            SAMPLE_FORMAT_PCM_S8,
+            SAMPLE_FORMAT_DSP_ADPCM
+        } SampleFormat;
 
         typedef struct SoundParam {
             f32 volume;       // 0x00

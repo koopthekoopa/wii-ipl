@@ -245,7 +245,6 @@ namespace ipl {
             ESTitleId mBS2LaunchTitle;  // 0x2B0
 
             friend class System;
-            friend class utility::BScroller;
         };
 
         /*==============================*/
@@ -403,7 +402,7 @@ namespace ipl {
         /*==============================*/
 
         /** @return The language of the System. */
-        static s32 getLanguage();
+        static u32 getLanguage();
         /** @return The region of the System. */
         static s32 getRegion();
 
@@ -695,8 +694,6 @@ namespace ipl {
         }
 
         static Arg smArg;
-
-        friend class utility::BScroller;
     };
 }  // namespace ipl
 

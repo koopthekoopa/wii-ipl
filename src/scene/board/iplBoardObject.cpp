@@ -445,7 +445,7 @@ namespace ipl {
                         }
                     }
 
-                    System::getPointer()->changeType(mConChan, PointerType::LayoutPoint);
+                    System::getPointer()->changeType(mConChan, Pointer::TYPE_POINT);
                     mMoveSpeed.clear();
                     mConPos.clear();
 
@@ -459,7 +459,7 @@ namespace ipl {
                     mState = STATE_NORMAL;
                 }
             } else {
-                System::getPointer()->changeType(mConChan, PointerType::LayoutPoint);
+                System::getPointer()->changeType(mConChan, Pointer::TYPE_POINT);
                 mMoveSpeed.clear();
                 mConPos.clear();
 
@@ -610,7 +610,7 @@ namespace ipl {
                 }
             }
 
-            if (System::getRegion() == SC_LANG_JAPANESE) {
+            if (System::getRegion() == SC_PRODUCT_AREA_JPN) {
                 if (local_28[THUMB_TEXT_LENGTH] != 0) {
                     local_28[THUMB_TEXT_LENGTH + 0] = L'…';
                 }
@@ -719,7 +719,7 @@ namespace ipl {
                 case ON_TRIG: {
                     if (con != NULL && con->pinchTrg()) {
                         if (mState != STATE_PINCH && static_cast<Board*>(System::getScene(SCENE_BOARD))->pinch(this)) {
-                            System::getPointer()->changeType(num, PointerType::LayoutGrab);
+                            System::getPointer()->changeType(num, Pointer::TYPE_GRAB);
 
                             nw4r::ut::Rect projRect;
                             System::getProjectionRect(&projRect);

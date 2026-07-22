@@ -13,7 +13,11 @@ namespace ipl {
             RESET_STATE_SHUTDOWN_SYSTEM = 4,
         };
 
-        enum { STATE_WAIT_REQUEST = 0, STATE_RESTART, STATE_SHUTDOWN };
+        enum {
+            STATE_WAIT_REQUEST = 0,
+            STATE_RESTART,
+            STATE_SHUTDOWN
+        };
 
         enum {
             FATAL_RESET_STATE_NONE = 0,
@@ -61,11 +65,9 @@ namespace ipl {
         static void cbFatalReset();
         static void cbFatalPowerOff();
 
-        u32 mUpdateState;  // 0x00
-        vu32 mState;       // 0x04
-    public:
-        volatile BOOL mbReturnToMenu;  // 0x08
-    private:
+        u32 mUpdateState;      // 0x00
+        vu32 mState;           // 0x04
+        vBOOL mbReturnToMenu;  // 0x08
         u32 mFatalResetState;  // 0x0C
     };
 }  // namespace ipl
