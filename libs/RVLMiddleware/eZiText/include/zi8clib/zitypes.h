@@ -127,16 +127,16 @@ typedef struct {
     ziU8 nextIdxLo;     // 0x5
     ziU8 chHi;          // 0x6
     ziU8 chLo;          // 0x7
-    ziU8 tabl34IdxHi;   // 0x8
+    ziU8 tab34IdxHi;    // 0x8
     union {
-        ziU8 tabl34IdxLo;  // 0x9 (relevant: 0bX0000000)
-        ziU8 codeOffs;     // 0x9 (relevant: 0b0XXX0000)
-        ziU8 tabl1OffsHi;  // 0x9 (relevant: 0b0000XXXX)
+        ziU8 tab34IdxLo;  // 0x9 (relevant: 0bX0000000)
+        ziU8 codeOffs;    // 0x9 (relevant: 0b0XXX0000)
+        ziU8 tab1OffsHi;  // 0x9 (relevant: 0b0000XXXX)
     };
-    ziU8 tabl1OffsMid;  // 0xA
-    ziU8 tab1OffsLo;    // 0xB
+    ziU8 tab1OffsMid;  // 0xA
+    ziU8 tab1OffsLo;   // 0xB
 } Table0Entry;
-#define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tabl1OffsMid << 0x8) | (((ENTRY)->tabl1OffsHi & 0x0F) << 0x10))
+#define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tab1OffsMid << 0x8) | (((ENTRY)->tab1OffsHi & 0x0F) << 0x10))
 
 typedef struct {
     ziU8 maskByte0;  // 0x0
@@ -253,6 +253,11 @@ typedef struct _ziLanguageEntry {
     ziU8* tableData;  // 0x04
 } ziLanguageEntry;
 
+typedef struct _ziListNodeA {
+    struct _ziListNodeA* next;  // 0x0
+    ziPtr value;                // 0x4
+} ziListNodeA;
+
 typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
 
 struct __zi8_work_data_s {
@@ -268,16 +273,29 @@ struct __zi8_work_data_s {
     ziU8 unk_0x17;                   // 0x017
     ziU8 unk_0x18;                   // 0x018
     ziU16 unk_0x1A;                  // 0x01a
-    ziU8 unk_0x1C[2];                // 0x01C
+    ziU8 unk_0x1C;                   // 0x01C
+    ziU8 unk_0x1D;                   // 0x01D
     ziU8 unk_0x1E;                   // 0x01E
     ziU8 unk_0x1F;                   // 0x01F
     ziU16 unk_0x20[0x40];            // 0x020
     ziU16 unk_0xA0[0x40];            // 0x0A0
-    ziU8 unk_0x120[4];               // 0x120
+    ziU8 unk_0x120;                  // 0x120
     ziU16* unk_0x124[2];             // 0x124
     ziU8 unk_0x12C;                  // 0x12C
-    ziU16 unk_0x12E;                 // 0x12E
-    ziU8 unk_0x130[0x1F0];           // 0x130
+    ziU8 unk_0x12D;                  // 0x12D
+    ziU8 unk_0x12E;                  // 0x12E
+    ziU32 unk_0x130[2];              // 0x130
+    ziU8 unk_0x138;                  // 0x138
+    ziU32 unk_0x13C;                 // 0x13C
+    ziU8 unk_0x140;                  // 0x140
+    ziU8 unk_0x141[134];             // 0x141
+    ziU8 unk_0x1C7;                  // 0x1C7
+    ziListNodeA unk_0x1C8[0x20];     // 0x1C8
+    ziListNodeA* unk_0x2C8;          // 0x2C8
+    ziU8 unk_0x2CC[0x40];            // 0x2CC
+    ziU8 unk_0x30C;                  // 0x30C
+    ziU8 unk_0x30D[0xF];             // 0x30D
+    ziU8 pdRemoveOpt;                // 0x31C
     Zi8OemSearchDict oemSearchDict;  // 0x320
     ziU16 oemDictLen;                // 0x324
     ziU32 unk_0x328;                 // 0x328
@@ -285,8 +303,12 @@ struct __zi8_work_data_s {
     ziU8 unk_0x330[0x200];           // 0x330
     ziU8 unk_0x530[8];               // 0x530
     ziU8 unk_0x538;                  // 0x538
-    ziU8 unk_0x539[3];               // 0x539
-    ziU8 unk_0x53C[0xCC4];           // 0x53C
+    ziU8 unk_0x539;                  // 0x539
+    ziU8 unk_0x53A[0x40];            // 0x53A
+    ziWChar unk_0x57A[0x40][21];     // 0x57A
+    ziU8 unk_0xFFA[0x200];           // 0xFFA
+    ziU8 unk_0x11FA;                 // 0x11FA
+    ziU32 unk_0x11FC;                // 0x11FC
     ziU32 unk_0x1200[ZI8_LANG_MAX];  // 0x1200
     ziU8 unk_0x1400[0x18];           // 0x1400
     ziU8 unk_0x1418[2];              // 0x1418

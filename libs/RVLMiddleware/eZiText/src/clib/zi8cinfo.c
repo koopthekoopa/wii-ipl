@@ -53,7 +53,7 @@ ziU8 Zi8GetCJInfo(ziU8* cangjieData, ziWChar* charInfoBuffer, ziU8 maxInfoBufSiz
 }
 
 ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK) {
-    ziU16 chHiBits, chMidBits, chLoBits;
+    ziU16 initial, final, tone;
     ziU8 infoLen = 0;
 
     if (maxInfoBufSize < 8) {
@@ -65,263 +65,268 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
         return 0;
     }
 
-    chHiBits = ch >> 9 & 0x3F;
-    chMidBits = ch >> 3 & 0x3F;
-    chLoBits = ch & 7;
-    if (chHiBits != 1) {
-        switch (chHiBits) {
-            case 0x3C:
-                charInfoBuffer[infoLen] = 0xF362;
+    initial = (ch >> PINYIN_INITIAL_SHIFT) & (PINYIN_INITIAL_MASK >> PINYIN_INITIAL_SHIFT);
+    final = (ch >> PINYIN_FINAL_SHIFT) & (PINYIN_FINAL_MASK >> PINYIN_FINAL_SHIFT);
+    tone = ch & (PINYIN_TONE_MASK >> PINYIN_TONE_SHIFT);
+    if (initial != INITIAL_NONE) {
+        switch (initial) {
+            case INITIAL_B:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('b');
                 break;
-            case 0x3F:
-                charInfoBuffer[infoLen] = 0xF370;
+            case INITIAL_P:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('p');
                 break;
-            case 0x02:
-                charInfoBuffer[infoLen] = 0xF364;
+            case INITIAL_D:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('d');
                 break;
-            case 0x05:
-                charInfoBuffer[infoLen] = 0xF374;
+            case INITIAL_T:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('t');
                 break;
-            case 0x34:
-                charInfoBuffer[infoLen] = 0xF367;
+            case INITIAL_G:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x37:
-                charInfoBuffer[infoLen] = 0xF36B;
+            case INITIAL_K:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('k');
                 break;
-            case 0x06:
-                charInfoBuffer[infoLen] = 0xF36A;
+            case INITIAL_J:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('j');
                 break;
-            case 0x09:
-                charInfoBuffer[infoLen] = 0xF371;
+            case INITIAL_Q:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('q');
                 break;
-            case 0x1C:
-                charInfoBuffer[infoLen] = 0xF37A;
+            case INITIAL_Z:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('z');
                 break;
-            case 0x18:
-                charInfoBuffer[infoLen] = 0xF363;
+            case INITIAL_C:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('c');
                 break;
-            case 0x0A:
-                charInfoBuffer[infoLen] = 0xF378;
+            case INITIAL_X:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('x');
                 break;
-            case 0x0C:
-                charInfoBuffer[infoLen] = 0xF36D;
+            case INITIAL_M:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('m');
                 break;
-            case 0x38:
-                charInfoBuffer[infoLen] = 0xF366;
+            case INITIAL_F:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('f');
                 break;
-            case 0x26:
-                charInfoBuffer[infoLen] = 0xF36E;
+            case INITIAL_N:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x2B:
-                charInfoBuffer[infoLen] = 0xF36C;
+            case INITIAL_L:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('l');
                 break;
-            case 0x3B:
-                charInfoBuffer[infoLen] = 0xF368;
+            case INITIAL_H:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('h');
                 break;
-            case 0x1A:
-                charInfoBuffer[infoLen] = 0xF373;
+            case INITIAL_S:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('s');
                 break;
-            case 0x2C:
-                charInfoBuffer[infoLen] = 0xF372;
+            case INITIAL_R:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('r');
                 break;
-            case 0x11:
-                charInfoBuffer[infoLen] = 0xF377;
+            case INITIAL_W:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('w');
                 break;
-            case 0x0D:
-                charInfoBuffer[infoLen] = 0xF379;
+            case INITIAL_Y:
+                charInfoBuffer[infoLen] = PINYIN_CHAR('y');
                 break;
 
-            case 0x1D:
-                charInfoBuffer[infoLen++] = 0xF37A;
-                charInfoBuffer[infoLen] = 0xF368;
+            case INITIAL_ZH:
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('z');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('h');
                 break;
-            case 0x19:
-                charInfoBuffer[infoLen++] = 0xF363;
-                charInfoBuffer[infoLen] = 0xF368;
+            case INITIAL_CH:
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('c');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('h');
                 break;
-            case 0x1B:
-                charInfoBuffer[infoLen++] = 0xF373;
-                charInfoBuffer[infoLen] = 0xF368;
+            case INITIAL_SH:
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('s');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('h');
                 break;
+
             default:
                 Zi8LogError(0x277, ZI_WORK);
                 return 0;
         }
         infoLen++;
     }
-    if (chMidBits != 0) {
-        switch (chMidBits) {
-            case 0x01:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36F;
+    if (final != 0) {
+        switch (final) {
+            case PINYIN_FINAL(0b00, 0b0001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('o');
                 break;
-            case 0x02:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36E;
+            case PINYIN_FINAL(0b00, 0b0010):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x03:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b00, 0b0011):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x04:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen] = 0xF361;
+            case PINYIN_FINAL(0b00, 0b0100):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('a');
                 break;
-            case 0x08:
-                charInfoBuffer[infoLen] = 0xF369;
+            case PINYIN_FINAL(0b00, 0b1000):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('i');
                 break;
-            case 0x09:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen] = 0xF365;
+            case PINYIN_FINAL(0b00, 0b1001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('e');
                 break;
-            case 0x0B:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen] = 0xF375;
+            case PINYIN_FINAL(0b00, 0b1011):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('u');
                 break;
-            case 0x0C:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen] = 0xF36E;
+            case PINYIN_FINAL(0b00, 0b1100):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x0D:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b00, 0b1101):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x0F:
-                charInfoBuffer[infoLen++] = 0xF369;
-                charInfoBuffer[infoLen++] = 0xF36F;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b00, 0b1111):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('i');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('o');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x10:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36E;
+
+            case PINYIN_FINAL(0b01, 0b0000):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x11:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b01, 0b0001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x13:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF369;
+            case PINYIN_FINAL(0b01, 0b0011):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('i');
                 break;
-            case 0x17:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen] = 0xF361;
+            case PINYIN_FINAL(0b01, 0b0111):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('a');
                 break;
-            case 0x18:
-                charInfoBuffer[infoLen] = 0xF375;
+            case PINYIN_FINAL(0b01, 0b1000):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('u');
                 break;
-            case 0x1C:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen] = 0xF36E;
+            case PINYIN_FINAL(0b01, 0b1100):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x1D:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen] = 0xF369;
+            case PINYIN_FINAL(0b01, 0b1101):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('i');
                 break;
-            case 0x1E:
-                charInfoBuffer[infoLen++] = 0xF375;
-                charInfoBuffer[infoLen] = 0xF36F;
+            case PINYIN_FINAL(0b01, 0b1110):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('o');
                 break;
-            case 0x1F:
-                if ((chHiBits == 0x26) || (chHiBits == 0x2B)) {
-                    charInfoBuffer[infoLen++] = 0xF376;
-                    charInfoBuffer[infoLen] = 0xF365;
+            case PINYIN_FINAL(0b01, 0b1111):
+                if (initial == INITIAL_N || initial == INITIAL_L) {
+                    charInfoBuffer[infoLen++] = PINYIN_CHAR('v');
+                    charInfoBuffer[infoLen] = PINYIN_CHAR('e');
                 } else {
-                    charInfoBuffer[infoLen++] = 0xF375;
-                    charInfoBuffer[infoLen] = 0xF365;
+                    charInfoBuffer[infoLen++] = PINYIN_CHAR('u');
+                    charInfoBuffer[infoLen] = PINYIN_CHAR('e');
                 }
                 break;
-            case 0x20:
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36E;
+
+            case PINYIN_FINAL(0b10, 0b0000):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x21:
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b10, 0b0001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x23:
-                charInfoBuffer[infoLen] = 0xF361;
+            case PINYIN_FINAL(0b10, 0b0011):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('a');
                 break;
-            case 0x25:
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF369;
+            case PINYIN_FINAL(0b10, 0b0101):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('i');
                 break;
-            case 0x26:
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36F;
+            case PINYIN_FINAL(0b10, 0b0110):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('o');
                 break;
-            case 0x28:
-                charInfoBuffer[infoLen++] = 0xF36F;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b10, 0b1000):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('o');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x2A:
-                charInfoBuffer[infoLen++] = 0xF36F;
-                charInfoBuffer[infoLen] = 0xF375;
+            case PINYIN_FINAL(0b10, 0b1010):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('o');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('u');
                 break;
-            case 0x2B:
-                charInfoBuffer[infoLen] = 0xF36F;
+            case PINYIN_FINAL(0b10, 0b1011):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('o');
                 break;
-            case 0x30:
-                charInfoBuffer[infoLen++] = 0xF365;
-                charInfoBuffer[infoLen] = 0xF36E;
+
+            case PINYIN_FINAL(0b11, 0b0000):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('e');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
-            case 0x31:
-                charInfoBuffer[infoLen++] = 0xF365;
-                charInfoBuffer[infoLen++] = 0xF36E;
-                charInfoBuffer[infoLen] = 0xF367;
+            case PINYIN_FINAL(0b11, 0b0001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('e');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('n');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('g');
                 break;
-            case 0x33:
-                charInfoBuffer[infoLen++] = 0xF365;
-                charInfoBuffer[infoLen] = 0xF372;
+            case PINYIN_FINAL(0b11, 0b0011):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('e');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('r');
                 break;
-            case 0x34:
-                charInfoBuffer[infoLen] = 0xF365;
+            case PINYIN_FINAL(0b11, 0b0100):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('e');
                 break;
-            case 0x35:
-                charInfoBuffer[infoLen++] = 0xF365;
-                charInfoBuffer[infoLen] = 0xF369;
+            case PINYIN_FINAL(0b11, 0b0101):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('e');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('i');
                 break;
-            case 0x38:
-                charInfoBuffer[infoLen] = 0xF376;
+            case PINYIN_FINAL(0b11, 0b1000):
+                charInfoBuffer[infoLen] = PINYIN_CHAR('v');
                 break;
-            case 0x39:
-                charInfoBuffer[infoLen++] = 0xF376;
-                charInfoBuffer[infoLen++] = 0xF361;
-                charInfoBuffer[infoLen] = 0xF36E;
+            case PINYIN_FINAL(0b11, 0b1001):
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('v');
+                charInfoBuffer[infoLen++] = PINYIN_CHAR('a');
+                charInfoBuffer[infoLen] = PINYIN_CHAR('n');
                 break;
+
             default:
                 Zi8LogError(0x278, ZI_WORK);
                 return 0;
         }
         infoLen++;
     }
-    switch (chLoBits) {
+    switch (tone) {
         case 1:
-            charInfoBuffer[infoLen++] = 0xF331;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(1);
             break;
         case 2:
-            charInfoBuffer[infoLen++] = 0xF332;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(2);
             break;
         case 3:
-            charInfoBuffer[infoLen++] = 0xF333;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(3);
             break;
         case 4:
-            charInfoBuffer[infoLen++] = 0xF334;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(4);
             break;
         case 5:
-            charInfoBuffer[infoLen++] = 0xF335;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(5);
             break;
     }
     charInfoBuffer[infoLen] = 0;
@@ -329,7 +334,7 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
     return infoLen;
 }
 ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK) {
-    ziU16 chHiBits, chMidBits, chLoBits;
+    ziU16 initial, final, tone;
     ziU8 infoLen = 0;
 
     if (maxInfoBufSize < 5) {
@@ -341,247 +346,250 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
         return 0;
     }
 
-    chHiBits = ch >> 9 & 0x3F;
-    chMidBits = ch >> 3 & 0x3F;
-    chLoBits = ch & 7;
-    switch (chHiBits) {
-        case 0x3C:
-            charInfoBuffer[infoLen++] = 0xF305;
+    initial = (ch >> PINYIN_INITIAL_SHIFT) & (PINYIN_INITIAL_MASK >> PINYIN_INITIAL_SHIFT);
+    final = (ch >> PINYIN_FINAL_SHIFT) & (PINYIN_FINAL_MASK >> PINYIN_FINAL_SHIFT);
+    tone = ch & (PINYIN_TONE_MASK >> PINYIN_TONE_SHIFT);
+    switch (initial) {
+        case INITIAL_B:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_B);
             break;
-        case 0x19:
-            charInfoBuffer[infoLen++] = 0xF314;
+        case INITIAL_CH:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_CH);
             break;
-        case 0x18:
-            charInfoBuffer[infoLen++] = 0xF318;
+        case INITIAL_C:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_C);
             break;
-        case 0x02:
-            charInfoBuffer[infoLen++] = 0xF309;
+        case INITIAL_D:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_D);
             break;
-        case 0x38:
-            charInfoBuffer[infoLen++] = 0xF308;
+        case INITIAL_F:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_F);
             break;
-        case 0x34:
-            charInfoBuffer[infoLen++] = 0xF30D;
+        case INITIAL_G:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_G);
             break;
-        case 0x3B:
-            charInfoBuffer[infoLen++] = 0xF30F;
+        case INITIAL_H:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_H);
             break;
-        case 0x06:
-            charInfoBuffer[infoLen++] = 0xF310;
+        case INITIAL_J:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_J);
             break;
-        case 0x37:
-            charInfoBuffer[infoLen++] = 0xF30E;
+        case INITIAL_K:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_K);
             break;
-        case 0x2B:
-            charInfoBuffer[infoLen++] = 0xF30C;
+        case INITIAL_L:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_L);
             break;
-        case 0x0C:
-            charInfoBuffer[infoLen++] = 0xF307;
+        case INITIAL_M:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_M);
             break;
-        case 0x26:
-            charInfoBuffer[infoLen++] = 0xF30B;
+        case INITIAL_N:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_N);
             break;
-        case 0x3F:
-            charInfoBuffer[infoLen++] = 0xF306;
+        case INITIAL_P:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_P);
             break;
-        case 0x09:
-            charInfoBuffer[infoLen++] = 0xF311;
+        case INITIAL_Q:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_Q);
             break;
-        case 0x2C:
-            charInfoBuffer[infoLen++] = 0xF316;
+        case INITIAL_R:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_R);
             break;
-        case 0x1B:
-            charInfoBuffer[infoLen++] = 0xF315;
+        case INITIAL_SH:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_SH);
             break;
-        case 0x1A:
-            charInfoBuffer[infoLen++] = 0xF319;
+        case INITIAL_S:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_S);
             break;
-        case 0x05:
-            charInfoBuffer[infoLen++] = 0xF30A;
+        case INITIAL_T:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_T);
             break;
-        case 0x0A:
-            charInfoBuffer[infoLen++] = 0xF312;
+        case INITIAL_X:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_X);
             break;
-        case 0x1D:
-            charInfoBuffer[infoLen++] = 0xF313;
+        case INITIAL_ZH:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_ZH);
             break;
-        case 0x1C:
-            charInfoBuffer[infoLen++] = 0xF317;
+        case INITIAL_Z:
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_INITIAL_Z);
             break;
 
-        case 0x01:
+        case INITIAL_NONE:
             break;
+
         default:
             Zi8LogError(0x281, ZI_WORK);
             return 0;
     }
 
-    switch (chMidBits) {
-        case 0x00:
-            if (chHiBits != 0x0C && chHiBits != 0x26)
+    switch (final) {
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_NONE):
+            if (initial != INITIAL_M && initial != INITIAL_N)
                 return 0;
             break;
-        case 0x11:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF31A;
+
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_A):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_A);
             break;
-        case 0x17:
-            charInfoBuffer[infoLen++] = 0xF327;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_MEDIAL):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
             break;
-        case 0x12:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF31B;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_O):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_O);
             break;
-        case 0x1A:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF320;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_AU):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AU);
             break;
-        case 0x15:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF31D;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_EH):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EH);
             break;
-        case 0x1B:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF321;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_OU):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_OU);
             break;
-        case 0x1C:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF322;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_AN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AN);
             break;
-        case 0x1E:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF323;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_EN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EN);
             break;
-        case 0x1D:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF324;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_ANG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ANG);
             break;
-        case 0x1F:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF325;
-            break;
-        case 0x3F:
-            charInfoBuffer[infoLen++] = 0xF329;
-            charInfoBuffer[infoLen++] = 0xF325;
-            break;
-        case 0x37:
-            charInfoBuffer[infoLen++] = 0xF329;
-            break;
-        case 0x27:
-            charInfoBuffer[infoLen++] = 0xF328;
-            break;
-        case 0x25:
-        case 0x35:
-            charInfoBuffer[infoLen++] = 0xF329;
-            charInfoBuffer[infoLen++] = 0xF31D;
-            break;
-        case 0x3C:
-            charInfoBuffer[infoLen++] = 0xF329;
-            charInfoBuffer[infoLen++] = 0xF322;
-            break;
-        case 0x2C:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF322;
-            break;
-        case 0x3E:
-            charInfoBuffer[infoLen++] = 0xF329;
-            charInfoBuffer[infoLen++] = 0xF323;
-            break;
-        case 0x2E:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF323;
-            break;
-        case 0x21:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF31A;
-            break;
-        case 0x22:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF31B;
-            break;
-        case 0x28:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF31E;
-            break;
-        case 0x29:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF31F;
-            break;
-        case 0x2D:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF324;
-            break;
-        case 0x2F:
-            charInfoBuffer[infoLen++] = 0xF328;
-            charInfoBuffer[infoLen++] = 0xF325;
-            break;
-        case 0x01:
-            charInfoBuffer[infoLen++] = 0xF31A;
-            break;
-        case 0x02:
-            charInfoBuffer[infoLen++] = 0xF31B;
-            break;
-        case 0x03:
-            charInfoBuffer[infoLen++] = 0xF31C;
-            break;
-        case 0x04:
-            charInfoBuffer[infoLen++] = 0xF326;
-            break;
-        case 0x08:
-            charInfoBuffer[infoLen++] = 0xF31E;
-            break;
-        case 0x18:
-            charInfoBuffer[infoLen++] = 0xF327;
-            charInfoBuffer[infoLen++] = 0xF31E;
-            break;
-        case 0x09:
-            charInfoBuffer[infoLen++] = 0xF31F;
-            break;
-        case 0x0A:
-            charInfoBuffer[infoLen++] = 0xF320;
-            break;
-        case 0x0B:
-            charInfoBuffer[infoLen++] = 0xF321;
-            break;
-        case 0x0C:
-            charInfoBuffer[infoLen++] = 0xF322;
-            break;
-        case 0x0E:
-            charInfoBuffer[infoLen++] = 0xF323;
-            break;
-        case 0x0D:
-            charInfoBuffer[infoLen++] = 0xF324;
-            break;
-        case 0x0F:
-            charInfoBuffer[infoLen++] = 0xF325;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_ENG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ENG);
             break;
 
-        case 0x07:
+        case PINYIN_FINAL(BPMF_MEDIAL_IU, BPMF_RIME_ENG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_IU);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ENG);
             break;
+        case PINYIN_FINAL(BPMF_MEDIAL_IU, BPMF_RIME_MEDIAL):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_IU);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_MEDIAL):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_EH):
+        case PINYIN_FINAL(BPMF_MEDIAL_IU, BPMF_RIME_EH):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_IU);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EH);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_IU, BPMF_RIME_AN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_IU);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_AN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_IU, BPMF_RIME_EN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_IU);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_EN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_A):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_A);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_O):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_O);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_AI):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AI);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_EI):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EI);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_ANG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ANG);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_U, BPMF_RIME_ENG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_U);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ENG);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_A):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_A);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_O):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_O);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_E):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_E);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_ER):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ER);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_AI):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AI);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_I, BPMF_RIME_AI):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_MEDIAL_I);
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AI);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_EI):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EI);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_AU):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AU);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_OU):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_OU);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_AN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_AN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_EN):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_EN);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_ANG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ANG);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_ENG):
+            charInfoBuffer[infoLen++] = BPMF_CHAR(BPMF_CHAR_RIME_ENG);
+            break;
+        case PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_MEDIAL):
+            break;
+
         default:
             Zi8LogError(0x282, ZI_WORK);
             return 0;
     }
 
-    switch (chLoBits) {
+    switch (tone) {
         case 1:
-            charInfoBuffer[infoLen++] = 0xF331;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(1);
             break;
         case 2:
-            charInfoBuffer[infoLen++] = 0xF332;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(2);
             break;
         case 3:
-            charInfoBuffer[infoLen++] = 0xF333;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(3);
             break;
         case 4:
-            charInfoBuffer[infoLen++] = 0xF334;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(4);
             break;
         case 5:
-            charInfoBuffer[infoLen++] = 0xF335;
+            charInfoBuffer[infoLen++] = PINYIN_TONE(5);
             break;
     }
     charInfoBuffer[infoLen] = 0;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(0x64, ZI_WORK);
     return infoLen;
 }
 
@@ -659,162 +667,204 @@ ziU8 Zi8GetSInfo(Table0Entry* strokeInfoA, ziU8* strokeInfoB, ziWChar* charInfoB
     return offset;
 }
 
+#define PAD_KEY_BASE 0xEFF0
+#define PAD_KEY(VALUE) (PAD_KEY_BASE + (VALUE))
+
+// Pinyin pad layout
+// %--------------------%
+// | .,?ˉ | ABCˊ | DEFˇ |
+// %--------------------%
+// | GHIˋ | JKL• | MNO  |
+// %--------------------%
+// | PQRS | TUV  | WXYZ |
+// %--------------------%
 ziU16 Zi81KeyPYinfo(ziWChar ch ZI_NEED_WORK) {
     switch (ch) {
-        case 0xF361:
-            return 0xEFF2;
-        case 0xF362:
-            return 0xEFF2;
-        case 0xF363:
-            return 0xEFF2;
-        case 0xF364:
-            return 0xEFF3;
-        case 0xF365:
-            return 0xEFF3;
-        case 0xF366:
-            return 0xEFF3;
-        case 0xF367:
-            return 0xEFF4;
-        case 0xF368:
-            return 0xEFF4;
-        case 0xF369:
-            return 0xEFF4;
-        case 0xF36A:
-            return 0xEFF5;
-        case 0xF36B:
-            return 0xEFF5;
-        case 0xF36C:
-            return 0xEFF5;
-        case 0xF36D:
-            return 0xEFF6;
-        case 0xF36E:
-            return 0xEFF6;
-        case 0xF36F:
-            return 0xEFF6;
-        case 0xF370:
-            return 0xEFF7;
-        case 0xF371:
-            return 0xEFF7;
-        case 0xF372:
-            return 0xEFF7;
-        case 0xF373:
-            return 0xEFF7;
-        case 0xF374:
-            return 0xEFF8;
-        case 0xF375:
-            return 0xEFF8;
-        case 0xF376:
-            return 0xEFF8;
-        case 0xF377:
-            return 0xEFF9;
-        case 0xF378:
-            return 0xEFF9;
-        case 0xF379:
-            return 0xEFF9;
-        case 0xF37A:
-            return 0xEFF9;
-        case 0xF331:
-            return 0xEFF1;
-        case 0xF332:
-            return 0xEFF2;
-        case 0xF333:
-            return 0xEFF3;
-        case 0xF334:
-            return 0xEFF4;
-        case 0xF335:
-            return 0xEFF5;
+        case PINYIN_CHAR('a'):
+            return PAD_KEY(2);
+        case PINYIN_CHAR('b'):
+            return PAD_KEY(2);
+        case PINYIN_CHAR('c'):
+            return PAD_KEY(2);
+
+        case PINYIN_CHAR('d'):
+            return PAD_KEY(3);
+        case PINYIN_CHAR('e'):
+            return PAD_KEY(3);
+        case PINYIN_CHAR('f'):
+            return PAD_KEY(3);
+
+        case PINYIN_CHAR('g'):
+            return PAD_KEY(4);
+        case PINYIN_CHAR('h'):
+            return PAD_KEY(4);
+        case PINYIN_CHAR('i'):
+            return PAD_KEY(4);
+
+        case PINYIN_CHAR('j'):
+            return PAD_KEY(5);
+        case PINYIN_CHAR('k'):
+            return PAD_KEY(5);
+        case PINYIN_CHAR('l'):
+            return PAD_KEY(5);
+
+        case PINYIN_CHAR('m'):
+            return PAD_KEY(6);
+        case PINYIN_CHAR('n'):
+            return PAD_KEY(6);
+        case PINYIN_CHAR('o'):
+            return PAD_KEY(6);
+
+        case PINYIN_CHAR('p'):
+            return PAD_KEY(7);
+        case PINYIN_CHAR('q'):
+            return PAD_KEY(7);
+        case PINYIN_CHAR('r'):
+            return PAD_KEY(7);
+        case PINYIN_CHAR('s'):
+            return PAD_KEY(7);
+
+        case PINYIN_CHAR('t'):
+            return PAD_KEY(8);
+        case PINYIN_CHAR('u'):
+            return PAD_KEY(8);
+        case PINYIN_CHAR('v'):
+            return PAD_KEY(8);
+
+        case PINYIN_CHAR('w'):
+            return PAD_KEY(9);
+        case PINYIN_CHAR('x'):
+            return PAD_KEY(9);
+        case PINYIN_CHAR('y'):
+            return PAD_KEY(9);
+        case PINYIN_CHAR('z'):
+            return PAD_KEY(9);
+
+        case PINYIN_TONE(1):
+            return PAD_KEY(1);
+        case PINYIN_TONE(2):
+            return PAD_KEY(2);
+        case PINYIN_TONE(3):
+            return PAD_KEY(3);
+        case PINYIN_TONE(4):
+            return PAD_KEY(4);
+        case PINYIN_TONE(5):
+            return PAD_KEY(5);
+
         default:
             Zi8LogError(0x14B, ZI_WORK);
             break;
     }
     return ch;
 }
+
+// Bopomofo pad layout (there's no fullwidth acute accent or caron)
+// ％－－－－－－－－－－－－－－－－－－－－－－－％
+// ｜　ㄅㄆㄇㄈ￣　｜　ㄉㄊㄋㄌ②　｜　ㄍㄎㄏ③　　｜
+// ％－－－－－－－－－－－－－－－－－－－－－－－％
+// ｜　ㄐㄑㄒ｀　　｜　ㄓㄔㄕㄖ・　｜　ㄗㄘㄙ　　　｜
+// ％－－－－－－－－－－－－－－－－－－－－－－－％
+// ｜　ㄚㄛㄜㄝ　　｜　ㄞㄟㄠㄡ　　｜　ㄢㄣㄤㄥㄦ　｜
+// ％－－－－－－－－－－－－－－－－－－－－－－－％
+// ｜　　　　　　　｜　ㄧㄨㄩ　　　｜　　　　　　　｜
+// ％－－－－－－－－－－－－－－－－－－－－－－－％
 ziU16 Zi81KeyZYinfo(ziWChar ch ZI_NEED_WORK) {
     switch (ch) {
-        case 0xF305:
-            return 0xEFF1;
-        case 0xF306:
-            return 0xEFF1;
-        case 0xF307:
-            return 0xEFF1;
-        case 0xF308:
-            return 0xEFF1;
-        case 0xF309:
-            return 0xEFF2;
-        case 0xF30A:
-            return 0xEFF2;
-        case 0xF30B:
-            return 0xEFF2;
-        case 0xF30C:
-            return 0xEFF2;
-        case 0xF30D:
-            return 0xEFF3;
-        case 0xF30E:
-            return 0xEFF3;
-        case 0xF30F:
-            return 0xEFF3;
-        case 0xF310:
-            return 0xEFF4;
-        case 0xF311:
-            return 0xEFF4;
-        case 0xF312:
-            return 0xEFF4;
-        case 0xF313:
-            return 0xEFF5;
-        case 0xF314:
-            return 0xEFF5;
-        case 0xF315:
-            return 0xEFF5;
-        case 0xF316:
-            return 0xEFF5;
-        case 0xF317:
-            return 0xEFF6;
-        case 0xF318:
-            return 0xEFF6;
-        case 0xF319:
-            return 0xEFF6;
-        case 0xF31A:
-            return 0xEFF7;
-        case 0xF31B:
-            return 0xEFF7;
-        case 0xF31C:
-            return 0xEFF7;
-        case 0xF31D:
-            return 0xEFF7;
-        case 0xF31E:
-            return 0xEFF8;
-        case 0xF31F:
-            return 0xEFF8;
-        case 0xF320:
-            return 0xEFF8;
-        case 0xF321:
-            return 0xEFF8;
-        case 0xF322:
-            return 0xEFF9;
-        case 0xF323:
-            return 0xEFF9;
-        case 0xF324:
-            return 0xEFF9;
-        case 0xF325:
-            return 0xEFF9;
-        case 0xF326:
-            return 0xEFF9;
-        case 0xF327:
-            return 0xEFFA;
-        case 0xF328:
-            return 0xEFFA;
-        case 0xF329:
-            return 0xEFFA;
-        case 0xF331:
-            return 0xEFF1;
-        case 0xF332:
-            return 0xEFF2;
-        case 0xF333:
-            return 0xEFF3;
-        case 0xF334:
-            return 0xEFF4;
-        case 0xF335:
-            return 0xEFF5;
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_B):
+            return PAD_KEY(1);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_P):
+            return PAD_KEY(1);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_M):
+            return PAD_KEY(1);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_F):
+            return PAD_KEY(1);
+
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_D):
+            return PAD_KEY(2);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_T):
+            return PAD_KEY(2);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_N):
+            return PAD_KEY(2);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_L):
+            return PAD_KEY(2);
+
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_G):
+            return PAD_KEY(3);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_K):
+            return PAD_KEY(3);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_H):
+            return PAD_KEY(3);
+
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_J):
+            return PAD_KEY(4);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_Q):
+            return PAD_KEY(4);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_X):
+            return PAD_KEY(4);
+
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_ZH):
+            return PAD_KEY(5);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_CH):
+            return PAD_KEY(5);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_SH):
+            return PAD_KEY(5);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_R):
+            return PAD_KEY(5);
+
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_Z):
+            return PAD_KEY(6);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_C):
+            return PAD_KEY(6);
+        case BPMF_CHAR(BPMF_CHAR_INITIAL_S):
+            return PAD_KEY(6);
+
+        case BPMF_CHAR(BPMF_CHAR_RIME_A):
+            return PAD_KEY(7);
+        case BPMF_CHAR(BPMF_CHAR_RIME_O):
+            return PAD_KEY(7);
+        case BPMF_CHAR(BPMF_CHAR_RIME_E):
+            return PAD_KEY(7);
+        case BPMF_CHAR(BPMF_CHAR_RIME_EH):
+            return PAD_KEY(7);
+
+        case BPMF_CHAR(BPMF_CHAR_RIME_AI):
+            return PAD_KEY(8);
+        case BPMF_CHAR(BPMF_CHAR_RIME_EI):
+            return PAD_KEY(8);
+        case BPMF_CHAR(BPMF_CHAR_RIME_AU):
+            return PAD_KEY(8);
+        case BPMF_CHAR(BPMF_CHAR_RIME_OU):
+            return PAD_KEY(8);
+
+        case BPMF_CHAR(BPMF_CHAR_RIME_AN):
+            return PAD_KEY(9);
+        case BPMF_CHAR(BPMF_CHAR_RIME_EN):
+            return PAD_KEY(9);
+        case BPMF_CHAR(BPMF_CHAR_RIME_ANG):
+            return PAD_KEY(9);
+        case BPMF_CHAR(BPMF_CHAR_RIME_ENG):
+            return PAD_KEY(9);
+        case BPMF_CHAR(BPMF_CHAR_RIME_ER):
+            return PAD_KEY(9);
+
+        case BPMF_CHAR(BPMF_CHAR_MEDIAL_I):
+            return PAD_KEY(10);
+        case BPMF_CHAR(BPMF_CHAR_MEDIAL_U):
+            return PAD_KEY(10);
+        case BPMF_CHAR(BPMF_CHAR_MEDIAL_IU):
+            return PAD_KEY(10);
+
+        case PINYIN_TONE(1):
+            return PAD_KEY(1);
+        case PINYIN_TONE(2):
+            return PAD_KEY(2);
+        case PINYIN_TONE(3):
+            return PAD_KEY(3);
+        case PINYIN_TONE(4):
+            return PAD_KEY(4);
+        case PINYIN_TONE(5):
+            return PAD_KEY(5);
+
         default:
             Zi8LogError(0x14C, ZI_WORK);
             break;
@@ -862,12 +912,12 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
             tableCount = 0;
             tableData = 0;
         }
-        if (hetMode == 1) {
+        if (hetMode == CHAR_INFO_HET_PINYIN_KB) {
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 3, ZI_WORK);
         } else {
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 4, ZI_WORK);
         }
-        if (hetMode == CHAR_INFO_HET_UNK_x01 || hetMode == CHAR_INFO_HET_UNK_x02) {
+        if (hetMode == CHAR_INFO_HET_PINYIN_KB || hetMode == CHAR_INFO_HET_BOPOMOFO_KB) {
             if (tableCount <= Zi8GetTableCount(ZI8_LANG_ZH, 8, ZI_WORK)) {
                 chHi = (ch >> 8) & 0xFF;
                 chLo = ch;
@@ -876,7 +926,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
                         ord = GET_TABLE19_ENTRY_TABLE34_IDX(&tableData->tables->t19);
                         code = table34Data[ord] + (ziU16)((ziU16)table34Data[ord + 1] << 8) + (tableData->tables->t19.codeOffs & 0xFFFF);
 
-                        if (hetMode == CHAR_INFO_HET_UNK_x01) {
+                        if (hetMode == CHAR_INFO_HET_PINYIN_KB) {
                             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
                         } else {
                             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
@@ -947,14 +997,14 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         case CHAR_INFO_HET_UNK_x11:
             scratchDataLen = Zi8GetSInfo(scratchBufPtr, tableData->raw, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
-        case CHAR_INFO_HET_UNK_x01:
-        case CHAR_INFO_HET_UNK_x03:
+        case CHAR_INFO_HET_PINYIN_KB:
+        case CHAR_INFO_HET_PINYIN_PAD:
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 3, ZI_WORK);
             code = Zi8GetPCode(table34Data, scratchBufPtr);
             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
-        case CHAR_INFO_HET_UNK_x02:
-        case CHAR_INFO_HET_UNK_x04:
+        case CHAR_INFO_HET_BOPOMOFO_KB:
+        case CHAR_INFO_HET_BOPOMOFO_PAD:
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 4, ZI_WORK);
             code = Zi8GetPCode(table34Data, scratchBufPtr);
             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
@@ -963,7 +1013,8 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
             scratchDataLen = 0;
             break;
     }
-    if (elementCount == 0 || (scratchBufPtr->maskBytes[0] & 0x80) == 0 || (hetMode != CHAR_INFO_HET_UNK_x03 && hetMode != CHAR_INFO_HET_UNK_x04))
+    if (elementCount == 0 || (scratchBufPtr->maskBytes[0] & 0x80) == 0 ||
+        (hetMode != CHAR_INFO_HET_PINYIN_PAD && hetMode != CHAR_INFO_HET_BOPOMOFO_PAD))
         goto FINISH;
     table5Data = (Table5Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 5, ZI_WORK);
     table5Rem = Zi8GetTableCount(ZI8_LANG_ZH, 5, ZI_WORK);
@@ -980,7 +1031,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
             for (i = 0; i < scratchDataLen; i++) {
                 if (i == elementCount)
                     break;
-                if (hetMode == CHAR_INFO_HET_UNK_x03) {
+                if (hetMode == CHAR_INFO_HET_PINYIN_PAD) {
                     if (elements[i] != Zi81KeyPYinfo(charInfoBuffer[i], ZI_WORK)) {
                         isOkToFinish = 0;
                         break;
@@ -1005,7 +1056,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         table5Rem--;
         table5Data++;
 
-        if (hetMode == CHAR_INFO_HET_UNK_x03) {
+        if (hetMode == CHAR_INFO_HET_PINYIN_PAD) {
             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
         } else {
             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
