@@ -590,7 +590,7 @@ namespace ipl {
         createAppHeap_();
 
         // Allocate work buffer for Banner Sound Player
-        pBSWaveBuffer = getMem1Sys()->alloc(0x3000, DEFAULT_ALIGN);
+        pBSWaveBuffer = (s16*)getMem1Sys()->alloc(SimpleWavePlayer::wsize, DEFAULT_ALIGN);
 
         OSSetSwitchThreadCallback(cbThreadSwitch);
 

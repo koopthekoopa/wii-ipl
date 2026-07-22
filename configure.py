@@ -783,8 +783,8 @@ config.libs = [
         ]
     ),
     IPLSection("kitayamaTest", [
-            Object(NonMatching, "scene/kitayamaTest/iplKitayamaTest.cpp"),
-            Object(NonMatching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
+            Object(Equivalent, "scene/kitayamaTest/iplKitayamaTest.cpp"),
+            Object(Matching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
         ]
     ),
     IPLSection("letterWriter", [
@@ -899,10 +899,10 @@ config.libs = [
         ]
     ),
     IPLSection("bannerSound", [
-            Object(NonMatching, "bannerSound/AudioWavePlayer.cpp"),
-            Object(NonMatching, "bannerSound/AxAdpcmPlayer.cpp"),
-            Object(NonMatching, "bannerSound/BannerSoundPlayer.cpp"),
-            Object(NonMatching, "bannerSound/AudioWaveUtility.cpp"),
+            Object(Equivalent, "bannerSound/AudioWavePlayer.cpp"),
+            Object(Equivalent, "bannerSound/AxAdpcmPlayer.cpp"),
+            Object(Matching, "bannerSound/BannerSoundPlayer.cpp"),
+            Object(Matching, "bannerSound/AudioWaveUtility.cpp"),
         ]
     ),
     # it decides to do fast optimization for this one

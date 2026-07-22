@@ -60,11 +60,16 @@ namespace ipl {
                 y = fy;
             }
 
+            void operator=(const VEC2& r) NO_INLINE {
+              this->x = r.x;
+              this->y = r.y;
+            }
+
             VEC2 operator*(f32 val) const { return VEC2(x * val, y * val); }
 
             void set(f32 fx, f32 fy) {
                 x = fx;
-                y = fx;
+                y = fy;
             }
 
             void clear() {

@@ -151,13 +151,26 @@ namespace ipl {
         BOOL is_terminated();
         BOOL is_working();
 
+        WIISaveBannerFile* get_cached_nand_save_banner(ESTitleId titleId);
+        void* get_cached_nand_app_thumbnail(ESTitleId titleId, u32*);
+        WIISaveBannerFile* get_cached_sd_save_banner(ESTitleId32 titleId);
+        void* get_cached_sd_app_thumbnail(ESTitleId32 titleId, u32*);
+
+        channel::SChanMgrMetaHeader* get_cached_nand_app_meta_header(ESTitleId titleId);
+        channel::SChanMgrMetaHeader* get_cached_sd_app_meta_header(ESTitleId32 titleId);
+
+        s32 get_cached_nand_save_size(ESTitleId titleId);
+        s32 get_cached_nand_app_size(ESTitleId titleId);
+        s32 get_cached_sd_save_size(ESTitleId32 titleId);
+        s32 get_cached_sd_app_size(ESTitleId32 titleId);
+
         static bool is_disk_or_user_nand_app(ESTitleId titleId);
         static bool is_user_nand_app(ESTitleId titleId);
         static bool is_data_only_title(ESTitleId titleId);
         static bool is_available_data_only_titleidlo(ESTitleId32 titleId);
 
         inline static u32 workerWorkSize() { return sizeof(Work); }
-        inline static u32 heapSizeForApmpWorker() { return appCacheHeapSize() + 0x40000; }
+        inline static u32 heapSizeForAppWorker() { return appCacheHeapSize() + 0x40000; }
         inline static u32 heapSizeForSaveWorker() { return saveCacheHeapSize() + 0x40000; }
 
         static const int SD_MAX_APP_PAGE = 20;
@@ -361,19 +374,6 @@ namespace ipl {
         void clear_app_cache(nw4r::ut::List* list);
         void delete_save_cache(nw4r::ut::List* list, ESTitleId titleId);
         void delete_app_cache(nw4r::ut::List* list, ESTitleId titleId);
-
-        WIISaveBannerFile* get_cached_nand_save_banner(ESTitleId titleId);
-        void* get_cached_nand_app_thumbnail(ESTitleId titleId, u32* sizeOut);
-        WIISaveBannerFile* get_cached_sd_save_banner(ESTitleId32 titleId);
-        void* get_cached_sd_app_thumbnail(ESTitleId32 titleId, u32* sizeOut);
-
-        channel::SChanMgrMetaHeader* get_cached_nand_app_meta_header(ESTitleId titleId);
-        channel::SChanMgrMetaHeader* get_cached_sd_app_meta_header(ESTitleId32 titleId);
-
-        s32 get_cached_nand_save_size(ESTitleId titleId);
-        s32 get_cached_nand_app_size(ESTitleId titleId);
-        s32 get_cached_sd_save_size(ESTitleId32 titleId);
-        s32 get_cached_sd_app_size(ESTitleId32 titleId);
 
         int delete_meta_file(ESTitleId titleId);
 
