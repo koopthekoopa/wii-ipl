@@ -185,13 +185,14 @@ CHANSVmObjHdr* CHANSVmNewObjHdr(CHANSVm* vm, vmBoolInt noAlloc) {
 
 vmPtr CHANSVmAlloc(CHANSVm* vm, vmSize size) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    vmU8* ptr;
     vmPtr result = vmNull;
 
     if (size != 0 && (size & 0x1F) == 0) {
         result = CHANSVmAllocFromGarbage(vm, size);
 
         if (result == vmNull) {
-            vmU8* ptr = pVm->pFreeExeBuf;
+            ptr = pVm->pFreeExeBuf;
             if ((vmU32)pVm->pObjStackTopBuf - (vmU32)ptr >= size) {
                 result = ptr;
                 pVm->pFreeExeBuf = ptr + size;
