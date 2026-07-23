@@ -998,7 +998,7 @@ config.libs = [
             Object(Matching,    "clib/zi8misc.c"),
             Object(NonMatching, "clib/zi8pud2.c"),
             Object(Matching,    "clib/zi8punct.c", extra_cflags=["-enc SJIS"]),
-            Object(NonMatching, "clib/zi8space.c"),
+            Object(Matching,    "clib/zi8space.c"),
             Object(NonMatching, "clib/zi8uwd.c"),
             Object(Matching,    "clib/zi8ver.c"),
             Object(Matching,    "clib/zi8ZHuwd.c"),
