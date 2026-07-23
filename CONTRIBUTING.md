@@ -181,7 +181,7 @@ Make sure the guard names are uppercase SNAKE_CASE.
 
 ### Literals
 
-- For floating-point values, please be explicit with them. (they also affect matching)
+- For floating-point values, please be explicit with them. (they can also affect matching)
 ```cpp
   // Do this!
   float value0 = 1.0f;

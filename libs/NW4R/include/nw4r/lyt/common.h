@@ -4,7 +4,6 @@
 #include <revolution/tpl.h>
 #include <revolution/types.h>
 
-
 #include <nw4r/ut/Color.h>
 
 #include <nw4r/lyt/animation.h>

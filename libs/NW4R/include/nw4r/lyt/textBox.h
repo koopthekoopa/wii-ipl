@@ -4,7 +4,6 @@
 #include <nw4r/lyt/common.h>
 #include <nw4r/lyt/pane.h>
 
-
 #include <nw4r/ut/TagProcessorBase.h>
 
 namespace nw4r {
@@ -34,6 +33,11 @@ namespace nw4r {
             const wchar_t* GetString() const { return mTextBuf; }
 
             const Size& GetFontSize() const { return mFontSize; }
+
+            void SetLineSpace(f32 lineSpace) { mLineSpace = lineSpace; }
+            const f32 GetLineSpace() const { return mLineSpace; }
+
+            void SetCharSpace(f32 charSpace) { mCharSpace = charSpace; }
             const f32 GetCharSpace() const { return mCharSpace; }
 
             void SetFontSize(const Size& fontSize) { mFontSize = fontSize; }

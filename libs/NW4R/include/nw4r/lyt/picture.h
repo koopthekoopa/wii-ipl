@@ -9,7 +9,7 @@ namespace nw4r {
     namespace lyt {
         class Picture : public Pane {
         public:
-            Picture(u8 num);
+            Picture(u8 num = 1);
             Picture(const res::Picture* pResPic, const ResBlockSet& resBlockSet);
             virtual ~Picture();
 

@@ -15,8 +15,6 @@
 #include <private/os.h>
 #include <private/wpad.h>
 
-#pragma sym on
-
 // :)
 #define PREV_LOADED_INDEX (1 - mLoadedIndex)
 

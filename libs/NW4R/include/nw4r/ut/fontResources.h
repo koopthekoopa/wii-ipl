@@ -86,6 +86,7 @@ namespace nw4r {
             u8 ascent;       // 0x16
             u8 padding_[1];  // 0x17
         } FontInformation;
+
         typedef struct GlyphGroups {
             u32 uncompSheetSize;  // 0x00
             u16 sheetGlyphCount;  // 0x04
@@ -100,6 +101,7 @@ namespace nw4r {
             BinaryBlockHeader hdr;  // 0x00
             GlyphGroups inner;      // 0x08
         } HeaderedGlyphGroups;
+
         typedef struct ArchiveFontBinaryLayout {
             BinaryFileHeader hdr;      // 0x00
             HeaderedGlyphGroups glgr;  // 0x10
