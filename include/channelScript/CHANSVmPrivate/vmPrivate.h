@@ -9,28 +9,28 @@ extern "C" {
 #include "channelScript/CHANSVm/VmTypes.h"
 
 typedef struct CHANSVmExecutionCtx {
-    struct CHANSVmExecutionCtx* next; // 0x00
-    struct CHANSVmModule* pDbg;       // 0x04
-    vmWString* pArgv;                 // 0x08
-    vmS32 stackDepth;                 // 0x0C
-    vmU32 pc;                         // 0x10
-    vmU16 argc;                       // 0x14
-    vmU16 totalSlots;                 // 0x16
-    vmU16 frameBase;                  // 0x18
-    vmU8 headerCount;                 // 0x1A
-    vmU8 pad_0x1B[5];                 // 0x1B
-    CHANSVmObjHdr headers[];          // 0x20 (variable)
+    struct CHANSVmExecutionCtx* pNext; // 0x00
+    struct CHANSVmModule* pDbg;        // 0x04
+    vmWString* pArgv;                  // 0x08
+    vmS32 stackDepth;                  // 0x0C
+    vmU32 pc;                          // 0x10
+    vmU16 argc;                        // 0x14
+    vmU16 totalSlots;                  // 0x16
+    vmU16 frameBase;                   // 0x18
+    vmU8 headerCount;                  // 0x1A
+    vmU8 pad_0x1B[5];                  // 0x1B
+    CHANSVmObjHdr headers[];           // 0x20 (variable)
 } CHANSVmExecutionCtx;
 
 typedef struct FreeBlock {
-    struct FreeBlock* next; // 0x00
-    vmU32 size;             // 0x04
+    struct FreeBlock* pNext; // 0x00
+    vmU32 size;              // 0x04
 } FreeBlock;
 
 typedef struct MethodListNode {
-    struct MethodListNode* next; // 0x00
-    u32 nameLength;              // 0x04
-    char name[];                 // 0x08 (variable)
+    struct MethodListNode* pNext; // 0x00
+    u32 nameLength;               // 0x04
+    char sName[];                 // 0x08 (variable)
 } MethodListNode;
 
 typedef struct GlobalObjListNode {
@@ -50,8 +50,8 @@ typedef struct ModuleEntry {
 } ModuleEntry;
 
 typedef struct ArrayChunk {
-    struct ArrayChunk* prev;    // 0x00
-    struct ArrayChunk* next;    // 0x04
+    struct ArrayChunk* pPrev;    // 0x00
+    struct ArrayChunk* pNext;    // 0x04
     u32 capacity;                // 0x08
     u32 count;                   // 0x0C
     u32 start;                   // 0x10
@@ -98,7 +98,7 @@ typedef struct SrcLineEntry {
 } SrcLineEntry;
 
 typedef struct CHANSVmModule {
-    struct CHANSVmModule* next;     // 0x00
+    struct CHANSVmModule* pNext;    // 0x00
     u32 regionSize;                 // 0x04
     ModuleHeader* pModule;          // 0x08
     u32 codeSize;                   // 0x0C
@@ -143,7 +143,7 @@ typedef struct CHANSVmPrivate {
     FreeBlock* pFreeList;                  // 0x3C
     CHANSVmNativeClass* pArrayCls;         // 0x40
     CHANSVmNativeClass* pStringCls;        // 0x44
-    vmBool* pbSignalPending;               // 0x48
+    vmBool* bpSignalPending;               // 0x48
     vmBool bAllocBlocked;                  // 0x4C
     vmBool bSignalUpdated;                 // 0x4D
     vmBool bSignalBlocked;                 // 0x4E

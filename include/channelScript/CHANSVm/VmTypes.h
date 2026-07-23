@@ -77,12 +77,12 @@ typedef struct {
 } vmInt32ObjVal;
 
 typedef struct {
-    vmWString str;
+    vmWString spData;
     vmSize len;
 } vmWStringObjVal;
 
 typedef struct {
-    vmString str;
+    vmString spData;
     vmSize len;
 } vmStringObjVal;
 
@@ -127,7 +127,7 @@ struct CHANSVmObjHdr {
 };
 
 typedef struct CHANSVmImage {
-    u8* data;      // 0x00
+    u8* pData;     // 0x00
     u32 size;      // 0x04
     u16 width;     // 0x08
     u16 height;    // 0x0A
@@ -141,13 +141,13 @@ typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSV
 typedef CHANSVmErr (*CHANSVmOpFunction)(CHANSVm*, CHANSVmObjType, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*);
 
 typedef struct CHANSVmIntConstantList {
-    const char* name; // 0x00
-    u32 value;        // 0x04
+    const char* spName; // 0x00
+    u32 value;          // 0x04
 } CHANSVmIntConstantList;
 
 typedef struct CHANSVmFloatConstantList {
-    const char* name; // 0x00
-    double* value;    // 0x04
+    const char* spName; // 0x00
+    double* pValue;     // 0x04
 } CHANSVmFloatConstantList;
 
 typedef struct CHANSVmBlobPackFormatList {
@@ -158,27 +158,27 @@ typedef struct CHANSVmBlobPackFormatList {
 } CHANSVmBlobPackFormatList;
 
 typedef struct CHANSVmMethodList {
-    const char* name;        // 0x00
+    const char* spName;      // 0x00
     CHANSVmFunction method;  // 0x04
 } CHANSVmMethodList;
 
 typedef struct CHANSVmNativeMethod {
-    struct CHANSVmNativeMethod* next;  // 0x00
+    struct CHANSVmNativeMethod* pNext; // 0x00
     u16 index;                         // 0x04
     u8 hasStar;                        // 0x06
     u8 pad_0x07;                       // 0x07
     CHANSVmFunction func;              // 0x08
-    undefined unk_0x0C[0x14];            // 0x0C
+    undefined unk_0x0C[0x14];          // 0x0C
 } CHANSVmNativeMethod;
 
 typedef struct CHANSVmPropertyList {
-    const char* name;  // 0x00
+    const char* spName;  // 0x00
     CHANSVmFunction get;
     CHANSVmFunction set;
 } CHANSVmPropertyList;
 
 typedef struct CHANSVmNativeProperty {
-    struct CHANSVmNativeProperty* next;  // 0x00
+    struct CHANSVmNativeProperty* pNext; // 0x00
     u16 index;                           // 0x04
     u8 flag;                             // 0x06
     u8 pad_0x07;                         // 0x07
@@ -188,17 +188,17 @@ typedef struct CHANSVmNativeProperty {
 } CHANSVmNativeProperty;
 
 struct CHANSVmNativeClass {
-    CHANSVmNativeClass* next;  // 0x00
+    CHANSVmNativeClass* pNext;  // 0x00
 
     CHANSVmFunction ctor;  // 0x04
     CHANSVmFunction dtor;  // 0x08
-   CHANSVmFunction init;  // 0x0C
+    CHANSVmFunction init;  // 0x0C
 
-    CHANSVmNativeMethod* nativeMethods;      // 0x10
-    CHANSVmNativeProperty* nativeProperties;  // 0x14
+    CHANSVmNativeMethod* pNativeMethods;      // 0x10
+    CHANSVmNativeProperty* pNativeProperties; // 0x14
 
     vmSize nameLength;  // 0x18
-    char name[4];       // 0x1C
+    char sName[4];      // 0x1C
 
     undefined unk_0x20[0x1C];
 };
