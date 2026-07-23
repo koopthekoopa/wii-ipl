@@ -19,6 +19,9 @@ ziBool Zi8GetPyFinal(ziU8* syllableChars, ziU8* maskOut, ziU8* syllableFinalOut)
 ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU16* outA, ziU16* outB ZI_NEED_WORK);
 ziWChar Zi8GetPCode(ziU8* table34, Table0Entry* table0Entry);
 
+#define PAD_KEY_BASE 0xEFF0
+#define PAD_KEY(VALUE) (PAD_KEY_BASE + (VALUE))
+
 #define PINYIN_BASE 0xF300
 #define PINYIN_CHAR(CHAR) (PINYIN_BASE + CHAR)
 #define PINYIN_TONE(TONE) (PINYIN_BASE + 0x30 + TONE)

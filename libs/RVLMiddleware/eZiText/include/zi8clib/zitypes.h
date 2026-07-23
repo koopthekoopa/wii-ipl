@@ -260,6 +260,18 @@ typedef struct _ziListNodeA {
 
 typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
 
+// TODO: Name this something real
+typedef struct {
+    ziU8 size;      // 0x0
+    ziU8 language;  // 0x1
+    ziU8 offsHi;    // 0x2
+    ziU8 offsLo;    // 0x3
+    ziU8 countHi;   // 0x4
+    ziU8 countLo;   // 0x5
+    ziU8 unk_0x6;   // 0x6
+    ziU8 unk_0x7;   // 0x7
+} ziUnkStruct;
+
 struct __zi8_work_data_s {
     ziU8 unk_0x00;                   // 0x000
     ziLanguageEntry* langEntries;    // 0x004
@@ -292,10 +304,14 @@ struct __zi8_work_data_s {
     ziU8 unk_0x1C7;                  // 0x1C7
     ziListNodeA unk_0x1C8[0x20];     // 0x1C8
     ziListNodeA* unk_0x2C8;          // 0x2C8
-    ziU8 unk_0x2CC[0x40];            // 0x2CC
+    ziUnkStruct* unk_0x2CC[0x10];    // 0x2CC
     ziU8 unk_0x30C;                  // 0x30C
-    ziU8 unk_0x30D[0xF];             // 0x30D
+    ziU8* unk_0x310;                 // 0x310
+    ziS32 unk_0x314;                 // 0x314
+    ziS32 unk_0x318;                 // 0x318
     ziU8 pdRemoveOpt;                // 0x31C
+    ziU8 unk_0x31D;                  // 0x31D
+    ziU8 unk_0x31E;                  // 0x31E
     Zi8OemSearchDict oemSearchDict;  // 0x320
     ziU16 oemDictLen;                // 0x324
     ziU32 unk_0x328;                 // 0x328

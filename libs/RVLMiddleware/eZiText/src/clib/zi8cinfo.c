@@ -667,9 +667,6 @@ ziU8 Zi8GetSInfo(Table0Entry* strokeInfoA, ziU8* strokeInfoB, ziWChar* charInfoB
     return offset;
 }
 
-#define PAD_KEY_BASE 0xEFF0
-#define PAD_KEY(VALUE) (PAD_KEY_BASE + (VALUE))
-
 // Pinyin pad layout
 // %--------------------%
 // | .,?ˉ | ABCˊ | DEFˇ |
