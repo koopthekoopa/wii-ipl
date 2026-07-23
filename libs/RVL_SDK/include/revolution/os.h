@@ -52,7 +52,7 @@ extern "C" {
 
 u32 __OSBusClock ADDRESS(OS_BASE_CACHED + OS_ADDR_BUS_CLOCK_SPEED);
 u32 __OSCoreClock ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLOCK_SPEED);
-extern s64 __OSStartTime;
+extern OSTime __OSStartTime;
 
 #define OS_BUS_CLOCK __OSBusClock
 #define OS_CORE_CLOCK __OSCoreClock

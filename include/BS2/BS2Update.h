@@ -39,7 +39,7 @@ typedef struct BS2UpdateEntry {
 int             BS2UpdateState();
 void            BS2CancelUpdate();
 
-BOOL            BS2Update_813801D4();
+BOOL            BS2ContainsSeatTitles();
 
 BS2UpdateEntry* BS2GetUpdateEntry();
 u32             BS2GetUpdateEntryNum();

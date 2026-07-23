@@ -31,7 +31,7 @@ namespace nw4r {
                 void SetWaveBuffer(const WaveBufferInfo& newWaveBuffer) { mWaveBuffer = newWaveBuffer; }
                 WaveBufferInfo& GetWaveBuffer() { return mWaveBuffer; }
 
-                bool getAppendFlag() const { return mAppendFlag; }
+                bool GetAppendFlag() const { return mAppendFlag; }
 
             private:
                 WaveBufferInfo mWaveBuffer;  // 0x04
@@ -53,7 +53,10 @@ namespace nw4r {
 
             typedef struct SetupParam {
             public:
-                SetupParam() : channelCount(1), sampleFormat(SAMPLE_FORMAT_PCM_S16), sampleRate(32000), pitchMax(1.0f), voices(1) {}
+                SetupParam(int channelCount_, SampleFormat sampleFormat_, int sampleRate_, f32 pitchMax_, int voices_)
+                    : /*channelCount(1), sampleFormat(SAMPLE_FORMAT_PCM_S16), sampleRate(32000), pitchMax(1.0f), voices(1)*/ channelCount(
+                          channelCount_),
+                      sampleFormat(sampleFormat_), sampleRate(sampleRate_), pitchMax(pitchMax_), voices(voices_) {}
                 int channelCount;           // 0x00
                 SampleFormat sampleFormat;  // 0x04
                 int sampleRate;             // 0x08
@@ -82,7 +85,7 @@ namespace nw4r {
             void SetNextWavePacket();
             void UpdateWavePacket();
 
-            inline void setVolume(f32 newVolume) { mVolume = newVolume; }
+            void SetVolume(f32 newVolume) { mVolume = newVolume; }
 
         private:
             void detail_Update();

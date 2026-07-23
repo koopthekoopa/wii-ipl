@@ -326,7 +326,7 @@ namespace ipl {
             mURLProc.update();
 
             if (mpSoundData != NULL && mbSoundPlaying) {
-                if (snd::getBannerPlayer()->getUnk_0x00() == 0) {
+                if (!snd::getBannerPlayer()->isStarted()) {
                     if (mSoundStopTimer()) {
                         mbSoundPlaying = false;
                         snd::getSystem()->muteOffBGM(120);

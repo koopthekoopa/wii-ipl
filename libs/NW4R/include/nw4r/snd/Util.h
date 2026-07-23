@@ -22,7 +22,13 @@ namespace nw4r {
                     REFTYPE_OFFSET,
                 } RefType;
 
-                typedef enum DataType { DATATYPE_T0, DATATYPE_T1, DATATYPE_T2, DATATYPE_T3, DATATYPE_INVALID } DataType;
+                typedef enum DataType {
+                    DATATYPE_T0,
+                    DATATYPE_T1,
+                    DATATYPE_T2,
+                    DATATYPE_T3,
+                    DATATYPE_INVALID
+                } DataType;
 
                 template <typename T0, typename T1 = void, typename T2 = void, typename T3 = void>
                 struct DataRef {

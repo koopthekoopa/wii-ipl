@@ -17,6 +17,13 @@
 
 namespace ipl {
     namespace channel {
+        // here to avoid typing in long namespaces constantly :P
+        enum {
+            CHANS_VM_ALT_SND_STATE_UNAVAILABLE = 0,
+            CHANS_VM_ALT_SND_STATE_UNK1,
+            CHANS_VM_ALT_SND_STATE_PLAY,
+        };
+
         class ChannelScriptManager {
         public:
             typedef struct CSData {
@@ -51,6 +58,9 @@ namespace ipl {
             CSData& getData() { return mCSData; }
             EGG::Heap* getHeap() { return mpHeap; }
 
+            int getAltSoundState() { return mAltSoundState; }
+            void setAltSoundState(int state) { mAltSoundState = state; }
+
         private:
             enum {
                 CHANS_VM_STATE_UNK0 = 0,
@@ -66,12 +76,6 @@ namespace ipl {
                 CHANS_VM_MSG_STATE_UNK2,
                 CHANS_VM_MSG_STATE_UNK3,
                 CHANS_VM_MSG_STATE_UNK4,
-            };
-
-            enum {
-                CHANS_VM_ALT_SND_STATE_UNAVAILABLE = 0,
-                CHANS_VM_ALT_SND_STATE_UNK1,
-                CHANS_VM_ALT_SND_STATE_PLAY,
             };
 
             u8* mpChansWork;  // 0x00

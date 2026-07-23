@@ -3,8 +3,6 @@
 
 #include <revolution/ncd.h>
 
-#define unk undefined
-
 namespace ipl {
     namespace scene {
         extern NCDAossConfig m_AOSSConfig;

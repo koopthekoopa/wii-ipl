@@ -43,25 +43,25 @@ public:
 
     void init(s32);
     BannerSoundPlayer::SoundType checkHeader(void* data, u32 length);
-    bool checkData(void* data, u32 length, bool unk);
+    bool checkData(void* data, u32 length, bool ignoreSize);
 
     void calc();
 
     void pause(bool flag);
 
     bool start(void* data, u32 dataLen);
-    void stop(u32 fadeoutSteps);
+    void stop(u32 fadeOut);
 
     void setMasterVolume(f32 volume);
 
-    int getUnk_0x00() const { return mIsStarted; }
+    bool isStarted() const { return mIsStarted; }
 
 private:
-    bool mIsStarted;                   // 0x000
-    bool mIsInitialized;               // 0x001
-    SndMoveValueF32 mSndMoveValue;     // 0x004
-    SoundType mSoundType;              // 0x014
-    SimpleWavePlayer mWavePlayer;      // 0x018
+    bool mIsStarted;                   // 0x00
+    bool mIsInitialized;               // 0x01
+    SndMoveValueF32 mSndMoveValue;     // 0x04
+    SoundType mSoundType;              // 0x14
+    SimpleWavePlayer mWavePlayer;      // 0x18
     AxAdpcmSimplePlayer mAdpcmPlayer;  // 0x500
     AxAdpcmHandle mAdpcmHandle;        // 0x508
     u8 unk_0x510;                      // 0x510

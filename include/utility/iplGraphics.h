@@ -51,6 +51,10 @@ namespace ipl {
                 mArg.mOrthoScale = scale;
             }
 
+            static void setOrthoTrans(const math::VEC3& translate) { mArg.mOrthoTrans = translate; }
+
+            static void setOrthoScale(const math::VEC2& scale) NO_INLINE { mArg.mOrthoScale = scale; }
+
         private:
             static Arg mArg;
         };

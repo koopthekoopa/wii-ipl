@@ -270,7 +270,7 @@ namespace ipl {
             }
         }
 
-        int ChannelObj::calcExtModule(EGG::ExpHeap* expHeap, bool unk0, bool unk1) {
+        int ChannelObj::calcExtModule(EGG::ExpHeap* expHeap, bool unk0, bool onSceneChange) {
             int result = EXT_MODULE_RESULT_WAIT;
 
             if (mExtModuleState == EXT_MODULE_STATE_UNAVAILABLE) {
@@ -280,7 +280,7 @@ namespace ipl {
             switch (mExtModuleState) {
                 case EXT_MODULE_STATE_BEGIN: {
                     if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
-                        mModuleCount += 1;
+                        mModuleCount++;
                         if (unk0 && mModuleCount > mMaxModuleCount) {
                             mpPrevModuleHeap = mpModuleHeap;
                             mpModuleHeap = expHeap;
@@ -363,7 +363,7 @@ namespace ipl {
                     }
 
                     // If the calc function requested to exit (by returning a non-zero value)
-                    if (!mbRSODoneCalc && mpRSOCalc(!(unk1 - 1))) {
+                    if (!mbRSODoneCalc && mpRSOCalc(onSceneChange == true)) {
                         mbRSODoneCalc = true;
                     }
 
@@ -530,7 +530,7 @@ namespace ipl {
         }
 
         BOOL ChannelObj::isDiskChannel() const {
-            if (isValid() && System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == channel::SCENE_ID_DISK_CHANNEL) {
+            if (isValid() && System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == SCENE_DISK_CHANNEL) {
                 return TRUE;
             } else {
                 return FALSE;
@@ -713,7 +713,7 @@ namespace ipl {
             f32 frame;
 
             if (isValid()) {
-                if (System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == channel::SCENE_ID_DISK_CHANNEL) {
+                if (System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == SCENE_DISK_CHANNEL) {
                     frame = 0.0f;
                 } else {
                     if (mpThumbFile->checkData() == nand::RESULT_SUCCESS) {
@@ -749,8 +749,8 @@ namespace ipl {
             mpThumbLayout = layout::Object::create(mpMainHeap, 0x8000, mpThumbFile->getBuffer(), "arc", "icon.brlyt");
             setLangPane(mpThumbLayout);
 
-            u32 rsoIdx = System::getChannelManager()->getMetaHdr_IconRSOIdx(mChanPage, mChanIndex);
-            u32 csIdx = System::getChannelManager()->getMetaHdr_IconCSIdx(mChanPage, mChanIndex);
+            u32 rsoIdx = System::getChannelManager()->getIconRSOIdx(mChanPage, mChanIndex);
+            u32 csIdx = System::getChannelManager()->getIconCSIdx(mChanPage, mChanIndex);
 
             if (rsoIdx != 0) {
                 if (mpThumbLayout->searchFile("icon_Start.brlan")) {

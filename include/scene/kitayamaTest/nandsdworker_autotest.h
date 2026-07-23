@@ -114,16 +114,22 @@ namespace ipl {
                 PROCESS_TYPE_APP_TEST = 2,    // 2
             };
 
-            NandSDWorker base;                     // 0x00000
-            ESTitleId mWiiTitleIds[0x40];          // 0x00008
-            ESTitleId32 mSDTitleIds[0x40];         // 0x00208
-            WIISaveBannerFile mBanner;             // 0x00308
-            ProcessState mProcessState;            // 0x0f3a8
-            ProcessType mProcessType;              // 0x0f3ac
-            int mResult;                           // 0x0f3b0
-            u8 mThumbnailData[0x19000];            // 0x0f3b4
-            channel::SChanMgrMetaHeader mMetaHdr;  // 0x283b4
-            u64 mSDFreeSize;                       // 0x289b8
+            NandSDWorker base;  // 0x00
+
+            ESTitleId mWiiTitleIds[0x40];   // 0x08
+            ESTitleId32 mSDTitleIds[0x40];  // 0x208
+
+            WIISaveBannerFile mBanner;  // 0x308
+
+            ProcessState mProcessState;  // 0xF3A8
+            ProcessType mProcessType;    // 0xF3AC
+
+            int mResult;  // 0xF3B0
+
+            u8 mThumbnailData[0x19000];            // 0xF3B4
+            channel::SChanMgrMetaHeader mMetaHdr;  // 0x283B4
+
+            u64 mSDFreeSize;  // 0x289B8
         };
     }  // namespace kitayama
 }  // namespace ipl

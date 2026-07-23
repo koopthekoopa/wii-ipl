@@ -78,6 +78,12 @@ namespace ipl {
             BS2State getUnlockedState() { return mUnlockedState; }
             BOOL diskHasBanner() { return mbHasBanner; }
 
+            /* @brief If the update includes assistant channels */
+            bool updateHasSeatTitles() { return mbIncludesSeatTitles; }
+
+            u32 getCurUpdateEntrySize() { return mEntrySize; }
+            u32 getCurUpdateEntryOffset() { return mEntryOffset; }
+
         private:
             void bootNewSystem();
 
@@ -87,11 +93,11 @@ namespace ipl {
             bool unk_0x0D;
             bool unk_0x0E;
             bool unk_0x0F;
-            bool mbIsDiagDisc;  // 0x10
-            bool unk_0x11;
-            u8* mpBannerBuffer;       // 0x14
-            BOOL mbHasBanner;         // 0x18
-            BS2State mUnlockedState;  // 0x1C
+            bool mbIsDiagDisc;          // 0x10
+            bool mbIncludesSeatTitles;  // 0x11
+            u8* mpBannerBuffer;         // 0x14
+            BOOL mbHasBanner;           // 0x18
+            BS2State mUnlockedState;    // 0x1C
 
             // For Update
 

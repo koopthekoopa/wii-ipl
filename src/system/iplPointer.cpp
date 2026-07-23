@@ -11,17 +11,6 @@ namespace ipl {
 #define MAX_LENGTH 128.f
 
     // clang-format off
-    
-    enum {
-        POINT_DOWN = 0,
-        POINT_UP
-    };
-            
-    enum {
-        POINT_NOT_SCROLLING = -1,
-        POINT_SCROLLING,
-    };
-
     static const char* scLayoutName[MAX_LAYOUT_FILES] = {
         #define LYT_INVALID_ID     -1
     
@@ -43,11 +32,10 @@ namespace ipl {
         #define LYT_SCROLLER_ID    8
          "my_BScroll_a.brlyt"
     };
-
     // clang-format on
 
     Pointer::Pointer(EGG::Heap* heap)
-        : mIsScrolling(POINT_NOT_SCROLLING), mOriginPos(0.f, 0.f), mArrowLength(MIN_LENGTH), mPointDirection(POINT_DOWN), mbScrolling(false),
+        : mScrollState(NO_SCROLL), mOriginPos(0.f, 0.f), mArrowLength(MIN_LENGTH), mPointDirection(POINT_DOWN), mbCursorScrolling(false),
           mbVisible(true), mCore() {
         mpLayoutArchive = System::getNandManager()->readLayout(heap, "cursor.ash");
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
@@ -61,7 +49,7 @@ namespace ipl {
         mCore.calc(this);
 
         // Update the scrolling cursor
-        if (mIsScrolling >= POINT_SCROLLING) {
+        if (mScrollState >= SCROLL) {
             nw4r::lyt::Pane* pRootPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("N_BArw");
             nw4r::lyt::Pane* pLengthPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("W_BArw");
             nw4r::lyt::Pane* pOriginPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("BArwBase");
@@ -81,14 +69,14 @@ namespace ipl {
             f32 arrowDirection;
             if (mPointDirection == POINT_DOWN) {
                 arrowDirection = 1.0f;
-            } else {
+            } else /* if (mPointDirection == POINT_UP) */ {
                 arrowDirection = -1.0f;
             }
             pRootPane->SetScale(math::VEC2(1.0f, arrowDirection));
 
             // Visible panes
-            pRootPane->SetVisible(mbScrolling);
-            pOriginPane->SetVisible(!mbScrolling);
+            pRootPane->SetVisible(mbCursorScrolling);
+            pOriginPane->SetVisible(!mbCursorScrolling);
 
             // Calculate the scroller layout
             mpLayout[LYT_SCROLLER_ID]->calc();
@@ -100,7 +88,7 @@ namespace ipl {
             mCore.draw();
 
             // Draw the scroller
-            if (mIsScrolling >= POINT_SCROLLING) {
+            if (mScrollState >= SCROLL) {
                 mpLayout[LYT_SCROLLER_ID]->draw();
             }
         }
@@ -118,11 +106,11 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case PointerType::LayoutPoint: {
+            case TYPE_POINT: {
                 grabId = LYT_POINT_ID;
                 break;
             }
-            case PointerType::LayoutGrab: {
+            case TYPE_GRAB: {
                 grabId = LYT_GRAB_ID;
                 break;
             }

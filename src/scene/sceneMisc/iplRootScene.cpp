@@ -11,7 +11,7 @@
 namespace ipl {
     namespace scene {
         void RootScene::create() {
-            createChildScene((int)mInitialSceneID, this, NULL, mInitialArgs);
+            createChildScene((int)mpInitialSceneID, this, NULL, mpInitialArgs);
         }
 
         void RootScene::proc_boot_scene(int* initialScene, int* initialSubScene) {

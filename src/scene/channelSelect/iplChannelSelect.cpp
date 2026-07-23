@@ -20,9 +20,11 @@ namespace ipl {
         static Board* getBoard() {
             return (Board*)System::getSceneManager()->getScene(SCENE_BOARD);
         }
+
         static Button* getButton() {
             return (Button*)System::getSceneManager()->getScene(SCENE_BUTTON);
         }
+
         static ChannelTitle* getChannelTitle() {
             return (ChannelTitle*)System::getSceneManager()->getScene(SCENE_CHANNEL_TITLE);
         }
@@ -170,7 +172,7 @@ namespace ipl {
             mPrevSDState = 0;
 
             unk_0x180 = 1;
-            unk_0x184 = false;
+            mbModuleSceneChange = false;
             mpCurrentRsoChanObj = NULL;
             unk_0x18C = NULL;
 
@@ -293,7 +295,7 @@ namespace ipl {
 
                         if (!msInitFlag) {
                             snd::getSystem()->startSE("WIPL_SE_WII_START");
-                            msInitFlag = snd::getSystem()->startBGM("WIPL_BGM_MENU");
+                            msInitFlag = (BOOL)snd::getSystem()->startBGM("WIPL_BGM_MENU");
                         }
                     } else if (mStartType == START_FROM_BOARD) {
                         if (mCurrentPage > 0) {
@@ -493,7 +495,7 @@ namespace ipl {
             }
 
             if (mState == STATE_BOARD_SCENE || mState == STATE_START_SETTING_SCENE) {
-                unk_0x184 = true;
+                mbModuleSceneChange = true;
                 unk_0x185 = true;
                 return FADER_SCN_NEXT;
             } else {
@@ -768,12 +770,12 @@ namespace ipl {
                             result = false;
                         }
 
-                        int state = chanObj->calcExtModule(expHeap, result, unk_0x184);
-                        if (state == 3) {
+                        int state = chanObj->calcExtModule(expHeap, result, mbModuleSceneChange);
+                        if (state == ChannelObj::EXT_MODULE_RESULT_DESTROY) {
                             updateModuleExHeap(chanObj->mpPrevModuleHeap, expHeap);
                             mpCurrentRsoChanObj = NULL;
                             unk_0x180 = 1;
-                        } else if (state == 2 && unk_0x180 == 1) {
+                        } else if (state == ChannelObj::EXT_MODULE_RESULT_CALC && unk_0x180 == 1) {
                             unk_0x180 = 2;
                             mpCurrentRsoChanObj = chanObj;
                         }
@@ -782,8 +784,8 @@ namespace ipl {
             }
 
             unk_0x18C = NULL;
-            if (unk_0x184 && unk_0x180 == 1) {
-                unk_0x184 = false;
+            if (mbModuleSceneChange && unk_0x180 == 1) {
+                mbModuleSceneChange = false;
                 unk_0x180 = 3;
             }
         }
@@ -1457,7 +1459,7 @@ namespace ipl {
         }
 
         void ChannelSelect::preparePageScrolling(int nextState) {
-            unk_0x184 = true;
+            mbModuleSceneChange = true;
             mState = nextState;
             unk_0x185 = false;
             snd::getSystem()->startSE("WSD_SELECT");
@@ -1519,7 +1521,7 @@ namespace ipl {
             channel::Manager::setCurrentChannel(page, index);
 
             mState = STATE_NORMAL_WAIT_LOADING;
-            unk_0x184 = true;
+            mbModuleSceneChange = true;
             unk_0x185 = true;
 
             snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
@@ -1773,10 +1775,10 @@ namespace ipl {
         }
 
         void ChannelSelect::restartChannelModules() {
-            if (!unk_0x184) {
+            if (!mbModuleSceneChange) {
                 unk_0x180 = 1;
             }
-            unk_0x184 = false;
+            mbModuleSceneChange = false;
             unk_0x185 = true;
         }
 
@@ -2137,7 +2139,7 @@ namespace ipl {
                 unk_0x2B4 = 0;
                 unk_0x2B8 = false;
 
-                System::getPointer()->changeType(con->getChannel(), PointerType::LayoutGrab);
+                System::getPointer()->changeType(con->getChannel(), Pointer::TYPE_GRAB);
 
                 mpMoveLytMask->getAnim(0)->play();
                 mpMoveLytObject->getAnim(0)->play();
@@ -2151,7 +2153,7 @@ namespace ipl {
                     chanObj->onPinch(chanPage == page && chanIndex == index);
                 }
 
-                unk_0x184 = true;
+                mbModuleSceneChange = true;
                 unk_0x185 = true;
 
                 snd::getSystem()->startSEwithPos("WIPL_SE_CH_HOLD", mDragPos.x);
@@ -2177,7 +2179,7 @@ namespace ipl {
                 mState = STATE_NORMAL_RELEASE_WAIT;
             }
 
-            System::getPointer()->changeType(mConChan, PointerType::LayoutPoint);
+            System::getPointer()->changeType(mConChan, Pointer::TYPE_POINT);
 
             mpMoveLytObject->getAnim(1)->play();
 
@@ -2256,7 +2258,7 @@ namespace ipl {
                         case ::gui::EventHandler::ON_TRIG: {
                             if (mpInstance->mState == ChannelSelect::STATE_NORMAL && con != NULL && con->pinchTrg() &&
                                 System::getChannelManager()->isNormalChannel(mpInstance->mCurrentPage, index) &&
-                                mpInstance->mMaxPages * 12 != (u32)System::getSaveData()->getNumValidChannel()) {
+                                mpInstance->mMaxPages * MAX_CHANNEL_INDEX != (u32)System::getSaveData()->getNumValidChannel()) {
                                 mpInstance->startDrag(con, mpInstance->mCurrentPage, index);
                             }
                             break;

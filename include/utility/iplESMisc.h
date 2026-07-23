@@ -53,6 +53,7 @@ namespace ipl {
             static void DeleteUnauthorizedData(EGG::Heap* heap);
 
             static u32 CheckTmdCountryCode(ESTmdView* tmdView);
+            static u32 CheckTmdParentalControl(ESTmdView* tmdView);
 
             static BOOL __IsPCEnable();
 
@@ -63,6 +64,8 @@ namespace ipl {
             static s32 CheckSafeDeleteTitle(EGG::Heap* heap, ESTitleId titleId);
 
             static ESError PrepareTitleDir(ESTitleId titleId, EGG::Heap* heap);
+
+            static ESError DeleteTitleContent(EGG::Heap* heap, ESTitleId titleId);
 
             static s32 DeleteTitle(EGG::Heap* heap, ESTitleId titleId);
             static s32 DeleteEmptyTitles(EGG::Heap* heap);

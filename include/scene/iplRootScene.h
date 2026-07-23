@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(RootScene) {
         public:
-            RootScene(EGG::Heap * heap, int sceneId) : Base(heap), mInitialArgs(NULL), mInitialSceneID((void*)sceneId) {
+            RootScene(EGG::Heap * heap, int sceneId) : Base(heap), mpInitialArgs(NULL), mpInitialSceneID((void*)sceneId) {
             }
             virtual ~RootScene() {
             }
@@ -16,8 +16,8 @@ namespace ipl {
             static void proc_boot_scene(int* initialScene, int* initialSubScene);
 
         private:
-            void* mInitialArgs;     // 0x54
-            void* mInitialSceneID;  // 0x58
+            void* mpInitialArgs;     // 0x54
+            void* mpInitialSceneID;  // 0x58
 
             friend class Manager;
         };

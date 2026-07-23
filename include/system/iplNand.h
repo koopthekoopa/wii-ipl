@@ -141,6 +141,10 @@ namespace ipl {
         class LangFile : public Base {
         public:
             LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile);
+            LangFile(File* commonFile, File* langFile = NULL) : Base() {
+                mpCommonFile = commonFile;
+                mpLangFile = langFile;
+            }
             virtual ~LangFile();  // 0x08
 
             virtual void read();  // 0x0C
@@ -160,6 +164,7 @@ namespace ipl {
         class LayoutFile : public LangFile {
         public:
             LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile);
+            LayoutFile(File* commonFile, File* langFile = NULL) : LangFile(commonFile, langFile) {}
             virtual ~LayoutFile();  // 0x08
         };
     }  // namespace nand

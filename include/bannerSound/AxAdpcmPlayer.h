@@ -13,53 +13,53 @@ class VoiceInfo {
 public:
     VoiceInfo() { initAXPBMIX(&mMix); }
 
-    AXVPB* getAXVPB() { return mAxVPB; }
+    AXVPB* getAXVPB() { return mpVPB; }
     u32 getState() { return mState; }
-    u32 getUnk_x08() { return unk_0x08; }
-    int getUnk_x0c() { return unk_0x0c; }
+    u32 getUnk_0x08() { return unk_0x08; }
+    int getUnk_0x0C() { return unk_0x0C; }
 
-    void setAXVPB(AXVPB* newVal) { mAxVPB = newVal; }
+    void setAXVPB(AXVPB* newVal) { mpVPB = newVal; }
     void setState(u32 newVal) { mState = newVal; }
-    void setUnk_x08(u32 newVal) { unk_0x08 = newVal; }
-    void setUnk_x0c(u32 newVal) { unk_0x0c = newVal; }
+    void setUnk_0x08(u32 newVal) { unk_0x08 = newVal; }
+    void setUnk_0x0C(u32 newVal) { unk_0x0C = newVal; }
 
     AXPBMIX* getMix() { return &mMix; }
 
     static void initAXPBMIX(AXPBMIX* mix);
 
 private:
-    AXVPB* mAxVPB;  // 0x00
-    u32 mState;     // 0x04
-    u32 unk_0x08;   // 0x08
-    int unk_0x0c;   // 0x0c
-    AXPBMIX mMix;   // 0x10
+    AXVPB* mpVPB;  // 0x00
+    u32 mState;    // 0x04
+    u32 unk_0x08;  // 0x08
+    int unk_0x0C;  // 0x0c
+    AXPBMIX mMix;  // 0x10
 };
 
 class AxAdpcmHandle {
 public:
     AxAdpcmHandle() {
-        mVoices[0] = NULL;
-        mVoices[1] = NULL;
+        mpVoices[0] = NULL;
+        mpVoices[1] = NULL;
     }
 
     bool isPlaying() {
-        if (mVoices[0] == NULL)
+        if (mpVoices[0] == NULL)
             return false;
-        return mVoices[0]->getAXVPB() != 0;
+        return mpVoices[0]->getAXVPB() != 0;
     }
 
     bool setVolume(f32 newVolume);
 
-    VoiceInfo* getVoice(u32 idx) { return mVoices[idx]; }
-    void setVoice(u32 idx, VoiceInfo* voice) { mVoices[idx] = voice; }
+    VoiceInfo* getVoice(u32 idx) { return mpVoices[idx]; }
+    void setVoice(u32 idx, VoiceInfo* voice) { mpVoices[idx] = voice; }
 
 private:
-    VoiceInfo* mVoices[2];
+    VoiceInfo* mpVoices[2];
 };
 
 class AxAdpcmSimplePlayer {
 public:
-    AxAdpcmSimplePlayer() : pBnsData(NULL), mVolume(1.0f) {}
+    AxAdpcmSimplePlayer() : mpBNSBuffer(NULL), mVolume(1.0f) {}
     ~AxAdpcmSimplePlayer() {}
 
     void init();
@@ -68,7 +68,7 @@ public:
     void setVolume(AxAdpcmHandle* handle, f32 newVolume);
     int start(void* data, u32 length, AxAdpcmHandle* handle);
     void stop(AxAdpcmHandle* handle);
-    int pause(bool flag);
+    BOOL pause(bool flag);
 
     void calc();
 
@@ -131,8 +131,8 @@ private:
         BlockInfo dataHead;  // 0x18
     };
 
-    Header* pBnsData;  // 0x0
-    f32 mVolume;       // 0x4
+    Header* mpBNSBuffer;  // 0x00
+    f32 mVolume;          // 0x04
 
 public:
     static bool sSysInit;

@@ -20,11 +20,11 @@ namespace ipl {
             : mpRootScene(NULL), mCommands(), mpReservedScene(NULL), mReservedCommand(), mbCreatedReserved(false), mbDestroySyncTask(false) {
             // Setup the heaps!!
             mpBigSceneHeap =
-                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE, 3, 4), SCENE_BIG_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
-            mpMdmSceneHeap =
-                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(Creator::BIG_SIZE, 3, 4), Creator::BIG_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpMdmSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(Creator::MEDIUM_SIZE, 4, 4), Creator::MEDIUM_SIZE, heap, 4,
+                                                   MEM_HEAP_OPT_DEBUG_FILL);
             mpSmlSceneHeap =
-                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE, 6, 4), SCENE_SMALL_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(Creator::SMALL_SIZE, 6, 4), Creator::SMALL_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
         }
 
         void Manager::init() {
@@ -39,7 +39,7 @@ namespace ipl {
 
         void Manager::createRootScene(int sceneId, void* args) {
             mpRootScene = (RootScene*)createScene(SCENE_ROOT, (void*)sceneId);
-            static_cast<RootScene*>(mpRootScene)->mInitialArgs = args;
+            static_cast<RootScene*>(mpRootScene)->mpInitialArgs = args;
 
             System::setCurrentHeap(mpRootScene->mpHeap);
             mpRootScene->do_create();
@@ -181,15 +181,15 @@ namespace ipl {
             SceneObj* scene = NULL;
 
             switch (size) {
-                case SCENE_BIG_SIZE: {
+                case Creator::BIG_SIZE: {
                     heap = mpBigSceneHeap;
                     break;
                 }
-                case SCENE_MEDIUM_SIZE: {
+                case Creator::MEDIUM_SIZE: {
                     heap = mpMdmSceneHeap;
                     break;
                 }
-                case SCENE_SMALL_SIZE: {
+                case Creator::SMALL_SIZE: {
                     heap = mpSmlSceneHeap;
                     break;
                 }

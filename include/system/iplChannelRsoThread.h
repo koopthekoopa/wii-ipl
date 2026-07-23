@@ -5,10 +5,12 @@
 
 #include <egg/core.h>
 
+#include <nw4r/lyt/layout.h>
+
 namespace ipl {
     namespace channel {
-        typedef void (*CreateFunc)(void*);
-        typedef BOOL (*CalcFunc)(int);
+        typedef void (*CreateFunc)(nw4r::lyt::Layout* channelLayout);
+        typedef BOOL (*CalcFunc)(BOOL onSceneChange /* ??? */);
         typedef void (*ThreadCalcFunc)();
 
         class RsoThread : public utility::ut_thread {

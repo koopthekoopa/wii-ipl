@@ -1218,8 +1218,8 @@ namespace ipl {
         return smArg.mpRandom;
     }
 
-    s32 System::getLanguage() {
-        s32 lang = SCGetLanguage();
+    u32 System::getLanguage() {
+        u32 lang = SCGetLanguage();
         s32 region = getRegion();
 
         switch (region) {
@@ -1230,25 +1230,30 @@ namespace ipl {
                 }
                 break;
             }
-            case SC_PRODUCT_AREA_JPN:
+            case SC_PRODUCT_AREA_JPN: {
                 lang = SC_LANG_JAPANESE;
                 break;
-            case SC_PRODUCT_AREA_EUR:
+            }
+            case SC_PRODUCT_AREA_EUR: {
                 // Fallback to english if the language is not available for European consoles.
                 if (lang >= (SC_LANG_DUTCH + 1) || lang < SC_LANG_GERMAN) {
                     lang = SC_LANG_ENGLISH;
                 }
                 break;
-            case SC_PRODUCT_AREA_KOR:
+            }
+            case SC_PRODUCT_AREA_KOR: {
                 lang = SC_LANG_KOREAN;
                 break;
-            case SC_PRODUCT_AREA_CHN:
+            }
+            case SC_PRODUCT_AREA_CHN: {
                 lang = SC_LANG_SIMP_CHINESE;
                 break;
-            default:
+            }
+            default: {
                 // Fallback to enlgish if the language is invalid.
                 lang = SC_LANG_ENGLISH;
                 break;
+            }
         }
 
         return lang;

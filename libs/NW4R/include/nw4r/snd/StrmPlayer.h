@@ -16,7 +16,10 @@ namespace nw4r {
         namespace detail {
             class StrmPlayer : public BasicPlayer {
             public:
-                typedef enum StartOffsetType { START_OFFSET_TYPE_SAMPLE = 0, START_OFFSET_TYPE_MILLISEC } StartOffsetType;
+                typedef enum StartOffsetType {
+                    START_OFFSET_TYPE_SAMPLE = 0,
+                    START_OFFSET_TYPE_MILLISEC
+                } StartOffsetType;
 
                 typedef struct StrmHeader {
                     // TODO: Why 8 if the player only supports 2???
@@ -59,7 +62,13 @@ namespace nw4r {
                 typedef void (*NotifyLoadHeaderAsyncEndCallback)(bool, const StrmHeader*, void*);
                 class StrmCallback {
                 public:
-                    typedef enum Result { RESULT_SUCCESS = 0, RESULT_FAILED, RESULT_CANCELED, RESULT_ASYNC, RESULT_RETRY } Result;
+                    typedef enum Result {
+                        RESULT_SUCCESS = 0,
+                        RESULT_FAILED,
+                        RESULT_CANCELED,
+                        RESULT_ASYNC,
+                        RESULT_RETRY
+                    } Result;
 
                     virtual ~StrmCallback() {}
 

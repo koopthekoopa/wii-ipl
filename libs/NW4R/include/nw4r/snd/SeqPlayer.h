@@ -28,9 +28,16 @@ namespace nw4r {
                     NoteOnCallback* callback;  // 0x04
                 } ParserPlayerParam;
 
-                typedef enum OffsetType { OFFSET_TYPE_TICK = 0, OFFSET_TYPE_MILLISEC } OffsetType;
+                typedef enum OffsetType {
+                    OFFSET_TYPE_TICK = 0,
+                    OFFSET_TYPE_MILLISEC
+                } OffsetType;
 
-                typedef enum SetupResult { SETUP_SUCCESS = 0, SETUP_ERR_CANNOT_ALLOCATE_TRACK, SETUP_ERR_UNKNOWN } SetupResult;
+                typedef enum SetupResult {
+                    SETUP_SUCCESS = 0,
+                    SETUP_ERR_CANNOT_ALLOCATE_TRACK,
+                    SETUP_ERR_UNKNOWN
+                } SetupResult;
 
                 static const int LOCAL_VARIABLE_NUM = 16;
                 static const int GLOBAL_VARIABLE_NUM = 16;

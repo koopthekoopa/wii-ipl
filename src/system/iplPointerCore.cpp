@@ -10,8 +10,7 @@
 #include "iplUtility.h"
 
 namespace ipl {
-    PointerCoreObject::PointerCoreObject()
-        : mpLayout(NULL), mState(PointerType::StateNoScroll), mLayoutType(PointerType::LayoutMax), mChan(0), unused_0x10(0) {
+    PointerCoreObject::PointerCoreObject() : mpLayout(NULL), mState(Pointer::STATE_NORMAL), mLayoutType(Pointer::TYPE_MAX), mChan(0), unused_0x10(0) {
     }
 
     void PointerCoreObject::calc(Pointer* pointer, const controller::Interface* pController) {
@@ -44,7 +43,7 @@ namespace ipl {
             return;
         }
         // Do not draw if scrolling
-        if (mState != PointerType::StateNoScroll) {
+        if (mState != Pointer::STATE_NORMAL) {
             return;
         }
         // Otherwise, do draw it.
@@ -54,7 +53,7 @@ namespace ipl {
     PointerCore::PointerCore() : mCursors() {
         int chan = 0;
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
-            mCursors[chan].changeType(PointerType::LayoutPoint);
+            mCursors[chan].changeType(Pointer::TYPE_POINT);
             mCursors[chan].setChan(chan);
 
             chan++;

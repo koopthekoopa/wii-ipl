@@ -64,8 +64,8 @@ namespace ipl {
 
         void BScroller::reset() {
             if (mState >= 0) {
-                System::smArg.mpPointer->setState(mState, 0);
-                System::smArg.mpPointer->mIsScrolling = -1;
+                System::getPointer()->setState(mState, Pointer::STATE_NORMAL);
+                System::getPointer()->setScrollState(Pointer::NO_SCROLL);
             }
             init();
         }
@@ -74,8 +74,8 @@ namespace ipl {
             BOOL result = FALSE;
 
             if (mState < 0) {
-                for (int channel = 0; channel < 4; channel++) {
-                    controller::Interface* ctrl = System::getController(channel);
+                for (int chan = 0; chan < WPAD_MAX_CONTROLLERS; chan++) {
+                    controller::Interface* ctrl = System::getController(chan);
                     if (ctrl == NULL) {
                         continue;
                     }
@@ -85,20 +85,20 @@ namespace ipl {
                     if (!ctrl->isValidDpd()) {
                         continue;
                     }
-                    if (!isYoungController(channel)) {
+                    if (!isYoungController(chan)) {
                         continue;
                     }
 
-                    mState = channel;
+                    mState = chan;
 
                     unk_0x08.x = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
                     unk_0x08.y = math::abs_clamp<float>(ctrl->getDpdPos().y, 1.f);
 
                     unk_0x10 = unk_0x08;
 
-                    System::smArg.mpPointer->setState(mState, 1);
-                    System::smArg.mpPointer->mIsScrolling = mState;
-                    System::smArg.mpPointer->mOriginPos = get_cursor_pos(ctrl->getDpdProjectionPos());
+                    System::getPointer()->setState(mState, Pointer::STATE_SCROLL);
+                    System::getPointer()->setScrollState(mState);
+                    System::getPointer()->setOrigin(get_cursor_pos(ctrl->getDpdProjectionPos()));
 
                     mSpeed = _get();
                     set_arw_param();
@@ -108,8 +108,8 @@ namespace ipl {
             } else {
                 controller::Interface* ctrl = System::getController(mState);
                 if (ctrl == NULL || !ctrl->down(controller::REVO_BTN_B) || !isYoungController(mState)) {
-                    System::smArg.mpPointer->setState(mState, 0);
-                    System::smArg.mpPointer->mIsScrolling = -1;
+                    System::getPointer()->setState(mState, Pointer::STATE_NORMAL);
+                    System::getPointer()->setScrollState(Pointer::NO_SCROLL);
                     init();
                 } else if (ctrl->isValidDpd()) {
                     unk_0x08.x = math::abs_clamp<float>(ctrl->getDpdPos().x, 1.f);
@@ -133,7 +133,7 @@ namespace ipl {
             }
 
             if (math::abs<float>(mSoundFreq) > 128) {
-                snd::sSystem.startSE("WIPL_SE_B_SCROLL");
+                snd::getSystem()->startSE("WIPL_SE_B_SCROLL");
                 f32 newFreq;
                 if (mSoundFreq > 0.0f) {
                     newFreq = mSoundFreq - 128;
@@ -167,7 +167,7 @@ namespace ipl {
             } else {
                 direction = 1;
             }
-            System::getPointer()->mPointDirection = direction;
+            System::getPointer()->setPointDirection(direction);
 
             nw4r::ut::Rect rect;
             System::getProjectionRect(&rect);
@@ -175,8 +175,7 @@ namespace ipl {
             f32 arrowLen = math::abs<float>(unk_0x10.y - unk_0x08.y) * rect.GetHeight();
             System::getPointer()->setArrowLength(arrowLen);
 
-            bool scrolling = math::abs<float>(mSpeed) > 0.0f;
-            System::getPointer()->mbScrolling = scrolling;
+            System::getPointer()->setCursorScrolling(math::abs<float>(mSpeed) > 0.0f);
         }
 #pragma pop
 
@@ -192,9 +191,9 @@ namespace ipl {
             return mSpeed > 0.0f;
         }
 
-        BOOL YoungBScroller::isYoungController(int channel) {
+        BOOL YoungBScroller::isYoungController(int chan) {
             controller::Interface* pController = System::getYoungController();
-            if (pController != NULL && pController->getChannel() == channel) {
+            if (pController != NULL && pController->getChannel() == chan) {
                 return TRUE;
             }
             return FALSE;
@@ -230,41 +229,41 @@ namespace ipl {
             f32 oldScroll = mScroll;
 
             switch (mState) {
-                case STATE_SCROLL_CON_UP: {
+                case Pointer::SCROLL_CON_UP: {
                     unk_0x3C = unk_0x3C * unk_0x48 - unk_0x4C;
                     if (unk_0x3C > 0.0f) {
                         unk_0x3C = 0.0f;
                     }
                     mScroll += unk_0x3C;
-                    mState = STATE_NORMAL;
+                    mState = Pointer::SCROLL;
                     break;
                 }
-                case STATE_SCROLL_CON_DOWN: {
+                case Pointer::SCROLL_CON_DOWN: {
                     unk_0x3C = unk_0x3C * unk_0x48 + unk_0x4C;
                     if (unk_0x3C < 0.0f) {
                         unk_0x3C = 0.0f;
                     }
                     mScroll += unk_0x3C;
-                    mState = STATE_NORMAL;
+                    mState = Pointer::SCROLL;
                     break;
                 }
-                case STATE_SCROLL_BTN_UP: {
+                case Pointer::SCROLL_BTN_UP: {
                     unk_0x44 = oldScroll;
                     anim.init(0.0f, -300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
-                    mState = 5;
+                    mState = Pointer::SCROLLING_BY_BTN;
                     break;
                 }
-                case STATE_SCROLL_BTN_DOWN: {
+                case Pointer::SCROLL_BTN_DOWN: {
                     unk_0x44 = oldScroll;
                     anim.init(0.0f, 300.0f, 20.0f, 0.0f, 0.0f, 0, 1.0f);
                     anim.initFrame();
                     anim.restart();
-                    mState = STATE_5;
+                    mState = Pointer::SCROLL_BTN_DOWN;
                     break;
                 }
-                case STATE_5: {
+                case Pointer::SCROLLING_BY_BTN: {
                     anim.calc();
                     mScroll = unk_0x44 + anim.get();
 
@@ -272,7 +271,7 @@ namespace ipl {
                         unk_0x3C = 0.0f;
                         anim.initFrame();
                         anim.calc();
-                        mState = STATE_NORMAL;
+                        mState = Pointer::SCROLL;
                     }
                     break;
                 }
@@ -285,7 +284,7 @@ namespace ipl {
             }
 
             if (math::abs<float>(oldScroll - mScroll) > 1.0f) {
-                snd::sSystem.holdSE("WIPL_SE_MESSAGE_SCROLL");
+                snd::getSystem()->holdSE("WIPL_SE_MESSAGE_SCROLL");
             }
         }
 
@@ -537,15 +536,15 @@ namespace ipl {
             u32 pal = (u32)mpPalette;
             BOOL r = TRUE;
 
-            if (mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
+            if (mpPalette == NULL || mpPalette->versionNumber != TPL_MAGIC) {
                 r = FALSE;
             } else {
                 u32 end = (u32)mpPalette + 0x100000;
                 if (mpTexDesc == NULL || mpTexHeader == NULL) {
                     r = FALSE;
-                } else if ((u32)mpTexData & 0x1F) {
+                } else if ((u32)mpTexData & 31) {
                     r = FALSE;
-                } else if ((u32)mpClutData & 0x1F) {
+                } else if ((u32)mpClutData & 31) {
                     r = FALSE;
                 } else if ((u32)mpTexData < pal || (u32)mpTexData > end) {
                     r = FALSE;
@@ -553,9 +552,9 @@ namespace ipl {
                     r = FALSE;
                 } else if (mpTexHeader->height == 0 || mpTexHeader->width == 0) {
                     r = FALSE;
-                } else if (mpClutHeader == NULL && mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 &&
-                           mpTexHeader->format != 3 && mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE &&
-                           mpTexHeader->format != 6) {
+                } else if (mpClutHeader == NULL && mpTexHeader->format != GX_TF_I4 && mpTexHeader->format != GX_TF_I8 &&
+                           mpTexHeader->format != GX_TF_IA4 && mpTexHeader->format != GX_TF_IA8 && mpTexHeader->format != GX_TF_RGB565 &&
+                           mpTexHeader->format != GX_TF_RGB5A3 && mpTexHeader->format != GX_TF_CMPR && mpTexHeader->format != GX_TF_RGBA8) {
                     r = FALSE;
                 } else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9) {
                     r = FALSE;
@@ -563,20 +562,21 @@ namespace ipl {
                     r = FALSE;
                 } else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000) {
                     r = FALSE;
-                } else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2) {
+                } else if (mpTexHeader->wrapS != GX_CLAMP && mpTexHeader->wrapS != GX_REPEAT && mpTexHeader->wrapS != GX_MIRROR) {
                     r = FALSE;
-                } else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2) {
+                } else if (mpTexHeader->wrapT != GX_CLAMP && mpTexHeader->wrapT != GX_REPEAT && mpTexHeader->wrapT != GX_MIRROR) {
                     r = FALSE;
                 } else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0) {
                     r = FALSE;
-                } else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 && mpTexHeader->minFilter != 3 &&
-                           mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5) {
+                } else if (mpTexHeader->minFilter != GX_NEAR && mpTexHeader->minFilter != GX_LINEAR && mpTexHeader->minFilter != GX_NEAR_MIP_NEAR &&
+                           mpTexHeader->minFilter != GX_LIN_MIP_NEAR && mpTexHeader->minFilter != GX_NEAR_MIP_LIN &&
+                           mpTexHeader->minFilter != GX_LIN_MIP_LIN) {
                     r = FALSE;
-                } else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1) {
+                } else if (mpTexHeader->magFilter != GX_NEAR && mpTexHeader->magFilter != GX_LINEAR) {
                     r = FALSE;
                 } else if (mpTexHeader->LODBias < -100.f || mpTexHeader->LODBias > 100.f) {
                     r = FALSE;
-                } else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1) {
+                } else if (mpTexHeader->edgeLODEnable != GX_FALSE && mpTexHeader->edgeLODEnable != GX_TRUE) {
                     r = FALSE;
                 }
             }
@@ -608,7 +608,7 @@ namespace ipl {
 
         namespace wpad {
             BOOL isIncreaseConnectedWpad(u32 prevMask, u32 nextMask) {
-                for (u32 i = 4; i > 0; i--) {
+                for (u32 i = WPAD_MAX_CONTROLLERS; i > 0; i--) {
                     if (!(prevMask & 1)) {
                         if ((nextMask & 1) == 1) {
                             return TRUE;
@@ -623,7 +623,7 @@ namespace ipl {
             u32 getWpadConnectedMask() {
                 u32 mask = 0;
                 u32 info[1];
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
                     if (WPADProbe(i, info) == 0 && info[0] != 0xFD) {
                         mask |= 1 << i;
                     }

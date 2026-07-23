@@ -11,7 +11,7 @@
 
 namespace ipl {
     namespace snd {
-        class System {
+        class System : EGG::SimpleAudioMgrWithFx {
         public:
             System();
 
@@ -20,38 +20,48 @@ namespace ipl {
 
             void shutup(BOOL shutUpDMA);
 
-            virtual void fn_815F6278();  // 0x08
-            virtual void calc();         // 0x0C
+            virtual void calc();  // 0x0C
 
-            void stopAllSound(int unk = 0);
-            void stopBannerSound(int unk = 0);
-
-            int startSE(const char* sndName);
-            int holdSE(const char* sndName);
-            int holdSEwithPosDis(const char* sndName, f32 x, f32 y);
+            void* /*todo*/ startBGM(const char* bgmName);
+            nw4r::snd::SoundHandle* startSE(const char* sndName);
             int startSEIndex(u32 sndIndex);
-
             int startSEwithPos(const char* sndName, f32 pos);
 
-            BOOL isSEActive(const char* sndName);
-            BOOL isSEActive(u32 id);
+            int holdSE(const char* sndName);
+            int holdSEwithPosDis(const char* sndName, f32 x, f32 y);
 
-            int startBGM(const char* bgmName);
-            int pauseOnBGM();
-            int pauseOffBGM();
-            int stopBGM(int);
+            int stopBGM(int unk = 0);
+            int stopBGM(nw4r::snd::SoundHandle* handle, int unk = 0);
+            int stopSE(nw4r::snd::SoundHandle* handle, int unk = 0);
+            void stopAllSound(int unk = 0);
+
+            int resetAllSound();
 
             int muteOffBGM(int);
             int muteOnBGM(int);
 
-            int resetAllSound();
+            int pauseOnBGM();
+            int pauseOffBGM();
+
+            int pauseOnSE();
+            int pauseOffSE();
+
+            BOOL isSEActive(const char* sndName);
+            BOOL isSEActive(u32 id);
+
+            BOOL FisSEActive(const char* sndName);
+            BOOL FisSEActive(u32 id);
+
+            void startBannerSound(void*, u32, bool ignoreSize = false);
+            void stopBannerSound(int unk = 0);
 
             BOOL checkTmpSoundFile(void*, u32);
 
         private:
-            u32 unk_0x00[0x638];
+            u32 unk_0x620[0x18];
         };
 
+        // use getSystem() and getBannerPlayer() instead
         extern System sSystem;
         extern BannerSoundPlayer sBannerSoundPlayer;
 

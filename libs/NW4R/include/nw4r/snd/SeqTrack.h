@@ -10,7 +10,6 @@
 
 namespace nw4r {
     namespace snd {
-        // clang-format off
         typedef enum SeqMute {
             MUTE_OFF = 0,
             MUTE_NO_STOP,
@@ -22,7 +21,6 @@ namespace nw4r {
             PARSE_RESULT_CONTINUE = 0,
             PARSE_RESULT_FINISH
         } ParseResult;
-        // clang-format on
 
         namespace detail {
             class SeqPlayer;
