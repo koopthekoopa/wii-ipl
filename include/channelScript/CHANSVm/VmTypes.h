@@ -29,7 +29,7 @@ typedef BOOL vmBoolInt;
 
 typedef void* vmPtr;
 
-typedef long long int vmInteger;
+typedef signed long long int vmInteger;
 typedef double vmFloat;
 typedef float vmFloat32;
 typedef size_t vmSize;
@@ -47,45 +47,67 @@ typedef struct CHANSVm {
 /* OBJECT HEADER & DATA */
 
 typedef enum CHANSVmObjType {
-    CHANS_VM_OBJ_TYPE_BLANK = 0,  // Generic
-    CHANS_VM_OBJ_TYPE_INTEGER,
-    CHANS_VM_OBJ_TYPE_FLOAT,
-    CHANS_VM_OBJ_TYPE_STRING,
-    CHANS_VM_TYPE_OBJECT,  // Class Instance, C++ Apis
-    CHANS_VM_TYPE_UNK5,
-    CHANS_VM_TYPE_UNK6,
-    CHANS_VM_TYPE_UNK7,     // Array of some kind?
-    CHANS_VM_TYPE_POINTER,  // Builtins
+    CHANS_VM_OBJ_TYPE_BLANK = 0, // Undefined/null
+    CHANS_VM_OBJ_TYPE_INTEGER,   // 64-bit signed integer
+    CHANS_VM_OBJ_TYPE_FLOAT,     // 64-bit float
+    CHANS_VM_OBJ_TYPE_STRING,    // UTF-16 string
+    CHANS_VM_TYPE_ARRAY,         // Array instance
+    CHANS_VM_TYPE_INDEX_REF,     // Array index accessor (only used by accumulator; not a stored object type)
+    CHANS_VM_TYPE_GLOBAL_REF,    // Resolved global object reference (only used by ModuleEntry; not a stored object type)
+    CHANS_VM_TYPE_CLASS_REF,     // Native class reference
+    CHANS_VM_TYPE_OBJECT,        // Native C class instance (Blob, Image, etc.)
+    CHANS_VM_TYPE_METHOD_REF,    // Method/function reference (name table index)
     CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
+
+typedef enum CHANSVmCallType {
+    CHANS_VM_CALL_TYPE_METHOD = 0,
+    CHANS_VM_CALL_TYPE_FUNCTION,
+    CHANS_VM_CALL_TYPE_PROP_GET,
+    CHANS_VM_CALL_TYPE_PROP_SET,
+    CHANS_VM_CALL_TYPE_MAX,
+} CHANSVmCallType;
 
 typedef struct CHANSVmObjHdr CHANSVmObjHdr;
 typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
+typedef struct {
+    vmU8 unk_0x00;  // 0x00
+    vmS32 val;      // 0x01
+} vmInt32ObjVal;
+
+typedef struct {
+    vmWString spData;
+    vmSize len;
+} vmWStringObjVal;
+
+typedef struct {
+    vmString spData;
+    vmSize len;
+} vmStringObjVal;
+
+#define CHANSVM_OBJ_FLAG_READONLY 0x80
+
 struct CHANSVmObjHdr {
     union {
-        vmBoolInt bool_v;
-        vmInteger int_v;
         struct {
-            vmU8 unk_0x00;  // ?
-            vmS32 val;
-        }* int32_v;
+            void* ptr;  // 0x00
+            u32 len;    // 0x04
+        } data;   // 0x00
+        vmInteger int_v;
+        vmBoolInt bool_v;
+        vmInt32ObjVal* int32_v;
         vmFloat float_v;
         vmFloat32 float32_v;
-        struct {
-            vmWString str;
-            vmSize len;
-        }* wstring_v;
-        struct {
-            vmString str;
-            vmSize len;
-        }* string_v;
+        vmWStringObjVal* wstring_v;
+        vmStringObjVal* string_v;
         vmPtr* array_v;
         vmFloat** float_array_v;
         vmPtr* ptr_v;
     } value;  // 0x00
 
     union {
+        vmS32 typeAndFlag;
         struct {
             vmU8 type;  // 0x08
 
@@ -96,58 +118,87 @@ struct CHANSVmObjHdr {
                 };
                 vmU8 raw;
             } flags;  // 0x08
-            vmU8 unk_0x0A;
-            vmU8 unk_0x0B;
+            vmU8 hasData; // 0x0A
+            vmU8 pad_0x0B; // 0x0B
         };
-        vmS32 typeAndFlag;
     };
 
     CHANSVmNativeClass* parentCls;  // 0x0C
 };
 
 typedef struct CHANSVmImage {
-    u32 unk_0x00;
-    u32 unk_0x04;
-    u16 width;   // 0x08
-    u16 height;  // 0x0A
-    u8 format;   // 0x0C
+    u8* pData;     // 0x00
+    u32 size;      // 0x04
+    u16 width;     // 0x08
+    u16 height;    // 0x0A
+    u8 format;     // 0x0C
+    u8 bpp;        // 0x0D
 } CHANSVmImage;
 
 /* CLASSES & METHODS */
 
 typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
+typedef CHANSVmErr (*CHANSVmOpFunction)(CHANSVm*, CHANSVmObjType, CHANSVmObjHdr*, CHANSVmObjHdr*, CHANSVmObjHdr*);
+
+typedef struct CHANSVmIntConstantList {
+    const char* spName; // 0x00
+    u32 value;          // 0x04
+} CHANSVmIntConstantList;
+
+typedef struct CHANSVmFloatConstantList {
+    const char* spName; // 0x00
+    double* pValue;     // 0x04
+} CHANSVmFloatConstantList;
+
+typedef struct CHANSVmBlobPackFormatList {
+    u32 charCode; // 0x00
+    u32 size;     // 0x04
+    u32 type;     // 0x08
+    u32 flags;    // 0x0C
+} CHANSVmBlobPackFormatList;
 
 typedef struct CHANSVmMethodList {
-    const char* name;        // 0x00
+    const char* spName;      // 0x00
     CHANSVmFunction method;  // 0x04
 } CHANSVmMethodList;
 
 typedef struct CHANSVmNativeMethod {
-    undefined unk_0x00[0x20];
+    struct CHANSVmNativeMethod* pNext; // 0x00
+    u16 index;                         // 0x04
+    u8 hasStar;                        // 0x06
+    u8 pad_0x07;                       // 0x07
+    CHANSVmFunction func;              // 0x08
+    undefined unk_0x0C[0x14];          // 0x0C
 } CHANSVmNativeMethod;
 
 typedef struct CHANSVmPropertyList {
-    const char* name;  // 0x00
+    const char* spName;  // 0x00
     CHANSVmFunction get;
     CHANSVmFunction set;
 } CHANSVmPropertyList;
 
 typedef struct CHANSVmNativeProperty {
-    undefined unk_0x00[0x20];
+    struct CHANSVmNativeProperty* pNext; // 0x00
+    u16 index;                           // 0x04
+    u8 flag;                             // 0x06
+    u8 pad_0x07;                         // 0x07
+    CHANSVmFunction getter;              // 0x08
+    CHANSVmFunction setter;              // 0x0C
+    undefined unk_0x10[0x10];            // 0x10
 } CHANSVmNativeProperty;
 
 struct CHANSVmNativeClass {
-    CHANSVmNativeClass* next;  // 0x00
+    CHANSVmNativeClass* pNext;  // 0x00
 
     CHANSVmFunction ctor;  // 0x04
     CHANSVmFunction dtor;  // 0x08
     CHANSVmFunction init;  // 0x0C
 
-    CHANSVmNativeMethod* nativeMethods;      // 0x10
-    CHANSVmNativeProperty* nativProperties;  // 0x14
+    CHANSVmNativeMethod* pNativeMethods;      // 0x10
+    CHANSVmNativeProperty* pNativeProperties; // 0x14
 
     vmSize nameLength;  // 0x18
-    vmString name;      // 0x1C
+    char sName[4];      // 0x1C
 
     undefined unk_0x20[0x1C];
 };

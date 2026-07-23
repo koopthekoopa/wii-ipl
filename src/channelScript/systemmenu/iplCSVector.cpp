@@ -15,7 +15,7 @@ namespace ipl {
                     data->x = x;
                     data->y = y;
                     data->z = z;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "VEC3");
                     result = VmObj->parentCls != NULL;
                 }

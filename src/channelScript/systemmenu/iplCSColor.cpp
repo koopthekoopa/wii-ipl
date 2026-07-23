@@ -61,7 +61,7 @@ namespace ipl {
                 nw4r::ut::Color* data = (nw4r::ut::Color*)CHANSVmNewObjData(VmInst, VmObj, sizeof(*data));
                 if (data != NULL) {
                     *data = color;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Color");
                     result = VmObj->parentCls != NULL;
                 }
@@ -150,7 +150,7 @@ namespace ipl {
                 GXColorS10* data = (GXColorS10*)CHANSVmNewObjData(VmInst, VmObj, sizeof(*data));
                 if (data != NULL) {
                     *data = color;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "GXColorS10");
                     result = VmObj->parentCls != NULL;
                 }
