@@ -5,4 +5,6 @@
 
 ziBool Zi8ChangeCharCase(ziBool upper, ziWChar* ch, ziU8 language ZI_NEED_WORK);
 
+ziBool Zi8getKeyLayout(ziU8 lang, ziWChar padKey, ziWChar* lytOut, ziU8 elCountMaybe ZI_NEED_WORK);
+
 #endif  // ZI8_CLIB_ZMT_KEY_H
