@@ -276,7 +276,6 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
             case PINYIN_FINAL(0b10, 0b1011):
                 charInfoBuffer[infoLen] = PINYIN_CHAR('o');
                 break;
-
             case PINYIN_FINAL(0b11, 0b0000):
                 charInfoBuffer[infoLen++] = PINYIN_CHAR('e');
                 charInfoBuffer[infoLen] = PINYIN_CHAR('n');
@@ -596,25 +595,25 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
 ziU16 zi8StrokeCode(ziU32 stroke ZI_NEED_WORK) {
     switch (stroke) {
         case 0x0:
-            return 0xEF02;
+            return ZI8_STROKE_CODE_x0;
         case 0x1:
-            return 0xEF04;
+            return ZI8_STROKE_CODE_x1;
         case 0x2:
-            return 0xEF01;
+            return ZI8_STROKE_CODE_x2;
         case 0x3:
-            return 0xEF07;
+            return ZI8_STROKE_CODE_x3;
         case 0x4:
-            return 0xEF06;
+            return ZI8_STROKE_CODE_x4;
         case 0x5:
-            return 0xEF03;
+            return ZI8_STROKE_CODE_x5;
         case 0x6:
-            return 0xEF05;
+            return ZI8_STROKE_CODE_x6;
         case 0x7:
-            return 0xEF08;
+            return ZI8_STROKE_CODE_x7;
         case 0x8:
-            return 0xEF02;
+            return ZI8_STROKE_CODE_x8;
         case 0xB:
-            return 0xEF07;
+            return ZI8_STROKE_CODE_xB;
     }
     Zi8LogError(0x14A, ZI_WORK);
     return 0;

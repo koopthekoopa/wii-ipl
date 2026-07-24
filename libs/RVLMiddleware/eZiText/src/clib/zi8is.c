@@ -17,9 +17,9 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
     ziGetParam getParam;
 
     charSet = 0;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(0x64, ZI_WORK);
     if (Zi8LangSupported(ZI8_LANG_ZH, ZI_WORK) == 0) {
-        Zi8ReplaceLastError(0x26c, ZI_WORK);
+        Zi8ReplaceLastError(0x26C, ZI_WORK);
         return 0;
     }
 
@@ -60,7 +60,7 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
         return charSet;
     }
 
-    Zi8Memset(&getParam, 0, 0x2c);
+    Zi8Memset(&getParam, 0, 0x2C);
     getParam.language = 1;
     getParam.context = 1;
     getParam.getOptions = 0;
@@ -70,19 +70,19 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
     getParam.subLanguage = 1;
     while (1) {
         getParam.getMode = 0;
-        if (_Zi8GetCandidates(&getParam, ZI_WORK) != '\0') {
+        if (_Zi8GetCandidates(&getParam, ZI_WORK) != 0) {
             charSet |= getParam.subLanguage;
             goto ADVANCE_SUBLANGUAGE;
         }
 
         getParam.getMode = 1;
-        if (_Zi8GetCandidates(&getParam, ZI_WORK) != '\0') {
+        if (_Zi8GetCandidates(&getParam, ZI_WORK) != 0) {
             charSet |= getParam.subLanguage;
             goto ADVANCE_SUBLANGUAGE;
         }
 
         getParam.getMode = 2;
-        if (_Zi8GetCandidates(&getParam, ZI_WORK) != '\0') {
+        if (_Zi8GetCandidates(&getParam, ZI_WORK) != 0) {
             charSet |= getParam.subLanguage;
             goto ADVANCE_SUBLANGUAGE;
         }

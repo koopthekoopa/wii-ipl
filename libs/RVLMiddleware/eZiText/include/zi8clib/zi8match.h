@@ -13,11 +13,13 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
                         ziU16* buf_param_7, ziU16* buf_param_8, ziU16* param_9, Table0Entry** newTab0Out, ziU8* param_11, ziU8 param_12,
                         ziU8 param_13, ziU8 param_14, ziU16 param_15, ziU16 param_16, ziU8 param_17, ziU8 param_18, ziU16 tab0Count, ziWChar* chOut,
                         ziU8 param_21 ZI_NEED_WORK);
-ziBool Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU8* syllable0Len, ziU16* outA,
-                        ziU16* outB ZI_NEED_WORK);
+ziU8 Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU8* syllable0Len, ziU16* outA,
+                      ziU16* outB ZI_NEED_WORK);
 ziBool Zi8GetPyFinal(ziU8* syllableChars, ziU8* maskOut, ziU8* syllableFinalOut);
-ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU16* outA, ziU16* outB ZI_NEED_WORK);
+ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU16* outA, ziU16* outB ZI_NEED_WORK);
 ziWChar Zi8GetPCode(ziU8* table34, Table0Entry* table0Entry);
+
+#define COMPONENT_BASE 0xEF10
 
 #define PAD_KEY_BASE 0xEFF0
 #define PAD_KEY(VALUE) (PAD_KEY_BASE + (VALUE))
@@ -65,11 +67,9 @@ ziWChar Zi8GetPCode(ziU8* table34, Table0Entry* table0Entry);
 #define INITIAL_SH 0b011011
 #define INITIAL_Z 0b011100
 #define INITIAL_ZH 0b011101
-
 #define INITIAL_N 0b100110
 #define INITIAL_L 0b101011
 #define INITIAL_R 0b101100
-
 #define INITIAL_G 0b110100
 #define INITIAL_K 0b110111
 #define INITIAL_F 0b111000

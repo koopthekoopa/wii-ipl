@@ -5,25 +5,6 @@
 #include <zi8clib/zierror.h>
 
 typedef struct {
-    ziBool unk_0x000;           // 0x000
-    ziU8 unk_0x001[0xc];        // 0x001
-    ziU8 unk_0x00D[0xc];        // 0x00D
-    ziU8 unk_0x019[4];          // 0x019
-    ziU8 unk_0x01D[4];          // 0x01D
-    ziU16 unk_0x022;            // 0x022
-    ziU8 maskIdx;               // 0x024
-    ziU8 unk_0x025;             // 0x025
-    ziU16 unk_0x026[0x10];      // 0x026
-    ziU16 unk_0x046[0x10];      // 0x046
-    ziU16 unk_0x066;            // 0x066
-    ziU16 unk_0x068;            // 0x068
-    ziU16 unk_0x06A;            // 0x06A
-    ziU8 unk_0x06C;             // 0x06C
-    ziU8 unk_0x06D[0x10][0xc];  // 0x06D
-    ziU8 unk_0x12D[0x10][0xc];  // 0x12D
-} ziMatchStructA;
-
-typedef struct {
     ziU8 chars[4];       // 0x0
     ziU8 knownMask;      // 0x4
     ziU8 syllableFinal;  // 0x5
@@ -155,11 +136,11 @@ ziBool Zi8PriMatchNextChar(Table0Entry* currTab0, ziU8 byte0A, ziU8 byte0B, ziU8
         *newTab0Out = currTab0;
         *chrOut = ((ziU16)currTab0->chHi << 8) + currTab0->chLo;
         *remainingInOut = remaining;
-        Zi8LogError(100, ZI_WORK);
-        return 1;
+        Zi8LogError(0x64, ZI_WORK);
+        return ZI8_TRUE;
     }
-    Zi8LogError(0x12e, ZI_WORK);
-    return 0;
+    Zi8LogError(0x12E, ZI_WORK);
+    return ZI8_FALSE;
 }
 ziBool Zi8ExactMatchNextChar(Table0Entry* tab0, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
                              ziU8 byte3B, ziU16* remainingInOut, Table0Entry** newTab0Out, ziU16* chrOut ZI_NEED_WORK) {
@@ -246,28 +227,28 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
     }
     if (matchStruct->maskIdx < 9) {
         if (matchStruct->maskIdx == 8) {
-            if ((*table1Curr & 0xf) == 0xf) {
+            if ((*table1Curr & 0x0F) == 0x0F) {
                 maskIsFull = ZI8_TRUE;
             }
         } else if (matchStruct->maskIdx & 1) {
-            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0xf) == 0xf) {
+            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0x0F) == 0x0F) {
                 maskIsFull = ZI8_TRUE;
             }
         } else {
-            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0xf0) == 0xf0) {
+            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0xF0) == 0xF0) {
                 maskIsFull = ZI8_TRUE;
             }
         }
 
         if (matchStruct->maskIdx > 2) {
             if (matchStruct->maskIdx & 1) {
-                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xf0) == 0 ||
-                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xf0) == 0xf0) {
+                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0 ||
+                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0xF0) {
                     return 0;
                 }
             } else {
-                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xf) == 0 ||
-                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xf) == 0xf) {
+                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0 ||
+                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0x0F) {
                     return 0;
                 }
             }
@@ -328,7 +309,6 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
             return 1;
         }
     }
-    // return uVar4;
 }
 
 ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
@@ -336,21 +316,21 @@ ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8
     ziU16 remaining;
 
     for (remaining = *remainingInOut; remaining-- > 0; currTab2++) {
-        if (byte0B != (currTab2->maskByte0 & byte0A))
+        if (byte0B != (currTab2->mask[0] & byte0A))
             continue;
-        if (byte1B != (currTab2->maskByte1 & byte1A))
+        if (byte1B != (currTab2->mask[1] & byte1A))
             continue;
-        if (byte2B != (currTab2->maskByte2 & byte2A))
+        if (byte2B != (currTab2->mask[2] & byte2A))
             continue;
-        if (byte3B != (currTab2->maskByte3 & byte3A))
+        if (byte3B != (currTab2->mask[3] & byte3A))
             continue;
 
         *newTab2Out = currTab2;
         *remainingInOut = remaining;
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(0x64, ZI_WORK);
         return ZI8_TRUE;
     }
-    Zi8LogError(0x12e, ZI_WORK);
+    Zi8LogError(0x12E, ZI_WORK);
     return ZI8_FALSE;
 }
 
@@ -380,11 +360,11 @@ ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2
     }
 
     if (matchData->maskIdx > 8) {
-        if (tab2Entry->unk_0x5 < matchData->maskIdx - 2) {
+        if (tab2Entry->maskLen < matchData->maskIdx - 2) {
             return ZI8_FALSE;
         }
     } else {
-        if (tab2Entry->unk_0x5 < matchData->maskIdx - 1) {
+        if (tab2Entry->maskLen < matchData->maskIdx - 1) {
             return ZI8_FALSE;
         }
     }
@@ -558,8 +538,8 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
 
 ziBool Zi8GetPyFinal(ziU8* syllableChars, ziU8* maskOut, ziU8* syllableFinalOut);
 
-ziBool Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU8* syllable0Len, ziU16* outA,
-                        ziU16* outB ZI_NEED_WORK) {
+ziU8 Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU8* syllable0Len, ziU16* outA,
+                      ziU16* outB ZI_NEED_WORK) {
     ziU8 finalCharI;
     ziU8 syllableI;
     ziU16* tmpElements;
@@ -571,7 +551,7 @@ ziBool Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     ziU8 finalBits;
 
     ziU8 initial;
-    ziBool syllableCount;
+    ziU8 syllableCount;
     ziBool syllableFinished;
     ziBool bVar9;
 
@@ -912,18 +892,21 @@ ziBool Zi8GetPyFinal(ziU8* syllableChars, ziU8* maskOut, ziU8* syllableFinalOut)
     return ZI8_FALSE;
 }
 
-ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU16* outA, ziU16* outB ZI_NEED_WORK) {
-    ziU32 elementsUsed;
+ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU16* outA, ziU16* outB ZI_NEED_WORK) {
+    ziU8 elementsUsed;
     ziWChar currElement;
 
     elementsUsed = 0;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(0x64, ZI_WORK);
+
+    // Error on empty input
     if (elCount == 0) {
         Zi8ReplaceLastError(0x135, ZI_WORK);
         return 0;
     }
 
-    // Get initial element, convert to bopomofo index
+    // Get first element, convert to bopomofo index
+    // If it's not a bopomofo character, error
     currElement = elements[0];
     if (currElement < BPMF_BASE) {
         Zi8ReplaceLastError(0x154, ZI_WORK);
@@ -935,22 +918,28 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         return 0;
     }
 
+    // If it's an initial, handle it, else record it phonetically as no initial
     if (currElement < BPMF_CHAR_INITIAL_MAX) {
         *maskBuf = PINYIN_INITIAL_MASK;
         *phoneticsBuf = ((ziU16)Zi8BpmfInitials[currElement] & PINYIN_INITIAL_PHONETIC) << PINYIN_INITIAL_SHIFT;
 
-        elementsUsed += 1;
+        // If it's the end of the input, return early
+        elementsUsed++;
         elCount--;
         if (elCount == 0) {
             *outA = *maskBuf;
             *outB = *phoneticsBuf;
+
+            // Handle zhi, chi, shi, ri, zi, ci, si
             if (currElement >= BPMF_CHAR_INITIAL_ZH && currElement <= BPMF_CHAR_INITIAL_S) {
                 *outA = *outA | PINYIN_FINAL_MASK;
-                *outB = *outB | (0b0111 << PINYIN_RIME_SHIFT);
+                *outB = *outB | (PINYIN_FINAL(BPMF_MEDIAL_NONE, BPMF_RIME_MEDIAL) << PINYIN_FINAL_SHIFT);
             }
             return elementsUsed;
         }
 
+        // Handle syllable seperation mark
+        // If it exists, it should be the last element, so error if it isn't
         elements++;
         if (*elements == PINYIN_CHAR('`')) {
             elementsUsed++;
@@ -967,16 +956,21 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         *phoneticsBuf = INITIAL_NONE << PINYIN_INITIAL_SHIFT;
     }
 
+    // Get second element, checking for medials
     currElement = *elements - BPMF_BASE;
     switch (currElement) {
         case BPMF_CHAR_MEDIAL_I:
             *phoneticsBuf |= BPMF_MEDIAL_I << PINYIN_MEDIAL_SHIFT;
             *maskBuf |= PINYIN_MEDIAL_MASK;
+
+            // If it's the end of the input, the closed syllable has a rime
+            // that's basically "ends with the medial"
+            // yi, bi, pi, mi, di, ti, ni, li, ji, qi, xi
             elementsUsed++;
             elCount--;
             if (elCount == 0) {
                 *outA = *maskBuf | PINYIN_RIME_MASK;
-                *outB = *phoneticsBuf | (0b0111 << PINYIN_RIME_SHIFT);
+                *outB = *phoneticsBuf | (BPMF_RIME_MEDIAL << PINYIN_RIME_SHIFT);
                 return elementsUsed;
             }
             elements++;
@@ -985,11 +979,15 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         case BPMF_CHAR_MEDIAL_U:
             *phoneticsBuf |= BPMF_MEDIAL_U << PINYIN_MEDIAL_SHIFT;
             *maskBuf |= PINYIN_MEDIAL_MASK;
+
+            // If it's the end of the input, the closed syllable has a rime
+            // that's basically "ends with the medial"
+            // wu, bu, pu, mu, fu, du, tu, nu, lu, gu, ku, hu, zhu, chu, shu, ru, zu, cu, su
             elementsUsed++;
             elCount--;
             if (elCount == 0) {
                 *outA = *maskBuf | PINYIN_RIME_MASK;
-                *outB = *phoneticsBuf | (0b0111 << PINYIN_RIME_SHIFT);
+                *outB = *phoneticsBuf | (BPMF_RIME_MEDIAL << PINYIN_RIME_SHIFT);
                 return elementsUsed;
             }
             elements++;
@@ -998,27 +996,35 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         case BPMF_CHAR_MEDIAL_IU:
             *phoneticsBuf |= BPMF_MEDIAL_IU << PINYIN_MEDIAL_SHIFT;
             *maskBuf |= PINYIN_MEDIAL_MASK;
+
+            // If it's the end of the input, the closed syllable has a rime
+            // that's basically "ends with the medial"
+            // yu, nü, lü, ju, qu, xu
             elementsUsed++;
             elCount--;
             if (elCount == 0) {
                 *outA = *maskBuf | PINYIN_RIME_MASK;
-                *outB = *phoneticsBuf | (0b0111 << PINYIN_RIME_SHIFT);
+                *outB = *phoneticsBuf | (BPMF_RIME_MEDIAL << PINYIN_RIME_SHIFT);
                 return elementsUsed;
             }
             elements++;
             break;
 
         default:
+            // If the element is a tone, it's group A. DON'T consume the element
             if (PINYIN_TONE(1) > *elements || *elements > PINYIN_TONE(5)) {
                 *maskBuf |= PINYIN_MEDIAL_MASK;
             }
             break;
     }
 
+    // Get and handle rime element
     currElement = *elements - BPMF_BASE;
     if (BPMF_CHAR_RIME_MIN - 1 < currElement && currElement < BPMF_CHAR_RIME_MAX) {
         *phoneticsBuf |= (ziU16)Zi8BpmfInitials[currElement] << PINYIN_RIME_SHIFT;
         *maskBuf |= PINYIN_RIME_MASK;
+
+        // If it's the end of the input, return early
         elementsUsed++;
         elCount--;
         if (elCount == 0) {
@@ -1028,12 +1034,19 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         }
         elements++;
     } else {
-        if (PINYIN_TONE(1) > *elements || *elements > PINYIN_TONE(5) || (*maskBuf & 0x0180) == 0x0180) {
-            *phoneticsBuf |= 0x0038;
+        // If the element is a tone or the mask is recorded as having a medial,
+        // the the syllable has a rime that's basically "ends with the medial"
+        //
+        // This will always be executed because all branches of the medial
+        // switch statement set the mask.
+        if (PINYIN_TONE(1) > *elements || *elements > PINYIN_TONE(5) || (*maskBuf & PINYIN_MEDIAL_MASK) == PINYIN_MEDIAL_MASK) {
+            *phoneticsBuf |= BPMF_RIME_MEDIAL << PINYIN_RIME_SHIFT;
             *maskBuf |= PINYIN_RIME_MASK;
         }
     }
 
+    // Get the next element. The only possible to be left is a tone element, so
+    // we error if it's not.
     currElement = *elements;
     if (currElement < PINYIN_TONE(1)) {
         Zi8ReplaceLastError(0x155, ZI_WORK);
@@ -1045,11 +1058,13 @@ ziU32 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16*
         return 0;
     }
 
+    // Incorporate tone element into the phonetics and mask
     *maskBuf |= PINYIN_TONE_MASK;
     *phoneticsBuf |= currElement;
     *outA = *maskBuf;
     *outB = *phoneticsBuf;
 
+    // If there are elements left over, error
     elementsUsed++;
     elCount--;
     if (elCount != 0) {
@@ -1064,5 +1079,5 @@ ziWChar Zi8GetPCode(ziU8* tab34Data, Table0Entry* tab0Entry) {
     ziU16 tab34Idx;
 
     tab34Idx = ((ziU16)tab0Entry->tab34IdxHi << 2) | (((ziU16)tab0Entry->tab34IdxLo & 0x80) >> 6);
-    return ((ziU16)tab0Entry->codeOffs >> 4 & 7) | tab34Data[tab34Idx] | ((ziU16)tab34Data[tab34Idx + 1] << 8);
+    return ((ziU16)tab0Entry->tone >> 4 & 7) | tab34Data[tab34Idx] | ((ziU16)tab34Data[tab34Idx + 1] << 8);
 }

@@ -116,8 +116,8 @@ typedef void* ziPtr;
 // Table  0 - Character table?
 // Table  1 - Mask Table?
 // Table  2 - Component table
-// Table  3 - Pinyin Table?
-// Table  4 - Bopomofo Table?
+// Table  3 - Pinyin Phonetic Syllables
+// Table  4 - Bopomofo Phonetic Syllables
 // Table  6 - Unsigned Char to Wide Char
 // Table 1E - Data Signature
 
@@ -130,7 +130,7 @@ typedef struct {
     ziU8 tab34IdxHi;    // 0x8
     union {
         ziU8 tab34IdxLo;  // 0x9 (relevant: 0bX0000000)
-        ziU8 codeOffs;    // 0x9 (relevant: 0b0XXX0000)
+        ziU8 tone;        // 0x9 (relevant: 0b0XXX0000)
         ziU8 tab1OffsHi;  // 0x9 (relevant: 0b0000XXXX)
     };
     ziU8 tab1OffsMid;  // 0xA
@@ -139,13 +139,10 @@ typedef struct {
 #define GET_TABLE0_ENTRY_TABLE1_OFFS(ENTRY) ((ENTRY)->tab1OffsLo | ((ENTRY)->tab1OffsMid << 0x8) | (((ENTRY)->tab1OffsHi & 0x0F) << 0x10))
 
 typedef struct {
-    ziU8 maskByte0;  // 0x0
-    ziU8 maskByte1;  // 0x1
-    ziU8 maskByte2;  // 0x2
-    ziU8 maskByte3;  // 0x3
+    ziU8 mask[4];    // 0x0
     ziU8 unk_0x4;    // 0x4
-    ziU8 unk_0x5;    // 0x5
-    ziU8 nextIdxHi;  // 0x6
+    ziU8 maskLen;    // 0x5
+    ziU8 nextIdxHi;  // 0x6 : 0b______XX
     ziU8 nextIdxLo;  // 0x7
 } Table2Entry;
 
@@ -158,6 +155,11 @@ typedef struct {
 #define GET_TABLE5_ENTRY_ORD(ENTRY) (((ziU16)(ENTRY)->ordHi << 8) | (ziU16)(ENTRY)->ordLo)
 #define GET_TABLE5_ENTRY_TABLE34_IDX(ENTRY) ((ziU16)(ENTRY)->tabl34IdxLo | ((ziU16)(ENTRY)->tabl34IdxHi & 1) << 8) << 1
 #define GET_TABLE5_ENTRY_CODE_OFFS(ENTRY) (((ziU16)(ENTRY)->tabl34IdxHi & 0xF0) >> 4)
+
+typedef struct {
+    ziU8 compIdxLo;  // 0x0
+    ziU8 compIdxHi;  // 0x1 : 0b__XXXXXX
+} Table6Entry;
 
 typedef struct {
     ziU8 chHi;             // 0x0
@@ -221,9 +223,28 @@ enum {
     ZI8_GET_MODE_UNK_x00 = 0x00,   // 0x00
     ZI8_GET_MODE_PINYIN_A = 0x01,  // 0x01
     ZI8_GET_MODE_UNK_x05 = 0x05,   // 0x05
-    ZI8_GET_MODE_PINYIN_B = 0x0c,  // 0x0c
+    ZI8_GET_MODE_PINYIN_B = 0x0C,  // 0x0C
     ZI8_GET_MODE_UNK_x10 = 0x10,   // 0x10
 };
+
+typedef struct {
+    ziBool unk_0x000;           // 0x000
+    ziU8 unk_0x001[0xc];        // 0x001
+    ziU8 unk_0x00D[0xc];        // 0x00D
+    ziU8 unk_0x019[4];          // 0x019
+    ziU8 unk_0x01D[4];          // 0x01D
+    ziU16 unk_0x022;            // 0x022
+    ziU8 maskIdx;               // 0x024
+    ziU8 syllCount;             // 0x025
+    ziU16 syllMasks[0x10];      // 0x026
+    ziU16 syllPhons[0x10];      // 0x046
+    ziU16 closedSyllMask;       // 0x066
+    ziU16 closedSyllPhon;       // 0x068
+    ziU16 unk_0x06A;            // 0x06A
+    ziU8 unk_0x06C;             // 0x06C
+    ziU8 unk_0x06D[0x10][0xc];  // 0x06D
+    ziU8 unk_0x12D[0x10][0xc];  // 0x12D
+} ziMatchStructA;
 
 typedef struct _ziGetParam {
     ziU8 language;     // 0x00
@@ -260,6 +281,30 @@ typedef struct _ziListNodeA {
 
 typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
 
+enum {
+    ZI8_STROKE_CODE_BLANK = 0xEF00,
+
+    ZI8_STROKE_CODE_x0 = 0xEF02,
+    ZI8_STROKE_CODE_x1 = 0xEF04,
+    ZI8_STROKE_CODE_x2 = 0xEF01,
+    ZI8_STROKE_CODE_x3 = 0xEF07,
+    ZI8_STROKE_CODE_x4 = 0xEF06,
+    ZI8_STROKE_CODE_x5 = 0xEF03,
+    ZI8_STROKE_CODE_x6 = 0xEF05,
+    ZI8_STROKE_CODE_x7 = 0xEF08,
+    ZI8_STROKE_CODE_x8 = 0xEF02,
+    ZI8_STROKE_CODE_xB = 0xEF07,
+
+    ZI8_STROKE_CODE_ENDFILL = 0xEF09,
+    ZI8_STROKE_CODE_PARTIAL_4 = 0xEF0A,
+    ZI8_STROKE_CODE_PARTIAL_8 = 0xEF0B,
+};
+
+enum {
+    ZI8_WORD_CASE_CAPS = 0x1,
+    ZI8_WORD_CASE_TITLE = 0x3,
+};
+
 // TODO: Name this something real
 typedef struct {
     ziU8 size;      // 0x0
@@ -287,7 +332,7 @@ struct __zi8_work_data_s {
     ziU16 unk_0x1A;                  // 0x01a
     ziU8 unk_0x1C;                   // 0x01C
     ziU8 unk_0x1D;                   // 0x01D
-    ziU8 unk_0x1E;                   // 0x01E
+    ziU8 wordCase;                   // 0x01E
     ziU8 unk_0x1F;                   // 0x01F
     ziU16 unk_0x20[0x40];            // 0x020
     ziU16 unk_0xA0[0x40];            // 0x0A0
@@ -352,16 +397,6 @@ struct __zi8_work_data_s {
     ziU8 unk_0x1B3D[0x3];            // 0x1B3D
     ziU16 unk_0x1B40;                // 0x1B40
 };
-
-// ZI_WORK->unk_0x1B30 = 0;
-// ZI_WORK->unk_0x1B3A = 0;
-// ZI_WORK->unk_0x1B36 = 0;
-// ZI_WORK->unk_0x1B32 = 0;
-// ZI_WORK->unk_0x1B34 = 0;
-// ZI_WORK->unk_0x1B3B = 0;
-// ZI_WORK->unk_0x1B3C = 0;
-// ZI_WORK->unk_0x1B40 = 0;
-// ZI_WORK->unk_0x1B38 = 0;
 
 #define ZI_WORK ((struct __zi8_work_data_s*)__zi8_work_data)
 #define ZI_NEED_WORK , ziPtr __zi8_work_data

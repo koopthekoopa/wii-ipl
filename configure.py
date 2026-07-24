@@ -1009,7 +1009,7 @@ config.libs = [
             Object(Matching,    "clib/zierror.c"),
             Object(NonMatching, "clib/zmtkey.c"),
             Object(Matching,    "clib/zoemdata.c"),
-            Object(NonMatching, "clib/zprepare.c"),
+            Object(Equivalent,  "clib/zprepare.c"),
         ]
     ),
     # RevoEX
