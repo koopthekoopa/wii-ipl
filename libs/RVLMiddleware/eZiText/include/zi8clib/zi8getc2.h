@@ -17,4 +17,6 @@ ziBool Zi8SetMaxWordLength(ziU8 length ZI_NEED_WORK);
 
 ziU8 _Zi8GetCandidates(void* local_40 ZI_NEED_WORK);
 
+ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* ziWork ZI_NEED_WORK);
+
 #endif  // ZI8_CLIB_GET_CANDIDATE_2_H

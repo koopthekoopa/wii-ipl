@@ -1,7 +1,9 @@
 #include <zi8clib/zconvert.h>
 
 #include <zi8clib/zaddress.h>
+#include <zi8clib/zi8match.h>
 #include <zi8clib/zierror.h>
+#include <zi8clib/ziswordw.h>
 
 #define ZI_LOAD_U16_FROM_TABLE(TABLE, OFFSET) (((ziU16)TABLE[OFFSET * 2] << 8) | (ziU16)(TABLE[OFFSET * 2 + 1]))
 
@@ -42,22 +44,22 @@ ziWChar Zi8ConvertUC2WC(ziChar ch, ziU8 language ZI_NEED_WORK) {
         offsetTable = table;
         tableStart = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
         tableEnd = ZI_LOAD_U16_FROM_TABLE(offsetTable, 1);
-        if ((ch < tableStart) || (ch > tableEnd)) {
+        if (ch < tableStart || ch > tableEnd) {
             Zi8LogError(0x132, ZI_WORK);
             return 0;
         }
 
-        offsetTable += ((ch - tableStart) * 2 + 8);
+        offsetTable += (ch - tableStart) * 2 + 8;
         Zi8LogError(0x64, ZI_WORK);
         return ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
     }
 
     cvrtTable = &Zi8CvrtTables.uc2wc;
     if (!cvrtTable) {
-        Zi8LogError(0x6a4, ZI_WORK);
+        Zi8LogError(0x6A4, ZI_WORK);
         return 0;
     }
-    if ((ch < cvrtTable->chrStart) || (ch > cvrtTable->chrEnd)) {
+    if (ch < cvrtTable->chrStart || ch > cvrtTable->chrEnd) {
         Zi8LogError(0x132, ZI_WORK);
         return 0;
     }
@@ -139,7 +141,6 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
     return 0;
 }
 
-ziU16 Zi8ConvertUC2UserKey(ziChar ch, ziU8 language ZI_NEED_WORK);
 ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     ziCvrtInfo* cvrtTableCvrtData;
     ziU16 tableCount;
@@ -162,7 +163,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
         Zi8LogError(0x133, ZI_WORK);
         return 0;
     }
-    if (ZI_WORK->unk_0x1200[language] != 0) {
+    if (ZI_WORK->usrKeyLyts[language] != 0) {
         return Zi8ConvertUC2UserKey(ch, language, ZI_WORK);
     }
     if (Zi8GetTableCount(language, 8, ZI_WORK) != 0) {
@@ -216,7 +217,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     }
     if (loopResult == 0) {
         Zi8LogError(0x6C2, ZI_WORK);
-        return 0xeff1;
+        return PAD_KEY(1);
     } else {
         Zi8LogError(0x64, ZI_WORK);
     }

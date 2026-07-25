@@ -1078,6 +1078,6 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
 ziWChar Zi8GetPCode(ziU8* tab34Data, Table0Entry* tab0Entry) {
     ziU16 tab34Idx;
 
-    tab34Idx = ((ziU16)tab0Entry->tab34IdxHi << 2) | (((ziU16)tab0Entry->tab34IdxLo & 0x80) >> 6);
+    tab34Idx = ((ziU16)tab0Entry->syllIdxHi << 2) | (((ziU16)tab0Entry->syllIdxLo & 0x80) >> 6);
     return ((ziU16)tab0Entry->tone >> 4 & 7) | tab34Data[tab34Idx] | ((ziU16)tab34Data[tab34Idx + 1] << 8);
 }

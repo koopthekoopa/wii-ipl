@@ -113,8 +113,8 @@ typedef void* ziPtr;
 // Table  3 - Data Signature
 
 // Chinese:
-// Table  0 - Character table?
-// Table  1 - Mask Table?
+// Table  0 - Character Table
+// Table  1 - Character Info Table: Extra Mask + Words
 // Table  2 - Component table
 // Table  3 - Pinyin Phonetic Syllables
 // Table  4 - Bopomofo Phonetic Syllables
@@ -127,9 +127,9 @@ typedef struct {
     ziU8 nextIdxLo;     // 0x5
     ziU8 chHi;          // 0x6
     ziU8 chLo;          // 0x7
-    ziU8 tab34IdxHi;    // 0x8
+    ziU8 syllIdxHi;     // 0x8
     union {
-        ziU8 tab34IdxLo;  // 0x9 (relevant: 0bX0000000)
+        ziU8 syllIdxLo;   // 0x9 (relevant: 0bX0000000)
         ziU8 tone;        // 0x9 (relevant: 0b0XXX0000)
         ziU8 tab1OffsHi;  // 0x9 (relevant: 0b0000XXXX)
     };
@@ -227,25 +227,6 @@ enum {
     ZI8_GET_MODE_UNK_x10 = 0x10,   // 0x10
 };
 
-typedef struct {
-    ziBool unk_0x000;           // 0x000
-    ziU8 unk_0x001[0xc];        // 0x001
-    ziU8 unk_0x00D[0xc];        // 0x00D
-    ziU8 unk_0x019[4];          // 0x019
-    ziU8 unk_0x01D[4];          // 0x01D
-    ziU16 unk_0x022;            // 0x022
-    ziU8 maskIdx;               // 0x024
-    ziU8 syllCount;             // 0x025
-    ziU16 syllMasks[0x10];      // 0x026
-    ziU16 syllPhons[0x10];      // 0x046
-    ziU16 closedSyllMask;       // 0x066
-    ziU16 closedSyllPhon;       // 0x068
-    ziU16 unk_0x06A;            // 0x06A
-    ziU8 unk_0x06C;             // 0x06C
-    ziU8 unk_0x06D[0x10][0xc];  // 0x06D
-    ziU8 unk_0x12D[0x10][0xc];  // 0x12D
-} ziMatchStructA;
-
 typedef struct _ziGetParam {
     ziU8 language;     // 0x00
     ziU8 getMode;      // 0x01
@@ -267,7 +248,48 @@ typedef struct _ziGetParam {
     ziU8 count;     // 0x21
     ziU8 letters;   // 0x22
     ziU8* scratch;  // 0x24
+
+    ziU32 unk_0x28;  // 0x28
 } ziGetParam;
+
+typedef struct {
+    ziU8 unk_0x00;      // 0x00
+    ziU8 unk_0x01;      // 0x01
+    ziU8 unk_0x02;      // 0x02
+    ziU8 unk_0x03;      // 0x03 - Maybe exists
+    ziWChar* unk_0x04;  // 0x04
+    ziU8 elementCount;  // 0x08
+    ziU8 unk_0x09;      // 0x09 - Maybe exists
+    ziU8 unk_0x0A;      // 0x0A - Maybe exists
+    ziU8 unk_0x0B;      // 0x0B - Maybe exists
+    ziS32 unk_0x0C;     // 0x0C
+    ziU16 unk_0x10;     // 0x10
+    ziU8 unk_0x12;      // 0x12
+    ziU8 unk_0x13;      // 0x13
+    ziU8 unk_0x14;      // 0x14
+    ziU8 unk_0x15;      // 0x15
+    ziU8 unk_0x16;      // 0x16
+    ziU8 unk_0x17;      // 0x17 - Maybe exists
+} ziGetCandidatesParam;
+
+typedef struct {
+    ziBool unk_0x000;           // 0x000
+    ziU8 unk_0x001[0xc];        // 0x001
+    ziU8 unk_0x00D[0xc];        // 0x00D
+    ziU8 unk_0x019[4];          // 0x019
+    ziU8 unk_0x01D[4];          // 0x01D
+    ziU16 unk_0x022;            // 0x022
+    ziU8 maskIdx;               // 0x024
+    ziU8 syllCount;             // 0x025
+    ziU16 syllMasks[0x10];      // 0x026
+    ziU16 syllPhons[0x10];      // 0x046
+    ziU16 closedSyllMask;       // 0x066
+    ziU16 closedSyllPhon;       // 0x068
+    ziU16 unk_0x06A;            // 0x06A
+    ziU8 unk_0x06C;             // 0x06C
+    ziU8 unk_0x06D[0x10][0xc];  // 0x06D
+    ziU8 unk_0x12D[0x10][0xc];  // 0x12D
+} ziMatchStructA;
 
 typedef struct _ziLanguageEntry {
     ziU8 language;    // 0x00
@@ -374,10 +396,12 @@ struct __zi8_work_data_s {
     ziWChar unk_0x57A[0x40][21];                // 0x57A
     ziU8 unk_0xFFA[0x200];                      // 0xFFA
     ziU8 unk_0x11FA;                            // 0x11FA
-    ziUserKeyLayout* unk_0x11FC;                // 0x11FC
-    ziUserKeyLayout* unk_0x1200[ZI8_LANG_MAX];  // 0x1200
-    ziU8 unk_0x1400[0x18];                      // 0x1400
-    ziU8 unk_0x1418[2];                         // 0x1418
+    ziUserKeyLayout* defaultUsrKeyLyt;          // 0x11FC
+    ziUserKeyLayout* usrKeyLyts[ZI8_LANG_MAX];  // 0x1200
+    ziU8 unk_0x1400[0x10];                      // 0x1400
+    ziU8* latinSearchOrderList;                 // 0x1410
+    ziU8* unk_0x1414;                           // 0x1414
+    ziU8 latinSearchOrderLen;                   // 0x1418
     ziU16 unk_0x141A;                           // 0x141A
     ziU8 unk_0x141C[0x458];                     // 0x141C
     ziU16 unk_0x1874;                           // 0x1874
