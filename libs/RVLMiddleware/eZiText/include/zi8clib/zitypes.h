@@ -24,6 +24,7 @@ typedef void* ziPtr;
 #define ZI8_LANG_NONE 0
 #define ZI8_LANG_ZH 1
 #define ZI8_LANG_PY 2
+#define ZI8_LANG_UNK4 4
 #define ZI8_LANG_DE 5
 #define ZI8_LANG_SV 9
 #define ZI8_LANG_FI 10
@@ -97,6 +98,7 @@ typedef void* ziPtr;
 #define ZI8_LANG_HA 84
 #define ZI8_LANG_IG 85
 #define ZI8_LANG_YO 86
+#define ZI8_LANG_UNK88 88
 #define ZI8_LANG_PYP 119
 #define ZI8_LANG_PYS 120
 #define ZI8_LANG_ZYP 121
@@ -405,8 +407,30 @@ struct __zi8_work_data_s {
     ziU16 unk_0x141A;                           // 0x141A
     ziU8 unk_0x141C[0x458];                     // 0x141C
     ziU16 unk_0x1874;                           // 0x1874
-    ziU8 unk_0x1876[2];                         // 0x1876
-    ziU8 unk_0x1878[0x2A0];                     // 0x1878
+    ziU8 unk_0x1876;                            // 0x1876
+    ziU8 unk_0x1877;                            // 0x1877
+    ziU8 unk_0x1878;                            // 0x1878
+    ziU8 unk_0x1879;                            // 0x1879
+    ziWChar hlBuffer[0x41];                     // 0x187A
+    ziU8 unk_0x18FC;                            // 0x18FC
+    ziWChar hlPrefix[0x41];                     // 0x18FE
+    ziU8 hlPrefixLen;                           // 0x1980
+    ziU8 unk_0x1981;                            // 0x1981
+    ziU8 unk_0x1982;                            // 0x1982
+    ziU8 unk_0x1983;                            // 0x1983
+    ziU8 unk_0x1984;                            // 0x1984
+    ziU8 unk_0x1985;                            // 0x1985
+    ziU8 unk_0x1986[2];                         // 0x1986
+    ziWChar hlSuffix[0x41];                     // 0x1988
+    ziU8 hlSuffixLen;                           // 0x1A0A
+    ziU8 unk_0x1A0B;                            // 0x1A0B
+    ziWChar unk_0x1A0C[0x41];                   // 0x1A0C
+    ziU8 unk_0x1A8E;                            // 0x1A8E
+    ziWChar unk_0x1A90;                         // 0x1A90
+    ziWChar unk_0x1A92[0x41];                   // 0x1A92
+    ziU8 unk_0x1B14;                            // 0x1B14
+    ziU8 unk_0x1B15;                            // 0x1B15
+    ziU8 unk_0x1B16;                            // 0x1B16
     ziU16* unk_0x1B18;                          // 0x1B18
     ziU16 unkRangeALo;                          // 0x1B1C
     ziU16 unkRangeAHi;                          // 0x1B1E
