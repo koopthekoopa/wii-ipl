@@ -1081,3 +1081,28 @@ ziWChar Zi8GetPCode(ziU8* tab34Data, Table0Entry* tab0Entry) {
     tab34Idx = ((ziU16)tab0Entry->syllIdxHi << 2) | (((ziU16)tab0Entry->syllIdxLo & 0x80) >> 6);
     return ((ziU16)tab0Entry->tone >> 4 & 7) | tab34Data[tab34Idx] | ((ziU16)tab34Data[tab34Idx + 1] << 8);
 }
+
+// - Your sibling can only be explicit if you have a sibling (3 possibilities)
+// - Your child can only be explicit if you have a child (3 possibilities)
+// - You can either be end of word or not (2 possibilities)
+//   - If you don't have a child, you must be an end-of-word (removes 3 possibilities)
+// 3 * 3 * 2 - 3 = 15 possibilities
+// Index 15 is similar to index 9, with an extra, currently unknown bit set
+const ziU16 nodeHeaderTable[0x10] = {
+    DAWG_SIBLING_NO_SIBLI | DAWG_CHILD_NO_CHILD | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_NO_SIBLI | DAWG_CHILD_IMPLICIT,
+    DAWG_SIBLING_NO_SIBLI | DAWG_CHILD_EXPLICIT,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_NO_CHILD | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_IMPLICIT,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_EXPLICIT,
+    DAWG_SIBLING_EXPLICIT | DAWG_CHILD_NO_CHILD | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_EXPLICIT | DAWG_CHILD_IMPLICIT,
+    DAWG_SIBLING_EXPLICIT | DAWG_CHILD_EXPLICIT,
+    DAWG_SIBLING_NO_SIBLI | DAWG_CHILD_IMPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_NO_SIBLI | DAWG_CHILD_EXPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_IMPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_EXPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_EXPLICIT | DAWG_CHILD_IMPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_EXPLICIT | DAWG_CHILD_EXPLICIT | DAWG_IS_EOW_FLAG,
+    DAWG_SIBLING_IMPLICIT | DAWG_CHILD_IMPLICIT | DAWG_IS_EOW_FLAG | DAWG_FLAG_32,
+};

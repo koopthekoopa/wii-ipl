@@ -1002,7 +1002,7 @@ config.libs = [
             Object(NonMatching, "clib/zi8uwd.c"),
             Object(Matching,    "clib/zi8ver.c"),
             Object(Matching,    "clib/zi8ZHuwd.c"),
-            Object(NonMatching, "clib/zidawg1.c"),
+            Object(Matching,    "clib/zidawg1.c"),
             Object(NonMatching, "clib/zikorean.c"),
             Object(Matching,    "clib/ziswordw.c"),
             Object(NonMatching, "clib/zkokeyp.c"),

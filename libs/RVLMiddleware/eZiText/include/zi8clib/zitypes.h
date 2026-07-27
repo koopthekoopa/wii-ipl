@@ -329,6 +329,31 @@ enum {
     ZI8_WORD_CASE_TITLE = 0x3,
 };
 
+typedef struct {
+    ziU8 hi;
+    ziU8 lo;
+} ziDAWGWCharData;
+
+typedef struct {
+    ziU8* node;     // 0x0
+    ziU32 unk_0x4;  // 0x4
+    ziU16 unk_0x8;  // 0x8
+    ziU8* unk_0xC;  // 0xC
+} ziDAWGCtxEntry;
+
+typedef struct {
+    ziU8 language;                 // 0x000
+    ziU8 graphDataTable;           // 0x001
+    ziU16 unk_0x002;               // 0x002
+    ziU16 chrCount;                // 0x004
+    ziDAWGWCharData* wchars;       // 0x008
+    ziU8* uchars;                  // 0x00C
+    ziU8* graphData;               // 0x010
+    ziPtr unk_0x014;               // 0x014
+    ziDAWGCtxEntry unk_0x018[50];  // 0x018
+    ziPtr unk_0x338;               // 0x338
+} ziDAWGCtx;
+
 // TODO: Name this something real
 typedef struct {
     ziU8 size;      // 0x0
