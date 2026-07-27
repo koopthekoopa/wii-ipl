@@ -335,22 +335,22 @@ typedef struct {
 } ziDAWGWCharData;
 
 typedef struct {
-    ziU8* node;     // 0x0
-    ziU32 unk_0x4;  // 0x4
-    ziU16 unk_0x8;  // 0x8
-    ziU8* unk_0xC;  // 0xC
+    ziU8* node;      // 0x0
+    ziU32 charAttr;  // 0x4 - Key: 8, UC: 8, WC: 16
+    ziU16 unk_0x8;   // 0x8
+    ziU8* unk_0xC;   // 0xC
 } ziDAWGCtxEntry;
 
 typedef struct {
     ziU8 language;                 // 0x000
     ziU8 graphDataTable;           // 0x001
-    ziU16 unk_0x002;               // 0x002
+    ziU16 stackLen;                // 0x002
     ziU16 chrCount;                // 0x004
     ziDAWGWCharData* wchars;       // 0x008
     ziU8* uchars;                  // 0x00C
     ziU8* graphData;               // 0x010
-    ziPtr unk_0x014;               // 0x014
-    ziDAWGCtxEntry unk_0x018[50];  // 0x018
+    ziDAWGWCharData* padKeys;      // 0x014
+    ziDAWGCtxEntry nodeStack[50];  // 0x018
     ziPtr unk_0x338;               // 0x338
 } ziDAWGCtx;
 
@@ -430,7 +430,20 @@ struct __zi8_work_data_s {
     ziU8* unk_0x1414;                           // 0x1414
     ziU8 latinSearchOrderLen;                   // 0x1418
     ziU16 unk_0x141A;                           // 0x141A
-    ziU8 unk_0x141C[0x458];                     // 0x141C
+    ziU8 unk_0x141C;                            // 0x141C
+    ziU8 unk_0x141D;                            // 0x141D
+    ziU8 unk_0x141E;                            // 0x141E
+    ziU8 deepestSearched;                       // 0x141F
+    ziU8 unk_0x1420[4];                         // 0x1420
+    ziDAWGCtx dawgCtx;                          // 0x1424
+    ziU8 unk_0x1760[2];                         // 0x1760
+    ziU8* dawgGroups;                           // 0x1764
+    ziU8 graphIdx;                              // 0x1768
+    ziU8 unk_0x1769[0x81];                      // 0x1769
+    ziU16 unk_0x17EA;                           // 0x17EA
+    ziU8 unk_0x17EC;                            // 0x17EC
+    ziU8* dawgGroupData;                        // 0x17F0
+    ziWChar predBuf[0x40];                      // 0x17F4
     ziU16 unk_0x1874;                           // 0x1874
     ziU8 unk_0x1876;                            // 0x1876
     ziU8 unk_0x1877;                            // 0x1877
