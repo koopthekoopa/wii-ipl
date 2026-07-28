@@ -298,9 +298,19 @@ typedef struct _ziLanguageEntry {
     ziU8* tableData;  // 0x04
 } ziLanguageEntry;
 
+typedef union {
+    struct {
+        ziU8 totalSize;      // 0x0
+        ziChar lang;         // 0x1
+        ziU8 len;            // 0x2
+        ziU8 unk_0x3;        // 0x3
+        ziU8 unk_0x4[0x3F];  // 0x4
+    };
+    ziU8 asBytes[0x3F + 4];
+} ziUWDNodeData;
 typedef struct _ziListNodeA {
-    struct _ziListNodeA* next;  // 0x0
-    ziPtr value;                // 0x4
+    struct _ziListNodeA* prev;  // 0x0
+    ziUWDNodeData* value;       // 0x4
 } ziListNodeA;
 
 typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
@@ -395,19 +405,20 @@ struct __zi8_work_data_s {
     ziU8 unk_0x12C;                             // 0x12C
     ziU8 unk_0x12D;                             // 0x12D
     ziU8 unk_0x12E;                             // 0x12E
-    ziU32 unk_0x130[2];                         // 0x130
+    ziU8* unk_0x130[2];                         // 0x130
     ziU8 unk_0x138;                             // 0x138
-    ziU32 unk_0x13C;                            // 0x13C
-    ziU8 unk_0x140;                             // 0x140
-    ziU8 unk_0x141[134];                        // 0x141
-    ziU8 unk_0x1C7;                             // 0x1C7
+    ziS32 unk_0x13C;                            // 0x13C
+    ziBool unk_0x140;                           // 0x140
+    ziUWDNodeData uwdChars;                     // 0x141
+    ziUWDNodeData uwdCaseChars;                 // 0x184
+    ziU8 uwdTopIdx;                             // 0x1C7
     ziListNodeA unk_0x1C8[0x20];                // 0x1C8
-    ziListNodeA* unk_0x2C8;                     // 0x2C8
-    ziUnkStruct* unk_0x2CC[0x10];               // 0x2CC
-    ziU8 unk_0x30C;                             // 0x30C
-    ziU8* unk_0x310;                            // 0x310
-    ziS32 unk_0x314;                            // 0x314
-    ziS32 unk_0x318;                            // 0x318
+    ziListNodeA* uwdTop;                        // 0x2C8
+    ziUnkStruct* pudStack[0x10];                // 0x2CC
+    ziU8 pudTopIdx;                             // 0x30C
+    ziU8* pudTop;                               // 0x310
+    ziS32 pudCurrCount;                         // 0x314
+    ziS32 pudCurrIdx;                           // 0x318
     ziU8 pdRemoveOpt;                           // 0x31C
     ziU8 unk_0x31D;                             // 0x31D
     ziU8 unk_0x31E;                             // 0x31E
