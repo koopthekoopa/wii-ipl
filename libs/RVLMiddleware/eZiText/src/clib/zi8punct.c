@@ -33,7 +33,7 @@ ziS32 Zi8Punctuation(ziGetParam* getParam, ziGetCandidatesParam* getCandidatesPa
                 }
                 if (candidateCount >= getParam->maxCandidates)
                     break;
-            } else if (candidateCount >= getCandidatesParam->unk_0x0C) {
+            } else if (candidateCount >= getCandidatesParam->maxSize) {
                 return candidateCount;
             }
         } else {

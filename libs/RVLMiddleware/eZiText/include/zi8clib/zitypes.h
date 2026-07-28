@@ -255,7 +255,7 @@ typedef struct _ziGetParam {
 } ziGetParam;
 
 typedef struct {
-    ziU8 unk_0x00;      // 0x00
+    ziBool unk_0x00;    // 0x00
     ziU8 unk_0x01;      // 0x01
     ziU8 unk_0x02;      // 0x02
     ziU8 unk_0x03;      // 0x03 - Maybe exists
@@ -264,7 +264,7 @@ typedef struct {
     ziU8 unk_0x09;      // 0x09 - Maybe exists
     ziU8 unk_0x0A;      // 0x0A - Maybe exists
     ziU8 unk_0x0B;      // 0x0B - Maybe exists
-    ziS32 unk_0x0C;     // 0x0C
+    ziS32 maxSize;      // 0x0C
     ziU16 unk_0x10;     // 0x10
     ziU8 unk_0x12;      // 0x12
     ziU8 unk_0x13;      // 0x13
