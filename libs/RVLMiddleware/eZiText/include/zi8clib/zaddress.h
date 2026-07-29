@@ -14,4 +14,6 @@ ziU16 Zi8GetTableCount(ziU8 lang, ziU8 tableIdx ZI_NEED_WORK);
 ziU8 Zi8GetFormatVersion(ziU8 lang ZI_NEED_WORK);
 ziU32 Zi8WCharCount(ziWChar* str ZI_NEED_WORK);
 
+#define GET_DICT_CONFIG(LANG, WORK) Zi8GetTableCount(LANG, 0x1F, WORK)
+
 #endif  // ZI8_CLIB_ADDRESS_H

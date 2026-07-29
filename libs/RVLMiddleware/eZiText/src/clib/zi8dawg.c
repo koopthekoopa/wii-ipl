@@ -286,7 +286,7 @@ ziU8 Zi8MatchROMdata2(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziU16* textOut, zi
                 goto RETURN;
             }
         }
-        if ((Zi8GetTableCount(lang, 0x1F, ZI_WORK) & 4) == 0) {
+        if ((GET_DICT_CONFIG(lang, ZI_WORK) & 4) == 0) {
             for (i = 0; i < inLen; i++) {
                 if (textIn[i] == PAD_KEY(1)) {
                     goto RETURN;

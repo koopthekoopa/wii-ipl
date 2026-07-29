@@ -4,7 +4,7 @@
 
 const wchar_t Zi8PunctTable[0x28] = L"，。、：？！々…―；．・“”（）「」０１２３４５６７８９／％￥＄￡\u20ac※＠";
 
-ziS32 Zi8Punctuation(ziGetParam* getParam, ziGetCandidatesParam* getCandidatesParam) {
+ziS32 Zi8Punctuation(ziGetParam* getParam, ziGetCandidatesParam* getCandidatesParam ZI_NEED_WORK) {
     ziS32 allowedStrOff;
     ziU16 leftUntilFirst;
     ziS32 candidateCount;

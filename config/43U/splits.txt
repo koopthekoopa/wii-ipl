@@ -1400,7 +1400,7 @@ libs/RVLMiddleware/eZiText/src/clib/zikorean.c:
 	extab       start:0x81330748 end:0x81330760
 	extabindex  start:0x8133147C end:0x813314A0
 	.text       start:0x814813FC end:0x81482840
-	.data       start:0x8166B2B0 end:0x8166B3D0
+	.data       start:0x8166B2B0 end:0x8166B3A8
 
 libs/RVLMiddleware/eZiText/src/clib/ziswordw.c:
 	extab       start:0x81330760 end:0x81330770
@@ -1412,6 +1412,7 @@ libs/RVLMiddleware/eZiText/src/clib/zkokeyp.c:
 	extab       start:0x81330770 end:0x813307A8
 	extabindex  start:0x813314B8 end:0x8133150C
 	.text       start:0x8148302C end:0x8148447C
+	.data       start:0x8166B3A8 end:0x8166B3D0
 
 libs/RVLMiddleware/eZiText/src/clib/zierror.c:
 	.text       start:0x8148447C end:0x81484484

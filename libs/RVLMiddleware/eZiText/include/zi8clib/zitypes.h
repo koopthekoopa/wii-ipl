@@ -187,45 +187,55 @@ typedef union {
 } TableEntry;
 
 typedef struct ziFuzzyPYPairs {
-    ziU32 ziDefault : 1;
+    ziS32 ziDefault : 1;  // X_______ ________ ________ ________
 
-    ziU32 cANDch : 1;
-    ziU32 sANDsh : 1;
-    ziU32 zANDzh : 1;
+    ziS32 cANDch : 1;  // _X______ ________ ________ ________
+    ziS32 sANDsh : 1;  // __X_____ ________ ________ ________
+    ziS32 zANDzh : 1;  // ___X____ ________ ________ ________
 
-    ziU32 anANDang : 1;
-    ziU32 enANDeng : 1;
-    ziU32 inANDing : 1;
+    ziS32 anANDang : 1;  // ____X___ ________ ________ ________
+    ziS32 enANDeng : 1;  // _____X__ ________ ________ ________
+    ziS32 inANDing : 1;  // ______X_ ________ ________ ________
 
-    ziU32 nANDl : 1;
-    ziU32 lANDr : 1;
-    ziU32 fANDh : 1;
+    ziS32 nANDl : 1;  // _______X ________ ________ ________
+    ziS32 lANDr : 1;  // ________ X_______ ________ ________
+    ziS32 fANDh : 1;  // ________ _X______ ________ ________
 } ziFuzzyPYPairs;
 
 typedef struct ziFuzzyZYPairs {
-    ziU32 ziDefault : 1;
+    ziS32 ziDefault : 1;  // X_______ ________ ________ ________
 
-    ziU32 cANDch : 1;
-    ziU32 sANDsh : 1;
-    ziU32 zANDzh : 1;
+    ziS32 cANDch : 1;  // _X______ ________ ________ ________
+    ziS32 sANDsh : 1;  // __X_____ ________ ________ ________
+    ziS32 zANDzh : 1;  // ___X____ ________ ________ ________
 
-    ziU32 anANDang : 1;
-    ziU32 enANDeng : 1;
+    ziS32 anANDang : 1;  // ____X___ ________ ________ ________
+    ziS32 enANDeng : 1;  // _____X__ ________ ________ ________
 
-    ziU32 nANDl : 1;
-    ziU32 lANDr : 1;
-    ziU32 fANDh : 1;
+    ziS32 nANDl : 1;  // ______X_ ________ ________ ________
+    ziS32 lANDr : 1;  // _______X ________ ________ ________
+    ziS32 fANDh : 1;  // ________ X_______ ________ ________
 
-    ziU32 rANDn : 1;
-    ziU32 bANDp : 1;
-    ziU32 gANDk : 1;
+    ziS32 rANDn : 1;  // ________ _X______ ________ ________
+    ziS32 bANDp : 1;  // ________ __X_____ ________ ________
+    ziS32 gANDk : 1;  // ________ ___X____ ________ ________
 } ziFuzzyZYPairs;
 
 enum {
     ZI8_GET_MODE_UNK_x00 = 0x00,   // 0x00
     ZI8_GET_MODE_PINYIN_A = 0x01,  // 0x01
+    ZI8_GET_MODE_UNK_x02 = 0x02,   // 0x02
+    ZI8_GET_MODE_UNK_x03 = 0x03,   // 0x03
+    ZI8_GET_MODE_UNK_x04 = 0x04,   // 0x04
     ZI8_GET_MODE_UNK_x05 = 0x05,   // 0x05
+    ZI8_GET_MODE_UNK_x07 = 0x07,   // 0x07
+    ZI8_GET_MODE_UNK_x08 = 0x08,   // 0x08
+    ZI8_GET_MODE_UNK_x09 = 0x09,   // 0x09
+    ZI8_GET_MODE_UNK_x0A = 0x0A,   // 0x0A
+    ZI8_GET_MODE_UNK_x0B = 0x0B,   // 0x0B
     ZI8_GET_MODE_PINYIN_B = 0x0C,  // 0x0C
+    ZI8_GET_MODE_UNK_x0E = 0x0E,   // 0x0E
+    ZI8_GET_MODE_UNK_x0F = 0x0F,   // 0x0F
     ZI8_GET_MODE_UNK_x10 = 0x10,   // 0x10
 };
 
@@ -383,6 +393,7 @@ typedef struct {
 
 struct __zi8_work_data_s {
     ziU8 unk_0x00;                              // 0x000
+    ziU8 unk_0x01;                              // 0x001
     ziLanguageEntry* langEntries;               // 0x004
     ziU8 unk_0x08;                              // 0x008
     ziU8 unk_0x09;                              // 0x009
@@ -424,19 +435,20 @@ struct __zi8_work_data_s {
     ziU8 unk_0x31E;                             // 0x31E
     Zi8OemSearchDict oemSearchDict;             // 0x320
     ziU16 oemDictLen;                           // 0x324
-    ziU32 unk_0x328;                            // 0x328
+    ziU32 oemDictIdxSavepoint;                  // 0x328
     ziPtr oemDictData;                          // 0x32C
-    ziU8 unk_0x330[0x200];                      // 0x330
-    ziU8 unk_0x530[8];                          // 0x530
+    ziU8 unk_0x330[8];                          // 0x330
+    ziWChar candidates[0x100];                  // 0x338
     ziU8 unk_0x538;                             // 0x538
-    ziU8 unk_0x539;                             // 0x539
-    ziU8 unk_0x53A[0x40];                       // 0x53A
-    ziWChar unk_0x57A[0x40][21];                // 0x57A
+    ziU8 dupWordBufsUsed;                       // 0x539
+    ziU8 dupWordBufRealIdxs[0x40];              // 0x53A
+    ziWChar dupWordBufs[0x40][21];              // 0x57A
     ziU8 unk_0xFFA[0x200];                      // 0xFFA
     ziU8 unk_0x11FA;                            // 0x11FA
     ziUserKeyLayout* defaultUsrKeyLyt;          // 0x11FC
     ziUserKeyLayout* usrKeyLyts[ZI8_LANG_MAX];  // 0x1200
-    ziU8 unk_0x1400[0x10];                      // 0x1400
+    ziU8 unk_0x1400[0xC];                       // 0x1400
+    ziU8 unk_0x140C;                            // 0x140C
     ziU8* latinSearchOrderList;                 // 0x1410
     ziU8* unk_0x1414;                           // 0x1414
     ziU8 latinSearchOrderLen;                   // 0x1418

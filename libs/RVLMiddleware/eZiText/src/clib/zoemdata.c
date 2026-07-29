@@ -35,9 +35,9 @@ ziU8 Zi8MatchOEMdata(ziWChar* text, ziU8 textLen, ziU8 language, ziWChar* wordOu
 
     hasRepeated = 0;
     if (!resume) {
-        ZI_WORK->unk_0x328 = 0;
+        ZI_WORK->oemDictIdxSavepoint = 0;
     }
-    if ((dictIdx = ZI_WORK->unk_0x328) >= ZI_WORK->oemDictLen || ZI_WORK->oemSearchDict == ZI8_NULL || textLen >= --wordMax) {
+    if ((dictIdx = ZI_WORK->oemDictIdxSavepoint) >= ZI_WORK->oemDictLen || ZI_WORK->oemSearchDict == ZI8_NULL || textLen >= --wordMax) {
         return 0;
     }
     wordOut[wordMax] = 0;
@@ -89,7 +89,7 @@ ziU8 Zi8MatchOEMdata(ziWChar* text, ziU8 textLen, ziU8 language, ziWChar* wordOu
                     *wordOut = *text;
                     return 1;
                 }
-                ZI_WORK->unk_0x328 = ++dictIdx;
+                ZI_WORK->oemDictIdxSavepoint = ++dictIdx;
                 while (wordOut[i] != L'\0')
                     i++;
                 return i;

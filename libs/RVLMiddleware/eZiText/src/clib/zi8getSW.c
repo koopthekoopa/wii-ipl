@@ -64,7 +64,7 @@ int Zi8GetSyllablesCandidates(ziGetParam* getInfo, ziGetCandidatesParam* getCand
         goto FINISH;
     }
 
-    if ((Zi8GetTableCount(getInfo->language, 0x1F, ZI_WORK) & 8) != 0) {
+    if ((GET_DICT_CONFIG(getInfo->language, ZI_WORK) & 8) != 0) {
         forcePunctuationHyphen = ZI8_FALSE;
     }
     if (getInfo->elements[0] == PAD_KEY(1) && getInfo->elementCount > 1 && forcePunctuationHyphen) {
