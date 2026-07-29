@@ -508,7 +508,8 @@ struct __zi8_work_data_s {
     ziU8 unk_0x1B3A;                            // 0x1B3A
     ziU8 unk_0x1B3B;                            // 0x1B3B
     ziU8 unk_0x1B3C;                            // 0x1B3C
-    ziU8 unk_0x1B3D[0x3];                       // 0x1B3D
+    ziU8 unk_0x1B3D;                            // 0x1B3D
+    ziU8 unk_0x1B3E[2];                         // 0x1B3D
     ziU16 unk_0x1B40;                           // 0x1B40
 };
 
