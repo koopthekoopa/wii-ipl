@@ -10,6 +10,7 @@ ziBool Zi8SetLatinSearchOrder(ziU8* searchArray, ziU8 searchSize ZI_NEED_WORK);
 ziU16 Zi8GetGlobalDataSize();
 
 ziU8 _Zi8GetCandidates(ziGetParam* getParam ZI_NEED_WORK);
+ziU8 _Zi8CheckCandidates(ziGetParam* getParam ZI_NEED_WORK);
 ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCandParam ZI_NEED_WORK);
 
 void Zi8InitDupWordBuf(ziPtr __zi8_work_data);

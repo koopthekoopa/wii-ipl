@@ -2,16 +2,17 @@
 
 #include <zi8clib/zaddress.h>
 #include <zi8clib/zi8getc2.h>
+#include <zi8clib/zi8match.h>
 #include <zi8clib/zierror.h>
 
 ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
     ziU8 savedVal;
     ziU8 charSet;
 
-    ziU8* tableA;
-    ziU8* tableACurr;
+    ziU8* regionalCharCountTable;
+    ziU8* regionalCharCountData;
 
-    ziU16 val0, val1, val2;
+    ziU16 mainlandCharCount, taiwanCharCount, hongKongCharCount;
 
     ziWChar candidatesBuf[0x10];
     ziGetParam getParam;
@@ -27,35 +28,35 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
         savedVal = ZI_WORK->unk_0x18;
 
         ZI_WORK->unk_0x18 = 1;
-        tableA = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 0xA, ZI_WORK);
-        tableACurr = tableA;
+        regionalCharCountTable = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 0xA, ZI_WORK);
+        regionalCharCountData = regionalCharCountTable;
 
-        val0 = tableACurr[0] | ((ziU16)tableACurr[1] << 8);
+        mainlandCharCount = regionalCharCountData[0] | ((ziU16)regionalCharCountData[1] << 8);
 
         ZI_WORK->unk_0x18 = 0;
-        tableA = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 0xA, ZI_WORK);
-        tableACurr = tableA;
+        regionalCharCountTable = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 0xA, ZI_WORK);
+        regionalCharCountData = regionalCharCountTable;
 
-        val1 = tableACurr[2] | ((ziU16)tableACurr[3] << 8);
-        val2 = tableACurr[4] | ((ziU16)tableACurr[5] << 8);
+        taiwanCharCount = regionalCharCountData[2] | ((ziU16)regionalCharCountData[3] << 8);
+        hongKongCharCount = regionalCharCountData[4] | ((ziU16)regionalCharCountData[5] << 8);
 
         ZI_WORK->unk_0x18 = savedVal;
-        if (val0 != 0) {
-            if (val0 > 0x4E20) {
-                charSet |= 0b01000;
+        if (mainlandCharCount != 0) {
+            if (mainlandCharCount > 20000) {
+                charSet |= ZI_CHAR_SET_MAINLAND_LARGE;
             } else {
-                charSet |= 0b00001;
+                charSet |= ZI_CHAR_SET_MAINLAND_SMALL;
             }
         }
-        if (val1 != 0) {
-            if (val1 > 0x2710) {
-                charSet |= 0b00010;
+        if (taiwanCharCount != 0) {
+            if (taiwanCharCount > 10000) {
+                charSet |= ZI_CHAR_SET_TAIWAN_LARGE;
             } else {
-                charSet |= 0b10000;
+                charSet |= ZI_CHAR_SET_TAIWAN_SMALL;
             }
         }
-        if (val2 != 0) {
-            charSet |= 0b00100;
+        if (hongKongCharCount != 0) {
+            charSet |= ZI_CHAR_SET_HONG_KONG;
         }
         return charSet;
     }
@@ -104,15 +105,15 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
 }
 
 ziBool Zi8IsComponent(ziWChar ch ZI_NEED_WORK) {
-    if (ch >= 0xEF10 && ch < 0xF305)
+    if (ch >= COMPONENT_BASE && ch < BPMF_BASE)
         return ZI8_TRUE;
     else
         return ZI8_FALSE;
 }
 
 ziBool Zi8IsCharacter(ziWChar ch ZI_NEED_WORK) {
-    Table0Entry* tabl0;
-    Table0Entry* currEntry;
+    Table0Entry* chEntries;
+    Table0Entry* chEntryCurr;
 
     ziU16 i;
     ziU16 entryCount;
@@ -146,11 +147,11 @@ ziBool Zi8IsCharacter(ziWChar ch ZI_NEED_WORK) {
     chLo = ch;
 
     entryCount = Zi8GetTableCount(ZI8_LANG_ZH, 0, ZI_WORK);
-    currEntry = tabl0 = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
+    chEntryCurr = chEntries = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
     for (i = 0; i < entryCount; i++) {
-        if (currEntry->chHi == chHi && currEntry->chLo == chLo)
+        if (chEntryCurr->chHi == chHi && chEntryCurr->chLo == chLo)
             return ZI8_TRUE;
-        currEntry++;
+        chEntryCurr++;
     }
     return ZI8_FALSE;
 }

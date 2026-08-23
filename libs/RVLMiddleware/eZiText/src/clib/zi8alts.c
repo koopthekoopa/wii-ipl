@@ -34,7 +34,7 @@ SEARCH_OUT:
     do {
         if ((tab5Entries[boundHi].tabl34IdxHi & 0b1110) == 0 || (tab5Entries[boundHi].tabl34IdxHi & param_7) != 0) {
             tabl34Idx = GET_TABLE5_ENTRY_TABLE34_IDX(&tab5Entries[boundHi]);
-            mask = GET_TABLE5_ENTRY_CODE_OFFS(&tab5Entries[boundHi]) | (tab34Data[tabl34Idx] | ((ziU16)tab34Data[tabl34Idx + 1] << 8));
+            mask = GET_TABLE5_ENTRY_TONE(&tab5Entries[boundHi]) | (tab34Data[tabl34Idx] | ((ziU16)tab34Data[tabl34Idx + 1] << 8));
             if (masked == (mask & unmasked)) {
                 return mask;
             }
@@ -46,7 +46,7 @@ SEARCH_OUT:
     while (--boundHi >= 0 && ordHi == tab5Entries[boundHi].ordHi && ordLo == tab5Entries[boundHi].ordLo) {
         if ((tab5Entries[boundHi].tabl34IdxHi & 0b1110) == 0 || (tab5Entries[boundHi].tabl34IdxHi & param_7) != 0) {
             tabl34Idx = GET_TABLE5_ENTRY_TABLE34_IDX(&tab5Entries[boundHi]);
-            mask = GET_TABLE5_ENTRY_CODE_OFFS(&tab5Entries[boundHi]) | (tab34Data[tabl34Idx] | ((ziU16)tab34Data[tabl34Idx + 1] << 8));
+            mask = GET_TABLE5_ENTRY_TONE(&tab5Entries[boundHi]) | (tab34Data[tabl34Idx] | ((ziU16)tab34Data[tabl34Idx + 1] << 8));
             if (masked == (mask & unmasked)) {
                 return mask;
             }

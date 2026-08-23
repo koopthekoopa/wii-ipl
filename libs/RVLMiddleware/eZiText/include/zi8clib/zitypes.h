@@ -115,12 +115,15 @@ typedef void* ziPtr;
 // Table  3 - Data Signature
 
 // Chinese:
-// Table  0 - Character Table
-// Table  1 - Character Info Table: Extra Mask + Words
-// Table  2 - Component table
+// Table  0 - Character
+// Table  1 - Character Info: Extra Mask + Words
+// Table  2 - Component
 // Table  3 - Pinyin Phonetic Syllables
 // Table  4 - Bopomofo Phonetic Syllables
+// Table  5 - Character to Phonetic Syllable Associations
 // Table  6 - Unsigned Char to Wide Char
+// Table  C - Syllable lengths
+// Table 1A - Supported tones for syllables
 // Table 1E - Data Signature
 
 typedef struct {
@@ -152,16 +155,34 @@ typedef struct {
     ziU8 ordLo;        // 0x0
     ziU8 ordHi;        // 0x1
     ziU8 tabl34IdxLo;  // 0x2
-    ziU8 tabl34IdxHi;  // 0x3
+    union {
+        ziU8 tone;         // 0x3 : 0bXXXX____
+        ziU8 region;       // 0x3 : 0b____XXX_
+        ziU8 tabl34IdxHi;  // 0x3 : 0b_______X
+    };  // 0x3
 } Table5Entry;
 #define GET_TABLE5_ENTRY_ORD(ENTRY) (((ziU16)(ENTRY)->ordHi << 8) | (ziU16)(ENTRY)->ordLo)
 #define GET_TABLE5_ENTRY_TABLE34_IDX(ENTRY) ((ziU16)(ENTRY)->tabl34IdxLo | ((ziU16)(ENTRY)->tabl34IdxHi & 1) << 8) << 1
-#define GET_TABLE5_ENTRY_CODE_OFFS(ENTRY) (((ziU16)(ENTRY)->tabl34IdxHi & 0xF0) >> 4)
+#define GET_TABLE5_ENTRY_TONE(ENTRY) (((ziU16)(ENTRY)->tone & 0xF0) >> 4)
+#define GET_TABLE5_ENTRY_REGION(ENTRY) ((ENTRY)->region & 0x0E)
 
 typedef struct {
     ziU8 compIdxLo;  // 0x0
     ziU8 compIdxHi;  // 0x1 : 0b__XXXXXX
 } Table6Entry;
+
+// Chinese (ZH) Table 12 (0xC)
+typedef struct {
+    union {
+        ziU8 mandarinRegionMask;  // 0x0 : 0bXXXX____
+        ziU8 pinyinLen;           // 0x0 : 0b____XXXX
+    };
+    union {
+        ziU8 syllableTableIdxHi;  // 0x1 : 0bXXXX____
+        ziU8 bpmfLen;             // 0x1 : 0b____XXXX
+    };
+    ziU8 syllableTableIdxLo;  // 0x2
+} SyllableLenTableEntry;
 
 typedef struct {
     ziU8 chHi;             // 0x0
@@ -222,29 +243,36 @@ typedef struct ziFuzzyZYPairs {
 } ziFuzzyZYPairs;
 
 enum {
-    ZI8_GET_MODE_UNK_x00 = 0x00,   // 0x00
-    ZI8_GET_MODE_PINYIN_A = 0x01,  // 0x01
-    ZI8_GET_MODE_UNK_x02 = 0x02,   // 0x02
-    ZI8_GET_MODE_UNK_x03 = 0x03,   // 0x03
-    ZI8_GET_MODE_UNK_x04 = 0x04,   // 0x04
-    ZI8_GET_MODE_UNK_x05 = 0x05,   // 0x05
-    ZI8_GET_MODE_UNK_x07 = 0x07,   // 0x07
-    ZI8_GET_MODE_UNK_x08 = 0x08,   // 0x08
-    ZI8_GET_MODE_UNK_x09 = 0x09,   // 0x09
-    ZI8_GET_MODE_UNK_x0A = 0x0A,   // 0x0A
-    ZI8_GET_MODE_UNK_x0B = 0x0B,   // 0x0B
-    ZI8_GET_MODE_PINYIN_B = 0x0C,  // 0x0C
-    ZI8_GET_MODE_UNK_x0E = 0x0E,   // 0x0E
-    ZI8_GET_MODE_UNK_x0F = 0x0F,   // 0x0F
-    ZI8_GET_MODE_UNK_x10 = 0x10,   // 0x10
+    ZI8_GET_MODE_UNK_x00 = 0x00,    // 0x00
+    ZI8_GET_MODE_PINYIN_A = 0x01,   // 0x01
+    ZI8_GET_MODE_UNK_x02 = 0x02,    // 0x02
+    ZI8_GET_MODE_PINYIN = 0x03,     // 0x03
+    ZI8_GET_MODE_ZHUYIN = 0x04,     // 0x04
+    ZI8_GET_MODE_UNK_x05 = 0x05,    // 0x05
+    ZI8_GET_MODE_UNK_x07 = 0x07,    // 0x07
+    ZI8_GET_MODE_UNK_x08 = 0x08,    // 0x08
+    ZI8_GET_MODE_UNK_x09 = 0x09,    // 0x09
+    ZI8_GET_MODE_UNK_x0A = 0x0A,    // 0x0A
+    ZI8_GET_MODE_UNK_x0B = 0x0B,    // 0x0B
+    ZI8_GET_MODE_PINYIN_B = 0x0C,   // 0x0C
+    ZI8_GET_MODE_UNK_x0E = 0x0E,    // 0x0E
+    ZI8_GET_MODE_SHUANGPIN = 0x0F,  // 0x0F
+    ZI8_GET_MODE_UNK_x10 = 0x10,    // 0x10
 };
 
 typedef struct _ziGetParam {
     ziU8 language;     // 0x00
     ziU8 getMode;      // 0x01
     ziU8 subLanguage;  // 0x02
-    ziU8 context;      // 0x03
-    ziU8 getOptions;   // 0x04
+    union {
+        ziU8 context;   // 0x03
+        ziU8 ctx_b0;    // 0x03 : 0bX_______
+        ziU8 ctx_b1;    // 0x03 : 0b_X______
+        ziU8 ctx_b2;    // 0x03 : 0b__X_____
+        ziU8 ctx_b3;    // 0x03 : 0b___X____
+        ziU8 ctx_b4_7;  // 0x03 : 0b____XXXX
+    };  // 0x03
+    ziU8 getOptions;  // 0x04
 
     ziWChar* elements;  // 0x08
     ziU8 elementCount;  // 0x0C
@@ -285,22 +313,22 @@ typedef struct {
 } ziGetCandidatesParam;
 
 typedef struct {
-    ziBool unk_0x000;           // 0x000
-    ziU8 unk_0x001[0xc];        // 0x001
-    ziU8 unk_0x00D[0xc];        // 0x00D
-    ziU8 unk_0x019[4];          // 0x019
-    ziU8 unk_0x01D[4];          // 0x01D
-    ziU16 unk_0x022;            // 0x022
-    ziU8 maskIdx;               // 0x024
-    ziU8 syllCount;             // 0x025
-    ziU16 syllMasks[0x10];      // 0x026
-    ziU16 syllPhons[0x10];      // 0x046
-    ziU16 closedSyllMask;       // 0x066
-    ziU16 closedSyllPhon;       // 0x068
-    ziU16 unk_0x06A;            // 0x06A
-    ziU8 unk_0x06C;             // 0x06C
-    ziU8 unk_0x06D[0x10][0xc];  // 0x06D
-    ziU8 unk_0x12D[0x10][0xc];  // 0x12D
+    ziBool unk_0x000;                     // 0x000
+    ziU8 strokeMask[0xC];                 // 0x001
+    ziU8 strokeData[0xC];                 // 0x00D
+    ziU8 shortStrokeMask[4];              // 0x019
+    ziU8 shortStrokeData[4];              // 0x01D
+    ziU16 unk_0x022;                      // 0x022
+    ziU8 maskIdx;                         // 0x024
+    ziU8 syllCount;                       // 0x025
+    ziU16 syllMasks[0x10];                // 0x026
+    ziU16 syllPhons[0x10];                // 0x046
+    ziU16 closedSyllMask;                 // 0x066
+    ziU16 closedSyllPhon;                 // 0x068
+    ziU16 unk_0x06A;                      // 0x06A
+    ziU8 multicharStrokeCount;            // 0x06C
+    ziU8 multicharStrokeMask[0x10][0xC];  // 0x06D
+    ziU8 multicharStrokeData[0x10][0xC];  // 0x12D
 } ziMatchStructA;
 
 typedef struct _ziLanguageEntry {
@@ -328,16 +356,16 @@ typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziP
 enum {
     ZI8_STROKE_CODE_BLANK = 0xEF00,
 
-    ZI8_STROKE_CODE_x0 = 0xEF02,
-    ZI8_STROKE_CODE_x1 = 0xEF04,
-    ZI8_STROKE_CODE_x2 = 0xEF01,
-    ZI8_STROKE_CODE_x3 = 0xEF07,
-    ZI8_STROKE_CODE_x4 = 0xEF06,
-    ZI8_STROKE_CODE_x5 = 0xEF03,
-    ZI8_STROKE_CODE_x6 = 0xEF05,
-    ZI8_STROKE_CODE_x7 = 0xEF08,
-    ZI8_STROKE_CODE_x8 = 0xEF02,
-    ZI8_STROKE_CODE_xB = 0xEF07,
+    ZI8_STROKE_CODE_x0 = 0xEF02,  // Press N (Nà)
+    ZI8_STROKE_CODE_x1 = 0xEF04,  // Hori H (Héng)
+    ZI8_STROKE_CODE_x2 = 0xEF01,  // Vert S (Shù)
+    ZI8_STROKE_CODE_x3 = 0xEF07,  // Throw P (Piě)
+    ZI8_STROKE_CODE_x4 = 0xEF06,  // Vert-Hori SZ (Shù Zhé)
+    ZI8_STROKE_CODE_x5 = 0xEF03,  // CwCurve-Hook WG (Wān Gōu)
+    ZI8_STROKE_CODE_x6 = 0xEF05,  // Hori-Hook HG (Héng Gōu)
+    ZI8_STROKE_CODE_x7 = 0xEF08,  // Hori-Press-Hook HXG (Héng Xié Gōu)
+    ZI8_STROKE_CODE_x8 = 0xEF02,  // Press N (Nà)
+    ZI8_STROKE_CODE_xB = 0xEF07,  // Throw P (Piě)
 
     ZI8_STROKE_CODE_ENDFILL = 0xEF09,
     ZI8_STROKE_CODE_PARTIAL_4 = 0xEF0A,
@@ -401,7 +429,7 @@ struct __zi8_work_data_s {
     ziU16 unk_0x0C;                             // 0x00C
     ziU32 unk_0x10;                             // 0x010
     ziU16 unk_0x14;                             // 0x014
-    ziU8 unk_0x16;                              // 0x016
+    ziU8 handleCangjie;                         // 0x016
     ziU8 unk_0x17;                              // 0x017
     ziU8 unk_0x18;                              // 0x018
     ziU16 unk_0x1A;                             // 0x01a

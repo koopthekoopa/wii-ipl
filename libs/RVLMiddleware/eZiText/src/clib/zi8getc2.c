@@ -536,7 +536,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
     }
 
     ZI_WORK->unk_0x18 = getParam->subLanguage;
-    ZI_WORK->unk_0x16 = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
+    ZI_WORK->handleCangjie = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
     getCandParam->maxSize = ZI_WORK->unk_0x10;
     getCandParam->unk_0x01 = ZI_WORK->maxWordLen;
     ZI_WORK->maxWordLen = 0xFF;
@@ -581,10 +581,10 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
             getParam->getMode = savedGetMode;
             getParam->letters = 1;
         }
-    } else if (getParam->language == ZI8_LANG_ZH && getParam->getMode == ZI8_GET_MODE_UNK_x0F) {
+    } else if (getParam->language == ZI8_LANG_ZH && getParam->getMode == ZI8_GET_MODE_SHUANGPIN) {
         code = 0x2D0;
         result = 0;
-    } else if (getParam->language == ZI8_LANG_ZH && (getParam->getMode == ZI8_GET_MODE_UNK_x03 || getParam->getMode == ZI8_GET_MODE_UNK_x04)) {
+    } else if (getParam->language == ZI8_LANG_ZH && (getParam->getMode == ZI8_GET_MODE_PINYIN || getParam->getMode == ZI8_GET_MODE_ZHUYIN)) {
         if ((getParam->getOptions & 0b10000000) != 0) {
             result = Zi8Get1KeyPressSpelling(getParam, getCandParam, ZI_WORK);
         } else {
@@ -596,7 +596,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
         }
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->getMode == ZI8_GET_MODE_UNK_x07 || getParam->getMode == ZI8_GET_MODE_UNK_x08 ||
                                                      getParam->getMode == ZI8_GET_MODE_UNK_x0A || getParam->getMode == ZI8_GET_MODE_UNK_x09)) {
-        if (ZI_WORK->unk_0x16 != 0) {
+        if (ZI_WORK->handleCangjie != 0) {
             result = Zi8GetChineseCandidates(getParam, getCandParam, ZI_WORK);
         } else {
             code = 0x708;

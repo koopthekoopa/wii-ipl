@@ -9,12 +9,12 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
     ziU8 i;
     ziU8 maskI;
 
-    ziU8 local_24[12];
-    ziU8 local_30[12];
+    ziU8 strokeMask[12];
+    ziU8 strokeData[12];
     Table2Entry* component;
     Table6Entry* componentIdxTable;
-    ziU8 local_3c[4];
-    ziU8 local_40[4];
+    ziU8 shortStrokeMask[4];
+    ziU8 shortStrokeData[4];
     ziU8* syllTable;
     ziWChar* elements;
 
@@ -33,7 +33,7 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
 
     ziU8 local_61;
     ziU8 elCount;
-    ziU8 local_63;
+    ziU8 elementI;
     ziU8 local_64;
     ziU8 someMask;
     ziU8 local_66;
@@ -41,10 +41,11 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
 
     local_64 = 0;
     someMask = 0x20;
-    Zi8Memset(matchInfo, '\0', sizeof(ziMatchStructA));
+    Zi8Memset(matchInfo, 0, sizeof(ziMatchStructA));
+
     local_61 = 0;
     maskI = 0;
-    local_63 = 0;
+    elementI = 0;
     elCount = getParam->elementCount;
     while (elCount != 0) {
         if (getParam->elements[elCount - 1] != ZI8_STROKE_CODE_ENDFILL)
@@ -63,7 +64,7 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
     if (elCount != 0) {
         matchInfo->unk_0x06A = local_4a = getParam->elements[0];
         if (Zi8IsComponent(local_4a, ZI_WORK)) {
-            local_63++;
+            elementI++;
             local_61 = 1;
             component = (Table2Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 2, ZI_WORK);
             componentIdxTable = (Table6Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 6, ZI_WORK);
@@ -99,14 +100,14 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
             }
             for (i = 0; i < (component->maskLen >> 1) + 1; i++) {
                 if (i < 4) {
-                    matchInfo->unk_0x00D[i] = component->mask[i];
-                    matchInfo->unk_0x001[i] = 0xFF;
+                    matchInfo->strokeData[i] = component->mask[i];
+                    matchInfo->strokeMask[i] = 0xFF;
                 }
             }
             if (i != 0 && (component->maskLen & 1) == 0) {
                 i--;
-                matchInfo->unk_0x00D[i] &= 0xF0;
-                matchInfo->unk_0x001[i] &= 0xF0;
+                matchInfo->strokeData[i] &= 0xF0;
+                matchInfo->strokeMask[i] &= 0xF0;
             }
             maskI = component->maskLen + 1;
             if (maskI > 8) {
@@ -115,8 +116,8 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
         }
     }
 
-    matchInfo->unk_0x001[0] = matchInfo->unk_0x001[0] & 0x0F;
-    matchInfo->unk_0x00D[0] = matchInfo->unk_0x00D[0] & 0x0F;
+    matchInfo->strokeMask[0] = matchInfo->strokeMask[0] & 0x0F;
+    matchInfo->strokeData[0] = matchInfo->strokeData[0] & 0x0F;
     if (param_3 == 0) {
         local_66 = 0;
         if ((getParam->subLanguage & 0b10000000) != 0 || (getParam->subLanguage & 0b01000000) != 0) {
@@ -134,21 +135,20 @@ ziBool Zi8PrepareMatch(ziGetParam* getParam, ziMatchStructA* matchInfo, ziU8 par
             case 1:
             case 2:
             case 4:
-                matchInfo->unk_0x001[0] |= (ziU8)(local_66 << 4);
-                matchInfo->unk_0x00D[0] |= (ziU8)(local_66 << 4);
+                matchInfo->strokeMask[0] |= (ziU8)(local_66 << 4);
+                matchInfo->strokeData[0] |= (ziU8)(local_66 << 4);
                 break;
         }
     }
-LAB_81485538:
     if (maskI == 0) {
         maskI = 1;
     }
     if (getParam->getMode == ZI8_GET_MODE_UNK_x00 || getParam->getMode == ZI8_GET_MODE_UNK_x10 || getParam->getMode == ZI8_GET_MODE_UNK_x05) {
-        Zi8Memcpy(local_24, matchInfo->unk_0x001, sizeof(matchInfo->unk_0x001));
-        Zi8Memcpy(local_30, matchInfo->unk_0x00D, sizeof(matchInfo->unk_0x00D));
+        Zi8Memcpy(strokeMask, matchInfo->strokeMask, sizeof(matchInfo->strokeMask));
+        Zi8Memcpy(strokeData, matchInfo->strokeData, sizeof(matchInfo->strokeData));
         do {
-            while (local_63 < elCount) {
-                local_4a = getParam->elements[local_63++];
+            while (elementI < elCount) {
+                local_4a = getParam->elements[elementI++];
                 switch (local_4a) {
                     case ZI8_STROKE_CODE_x0:
                         local_64 = 0b0000;
@@ -201,59 +201,63 @@ LAB_81485538:
                     maskI++;
                 }
                 if ((maskI & 1) != 0) {
-                    local_30[maskI >> 1] |= local_64;
+                    strokeData[maskI >> 1] |= local_64;
                     if (local_4a == ZI8_STROKE_CODE_PARTIAL_8) {
-                        local_24[maskI >> 1] |= 0b00001000;
+                        strokeMask[maskI >> 1] |= 0b00001000;
                     } else if (local_4a == ZI8_STROKE_CODE_PARTIAL_4) {
-                        local_24[maskI >> 1] |= 0b00000100;
+                        strokeMask[maskI >> 1] |= 0b00000100;
                     } else if (local_4a != ZI8_STROKE_CODE_BLANK) {
-                        local_24[maskI >> 1] |= 0b00000111;
+                        strokeMask[maskI >> 1] |= 0b00000111;
                     }
                 } else {
-                    local_30[maskI >> 1] |= local_64 << 4;
+                    strokeData[maskI >> 1] |= local_64 << 4;
                     if (local_4a == ZI8_STROKE_CODE_PARTIAL_8) {
-                        local_24[maskI >> 1] |= 0b10000000;
+                        strokeMask[maskI >> 1] |= 0b10000000;
                     } else if (local_4a == ZI8_STROKE_CODE_PARTIAL_4) {
-                        local_24[maskI >> 1] |= 0b01000000;
+                        strokeMask[maskI >> 1] |= 0b01000000;
                     } else if (local_4a != ZI8_STROKE_CODE_BLANK) {
-                        local_24[maskI >> 1] |= 0b01110000;
+                        strokeMask[maskI >> 1] |= 0b01110000;
                     }
                 }
                 maskI++;
             }
             local_67 = maskI;
             for (i = 0; i < 4; i++) {
-                local_3c[i] = local_24[i];
-                local_40[i] = local_30[i];
+                shortStrokeMask[i] = strokeMask[i];
+                shortStrokeData[i] = strokeData[i];
             }
+
+            // Add the stop stroke (0xF) at the end of the short stroke buffers
             if (1 < maskI && maskI < 8) {
                 i = maskI >> 1;
                 if ((maskI & 1) != 0) {
-                    local_3c[i] = local_3c[i] | 0x0F;
-                    local_40[i] = local_40[i] | 0x0F;
+                    shortStrokeMask[i] = shortStrokeMask[i] | 0x0F;
+                    shortStrokeData[i] = shortStrokeData[i] | 0x0F;
                 } else {
-                    local_3c[i] = local_3c[i] | 0xF0;
-                    local_40[i] = local_40[i] | 0xF0;
+                    shortStrokeMask[i] = shortStrokeMask[i] | 0xF0;
+                    shortStrokeData[i] = shortStrokeData[i] | 0xF0;
                 }
             }
 
-            if (matchInfo->unk_0x06C == 0) {
-                Zi8Memcpy(matchInfo->unk_0x001, local_24, sizeof(matchInfo->unk_0x001));
-                Zi8Memcpy(matchInfo->unk_0x00D, local_30, sizeof(matchInfo->unk_0x00D));
-                Zi8Memcpy(matchInfo->unk_0x019, local_3c, sizeof(matchInfo->unk_0x019));
-                Zi8Memcpy(matchInfo->unk_0x01D, local_40, sizeof(matchInfo->unk_0x01D));
+            if (matchInfo->multicharStrokeCount == 0) {
+                Zi8Memcpy(matchInfo->strokeMask, strokeMask, sizeof(matchInfo->strokeMask));
+                Zi8Memcpy(matchInfo->strokeData, strokeData, sizeof(matchInfo->strokeData));
+                Zi8Memcpy(matchInfo->shortStrokeMask, shortStrokeMask, sizeof(matchInfo->shortStrokeMask));
+                Zi8Memcpy(matchInfo->shortStrokeData, shortStrokeData, sizeof(matchInfo->shortStrokeData));
                 matchInfo->maskIdx = local_67;
             }
 
-            Zi8Memcpy(matchInfo->unk_0x06D[matchInfo->unk_0x06C], local_24, sizeof(matchInfo->unk_0x06D[matchInfo->unk_0x06C]));
-            Zi8Memcpy(matchInfo->unk_0x12D[matchInfo->unk_0x06C], local_30, sizeof(matchInfo->unk_0x12D[matchInfo->unk_0x06C]));
-            matchInfo->unk_0x06C++;
+            Zi8Memcpy(matchInfo->multicharStrokeMask[matchInfo->multicharStrokeCount], strokeMask,
+                      sizeof(matchInfo->multicharStrokeMask[matchInfo->multicharStrokeCount]));
+            Zi8Memcpy(matchInfo->multicharStrokeData[matchInfo->multicharStrokeCount], strokeData,
+                      sizeof(matchInfo->multicharStrokeData[matchInfo->multicharStrokeCount]));
+            matchInfo->multicharStrokeCount++;
 
-            if (local_64 == 0xFF && local_63 < elCount && matchInfo->unk_0x06C < 0x10) {
-                Zi8Memset(local_24, 0, sizeof(local_24));
-                Zi8Memset(local_30, 0, sizeof(local_24));
-                local_24[0] = matchInfo->unk_0x001[0] & 0xF0;
-                local_30[0] = matchInfo->unk_0x00D[0] & 0xF0;
+            if (local_64 == (ziU8)-1 && elementI < elCount && matchInfo->multicharStrokeCount < 0x10) {
+                Zi8Memset(strokeMask, 0, sizeof(strokeMask));
+                Zi8Memset(strokeData, 0, sizeof(strokeMask));
+                strokeMask[0] = matchInfo->strokeMask[0] & 0xF0;
+                strokeData[0] = matchInfo->strokeData[0] & 0xF0;
                 maskI = 1;
             } else {
                 return ZI8_TRUE;

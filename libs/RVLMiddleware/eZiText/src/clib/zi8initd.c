@@ -42,7 +42,7 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
     Zi8SetLatinSearchOrder(ZI8_NULL, 0, ZI_WORK);
     ZADP_Zi8SetPDremoveOpt(1, ZI_WORK);
     ZI_WORK->unk_0x17 = 5;
-    ZI_WORK->unk_0x16 = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
+    ZI_WORK->handleCangjie = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
 
     ZI_WORK->pyFuzzyPairs.ziDefault = 1;
     ZI_WORK->zyFuzzyPairs.ziDefault = 1;

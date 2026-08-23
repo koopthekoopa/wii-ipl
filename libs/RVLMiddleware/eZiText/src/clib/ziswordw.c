@@ -7,19 +7,19 @@
 #include <zi8clib/zierror.h>
 
 ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
-    Table0Entry* table0Data = ZI8_NULL;
-    ziU8* table1Data = ZI8_NULL;
-    ziU8 sublistFirstByte = 0;
-    ziU8 remWordsInSublist = 0;
+    Table0Entry* chEntries = ZI8_NULL;
+    ziU8* chAddtlData = ZI8_NULL;
+    ziU8 groupFirstByte = 0;
+    ziU8 remWordGroupLen = 0;
     ziU16 calculatedOrdinal = 0;
     ziU8 latinSearchOrder[8] = {1, 5};
-    Table0Entry* table0Entry;
+    Table0Entry* firstChEntry;
     ziU16* ordinalPtr;
     ziU8* savedLatinSearchOrderList = ZI_WORK->latinSearchOrderList;
     ziU8 savedLatinSearchOrderLen = ZI_WORK->latinSearchOrderLen;
     ziGetCandidatesParam getCandidatesWork = {};
 
-    ziU8* table1Curr;
+    ziU8* addtlDataCurr;
     ziS32 remOrdinals;
     ziS32 i;
     ziGetParam getParam;
@@ -91,7 +91,7 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
         ZI_WORK->latinSearchOrderList = savedLatinSearchOrderList;
         ZI_WORK->latinSearchOrderLen = savedLatinSearchOrderLen;
         if (i != 0) {
-            return 1;
+            return ZI8_TRUE;
         }
     }
 
@@ -115,21 +115,35 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
             return ZI8_FALSE;
     }
 
+    // All single-characters are words
     if (i-- == 1) {
-        return 1;
+        return ZI8_TRUE;
     }
+    // Mark the "final ordinal" bit on the final ordinal
     ordinals[i] |= 0x8000;
-    ZI_WORK->unk_0x16 = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
+    ZI_WORK->handleCangjie = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & ZI8_FORMAT_FLAG_HAS_CANGJIE;
 
-    table0Data = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
-    table0Entry = &table0Data[ordinals[0]];
+    chEntries = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
+    firstChEntry = &chEntries[ordinals[0]];
 
-    table1Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
-    table1Data += GET_TABLE0_ENTRY_TABLE1_OFFS(table0Entry);
+    // Get the additional data for the first ordinal (Cangjie, Strokes, and Multi-character Words)
+    chAddtlData = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
+    chAddtlData += GET_TABLE0_ENTRY_TABLE1_OFFS(firstChEntry);
 
-    table1Curr = table1Data;
-    if (ZI_WORK->unk_0x16 != '\0') {
-        switch (*table1Curr & 7) {
+    addtlDataCurr = chAddtlData;
+
+    // Skip over cangjie information
+    // 3 bits + 5 bits per keypress num (the 3 LSBs of the first byte)
+    // Then, round up to next byte
+    // Format(s):
+    // - _____000
+    // - aaaaa001
+    // - aaaaa010 ___bbbbb
+    // - aaaaa011 cccbbbbb ______cc
+    // - aaaaa100 cccbbbbb _dddddcc
+    // - aaaaa101 cccbbbbb edddddcc ____eeee
+    if (ZI_WORK->handleCangjie != 0) {
+        switch (*addtlDataCurr & 7) {
             case 2:
                 remOrdinals = 2;
                 break;
@@ -144,39 +158,59 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
                 remOrdinals = 1;
                 break;
         }
-        table1Curr += remOrdinals;
+        addtlDataCurr += remOrdinals;
     }
-    if ((*table1Curr & 0x80) != 0) {
-        sublistFirstByte = 0;
-        table1Curr += ((*table1Curr & 0x7f) >> 4) + 1;
+
+    // Skip over the additional stroke information.
+    if ((addtlDataCurr[0] & 0x80) != 0) {
+        groupFirstByte = 0;
+        addtlDataCurr += ((addtlDataCurr[0] & 0x7F) >> 4) + 1;
     } else {
+        // There is no additional stroke information or word information
         return ZI8_FALSE;
     }
 
-    while ((sublistFirstByte & 0x80) == 0) {
-        sublistFirstByte = *table1Curr++;
-        for (remWordsInSublist = sublistFirstByte & 0x0F; remWordsInSublist != 0; remWordsInSublist--) {
+    while ((groupFirstByte & 0x80) == 0) {
+        // Consume the word group config byte
+        // Format: DRRR
+        // D: Done (a flag for this being the final group)
+        // R: Region (mainland, taiwan, hong kong) (ignored here)
+        // L: Length (how many words there are in this group)
+        groupFirstByte = *addtlDataCurr++;
+        for (remWordGroupLen = groupFirstByte & 0x0F; remWordGroupLen != 0; remWordGroupLen--) {
+            // Try to match the ordinals to the stored ordinals in the word data
+            // The last ordinal in the word has its highest bit set (big endian)
             remOrdinals = i;
             ordinalPtr = ordinals;
-            while (0 < remOrdinals) {
-                calculatedOrdinal = ((ziU16)table1Curr[1] << 8) | table1Curr[0];
-                table1Curr += 2;
+            while (remOrdinals > 0) {
+                calculatedOrdinal = ((ziU16)addtlDataCurr[1] << 8) | addtlDataCurr[0];
+                addtlDataCurr += 2;
+
+                // Note that the setting of the high bit on the final ordinal
+                // ensures that this comparison will break if the word ordinal
+                // is final and our ordinal isn't or vice versa.
                 if (calculatedOrdinal != *++ordinalPtr)
                     break;
                 remOrdinals--;
                 if ((calculatedOrdinal & 0x8000) != 0)
                     break;
             }
+
+            // If the entire word matched, it worked!
             if (remOrdinals == 0) {
                 return ZI8_TRUE;
             }
-            if ((calculatedOrdinal & 0x8000) == 0) {
-                table1Curr++;
-                while ((*table1Curr & 0x80) == 0) {
-                    table1Curr += 2;
-                }
-                table1Curr++;
+
+            // Otherwise, if there was more left in the word, consume the
+            // remaining ordinal high bytes until you're at the end of the word
+            if ((calculatedOrdinal & 0x8000) != 0)
+                continue;
+
+            addtlDataCurr++;
+            while ((*addtlDataCurr & 0x80) == 0) {
+                addtlDataCurr += 2;
             }
+            addtlDataCurr++;
         }
     }
     Zi8LogError(0x2BD, ZI_WORK);

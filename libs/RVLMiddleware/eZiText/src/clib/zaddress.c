@@ -73,10 +73,10 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
                 return (ziU32)(tableData[2] | ((tableData[0] << 0x10) | (tableData[1] << 8)));
             }
             case ziTableUnk3: {
-                return tableData[1];  // always 0x80?
+                return tableData[1];  // Always 0x80 (Except for Chinese, which isn't supported on the Wii)
             }
             case ziTableFormatVersion: {
-                return tableData[3];
+                return tableData[3];  // Always 0x00 (Except for Chinese again)
             }
             default: {
                 Zi8ReplaceLastError(0x134, ZI_WORK);

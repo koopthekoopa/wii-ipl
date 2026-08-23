@@ -167,12 +167,12 @@ ziBool Zi8ExactMatchNextChar(Table0Entry* tab0, ziU8 byte0A, ziU8 byte0B, ziU8 b
     return 0;
 }
 
-ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStructA* matchStruct, ziWChar* chOut ZI_NEED_WORK) {
+ziU8 Zi8SecMatchChar(Table0Entry* chEntry, Table2Entry* tab2Entry, ziMatchStructA* matchStruct, ziWChar* chOut ZI_NEED_WORK) {
     ziBool maskIsFull;
 
     ziU8 maskI;
     ziU8 maskBytesRem;
-    ziU8* table1Curr;
+    ziU8* addtlDataCurr;
 
     ziU8 i;
     ziU16 nextidx;
@@ -182,7 +182,7 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
 
     if (matchStruct->unk_0x022 != 0) {
         targetIdx = matchStruct->unk_0x022;
-        nextidx = (ziU16)(tab0Entry->nextIdxHi & 3) << 8 | tab0Entry->nextIdxLo;
+        nextidx = (ziU16)(chEntry->nextIdxHi & 3) << 8 | chEntry->nextIdxLo;
 
         i = 0;
         while (i++ < 6) {
@@ -199,62 +199,64 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
         }
     }
 
-    table1Curr = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
+    addtlDataCurr = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
+    addtlDataCurr += chEntry->tab1OffsLo + (chEntry->tab1OffsMid << 0x08) + ((chEntry->tab1OffsHi & 0x0F) << 0x10);
 
-    table1Curr += (tab0Entry->tab1OffsLo + (tab0Entry->tab1OffsMid << 0x8) + ((tab0Entry->tab1OffsHi & 0x0F) << 0x10));
-    if (ZI_WORK->unk_0x16 != '\0') {
-        switch (*table1Curr & 7) {
+    // Skip over cangjie information
+    if (ZI_WORK->handleCangjie != 0) {
+        switch (*addtlDataCurr & 7) {
             case 2:
-                table1Curr += 2;
+                addtlDataCurr += 2;
                 break;
             case 3:
             case 4:
-                table1Curr += 3;
+                addtlDataCurr += 3;
                 break;
             case 5:
-                table1Curr += 4;
+                addtlDataCurr += 4;
                 break;
             default:
-                table1Curr += 1;
+                addtlDataCurr += 1;
                 break;
         }
     }
 
-    i = *table1Curr;
+    i = addtlDataCurr[0];
     i = (i >> 4) & 7;
     if (i * 2 + 10 < matchStruct->maskIdx) {
         return 0;
     }
     if (matchStruct->maskIdx < 9) {
         if (matchStruct->maskIdx == 8) {
-            if ((*table1Curr & 0x0F) == 0x0F) {
+            // If the additional data is literally just
+            if ((addtlDataCurr[0] & 0x0F) == 0x0F) {
                 maskIsFull = ZI8_TRUE;
             }
         } else if (matchStruct->maskIdx & 1) {
-            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0x0F) == 0x0F) {
+            if ((chEntry->maskBytes[matchStruct->maskIdx >> 1] & 0x0F) == 0x0F) {
                 maskIsFull = ZI8_TRUE;
             }
         } else {
-            if ((tab0Entry->maskBytes[matchStruct->maskIdx >> 1] & 0xF0) == 0xF0) {
+            if ((chEntry->maskBytes[matchStruct->maskIdx >> 1] & 0xF0) == 0xF0) {
                 maskIsFull = ZI8_TRUE;
             }
         }
 
         if (matchStruct->maskIdx > 2) {
             if (matchStruct->maskIdx & 1) {
-                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0 ||
-                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0xF0) {
+                if ((chEntry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0 ||
+                    (chEntry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0xF0) == 0xF0) {
                     return 0;
                 }
             } else {
-                if ((tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0 ||
-                    (tab0Entry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0x0F) {
+                if ((chEntry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0 ||
+                    (chEntry->maskBytes[(matchStruct->maskIdx - 1) >> 1] & 0x0F) == 0x0F) {
                     return 0;
                 }
             }
         }
         if (chOut != ZI8_NULL) {
-            *chOut = ((ziU16)tab0Entry->chHi << 8) + tab0Entry->chLo;
+            *chOut = ((ziU16)chEntry->chHi << 8) + chEntry->chLo;
         }
         if (maskIsFull) {
             return 2;
@@ -263,13 +265,13 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
         }
     } else {
         if ((matchStruct->maskIdx & 1) != 0) {
-            if ((table1Curr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xf0) == 0 ||
-                (table1Curr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xf0) == 0xf0) {
+            if ((addtlDataCurr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xF0) == 0 ||
+                (addtlDataCurr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xF0) == 0xF0) {
                 return 0;
             }
         } else {
-            if ((table1Curr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xf) == 0 ||
-                (table1Curr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0xf) == 0xf) {
+            if ((addtlDataCurr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0x0F) == 0 ||
+                (addtlDataCurr[((matchStruct->maskIdx - 1) >> 1) + -4] & 0x0F) == 0x0F) {
                 return 0;
             }
         }
@@ -281,27 +283,27 @@ ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStru
         }
 
         if (matchStruct->maskIdx & 1) {
-            if ((table1Curr[(matchStruct->maskIdx >> 1) + -4] & 0xf) == 0xf) {
+            if ((addtlDataCurr[(matchStruct->maskIdx >> 1) + -4] & 0x0F) == 0x0F) {
                 maskIsFull = ZI8_TRUE;
             }
         } else {
-            if ((table1Curr[(matchStruct->maskIdx >> 1) + -4] & 0xf0) == 0xf0) {
+            if ((addtlDataCurr[(matchStruct->maskIdx >> 1) + -4] & 0xF0) == 0xF0) {
                 maskIsFull = ZI8_TRUE;
             }
         }
 
         if (!matchStruct->unk_0x000) {
             for (; maskBytesRem != 0;) {
-                if ((*table1Curr & matchStruct->unk_0x001[maskI]) != matchStruct->unk_0x00D[maskI]) {
+                if ((addtlDataCurr[0] & matchStruct->strokeMask[maskI]) != matchStruct->strokeData[maskI]) {
                     return 0;
                 }
                 maskI++;
                 maskBytesRem--;
-                table1Curr++;
+                addtlDataCurr++;
             }
         }
         if (chOut != ZI8_NULL) {
-            *chOut = ((ziU16)tab0Entry->chHi << 8) + tab0Entry->chLo;
+            *chOut = ((ziU16)chEntry->chHi << 8) + chEntry->chLo;
         }
         if (maskIsFull) {
             return 2;
@@ -435,7 +437,7 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
         }
 
         pbVar7 = tab1Data + (currTab0->tab1OffsLo + (currTab0->tab1OffsMid << 0x8) + ((currTab0->tab1OffsHi & 0x0F) << 0x10));
-        if (ZI_WORK->unk_0x16 != '\0') {
+        if (ZI_WORK->handleCangjie != 0) {
             switch (*pbVar7 & 7) {
                 case 2:
                     pbVar7 += 2;
@@ -896,6 +898,8 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     ziU8 elementsUsed;
     ziWChar currElement;
 
+    currElement;
+
     elementsUsed = 0;
     Zi8LogError(0x64, ZI_WORK);
 
@@ -1075,11 +1079,11 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     return elementsUsed;
 }
 
-ziWChar Zi8GetPCode(ziU8* tab34Data, Table0Entry* tab0Entry) {
-    ziU16 tab34Idx;
+ziWChar Zi8GetPCode(ziU8* syllTable, Table0Entry* chInfo) {
+    ziU16 syllTableOff;
 
-    tab34Idx = ((ziU16)tab0Entry->syllIdxHi << 2) | (((ziU16)tab0Entry->syllIdxLo & 0x80) >> 6);
-    return ((ziU16)tab0Entry->tone >> 4 & 7) | tab34Data[tab34Idx] | ((ziU16)tab34Data[tab34Idx + 1] << 8);
+    syllTableOff = ((ziU16)chInfo->syllIdxHi << 2) | (((ziU16)chInfo->syllIdxLo & 0x80) >> 6);
+    return ((ziU16)chInfo->tone >> 4 & 7) | syllTable[syllTableOff] | ((ziU16)syllTable[syllTableOff + 1] << 8);
 }
 
 // - Your sibling can only be explicit if you have a sibling (3 possibilities)

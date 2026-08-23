@@ -3,12 +3,12 @@
 #include <zi8clib/zaddress.h>
 #include <zi8clib/zierror.h>
 
-ziU16 Zi8Uni2Ptr(ziWChar ch, Table0Entry* ptr ZI_NEED_WORK) {
+ziU16 Zi8Uni2Ptr(ziWChar ch, Table0Entry* chEntry ZI_NEED_WORK) {
     ziU16 table0Count;
-    Table0Entry* table0Data;
-    Table0Entry* table0Curr;
-    ziU8* table1Data;
-    ziU8* table1Curr;
+    Table0Entry* chTab;
+    Table0Entry* chCurr;
+    ziU8* chAddtlData;
+    ziU8* addtlDataCurr;
     ziU16 out;
 
     ziU8 chHi;
@@ -21,45 +21,50 @@ ziU16 Zi8Uni2Ptr(ziWChar ch, Table0Entry* ptr ZI_NEED_WORK) {
     chLo = ch;
 
     table0Count = Zi8GetTableCount(ZI8_LANG_ZH, 0, ZI_WORK);
-    table0Data = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
-    table1Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
-    if (!ptr) {
+    chTab = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
+    chAddtlData = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
+    if (!chEntry) {
         for (out = 0; out < 0x40; out++) {
-            if (ch == ZI_WORK->unk_0x20[out]) {
-                out = ZI_WORK->unk_0xA0[out];
-                table0Curr = table0Data + out;
-                if (out < table0Count && chHi == table0Curr->chHi && chLo == table0Curr->chLo) {
-                    table1Curr = table1Data + GET_TABLE0_ENTRY_TABLE1_OFFS(table0Curr);
-                    if (ZI_WORK->unk_0x16 != 0) {
-                        switch (*table1Curr & 7) {
-                            case 2:
-                                table1Curr += 2;
-                                break;
-                            case 3:
-                            case 4:
-                                table1Curr += 3;
-                                break;
-                            case 5:
-                                table1Curr += 4;
-                                break;
-                            default:
-                                table1Curr += 1;
-                                break;
-                        }
-                    }
-                    if ((*table1Curr & 0x80) != 0) {
-                        if (ptr) {
-                            *ptr = *table0Curr;
-                        }
-                        return out;
-                    }
-                }
+            if (ch != ZI_WORK->unk_0x20[out])
+                continue;
+
+            out = ZI_WORK->unk_0xA0[out];
+            chCurr = chTab + out;
+            if (out >= table0Count || chHi != chCurr->chHi || chLo != chCurr->chLo) {
                 break;
             }
+
+            addtlDataCurr = chAddtlData + GET_TABLE0_ENTRY_TABLE1_OFFS(chCurr);
+
+            // Skip over cangjie information
+            if (ZI_WORK->handleCangjie != 0) {
+                switch (addtlDataCurr[0] & 7) {
+                    case 2:
+                        addtlDataCurr += 2;
+                        break;
+                    case 3:
+                    case 4:
+                        addtlDataCurr += 3;
+                        break;
+                    case 5:
+                        addtlDataCurr += 4;
+                        break;
+                    default:
+                        addtlDataCurr += 1;
+                        break;
+                }
+            }
+            if ((addtlDataCurr[0] & 0x80) == 0)
+                break;
+
+            if (chEntry) {
+                *chEntry = *chCurr;
+            }
+            return out;
         }
     }
 
-    table0Curr = table0Data;
+    chCurr = chTab;
     if (ZI_WORK->unk_0x1B18 && (ZI_WORK->unk_0x1B24 == ZI_WORK->unk_0x18)) {
         if (ch >= ZI_WORK->unkRangeALo && ch <= ZI_WORK->unkRangeAHi) {
             out = ch - ZI_WORK->unkRangeALo;
@@ -72,10 +77,10 @@ ziU16 Zi8Uni2Ptr(ziWChar ch, Table0Entry* ptr ZI_NEED_WORK) {
         }
         out = ZI_WORK->unk_0x1B18[out];
         if (out != 0xFFFF) {
-            table0Curr = table0Data + out;
-            if (chHi == table0Curr->chHi && chLo == table0Curr->chLo) {
-                if (ptr) {
-                    *ptr = *table0Curr;
+            chCurr = chTab + out;
+            if (chHi == chCurr->chHi && chLo == chCurr->chLo) {
+                if (chEntry) {
+                    *chEntry = *chCurr;
                 }
                 return out;
             }
@@ -83,13 +88,13 @@ ziU16 Zi8Uni2Ptr(ziWChar ch, Table0Entry* ptr ZI_NEED_WORK) {
         return 0xFFFF;
     } else {
         for (out = 0; out < table0Count; out++) {
-            if (chLo == table0Curr->chLo && chHi == table0Curr->chHi) {
-                if (ptr) {
-                    *ptr = *table0Curr;
+            if (chLo == chCurr->chLo && chHi == chCurr->chHi) {
+                if (chEntry) {
+                    *chEntry = *chCurr;
                 }
                 return out;
             }
-            table0Curr++;
+            chCurr++;
         }
         return 0xFFFF;
     }
