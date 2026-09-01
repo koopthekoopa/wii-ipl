@@ -12,7 +12,7 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
     ziU8 groupFirstByte = 0;
     ziU8 remWordGroupLen = 0;
     ziU16 calculatedOrdinal = 0;
-    ziU8 latinSearchOrder[8] = {1, 5};
+    ziU8 latinSearchOrder[8] = {ZI8_SEARCH_ROM_A, ZI8_SEARCH_ROM_B};
     Table0Entry* firstChEntry;
     ziU16* ordinalPtr;
     ziU8* savedLatinSearchOrderList = ZI_WORK->latinSearchOrderList;
@@ -34,12 +34,12 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
     // If Non-chinese, call GetCandidatesOrCount to get the number of dictionary
     // words that match the input word. If it's nonzero, it is a word
     if (language != ZI8_LANG_ZH) {
-        for (i = 0; word[i] != 0; i = i + 1) {
+        for (i = 0; word[i] != 0; i++) {
             if (word[i] >= PAD_KEY(1) || i == 0x40) {
                 return 0;
             }
         }
-        getCandidatesWork.elementCount = (ziU8)i;
+        getCandidatesWork.elementCount = i;
         getCandidatesWork.unk_0x02 = 1;
         getCandidatesWork.unk_0x04 = word;
         getCandidatesWork.unk_0x10 = 0x40;
@@ -49,43 +49,35 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
         getParam.context = 0x01;
         getParam.getOptions = 0x81;
         getParam.elements = word;
-        getParam.elementCount = (ziU8)i;
-        getParam.currentWord = (ziWChar*)0x0;
-        getParam.wordCharCount = 0x0;
+        getParam.elementCount = i;
+        getParam.currentWord = ZI8_NULL;
+        getParam.wordCharCount = 0;
         getParam.candidates = ordinals;
-        getParam.maxCandidates = 0x1;
+        getParam.maxCandidates = 1;
         getParam.firstCandidate = 0;
         ZI_WORK->latinSearchOrderList = latinSearchOrder;
-        if (ZI_WORK->unk_0x1C == 0x2) {
+        if (ZI_WORK->unk_0x1C == 2) {
             ZI_WORK->latinSearchOrderLen = 0;
-            if ((ZI_WORK->unk_0x09 & 1) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 1;
-            }
-            if ((ZI_WORK->unk_0x09 & 4) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 2;
-            }
-            if ((ZI_WORK->unk_0x09 & 2) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 3;
-            }
-            if ((ZI_WORK->unk_0x09 & 8) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 4;
-            }
-            if ((ZI_WORK->unk_0x09 & 1) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 5;
-            }
-            if ((ZI_WORK->unk_0x09 & 4) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 6;
-            }
-            if ((ZI_WORK->unk_0x09 & 2) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 7;
-            }
-            if ((ZI_WORK->unk_0x09 & 8) != 0) {
-                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = 8;
-            }
-        } else if (ZI_WORK->unk_0x1C != 0x0) {
-            ZI_WORK->latinSearchOrderLen = 0x2;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_ROM)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_ROM_A;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_PUD)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_PUD_A;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_UWD)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_UWD_A;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_OEM)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_OEM_A;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_ROM)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_ROM_B;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_PUD)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_PUD_B;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_UWD)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_UWD_B;
+            if (ZI_WORK->searchFlags & ZI8_SEARCH_FLAG_OEM)
+                latinSearchOrder[ZI_WORK->latinSearchOrderLen++] = ZI8_SEARCH_OEM_B;
+        } else if (ZI_WORK->unk_0x1C != 0) {
+            ZI_WORK->latinSearchOrderLen = 2;
         } else {
-            ZI_WORK->latinSearchOrderLen = 0x1;
+            ZI_WORK->latinSearchOrderLen = 1;
         }
         i = Zi8GetCandidatesOrCount(&getParam, &getCandidatesWork, ZI_WORK);
         ZI_WORK->latinSearchOrderList = savedLatinSearchOrderList;

@@ -9,7 +9,7 @@
 ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
     Zi8Memset(ZI_WORK, 0, sizeof(struct __zi8_work_data_s));
     ZI_WORK->unk_0x08 = 1;
-    ZI_WORK->unk_0x09 = 1;
+    ZI_WORK->searchFlags = ZI8_SEARCH_FLAG_ROM;
     ZI_WORK->maxWordLen = 0xFF;
     ZI_WORK->unk_0x10 = 100;
     ZI_WORK->unk_0x0C = 0xFFFF;
@@ -35,7 +35,7 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
         return ZI8_FALSE;
     }
 
-    ZI_WORK->unk_0x1874 = 0x2D;
+    ZI_WORK->unk_0x1874 = L'-';
     ZI_WORK->unk_0x538 = 0;
     ZI_WORK->unk_0x1F = 0;
     ZI_WORK->unk_0x141A = 0x100;

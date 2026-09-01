@@ -105,8 +105,8 @@ ziU8 Zi8GetFormatVersion(ziU8 lang ZI_NEED_WORK) {
     return Zi8GetTableData(lang, 0, 4, ZI_WORK);
 }
 
-ziU32 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
-    ziU32 count = 0;
+ziU8 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
+    ziU8 count = 0;
 
     str;  // *sob*
 

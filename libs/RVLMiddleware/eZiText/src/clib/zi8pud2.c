@@ -26,26 +26,24 @@ ziS32 ZiGetZHWordSize(ziWChar* chars, ziS32 inputSize) {
     return size;
 }
 
-void Zi8CopyZHSpelling(void* param_1, ziWChar* param_2, ziU16 param_3, int param_4, int param_5) {
+void Zi8CopyZHSpelling(void* in, ziWChar* out, ziU16 outLen, int inLen, int inOffs) {
     int i;
     ziU32 currChAddr;
 
-    if (param_2 == ZI8_NULL)
+    if (out == ZI8_NULL)
         return;
-    if (param_3 == 0)
+    if (outLen == 0)
         return;
-    *param_2 = 0;
-    if (param_4 <= param_5)
+    *out = L'\0';
+    if (inLen <= inOffs)
         return;
 
-    for (i = 0; i < param_4 - param_5 && i < param_3 * 2; i += 2) {
-        currChAddr = (ziU32)param_1 + param_5 + i;
-        *param_2 = *(ziU16*)currChAddr;
-        param_2++;
+    for (i = 0; i < inLen - inOffs && i < outLen * 2; i += 2) {
+        currChAddr = (ziU32)in + inOffs + i;
+        *out = *(ziU16*)currChAddr;
+        out++;
     }
-    *param_2 = L'\0';
-
-    return;
+    *out = L'\0';
 }
 
 ziU8 ZADP_Zi8SetPDremoveOpt(ziU8 newOpt ZI_NEED_WORK) {
@@ -134,14 +132,13 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
 
             if (lang == ZI8_LANG_ZH) {
                 param_1_bytes = (ziU8*)param_1;
-                for (i = 0; i < (int)param_2; i++) {
+                for (i = 0; i < param_2; i++) {
                     if (pbVar7[i] != param_1_bytes[i])
                         goto CONTINUE;
                 }
-                goto LAB_8147fac0;
             } else {
             LAB_8147f9ec:
-                for (i = 0; i < (int)param_2; i++) {
+                for (i = 0; i < param_2; i++) {
                     if (param_1[i] >= PAD_KEY(1) && param_1[i] <= PINYIN_CHAR(0x7F)) {
                         if (param_1[i] != Zi8ConvertUC2Key(pbVar7[i], lang, ZI_WORK))
                             goto CONTINUE;
@@ -154,12 +151,11 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
                 }
             }
 
-        LAB_8147fac0:
             if (local_40 != 0) {
                 ZI_WORK->pudTop = ZI8_NULL;
                 ZI_WORK->pudCurrIdx = 0;
                 ZI_WORK->pudCurrCount = 0;
-                if (*param_1 >= 0xEFF1) {
+                if (*param_1 >= PAD_KEY(1)) {
                     *param_4 = *param_1;
                 } else {
                     *param_4 = Zi8ConvertWC2Key(*param_1, lang, ZI_WORK);
@@ -176,15 +172,13 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
                 }
                 Zi8CopyZHSpelling(pbVar7, param_6, param_7, totalLen, wordLen);
             } else {
-                uVar6 = 0;
-                while (uVar6 < wordLen && uVar6 < param_5) {
+                for (uVar6 = 0; uVar6 < wordLen && uVar6 < param_5; uVar6++) {
                     param_4[uVar6] = Zi8ConvertUC2WC(pbVar7[uVar6], lang, ZI_WORK);
                     if (ZI_WORK->unk_0x31E != 0 && uVar6 >= param_2 && param_4[uVar6] == L' ') {
                         if (param_8 != 0 || uVar6 >= param_2)
                             break;
                         goto CONTINUE;
                     }
-                    uVar6++;
                 }
             }
             ZI_WORK->pudCurrIdx++;

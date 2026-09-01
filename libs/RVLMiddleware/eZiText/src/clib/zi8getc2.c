@@ -59,7 +59,14 @@ ziBool Zi8ZHsetZYfuzzyPairs(ziFuzzyZYPairs pairsList ZI_NEED_WORK) {
     return ZI8_TRUE;
 }
 
-const ziU8 Zi8SOdefaultArray[] = {1, 4, 3, 2, 1, 8, 7, 6, 5, 0};
+// clang-format off
+const ziU8 Zi8SOdefaultArray[] = {
+    ZI8_SEARCH_ROM_A,
+    ZI8_SEARCH_OEM_A, ZI8_SEARCH_UWD_A, ZI8_SEARCH_PUD_A, ZI8_SEARCH_ROM_A,
+    ZI8_SEARCH_OEM_B, ZI8_SEARCH_UWD_B, ZI8_SEARCH_PUD_B, ZI8_SEARCH_ROM_B,
+    ZI8_SEARCH_TERMINATE,
+};
+// clang-format on
 ziBool Zi8SetLatinSearchOrder(ziU8* searchArray, ziU8 searchSize ZI_NEED_WORK) {
     if (searchArray == ZI8_NULL || searchArray[0] == 0) {
         ZI_WORK->latinSearchOrderList = (ziU8*)Zi8SOdefaultArray;

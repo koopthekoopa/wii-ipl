@@ -12,10 +12,11 @@ ziU32 Zi8GetTableSize(ziU8 lang, ziU8 tableIdx ZI_NEED_WORK);
 ziU16 Zi8GetTableCount(ziU8 lang, ziU8 tableIdx ZI_NEED_WORK);
 
 ziU8 Zi8GetFormatVersion(ziU8 lang ZI_NEED_WORK);
-ziU32 Zi8WCharCount(ziWChar* str ZI_NEED_WORK);
+ziU8 Zi8WCharCount(ziWChar* str ZI_NEED_WORK);
 
 #define ZI8_FORMAT_FLAG_HAS_CANGJIE 0x02
 
 #define GET_DICT_CONFIG(LANG, WORK) Zi8GetTableCount(LANG, 0x1F, WORK)
+#define GET_DICT_CFG_FLAG(LANG, WORK, FLAG) (Zi8GetTableCount(LANG, 0x1F, WORK) & FLAG)
 
 #endif  // ZI8_CLIB_ADDRESS_H

@@ -1838,7 +1838,7 @@ FINISH:
     return local_c4;
 }
 
-ziU8 Zi8ZHCheckSpelling(ziWChar* param_1, ziWChar* param_2, ziU8 param_3 ZI_NEED_WORK) {
+ziBool Zi8ZHCheckSpelling(ziWChar* param_1, ziWChar* param_2, ziU8 param_3 ZI_NEED_WORK) {
     int i;
 
     ziBool spellingOk;

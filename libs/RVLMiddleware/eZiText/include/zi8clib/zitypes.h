@@ -377,6 +377,28 @@ enum {
     ZI8_WORD_CASE_TITLE = 0x3,
 };
 
+enum {
+    ZI8_SEARCH_TERMINATE = 0,
+    ZI8_SEARCH_ROM_A = 1,
+    ZI8_SEARCH_PUD_A = 2,
+    ZI8_SEARCH_UWD_A = 3,
+    ZI8_SEARCH_OEM_A = 4,
+    ZI8_SEARCH_ROM_B = 5,
+    ZI8_SEARCH_PUD_B = 6,
+    ZI8_SEARCH_UWD_B = 7,
+    ZI8_SEARCH_OEM_B = 8,
+    ZI8_SEARCH_ROM_C = 9,
+    ZI8_SEARCH_UNK_10 = 10,
+    ZI8_SEARCH_UNK_11 = 11,
+    ZI8_SEARCH_UNK_12 = 12,
+};
+enum {
+    ZI8_SEARCH_FLAG_ROM = 0b0001,
+    ZI8_SEARCH_FLAG_PUD = 0b0100,
+    ZI8_SEARCH_FLAG_UWD = 0b0010,
+    ZI8_SEARCH_FLAG_OEM = 0b1000,
+};
+
 typedef struct {
     ziU8 hi;
     ziU8 lo;
@@ -424,7 +446,7 @@ struct __zi8_work_data_s {
     ziU8 unk_0x01;                              // 0x001
     ziLanguageEntry* langEntries;               // 0x004
     ziU8 unk_0x08;                              // 0x008
-    ziU8 unk_0x09;                              // 0x009
+    ziU8 searchFlags;                           // 0x009
     ziU8 maxWordLen;                            // 0x00A
     ziU16 unk_0x0C;                             // 0x00C
     ziU32 unk_0x10;                             // 0x010
@@ -481,8 +503,8 @@ struct __zi8_work_data_s {
     ziU8* unk_0x1414;                           // 0x1414
     ziU8 latinSearchOrderLen;                   // 0x1418
     ziU16 unk_0x141A;                           // 0x141A
-    ziU8 unk_0x141C;                            // 0x141C
-    ziU8 unk_0x141D;                            // 0x141D
+    ziBool unk_0x141C;                          // 0x141C
+    ziBool unk_0x141D;                          // 0x141D
     ziU8 unk_0x141E;                            // 0x141E
     ziU8 deepestSearched;                       // 0x141F
     ziU8 unk_0x1420[4];                         // 0x1420
@@ -495,13 +517,13 @@ struct __zi8_work_data_s {
     ziU8 unk_0x17EC;                            // 0x17EC
     ziU8* dawgGroupData;                        // 0x17F0
     ziWChar predBuf[0x40];                      // 0x17F4
-    ziU16 unk_0x1874;                           // 0x1874
+    ziWChar unk_0x1874;                         // 0x1874
     ziU8 unk_0x1876;                            // 0x1876
     ziU8 unk_0x1877;                            // 0x1877
     ziU8 unk_0x1878;                            // 0x1878
     ziU8 unk_0x1879;                            // 0x1879
     ziWChar hlBuffer[0x41];                     // 0x187A
-    ziU8 unk_0x18FC;                            // 0x18FC
+    ziBool unk_0x18FC;                          // 0x18FC
     ziWChar hlPrefix[0x41];                     // 0x18FE
     ziU8 hlPrefixLen;                           // 0x1980
     ziU8 unk_0x1981;                            // 0x1981

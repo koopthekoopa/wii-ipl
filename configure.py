@@ -388,8 +388,9 @@ cflags_sdk_except = [
 # Zi8 C Library
 cflags_zi8 = [
     *cflags_base,
-    "-inline off",
     "-opt off",
+    "-inline on,noauto",
+    "-ipa file",
     "-str readonly",
     "-sdata 0",
     "-fp_contract off",
@@ -983,7 +984,7 @@ config.libs = [
             Object(Matching,    "clib/zaddress.c"),
             Object(Matching,    "clib/zconvert.c"),
             Object(Equivalent,  "clib/zi81key.c"),
-            Object(NonMatching, "clib/zi8alpha.c"),
+            Object(Equivalent,  "clib/zi8alpha.c"),
             Object(Matching,    "clib/zi8alts.c"),
             Object(NonMatching, "clib/zi8cgetc.c"),
             Object(Matching,    "clib/zi8cinfo.c"),
