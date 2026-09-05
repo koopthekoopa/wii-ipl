@@ -24,6 +24,8 @@ enum CharInfoHetMode {
     CHAR_INFO_HET_UNK_x11,       // 0x11
 };
 
+extern const ziU8 zi8CangjieCodes[0x20];
+
 ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
 ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);
 ziU8 Zi8GetSInfo(Table0Entry* strokeInfoA, ziU8* strokeInfoB, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK);

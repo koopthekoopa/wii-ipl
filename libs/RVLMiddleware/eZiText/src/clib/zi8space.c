@@ -59,7 +59,7 @@ ziBool Zi8ZHaddSpace(ziWChar* in, ziU8 inLen, ziWChar* out, ziU16 outLen ZI_NEED
             currOut[j] = currIn[j];
         }
         if (currOut[j - 1] != PINYIN_CHAR('`') && (PINYIN_TONE(1) > currOut[j - 1] || currOut[j - 1] > PINYIN_TONE(5))) {
-            currOut[j++] = ZI_WORK->unk_0x1A;
+            currOut[j++] = ZI_WORK->spaceChar;
         }
         currIn = currIn + checkSize;
         remInLen = remInLen - checkSize;

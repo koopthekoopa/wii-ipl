@@ -336,7 +336,7 @@ ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8
     return ZI8_FALSE;
 }
 
-ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2Entry* fullTab2) {
+ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2Entry* fullTab2 ZI_NEED_WORK) {
     ziS32 i;
     ziU16 nextidx;
 
@@ -375,7 +375,7 @@ ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2
 }
 
 ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* tab5Entries, ziU16 tab5Count, ziU8* tab1Data, Table0Entry* currTab0,
-                        ziU16* buf_param_7, ziU16* buf_param_8, ziU16* param_9, Table0Entry** newTab0Out, ziU8* param_11, ziU8 param_12,
+                        ziU16* buf_param_7, ziU16* buf_param_8, ziU16* param_9, Table0Entry** newTab0Out, ziU8** param_11, ziBool checkDupWholeWord,
                         ziU8 param_13, ziU8 param_14, ziU16 param_15, ziU16 param_16, ziU8 param_17, ziU8 param_18, ziU16 tab0Count, ziWChar* chOut,
                         ziU8 param_21 ZI_NEED_WORK) {
     ziBool bVar9;
@@ -392,7 +392,7 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
     param_11;
     param_11;
     param_11;
-    if (*(int*)param_11 != 0)
+    if (*param_11 != ZI8_NULL)
         bVar1 = ZI8_TRUE;
     else
         bVar1 = ZI8_FALSE;
@@ -478,11 +478,11 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
             }
             for (; local_5a != 0; local_5a--) {
                 i = 1;
-                if (bVar1 && (pbVar7 > *(ziU8**)param_11)) {
+                if (bVar1 && (pbVar7 > *param_11)) {
                     bVar1 = ZI8_FALSE;
                 }
                 if (!bVar1) {
-                    *(ziU8**)param_11 = pbVar7;
+                    *param_11 = pbVar7;
                 }
                 do {
                     uVar3 = pbVar7[0] | ((ziU16)pbVar7[1] << 8);
@@ -513,7 +513,7 @@ ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* 
 
                     CONTINUE:
                         if (++i == param_14) {
-                            if (param_12 != 0 && ((param_13 == 0 && (uVar3 & 0x8000) != 0) || (param_13 != 0 && (uVar3 & 0x8000) == 0))) {
+                            if (checkDupWholeWord && ((param_13 == 0 && (uVar3 & 0x8000) != 0) || (param_13 != 0 && (uVar3 & 0x8000) == 0))) {
                                 goto POSITION_A;
                             }
 

@@ -255,6 +255,7 @@ enum {
     ZI8_GET_MODE_UNK_x0A = 0x0A,    // 0x0A
     ZI8_GET_MODE_UNK_x0B = 0x0B,    // 0x0B
     ZI8_GET_MODE_PINYIN_B = 0x0C,   // 0x0C
+    ZI8_GET_MODE_UNK_x0D = 0x0D,    // 0x0D
     ZI8_GET_MODE_UNK_x0E = 0x0E,    // 0x0E
     ZI8_GET_MODE_SHUANGPIN = 0x0F,  // 0x0F
     ZI8_GET_MODE_UNK_x10 = 0x10,    // 0x10
@@ -296,12 +297,8 @@ typedef struct {
     ziBool unk_0x00;    // 0x00
     ziU8 unk_0x01;      // 0x01
     ziU8 unk_0x02;      // 0x02
-    ziU8 unk_0x03;      // 0x03 - Maybe exists
     ziWChar* unk_0x04;  // 0x04
     ziU8 elementCount;  // 0x08
-    ziU8 unk_0x09;      // 0x09 - Maybe exists
-    ziU8 unk_0x0A;      // 0x0A - Maybe exists
-    ziU8 unk_0x0B;      // 0x0B - Maybe exists
     ziS32 maxSize;      // 0x0C
     ziU16 unk_0x10;     // 0x10
     ziU8 unk_0x12;      // 0x12
@@ -309,7 +306,6 @@ typedef struct {
     ziU8 unk_0x14;      // 0x14
     ziU8 unk_0x15;      // 0x15
     ziU8 unk_0x16;      // 0x16
-    ziU8 unk_0x17;      // 0x17 - Maybe exists
 } ziGetCandidatesParam;
 
 typedef struct {
@@ -454,7 +450,7 @@ struct __zi8_work_data_s {
     ziU8 handleCangjie;                         // 0x016
     ziU8 unk_0x17;                              // 0x017
     ziU8 unk_0x18;                              // 0x018
-    ziU16 unk_0x1A;                             // 0x01a
+    ziWChar spaceChar;                          // 0x01A
     ziU8 unk_0x1C;                              // 0x01C
     ziU8 unk_0x1D;                              // 0x01D
     ziU8 wordCase;                              // 0x01E

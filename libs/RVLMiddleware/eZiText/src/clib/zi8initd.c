@@ -13,7 +13,7 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
     ZI_WORK->maxWordLen = 0xFF;
     ZI_WORK->unk_0x10 = 100;
     ZI_WORK->unk_0x0C = 0xFFFF;
-    ZI_WORK->unk_0x1A = 0x20;
+    ZI_WORK->spaceChar = L' ';
     ZI_WORK->wordCase = 0;
     ZI_WORK->unk_0x1B30 = 0;
     ZI_WORK->unk_0x1B3A = 0;

@@ -3,14 +3,16 @@
 
 #include <zi8clib/zitypes.h>
 
-// ziBool Zi8PriMatchNextChar(Table0Entry* currTab0, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
-//                            ziU8 byte3B, ziU16* remainingInOut, Table0Entry** newTab0Out, ziU16* chrOut ZI_NEED_WORK);
-// ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStructA* matchStruct, ziWChar* chOut ZI_NEED_WORK);
-// ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
-//                            ziU8 byte3B, ziU16* remainingInOut, Table2Entry** newTab2Out ZI_NEED_WORK);
-// ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2Entry* fullTab2);
+ziBool Zi8PriMatchNextChar(Table0Entry* currTab0, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
+                           ziU8 byte3B, ziU16* remainingInOut, Table0Entry** newTab0Out, ziU16* chrOut ZI_NEED_WORK);
+ziBool Zi8ExactMatchNextChar(Table0Entry* tab0, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
+                             ziU8 byte3B, ziU16* remainingInOut, Table0Entry** newTab0Out, ziU16* chrOut ZI_NEED_WORK);
+ziU8 Zi8SecMatchChar(Table0Entry* tab0Entry, Table2Entry* tab2Entry, ziMatchStructA* matchStruct, ziWChar* chOut ZI_NEED_WORK);
+ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
+                           ziU8 byte3B, ziU16* remainingInOut, Table2Entry** newTab2Out ZI_NEED_WORK);
+ziBool Zi8SecMatchComp(Table2Entry* tab2Entry, ziMatchStructA* matchData, Table2Entry* fullTab2 ZI_NEED_WORK);
 ziBool Zi8MatchPhonetic(ziU8* tab34Data, Table0Entry* tab0Entries, Table5Entry* tab5Entries, ziU16 tab5Count, ziU8* tab1Data, Table0Entry* currTab0,
-                        ziU16* buf_param_7, ziU16* buf_param_8, ziU16* param_9, Table0Entry** newTab0Out, ziU8* param_11, ziU8 param_12,
+                        ziU16* buf_param_7, ziU16* buf_param_8, ziU16* param_9, Table0Entry** newTab0Out, ziU8** param_11, ziU8 param_12,
                         ziU8 param_13, ziU8 param_14, ziU16 param_15, ziU16 param_16, ziU8 param_17, ziU8 param_18, ziU16 tab0Count, ziWChar* chOut,
                         ziU8 param_21 ZI_NEED_WORK);
 ziU8 Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* phoneticsBuf, ziU8* syllable0Len, ziU16* outA,
@@ -51,6 +53,10 @@ ziWChar Zi8GetPCode(ziU8* table34, Table0Entry* table0Entry);
 
 #define PINYIN_TONE_SHIFT 0
 #define PINYIN_TONE_MASK (0b111 << PINYIN_TONE_SHIFT)
+
+#define PHONETIC_PINYIN(INITIAL, FINAL, TONE) (((INITIAL) << PINYIN_INITIAL_SHIFT) | ((FINAL) << PINYIN_FINAL_SHIFT) | ((TONE) << PINYIN_TONE_SHIFT))
+#define PHONETIC_ZHUYIN(INITIAL, MEDIAL, RIME, TONE)                                                                                                 \
+    (((INITIAL) << PINYIN_INITIAL_SHIFT) | (PINYIN_FINAL(MEDIAL, RIME) << PINYIN_FINAL_SHIFT) | ((TONE) << PINYIN_TONE_SHIFT))
 
 #define INITIAL_NONE 0b000001
 #define INITIAL_D 0b000010

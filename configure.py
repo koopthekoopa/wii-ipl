@@ -986,7 +986,7 @@ config.libs = [
             Object(Equivalent,  "clib/zi81key.c"),
             Object(Equivalent,  "clib/zi8alpha.c"),
             Object(Matching,    "clib/zi8alts.c"),
-            Object(NonMatching, "clib/zi8cgetc.c"),
+            Object(NonMatching, "clib/zi8cgetc.c", extra_cflags=["-sdata 8"]),
             Object(Matching,    "clib/zi8cinfo.c"),
             Object(Matching,    "clib/zi8copy.c"),
             Object(Matching,    "clib/zi8dawg.c"),
