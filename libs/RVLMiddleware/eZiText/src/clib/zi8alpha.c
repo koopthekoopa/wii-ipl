@@ -15,7 +15,7 @@
 #include <zi8clib/zoemdata.h>
 
 ziBool Zi8SetParentalControls(ziU8 level ZI_NEED_WORK) {
-    Zi8LogError(0x2C9, ZI_WORK);
+    Zi8LogError(713, ZI_WORK);
     return ZI8_FALSE;
 }
 
@@ -35,15 +35,15 @@ ziBool Zi8SetHighlightedWordW(ziWChar* word, ziU8 language, ziU8 subLanguage ZI_
     ziS32 wordLen;
     ziS32 i;
 
-    for (wordLen = 0; word[wordLen] != 0; wordLen++) {
+    for (wordLen = 0; word[wordLen] != L'\0'; wordLen++) {
     }
     if (wordLen >= 0x40) {
-        Zi8LogError(0x131, ZI_WORK);
+        Zi8LogError(305, ZI_WORK);
         return ZI8_FALSE;
     }
 
-    if (wordLen == 1 && PAD_KEY(1) <= *word && *word <= PAD_KEY(0x20)) {
-        Zi8LogError(0x640, ZI_WORK);
+    if (wordLen == 1 && PAD_KEY(1) <= *word && *word <= PAD_KEY(32)) {
+        Zi8LogError(1600, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -74,7 +74,7 @@ ziBool Zi8SetHighlightedWordW(ziWChar* word, ziU8 language, ziU8 subLanguage ZI_
     for (i = 0; i <= wordLen; i++) {
         ZI_WORK->hlBuffer[i] = word[i];
     }
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return ZI8_TRUE;
 }
 
@@ -417,7 +417,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
     if (ZI_WORK->unk_0x1D != 0)
         bVar1 = ZI8_TRUE;
 
-    if (getParam->elementCount != 0 && ZI_WORK->unk_0x1F != 0 && !bVar7 && !bVar8) {
+    if (getParam->elementCount != 0 && ZI_WORK->caseInsensitive != 0 && !bVar7 && !bVar8) {
         for (j = i = ZI8_FALSE; j < getParam->elementCount; j++) {
             normalizedElementsBuf[j] = getParam->elements[j];
             if (PAD_KEY(1) <= getParam->elements[j] && getParam->elements[j] <= PINYIN_CHAR(0x7F)) {
@@ -1310,9 +1310,13 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                             }
                         }
                     }
-                LAB_81468c6c: {}
+                LAB_81468c6c:
+                    {
+                    }
                 } while (lsoI != 0);
-            LAB_81468c78: {}
+            LAB_81468c78:
+                {
+                }
             }
             if (local_284 == 0 && !bVar12 && getParam->firstCandidate == 0 && getParam->elementCount == 1 &&
                 !GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, 0x40) && PAD_KEY(1) <= getParam->elements[0] &&
@@ -1358,7 +1362,9 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                 searchStates[ZI8_SEARCH_OEM_A] = 0;
             }
 
-        LAB_81466e34: {}
+        LAB_81466e34:
+            {
+            }
         }
 
         lang = ZI_WORK->unk_0x1983;
@@ -1559,7 +1565,7 @@ LAB_81469704:
             local_244--;
         }
     }
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return local_284;
 }
 

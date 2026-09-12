@@ -126,9 +126,9 @@ ziBool Zi8NewMatchPhonetic(ziGetParam* getParam, Table0Entry* chTab, Table5Entry
                            ziBool checkDupWholeWord, ziBool useBitset, ziBool isPinyin, ziU8* param_20, ziU8* __param_21, ziU8 param_22,
                            ziWChar* candidatesOut ZI_NEED_WORK);
 
-ziWChar ziTones[4] = {0x2CA, 0x2C7, 0x2CB, 0x2D9};  // {L'ˊ', L'ˇ', L'ˋ', L'˙'};
-ziWChar ziPuncts[4] = {L'，', L'。', L'？', L'！'};
-ziWChar zi8tones[4];
+const ziWChar ziTones[4] = {0x2CA, 0x2C7, 0x2CB, 0x2D9};       // {L'ˊ', L'ˇ', L'ˋ', L'˙'};
+const ziWChar ziPuncts[4] = {0xFF0C, 0x3002, 0xFF1F, 0xFF01};  // {L'，', L'。', L'？', L'！'};
+const ziWChar zi8tones[4];
 ziU32 zi8InternalGetZH(ziGetParam* getParam, ziGetCandidatesParam* getCandParam ZI_NEED_WORK) {
     ziMatchStructA local_208 = {};
 
@@ -768,7 +768,7 @@ ziU32 zi8InternalGetZH(ziGetParam* getParam, ziGetCandidatesParam* getCandParam 
         }
         if ((getParam->context & 0x10) != 0) {
             if (local_424 == ZI8_NULL) {
-                Zi8LogError(0x162, ZI_WORK);
+                Zi8LogError(354, ZI_WORK);
                 return 0;
             }
             local_483 = 1;
@@ -1816,7 +1816,9 @@ ziU32 zi8InternalGetZH(ziGetParam* getParam, ziGetCandidatesParam* getCandParam 
                         if (local_479 >= getParam->maxCandidates)
                             goto LAB_81474748;
                     }
-                LAB_814701d8: {}
+                LAB_814701d8:
+                    {
+                    }
                 }
             }
             currTab0 = tab0Entries;
@@ -2171,7 +2173,9 @@ LAB_81470db0:
                 goto LAB_81474748;
         }
 
-    LAB_814710c4: {}
+    LAB_814710c4:
+        {
+        }
     }
     if (bVar21) {
         bVar21 = ZI8_FALSE;

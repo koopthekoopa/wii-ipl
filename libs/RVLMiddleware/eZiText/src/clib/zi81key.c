@@ -793,7 +793,7 @@ ziU32 Zi8Get1KeyPressSpelling(ziGetParam* getParam, ziGetCandidatesParam* param_
             savedLatinSearchOrderList = ZI_WORK->latinSearchOrderList;
             savedLatinSearchOrderLen = ZI_WORK->latinSearchOrderLen;
             zVar5 = ZI8_FALSE;
-            savedUnk_0x1F = ZI_WORK->unk_0x1F;
+            savedUnk_0x1F = ZI_WORK->caseInsensitive;
             Zi8Memset(&modifiedGetParam, 0, sizeof(modifiedGetParam));
             modifiedGetParam.getMode = 0x00;
             modifiedGetParam.subLanguage = 0x80;
@@ -874,11 +874,11 @@ ziU32 Zi8Get1KeyPressSpelling(ziGetParam* getParam, ziGetCandidatesParam* param_
             if ((getParam->subLanguage & 0x07) != 0 || (getParam->subLanguage & 0x40) != 0 || (getParam->subLanguage & 0x20) != 0) {
                 ZI_WORK->unk_0x1B16 = 1;
             }
-            ZI_WORK->unk_0x1F = 0;
+            ZI_WORK->caseInsensitive = 0;
             ZI_WORK->unk_0x1D = 1;
             local_74 = _Zi8GetCandidates(&modifiedGetParam, ZI_WORK);
             ZI_WORK->unk_0x1D = 0;
-            ZI_WORK->unk_0x1F = savedUnk_0x1F;
+            ZI_WORK->caseInsensitive = savedUnk_0x1F;
             ZI_WORK->latinSearchOrderList = savedLatinSearchOrderList;
             ZI_WORK->latinSearchOrderLen = savedLatinSearchOrderLen;
             getParam->count = modifiedGetParam.count;

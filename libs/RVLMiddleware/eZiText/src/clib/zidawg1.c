@@ -187,7 +187,7 @@ ziU8* ZiDAWGGetGraphInfo(ziDAWGCtx* ctx, ziDAWGGraphInfo* currNode, ziU16* keys)
     currNode++;
     depth = 0;
     while (depth < 2 && *keys != 0) {
-        if (PAD_KEY(1) <= *keys && *keys <= PAD_KEY(0x20)) {
+        if (PAD_KEY(1) <= *keys && *keys <= PAD_KEY(32)) {
             while (currNode < childrenEnd && *keys != GET_DAWG_GRAPH_INFO_CHAR(currNode)) {
                 if (*keys == GET_DAWG_GRAPH_INFO_CHAR(currNode))
                     break;

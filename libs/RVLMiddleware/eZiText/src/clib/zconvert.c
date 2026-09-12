@@ -31,43 +31,43 @@ ziWChar Zi8ConvertUC2WC(ziChar ch, ziU8 language ZI_NEED_WORK) {
     ziU8* offsetTable;
 
     if (ch == '\0') {
-        Zi8LogError(0x133, ZI_WORK);
-        return 0;
+        Zi8LogError(307, ZI_WORK);
+        return L'\0';
     }
     if (Zi8GetTableCount(language, 6, ZI_WORK) != 0) {
         table = (ziU8*)Zi8GetTableAddress(language, 6, ZI_WORK);
         if (!table) {
-            Zi8LogError(0x6a4, ZI_WORK);
-            return 0;
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_UC2WC, ZI_WORK);
+            return L'\0';
         }
 
         offsetTable = table;
         tableStart = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
         tableEnd = ZI_LOAD_U16_FROM_TABLE(offsetTable, 1);
         if (ch < tableStart || ch > tableEnd) {
-            Zi8LogError(0x132, ZI_WORK);
-            return 0;
+            Zi8LogError(306, ZI_WORK);
+            return L'\0';
         }
 
         offsetTable += (ch - tableStart) * 2 + 8;
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(100, ZI_WORK);
         return ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-    }
+    } else {
+        cvrtTable = &Zi8CvrtTables.uc2wc;
+        if (!cvrtTable) {
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_UC2WC, ZI_WORK);
+            return L'\0';
+        }
+        if (ch < cvrtTable->chrStart || ch > cvrtTable->chrEnd) {
+            Zi8LogError(306, ZI_WORK);
+            return L'\0';
+        }
 
-    cvrtTable = &Zi8CvrtTables.uc2wc;
-    if (!cvrtTable) {
-        Zi8LogError(0x6A4, ZI_WORK);
-        return 0;
-    }
-    if (ch < cvrtTable->chrStart || ch > cvrtTable->chrEnd) {
-        Zi8LogError(0x132, ZI_WORK);
-        return 0;
-    }
+        cvrtTableCvrtData = (ziWChar*)cvrtTable->convData;
+        Zi8LogError(100, ZI_WORK);
 
-    cvrtTableCvrtData = (ziWChar*)cvrtTable->convData;
-    Zi8LogError(0x64, ZI_WORK);
-
-    return cvrtTableCvrtData[ch - cvrtTable->chrStart];
+        return cvrtTableCvrtData[ch - cvrtTable->chrStart];
+    }
 }
 
 ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
@@ -83,15 +83,15 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
 
     ziU16 i;
 
-    if (ch == '\0') {
-        Zi8LogError(0x133, ZI_WORK);
-        return 0;
+    if (ch == L'\0') {
+        Zi8LogError(307, ZI_WORK);
+        return '\0';
     }
     if (Zi8GetTableCount(language, 7, ZI_WORK) != 0) {
         table = (ziU8*)Zi8GetTableAddress(language, 7, ZI_WORK);
         if (!table) {
-            Zi8LogError(0x6AE, ZI_WORK);
-            return 0;
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_WC2UC, ZI_WORK);
+            return '\0';
         }
 
         offsetTable = table;
@@ -106,39 +106,39 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
             }
             offsetTableBase = ZI_LOAD_U16_FROM_TABLE(offsetTable, 3);
             if (tableStart == tableEnd) {
-                Zi8LogError(0x64, ZI_WORK);
+                Zi8LogError(100, ZI_WORK);
                 return offsetTableBase;
             }
 
             offsetTable = (table + offsetTableBase + ch - tableStart + 8);
-            Zi8LogError(0x64, ZI_WORK);
+            Zi8LogError(100, ZI_WORK);
             return *offsetTable;
         }
-        Zi8LogError(0x6C2, ZI_WORK);
-        return 0;
-    }
-
-    cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.wc2uc.convData;
-    if (!cvrtTableCvrtData) {
-        Zi8LogError(0x6AE, ZI_WORK);
-        return 0;
-    }
-    tableCount = Zi8CvrtTables.wc2uc.chrStart;
-    for (i = 0; i < tableCount; i++) {
-        if (ch < cvrtTableCvrtData[i].chrStart || ch > cvrtTableCvrtData[i].chrEnd) {
-            continue;
+        Zi8LogError(ZI8_ERR_CONVERT_NOT_FOUND, ZI_WORK);
+        return '\0';
+    } else {
+        cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.wc2uc.convData;
+        if (!cvrtTableCvrtData) {
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_WC2UC, ZI_WORK);
+            return '\0';
         }
+        tableCount = Zi8CvrtTables.wc2uc.chrStart;
+        for (i = 0; i < tableCount; i++) {
+            if (ch < cvrtTableCvrtData[i].chrStart || ch > cvrtTableCvrtData[i].chrEnd) {
+                continue;
+            }
 
-        Zi8LogError(0x64, ZI_WORK);
-        if (cvrtTableCvrtData[i].chrStart == cvrtTableCvrtData[i].chrEnd) {
-            return (ziU8)(ziU32)cvrtTableCvrtData[i].convData;
+            Zi8LogError(100, ZI_WORK);
+            if (cvrtTableCvrtData[i].chrStart == cvrtTableCvrtData[i].chrEnd) {
+                return (ziU8)(ziU32)cvrtTableCvrtData[i].convData;
+            }
+
+            convData = (ziU8*)cvrtTableCvrtData[i].convData;
+            return convData[ch - cvrtTableCvrtData[i].chrStart];
         }
-
-        convData = (ziU8*)cvrtTableCvrtData[i].convData;
-        return convData[ch - cvrtTableCvrtData[i].chrStart];
+        Zi8LogError(ZI8_ERR_CONVERT_NOT_FOUND, ZI_WORK);
+        return '\0';
     }
-    Zi8LogError(0x6C2, ZI_WORK);
-    return 0;
 }
 
 ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
@@ -160,7 +160,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     loopResult = 0;
 
     if (ch == '\0') {
-        Zi8LogError(0x133, ZI_WORK);
+        Zi8LogError(307, ZI_WORK);
         return 0;
     }
     if (ZI_WORK->usrKeyLyts[language] != 0) {
@@ -169,7 +169,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     if (Zi8GetTableCount(language, 8, ZI_WORK) != 0) {
         table = (ziU8*)Zi8GetTableAddress(language, 8, ZI_WORK);
         if (!table) {
-            Zi8LogError(0x6B8, ZI_WORK);
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_UC2KEY, ZI_WORK);
             return 0;
         }
 
@@ -196,7 +196,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     } else {
         cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.uc2key.convData;
         if (!cvrtTableCvrtData) {
-            Zi8LogError(0x6B8, ZI_WORK);
+            Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_UC2KEY, ZI_WORK);
             return 0;
         }
         tableCount = Zi8CvrtTables.uc2key.chrStart;
@@ -216,10 +216,10 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
         }
     }
     if (loopResult == 0) {
-        Zi8LogError(0x6C2, ZI_WORK);
+        Zi8LogError(ZI8_ERR_CONVERT_NOT_FOUND, ZI_WORK);
         return PAD_KEY(1);
     } else {
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     }
     return loopResult;
 }

@@ -5,9 +5,9 @@
 ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
     ziU8 i;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     if (ZI_WORK->langEntries == ZI8_NULL) {
-        Zi8ReplaceLastError(0x578, ZI_WORK);
+        Zi8ReplaceLastError(1400, ZI_WORK);
         return 0;
     }
 
@@ -25,10 +25,10 @@ ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
         }
     }
 
-    if (ZI_WORK->langEntries[i].language != 0) {
+    if (ZI_WORK->langEntries[i].language != ZI8_LANG_NONE) {
         return i + 1;
     } else {
-        Zi8ReplaceLastError(0x582, ZI_WORK);
+        Zi8ReplaceLastError(1410, ZI_WORK);
         return 0;
     }
 }
@@ -49,7 +49,7 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
     ziU8* tableData;
     volatile ziU32 tableAddrOffset;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
 
     langIdx = Zi8LangSupported(lang, ZI_WORK);
 
@@ -79,12 +79,12 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
                 return tableData[3];  // Always 0x00 (Except for Chinese again)
             }
             default: {
-                Zi8ReplaceLastError(0x134, ZI_WORK);
+                Zi8ReplaceLastError(308, ZI_WORK);
                 return 0;
             }
         }
     } else {
-        Zi8ReplaceLastError(0x258, ZI_WORK);
+        Zi8ReplaceLastError(600, ZI_WORK);
         return 0;
     }
 }
@@ -110,10 +110,10 @@ ziU8 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
 
     str;  // *sob*
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
 
     if (str == ZI8_NULL) {
-        Zi8ReplaceLastError(0x12D, ZI_WORK);
+        Zi8ReplaceLastError(301, ZI_WORK);
         return 0;
     }
 

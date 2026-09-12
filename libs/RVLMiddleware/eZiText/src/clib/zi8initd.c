@@ -27,17 +27,17 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
     ZI_WORK->langEntries = data;
 
     if (ZI_WORK->langEntries == ZI8_NULL) {
-        Zi8LogError(0x578, ZI_WORK);
+        Zi8LogError(1400, ZI_WORK);
         return ZI8_FALSE;
     }
     if (ZI_WORK->langEntries->language == ZI8_LANG_NONE) {
-        Zi8LogError(0x582, ZI_WORK);
+        Zi8LogError(1410, ZI_WORK);
         return ZI8_FALSE;
     }
 
     ZI_WORK->unk_0x1874 = L'-';
     ZI_WORK->unk_0x538 = 0;
-    ZI_WORK->unk_0x1F = 0;
+    ZI_WORK->caseInsensitive = ZI8_FALSE;
     ZI_WORK->unk_0x141A = 0x100;
     Zi8SetLatinSearchOrder(ZI8_NULL, 0, ZI_WORK);
     ZADP_Zi8SetPDremoveOpt(1, ZI_WORK);
@@ -51,7 +51,7 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
 
     Zi8SetParentalControls(2, ZI_WORK);
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return ZI8_TRUE;
 }
 

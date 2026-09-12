@@ -53,7 +53,7 @@ ziU8 ZADP_Zi8SetPDremoveOpt(ziU8 newOpt ZI_NEED_WORK) {
     oldOpt = ZI_WORK->pdRemoveOpt;
     ZI_WORK->pdRemoveOpt = newOpt;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return oldOpt;
 }
 
@@ -77,7 +77,7 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
     __extra_work = ZI_WORK;
     local_40 = 0;
     if (ZI_WORK->pudTopIdx > 0x10 || ZI_WORK->pudTopIdx == 0 || ZI_WORK->pudStack[ZI_WORK->pudTopIdx - 1] == ZI8_NULL) {
-        Zi8LogError(0x4B0, ZI_WORK);
+        Zi8LogError(1200, ZI_WORK);
         return 0;
     }
 
@@ -95,7 +95,7 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
             pzVar1++;
         }
         if (i >= stackTop->offsLo) {
-            Zi8LogError(0x4F6, ZI_WORK);
+            Zi8LogError(1270, ZI_WORK);
             return 0;
         }
         ZI_WORK->pudCurrCount = ((ziU16)pzVar1->countHi << 8) + (ziU16)pzVar1->countLo;
@@ -105,7 +105,7 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
     while (1) {
         pbVar7 = ZI_WORK->pudTop;
         if (pbVar7 == ZI8_NULL) {
-            Zi8LogError(0x4B3, ZI_WORK);
+            Zi8LogError(1203, ZI_WORK);
             return 0;
         }
 
@@ -145,7 +145,7 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
                     } else {
                         local_52 = Zi8ConvertUC2WC(pbVar7[i], lang, ZI_WORK);
                         if (local_52 != param_1[i] &&
-                            (ZI_WORK->unk_0x1F == 0 || Zi8ChangeCharCase(0, &local_52, lang, ZI_WORK) == 0 || local_52 != param_1[i]))
+                            (ZI_WORK->caseInsensitive == 0 || Zi8ChangeCharCase(0, &local_52, lang, ZI_WORK) == 0 || local_52 != param_1[i]))
                             goto CONTINUE;
                     }
                 }
@@ -183,7 +183,7 @@ ziU8 Zi8MatchPUDdata_ZHS(ziU16* param_1, ziU8 param_2, ziU8 lang, ziU16* param_4
             }
             ZI_WORK->pudCurrIdx++;
             ZI_WORK->pudTop = pbVar7 + totalLen;
-            Zi8LogError(0x64, ZI_WORK);
+            Zi8LogError(100, ZI_WORK);
             return uVar6;
         }
         if (param_2 != 1 || param_8 == 0 || param_9 != 0) {

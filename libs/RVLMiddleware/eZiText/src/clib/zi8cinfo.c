@@ -5,7 +5,12 @@
 #include <zi8clib/zi8misc.h>
 #include <zi8clib/zierror.h>
 
-const ziU8 zi8CangjieCodes[0x20] = {
+// #define ZI8_ERR_KEY_ERR_BASE 330
+// #define ZI8_ERR_SIGNATURE_UNK_A (ZI8_ERR_SIGNATURE_BASE + 0)
+// #define ZI8_ERR_SIGNATURE_UNK_B (ZI8_ERR_SIGNATURE_BASE + 1)
+// #define ZI8_ERR_SIGNATURE_UNK_C (ZI8_ERR_SIGNATURE_BASE + 2)
+
+const ziU8 zi8CangjieCodes[] = {
     0x01, 0x02, 0x03, 0x05, 0x06, 0x07, 0x09, 0x0A, 0x0B, 0x0D, 0x0E, 0x0F, 0x11,
     0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x19, 0x1A, 0x1B, 0x1D, 0x1E, 0x1F,
 };
@@ -19,12 +24,12 @@ ziU8 Zi8GetCJInfo(ziU8* cangjieData, ziWChar* charInfoBuffer, ziU8 maxInfoBufSiz
     ZI_WORK;
 
     ZI_WORK->handleCangjie = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 0x02;
-    if (ZI_WORK->handleCangjie == 0) {
-        Zi8LogError(0x8FC, ZI_WORK);
+    if (!ZI_WORK->handleCangjie) {
+        Zi8LogError(2300, ZI_WORK);
         return 0;
     }
     if (maxInfoBufSize < 6) {
-        Zi8LogError(0x322, ZI_WORK);
+        Zi8LogError(ZI8_ERR_BUFFER_TOO_SMALL, ZI_WORK);
         return 0;
     }
 
@@ -34,19 +39,19 @@ ziU8 Zi8GetCJInfo(ziU8* cangjieData, ziWChar* charInfoBuffer, ziU8 maxInfoBufSiz
     for (i = 0; i < count; i++) {
         part = value & 0x1F;
         value >>= 5;
-        for (j = 0; j < 0x19; j++) {
+        for (j = 0; j < 25; j++) {
             if (zi8CangjieCodes[j] == part)
                 break;
         }
-        if (j >= 0x19) {
-            Zi8LogError(0x26D, ZI_WORK);
+        if (j >= 25) {
+            Zi8LogError(ZI8_ERR_CH_INFO_CJ_INVALID_CHAR, ZI_WORK);
             return 0;
         }
         charInfoBuffer[i] = j + 'A';
     }
 
     charInfoBuffer[i] = L'\0';
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return i;
 }
 
@@ -55,11 +60,11 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
     ziU8 infoLen = 0;
 
     if (maxInfoBufSize < 8) {
-        Zi8LogError(0x322, ZI_WORK);
+        Zi8LogError(ZI8_ERR_BUFFER_TOO_SMALL, ZI_WORK);
         return 0;
     }
-    if (ch == 0) {
-        Zi8LogError(0x276, ZI_WORK);
+    if (ch == L'\0') {
+        Zi8LogError(ZI8_ERR_CH_INFO_PY_PHONETIC_NULL, ZI_WORK);
         return 0;
     }
 
@@ -143,7 +148,7 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
                 break;
 
             default:
-                Zi8LogError(0x277, ZI_WORK);
+                Zi8LogError(ZI8_ERR_CH_INFO_PY_PHONETIC_BAD_INITIAL, ZI_WORK);
                 return 0;
         }
         infoLen++;
@@ -304,7 +309,7 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
                 break;
 
             default:
-                Zi8LogError(0x278, ZI_WORK);
+                Zi8LogError(ZI8_ERR_CH_INFO_PY_PHONETIC_BAD_FINAL, ZI_WORK);
                 return 0;
         }
         infoLen++;
@@ -326,8 +331,8 @@ ziU8 Zi8GetPInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
             charInfoBuffer[infoLen++] = PINYIN_TONE(5);
             break;
     }
-    charInfoBuffer[infoLen] = 0;
-    Zi8LogError(100, ZI_WORK);
+    charInfoBuffer[infoLen] = L'\0';
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return infoLen;
 }
 ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK) {
@@ -335,11 +340,11 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
     ziU8 infoLen = 0;
 
     if (maxInfoBufSize < 5) {
-        Zi8LogError(0x322, ZI_WORK);
+        Zi8LogError(ZI8_ERR_BUFFER_TOO_SMALL, ZI_WORK);
         return 0;
     }
     if (ch == 0) {
-        Zi8LogError(0x280, ZI_WORK);
+        Zi8LogError(ZI8_ERR_CH_INFO_ZY_PHONETIC_NULL, ZI_WORK);
         return 0;
     }
 
@@ -415,7 +420,7 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
             break;
 
         default:
-            Zi8LogError(0x281, ZI_WORK);
+            Zi8LogError(ZI8_ERR_CH_INFO_ZY_PHONETIC_BAD_INITIAL, ZI_WORK);
             return 0;
     }
 
@@ -564,7 +569,7 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
             break;
 
         default:
-            Zi8LogError(0x282, ZI_WORK);
+            Zi8LogError(ZI8_ERR_CH_INFO_ZY_PHONETIC_BAD_FINAL, ZI_WORK);
             return 0;
     }
 
@@ -585,12 +590,12 @@ ziU8 Zi8GetZInfo(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEE
             charInfoBuffer[infoLen++] = PINYIN_TONE(5);
             break;
     }
-    charInfoBuffer[infoLen] = 0;
-    Zi8LogError(0x64, ZI_WORK);
+    charInfoBuffer[infoLen] = L'\0';
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return infoLen;
 }
 
-ziU16 zi8StrokeCode(ziU32 stroke ZI_NEED_WORK) {
+ziWChar zi8StrokeCode(ziU32 stroke ZI_NEED_WORK) {
     switch (stroke) {
         case 0x0:
             return ZI8_STROKE_CODE_x0;
@@ -613,8 +618,8 @@ ziU16 zi8StrokeCode(ziU32 stroke ZI_NEED_WORK) {
         case 0xB:
             return ZI8_STROKE_CODE_xB;
     }
-    Zi8LogError(0x14A, ZI_WORK);
-    return 0;
+    Zi8LogError(ZI8_ERR_KEY_ERR_STROKE, ZI_WORK);
+    return L'\0';
 }
 ziU8 Zi8GetSInfo(Table0Entry* chInfo, ziU8* extendedInfo, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize ZI_NEED_WORK) {
     ziS32 i;
@@ -623,9 +628,9 @@ ziU8 Zi8GetSInfo(Table0Entry* chInfo, ziU8* extendedInfo, ziWChar* charInfoBuffe
     ziU8 offset;
 
     offset = 0;
-    Zi8LogError(0x64, ZI_WORK);
-    if (maxInfoBufSize <= 0x17) {
-        Zi8ReplaceLastError(0x322, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
+    if (maxInfoBufSize <= 23) {
+        Zi8ReplaceLastError(ZI8_ERR_BUFFER_TOO_SMALL, ZI_WORK);
         return 0;
     }
 
@@ -664,13 +669,13 @@ ziU8 Zi8GetSInfo(Table0Entry* chInfo, ziU8* extendedInfo, ziWChar* charInfoBuffe
 }
 
 // Pinyin pad layout
-// %--------------------%
+// %------+------+------%
 // | .,?ˉ | ABCˊ | DEFˇ |
-// %--------------------%
+// %------+------+------%
 // | GHIˋ | JKL• | MNO  |
-// %--------------------%
+// %------+------+------%
 // | PQRS | TUV  | WXYZ |
-// %--------------------%
+// %------+------+------%
 ziU16 Zi81KeyPYinfo(ziWChar ch ZI_NEED_WORK) {
     switch (ch) {
         case PINYIN_CHAR('a'):
@@ -745,22 +750,22 @@ ziU16 Zi81KeyPYinfo(ziWChar ch ZI_NEED_WORK) {
             return PAD_KEY(5);
 
         default:
-            Zi8LogError(0x14B, ZI_WORK);
+            Zi8LogError(ZI8_ERR_KEY_ERR_PINYIN, ZI_WORK);
             break;
     }
     return ch;
 }
 
 // Bopomofo pad layout (there's no fullwidth acute accent or caron)
-// ％－－－－－－－－－－－－－－－－－－－－－－－％
-// ｜　ㄅㄆㄇㄈ￣　｜　ㄉㄊㄋㄌ②　｜　ㄍㄎㄏ③　　｜
-// ％－－－－－－－－－－－－－－－－－－－－－－－％
-// ｜　ㄐㄑㄒ｀　　｜　ㄓㄔㄕㄖ・　｜　ㄗㄘㄙ　　　｜
-// ％－－－－－－－－－－－－－－－－－－－－－－－％
-// ｜　ㄚㄛㄜㄝ　　｜　ㄞㄟㄠㄡ　　｜　ㄢㄣㄤㄥㄦ　｜
-// ％－－－－－－－－－－－－－－－－－－－－－－－％
-// ｜　　　　　　　｜　ㄧㄨㄩ　　　｜　　　　　　　｜
-// ％－－－－－－－－－－－－－－－－－－－－－－－％
+// %－－－－－－－+－－－－－－－+－－－－－－－%
+// |　ㄅㄆㄇㄈ￣　|　ㄉㄊㄋㄌ②　|　ㄍㄎㄏ③　　|
+// %－－－－－－－+－－－－－－－+－－－－－－－%
+// |　ㄐㄑㄒ｀　　|　ㄓㄔㄕㄖ・　|　ㄗㄘㄙ　　　|
+// %－－－－－－－+－－－－－－－+－－－－－－－%
+// |　ㄚㄛㄜㄝ　　|　ㄞㄟㄠㄡ　　|　ㄢㄣㄤㄥㄦ　|
+// %－－－－－－－+－－－－－－－+－－－－－－－%
+// |　　　　　　　|　ㄧㄨㄩ　　　|　　　　　　　|
+// %－－－－－－－+－－－－－－－+－－－－－－－%
 ziU16 Zi81KeyZYinfo(ziWChar ch ZI_NEED_WORK) {
     switch (ch) {
         case BPMF_CHAR(BPMF_CHAR_INITIAL_B):
@@ -859,7 +864,7 @@ ziU16 Zi81KeyZYinfo(ziWChar ch ZI_NEED_WORK) {
             return PAD_KEY(5);
 
         default:
-            Zi8LogError(0x14C, ZI_WORK);
+            Zi8LogError(ZI8_ERR_KEY_ERR_ZHUYIN, ZI_WORK);
             break;
     }
     return ch;
@@ -888,11 +893,10 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
     ziS32 j;
     ziU16 table5Rem;
 
-    ziU8 chHi;
-    ziU8 chLo;
+    ziU8 chHi, chLo;
 
     table34Data = 0;
-    if (!charInfoBuffer || maxInfoBufSize == 0) {
+    if (charInfoBuffer == ZI8_NULL || maxInfoBufSize == 0) {
         Zi8LogError(300, ZI_WORK);
         return 0;
     }
@@ -905,12 +909,12 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
             tableCount = 0;
             tableData = 0;
         }
-        if (hetMode == CHAR_INFO_HET_PINYIN_KB) {
+        if (hetMode == CHAR_INFO_HET_PY_KB) {
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 3, ZI_WORK);
         } else {
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 4, ZI_WORK);
         }
-        if (hetMode == CHAR_INFO_HET_PINYIN_KB || hetMode == CHAR_INFO_HET_BOPOMOFO_KB) {
+        if (hetMode == CHAR_INFO_HET_PY_KB || hetMode == CHAR_INFO_HET_ZY_KB) {
             if (tableCount <= Zi8GetTableCount(ZI8_LANG_ZH, 8, ZI_WORK)) {
                 chHi = (ch >> 8) & 0xFF;
                 chLo = ch;
@@ -919,25 +923,25 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
                         ord = GET_TABLE19_ENTRY_TABLE34_IDX(&tableData->tables->t19);
                         code = table34Data[ord] + (ziU16)((ziU16)table34Data[ord + 1] << 8) + (tableData->tables->t19.codeOffs & 0xFFFF);
 
-                        if (hetMode == CHAR_INFO_HET_PINYIN_KB) {
+                        if (hetMode == CHAR_INFO_HET_PY_KB) {
                             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
                         } else {
                             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
                         }
                     FINISH:
-                        if (hetMode == CHAR_INFO_HET_UNK_x11) {
+                        if (hetMode == CHAR_INFO_HET_WBH) {
                             for (j = 0; j < scratchDataLen; j++) {
                                 switch (charInfoBuffer[j]) {
-                                    case 0xEF03:
-                                    case 0xEF05:
-                                    case 0xEF06:
-                                    case 0xEF08:
-                                        charInfoBuffer[j] = 0xEF0A;
+                                    case ZI8_STROKE_CODE_x4:
+                                    case ZI8_STROKE_CODE_x5:
+                                    case ZI8_STROKE_CODE_x6:
+                                    case ZI8_STROKE_CODE_x7:
+                                        charInfoBuffer[j] = ZI8_STROKE_CODE_PARTIAL_4;
                                         break;
                                 }
                             }
                         }
-                        Zi8LogError(100, ZI_WORK);
+                        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                         return scratchDataLen;
                     }
                     i++;
@@ -955,8 +959,8 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
     tableData = (TableEntry*)Zi8GetTableAddress(ZI8_LANG_ZH, 1, ZI_WORK);
     tableData += GET_TABLE0_ENTRY_TABLE1_OFFS(chEntry);
     ZI_WORK->handleCangjie = Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) & 2;
-    if (ZI_WORK->handleCangjie != 0 && hetMode != CHAR_INFO_HET_UNK_x07 && hetMode != CHAR_INFO_HET_UNK_x0A && hetMode != CHAR_INFO_HET_UNK_x08 &&
-        hetMode != CHAR_INFO_HET_UNK_x09) {
+    if (ZI_WORK->handleCangjie != 0 && hetMode != CHAR_INFO_HET_CJ_A && hetMode != CHAR_INFO_HET_CJ_SIMP_B && hetMode != CHAR_INFO_HET_CJ_B &&
+        hetMode != CHAR_INFO_HET_CJ_SIMP_A) {
         switch (tableData->raw[0] & 7) {
             case 2:
                 tableData += 2;
@@ -974,39 +978,43 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         }
     }
     switch (hetMode) {
-        case CHAR_INFO_HET_UNK_x07:
-        case CHAR_INFO_HET_UNK_x08:
-        case CHAR_INFO_HET_UNK_x09:
-        case CHAR_INFO_HET_UNK_x0A:
+        case CHAR_INFO_HET_CJ_A:
+        case CHAR_INFO_HET_CJ_B:
+        case CHAR_INFO_HET_CJ_SIMP_A:
+        case CHAR_INFO_HET_CJ_SIMP_B:
             scratchDataLen = Zi8GetCJInfo(tableData->raw, charInfoBuffer, maxInfoBufSize, ZI_WORK);
-            if ((hetMode == CHAR_INFO_HET_UNK_x09 || hetMode == CHAR_INFO_HET_UNK_x0A) && scratchDataLen > 2) {
+            if ((hetMode == CHAR_INFO_HET_CJ_SIMP_A || hetMode == CHAR_INFO_HET_CJ_SIMP_B) && scratchDataLen > 2) {
                 charInfoBuffer[1] = charInfoBuffer[scratchDataLen - 1];
                 charInfoBuffer[2] = L'\0';
                 scratchDataLen = 2;
             }
             break;
-        case CHAR_INFO_HET_UNK_x00:
-        case CHAR_INFO_HET_UNK_x10:
-        case CHAR_INFO_HET_UNK_x11:
+
+        case CHAR_INFO_HET_STROKE_A:
+        case CHAR_INFO_HET_STROKE_B:
+        case CHAR_INFO_HET_WBH:
             scratchDataLen = Zi8GetSInfo(chEntry, tableData->raw, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
-        case CHAR_INFO_HET_PINYIN_KB:
-        case CHAR_INFO_HET_PINYIN_PAD:
+
+        case CHAR_INFO_HET_PY_KB:
+        case CHAR_INFO_HET_PY_PAD:
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 3, ZI_WORK);
             code = Zi8GetPCode(table34Data, chEntry);
             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
-        case CHAR_INFO_HET_BOPOMOFO_KB:
-        case CHAR_INFO_HET_BOPOMOFO_PAD:
+
+        case CHAR_INFO_HET_ZY_KB:
+        case CHAR_INFO_HET_ZY_PAD:
             table34Data = (ziU8*)Zi8GetTableAddress(ZI8_LANG_ZH, 4, ZI_WORK);
             code = Zi8GetPCode(table34Data, chEntry);
             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
             break;
+
         default:
             scratchDataLen = 0;
             break;
     }
-    if (elementCount == 0 || (chEntry->maskBytes[0] & 0x80) == 0 || (hetMode != CHAR_INFO_HET_PINYIN_PAD && hetMode != CHAR_INFO_HET_BOPOMOFO_PAD))
+    if (elementCount == 0 || (chEntry->maskBytes[0] & 0x80) == 0 || (hetMode != CHAR_INFO_HET_PY_PAD && hetMode != CHAR_INFO_HET_ZY_PAD))
         goto FINISH;
     table5Data = (Table5Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 5, ZI_WORK);
     table5Rem = Zi8GetTableCount(ZI8_LANG_ZH, 5, ZI_WORK);
@@ -1023,7 +1031,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
             for (i = 0; i < scratchDataLen; i++) {
                 if (i == elementCount)
                     break;
-                if (hetMode == CHAR_INFO_HET_PINYIN_PAD) {
+                if (hetMode == CHAR_INFO_HET_PY_PAD) {
                     if (elements[i] != Zi81KeyPYinfo(charInfoBuffer[i], ZI_WORK)) {
                         isOkToFinish = 0;
                         break;
@@ -1048,7 +1056,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
         table5Rem--;
         table5Data++;
 
-        if (hetMode == CHAR_INFO_HET_PINYIN_PAD) {
+        if (hetMode == CHAR_INFO_HET_PY_PAD) {
             scratchDataLen = Zi8GetPInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);
         } else {
             scratchDataLen = Zi8GetZInfo(code, charInfoBuffer, maxInfoBufSize, ZI_WORK);

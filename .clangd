@@ -5,3 +5,10 @@ CompileFlags:
   Add: [
     "-Wno-c++11-extensions",
   ]
+---
+If:
+  PathMatch: libs/RVLMiddleware/eZiText/.*
+Documentation:
+  CommentFormat: Doxygen
+Hover:
+  ShowAKA: false

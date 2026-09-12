@@ -352,14 +352,14 @@ typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziP
 enum {
     ZI8_STROKE_CODE_BLANK = 0xEF00,
 
-    ZI8_STROKE_CODE_x0 = 0xEF02,  // Press N (Nà)
-    ZI8_STROKE_CODE_x1 = 0xEF04,  // Hori H (Héng)
-    ZI8_STROKE_CODE_x2 = 0xEF01,  // Vert S (Shù)
-    ZI8_STROKE_CODE_x3 = 0xEF07,  // Throw P (Piě)
-    ZI8_STROKE_CODE_x4 = 0xEF06,  // Vert-Hori SZ (Shù Zhé)
-    ZI8_STROKE_CODE_x5 = 0xEF03,  // CwCurve-Hook WG (Wān Gōu)
-    ZI8_STROKE_CODE_x6 = 0xEF05,  // Hori-Hook HG (Héng Gōu)
-    ZI8_STROKE_CODE_x7 = 0xEF08,  // Hori-Press-Hook HXG (Héng Xié Gōu)
+    ZI8_STROKE_CODE_x0 = 0xEF02,  // Press N (Nà) (丶)
+    ZI8_STROKE_CODE_x1 = 0xEF04,  // Hori H (Héng) (一)
+    ZI8_STROKE_CODE_x2 = 0xEF01,  // Vert S (Shù) (丨)
+    ZI8_STROKE_CODE_x3 = 0xEF07,  // Throw P (Piě) (丿)
+    ZI8_STROKE_CODE_x4 = 0xEF06,  // Vert-Hori SZ (Shù Zhé) (㇗)
+    ZI8_STROKE_CODE_x5 = 0xEF03,  // CwCurve-Hook WG (Wān Gōu) (㇁)
+    ZI8_STROKE_CODE_x6 = 0xEF05,  // Hori-Hook HG (Héng Gōu) (㇖)
+    ZI8_STROKE_CODE_x7 = 0xEF08,  // Hori-Press-Hook HXG (Héng Xié Gōu) (㇠)
     ZI8_STROKE_CODE_x8 = 0xEF02,  // Press N (Nà)
     ZI8_STROKE_CODE_xB = 0xEF07,  // Throw P (Piě)
 
@@ -395,16 +395,22 @@ enum {
     ZI8_SEARCH_FLAG_OEM = 0b1000,
 };
 
+typedef enum {
+    ZI8_MATCH_STATE_BEGIN = 0,
+    ZI8_MATCH_STATE_WORKING = 1,
+    ZI8_MATCH_STATE_DONE = 2,
+} Zi8MatchState;
+
 typedef struct {
     ziU8 hi;
     ziU8 lo;
 } ziDAWGWCharData;
 
 typedef struct {
-    ziU8* node;      // 0x0
-    ziU32 charAttr;  // 0x4 - Key: 8, UC: 8, WC: 16
-    ziU16 unk_0x8;   // 0x8
-    ziU8* unk_0xC;   // 0xC
+    ziU8* node;       // 0x0
+    ziU32 charAttr;   // 0x4 - Key: 8, UC: 8, WC: 16
+    ziWChar unk_0x8;  // 0x8
+    ziU8* unk_0xC;    // 0xC
 } ziDAWGCtxEntry;
 
 typedef struct {
@@ -454,7 +460,7 @@ struct __zi8_work_data_s {
     ziU8 unk_0x1C;                              // 0x01C
     ziU8 unk_0x1D;                              // 0x01D
     ziU8 wordCase;                              // 0x01E
-    ziU8 unk_0x1F;                              // 0x01F
+    ziBool caseInsensitive;                     // 0x01F
     ziU16 unk_0x20[0x40];                       // 0x020
     ziU16 unk_0xA0[0x40];                       // 0x0A0
     ziU8 unk_0x120;                             // 0x120

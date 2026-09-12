@@ -14,6 +14,9 @@
 #include <zi8clib/zikorean.h>
 #include <zi8clib/zkokeyp.h>
 
+#define ZI8_TABLE_DATASIG_ALPHA 3
+#define ZI8_TABLE_DATASIG_CHINESE 30
+
 const ziFuzzyPYPairs Zi8PYdefaultFuzzyPairs = {
     ZI8_FALSE,  // ziDefault    NOLINT
     ZI8_TRUE,   // cANDch       NOLINT
@@ -91,23 +94,23 @@ ziU16 Zi8GetDataSignature(ziChar* sigOut, ziU16 sigOutLen, ziU8 language ZI_NEED
 
     if (language == ZI8_LANG_ZH) {
         if (Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) < 8) {
-            Zi8LogError(0x26F, ZI_WORK);
+            Zi8LogError(623, ZI_WORK);
             return 0;
         }
-        tabInfo = 0x1E;
+        tabInfo = ZI8_TABLE_DATASIG_CHINESE;
     } else {
-        tabInfo = 0x03;
+        tabInfo = ZI8_TABLE_DATASIG_ALPHA;
     }
 
     dataSig = (ziChar*)Zi8GetTableAddress(language, tabInfo, ZI_WORK);
     tabInfo = Zi8GetTableCount(language, tabInfo, ZI_WORK);
     if (tabInfo == 0 || tabInfo > sigOutLen) {
-        Zi8LogError(0x961, ZI_WORK);
+        Zi8LogError(2401, ZI_WORK);
         return 0;
     } else {
         Zi8Memcpy(sigOut, dataSig, tabInfo);
         sigOut[tabInfo] = '\0';
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(100, ZI_WORK);
     }
     return tabInfo;
 }
@@ -160,7 +163,7 @@ ziBool Zi8AlphaSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
 
     ZI_WORK;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     getParam->count = 0;
     sigPartLen = Zi8GetDataSignature(dataSig, 0x20, getParam->language, ZI_WORK);
     if (sigPartLen != 0 && getParam->elementCount <= sigPartLen) {
@@ -177,7 +180,7 @@ ziBool Zi8AlphaSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
             p2ndSig = ZI8_NULL;
             sigPartLen = 1;
         } else {
-            Zi8ReplaceLastError(0x1F4, ZI_WORK);
+            Zi8ReplaceLastError(ZI8_ERR_SIGNATURE_UNK_A, ZI_WORK);
             return ZI8_FALSE;
         }
     } else if (sig1stPartLen != 0) {
@@ -188,7 +191,7 @@ ziBool Zi8AlphaSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
         sigPartLen = 1;
     }
     if (getParam->firstCandidate >= sigPartLen) {
-        Zi8ReplaceLastError(0x1F5, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_SIGNATURE_UNK_B, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -261,7 +264,7 @@ ziBool Zi8ZhSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
 
     pSigOut = getParam->candidates;
     pSigUC = ZI8_NULL;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     getParam->count = 0;
     sig1stPartLen = Zi8GetDataSignature(p1stSig, 0x20, getParam->language, ZI_WORK);
     sig2ndPartLen = Zi8GetEngineSignature(p2ndSig, ZI_WORK);
@@ -276,7 +279,7 @@ ziBool Zi8ZhSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
         sigCurrPartLen = sig1stPartLen + sig2ndPartLen;
     }
     if (getParam->firstCandidate >= sigCurrPartLen) {
-        Zi8ReplaceLastError(0x1F6, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_SIGNATURE_UNK_C, ZI_WORK);
         return ZI8_FALSE;
     }
     sigCurrPartLen = sigCurrPartLen - getParam->firstCandidate;
@@ -294,7 +297,7 @@ ziBool Zi8ZhSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
     if ((getParam->context & 0x10) != 0) {
         if (getParam->firstCandidate != 0 || sig1stPartLen == 0) {
             if (getParam->firstCandidate != 0 && sig1stPartLen == 0) {
-                Zi8ReplaceLastError(0x1F4, ZI_WORK);
+                Zi8ReplaceLastError(ZI8_ERR_SIGNATURE_UNK_A, ZI_WORK);
                 return 0;
             }
             pSigUC = p2ndSig;
@@ -335,7 +338,7 @@ ziBool Zi8ZhSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
         pSigUC = p2ndSig;
         if (getParam->firstCandidate >= sig1stPartLen) {
             sigCurrPartLen = sig1stPartLen + (sig2ndPartLen - getParam->firstCandidate);
-            pSigUC += sigCurrPartLen - sig2ndPartLen;
+            pSigUC += sig2ndPartLen - sigCurrPartLen;
         } else {
             sigCurrPartLen = sig2ndPartLen;
         }
@@ -394,7 +397,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
             if (getCandParam->unk_0x00 != 0) {
                 getParam->count = 0;
             }
-            Zi8LogError(0x64, ZI_WORK);
+            Zi8LogError(100, ZI_WORK);
             return result;
         }
 
@@ -436,7 +439,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
                                     if (getCandParam->unk_0x00 != 0) {
                                         getParam->count = 0;
                                     }
-                                    Zi8LogError(0x64, ZI_WORK);
+                                    Zi8LogError(100, ZI_WORK);
                                     return result;
                                 }
                             default:
@@ -514,7 +517,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
                                     if (getCandParam->unk_0x00 != 0) {
                                         getParam->count = 0;
                                     }
-                                    Zi8LogError(0x64, ZI_WORK);
+                                    Zi8LogError(100, ZI_WORK);
                                     return result;
                                 }
                             default:
@@ -548,7 +551,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
     getCandParam->unk_0x01 = ZI_WORK->maxWordLen;
     ZI_WORK->maxWordLen = 0xFF;
     if (Zi8LangSupported(getParam->language, ZI_WORK) == 0) {
-        Zi8LogError(0x163, ZI_WORK);
+        Zi8LogError(355, ZI_WORK);
         return 0;
     }
 
@@ -566,7 +569,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
         code = 0x64;
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->getOptions & 0b10111111) == 4 && getParam->elementCount != 0 &&
                Zi8IsCharacter(*getParam->elements, ZI_WORK)) {
-        charInfoSize = Zi8GetCharInfo(*getParam->elements, charInfoBuffer, 0x10, CHAR_INFO_HET_PINYIN_KB, ZI_WORK);
+        charInfoSize = Zi8GetCharInfo(*getParam->elements, charInfoBuffer, 0x10, CHAR_INFO_HET_PY_KB, ZI_WORK);
         if (charInfoSize == 0) {
             getParam->count = getParam->letters = getParam->wordCandidates = 0;
             result = 0;
@@ -674,7 +677,7 @@ ziBool Zi8IsDupWChar(ziWChar ch ZI_NEED_WORK) {
         pDupWordBuf[0] = 2;
         pDupWordBuf[1] = ch;
         ZI_WORK->dupWordBufsUsed = 1;
-        Zi8LogError(0x8FD, ZI_WORK);
+        Zi8LogError(2301, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -691,7 +694,7 @@ ziBool Zi8IsDupWChar(ziWChar ch ZI_NEED_WORK) {
         pDupWordBuf[1] = ch;
         ZI_WORK->dupWordBufsUsed = 1;
     }
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return isDup;
 }
 
@@ -757,7 +760,7 @@ ziBool Zi8IsDupWordW(ziWChar* word, ziU8 wordLen ZI_NEED_WORK) {
     }
     ZI_WORK->dupWordBufs[dwbRealIdx][wordI] = L'\0';
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(100, ZI_WORK);
     return isDup;
 }
 

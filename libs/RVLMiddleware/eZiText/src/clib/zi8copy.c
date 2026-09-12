@@ -6,35 +6,35 @@ ziU8 Zi8CopyWordListW(ziWChar* destination, ziU8 maxCharacters, ziWChar* wordLis
 
     while (ZI8_TRUE) {
         if (index == 0) {
-            if (*wordList == 0) {
-                Zi8LogError(0x132, ZI_WORK);
+            if (*wordList == L'\0') {
+                Zi8LogError(306, ZI_WORK);
                 return 0;
             }
 
             while (ZI8_TRUE) {
                 *destination = *wordList++;
                 if (++charCount >= maxCharacters) {
-                    Zi8LogError(0x320, ZI_WORK);
+                    Zi8LogError(800, ZI_WORK);
                     return charCount;
                 }
 
-                if (*destination++ == 0) {
-                    Zi8LogError(0x64, ZI_WORK);
+                if (*destination++ == L'\0') {
+                    Zi8LogError(100, ZI_WORK);
                     return charCount;
                 }
             }
         }
 
-        if (*wordList == 0) {
-            Zi8LogError(0x132, ZI_WORK);
+        if (*wordList == L'\0') {
+            Zi8LogError(306, ZI_WORK);
             return 0;
         }
 
-        while (*wordList++ != 0) {
+        while (*wordList++ != L'\0') {
         }
 
         if (index-- == 0) {
-            Zi8LogError(0x132, ZI_WORK);
+            Zi8LogError(306, ZI_WORK);
             return 0;
         }
     }

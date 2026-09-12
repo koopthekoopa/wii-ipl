@@ -6,6 +6,22 @@
 #include <zi8clib/zidawg1.h>
 #include <zi8clib/zierror.h>
 
+#define ZI8_TABLE_DAWG_DATA_BASE 0
+#define ZI8_TABLE_DAWG_INFO_BASE (ZI8_TABLE_DAWG_DATA_BASE + 1)
+#define ZI8_TABLE_DAWG_DATA_SUFFIX 12
+#define ZI8_TABLE_DAWG_INFO_SUFFIX (ZI8_TABLE_DAWG_DATA_SUFFIX + 1)
+#define ZI8_TABLE_DAWG_DATA_PREFIX 14
+#define ZI8_TABLE_DAWG_INFO_PREFIX (ZI8_TABLE_DAWG_DATA_PREFIX + 1)
+#define ZI8_TABLE_DAWG_DATA_FINNISH_SUFFIX 16 /* Finnish moment! */
+#define ZI8_TABLE_DAWG_INFO_FINNISH_SUFFIX (ZI8_TABLE_DAWG_DATA_FINNISH_SUFFIX + 1)
+#define ZI8_TABLE_DAWG_DATA_SYLL_ALT 24
+#define ZI8_TABLE_DAWG_INFO_SYLL_ALT (ZI8_TABLE_DAWG_DATA_SYLL_ALT + 1)
+#define ZI8_TABLE_DAWG_DATA_SYLL_COM 26
+#define ZI8_TABLE_DAWG_INFO_SYLL_COM (ZI8_TABLE_DAWG_DATA_SYLL_COM + 1)
+
+#define ZI8_TABLE_DAWG_GROUPS 11
+#define ZI8_TABLE_DAWG_OUTER_GROUPS 28
+
 ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, ziU16 outLen, ziU8 param_6, ziBool cont, ziU8 dataTab, ziU8 infoTab,
                       ziU8 param_10, ziU8* lenOut, ziDAWGCtx* dawgCtx, ziU8* param_13 ZI_NEED_WORK) {
     ziU16 noneFoundYet;
@@ -24,10 +40,10 @@ ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
     if (lang != dawgCtx->language || dataTab != dawgCtx->graphDataTable) {
         nodeStack[0].unk_0x8 = 0;
     }
-    if (inLen == 1 && param_6 != 0 && dataTab == 0x0E)
+    if (inLen == 1 && param_6 != 0 && dataTab == ZI8_TABLE_DAWG_DATA_PREFIX)
         goto RETURN;
 
-    if (cont) {
+    if (cont != ZI8_MATCH_STATE_BEGIN) {
         if (nodeStack[dawgCtx->stackLen - 1].node == dawgCtx->unk_0x338) {
             goto RETURN;
         }
@@ -40,12 +56,12 @@ ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
             param_10 = 0;
         }
     } else {
-        if (ZI_WORK->unk_0x141E != 0 && dataTab == 0xC && Zi8GetTableSize(lang, ZI_WORK->unk_0x141E, ZI_WORK) != 0) {
+        if (ZI_WORK->unk_0x141E != 0 && dataTab == ZI8_TABLE_DAWG_DATA_SUFFIX && Zi8GetTableSize(lang, ZI_WORK->unk_0x141E, ZI_WORK) != 0) {
             graphData = (ziU8*)Zi8GetTableAddress(lang, ZI_WORK->unk_0x141E, ZI_WORK);
             infoTab = ZI_WORK->unk_0x141E + 1;
         } else {
             if (Zi8GetTableSize(lang, dataTab, ZI_WORK) == 0) {
-                Zi8LogError(0x961, ZI_WORK);
+                Zi8LogError(ZI8_ERR_DAWG_MISSING_TABLE, ZI_WORK);
                 goto RETURN;
             }
             graphData = (ziU8*)Zi8GetTableAddress(lang, dataTab, ZI_WORK);
@@ -70,12 +86,12 @@ ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
                 i = 0;
                 while (i < (inLen < 2 ? inLen : 2)) {
                     keys[i] = Zi8ConvertWC2Key(textIn[i], lang, ZI_WORK);
-                    if (keys[i] == 0) {
+                    if (keys[i] == L'\0') {
                         keys[i] = textIn[i];
                     }
                     i++;
                 }
-                keys[i] = 0;
+                keys[i] = L'\0';
                 infoTableData = (ziU8*)Zi8GetTableAddress(lang, infoTab, ZI_WORK);
                 dawgCtx->padKeys = (ziDAWGWCharData*)(infoTableData + 2);
                 infoTableData += dawgCtx->chrCount * 2 + 2;
@@ -85,7 +101,7 @@ ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
                 dawgCtx->unk_0x338 = ZI8_NULL;
                 dawgCtx->padKeys = ZI8_NULL;
             }
-            nodeStack->unk_0x8 = 0;
+            nodeStack->unk_0x8 = L'\0';
             if (nodeStack->node == (ziU8*)ZI8_NULL) {
                 goto RETURN;
             }
@@ -118,7 +134,7 @@ ziU8 Zi8MatchROMdata0(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
             if (topNode->unk_0x8 != textIn[dawgCtx->stackLen - 1]) {
                 topNode->unk_0x8 = textIn[dawgCtx->stackLen - 1];
                 topNode->unk_0xC = nodeStack->node;
-                nodeStack[dawgCtx->stackLen].unk_0x8 = 0;
+                nodeStack[dawgCtx->stackLen].unk_0x8 = L'\0';
             }
             if (lenOut != ZI8_NULL && *lenOut < dawgCtx->stackLen) {
                 if (ZiDAWGgetEOWattribute(topNode->node)) {
@@ -178,11 +194,11 @@ RETURN:
 }
 
 ziU8* NextDawgGroup(ziU8* groupData, ziU8 language ZI_NEED_WORK) {
-    if (Zi8GetTableSize(language, 0x1C, ZI_WORK) != 0) {
+    if (Zi8GetTableSize(language, ZI8_TABLE_DAWG_OUTER_GROUPS, ZI_WORK) != 0) {
         if (groupData == ZI8_NULL) {
-            groupData = (ziU8*)Zi8GetTableAddress(language, 0x1C, ZI_WORK);
+            groupData = (ziU8*)Zi8GetTableAddress(language, ZI8_TABLE_DAWG_OUTER_GROUPS, ZI_WORK);
             if (groupData == ZI8_NULL) {
-                Zi8LogError(0x962, ZI_WORK);
+                Zi8LogError(ZI8_ERR_DAWG_GROUP_TABLE_NULL, ZI_WORK);
                 return ZI8_NULL;
             }
             if (ZI_WORK->unk_0x141D == '\0') {
@@ -195,12 +211,12 @@ ziU8* NextDawgGroup(ziU8* groupData, ziU8 language ZI_NEED_WORK) {
 
         groupData += 2;
         if (groupData[0] == 0xFF) {
-            Zi8LogError(0x963, ZI_WORK);
+            Zi8LogError(ZI8_ERR_DAWG_NO_NEXT_GROUP, ZI_WORK);
             return ZI8_NULL;
         }
         return groupData;
     } else {
-        Zi8LogError(0x961, ZI_WORK);
+        Zi8LogError(ZI8_ERR_DAWG_MISSING_TABLE, ZI_WORK);
         return ZI8_NULL;
     }
 }
@@ -211,10 +227,10 @@ ziU8 Zi8MatchROMdata1(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
     ziU8* groupDataAddr;
 
     matchResult = 0;
-    if (cont == 0) {
+    if (cont == ZI8_MATCH_STATE_BEGIN) {
         ZI_WORK->dawgGroups = dawgGroupData;
-        if (ZI_WORK->dawgGroups == ZI8_NULL && Zi8GetTableSize(lang, 0x0B, ZI_WORK) != 0) {
-            ZI_WORK->dawgGroups = (groupDataAddr = (ziU8*)Zi8GetTableAddress(lang, 0x0B, ZI_WORK));
+        if (ZI_WORK->dawgGroups == ZI8_NULL && Zi8GetTableSize(lang, ZI8_TABLE_DAWG_GROUPS, ZI_WORK) != 0) {
+            ZI_WORK->dawgGroups = (groupDataAddr = (ziU8*)Zi8GetTableAddress(lang, ZI8_TABLE_DAWG_GROUPS, ZI_WORK));
         }
         if (ZI_WORK->dawgGroups != ZI8_NULL) {
             while (*ZI_WORK->dawgGroups != 0xFF && graphIdx != 0) {
@@ -236,7 +252,7 @@ ziU8 Zi8MatchROMdata1(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, 
             if (matchResult != 0)
                 break;
             ZI_WORK->dawgGroups += 2;
-            cont = 0;
+            cont = ZI8_MATCH_STATE_BEGIN;
         }
     }
     return matchResult;
@@ -252,11 +268,11 @@ ziU8 Zi8MatchROMdata2(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziU16* textOut, zi
         return 0;
     }
 
-    if (!cont) {
+    if (cont == ZI8_MATCH_STATE_BEGIN) {
         ZI_WORK->graphIdx = 0;
         ZI_WORK->unk_0x17EA = 0;
-        if (dawgGroupData != ZI8_NULL && dawgGroupData[0] == 0xC && lang == ZI8_LANG_FI && ZI_WORK->unk_0x141C != 0) {
-            ZI_WORK->unk_0x141E = 0x10;
+        if (dawgGroupData != ZI8_NULL && dawgGroupData[0] == ZI8_TABLE_DAWG_DATA_SUFFIX && lang == ZI8_LANG_FI && ZI_WORK->unk_0x141C) {
+            ZI_WORK->unk_0x141E = ZI8_TABLE_DAWG_DATA_FINNISH_SUFFIX;
         } else {
             ZI_WORK->unk_0x141E = 0;
         }
@@ -275,7 +291,7 @@ ziU8 Zi8MatchROMdata2(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziU16* textOut, zi
             break;
         }
 
-        if (cont)
+        if (cont != ZI8_MATCH_STATE_BEGIN)
             break;
         if (inLen == 1)
             break;
@@ -309,7 +325,7 @@ ziU8 Zi8MatchROMdata2(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziU16* textOut, zi
                 return 0;
             }
             ZI_WORK->graphIdx++;
-            cont = ZI8_FALSE;
+            cont = ZI8_MATCH_STATE_BEGIN;
             ZI_WORK->unk_0x141E = 0;
             if ((ZI_WORK->dawgCtx).graphDataTable == 0 && lang == ZI8_LANG_FI) {
                 for (i = 0; i < ZI_WORK->unk_0x17EA; i++) {
@@ -331,7 +347,7 @@ RETURN:
     return matchLen;
 }
 
-ziU8 Zi8MatchROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, ziU16 outLen, ziU8 param_6, ziBool cont, ziU8 param_8,
+ziU8 Zi8MatchROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, ziU16 outLen, ziU8 param_6, ziU8 cont, ziU8 param_8,
                      ziU8 param_9 ZI_NEED_WORK) {
     ziU32 dawgGroupTableSize;
     ziU8 matchLen;
@@ -339,18 +355,18 @@ ziU8 Zi8MatchROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, z
     matchLen = 0;
     dawgGroupTableSize = 0;
     if (outLen < inLen) {
-        Zi8LogError(0x321, ZI_WORK);
-    } else if (cont == 2) {
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(801, ZI_WORK);
+    } else if (cont == ZI8_MATCH_STATE_DONE) {
+        Zi8LogError(100, ZI_WORK);
     } else {
-        if (!cont) {
+        if (cont == ZI8_MATCH_STATE_BEGIN) {
             ZI_WORK->unk_0x17EC = 0;
             ZI_WORK->dawgGroupData = NextDawgGroup(ZI8_NULL, lang, ZI_WORK);
         } else if (ZI_WORK->unk_0x17EC != 0) {
-            Zi8LogError(0x64, ZI_WORK);
+            Zi8LogError(100, ZI_WORK);
             goto RETURN;
         }
-        dawgGroupTableSize = Zi8GetTableSize(lang, 0x1C, ZI_WORK);
+        dawgGroupTableSize = Zi8GetTableSize(lang, ZI8_TABLE_DAWG_OUTER_GROUPS, ZI_WORK);
         if (dawgGroupTableSize == 0) {
             matchLen = Zi8MatchROMdata2(textIn, inLen, lang, textOut, outLen, param_6, cont, param_8, ZI8_NULL, param_9, ZI_WORK);
         } else {
@@ -358,13 +374,13 @@ ziU8 Zi8MatchROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, z
                 matchLen = Zi8MatchROMdata2(textIn, inLen, lang, textOut, outLen, param_6, cont, param_8, ZI_WORK->dawgGroupData, param_9, ZI_WORK);
                 if (matchLen != 0)
                     break;
-                cont = ZI8_FALSE;
+                cont = ZI8_MATCH_STATE_BEGIN;
                 if (inLen <= 1 && lang == ZI8_LANG_SW)
                     break;
                 ZI_WORK->dawgGroupData = NextDawgGroup(ZI_WORK->dawgGroupData, lang, ZI_WORK);
             }
         }
-        if (matchLen == 0 && !cont && param_6 == 1 && inLen == 1 && outLen >= 1) {
+        if (matchLen == 0 && cont == ZI8_MATCH_STATE_BEGIN && param_6 == 1 && inLen == 1 && outLen >= 1) {
             param_6 = 0;
             ZI_WORK->unk_0x17EC = 1;
             if (dawgGroupTableSize != 0) {
@@ -385,7 +401,7 @@ ziU8 Zi8MatchROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOut, z
                 }
             }
         }
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(100, ZI_WORK);
     }
 RETURN:
     return matchLen;
@@ -396,22 +412,22 @@ ziU8 Zi8SyllablesROMdata(ziWChar* textIn, ziU8 inLen, ziU8 lang, ziWChar* textOu
     ziU8 infoTab;
     ziU8 dataTab;
 
-    dataTab = 0x1A;
-    infoTab = 0x1B;
+    dataTab = ZI8_TABLE_DAWG_DATA_SYLL_COM;
+    infoTab = ZI8_TABLE_DAWG_INFO_SYLL_COM;
     if (lenOut != ZI8_NULL) {
         *lenOut = 0;
     }
     if (useAlt) {
-        dataTab = 0x18;
-        infoTab = 0x19;
+        dataTab = ZI8_TABLE_DAWG_DATA_SYLL_ALT;
+        infoTab = ZI8_TABLE_DAWG_INFO_SYLL_ALT;
     }
     if (Zi8GetTableSize(lang, dataTab, ZI_WORK) == 0) {
-        if (dataTab == 0x1A) {
-            dataTab = 0x18;
-            infoTab = 0x19;
+        if (dataTab == ZI8_TABLE_DAWG_DATA_SYLL_COM) {
+            dataTab = ZI8_TABLE_DAWG_DATA_SYLL_ALT;
+            infoTab = ZI8_TABLE_DAWG_INFO_SYLL_ALT;
         } else {
-            dataTab = 0x1A;
-            infoTab = 0x1B;
+            dataTab = ZI8_TABLE_DAWG_DATA_SYLL_COM;
+            infoTab = ZI8_TABLE_DAWG_INFO_SYLL_COM;
         }
     }
     return Zi8MatchROMdata0(textIn, inLen, lang, textOut, outLen, 1, cont, dataTab, infoTab, 0, lenOut, &ZI_WORK->dawgCtx, ZI_WORK->unk_0x1760,
