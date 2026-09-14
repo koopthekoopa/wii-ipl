@@ -68,6 +68,7 @@ class Object:
             "shift_jis": None,
             "source": name,
             "src_dir": None,
+            "strip_comment": False,
         }
         self.options.update(options)
 
@@ -711,6 +712,15 @@ def generate_build_ninja(
     mwcc_sjis_extab_cmd = f'{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean --padding "$extab_padding" $out $out'
     mwcc_sjis_extab_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, dtk]
 
+    # MWCC with .comment section stripping
+    # A .comment section makes mwld recognize the object as Metrowerks-produced
+    # and enables identical code/data folding, some MSL_Common objects lack.
+    strip_comment = config.tools_dir / "strip_comment.py"
+    mwcc_nocomment_cmd = f'{CHAIN}{mwcc_cmd} && $python {strip_comment} $out $out'
+    mwcc_nocomment_implicit: List[Optional[Path]] = [*mwcc_implicit, strip_comment]
+    mwcc_sjis_nocomment_cmd = f'{CHAIN}{mwcc_sjis_cmd} && $python {strip_comment} $out $out'
+    mwcc_sjis_nocomment_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, strip_comment]
+
     # MWLD
     mwld = compiler_path / "mwldeppc.exe"
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
@@ -734,12 +744,16 @@ def generate_build_ninja(
         mwcc_pch_sjis_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_sjis_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_nocomment_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_sjis_nocomment_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_implicit.append(transform_dep)
         mwcc_sjis_implicit.append(transform_dep)
         mwcc_pch_implicit.append(transform_dep)
         mwcc_pch_sjis_implicit.append(transform_dep)
         mwcc_extab_implicit.append(transform_dep)
         mwcc_sjis_extab_implicit.append(transform_dep)
+        mwcc_nocomment_implicit.append(transform_dep)
+        mwcc_sjis_nocomment_implicit.append(transform_dep)
 
     n.comment("Link ELF file")
     n.rule(
@@ -801,6 +815,24 @@ def generate_build_ninja(
     n.rule(
         name="mwcc_sjis_extab",
         command=mwcc_sjis_extab_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
+
+    n.comment("MWCC build (with .comment section stripping)")
+    n.rule(
+        name="mwcc_nocomment",
+        command=mwcc_nocomment_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
+    n.newline()
+
+    n.rule(
+        name="mwcc_sjis_nocomment",
+        command=mwcc_sjis_nocomment_cmd,
         description="MWCC $out",
         depfile="$basefile.d",
         deps="gcc",
@@ -1065,7 +1097,13 @@ def generate_build_ninja(
                 "basefile": obj.src_obj_path.with_suffix(""),
             }
 
-            if obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
+            if obj.options["strip_comment"] and obj.options["shift_jis"]:
+                build_rule = "mwcc_sjis_nocomment"
+                build_implcit = mwcc_sjis_nocomment_implicit
+            elif obj.options["strip_comment"]:
+                build_rule = "mwcc_nocomment"
+                build_implcit = mwcc_nocomment_implicit
+            elif obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
                 build_rule = "mwcc_sjis_extab"
                 build_implcit = mwcc_sjis_extab_implicit
                 variables["extab_padding"] = "".join(

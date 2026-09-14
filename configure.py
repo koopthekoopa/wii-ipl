@@ -422,13 +422,17 @@ cflags_runtime = [
     "-D_IEEE_LIBM",
 ]
 
-cflags_msl = [
+cflags_msl_embedded = [
     *cflags_base,
     "-ipa file",
     "-str reuse,pool,readonly",
-    "-Cpp_exceptions off",
     "-fp_contract off",
     "-use_lmw_stmw on"
+]
+
+cflags_msl = [
+    *cflags_msl_embedded,
+    "-Cpp_exceptions on"
 ]
 
 cflags_trk = [
@@ -592,6 +596,16 @@ def MSLLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/MSL/src",
     }
 
+# Helper function for MSL_Common_Embedded
+def MSLEmbeddedLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+    return {
+        "lib": lib_name,
+        "mw_version": "GC/3.0a3",
+        "cflags": cflags_msl_embedded,
+        "progress_category": "mw",
+        "objects": objects,
+        "src_dir": "libs/MSL/src",
+    }
 
 # Helper function for MetroTRK
 def TRKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
@@ -1940,45 +1954,47 @@ config.libs = [
     ),
     # MSL Library
     MSLLib("MSL_C.PPCEABI.bare.H", [
-            Object(NonMatching, "MSL_Common/alloc.c"),
+            Object(Matching,    "MSL_Common/alloc.c"),
             Object(Matching,    "MSL_Common/errno.c"),
-            Object(NonMatching, "MSL_Common/ansi_files.c"),
-            Object(NonMatching, "MSL_Common_Embedded/ansi_fp.c"),
+            Object(Matching,    "MSL_Common/ansi_files.c"),
+            Object(Matching,    "MSL_Common_Embedded/ansi_fp.c"),
             Object(Matching,    "MSL_Common/ctype.c"),
-            Object(NonMatching, "MSL_Common/locale.c"),
-            Object(NonMatching, "MSL_Common/arith.c"),
-            Object(NonMatching, "MSL_Common/bsearch.c"),
-            Object(NonMatching, "MSL_Common/buffer_io.c"),
-            Object(NonMatching, "MSL_Common/direct_io.c"),
-            Object(NonMatching, "MSL_Common/file_io.c"),
-            Object(NonMatching, "MSL_Common/FILE_POS.c"),
-            Object(NonMatching, "MSL_Common/mbstring.c"),
+            Object(Matching,    "MSL_Common/locale.c"),
+            Object(Matching,    "MSL_Common/arith.c", strip_comment=True),
+            Object(Matching,    "MSL_Common/bsearch.c"),
+            Object(Matching,    "MSL_Common/buffer_io.c"),
+            Object(Matching,    "MSL_Common/direct_io.c"),
+            Object(Matching,    "MSL_Common/file_io.c"),
+            Object(Matching,    "MSL_Common/FILE_POS.c"),
+            Object(Matching,    "MSL_Common/mbstring.c"),
             Object(Matching,    "MSL_Common/mem.c"),
             Object(Matching,    "MSL_Common/mem_funcs.c"),
             Object(Matching,    "MSL_Common/math_api.c"),
-            Object(NonMatching, "MSL_Common/misc_io.c"),
-            Object(NonMatching, "MSL_Common/printf.c"),
-            Object(NonMatching, "MSL_Common/qsort.c"),
+            Object(Matching,    "MSL_Common/misc_io.c"),
+            Object(Matching,    "MSL_Common/printf.c", mw_version = "GC/3.0a5.2", strip_comment=True),
+            Object(Matching,    "MSL_Common/qsort.c"),
             Object(Matching,    "MSL_Common/rand.c"),
-            Object(NonMatching, "MSL_Common/scanf.c"),
-            Object(NonMatching, "MSL_Common/signal.c"),
-            Object(NonMatching, "MSL_Common/string.c"),
+            Object(Matching,    "MSL_Common/scanf.c"),
+            Object(Matching,    "MSL_Common/signal.c"),
+            Object(Matching,    "MSL_Common/string.c", strip_comment=True),
             Object(Matching,    "MSL_Common/float.c"),
-            Object(NonMatching, "MSL_Common/strtold.c"),
-            Object(NonMatching, "MSL_Common/strtoul.c"),
-            Object(NonMatching, "MSL_Common/time.c"),
-            Object(NonMatching, "MSL_Common/wctype.c"),
+            Object(Matching,    "MSL_Common/strtold.c"),
+            Object(Matching,    "MSL_Common/strtoul.c", strip_comment=True),
+            Object(Equivalent,  "MSL_Common/time.c"),
+            Object(Matching,    "MSL_Common/wctype.c"),
             Object(Matching,    "MSL_Common/wmem.c"),
-            Object(NonMatching, "MSL_Common/wprintf.c"),
-            Object(NonMatching, "MSL_Common/wstring.c"),
-            Object(NonMatching, "MSL_Common/wchar_io.c"),
+            Object(Matching,    "MSL_Common/wprintf.c", mw_version = "GC/3.0a5.2"),
+            Object(Matching,    "MSL_Common/wstring.c"),
+            Object(Matching,    "MSL_Common/wchar_io.c"),
             Object(Matching,    "PPC_EABI/time.dolphin.c"),
             Object(Matching,    "PPC_EABI/sysenv.GCN.c"),
             Object(Matching,    "PPC_EABI/uart_console_io_gcn.c"),
             Object(Matching,    "PPC_EABI/abort_exit_ppc_eabi.c"),
-            Object(NonMatching, "MSL_Common/math_sun.c"),
-            Object(NonMatching, "MSL_Common/extras.c"),
-
+            Object(Matching,    "MSL_Common/math_sun.c"),
+            Object(Matching,    "MSL_Common/extras.c", strip_comment=True),
+        ]
+    ),
+    MSLEmbeddedLib("MSL_C.PPCEABI.bare.H", [
             Object(Matching,    "MSL_Common_Embedded/Math/e_acos.c"),
             Object(Matching,    "MSL_Common_Embedded/Math/e_asin.c"),
             Object(Matching,    "MSL_Common_Embedded/Math/e_atan2.c"),

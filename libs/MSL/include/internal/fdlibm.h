@@ -43,7 +43,12 @@ extern int signgam;
 
 #define MAXFLOAT ((float)3.40282346638528860e+38)
 
-enum fdversion { fdlibm_ieee = -1, fdlibm_svid, fdlibm_xopen, fdlibm_posix };
+enum fdversion {
+    fdlibm_ieee = -1,
+    fdlibm_svid,
+    fdlibm_xopen,
+    fdlibm_posix
+};
 
 #define _LIB_VERSION_TYPE enum fdversion
 #define _LIB_VERSION _fdlib_version
@@ -63,11 +68,11 @@ extern _LIB_VERSION_TYPE _LIB_VERSION;
 #define _POSIX_ fdlibm_posix
 
 struct exception {
-    int type;
-    char* name;
-    double arg1;
-    double arg2;
-    double retval;
+    int type;       // 0x00
+    char* name;     // 0x04
+    double arg1;    // 0x08
+    double arg2;    // 0x10
+    double retval;  // 0x18
 };
 
 #define HUGE MAXFLOAT

@@ -1,16 +1,15 @@
 #include <cstdlib>
-#pragma exceptions on
+#include <signal.h>
 
 #pragma force_active on
 
-int raise(int);
 int exit(int);
 
 int __aborting = 0;
 void (*__stdio_exit)() = 0;
 
 void abort() {
-    raise(1);
+    raise(SIGNAL_ABORT);
     __aborting = 1;
     exit(1);
 }

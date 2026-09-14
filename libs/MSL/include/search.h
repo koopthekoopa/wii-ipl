@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-typedef int (*COMPARE_FUNC)(const void*, const void*);
+typedef int (*compare_func)(const void*, const void*);
 
-void* bsearch(const void* key, const void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
+void* bsearch(const void* key, const void* ptr, size_t count, size_t size, compare_func comp);
 
-void qsort(void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
+void qsort(void* ptr, size_t count, size_t size, compare_func comp);
 
 #ifdef __cplusplus
 }

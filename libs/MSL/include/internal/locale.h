@@ -11,83 +11,83 @@ typedef int (*__decode_mbyte)(wchar_t*, const char*, size_t);
 typedef int (*__encode_mbyte)(char*, wchar_t);
 
 struct lconv {
-    char* decimal_point;
-    char* thousands_sep;
-    char* grouping;
-    char* mon_decimal_point;
-    char* mon_thousands_sep;
-    char* mon_grouping;
-    char* positive_sign;
-    char* negative_sign;
-    char* currency_symbol;
-    char frac_digits;
-    char p_cs_precedes;
-    char n_cs_precedes;
-    char p_sep_by_space;
-    char n_sep_by_space;
-    char p_sign_posn;
-    char n_sign_posn;
-    char* int_curr_symbol;
-    char int_frac_digits;
-    char int_p_cs_precedes;
-    char int_n_cs_precedes;
-    char int_p_sep_by_space;
-    char int_n_sep_by_space;
-    char int_p_sign_posn;
-    char int_n_sign_posn;
+    char* decimal_point;      // 0x00
+    char* thousands_sep;      // 0x04
+    char* grouping;           // 0x08
+    char* mon_decimal_point;  // 0x0C
+    char* mon_thousands_sep;  // 0x10
+    char* mon_grouping;       // 0x14
+    char* positive_sign;      // 0x18
+    char* negative_sign;      // 0x1C
+    char* currency_symbol;    // 0x20
+    char frac_digits;         // 0x24
+    char p_cs_precedes;       // 0x25
+    char n_cs_precedes;       // 0x26
+    char p_sep_by_space;      // 0x27
+    char n_sep_by_space;      // 0x28
+    char p_sign_posn;         // 0x29
+    char n_sign_posn;         // 0x2A
+    char* int_curr_symbol;    // 0x2C
+    char int_frac_digits;     // 0x30
+    char int_p_cs_precedes;   // 0x31
+    char int_n_cs_precedes;   // 0x32
+    char int_p_sep_by_space;  // 0x33
+    char int_n_sep_by_space;  // 0x34
+    char int_p_sign_posn;     // 0x35
+    char int_n_sign_posn;     // 0x36
 };
 
 struct _loc_mon_cmpt {
-    char CmptName[8];
-    char* mon_decimal_point;
-    char* mon_thousands_sep;
-    char* mon_grouping;
-    char* positive_sign;
-    char* negative_sign;
-    char* currency_symbol;
-    char frac_digits;
-    char p_cs_precedes;
-    char n_cs_precedes;
-    char p_sep_by_space;
-    char n_sep_by_space;
-    char p_sign_posn;
-    char n_sign_posn;
-    char* int_curr_symbol;
-    char int_frac_digits;
-    char int_p_cs_precedes;
-    char int_n_cs_precedes;
-    char int_p_sep_by_space;
-    char int_n_sep_by_space;
-    char int_p_sign_posn;
-    char int_n_sign_posn;
+    char CmptName[8];         // 0x00
+    char* mon_decimal_point;  // 0x08
+    char* mon_thousands_sep;  // 0x0C
+    char* mon_grouping;       // 0x10
+    char* positive_sign;      // 0x14
+    char* negative_sign;      // 0x18
+    char* currency_symbol;    // 0x1C
+    char frac_digits;         // 0x20
+    char p_cs_precedes;       // 0x21
+    char n_cs_precedes;       // 0x22
+    char p_sep_by_space;      // 0x23
+    char n_sep_by_space;      // 0x24
+    char p_sign_posn;         // 0x25
+    char n_sign_posn;         // 0x26
+    char* int_curr_symbol;    // 0x28
+    char int_frac_digits;     // 0x2C
+    char int_p_cs_precedes;   // 0x2D
+    char int_n_cs_precedes;   // 0x2E
+    char int_p_sep_by_space;  // 0x2F
+    char int_n_sep_by_space;  // 0x30
+    char int_p_sign_posn;     // 0x31
+    char int_n_sign_posn;     // 0x32
 };
 
 struct _loc_num_cmpt {
-    char CmptName[8];
-    char* decimal_point;
-    char* thousands_sep;
-    char* grouping;
+    char CmptName[8];     // 0x00
+    char* decimal_point;  // 0x08
+    char* thousands_sep;  // 0x0C
+    char* grouping;       // 0x10
 };
 
 struct _loc_time_cmpt {
-    char CmptName[8];
-    const char* am_pm;
-    const char* DateTime_Format;
-    const char* Twelve_hr_format;
-    const char* Date_Format;
-    const char* Time_Format;
-    const char* Day_Names;
-    const char* MonthNames;
-    char* TimeZone;
+    char CmptName[8];              // 0x00
+    const char* am_pm;             // 0x08
+    const char* DateTime_Format;   // 0x0C
+    const char* Twelve_hr_format;  // 0x10
+    const char* Date_Format;       // 0x14
+    const char* Time_Format;       // 0x18
+    const char* Day_Names;         // 0x1C
+    const char* MonthNames;        // 0x20
+    char* TimeZone;                // 0x24
 };
 
 struct _loc_coll_cmpt {
-    char name[8];
-    int char_start;
-    int char_coll_tab_size;
-    short char_spec;
-    unsigned short* char_coll_table_ptr;
-    unsigned short* wchar_coll_seq_ptr;
+    char name[8];                         // 0x00
+    int char_start;                       // 0x08
+    int char_coll_tab_size;               // 0x0C
+    short char_spec;                      // 0x10
+    unsigned short* char_coll_table_ptr;  // 0x14
+    unsigned short* wchar_coll_seq_ptr;   // 0x18
 };
 
 struct _loc_ctype_cmpt {
@@ -98,8 +98,8 @@ struct _loc_ctype_cmpt {
     const unsigned short* wctype_map_ptr;  // 0x14
     const wchar_t* wupper_map_ptr;         // 0x18
     const wchar_t* wlower_map_ptr;         // 0x1C
-    __decode_mbyte decode_mb;
-    __encode_mbyte encode_wc;
+    __decode_mbyte decode_mb;              // 0x20
+    __encode_mbyte encode_wc;              // 0x24
 };
 
 struct __locale {

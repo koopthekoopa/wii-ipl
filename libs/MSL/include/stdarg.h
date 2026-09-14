@@ -11,11 +11,11 @@ typedef enum {
 } _va_arg_type;
 
 typedef struct __va_list_struct {
-    char gpr;
-    char fpr;
-    char reserved[2];
-    char* input_arg_area;
-    char* reg_save_area;
+    char gpr;              // 0x00
+    char fpr;              // 0x01
+    char reserved[2];      // 0x02
+    char* input_arg_area;  // 0x04
+    char* reg_save_area;   // 0x08
 } va_list[1];
 
 char* __va_arg(va_list args, _va_arg_type type);

@@ -14,7 +14,7 @@ clock_t clock();
 time_t mktime(tm* timePtr);
 tm* localtime(const time_t* sourceTime);
 
-size_t strftime(char* strDest, size_t maxsize, const char* format, const tm* timeptr);
+size_t strftime(char* strDest, size_t maxSize, const char* format, const tm* timePtr);
 
 #ifdef __cplusplus
 }
