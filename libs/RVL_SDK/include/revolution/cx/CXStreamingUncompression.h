@@ -18,7 +18,7 @@ typedef s32 CXStreamingResult;
 typedef struct CXUncompContextRL {
     u8* unk_0x00;  // 0x00
     int unk_0x04;  // 0x04
-    int unk_0x08;  // 0x08
+    u32 size;      // 0x08
     u16 unk_0x0C;  // 0x0C
     u8 unk_0x0e;   // 0x0E
     u8 unk_0x0f;   // 0x0F
@@ -27,7 +27,7 @@ typedef struct CXUncompContextRL {
 typedef struct CXUncompContextLZ {
     u8* unk_0x00;  // 0x00
     int unk_0x04;  // 0x04
-    int unk_0x08;  // 0x08
+    u32 size;      // 0x08
     int unk_0x0C;  // 0x0C
     u8 unk_0x10;   // 0x10
     u8 unk_0x11;   // 0x11
@@ -49,7 +49,7 @@ typedef union CXHuffmanDecodeTableEntry {
 typedef struct CXUncompContextHuffman {
     u32* outData;                                      // 0x00
     int outDataLen;                                    // 0x04
-    int unk_0x08;                                      // 0x08
+    u32 size;                                          // 0x08
     CXHuffmanDecodeTableEntry* decodeTable;            // 0x0C
     u32 bits;                                          // 0x10
     u32 unk_0x14;                                      // 0x14

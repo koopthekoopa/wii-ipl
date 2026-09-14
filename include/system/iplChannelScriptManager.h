@@ -51,6 +51,7 @@ namespace ipl {
             void setData(const CSData& data);
 
             void setAltBannerSound(void* sndData, u32 sndLength);
+            void setAltBannerSoundState(s32 state) { mAltSoundState = state; }
             BOOL isValidAddr(void* addr);
 
             static void calcCSThread();

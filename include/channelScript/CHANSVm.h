@@ -18,8 +18,8 @@ extern "C" {
 
 #define CHANS_VM_CLASS_NAME_LEN 32
 
-void CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size);
-vmBool CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0);
+CHANSVmErr CHANSVmInit(CHANSVm* vm, vmPtr work, vmU32 size);
+CHANSVmErr CHANSVmLinkModules(CHANSVm* vm, vmS32 unk0);
 
 void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal);
 
@@ -30,9 +30,9 @@ void CHANSVmSetSignal(CHANSVm* vm, vmBool* signal);
 vmU32 CHANSVmGetFreeExeSize(CHANSVm* vm);
 vmPtr CHANSVmGetFreeExeBufp(CHANSVm* vm);
 
-vmBool CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, vmS32 unk1);
+CHANSVmErr CHANSVmAddExe(CHANSVm* vm, vmS32 unk0, CHANSVm* execCtx);
 
-vmBool CHANSVmStep(CHANSVm* vm, int unk);
+CHANSVmErr CHANSVmStep(CHANSVm* vm, int stepCount);
 
 vmU16 CHANSVmGetSourceLine(CHANSVm* vm);
 
@@ -40,7 +40,7 @@ vmU16 CHANSVmGetSourceLine(CHANSVm* vm);
 /***   CHANS Object   ***/
 /************************/
 
-CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmS32 unk, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize length);
+CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmBoolInt noAlloc, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize length);
 vmPtr CHANSVmNewObjData(CHANSVm* vm, CHANSVmObjHdr* object, u32 length);
 CHANSVmErr CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object);
 CHANSVmObjHdr* CHANSVmCopyObject(CHANSVm* vm, CHANSVmObjHdr* outObj, CHANSVmObjHdr* inObj);
@@ -48,6 +48,11 @@ CHANSVmObjHdr* CHANSVmCopyObject(CHANSVm* vm, CHANSVmObjHdr* outObj, CHANSVmObjH
 CHANSVmErr CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, vmInteger val);
 CHANSVmErr CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, vmFloat value);
 CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, vmWString str, vmSize strLen);
+
+CHANSVmObjHdr* CHANSVmNewStringObject(CHANSVm* vm, CHANSVmObjHdr* object, vmU32 length);
+CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, vmString str, vmSize strLen);
+
+vmU32 CHANSVmStrCpyToU8FromStringObject(u8* output, CHANSVmObjHdr* stringObj, vmSize length);
 
 vmU32 CHANSVmGetArgc(CHANSVm* vm);
 CHANSVmObjHdr* CHANSVmGetArg(CHANSVm* vm, vmU32 argIdx);
@@ -59,6 +64,9 @@ CHANSVmObjHdr* CHANSVmNewArrayObject(CHANSVm* vm, CHANSVmObjHdr* object, vmU32 d
 CHANSVmObjHdr* CHANSVmGetArrayElement2D(CHANSVm* vm, vmPtr array, vmS32 dimension0, vmS32 dimension1);
 CHANSVmObjHdr* CHANSVmGetArrayElement2DFloat(CHANSVm* vm, vmFloat* array, vmS32 dimension0, vmS32 dimension1);
 
+CHANSVmObjHdr* CHANSVmNewBlobObject(CHANSVm*, CHANSVmObjHdr*, vmU32 size, vmPtr src, vmU32 count);
+CHANSVmObjHdr* CHANSVmNewImageObject(CHANSVm*, CHANSVmObjHdr*, vmPtr srcData, vmU16 width, vmU16 height, vmS32 format);
+
 /************************/
 /***   CHANS Method   ***/
 /************************/
@@ -67,7 +75,7 @@ CHANSVmObjHdr* CHANSVmGetArrayElement2DFloat(CHANSVm* vm, vmFloat* array, vmS32 
 
 #define CHANSVmMethodCount(x) (sizeof(x) / sizeof(CHANSVmMethodList))
 
-vmBool CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmMethodList* methods, vmSize methodCount);
+CHANSVmErr CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmMethodList* methods, vmSize methodCount);
 
 /************************/
 /***  CHANS Property  ***/
@@ -75,7 +83,7 @@ vmBool CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, const CH
 
 #define CHANSVmPropertyCount(x) (sizeof(x) / sizeof(CHANSVmPropertyList))
 
-vmBool CHANSVmAddNativePropertyAccessorsList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmPropertyList* properties, vmSize propertyCount);
+CHANSVmErr CHANSVmAddNativePropertyAccessorsList(CHANSVm* vm, CHANSVmNativeClass* cls, const CHANSVmPropertyList* properties, vmSize propertyCount);
 
 /************************/
 /***    CHANS Class   ***/
@@ -88,7 +96,7 @@ CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const char* clsName, CHAN
 /***    CHANS Image   ***/
 /************************/
 
-typedef vmBool (*CHANSVmImageCtorCallback)();
+typedef vmBoolInt (*CHANSVmImageCtorCallback)(CHANSVm* vm);
 typedef vmPtr (*CHANSVmImageAllocatorCallback)(CHANSVm* vm, u32 size);
 
 void CHANSVmImageRegisterAllocator(CHANSVmImageAllocatorCallback allocCb, CHANSVmImageCtorCallback ctorCb);

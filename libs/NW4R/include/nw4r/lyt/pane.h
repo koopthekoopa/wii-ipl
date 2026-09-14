@@ -14,6 +14,8 @@
 #include <nw4r/lyt/material.h>
 #include <nw4r/lyt/types.h>
 
+#define NW4R_LYT_PANE_USERDATA_SIZE 8
+
 namespace nw4r {
     namespace lyt {
         class Pane;
@@ -130,6 +132,7 @@ namespace nw4r {
             math::VEC2 GetVtxPos() const;
 
             void SetName(const char* name);
+            const char* GetUserData() const { return mUserData; }
             void SetUserData(const char* userData);
 
             void Init();
@@ -163,7 +166,7 @@ namespace nw4r {
             math::MTX34 mGlbMtx;  // 0x84
 
             char mName[16];     // 0xB4
-            char mUserData[8];  // 0xC4
+            char mUserData[NW4R_LYT_PANE_USERDATA_SIZE];  // 0xC4
 
             u8 mBasePosition;      // 0xCC
             u8 mAlpha;             // 0xCD

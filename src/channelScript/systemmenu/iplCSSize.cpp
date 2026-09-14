@@ -10,11 +10,11 @@ namespace ipl {
 
             DEFINE_CS_IPL_CTOR_ARG(f32 width, f32 height) {
                 BOOL result = FALSE;
-                nw4r::lyt::Size* data = (nw4r::lyt::Size*)CHANSVmNewObjData(VmInst, VmObj, sizeof(*data));
+                nw4r::lyt::Size* data = static_cast<nw4r::lyt::Size*>(CHANSVmNewObjData(VmInst, VmObj, sizeof(*data)));
                 if (data != NULL) {
                     data->width = width;
                     data->height = height;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Size");
                     result = VmObj->parentCls != NULL;
                 }
@@ -68,7 +68,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    f32* data = (f32*)*VmParentObj->value.ptr_v;
+                    f32* data = static_cast<f32*>(*VmParentObj->value.ptr_v);
 
                     result = TRUE;
                     data[I] = arg->value.float_v;
@@ -80,7 +80,7 @@ namespace ipl {
             CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    f32* data = (f32*)*VmParentObj->value.ptr_v;
+                    f32* data = static_cast<f32*>(*VmParentObj->value.ptr_v);
                     result = CHANSVmSetFloat(VmInst, VmReturnObj, data[I]) == CHANS_VM_OK;
                 }
                 return result;

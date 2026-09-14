@@ -27,13 +27,13 @@ namespace ipl {
             CHANSVmDefineMethod(ctor) {
                 BOOL result = FALSE;
 
-                nw4r::ut::Color* data = (nw4r::ut::Color*)CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data));
+                nw4r::ut::Color* data = static_cast<nw4r::ut::Color*>(CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data)));
                 if (data != NULL) {
                     // new Color(GXColor)
                     if (CHANSVmGetArgc(VmInst) == 1) {
                         CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                         if (arg != NULL) {
-                            *data = ((CS_Struct*)&arg->value.ptr_v)->unk_0x04.gxColor;
+                            *data = reinterpret_cast<CS_Struct*>(&arg->value.ptr_v)->unk_0x04.gxColor;
                         }
                     }
                     // new Color(u8 r, u8 g, u8 b, u8 a)
@@ -58,10 +58,10 @@ namespace ipl {
 
             DEFINE_CS_IPL_CTOR_ARG(nw4r::ut::Color color) {
                 BOOL result = FALSE;
-                nw4r::ut::Color* data = (nw4r::ut::Color*)CHANSVmNewObjData(VmInst, VmObj, sizeof(*data));
+                nw4r::ut::Color* data = static_cast<nw4r::ut::Color*>(CHANSVmNewObjData(VmInst, VmObj, sizeof(*data)));
                 if (data != NULL) {
                     *data = color;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Color");
                     result = VmObj->parentCls != NULL;
                 }
@@ -84,7 +84,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    CS_Struct* data = (CS_Struct*)*VmParentObj->value.ptr_v;
+                    CS_Struct* data = static_cast<CS_Struct*>(*VmParentObj->value.ptr_v);
                     if (data != NULL) {
                         result = TRUE;
                         CS_Color newVal = data->unk_0x00;
@@ -99,7 +99,7 @@ namespace ipl {
             CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    CS_Struct* data = (CS_Struct*)*VmParentObj->value.ptr_v;
+                    CS_Struct* data = static_cast<CS_Struct*>(*VmParentObj->value.ptr_v);
                     if (data != NULL) {
                         CS_Color val = data->unk_0x00;
                         result = CHANSVmSetInteger(VmInst, VmReturnObj, val.arr[I]) == CHANS_VM_OK;
@@ -125,7 +125,7 @@ namespace ipl {
             CHANSVmDefineMethod(ctor) {
                 BOOL result = FALSE;
 
-                GXColorS10* data = (GXColorS10*)CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data));
+                GXColorS10* data = static_cast<GXColorS10*>(CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data)));
                 if (data != NULL) {
                     CHANSVmObjHdr* arg0 = CHANSVmGetArgInteger(VmInst, 0);
                     CHANSVmObjHdr* arg1 = CHANSVmGetArgInteger(VmInst, 1);
@@ -147,10 +147,10 @@ namespace ipl {
 
             DEFINE_CS_IPL_CTOR_ARG(GXColorS10 color) {
                 BOOL result = FALSE;
-                GXColorS10* data = (GXColorS10*)CHANSVmNewObjData(VmInst, VmObj, sizeof(*data));
+                GXColorS10* data = static_cast<GXColorS10*>(CHANSVmNewObjData(VmInst, VmObj, sizeof(*data)));
                 if (data != NULL) {
                     *data = color;
-                    VmObj->type = CHANS_VM_TYPE_POINTER;
+                    VmObj->type = CHANS_VM_TYPE_OBJECT;
                     VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "GXColorS10");
                     result = VmObj->parentCls != NULL;
                 }
@@ -173,7 +173,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    s16* data = (s16*)*VmParentObj->value.ptr_v;
+                    s16* data = static_cast<s16*>(*VmParentObj->value.ptr_v);
                     if (*VmParentObj->value.ptr_v != NULL) {
                         result = TRUE;
                         data[I] = arg->value.int_v;
@@ -186,7 +186,7 @@ namespace ipl {
             CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    s16* data = (s16*)*VmParentObj->value.ptr_v;
+                    s16* data = static_cast<s16*>(*VmParentObj->value.ptr_v);
                     if (data != NULL) {
                         result = CHANSVmSetInteger(VmInst, VmReturnObj, data[I]) == CHANS_VM_OK;
                     }

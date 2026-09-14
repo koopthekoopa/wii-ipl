@@ -5,13 +5,10 @@
 namespace ipl {
     namespace cs {
         namespace rect {
-#define METHOD_COUNT 4
-            extern const CHANSVmMethodList cMethodList[METHOD_COUNT];
-
             CHANSVmDefineMethod(get_width) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    nw4r::ut::Rect* data = (nw4r::ut::Rect*)*VmParentObj->value.ptr_v;
+                    nw4r::ut::Rect* data = static_cast<nw4r::ut::Rect*>(*VmParentObj->value.ptr_v);
                     result = CHANSVmSetFloat(VmInst, VmReturnObj, data->GetWidth()) == CHANS_VM_OK;
                 }
                 return result;
@@ -20,7 +17,7 @@ namespace ipl {
             CHANSVmDefineMethod(get_height) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    nw4r::ut::Rect* data = (nw4r::ut::Rect*)*VmParentObj->value.ptr_v;
+                    nw4r::ut::Rect* data = static_cast<nw4r::ut::Rect*>(*VmParentObj->value.ptr_v);
                     result = CHANSVmSetFloat(VmInst, VmReturnObj, data->GetHeight()) == CHANS_VM_OK;
                 }
                 return result;
@@ -30,7 +27,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    nw4r::ut::Rect* data = (nw4r::ut::Rect*)*VmParentObj->value.ptr_v;
+                    nw4r::ut::Rect* data = static_cast<nw4r::ut::Rect*>(*VmParentObj->value.ptr_v);
 
                     result = TRUE;
                     data->SetWidth(arg->value.float_v);
@@ -42,7 +39,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    nw4r::ut::Rect* data = (nw4r::ut::Rect*)*VmParentObj->value.ptr_v;
+                    nw4r::ut::Rect* data = static_cast<nw4r::ut::Rect*>(*VmParentObj->value.ptr_v);
 
                     result = TRUE;
                     data->SetHeight(arg->value.float_v);
@@ -53,7 +50,7 @@ namespace ipl {
             DEFINE_CS_IPL_CTOR() {
                 BOOL result = FALSE;
 
-                VmObj->type = CHANS_VM_TYPE_POINTER;
+                VmObj->type = CHANS_VM_TYPE_OBJECT;
                 VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Rect");
                 if (VmObj->parentCls != NULL) {
                     result = TRUE;
@@ -65,7 +62,7 @@ namespace ipl {
             CHANSVmDefineMethod(ctor) {
                 BOOL result = FALSE;
 
-                nw4r::ut::Rect* data = (nw4r::ut::Rect*)CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data));
+                nw4r::ut::Rect* data = static_cast<nw4r::ut::Rect*>(CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(*data)));
                 if (data != NULL) {
                     CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(VmInst, 0);
                     CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(VmInst, 1);
@@ -108,11 +105,11 @@ namespace ipl {
             }
 
             // clang-format off
-            const CHANSVmMethodList cMethodList[METHOD_COUNT] = {
-                {"GetWidth",    get_width },
-                {"GetHeight",   get_height },
-                {"SetWidth",    set_width },
-                {"SetHeight",   set_height },
+            const CHANSVmMethodList cMethodList[] = {
+                {"GetWidth", get_width },
+                {"GetHeight", get_height },
+                {"SetWidth", set_width },
+                {"SetHeight", set_height },
             };
             // clang-format on
 
@@ -122,7 +119,7 @@ namespace ipl {
                 CHANSVmNativeClass* cls = CHANSVmAddNativeClass(vm, "Rect", ctor, NULL);
                 if (cls != NULL) {
                     // Add properties
-                    result = CHANSVmAddNativeMethodList(vm, cls, cMethodList, METHOD_COUNT) == CHANS_VM_OK;
+                    result = CHANSVmAddNativeMethodList(vm, cls, cMethodList, CHANSVmMethodCount(cMethodList)) == CHANS_VM_OK;
                 }
                 return result;
             }

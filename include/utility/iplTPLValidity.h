@@ -16,10 +16,10 @@ namespace ipl {
                 return inst.is_valid_for_ltx();
             }
 
-        private:
             BOOL is_valid_cmn();
             BOOL is_valid();
 
+        private:
             TPLPalette* mpPalette;         // 0x00
             TPLDescriptor* mpTexDesc;      // 0x04
             TPLHeader* mpTexHeader;        // 0x08
