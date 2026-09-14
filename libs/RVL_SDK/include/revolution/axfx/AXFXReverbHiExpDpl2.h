@@ -35,27 +35,27 @@ typedef struct AXFX_REVERBHI_EXP_DPL2 {
     u32 lastAllpassLength[4];     // 0x104
     u32 lastAllpassMaxLength[4];  // 0x114
 
-    f32 allpassCoef;      // 0x124
-    f32 lastLpfOut[4];    // 0x128
-    f32 lpfCoef;          // 0x138
-    u32 active;           // 0x13C
-    u32 earlyMode;        // 0x140
-    f32 preDelayTimeMax;  // 0x144
-    f32 preDelayTime;     // 0x148
-    u32 fusedMode;        // 0x14C
-    f32 fusedTime;        // 0x150
-    f32 coloration;       // 0x154
-    f32 damping;          // 0x158
-    f32 crosstalk;        // 0x15C
-    f32 earlyGain;        // 0x160
-    f32 fusedGain;        // 0x164
-    AXFX_BUS* busIn;      // 0x168
-    AXFX_BUS* busOut;     // 0x16C
-    f32 outGain;          // 0x170
-    f32 sendGain;         // 0x174
+    f32 allpassCoef;        // 0x124
+    f32 lastLpfOut[4];      // 0x128
+    f32 lpfCoef;            // 0x138
+    u32 active;             // 0x13C
+    u32 earlyMode;          // 0x140
+    f32 preDelayTimeMax;    // 0x144
+    f32 preDelayTime;       // 0x148
+    u32 fusedMode;          // 0x14C
+    f32 fusedTime;          // 0x150
+    f32 coloration;         // 0x154
+    f32 damping;            // 0x158
+    f32 crosstalk;          // 0x15C
+    f32 earlyGain;          // 0x160
+    f32 fusedGain;          // 0x164
+    AXFX_BUS_DPL2* busIn;   // 0x168
+    AXFX_BUS_DPL2* busOut;  // 0x16C
+    f32 outGain;            // 0x170
+    f32 sendGain;           // 0x174
 } AXFX_REVERBHI_EXP_DPL2;
 
-u32 AXFXReverbHiExpGetMemSizeDpl2(const AXFX_REVERBHI_EXP_DPL2* fx);
+u32 AXFXReverbHiExpGetMemSizeDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpInitDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 void AXFXReverbHiExpShutdownDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpSettingsDpl2(AXFX_REVERBHI_EXP_DPL2* fx);

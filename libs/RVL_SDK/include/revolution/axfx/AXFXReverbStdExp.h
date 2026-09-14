@@ -49,11 +49,11 @@ typedef struct AXFX_REVERBSTD_EXP {
     f32 sendGain;         // 0xE4
 } AXFX_REVERBSTD_EXP;
 
-u32 AXFXReverbStdExpGetMemSize(const AXFX_REVERBSTD_EXP* fx);
+u32 AXFXReverbStdExpGetMemSize(AXFX_REVERBSTD_EXP* fx);
 BOOL AXFXReverbStdExpInit(AXFX_REVERBSTD_EXP* fx);
 void AXFXReverbStdExpShutdown(AXFX_REVERBSTD_EXP* fx);
 BOOL AXFXReverbStdExpSettings(AXFX_REVERBSTD_EXP* fx);
-void AXFXReverbStdExpCallback(void* chans, AXFX_REVERBSTD_EXP* context);
+void AXFXReverbStdExpCallback(AXFX_BUFFERUPDATE* chans, AXFX_REVERBSTD_EXP* context);
 
 #ifdef __cplusplus
 }
