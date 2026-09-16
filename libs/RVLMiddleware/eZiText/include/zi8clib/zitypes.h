@@ -552,7 +552,7 @@ struct __zi8_work_data_s {
     ziU8 unk_0x1B24;                            // 0x1B24
     ziFuzzyPYPairs pyFuzzyPairs;                // 0x1B28
     ziFuzzyZYPairs zyFuzzyPairs;                // 0x1B2C
-    ziU8 unk_0x1B30;                            // 0x1B30
+    ziU8 hasSplitTables;                        // 0x1B30
     ziU16 unk_0x1B32;                           // 0x1B32
     ziU16 unk_0x1B34;                           // 0x1B34
     ziU16 unk_0x1B36;                           // 0x1B36
