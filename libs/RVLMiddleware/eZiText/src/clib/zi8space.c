@@ -24,7 +24,7 @@ ziBool Zi8ZHaddSpace(ziWChar* in, ziU8 inLen, ziWChar* out, ziU16 outLen ZI_NEED
     currOut = out;
     remOutLen = outLen;
     if (remInLen == 0) {
-        Zi8LogError(0x137, ZI_WORK);
+        Zi8LogError(311, ZI_WORK);
         return ZI8_FALSE;
     }
     if ((PINYIN_CHAR('a') <= currIn[0] && currIn[0] <= PINYIN_CHAR('z')) || (PINYIN_CHAR('A') <= currIn[0] && currIn[0] <= PINYIN_CHAR('Z'))) {
@@ -71,7 +71,7 @@ ziBool Zi8ZHaddSpace(ziWChar* in, ziU8 inLen, ziWChar* out, ziU16 outLen ZI_NEED
             currOut[j] = currIn[j];
         }
         currOut[j] = 0;
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return ZI8_TRUE;
     }
 
@@ -83,6 +83,6 @@ DONE:
         out[checkSize] = in[checkSize];
     }
     out[checkSize] = L'\0';
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_TRUE;
 }

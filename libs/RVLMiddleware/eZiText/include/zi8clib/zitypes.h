@@ -332,20 +332,17 @@ typedef struct _ziLanguageEntry {
     ziU8* tableData;  // 0x04
 } ziLanguageEntry;
 
-typedef union {
-    struct {
-        ziU8 totalSize;      // 0x0
-        ziChar lang;         // 0x1
-        ziU8 len;            // 0x2
-        ziU8 unk_0x3;        // 0x3
-        ziU8 unk_0x4[0x3F];  // 0x4
-    };
-    ziU8 asBytes[0x3F + 4];
-} ziUWDNodeData;
+typedef struct {
+    ziU16 unk_0x0;         // 0x0
+    ziU16 rightEndOffset;  // 0x2
+    ziU16 baseOffset;      // 0x4
+    ziU16 leftEndOffset;   // 0x6
+    ziU8 data[];           // 0x8
+} ziUWDData;
 typedef struct _ziListNodeA {
     struct _ziListNodeA* prev;  // 0x0
-    ziUWDNodeData* value;       // 0x4
-} ziListNodeA;
+    ziU8* value;                // 0x4
+} ziUWDStackEntry;
 
 typedef ziBool (*Zi8OemSearchDict)(ziU16 idx, ziWChar* wordOut, ziU8 maxLen, ziPtr dictData);
 
@@ -404,13 +401,15 @@ typedef enum {
 typedef struct {
     ziU8 hi;
     ziU8 lo;
-} ziDAWGWCharData;
+} ziSplitWCharData;
+#define ZI8_GET_SPLIT_WCHAR_IDXD_ADD(ARR, IDX) (((ziWChar)(ARR)[IDX].hi << 8) + (ARR)[IDX].lo)
+#define ZI8_GET_SPLIT_WCHAR_IDXD_OR(ARR, IDX) (((ziWChar)(ARR)[IDX].hi << 8) | ((ziWChar)(ARR)[IDX].lo << 0))
 
 typedef struct {
-    ziU8* node;       // 0x0
-    ziU32 charAttr;   // 0x4 - Key: 8, UC: 8, WC: 16
-    ziWChar unk_0x8;  // 0x8
-    ziU8* unk_0xC;    // 0xC
+    ziU8* node;         // 0x0
+    ziU32 charAttr;     // 0x4 - Key: 8, UC: 8, WC: 16
+    ziWChar inputChar;  // 0x8
+    ziU8* rootNode;     // 0xC
 } ziDAWGCtxEntry;
 
 typedef struct {
@@ -418,12 +417,12 @@ typedef struct {
     ziU8 graphDataTable;           // 0x001
     ziU16 stackLen;                // 0x002
     ziU16 chrCount;                // 0x004
-    ziDAWGWCharData* wchars;       // 0x008
+    ziSplitWCharData* wchars;      // 0x008
     ziU8* uchars;                  // 0x00C
     ziU8* graphData;               // 0x010
-    ziDAWGWCharData* padKeys;      // 0x014
+    ziSplitWCharData* padKeys;     // 0x014
     ziDAWGCtxEntry nodeStack[50];  // 0x018
-    ziPtr unk_0x338;               // 0x338
+    ziPtr graphInfoEndNode;        // 0x338
 } ziDAWGCtx;
 
 // TODO: Name this something real
@@ -444,51 +443,57 @@ typedef struct {
 } ziUserKeyLayout;
 
 struct __zi8_work_data_s {
-    ziU8 unk_0x00;                              // 0x000
-    ziU8 unk_0x01;                              // 0x001
-    ziLanguageEntry* langEntries;               // 0x004
-    ziU8 unk_0x08;                              // 0x008
-    ziU8 searchFlags;                           // 0x009
-    ziU8 maxWordLen;                            // 0x00A
-    ziU16 unk_0x0C;                             // 0x00C
-    ziU32 unk_0x10;                             // 0x010
-    ziU16 unk_0x14;                             // 0x014
-    ziU8 handleCangjie;                         // 0x016
-    ziU8 unk_0x17;                              // 0x017
-    ziU8 unk_0x18;                              // 0x018
-    ziWChar spaceChar;                          // 0x01A
-    ziU8 unk_0x1C;                              // 0x01C
-    ziU8 unk_0x1D;                              // 0x01D
-    ziU8 wordCase;                              // 0x01E
-    ziBool caseInsensitive;                     // 0x01F
-    ziU16 unk_0x20[0x40];                       // 0x020
-    ziU16 unk_0xA0[0x40];                       // 0x0A0
-    ziU8 unk_0x120;                             // 0x120
-    ziU16* unk_0x124[2];                        // 0x124
-    ziU8 unk_0x12C;                             // 0x12C
-    ziU8 unk_0x12D;                             // 0x12D
-    ziU8 unk_0x12E;                             // 0x12E
-    ziU8* unk_0x130[2];                         // 0x130
-    ziU8 unk_0x138;                             // 0x138
-    ziS32 unk_0x13C;                            // 0x13C
-    ziBool unk_0x140;                           // 0x140
-    ziUWDNodeData uwdChars;                     // 0x141
-    ziUWDNodeData uwdCaseChars;                 // 0x184
-    ziU8 uwdTopIdx;                             // 0x1C7
-    ziListNodeA unk_0x1C8[0x20];                // 0x1C8
-    ziListNodeA* uwdTop;                        // 0x2C8
-    ziUnkStruct* pudStack[0x10];                // 0x2CC
-    ziU8 pudTopIdx;                             // 0x30C
-    ziU8* pudTop;                               // 0x310
-    ziS32 pudCurrCount;                         // 0x314
-    ziS32 pudCurrIdx;                           // 0x318
-    ziU8 pdRemoveOpt;                           // 0x31C
-    ziU8 unk_0x31D;                             // 0x31D
-    ziU8 unk_0x31E;                             // 0x31E
-    Zi8OemSearchDict oemSearchDict;             // 0x320
-    ziU16 oemDictLen;                           // 0x324
-    ziU32 oemDictIdxSavepoint;                  // 0x328
-    ziPtr oemDictData;                          // 0x32C
+    ziU8 unk_0x00;                 // 0x000
+    ziU8 unk_0x01;                 // 0x001
+    ziLanguageEntry* langEntries;  // 0x004
+    ziU8 unk_0x08;                 // 0x008
+    ziU8 searchFlags;              // 0x009
+    ziU8 maxWordLen;               // 0x00A
+    ziU16 unk_0x0C;                // 0x00C
+    ziU32 unk_0x10;                // 0x010
+    ziU16 unk_0x14;                // 0x014
+    ziU8 handleCangjie;            // 0x016
+    ziU8 unk_0x17;                 // 0x017
+    ziU8 unk_0x18;                 // 0x018
+    ziWChar spaceChar;             // 0x01A
+    ziU8 unk_0x1C;                 // 0x01C
+    ziU8 unk_0x1D;                 // 0x01D
+    ziU8 wordCase;                 // 0x01E
+    ziBool caseInsensitive;        // 0x01F
+    ziU16 unk_0x20[0x40];          // 0x020
+    ziU16 unk_0xA0[0x40];          // 0x0A0
+    ziU8 unk_0x120;                // 0x120
+
+    ziU16* zhUwdDataPtrs[2];  // 0x124
+    ziU8 zhUwdDataIdx;        // 0x12C
+
+    ziU8 unk_0x12D;  // 0x12D
+
+    ziU8 unk_0x12E;                  // 0x12E
+    ziUWDData* uwdDataPtrs[2];       // 0x130
+    ziU8 uwdDataIdx;                 // 0x138
+    ziS32 uwdSkipOffset;             // 0x13C
+    ziBool uwdMatchCurrentWord;      // 0x140
+    ziU8 uwdWordNode[4 + 0x3F];      // 0x141
+    ziU8 uwdWordCINode[4 + 0x3F];    // 0x184
+    ziU8 uwdTopIdx;                  // 0x1C7
+    ziUWDStackEntry uwdStack[0x20];  // 0x1C8
+    ziUWDStackEntry* uwdTop;         // 0x2C8
+
+    ziUnkStruct* pudStack[0x10];  // 0x2CC
+    ziU8 pudTopIdx;               // 0x30C
+    ziU8* pudTop;                 // 0x310
+    ziS32 pudCurrCount;           // 0x314
+    ziS32 pudCurrIdx;             // 0x318
+    ziU8 pudRemoveOpt;            // 0x31C
+    ziU8 pudUnk_0x31D;            // 0x31D
+    ziU8 pudUnk_0x31E;            // 0x31E
+
+    Zi8OemSearchDict oemSearchDict;  // 0x320
+    ziU16 oemDictLen;                // 0x324
+    ziU32 oemDictIdxSavepoint;       // 0x328
+    ziPtr oemDictData;               // 0x32C
+
     ziU8 unk_0x330[8];                          // 0x330
     ziWChar candidates[0x100];                  // 0x338
     ziU8 unk_0x538;                             // 0x538
@@ -505,64 +510,66 @@ struct __zi8_work_data_s {
     ziU8* unk_0x1414;                           // 0x1414
     ziU8 latinSearchOrderLen;                   // 0x1418
     ziU16 unk_0x141A;                           // 0x141A
-    ziBool unk_0x141C;                          // 0x141C
-    ziBool unk_0x141D;                          // 0x141D
-    ziU8 unk_0x141E;                            // 0x141E
-    ziU8 deepestSearched;                       // 0x141F
-    ziU8 unk_0x1420[4];                         // 0x1420
-    ziDAWGCtx dawgCtx;                          // 0x1424
-    ziU8 unk_0x1760[2];                         // 0x1760
-    ziU8* dawgGroups;                           // 0x1764
-    ziU8 graphIdx;                              // 0x1768
-    ziU8 unk_0x1769[0x81];                      // 0x1769
-    ziU16 unk_0x17EA;                           // 0x17EA
-    ziU8 unk_0x17EC;                            // 0x17EC
-    ziU8* dawgGroupData;                        // 0x17F0
-    ziWChar predBuf[0x40];                      // 0x17F4
-    ziWChar unk_0x1874;                         // 0x1874
-    ziU8 unk_0x1876;                            // 0x1876
-    ziU8 unk_0x1877;                            // 0x1877
-    ziU8 unk_0x1878;                            // 0x1878
-    ziU8 unk_0x1879;                            // 0x1879
-    ziWChar hlBuffer[0x41];                     // 0x187A
-    ziBool unk_0x18FC;                          // 0x18FC
-    ziWChar hlPrefix[0x41];                     // 0x18FE
-    ziU8 hlPrefixLen;                           // 0x1980
-    ziU8 unk_0x1981;                            // 0x1981
-    ziU8 unk_0x1982;                            // 0x1982
-    ziU8 unk_0x1983;                            // 0x1983
-    ziU8 unk_0x1984;                            // 0x1984
-    ziU8 unk_0x1985;                            // 0x1985
-    ziU8 unk_0x1986[2];                         // 0x1986
-    ziWChar hlSuffix[0x41];                     // 0x1988
-    ziU8 hlSuffixLen;                           // 0x1A0A
-    ziU8 unk_0x1A0B;                            // 0x1A0B
-    ziWChar unk_0x1A0C[0x41];                   // 0x1A0C
-    ziU8 unk_0x1A8E;                            // 0x1A8E
-    ziWChar unk_0x1A90;                         // 0x1A90
-    ziWChar unk_0x1A92[0x41];                   // 0x1A92
-    ziU8 unk_0x1B14;                            // 0x1B14
-    ziU8 unk_0x1B15;                            // 0x1B15
-    ziU8 unk_0x1B16;                            // 0x1B16
-    ziU16* unk_0x1B18;                          // 0x1B18
-    ziU16 unkRangeALo;                          // 0x1B1C
-    ziU16 unkRangeAHi;                          // 0x1B1E
-    ziU16 unkRangeBLo;                          // 0x1B20
-    ziU16 unkRangeBHi;                          // 0x1B22
-    ziU8 unk_0x1B24;                            // 0x1B24
-    ziFuzzyPYPairs pyFuzzyPairs;                // 0x1B28
-    ziFuzzyZYPairs zyFuzzyPairs;                // 0x1B2C
-    ziU8 hasSplitTables;                        // 0x1B30
-    ziU16 unk_0x1B32;                           // 0x1B32
-    ziU16 unk_0x1B34;                           // 0x1B34
-    ziU16 unk_0x1B36;                           // 0x1B36
-    ziU16 unk_0x1B38;                           // 0x1B38
-    ziU8 unk_0x1B3A;                            // 0x1B3A
-    ziU8 unk_0x1B3B;                            // 0x1B3B
-    ziU8 unk_0x1B3C;                            // 0x1B3C
-    ziU8 unk_0x1B3D;                            // 0x1B3D
-    ziU8 unk_0x1B3E[2];                         // 0x1B3D
-    ziU16 unk_0x1B40;                           // 0x1B40
+
+    ziBool dawgUseAltSuffixTable;      // 0x141C
+    ziBool dawgSkipSuffixOnlyPattern;  // 0x141D
+    ziU8 dawgAltSuffixTable;           // 0x141E
+    ziU8 dawgDeepestSearched;          // 0x141F
+    ziU8 unk_0x1420[4];                // 0x1420
+    ziDAWGCtx dawgCtx;                 // 0x1424
+    ziU8 unk_0x1760[2];                // 0x1760
+    ziU8* dawgGroups;                  // 0x1764
+    ziU8 graphIdx;                     // 0x1768
+    ziU8 unk_0x1769[0x81];             // 0x1769
+    ziU16 unk_0x17EA;                  // 0x17EA
+    ziU8 unk_0x17EC;                   // 0x17EC
+    ziU8* dawgGroupData;               // 0x17F0
+    ziWChar predBuf[0x40];             // 0x17F4
+
+    ziWChar unk_0x1874;           // 0x1874
+    ziU8 unk_0x1876;              // 0x1876
+    ziU8 unk_0x1877;              // 0x1877
+    ziU8 unk_0x1878;              // 0x1878
+    ziU8 unk_0x1879;              // 0x1879
+    ziWChar hlBuffer[0x41];       // 0x187A
+    ziBool unk_0x18FC;            // 0x18FC
+    ziWChar hlPrefix[0x41];       // 0x18FE
+    ziU8 hlPrefixLen;             // 0x1980
+    ziU8 unk_0x1981;              // 0x1981
+    ziU8 unk_0x1982;              // 0x1982
+    ziU8 unk_0x1983;              // 0x1983
+    ziU8 unk_0x1984;              // 0x1984
+    ziU8 unk_0x1985;              // 0x1985
+    ziU8 unk_0x1986[2];           // 0x1986
+    ziWChar hlSuffix[0x41];       // 0x1988
+    ziU8 hlSuffixLen;             // 0x1A0A
+    ziU8 unk_0x1A0B;              // 0x1A0B
+    ziWChar unk_0x1A0C[0x41];     // 0x1A0C
+    ziU8 unk_0x1A8E;              // 0x1A8E
+    ziWChar unk_0x1A90;           // 0x1A90
+    ziWChar unk_0x1A92[0x41];     // 0x1A92
+    ziU8 unk_0x1B14;              // 0x1B14
+    ziU8 unk_0x1B15;              // 0x1B15
+    ziU8 unk_0x1B16;              // 0x1B16
+    ziU16* unk_0x1B18;            // 0x1B18
+    ziU16 unkRangeALo;            // 0x1B1C
+    ziU16 unkRangeAHi;            // 0x1B1E
+    ziU16 unkRangeBLo;            // 0x1B20
+    ziU16 unkRangeBHi;            // 0x1B22
+    ziU8 unk_0x1B24;              // 0x1B24
+    ziFuzzyPYPairs pyFuzzyPairs;  // 0x1B28
+    ziFuzzyZYPairs zyFuzzyPairs;  // 0x1B2C
+    ziU8 hasSplitTables;          // 0x1B30
+    ziU16 unk_0x1B32;             // 0x1B32
+    ziU16 unk_0x1B34;             // 0x1B34
+    ziU16 unk_0x1B36;             // 0x1B36
+    ziU16 unk_0x1B38;             // 0x1B38
+    ziU8 unk_0x1B3A;              // 0x1B3A
+    ziU8 unk_0x1B3B;              // 0x1B3B
+    ziU8 unk_0x1B3C;              // 0x1B3C
+    ziU8 unk_0x1B3D;              // 0x1B3D
+    ziU8 unk_0x1B3E[2];           // 0x1B3D
+    ziU16 unk_0x1B40;             // 0x1B40
 };
 
 #define ZI_WORK ((struct __zi8_work_data_s*)__zi8_work_data)

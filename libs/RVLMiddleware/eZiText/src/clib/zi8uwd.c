@@ -6,33 +6,33 @@
 #include <zi8clib/zierror.h>
 #include <zi8clib/zmtkey.h>
 
-ziBool Zi8UWDPush(ziUWDNodeData* nodeData ZI_NEED_WORK) {
+ziBool Zi8UWDPush(ziU8* nodeData ZI_NEED_WORK) {
     ziU8 nodeLen;
-    ziListNodeA* pzVar3;
+    ziUWDStackEntry* pzVar3;
     ziU8 i;
-    ziListNodeA* newNode;
-    ziUWDNodeData* pvVar4;
-    ziListNodeA* curr;
+    ziUWDStackEntry* newNode;
+    ziU8* pvVar4;
+    ziUWDStackEntry* curr;
 
     nodeData;
 
     if (ZI_WORK->uwdTopIdx >= 0x20) {
-        Zi8LogError(413, ZI_WORK);
+        Zi8LogError(ZI8_ERR_UWD_STACK_OVERFLOW, ZI_WORK);
         return ZI8_FALSE;
     }
-    if (nodeData == 0) {
-        Zi8LogError(415, ZI_WORK);
+    if (nodeData == ZI8_NULL) {
+        Zi8LogError(ZI8_ERR_UWD_NODE_NULL, ZI_WORK);
         return ZI8_FALSE;
     }
 
-    nodeLen = nodeData->len;
+    nodeLen = nodeData[2];
     if (nodeLen == 0) {
-        Zi8LogError(403, ZI_WORK);
+        Zi8LogError(ZI8_ERR_UWD_NODE_EMPTY, ZI_WORK);
         return ZI8_FALSE;
     }
 
     if (nodeLen > 0x3F) {
-        Zi8LogError(404, ZI_WORK);
+        Zi8LogError(ZI8_ERR_UWD_NODE_TOO_LONG, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -40,22 +40,22 @@ ziBool Zi8UWDPush(ziUWDNodeData* nodeData ZI_NEED_WORK) {
     curr = ZI_WORK->uwdTop;
     while (curr != ZI8_NULL) {
         pvVar4 = curr->value;
-        if (ZI_WORK->unk_0x12E == 1 && nodeData->unk_0x3 > pvVar4->unk_0x3)
+        if (ZI_WORK->unk_0x12E == 1 && nodeData[3] > pvVar4[3])
             break;
-        if (pvVar4->len == nodeLen) {
+        if (pvVar4[2] == nodeLen) {
             for (i = 0; i < nodeLen; i++) {
-                if (pvVar4->asBytes[i + 4] != nodeData->asBytes[i + 4])
+                if (pvVar4[i + 4] != nodeData[i + 4])
                     break;
             }
             if (i == nodeLen) {
-                Zi8LogError(100, ZI_WORK);
+                Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                 return ZI8_FALSE;
             }
         }
         pzVar3 = curr;
         curr = curr->prev;
     }
-    newNode = ZI_WORK->unk_0x1C8 + ZI_WORK->uwdTopIdx++;
+    newNode = ZI_WORK->uwdStack + ZI_WORK->uwdTopIdx++;
     if (pzVar3 == ZI8_NULL) {
         ZI_WORK->uwdTop = newNode;
         newNode->prev = curr;
@@ -65,38 +65,30 @@ ziBool Zi8UWDPush(ziUWDNodeData* nodeData ZI_NEED_WORK) {
     }
 
     newNode->value = nodeData;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_TRUE;
 }
 
-ziUWDNodeData* Zi8UWDPop(ziPtr __zi8_work_data) {
-    ziUWDNodeData* stackVal;
+ziU8* Zi8UWDPop(ziPtr __zi8_work_data) {
+    ziU8* stackVal;
 
     if (ZI_WORK->uwdTopIdx != 0) {
         ZI_WORK->uwdTopIdx--;
         stackVal = ZI_WORK->uwdTop->value;
         ZI_WORK->uwdTop = ZI_WORK->uwdTop->prev;
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return stackVal;
     } else {
-        Zi8LogError(414, ZI_WORK);
+        Zi8LogError(ZI8_ERR_UWD_STACK_UNDERFLOW, ZI_WORK);
         return ZI8_NULL;
     }
 }
 
 void Zi8UWDClearStack(ziPtr __zi8_work_data) {
-    Zi8Memset(ZI_WORK->unk_0x1C8, 0, sizeof(ZI_WORK->unk_0x1C8));
+    Zi8Memset(ZI_WORK->uwdStack, 0, sizeof(ZI_WORK->uwdStack));
     ZI_WORK->uwdTopIdx = 0;
     ZI_WORK->uwdTop = ZI8_NULL;
 }
-
-typedef struct {
-    ziU16 unk_0x0;         // 0x0
-    ziU16 rightEndOffset;  // 0x2
-    ziU16 baseOffset;      // 0x4
-    ziU16 leftEndOffset;   // 0x6
-    ziU8 data[];           // 0x8
-} ziUnkStructB;
 
 #define PTR_CMP(A, CMP, B) ((ziU32)(A)CMP(ziU32)(B))
 #define PTR_LT(A, B) PTR_CMP(A, <, B)
@@ -108,19 +100,19 @@ typedef struct {
 
 #define PTR_DIFF(A, B) ((ziU32)(A) - (ziU32)(B))
 
-ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, ziU8 lang, ziWChar* textOut, ziU16 outLen, ziBool param_8,
-                     ziU8 param_9 ZI_NEED_WORK) {
+ziU8 Zi8MatchUWDdata(ziWChar* elements, ziU8 elCount, ziWChar* currWord, ziU16 wordLen, ziU8 lang, ziWChar* textOut, ziU16 outLen, ziBool param_8,
+                     ziU8 matchState ZI_NEED_WORK) {
     ziU8* nodeData;
     ziS32 i, j;
 
     ziWChar currWc;
 
-    ziUnkStructB* uwdData;
+    ziUWDData* uwdData;
     ziU8* currNode;
     ziU8* baseNode;
     ziU8* leftEnd;
     ziU8* rightEnd;
-    ziUWDNodeData* currNodeData;
+    ziU8* currNodeData;
 
     ziS32 isLeft;
     ziU32 currNodeSize;
@@ -134,15 +126,15 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
 
     local_70 = 0;
     unkFlag = 0;
-    Zi8LogError(100, ZI_WORK);
-    if (ZI_WORK->unk_0x138 > 2 || ZI_WORK->unk_0x138 == 0 || ZI_WORK->unk_0x130[ZI_WORK->unk_0x138 - 1] == ZI8_NULL) {
-        Zi8ReplaceLastError(412, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
+    if (ZI_WORK->uwdDataIdx > 2 || ZI_WORK->uwdDataIdx == 0 || ZI_WORK->uwdDataPtrs[ZI_WORK->uwdDataIdx - 1] == ZI8_NULL) {
+        Zi8ReplaceLastError(ZI8_ERR_UWD_NO_DATA, ZI_WORK);
         return 0;
     }
 
-    uwdData = (ziUnkStructB*)ZI_WORK->unk_0x130[ZI_WORK->unk_0x138 - 1];
-    if (param_9 != 0) {
-        nodeData = (ziU8*)Zi8UWDPop(ZI_WORK);
+    uwdData = ZI_WORK->uwdDataPtrs[ZI_WORK->uwdDataIdx - 1];
+    if (matchState != ZI8_MATCH_STATE_BEGIN) {
+        nodeData = Zi8UWDPop(ZI_WORK);
         nodeLen = 0;
         if (nodeData != ZI8_NULL) {
             lang = nodeData[1];
@@ -152,21 +144,21 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
                 return 0;
             }
             nodeData += 4;
-            for (i = 0; i < (int)nodeLen; i++) {
+            for (i = 0; i < nodeLen; i++) {
                 textOut[i] = Zi8ConvertUC2WC(nodeData[i], lang, ZI_WORK);
             }
         }
         return nodeLen;
     }
     Zi8UWDClearStack(ZI_WORK);
-    ZI_WORK->unk_0x13C = 0;
-    if (textB == ZI8_NULL || bLen == 0 || textB[bLen - 1] != L' ') {
-        ZI_WORK->unk_0x140 = ZI8_FALSE;
+    ZI_WORK->uwdSkipOffset = 0;
+    if (currWord == ZI8_NULL || wordLen == 0 || currWord[wordLen - 1] != L' ') {
+        ZI_WORK->uwdMatchCurrentWord = ZI8_FALSE;
     } else {
         j = 0;
-        i = bLen - 2;
+        i = wordLen - 2;
         while (i >= 0) {
-            if (textB[i] == L' ')
+            if (currWord[i] == L' ')
                 break;
             i--;
             j++;
@@ -174,25 +166,25 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
         i++;
 
         if (j == 0 || j > 0x3F) {
-            ZI_WORK->unk_0x140 = ZI8_FALSE;
+            ZI_WORK->uwdMatchCurrentWord = ZI8_FALSE;
         } else {
-            ZI_WORK->unk_0x140 = ZI8_TRUE;
-            ZI_WORK->uwdChars.asBytes[j + 4] = ZI_WORK->uwdChars.totalSize = j + 5;
-            ZI_WORK->uwdChars.lang = lang;
-            ZI_WORK->uwdChars.len = j;
+            ZI_WORK->uwdMatchCurrentWord = ZI8_TRUE;
+            ZI_WORK->uwdWordNode[j + 4] = ZI_WORK->uwdWordNode[0] = j + 5;
+            ZI_WORK->uwdWordNode[1] = lang;
+            ZI_WORK->uwdWordNode[2] = j;
             charsOffs = 4;
-            for (; j > 0;) {
-                currWc = textB[i];
-                ZI_WORK->uwdChars.asBytes[charsOffs] = Zi8ConvertWC2UC(currWc, lang, ZI_WORK);
-                ZI_WORK->uwdCaseChars.asBytes[charsOffs] = '\0';
+            while (j > 0) {
+                currWc = currWord[i];
+                ZI_WORK->uwdWordNode[charsOffs] = Zi8ConvertWC2UC(currWc, lang, ZI_WORK);
+                ZI_WORK->uwdWordCINode[charsOffs] = '\0';
                 if (ZI_WORK->caseInsensitive) {
                     if (!Zi8ChangeCharCase(ZI8_TRUE, &currWc, lang, ZI_WORK)) {
                         Zi8ChangeCharCase(ZI8_FALSE, &currWc, lang, ZI_WORK);
                     }
-                    ZI_WORK->uwdCaseChars.asBytes[charsOffs] = Zi8ConvertWC2UC(currWc, lang, ZI_WORK);
+                    ZI_WORK->uwdWordCINode[charsOffs] = Zi8ConvertWC2UC(currWc, lang, ZI_WORK);
                 }
-                if (ZI_WORK->uwdChars.asBytes[charsOffs++] == '\0') {
-                    ZI_WORK->unk_0x140 = ZI8_FALSE;
+                if (ZI_WORK->uwdWordNode[charsOffs++] == '\0') {
+                    ZI_WORK->uwdMatchCurrentWord = ZI8_FALSE;
                     break;
                 }
                 j--;
@@ -200,7 +192,7 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
             }
         }
     }
-    if (!ZI_WORK->unk_0x140 && inLen == 0) {
+    if (!ZI_WORK->uwdMatchCurrentWord && elCount == 0) {
         return 0;
     }
 
@@ -216,7 +208,7 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
         }
         while ((currNode < leftEnd && isLeft) || (currNode < rightEnd && !isLeft)) {
             currNodeSize = currNode[0];
-            if (ZI_WORK->unk_0x13C > local_70++ || (currNode[0] & 0xC0) != 0) {
+            if (ZI_WORK->uwdSkipOffset > local_70++ || (currNode[0] & 0xC0) != 0) {
             ADVANCE_NODE:
                 if ((currNode += currNodeSize) > rightEnd) {
                     if (isLeft != 0)
@@ -228,61 +220,60 @@ ziU8 Zi8MatchUWDdata(ziWChar* textIn, ziU8 inLen, ziWChar* textB, ziU16 bLen, zi
                 continue;
             }
 
-            currNodeData = (ziUWDNodeData*)(currNode + currNodeSize);
-            if ((ziU8*)currNodeData > rightEnd) {
-                currNodeData = (ziUWDNodeData*)(uwdData->data + (currNode - rightEnd - 1));
+            currNodeData = currNode + currNodeSize;
+            if (currNodeData > rightEnd) {
+                currNodeData = uwdData->data + (currNode - rightEnd - 1);
             }
             nodeData = currNode;
             nodeSize = *nodeData++;
             nodeLang = *nodeData++;
             nodeLen = *nodeData++;
             nodeData++;
-            if (nodeLang != lang || nodeLen < inLen || nodeLen >= outLen || (param_8 && nodeLen != inLen) || (!param_8 && nodeLen == inLen)) {
+            if (nodeLang != lang || nodeLen < elCount || nodeLen >= outLen || (param_8 && nodeLen != elCount) || (!param_8 && nodeLen == elCount)) {
                 goto ADVANCE_NODE;
             }
 
-            // Compare the node characters to textIn
+            // Compare the node characters
             // If they don't match, advance and continue
-            for (i = 0; i < inLen; i++) {
-                if (PAD_KEY(1) <= textIn[i] && textIn[i] <= PAD_KEY(32)) {
-                    if (textIn[i] != Zi8ConvertUC2Key(nodeData[i], lang, ZI_WORK))
+            for (i = 0; i < elCount; i++) {
+                if (PAD_KEY(1) <= elements[i] && elements[i] <= PAD_KEY(32)) {
+                    if (elements[i] != Zi8ConvertUC2Key(nodeData[i], lang, ZI_WORK))
                         goto ADVANCE_NODE;
                     continue;
                 }
 
                 currWc = Zi8ConvertUC2WC(nodeData[i], lang, ZI_WORK);
-                if (currWc == textIn[i])
+                if (currWc == elements[i])
                     continue;
 
-                if (!ZI_WORK->caseInsensitive || !Zi8ChangeCharCase(ZI8_FALSE, &currWc, lang, ZI_WORK) || currWc != textIn[i])
+                if (!ZI_WORK->caseInsensitive || !Zi8ChangeCharCase(ZI8_FALSE, &currWc, lang, ZI_WORK) || currWc != elements[i])
                     goto ADVANCE_NODE;
             }
-            if (ZI_WORK->unk_0x140) {
-                if (ZI_WORK->uwdChars.totalSize != currNodeData->totalSize || ZI_WORK->uwdChars.lang != currNodeData->lang ||
-                    ZI_WORK->uwdChars.len != currNodeData->len)
+            if (ZI_WORK->uwdMatchCurrentWord) {
+                if (ZI_WORK->uwdWordNode[0] != currNodeData[0] || ZI_WORK->uwdWordNode[1] != currNodeData[1] ||
+                    ZI_WORK->uwdWordNode[2] != currNodeData[2])
                     goto ADVANCE_NODE;
 
                 j = 4;
-                i = ZI_WORK->uwdChars.len + 4;
+                i = ZI_WORK->uwdWordNode[2] + 4;
                 for (; j < i; j++) {
-                    if (ZI_WORK->uwdChars.asBytes[j] != currNodeData->asBytes[j] && ZI_WORK->uwdCaseChars.asBytes[j] != currNodeData->asBytes[j])
+                    if (ZI_WORK->uwdWordNode[j] != currNodeData[j] && ZI_WORK->uwdWordCINode[j] != currNodeData[j])
                         goto ADVANCE_NODE;
                 }
             }
-            Zi8UWDPush((ziUWDNodeData*)currNode, ZI_WORK);
+            Zi8UWDPush(currNode, ZI_WORK);
             goto ADVANCE_NODE;
         }
-        if (ZI_WORK->unk_0x140 && inLen != 0) {
-            ZI_WORK->unk_0x140 = ZI8_FALSE;
+        if (ZI_WORK->uwdMatchCurrentWord && elCount != 0) {
+            ZI_WORK->uwdMatchCurrentWord = ZI8_FALSE;
             local_70 = 0;
-            continue;
-        } else if (inLen == 1 && param_8 && param_9 == 0) {
+        } else if (elCount == 1 && param_8 && matchState == ZI8_MATCH_STATE_BEGIN) {
             param_8 = ZI8_FALSE;
             unkFlag = 1;
             local_70 = 0;
-            continue;
+        } else {
+            break;
         }
-        break;
     } while (1);
 
     nodeData = (ziU8*)Zi8UWDPop(ZI_WORK);

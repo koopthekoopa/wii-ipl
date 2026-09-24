@@ -119,23 +119,23 @@ ziU8* ZiDAWGGetSibling(ziU8* currNode) {
             // parent and short-circuit
             if (!NODE_HAS_SIBLING(headerTableVal)) {
                 depth--;
-                continue;
+            } else {
+                // If there's an explicit sibling, we can step directly over it. If
+                // there was an implicit child, that's already handled by
+                // incrementing the depth, and if there isn't, then we'll be back up
+                // at the end of the parent
+                if (NODE_SIBLING_EXPLICIT(headerTableVal)) {
+                    if ((*currNode & 0x80) != 0) {
+                        currNode += 3;
+                        offset += 3;
+                    } else {
+                        currNode += 2;
+                        offset += 2;
+                    }
+                    depth--;
+                }
             }
 
-            // If there's an explicit sibling, we can step directly over it. If
-            // there was an implicit child, that's already handled by
-            // incrementing the depth, and if there isn't, then we'll be back up
-            // at the end of the parent
-            if (NODE_SIBLING_EXPLICIT(headerTableVal)) {
-                if ((*currNode & 0x80) != 0) {
-                    currNode += 3;
-                    offset += 3;
-                } else {
-                    currNode += 2;
-                    offset += 2;
-                }
-                depth--;
-            }
         } while (depth > 0);
         return baseNode + offset;
     }
@@ -157,44 +157,42 @@ ziU32 ZiDAWGgetCHARattribute(ziDAWGCtx* ctx, ziU8* node ZI_NEED_WORK) {
     }
 
     if (chrIdx > ctx->chrCount) {
-        Zi8LogError(0x138B, ZI_WORK);
+        Zi8LogError(5003, ZI_WORK);
         return 0;
     }
 
     attrib = chrIdx << 0x18;
     attrib |= ctx->uchars[chrIdx] << 0x10;
     attrib |= ((ziU16)ctx->wchars[chrIdx].hi << 0x08) + ctx->wchars[chrIdx].lo;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return attrib;
 }
 
 ziU8* ZiDAWGGetGraph(ziDAWGCtx* ctx) {
-    return ctx->graphData + 4 + (((ziU16)ctx->graphData[2] << 8) + ctx->graphData[3]);
+    return ctx->graphData + ZI8_DAWGHDR_ENTRY_SIZE + ZI8_DAWGHDR_CHARS_SIZE(ctx->graphData);
 }
 
-ziU8* ZiDAWGGetGraphInfo(ziDAWGCtx* ctx, ziDAWGGraphInfo* currNode, ziU16* keys) {
+ziU8* ZiDAWGGetGraphInfo(ziDAWGCtx* ctx, ziU8* currNode, ziWChar* keys) {
     ziU8* ptrOut;
     ziU8 depth;
-    ziDAWGGraphInfo* childrenEnd;
+    ziU8* childrenEnd;
     ziU8* graphBase;
 
     graphBase = (ziU8*)ZiDAWGGetGraph(ctx);
     ptrOut = ZI8_NULL;
-    if (GET_DAWG_GRAPH_INFO_SIBLING_OFF(currNode) != 0 || GET_DAWG_GRAPH_INFO_CHAR(currNode) != 0) {
+    if (ZI8_DAWGINFO_CHILD_COUNT(currNode) != 0 || ZI8_DAWGINFO_CHAR(currNode) != 0) {
         return ZI8_NULL;
     }
-    childrenEnd = currNode + (GET_DAWG_GRAPH_INFO_BASE_COUNT(currNode) + 1);
-    currNode++;
+    childrenEnd = currNode + (ZI8_DAWGINFO_HDR_NODECOUNT(currNode) + 1) * ZI8_DAWGINFO_ENTRY_SIZE;
+    currNode += ZI8_DAWGINFO_ENTRY_SIZE;
     depth = 0;
-    while (depth < 2 && *keys != 0) {
+    while (depth < 2 && *keys != L'\0') {
         if (PAD_KEY(1) <= *keys && *keys <= PAD_KEY(32)) {
-            while (currNode < childrenEnd && *keys != GET_DAWG_GRAPH_INFO_CHAR(currNode)) {
-                if (*keys == GET_DAWG_GRAPH_INFO_CHAR(currNode))
+            while (currNode < childrenEnd && *keys != ZI8_DAWGINFO_CHAR(currNode)) {
+                if (*keys == ZI8_DAWGINFO_CHAR(currNode))
                     break;
 
-                // I couldn't get it to match any other way :(
-                currNode = (ziDAWGGraphInfo*)(GET_DAWG_GRAPH_INFO_SIBLING_OFF(currNode) * sizeof(ziDAWGGraphInfo) + sizeof(ziDAWGGraphInfo) +
-                                              (ziU8*)currNode);
+                currNode += ZI8_DAWGINFO_CHILD_COUNT(currNode) * ZI8_DAWGINFO_ENTRY_SIZE + ZI8_DAWGINFO_ENTRY_SIZE;
             }
         } else {
             return ZI8_NULL;
@@ -203,16 +201,16 @@ ziU8* ZiDAWGGetGraphInfo(ziDAWGCtx* ctx, ziDAWGGraphInfo* currNode, ziU16* keys)
             return ZI8_NULL;
         }
 
-        ptrOut = (((ziU16)currNode->ptrAMid << 0x08) + currNode->ptrALo) + ((currNode->ptrAHi << 0x10) + graphBase);
-        ctx->unk_0x338 = (((ziU16)currNode->ptrBMid << 0x08) + currNode->ptrBLo) + ((currNode->ptrBHi << 0x10) + graphBase);
-        if (ctx->unk_0x338 == graphBase) {
-            ctx->unk_0x338 = ZI8_NULL;
+        ptrOut = graphBase + ZI8_DAWGINFO_GRAPH_NODE_OFF(currNode);
+        ctx->graphInfoEndNode = graphBase + ZI8_DAWGINFO_GRAPH_END_OFF(currNode);
+        if (ctx->graphInfoEndNode == graphBase) {
+            ctx->graphInfoEndNode = ZI8_NULL;
         }
-        if (GET_DAWG_GRAPH_INFO_SIBLING_OFF(currNode) == 0) {
+        if (ZI8_DAWGINFO_CHILD_COUNT(currNode) == 0) {
             break;
         }
-        childrenEnd = currNode + 1 + GET_DAWG_GRAPH_INFO_SIBLING_OFF(currNode);
-        currNode++;
+        childrenEnd = currNode + ZI8_DAWGINFO_ENTRY_SIZE + ZI8_DAWGINFO_CHILD_COUNT(currNode) * ZI8_DAWGINFO_ENTRY_SIZE;
+        currNode += ZI8_DAWGINFO_ENTRY_SIZE;
         depth++;
         keys++;
     }

@@ -25,9 +25,9 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
     ziGetParam getParam;
     ziU16 ordinals[0x3F];
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (word == ZI8_NULL || *word == 0) {
-        Zi8ReplaceLastError(0x12C, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_COM_UNK_A, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -88,7 +88,7 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
     }
 
     if (language != ZI8_LANG_ZH) {
-        Zi8ReplaceLastError(0x26C, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_LANG_ZH_UNSUPPORTED, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -205,7 +205,7 @@ ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK) {
             addtlDataCurr++;
         }
     }
-    Zi8LogError(0x2BD, ZI_WORK);
+    Zi8LogError(701, ZI_WORK);
     return ZI8_FALSE;
 }
 

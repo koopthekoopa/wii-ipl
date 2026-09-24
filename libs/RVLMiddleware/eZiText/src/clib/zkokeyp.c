@@ -64,7 +64,7 @@ ziU16 Zi8WCharToOrdKO(ziWChar ch, ziU8* t9 ZI_NEED_WORK) {
     for (i = 0; i < entryCount; i++) {
         currCh = ZI8_KOREA_T9_IDXD_CHAR(t9, i);
         if (currCh == ch) {
-            Zi8LogError(100, ZI_WORK);
+            Zi8LogError(ZI8_ERR_OK, ZI_WORK);
             return i;
         }
     }
@@ -107,14 +107,14 @@ ziBool Zi8CandidateSetClear(ziGetParam* getParam ZI_NEED_WORK) {
     getParam;
 
     if (getParam->scratch == ZI8_NULL) {
-        Zi8LogError(356, ZI_WORK);
+        Zi8LogError(ZI8_ERR_MISC_SCRATCH_NULL, ZI_WORK);
         return ZI8_TRUE;
     }
 
     for (i = 0; i < getParam->maxCandidates; i++) {
         ((ziWChar*)getParam->scratch)[i] = L'\0';
     }
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_FALSE;
 }
 
@@ -123,9 +123,9 @@ ziBool Zi8CandidateSetInsert(ziGetParam* getParam, ziWChar ch, ziU8* scratchIdx 
 
     scratchIdx;
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (getParam->scratch == ZI8_NULL) {
-        Zi8ReplaceLastError(356, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_MISC_SCRATCH_NULL, ZI_WORK);
         return ZI8_TRUE;
     }
 
@@ -147,9 +147,9 @@ ziU32 Zi8CandidateSetContains(ziGetParam* getParam, ziWChar ch ZI_NEED_WORK) {
 
     getParam;
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (getParam->scratch == ZI8_NULL) {
-        Zi8ReplaceLastError(356, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_MISC_SCRATCH_NULL, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -227,7 +227,7 @@ ziU32 Zi8_814834AC(ziGetParam* getParam, ziU16* remainingToSkip, ziU8* candI, zi
 
     ZI_WORK;
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (getParam->elementCount == 0) {
         if (*remainingToSkip >= *candI) {
             for (i = 0; i < *candI; i++) {
@@ -321,7 +321,7 @@ ziU32 Zi8GetKOcandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandPara
     ziU8* tACurr;
     ziBool packedMatch;
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     Zi8CandidateSetClear(getParam, ZI_WORK);
     t9 = (ziU8*)Zi8GetTableAddress(ZI8_LANG_KO, 9, ZI_WORK);
     tA = (ziU8*)Zi8GetTableAddress(ZI8_LANG_KO, 10, ZI_WORK);
@@ -340,7 +340,7 @@ ziU32 Zi8GetKOcandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandPara
         getParam->wordCandidates = 0;
         getParam->candidates[0] = L'\0';
     }
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
 
     if (getParam->wordCharCount != 0) {
         if ((currOrd = Zi8WCharToOrdKO(*getParam->currentWord, t9, ZI_WORK)) != 0xFFFF && ZI8_KOREA_T9_IDXD_FLAG_A(t9, currOrd) != 0) {

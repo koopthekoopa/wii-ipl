@@ -18,9 +18,9 @@ ziU8 Zi8GetZHCharSet(void* __zi8_work_data) {
     ziGetParam getParam;
 
     charSet = 0;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (Zi8LangSupported(ZI8_LANG_ZH, ZI_WORK) == 0) {
-        Zi8ReplaceLastError(0x26C, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_LANG_ZH_UNSUPPORTED, ZI_WORK);
         return 0;
     }
 

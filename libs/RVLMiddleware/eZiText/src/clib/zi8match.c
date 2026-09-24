@@ -136,10 +136,10 @@ ziBool Zi8PriMatchNextChar(Table0Entry* currTab0, ziU8 byte0A, ziU8 byte0B, ziU8
         *newTab0Out = currTab0;
         *chrOut = ((ziU16)currTab0->chHi << 8) + currTab0->chLo;
         *remainingInOut = remaining;
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return ZI8_TRUE;
     }
-    Zi8LogError(0x12E, ZI_WORK);
+    Zi8LogError(ZI8_ERR_COM_NO_CHAR_MATCH, ZI_WORK);
     return ZI8_FALSE;
 }
 ziBool Zi8ExactMatchNextChar(Table0Entry* tab0, ziU8 byte0A, ziU8 byte0B, ziU8 byte1A, ziU8 byte1B, ziU8 byte2A, ziU8 byte2B, ziU8 byte3A,
@@ -160,10 +160,10 @@ ziBool Zi8ExactMatchNextChar(Table0Entry* tab0, ziU8 byte0A, ziU8 byte0B, ziU8 b
         *newTab0Out = currTab0;
         *chrOut = ((ziU16)currTab0->chHi << 8) + currTab0->chLo;
         *remainingInOut = remaining;
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return 1;
     }
-    Zi8LogError(0x12e, ZI_WORK);
+    Zi8LogError(ZI8_ERR_COM_NO_CHAR_MATCH, ZI_WORK);
     return 0;
 }
 
@@ -329,10 +329,10 @@ ziBool Zi8PriMatchNextComp(Table2Entry* currTab2, ziU8 byte0A, ziU8 byte0B, ziU8
 
         *newTab2Out = currTab2;
         *remainingInOut = remaining;
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return ZI8_TRUE;
     }
-    Zi8LogError(0x12E, ZI_WORK);
+    Zi8LogError(ZI8_ERR_COM_NO_CHAR_MATCH, ZI_WORK);
     return ZI8_FALSE;
 }
 
@@ -562,7 +562,7 @@ ziU8 Zi8GetPyPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* ph
     syllableCount = 0;
     *syllable0Len = 0;
     if (elCount == 0) {
-        Zi8LogError(0x135, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_INPUT_EMPTY, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -901,11 +901,11 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     currElement;
 
     elementsUsed = 0;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
 
     // Error on empty input
     if (elCount == 0) {
-        Zi8ReplaceLastError(0x135, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_COM_INPUT_EMPTY, ZI_WORK);
         return 0;
     }
 
@@ -913,12 +913,12 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     // If it's not a bopomofo character, error
     currElement = elements[0];
     if (currElement < BPMF_BASE) {
-        Zi8ReplaceLastError(0x154, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_GETBPMF_INVALID_CH, ZI_WORK);
         return 0;
     }
     currElement -= BPMF_BASE;
     if (currElement >= BPMF_CHAR_LETTER_MAX) {
-        Zi8ReplaceLastError(0x154, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_GETBPMF_INVALID_CH, ZI_WORK);
         return 0;
     }
 
@@ -951,7 +951,7 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
             if (elCount == 0) {
                 return elementsUsed;
             } else {
-                Zi8ReplaceLastError(0x156, ZI_WORK);
+                Zi8ReplaceLastError(ZI8_ERR_GETBPMF_EXTRA_AFTER_SEP, ZI_WORK);
                 return 0;
             }
         }
@@ -1053,12 +1053,12 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     // we error if it's not.
     currElement = *elements;
     if (currElement < PINYIN_TONE(1)) {
-        Zi8ReplaceLastError(0x155, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_GETBPMF_INVALID_TONE, ZI_WORK);
         return 0;
     }
     currElement -= PINYIN_TONE(0);
     if (currElement > 5) {
-        Zi8ReplaceLastError(0x155, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_GETBPMF_INVALID_TONE, ZI_WORK);
         return 0;
     }
 
@@ -1072,7 +1072,7 @@ ziU8 Zi8GetBpmfPhonetic(ziWChar* elements, ziU8 elCount, ziU16* maskBuf, ziU16* 
     elementsUsed++;
     elCount--;
     if (elCount != 0) {
-        Zi8ReplaceLastError(0x157, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_GETBPMF_EXTRA_AFTER_END, ZI_WORK);
         return 0;
     }
 

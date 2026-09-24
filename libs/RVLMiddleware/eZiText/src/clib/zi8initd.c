@@ -51,7 +51,7 @@ ziBool Zi8InitializeDynamic(ziLanguageEntry* data ZI_NEED_WORK) {
 
     Zi8SetParentalControls(2, ZI_WORK);
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_TRUE;
 }
 

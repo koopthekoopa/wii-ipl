@@ -38,7 +38,7 @@ ziBool Zi8SetHighlightedWordW(ziWChar* word, ziU8 language, ziU8 subLanguage ZI_
     for (wordLen = 0; word[wordLen] != L'\0'; wordLen++) {
     }
     if (wordLen >= 0x40) {
-        Zi8LogError(305, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_UNK_F, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -74,7 +74,7 @@ ziBool Zi8SetHighlightedWordW(ziWChar* word, ziU8 language, ziU8 subLanguage ZI_
     for (i = 0; i <= wordLen; i++) {
         ZI_WORK->hlBuffer[i] = word[i];
     }
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_TRUE;
 }
 
@@ -112,9 +112,9 @@ void ZiprocessHighlightedW(ziU8 inputLen ZI_NEED_WORK) {
         }
         ZI_WORK->hlSuffixLen = i;
     }
-    if (wordLen == 1 && ZI_WORK->unk_0x1A90 != 0) {
-        if (PAD_KEY(1) <= ZI_WORK->hlBuffer[0] && ZI_WORK->hlBuffer[0] <= PAD_KEY(0x20)) {
-            ZI_WORK->unk_0x1A90 = 0;
+    if (wordLen == 1 && ZI_WORK->unk_0x1A90 != L'\0') {
+        if (PAD_KEY(1) <= ZI_WORK->hlBuffer[0] && ZI_WORK->hlBuffer[0] <= PAD_KEY(32)) {
+            ZI_WORK->unk_0x1A90 = L'\0';
         } else {
             ZI_WORK->unk_0x1A90 = ZI_WORK->hlBuffer[0];
         }
@@ -448,13 +448,13 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
         if (ZI_WORK->unk_0x1983 != getParam->language) {
             ZI_WORK->unk_0x1983 = 0;
         }
-    } else if (getParam->elementCount == 1 && PAD_KEY(1) <= getParam->elements[0] && getParam->elements[0] <= PAD_KEY(0x20)) {
+    } else if (getParam->elementCount == 1 && PAD_KEY(1) <= getParam->elements[0] && getParam->elements[0] <= PAD_KEY(32)) {
         bVar1 = ZI8_FALSE;
-        matchLen = Zi8MatchROMdata(getParam->elements, 1, lang, romMatchText, 2, 1, ZI8_FALSE, 0, 0, ZI_WORK);
+        matchLen = Zi8MatchROMdata(getParam->elements, 1, lang, romMatchText, 2, 1, ZI8_MATCH_STATE_BEGIN, 0, 0, ZI_WORK);
         if (matchLen == 0) {
             lang = getParam->subLanguage;
         } else {
-            matchLen = Zi8MatchROMdata(getParam->elements, 1, getParam->subLanguage, romMatchText, 2, 1, ZI8_FALSE, 0, 0, ZI_WORK);
+            matchLen = Zi8MatchROMdata(getParam->elements, 1, getParam->subLanguage, romMatchText, 2, 1, ZI8_MATCH_STATE_BEGIN, 0, 0, ZI_WORK);
             if (matchLen != 0 && romMatchText[0] != getParam->elements[0]) {
                 local_240 = 1;
             }
@@ -492,10 +492,10 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
         }
     }
 
-    if (GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, 0x04)) {
+    if (GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, ZI8_CFG_UNK_x004)) {
         bVar10 = bVar5 = ZI8_FALSE;
     }
-    if (GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, 0x02)) {
+    if (GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, ZI8_CFG_UNK_x002)) {
         bVar22 = bVar9 = ZI8_FALSE;
     }
     local_248 = (ziChar*)getParam->candidates;
@@ -517,10 +517,10 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
         zVar4 = ZI8_TRUE;
     }
     if (local_238 != 0) {
-        if (GET_DICT_CFG_FLAG(getParam->subLanguage, ZI_WORK, 0x04)) {
+        if (GET_DICT_CFG_FLAG(getParam->subLanguage, ZI_WORK, ZI8_CFG_UNK_x004)) {
             bVar6 = ZI8_FALSE;
         }
-        if (GET_DICT_CFG_FLAG(getParam->subLanguage, ZI_WORK, 0x02)) {
+        if (GET_DICT_CFG_FLAG(getParam->subLanguage, ZI_WORK, ZI8_CFG_UNK_x002)) {
             bVar15 = ZI8_FALSE;
         }
     } else {
@@ -680,14 +680,14 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
         }
 
     LAB_733:
-        ZI_WORK->unk_0x141C = ZI8_FALSE;
-        if (GET_DICT_CFG_FLAG(lang, ZI_WORK, 0x20)) {
+        ZI_WORK->dawgUseAltSuffixTable = ZI8_FALSE;
+        if (GET_DICT_CFG_FLAG(lang, ZI_WORK, ZI8_CFG_HAS_SUFFIXONLY)) {
             if (getParam->currentWord == ZI8_NULL || getParam->wordCharCount == 0 || getParam->currentWord[getParam->wordCharCount - 1] == L' ' ||
-                getParam->currentWord[getParam->wordCharCount - 1] > 0xFE ||
+                getParam->currentWord[getParam->wordCharCount - 1] > L'\xFE' ||
                 Zi8ConvertWC2Key(getParam->currentWord[getParam->wordCharCount - 1], lang, ZI_WORK) == PAD_KEY(1)) {
-                ZI_WORK->unk_0x141D = ZI8_TRUE;
+                ZI_WORK->dawgSkipSuffixOnlyPattern = ZI8_TRUE;
             } else {
-                ZI_WORK->unk_0x141D = ZI8_FALSE;
+                ZI_WORK->dawgSkipSuffixOnlyPattern = ZI8_FALSE;
                 if (lang == ZI8_LANG_FI && getParam->wordCharCount != 0) {
                     j = getParam->wordCharCount - 1;
                     while (j >= 0) {
@@ -695,7 +695,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                             case L'a':
                             case L'o':
                             case L'u':
-                                ZI_WORK->unk_0x141C = ZI8_TRUE;
+                                ZI_WORK->dawgUseAltSuffixTable = ZI8_TRUE;
                             case L' ':
                                 j = 0;
                                 break;
@@ -705,12 +705,12 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                 }
             }
         } else {
-            ZI_WORK->unk_0x141D = ZI8_FALSE;
+            ZI_WORK->dawgSkipSuffixOnlyPattern = ZI8_FALSE;
         }
 
         while (ZI8_TRUE) {
             local_234 = 0;
-            if (GET_DICT_CFG_FLAG(lang, ZI_WORK, 0x10) && getParam->elementCount > 2) {
+            if (GET_DICT_CFG_FLAG(lang, ZI_WORK, ZI8_CFG_UNK_x010) && getParam->elementCount > 2) {
                 for (i = 0; i < getParam->elementCount; i++) {
                     if (getParam->elements[i] >= PAD_KEY(1))
                         break;
@@ -725,7 +725,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                     local_234++;
                 }
             }
-            if (bVar5 && local_238 != 2 && getParam->elementCount == 2 && getParam->elements[1] == PAD_KEY(1) && ZI_WORK->unk_0x1A90 != 0) {
+            if (bVar5 && local_238 != 2 && getParam->elementCount == 2 && getParam->elements[1] == PAD_KEY(1) && ZI_WORK->unk_0x1A90 != L'\0') {
                 if (!Zi8getKeyLayout(lang, PAD_KEY(1), keyLayout, 1, ZI_WORK)) {
                     keyLayout[0] = L'\0';
                 }
@@ -779,9 +779,9 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                     case ZI8_SEARCH_UNK_10:
                         if (local_27c != 1)
                             continue;
-                        if (GET_DICT_CFG_FLAG(lang, ZI_WORK, 0x40))
+                        if (GET_DICT_CFG_FLAG(lang, ZI_WORK, ZI8_CFG_UNK_x040))
                             continue;
-                        if (PAD_KEY(1) > elements[0] || elements[0] > PAD_KEY(0x20))
+                        if (PAD_KEY(1) > elements[0] || elements[0] > PAD_KEY(32))
                             continue;
                         if (!Zi8getKeyLayout(lang, elements[0], keyLayout + 1, getParam->elementCount, ZI_WORK))
                             continue;
@@ -883,11 +883,11 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                                 if (local_240 != 0 && (matchLen == 0 || pwVar31[0] == elements[0])) {
                                     if (local_240 == 1) {
                                         local_240 = 2;
-                                        matchLen =
-                                            Zi8MatchROMdata(elements, local_27c, getParam->subLanguage, pwVar31, local_264, 1, 0, 0, zVar4, ZI_WORK);
+                                        matchLen = Zi8MatchROMdata(elements, local_27c, getParam->subLanguage, pwVar31, local_264, 1,
+                                                                   ZI8_MATCH_STATE_BEGIN, 0, zVar4, ZI_WORK);
                                     } else {
-                                        matchLen =
-                                            Zi8MatchROMdata(elements, local_27c, getParam->subLanguage, pwVar31, local_264, 1, 1, 0, zVar4, ZI_WORK);
+                                        matchLen = Zi8MatchROMdata(elements, local_27c, getParam->subLanguage, pwVar31, local_264, 1,
+                                                                   ZI8_MATCH_STATE_WORKING, 0, zVar4, ZI_WORK);
                                     }
                                 }
                             }
@@ -1319,8 +1319,8 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                 }
             }
             if (local_284 == 0 && !bVar12 && getParam->firstCandidate == 0 && getParam->elementCount == 1 &&
-                !GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, 0x40) && PAD_KEY(1) <= getParam->elements[0] &&
-                getParam->elements[0] <= PAD_KEY(0x20) && Zi8getKeyLayout(getParam->language, *getParam->elements, keyLayout, '\x01', ZI_WORK)) {
+                !GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, ZI8_CFG_UNK_x040) && PAD_KEY(1) <= getParam->elements[0] &&
+                getParam->elements[0] <= PAD_KEY(32) && Zi8getKeyLayout(getParam->language, getParam->elements[0], keyLayout, 1, ZI_WORK)) {
                 bVar12 = ZI8_TRUE;
             }
             if (local_284 == 0 && bVar12 && local_278 == 0) {
@@ -1338,7 +1338,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                     local_248[1] = local_248[2] = L'\0';
                 }
                 if (getCandParam->unk_0x02 == 0) {
-                    ZI_WORK->unk_0x1A90 = 0;
+                    ZI_WORK->unk_0x1A90 = L'\0';
                 }
             }
             if (local_238 != 1)
@@ -1449,7 +1449,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
             if ((elements[0] == PAD_KEY(1) || ZiIsLetterHyphen(*elements, ZI_WORK)) &&
                 (ZI_WORK->unk_0x1984 == 0 || !ZiIsLetterHyphen(ZI_WORK->hlSuffix[ZI_WORK->hlSuffixLen - 1], ZI_WORK)) &&
                 (!ZI_WORK->unk_0x18FC || ZI_WORK->unk_0x1984 != 0 || !ZiIsLetterHyphen(ZI_WORK->hlPrefix[ZI_WORK->hlPrefixLen - 1], ZI_WORK)) &&
-                GET_DICT_CFG_FLAG(lang, ZI_WORK, 0x08) == 0 && getParam->elements[getParam->elementCount - 1] != PAD_KEY(1)) {
+                !GET_DICT_CFG_FLAG(lang, ZI_WORK, ZI8_CFG_UNK_x008) && getParam->elements[getParam->elementCount - 1] != PAD_KEY(1)) {
                 if (bVar16) {
                     pwVar31 -= local_214;
                     elements -= local_214;
@@ -1475,7 +1475,7 @@ ziU32 Zi8AlphaGetCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCandP
                         ZI_WORK->hlPrefixLen = 0;
                     }
                     if ((ZI_WORK->hlPrefixLen == 3 && ZI_WORK->hlPrefix[0] == 'w' && ZI_WORK->hlPrefix[1] == 'w' && ZI_WORK->hlPrefix[2] == 'w') ||
-                        GET_DICT_CFG_FLAG(lang, ZI_WORK, 0x100)) {
+                        GET_DICT_CFG_FLAG(lang, ZI_WORK, ZI8_CFG_UNK_x100)) {
                         ZI_WORK->unk_0x1874 = L'.';
                     }
                     if (elements[ZI_WORK->hlPrefixLen] != PAD_KEY(1) && Zi8IsAlphaPunct(elements[ZI_WORK->hlPrefixLen])) {
@@ -1565,7 +1565,7 @@ LAB_81469704:
             local_244--;
         }
     }
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return local_284;
 }
 

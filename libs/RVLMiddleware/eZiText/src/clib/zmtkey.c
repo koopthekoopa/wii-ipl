@@ -88,7 +88,7 @@ ziBool Zi8getKeyLayout(ziU8 language, ziWChar padKey, ziWChar* lytOut, ziU8 elem
     tableKeyLyt = ZI8_NULL;
     numKeysWithChars = ziNumKeysWithChars(language, ZI_WORK);
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     *lytOut = L'\0';
 
     if (ZI_WORK->usrKeyLyts[language] != ZI8_NULL) {
@@ -118,7 +118,7 @@ ziBool Zi8getKeyLayout(ziU8 language, ziWChar padKey, ziWChar* lytOut, ziU8 elem
     }
 
     if (!Zi8PadKeyToIdx(padKey, &padKey, ZI_WORK) || padKey >= numKeysWithChars) {
-        Zi8ReplaceLastError(300, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_COM_UNK_A, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -194,7 +194,7 @@ ziBool Zi8ChangeCharCase(ziBool upper, ziWChar* ch, ziU8 language ZI_NEED_WORK) 
     tabKeyLyt = ZI8_NULL;
     conversionDone = ZI8_FALSE;
     numKeysWithChars = 32;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (ZI_WORK->usrKeyLyts[language] != ZI8_NULL) {
         usrKeyLyt = ZI_WORK->usrKeyLyts[language];
     } else if (ZI_WORK->defaultUsrKeyLyt != ZI8_NULL) {

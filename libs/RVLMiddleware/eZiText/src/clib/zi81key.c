@@ -391,12 +391,12 @@ ziBool MatchAltSound1Key(ziWChar* text, ziU8 textLen, ziBool requireExactLen, Ta
     int upperIdx;
     int centerIdx;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     ordHi = (ziU8)(ord >> 8);
     ordLo = (ziU8)ord;
     mandarinRegionMask >>= 3;
     if (charSyllTableLen == 0) {
-        Zi8ReplaceLastError(0x964, ZI_WORK);
+        Zi8ReplaceLastError(2404, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -560,7 +560,7 @@ ziU32 Zi8Get1KeyPressSpelling(ziGetParam* getParam, ziGetCandidatesParam* param_
     getOpts = getOpts & ~0x40;
     if (param_2->unk_0x01 == 0) {
         getParam->count = 0;
-        Zi8LogError(0x64, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return 0;
     }
 
@@ -911,11 +911,11 @@ ziU32 Zi8Get1KeyPressSpelling(ziGetParam* getParam, ziGetCandidatesParam* param_
                     candidateBuf++;
                 }
             }
-            Zi8LogError(0x64, ZI_WORK);
+            Zi8LogError(ZI8_ERR_OK, ZI_WORK);
             return local_74;
         }
         if (getParam->getMode == ZI8_GET_MODE_SHUANGPIN) {
-            Zi8LogError(0x3E8, ZI_WORK);
+            Zi8LogError(1000, ZI_WORK);
             return 0;
         }
         Zi8InitDupWordBuf(ZI_WORK);
@@ -1001,7 +1001,7 @@ ziU32 Zi8Get1KeyPressSpelling(ziGetParam* getParam, ziGetCandidatesParam* param_
     }
 FINISHED:
     getParam->count = candCount;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return local_74;
 }
 
@@ -1834,7 +1834,7 @@ FINISH:
         candBuf[local_cc++] = 0;
     }
     getParam->count = local_118;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return local_c4;
 }
 
@@ -1870,9 +1870,9 @@ ziBool Zi8ZHCheckSpelling(ziWChar* param_1, ziWChar* param_2, ziU8 param_3 ZI_NE
     // iVar5;
     spellingOk = ZI8_FALSE;
     syllTonesData = ZI8_NULL;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (*param_1 == L'\0') {
-        Zi8ReplaceLastError(0x187, ZI_WORK);
+        Zi8ReplaceLastError(391, ZI_WORK);
         goto RETURN;
     }
 

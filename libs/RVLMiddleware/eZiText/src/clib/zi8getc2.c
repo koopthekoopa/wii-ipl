@@ -94,7 +94,7 @@ ziU16 Zi8GetDataSignature(ziChar* sigOut, ziU16 sigOutLen, ziU8 language ZI_NEED
 
     if (language == ZI8_LANG_ZH) {
         if (Zi8GetFormatVersion(ZI8_LANG_ZH, ZI_WORK) < 8) {
-            Zi8LogError(623, ZI_WORK);
+            Zi8LogError(ZI8_ERR_LANG_ZH_FORMAT_VERSION, ZI_WORK);
             return 0;
         }
         tabInfo = ZI8_TABLE_DATASIG_CHINESE;
@@ -110,7 +110,7 @@ ziU16 Zi8GetDataSignature(ziChar* sigOut, ziU16 sigOutLen, ziU8 language ZI_NEED
     } else {
         Zi8Memcpy(sigOut, dataSig, tabInfo);
         sigOut[tabInfo] = '\0';
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     }
     return tabInfo;
 }
@@ -163,7 +163,7 @@ ziBool Zi8AlphaSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
 
     ZI_WORK;
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     getParam->count = 0;
     sigPartLen = Zi8GetDataSignature(dataSig, 0x20, getParam->language, ZI_WORK);
     if (sigPartLen != 0 && getParam->elementCount <= sigPartLen) {
@@ -264,7 +264,7 @@ ziBool Zi8ZhSignature(ziGetParam* getParam, ziBool param_2 ZI_NEED_WORK) {
 
     pSigOut = getParam->candidates;
     pSigUC = ZI8_NULL;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     getParam->count = 0;
     sig1stPartLen = Zi8GetDataSignature(p1stSig, 0x20, getParam->language, ZI_WORK);
     sig2ndPartLen = Zi8GetEngineSignature(p2ndSig, ZI_WORK);
@@ -397,7 +397,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
             if (getCandParam->unk_0x00 != 0) {
                 getParam->count = 0;
             }
-            Zi8LogError(100, ZI_WORK);
+            Zi8LogError(ZI8_ERR_OK, ZI_WORK);
             return result;
         }
 
@@ -439,7 +439,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
                                     if (getCandParam->unk_0x00 != 0) {
                                         getParam->count = 0;
                                     }
-                                    Zi8LogError(100, ZI_WORK);
+                                    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                                     return result;
                                 }
                             default:
@@ -517,7 +517,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
                                     if (getCandParam->unk_0x00 != 0) {
                                         getParam->count = 0;
                                     }
-                                    Zi8LogError(100, ZI_WORK);
+                                    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                                     return result;
                                 }
                             default:
@@ -551,12 +551,12 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
     getCandParam->unk_0x01 = ZI_WORK->maxWordLen;
     ZI_WORK->maxWordLen = 0xFF;
     if (Zi8LangSupported(getParam->language, ZI_WORK) == 0) {
-        Zi8LogError(355, ZI_WORK);
+        Zi8LogError(ZI8_ERR_MISC_LANG_UNSUPPORTED_B, ZI_WORK);
         return 0;
     }
 
     if (getParam->language == ZI8_LANG_JP) {
-        code = 0x2C1;
+        code = 705;
         result = 0;
     } else if (getParam->language == ZI8_LANG_KO) {
         if (getParam->elementCount == 0 || *getParam->elements >= PAD_KEY(1)) {
@@ -566,14 +566,14 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
         }
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->context & 8) != 0) {
         result = Zi8Punctuation(getParam, getCandParam, ZI_WORK);
-        code = 0x64;
+        code = ZI8_ERR_OK;
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->getOptions & 0b10111111) == 4 && getParam->elementCount != 0 &&
                Zi8IsCharacter(*getParam->elements, ZI_WORK)) {
         charInfoSize = Zi8GetCharInfo(*getParam->elements, charInfoBuffer, 0x10, CHAR_INFO_HET_PY_KB, ZI_WORK);
         if (charInfoSize == 0) {
             getParam->count = getParam->letters = getParam->wordCandidates = 0;
             result = 0;
-            code = 0x384;
+            code = 900;
         } else {
             pinyinToneIdxChr = charInfoBuffer[charInfoSize - 1];
             if (PINYIN_CHAR('1') <= pinyinToneIdxChr && pinyinToneIdxChr <= PINYIN_CHAR('5')) {
@@ -592,7 +592,7 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
             getParam->letters = 1;
         }
     } else if (getParam->language == ZI8_LANG_ZH && getParam->getMode == ZI8_GET_MODE_SHUANGPIN) {
-        code = 0x2D0;
+        code = 720;
         result = 0;
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->getMode == ZI8_GET_MODE_PINYIN || getParam->getMode == ZI8_GET_MODE_ZHUYIN)) {
         if ((getParam->getOptions & 0b10000000) != 0) {
@@ -609,11 +609,11 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
         if (ZI_WORK->handleCangjie != 0) {
             result = Zi8GetChineseCandidates(getParam, getCandParam, ZI_WORK);
         } else {
-            code = 0x708;
+            code = 1800;
             result = 0;
         }
     } else if (getParam->language == ZI8_LANG_ZH && (getParam->getMode == ZI8_GET_MODE_UNK_x0B || getParam->getMode == ZI8_GET_MODE_UNK_x0E)) {
-        code = 0x2EE;
+        code = 750;
         result = 0;
     } else if (getParam->language == ZI8_LANG_ZH) {
         result = Zi8GetChineseCandidates(getParam, getCandParam, ZI_WORK);
@@ -637,10 +637,10 @@ ziU32 Zi8GetCandidatesOrCount(ziGetParam* getParam, ziGetCandidatesParam* getCan
             getCandParam->unk_0x10 = 0x100;
         }
         if (getParam->getMode == ZI8_GET_MODE_UNK_x02) {
-            if ((GET_DICT_CONFIG(getParam->language, ZI_WORK) & 0x200) != 0) {
+            if (GET_DICT_CFG_FLAG(getParam->language, ZI_WORK, ZI8_CFG_HAS_SYLLABLES)) {
                 result = Zi8GetSyllablesCandidates(getParam, getCandParam, ZI_WORK);
             } else {
-                code = 0x44C;
+                code = 1100;
                 result = 0;
             }
         } else {
@@ -694,7 +694,7 @@ ziBool Zi8IsDupWChar(ziWChar ch ZI_NEED_WORK) {
         pDupWordBuf[1] = ch;
         ZI_WORK->dupWordBufsUsed = 1;
     }
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return isDup;
 }
 
@@ -708,7 +708,7 @@ ziBool Zi8IsDupWordW(ziWChar* word, ziU8 wordLen ZI_NEED_WORK) {
     // uVar2 = param_2;
     isDup = ZI8_FALSE;
     if (word == ZI8_NULL || wordLen == 0) {
-        Zi8LogError(300, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_UNK_A, ZI_WORK);
         return ZI8_FALSE;
     }
 
@@ -760,7 +760,7 @@ ziBool Zi8IsDupWordW(ziWChar* word, ziU8 wordLen ZI_NEED_WORK) {
     }
     ZI_WORK->dupWordBufs[dwbRealIdx][wordI] = L'\0';
 
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return isDup;
 }
 

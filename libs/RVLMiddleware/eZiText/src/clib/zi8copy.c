@@ -7,26 +7,26 @@ ziU8 Zi8CopyWordListW(ziWChar* destination, ziU8 maxCharacters, ziWChar* wordLis
     while (ZI8_TRUE) {
         if (index == 0) {
             if (*wordList == L'\0') {
-                Zi8LogError(306, ZI_WORK);
+                Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
                 return 0;
             }
 
             while (ZI8_TRUE) {
                 *destination = *wordList++;
                 if (++charCount >= maxCharacters) {
-                    Zi8LogError(800, ZI_WORK);
+                    Zi8LogError(ZI8_ERR_BUFFER_OVERRUN, ZI_WORK);
                     return charCount;
                 }
 
                 if (*destination++ == L'\0') {
-                    Zi8LogError(100, ZI_WORK);
+                    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                     return charCount;
                 }
             }
         }
 
         if (*wordList == L'\0') {
-            Zi8LogError(306, ZI_WORK);
+            Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
             return 0;
         }
 
@@ -34,7 +34,7 @@ ziU8 Zi8CopyWordListW(ziWChar* destination, ziU8 maxCharacters, ziWChar* wordLis
         }
 
         if (index-- == 0) {
-            Zi8LogError(306, ZI_WORK);
+            Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
             return 0;
         }
     }

@@ -108,12 +108,12 @@ ziWChar Zi8Ord2Uni(ziU16 ord ZI_NEED_WORK) {
     Table0Entry* table0Data;
 
     if (ord >= Zi8GetTableCount('\x01', 0, ZI_WORK)) {
-        Zi8LogError(0x132, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
         return 0;
     }
     table0Data = (Table0Entry*)Zi8GetTableAddress('\x01', 0, ZI_WORK);
     table0Data += ord;
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ((ziU16)table0Data->chHi << 8) + table0Data->chLo;
 }
 ziWChar Zi8Ord2Ord(ziU16 ord ZI_NEED_WORK) {
@@ -124,7 +124,7 @@ ziWChar Zi8Ord2Ord(ziU16 ord ZI_NEED_WORK) {
     tableCount = Zi8GetTableCount(ZI8_LANG_ZH, 0, ZI_WORK);
     table0Data = (Table0Entry*)Zi8GetTableAddress(ZI8_LANG_ZH, 0, ZI_WORK);
     if (ord == 0 || ord >= tableCount) {
-        Zi8LogError(0x132, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
         return ord;
     }
     for (curr = table0Data + (ord - 1); ord != 0; ord--) {
@@ -132,6 +132,6 @@ ziWChar Zi8Ord2Ord(ziU16 ord ZI_NEED_WORK) {
             break;
         curr--;
     }
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ord;
 }

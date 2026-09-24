@@ -16,7 +16,7 @@ ziBool Zi8HangulInitialToOrd(ziU16 jamoIn, ziU8* jamoOut, ziU16* ordOut ZI_NEED_
 
         *ordOut = i;
         *jamoOut = tab5[i];
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return ZI8_TRUE;
     }
     Zi8LogError(680, ZI_WORK);
@@ -85,7 +85,7 @@ ziU32 Zi8GetKoreanCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCand
         return 0;
     }
     if (getParam->elementCount == 0 || getParam->elementCount > 100) {
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return 0;
     }
 
@@ -112,7 +112,7 @@ ziU32 Zi8GetKoreanCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCand
             if (elementToJamo[syllJamoLen].elementValue != '\0') {
                 jamos[jamoCount] = ((ziU16)elementToJamo[syllJamoLen].jamoHi << 8) | ((ziU16)elementToJamo[syllJamoLen].jamoLo);
             } else {
-                Zi8LogError(353, ZI_WORK);
+                Zi8LogError(ZI8_ERR_MISC_INVALID_JAMO_KOREAN, ZI_WORK);
                 return 0;
             }
         }
@@ -242,7 +242,7 @@ ziU32 Zi8GetKoreanCandidates(ziGetParam* getParam, ziGetCandidatesParam* getCand
             break;
     }
     getParam->count = candI;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return candI;
 }
 

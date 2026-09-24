@@ -897,7 +897,7 @@ ziU8 ZiCharInfo2(ziWChar ch, ziWChar* charInfoBuffer, ziU8 maxInfoBufSize, ziU8 
 
     table34Data = 0;
     if (charInfoBuffer == ZI8_NULL || maxInfoBufSize == 0) {
-        Zi8LogError(300, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_UNK_A, ZI_WORK);
         return 0;
     }
     if ((hetMode & 0x80) != 0) {

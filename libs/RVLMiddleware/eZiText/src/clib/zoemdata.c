@@ -9,12 +9,12 @@ ziBool Zi8AttachOEMdata(Zi8OemSearchDict searchCb, ziU16 dictLen, ziPtr dictData
     ZI_WORK->oemSearchDict = searchCb;
     ZI_WORK->oemDictLen = dictLen;
     ZI_WORK->oemDictData = dictData;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     return ZI8_TRUE;
 }
 
 ziBool Zi8DetachOEMdata(ziU8 oemId ZI_NEED_WORK) {
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (oemId != 1 || ZI_WORK->oemSearchDict == ZI8_NULL) {
         return ZI8_FALSE;
     }

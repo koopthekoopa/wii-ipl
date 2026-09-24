@@ -768,7 +768,7 @@ ziU32 zi8InternalGetZH(ziGetParam* getParam, ziGetCandidatesParam* getCandParam 
         }
         if ((getParam->context & 0x10) != 0) {
             if (local_424 == ZI8_NULL) {
-                Zi8LogError(354, ZI_WORK);
+                Zi8LogError(ZI8_ERR_MISC_CAND_NULL, ZI_WORK);
                 return 0;
             }
             local_483 = 1;
@@ -2272,7 +2272,7 @@ LAB_81471130:
                             goto LAB_81474748;
                     }
                 }
-                if (*local_420 != 0xf305)
+                if (*local_420 != BPMF_CHAR(BPMF_CHAR_INITIAL_B))
                     break;
             LAB_2474:
                 local_44c = (ziWChar)zi8tones[local_3cc++];
@@ -2338,7 +2338,7 @@ LAB_81471130:
         }
     }
 LAB_814717e8:
-    if ((ZI_WORK->unk_0x12C != 0 && (local_48a != 0 || !bVar22) && !getCandParam->unk_0x00) &&
+    if ((ZI_WORK->zhUwdDataIdx != 0 && (local_48a != 0 || !bVar22) && !getCandParam->unk_0x00) &&
         (local_208.syllCount <= 1 || (local_48a != 1 && local_48a != 2)) && Zi8GetZHuwdPtr(&local_3d4, &local_446, ZI_WORK) &&
         (local_48a != 0 || local_208.multicharStrokeCount <= 1)) {
         for (local_444 = 0; local_444 < local_446;) {
@@ -3334,7 +3334,7 @@ LAB_81474748:
         if (local_490 != '\0') {
             ZI_WORK->pudTopIdx = local_490;
         }
-        Zi8LogError(100, ZI_WORK);
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
         return local_414;
     }
 
@@ -3623,7 +3623,7 @@ ziBool Zi8NewMatchPhonetic(ziGetParam* getParam, Table0Entry* chTab, Table5Entry
     ziU8* local_68;
     ziS32 local_6c = getCandParam->unk_0x10 - 0x40;
     ziU8* local_70;
-    Zi8LogError(100, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if ((syllMask & 7) == 7) {
         tone = syllPhon & 7;
     }

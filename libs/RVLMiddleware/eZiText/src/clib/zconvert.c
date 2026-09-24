@@ -5,12 +5,33 @@
 #include <zi8clib/zierror.h>
 #include <zi8clib/ziswordw.h>
 
-#define ZI_LOAD_U16_FROM_TABLE(TABLE, OFFSET) (((ziU16)TABLE[OFFSET * 2] << 8) | (ziU16)(TABLE[OFFSET * 2 + 1]))
+// AlphaTConv {
+//     ziU16   hdrOnlyCount: [0x0, 0x1] OR,
+//     ziWChar startCh: [0x0, 0x1] OR,
+//     ziWChar endCh: [0x2, 0x3] OR,
+//     ziU8    unused4_: [0x4]  NOSHIFT,
+//     ziU8    unused5_: [0x5]  NOSHIFT,
+//     ziU16   charOrOffs: [0x6, 0x7] OR SHIFT,
+// }
+#define ZI8_ALPHA_TCONV_ENTRY_SIZE 0x8
+#define ZI8_ALPHA_TCONV_BYTE(TAB, BYTE_I) ((TAB)[BYTE_I])
+#define ZI8_ALPHA_TCONV_HDR_ONLY_COUNT(TAB) ((ziU16)ZI8_ALPHA_TCONV_BYTE(TAB, 0) << 8 | (ziU16)ZI8_ALPHA_TCONV_BYTE(TAB, 1))
+#define ZI8_ALPHA_TCONV_START_CH(TAB) ((ziWChar)ZI8_ALPHA_TCONV_BYTE(TAB, 0) << 8 | (ziWChar)ZI8_ALPHA_TCONV_BYTE(TAB, 1))
+#define ZI8_ALPHA_TCONV_END_CH(TAB) ((ziWChar)ZI8_ALPHA_TCONV_BYTE(TAB, 2) << 8 | (ziWChar)ZI8_ALPHA_TCONV_BYTE(TAB, 3))
+#define ZI8_ALPHA_TCONV_UNUSED4_(TAB) (ZI8_ALPHA_TCONV_BYTE(TAB, 4))
+#define ZI8_ALPHA_TCONV_UNUSED5_(TAB) (ZI8_ALPHA_TCONV_BYTE(TAB, 5))
+#define ZI8_ALPHA_TCONV_CHAR_OR_OFFS(TAB) ((ziU16)ZI8_ALPHA_TCONV_BYTE(TAB, 6) << 8 | (ziU16)ZI8_ALPHA_TCONV_BYTE(TAB, 7))
+
+#define ZI_LOAD_WCHAR(DATA) ((ziWChar)(DATA)[0] << 8 | (ziWChar)(DATA)[1])
 
 typedef struct {
     ziWChar chrStart;  // 0x0
     ziWChar chrEnd;    // 0x2
-    ziU32 convData;    // 0x4
+    union {
+        ziWChar* wcharList;  // 0x4
+        ziChar* ucharList;   // 0x4
+        ziU32 ch;            // 0x4
+    };
 } ziCvrtInfo;
 typedef struct {
     ziCvrtInfo uc2wc;   // 0x00
@@ -31,7 +52,7 @@ ziWChar Zi8ConvertUC2WC(ziChar ch, ziU8 language ZI_NEED_WORK) {
     ziU8* offsetTable;
 
     if (ch == '\0') {
-        Zi8LogError(307, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_NULL_CHAR, ZI_WORK);
         return L'\0';
     }
     if (Zi8GetTableCount(language, 6, ZI_WORK) != 0) {
@@ -42,16 +63,16 @@ ziWChar Zi8ConvertUC2WC(ziChar ch, ziU8 language ZI_NEED_WORK) {
         }
 
         offsetTable = table;
-        tableStart = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-        tableEnd = ZI_LOAD_U16_FROM_TABLE(offsetTable, 1);
+        tableStart = ZI8_ALPHA_TCONV_START_CH(offsetTable);
+        tableEnd = ZI8_ALPHA_TCONV_END_CH(offsetTable);
         if (ch < tableStart || ch > tableEnd) {
-            Zi8LogError(306, ZI_WORK);
+            Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
             return L'\0';
         }
 
-        offsetTable += (ch - tableStart) * 2 + 8;
-        Zi8LogError(100, ZI_WORK);
-        return ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
+        offsetTable += (ch - tableStart) * sizeof(ziWChar) + ZI8_ALPHA_TCONV_ENTRY_SIZE;
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
+        return ZI_LOAD_WCHAR(offsetTable);
     } else {
         cvrtTable = &Zi8CvrtTables.uc2wc;
         if (!cvrtTable) {
@@ -59,12 +80,12 @@ ziWChar Zi8ConvertUC2WC(ziChar ch, ziU8 language ZI_NEED_WORK) {
             return L'\0';
         }
         if (ch < cvrtTable->chrStart || ch > cvrtTable->chrEnd) {
-            Zi8LogError(306, ZI_WORK);
+            Zi8LogError(ZI8_ERR_COM_UNK_G, ZI_WORK);
             return L'\0';
         }
 
-        cvrtTableCvrtData = (ziWChar*)cvrtTable->convData;
-        Zi8LogError(100, ZI_WORK);
+        cvrtTableCvrtData = cvrtTable->wcharList;
+        Zi8LogError(ZI8_ERR_OK, ZI_WORK);
 
         return cvrtTableCvrtData[ch - cvrtTable->chrStart];
     }
@@ -84,7 +105,7 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
     ziU16 i;
 
     if (ch == L'\0') {
-        Zi8LogError(307, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_NULL_CHAR, ZI_WORK);
         return '\0';
     }
     if (Zi8GetTableCount(language, 7, ZI_WORK) != 0) {
@@ -95,29 +116,29 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
         }
 
         offsetTable = table;
-        tableCount = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-        offsetTable += 8;
+        tableCount = ZI8_ALPHA_TCONV_HDR_ONLY_COUNT(offsetTable);
+        offsetTable += ZI8_ALPHA_TCONV_ENTRY_SIZE;
         for (i = 0; i < tableCount; i++) {
-            tableStart = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-            tableEnd = ZI_LOAD_U16_FROM_TABLE(offsetTable, 1);
-            if ((ch < tableStart) || (ch > tableEnd)) {
-                offsetTable += 8;
+            tableStart = ZI8_ALPHA_TCONV_START_CH(offsetTable);
+            tableEnd = ZI8_ALPHA_TCONV_END_CH(offsetTable);
+            if (ch < tableStart || ch > tableEnd) {
+                offsetTable += ZI8_ALPHA_TCONV_ENTRY_SIZE;
                 continue;
             }
-            offsetTableBase = ZI_LOAD_U16_FROM_TABLE(offsetTable, 3);
+            offsetTableBase = ZI8_ALPHA_TCONV_CHAR_OR_OFFS(offsetTable);
             if (tableStart == tableEnd) {
-                Zi8LogError(100, ZI_WORK);
+                Zi8LogError(ZI8_ERR_OK, ZI_WORK);
                 return offsetTableBase;
             }
 
-            offsetTable = (table + offsetTableBase + ch - tableStart + 8);
-            Zi8LogError(100, ZI_WORK);
-            return *offsetTable;
+            offsetTable = table + offsetTableBase + ch - tableStart + ZI8_ALPHA_TCONV_ENTRY_SIZE;
+            Zi8LogError(ZI8_ERR_OK, ZI_WORK);
+            return offsetTable[0];
         }
         Zi8LogError(ZI8_ERR_CONVERT_NOT_FOUND, ZI_WORK);
         return '\0';
     } else {
-        cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.wc2uc.convData;
+        cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.wc2uc.ch;
         if (!cvrtTableCvrtData) {
             Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_WC2UC, ZI_WORK);
             return '\0';
@@ -128,12 +149,12 @@ ziChar Zi8ConvertWC2UC(ziWChar ch, ziU8 language ZI_NEED_WORK) {
                 continue;
             }
 
-            Zi8LogError(100, ZI_WORK);
+            Zi8LogError(ZI8_ERR_OK, ZI_WORK);
             if (cvrtTableCvrtData[i].chrStart == cvrtTableCvrtData[i].chrEnd) {
-                return (ziU8)(ziU32)cvrtTableCvrtData[i].convData;
+                return (ziU8)cvrtTableCvrtData[i].ch;
             }
 
-            convData = (ziU8*)cvrtTableCvrtData[i].convData;
+            convData = cvrtTableCvrtData[i].ucharList;
             return convData[ch - cvrtTableCvrtData[i].chrStart];
         }
         Zi8LogError(ZI8_ERR_CONVERT_NOT_FOUND, ZI_WORK);
@@ -149,7 +170,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
 
     ziU8* table;
     ziU8* offsetTable;
-    ziU16* convData;
+    ziWChar* convData;
 
     ziU16 i;
     ziU16 loopResult;
@@ -160,7 +181,7 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
     loopResult = 0;
 
     if (ch == '\0') {
-        Zi8LogError(307, ZI_WORK);
+        Zi8LogError(ZI8_ERR_COM_NULL_CHAR, ZI_WORK);
         return 0;
     }
     if (ZI_WORK->usrKeyLyts[language] != 0) {
@@ -174,27 +195,27 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
         }
 
         offsetTable = table;
-        tableCount = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-        offsetTable += 8;
+        tableCount = ZI8_ALPHA_TCONV_HDR_ONLY_COUNT(offsetTable);
+        offsetTable += ZI8_ALPHA_TCONV_ENTRY_SIZE;
         for (i = 0; i < tableCount; i++) {
-            tableStart = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
-            tableEnd = ZI_LOAD_U16_FROM_TABLE(offsetTable, 1);
-            if ((ch < tableStart) || (ch > tableEnd)) {
-                offsetTable += 8;
+            tableStart = ZI8_ALPHA_TCONV_START_CH(offsetTable);
+            tableEnd = ZI8_ALPHA_TCONV_END_CH(offsetTable);
+            if (ch < tableStart || ch > tableEnd) {
+                offsetTable += ZI8_ALPHA_TCONV_ENTRY_SIZE;
                 continue;
             }
-            loopResult = ZI_LOAD_U16_FROM_TABLE(offsetTable, 3);
+            loopResult = ZI8_ALPHA_TCONV_CHAR_OR_OFFS(offsetTable);
             if (tableStart != tableEnd) {
                 offsetTable = table + ((ch - tableStart) * 2 + loopResult);
-                offsetTable += 8;
-                loopResult = ZI_LOAD_U16_FROM_TABLE(offsetTable, 0);
+                offsetTable += ZI8_ALPHA_TCONV_ENTRY_SIZE;
+                loopResult = ZI_LOAD_WCHAR(offsetTable);
                 break;
             } else {
                 break;
             }
         }
     } else {
-        cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.uc2key.convData;
+        cvrtTableCvrtData = (ziCvrtInfo*)Zi8CvrtTables.uc2key.ch;
         if (!cvrtTableCvrtData) {
             Zi8LogError(ZI8_ERR_CONVERT_MISSING_TABLE_UC2KEY, ZI_WORK);
             return 0;
@@ -206,11 +227,12 @@ ziU16 Zi8ConvertUC2Key(ziChar ch, ziU8 language ZI_NEED_WORK) {
             }
 
             if (cvrtTableCvrtData[i].chrStart == cvrtTableCvrtData[i].chrEnd) {
-                loopResult = (ziU8)(ziU32)cvrtTableCvrtData[i].convData;
+                // @bug Unused codepath, but should be a cast to ziWChar, not ziChar
+                loopResult = (ziChar)cvrtTableCvrtData[i].ch;
                 break;
             }
 
-            convData = (ziU16*)cvrtTableCvrtData[i].convData;
+            convData = cvrtTableCvrtData[i].wcharList;
             loopResult = convData[ch - cvrtTableCvrtData[i].chrStart];
             break;
         }
