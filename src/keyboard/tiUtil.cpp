@@ -173,17 +173,17 @@ namespace textinput {
             return ch;
         }
 
-        bool KBD_IsDakuten(wchar_t ch) {
+        BOOL KBD_IsDakuten(wchar_t ch) {
             wchar_t* first = wcschr((wchar_t*)s_dakuten_map[1], ch);
             return first != NULL;
         }
 
-        bool KBD_IsHandaku(wchar_t ch) {
+        BOOL KBD_IsHandaku(wchar_t ch) {
             wchar_t* first = wcschr((wchar_t*)s_handaku_map[1], ch);
             return first != NULL;
         }
 
-        bool KBD_IsSmall(wchar_t ch) {
+        BOOL KBD_IsSmall(wchar_t ch) {
             wchar_t* first = wcschr((wchar_t*)s_small_map[1], ch);
             return first != NULL;
         }

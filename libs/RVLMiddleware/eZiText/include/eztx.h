@@ -135,9 +135,15 @@ typedef struct EZTXGetParam {
     u8 count;     // 0x21
     u8 letters;   // 0x22
     u8* scratch;  // 0x24
+
+    u32 unk_0x28;  // 0x28
 } EZTXGetParam;
 
-typedef u8 (*Zi8OemSearchDict)(u16 idx, wchar_t* wordOut, u8 maxLen, void* dictData);
+typedef u8 (*Zi8OemSearchDict)(u16 idx, u16* wordOut, u8 maxLen, void* dictData);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 u16 EZTXGetGlobalDataSize();
 
@@ -150,5 +156,9 @@ u8 EZTXCopy(wchar_t* dest, EZTXGetParam* getParams, u8 index, void* workData);
 
 u8 EZTXAttachOEMDict(Zi8OemSearchDict searchCb, u16 dictLen, void* dictData, void* workData);
 int EZTXDetachOEMDict(u8 oemId, void* workData);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // EZI_TEXT_H

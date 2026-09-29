@@ -24,6 +24,13 @@ typedef struct _KPRQueue {
     u32 altVal;       // 0x14
 } KPRQueue;
 
+void KPRInitQueue(KPRQueue* queue);
+void KPRSetMode(KPRQueue* queue, KPRMode mode);
+void KPRClearQueue(KPRQueue* queue);
+u8 KPRPutChar(KPRQueue* queue, wchar_t);
+wchar_t KPRGetChar(KPRQueue* queue);
+u8 KPRLookAhead(const KPRQueue* queue, wchar_t*, u32);
+
 #ifdef __cplusplus
 }
 #endif
