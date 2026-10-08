@@ -35,47 +35,51 @@ namespace textinput {
 
     typedef struct Scroll {
         bool absY;  // 0x00
-        f32  x;     // 0x04
-        f32  y;     // 0x08
+        f32 x;      // 0x04
+        f32 y;      // 0x08
     } Scroll;
 
     class Base {
-        public :
-            virtual ~Base() {}
+    public:
+        virtual ~Base() {}
 
-            virtual void    create(MEMAllocator* allocator);
-            virtual void    init();
+        virtual void create(MEMAllocator* allocator);
+        virtual void init();
     };
 
     class CommandSender;
     class CommandReceiver : public Base {
-        public:
-            typedef enum INPUT_COMMAND {
-                INPUT_COMMAND_0 = 0,
-                INPUT_COMMAND_37 = 37,
-            } INPUT_COMMAND;
+    public:
+        typedef enum INPUT_COMMAND {
+            INPUT_COMMAND_0 = 0,
+            INPUT_COMMAND_37 = 37,
+        } INPUT_COMMAND;
+        struct ChangePredictMode {
+            int unk_0x0;      // 0x0
+            bool bZiEnabled;  // 0x4
+        };
 
-            virtual void    clearSender();
-            virtual void    onCommand(INPUT_COMMAND command, void* data);
-            virtual void    addSender(CommandSender* cmdSend);
+        virtual void clearSender();
+        virtual void onCommand(INPUT_COMMAND command, void* data);
+        virtual void addSender(CommandSender* cmdSend);
 
-        private:
-            nw4r::ut::List  mSenderList;    // 0x04
+    private:
+        nw4r::ut::List mSenderList;  // 0x04
     };
 
     class CommandSender : public Base {
-        public:
-            CommandSender() : mpCommandReceiver(NULL) {}
+    public:
+        CommandSender() : mpCommandReceiver(NULL) {}
 
-            virtual void    setCommandReceiver(CommandReceiver* cmdRecv);
-            virtual void    sendCommand(u32, void*);
-            virtual void    updateFromReceiver(u32, void*) {}
+        virtual void setCommandReceiver(CommandReceiver* cmdRecv);
+        virtual void sendCommand(u32 command, void* data);
+        virtual void updateFromReceiver(u32 command, void* data) {}
 
-            nw4r::ut::Link      mLink;              // 0x00
+        nw4r::ut::Link mLink;  // 0x00
 
-        private:
-            CommandReceiver*    mpCommandReceiver;  // 0x08
+    private:
+        CommandReceiver* mpCommandReceiver;  // 0x08
     };
-}
+}  // namespace textinput
 
-#endif // TEXTINPUT_BASE_H
+#endif  // TEXTINPUT_BASE_H

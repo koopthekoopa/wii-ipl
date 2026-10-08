@@ -42,7 +42,7 @@ namespace textinput {
             virtual void onOK();
             virtual void onCancel();
             virtual void setQwertyWithSE(bool qwerty);
-            virtual bool isEnableKeytopChange() const;
+            virtual bool isEnableKeytopChange() const { return mbIsEnableQwertyChg; }
             virtual void enableKeytopChange(bool enable);
             virtual nw4r::lyt::Pane* getUpArea();
             virtual nw4r::lyt::Pane* getDownArea();

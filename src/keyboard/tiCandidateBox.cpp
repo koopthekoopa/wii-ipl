@@ -673,7 +673,7 @@ namespace textinput {
             mbActive = active;
             if (meLanguage == CN || meLanguage == KR) {
                 mpManager->getPCKeyboard()->setLangKeyActive(active);
-                mpManager->getCellPhoneKeyboard()->vt_0x68(active);
+                mpManager->getCellPhoneKeyboard()->setLangKeyActive(active);
             }
         }
 

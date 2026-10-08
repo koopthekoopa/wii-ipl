@@ -182,7 +182,7 @@ namespace textinput {
                             }
                             break;
                         }
-                        case ANM_07:
+                        case ANM_08:
                         case ANM_11: {
                             pane->changeAnimation(ANM_09);
                             break;

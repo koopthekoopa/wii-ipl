@@ -41,8 +41,8 @@ namespace textinput {
                 virtual void getState();
                 virtual void isShiftOn();
                 virtual void isCapsOn();
-                virtual void isABC();
-                virtual void setABC();
+                virtual bool isABC();
+                virtual void setABC(bool);
                 virtual void getABCInputMode();
                 virtual void getAIUInputMode();
                 virtual TranslateMode getTranslateMode();

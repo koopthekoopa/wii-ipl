@@ -173,10 +173,10 @@ namespace textinput {
 
             u16 mFlightDuration[GUI_POINTS_MAX];  // 0x80
 
-            bool mbTriggerTarget;  // 0x8A
+            bool mbTriggerTarget;  // 0x90
 
-            GUIManager* mpManager;     // 0x8C
-            EventHandler* mpListener;  // 0x90
+            GUIManager* mpManager;     // 0x94
+            EventHandler* mpListener;  // 0x98
         };
 
         class GUIManager : public GUIInterface {
