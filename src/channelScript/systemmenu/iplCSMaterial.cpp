@@ -16,7 +16,6 @@ struct CSMatTexData {
     };
 };
 
-
 namespace ipl {
     namespace cs {
         namespace material {
@@ -153,7 +152,7 @@ namespace ipl {
                 u32* data = static_cast<u32*>(CHANSVmNewObjData(vm, obj, sizeof(u32)));
                 if (data != NULL) {
                     *data = materialData;
-                    obj->type = CHANS_VM_TYPE_OBJECT;
+                    obj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                     CHANSVmNativeClass* ncls = CHANSVmFindNativeClass(vm, "Material");
                     obj->parentCls = ncls;
                     if (ncls != NULL) {

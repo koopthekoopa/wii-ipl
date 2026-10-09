@@ -208,7 +208,7 @@ namespace ipl {
                 u32* data = static_cast<u32*>(CHANSVmNewObjData(VmInst, VmObj, sizeof(u32)));
                 if (data != NULL) {
                     *data = anim;
-                    VmObj->type = CHANS_VM_TYPE_OBJECT;
+                    VmObj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                     CHANSVmNativeClass* ncls = CHANSVmFindNativeClass(VmInst, "Anim");
                     VmObj->parentCls = ncls;
                     ret = ncls != NULL;
@@ -246,8 +246,7 @@ namespace ipl {
                 CHANSVmNativeClass* cls = CHANSVmAddNativeClass(vm, "Anim", NULL, NULL);
                 if (cls != NULL) {
                     result = CHANSVmAddNativeMethodList(vm, cls, cMethodList, CHANSVmMethodCount(cMethodList)) == CHANS_VM_OK;
-                    result =
-                        result & (CHANSVmAddNativePropertyAccessorsList(vm, cls, cPropertyList, CHANSVmPropertyCount(cPropertyList)) == CHANS_VM_OK);
+                    result &= (CHANSVmAddNativePropertyAccessorsList(vm, cls, cPropertyList, CHANSVmPropertyCount(cPropertyList)) == CHANS_VM_OK);
                 }
                 return result;
             }

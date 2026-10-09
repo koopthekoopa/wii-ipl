@@ -957,7 +957,7 @@ config.libs = [
             Object(Matching,    "channelScript/systemmenu/iplCSRect.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSColor.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSSize.cpp"),
-            Object(Equivalent,  "channelScript/systemmenu/iplCSAnim.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSAnim.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSSound.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSImage.cpp"),
         ]

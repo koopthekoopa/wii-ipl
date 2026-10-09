@@ -3,9 +3,7 @@
 
 #include <egg/core.h>
 
-extern "C" {
 #include <revolution/wd.h>
-}
 
 #include "utility/iplThread.h"
 
@@ -17,7 +15,7 @@ namespace ipl {
 
             virtual ~APScanThread();      // 0x08
             virtual void* Run();          // 0x0C
-            virtual void unk_0x2C() = 0;  // 0x2C
+            virtual void unk_0x2C() = 0;  // 0x2C (unused or the same crap as 4.3K iplBackMenu)
 
             void setResultData(unsigned short* buffer);
             void setParam();

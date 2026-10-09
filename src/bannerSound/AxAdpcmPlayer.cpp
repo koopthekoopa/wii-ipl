@@ -291,10 +291,10 @@ int AxAdpcmSimplePlayer::start(void* data, u32 length, AxAdpcmHandle* handle) {
 
             void* loopAddr;
             if (axAddr.loopFlag) {
-                axAdpcmLoop.loop_pred_scale = coeffsBufB[i]->cfg.loopPredScale;
-                axAdpcmLoop.loop_yn1 = coeffsBufB[i]->cfg.loopYn1;
+                axAdpcmLoop.loop_pred_scale = coeffsBufB[i]->loop.loop_pred_scale;
+                axAdpcmLoop.loop_yn1 = coeffsBufB[i]->loop.loop_yn1;
                 // @bug Doesn't copy the loop value correctly :(
-                axAdpcmLoop.loop_yn2 = coeffsBufB[i]->cfg.loopYn1;
+                axAdpcmLoop.loop_yn2 = coeffsBufB[i]->loop.loop_yn1;
                 loopAddr = SimpleWavePlayer::convertDSPAddr(chanDataBuf[i], infoBlock->loopStart, 0);
             } else {
                 loopAddr = SimpleWavePlayer::convertDSPAddr(zeroBuffer, 0, 0);
@@ -312,26 +312,26 @@ int AxAdpcmSimplePlayer::start(void* data, u32 length, AxAdpcmHandle* handle) {
             axAddr.currentAddressHi = (u32)currAddr >> 0x10;
             axAddr.currentAddressLo = (u32)currAddr & 0xFFFF;
 
-            axAdpcm.a[0][0] = pCoeffsBufB[i]->a[0][0];
-            axAdpcm.a[0][1] = pCoeffsBufB[i]->a[0][1];
-            axAdpcm.a[1][0] = pCoeffsBufB[i]->a[1][0];
-            axAdpcm.a[1][1] = pCoeffsBufB[i]->a[1][1];
-            axAdpcm.a[2][0] = pCoeffsBufB[i]->a[2][0];
-            axAdpcm.a[2][1] = pCoeffsBufB[i]->a[2][1];
-            axAdpcm.a[3][0] = pCoeffsBufB[i]->a[3][0];
-            axAdpcm.a[3][1] = pCoeffsBufB[i]->a[3][1];
-            axAdpcm.a[4][0] = pCoeffsBufB[i]->a[4][0];
-            axAdpcm.a[4][1] = pCoeffsBufB[i]->a[4][1];
-            axAdpcm.a[5][0] = pCoeffsBufB[i]->a[5][0];
-            axAdpcm.a[5][1] = pCoeffsBufB[i]->a[5][1];
-            axAdpcm.a[6][0] = pCoeffsBufB[i]->a[6][0];
-            axAdpcm.a[6][1] = pCoeffsBufB[i]->a[6][1];
-            axAdpcm.a[7][0] = pCoeffsBufB[i]->a[7][0];
-            axAdpcm.a[7][1] = pCoeffsBufB[i]->a[7][1];
-            axAdpcm.gain = pCoeffsBufB[i]->cfg.gain;
-            axAdpcm.pred_scale = pCoeffsBufB[i]->cfg.predScale;
-            axAdpcm.yn1 = pCoeffsBufB[i]->cfg.yn1;
-            axAdpcm.yn2 = pCoeffsBufB[i]->cfg.yn2;
+            axAdpcm.a[0][0] = pCoeffsBufB[i]->adpcm.a[0][0];
+            axAdpcm.a[0][1] = pCoeffsBufB[i]->adpcm.a[0][1];
+            axAdpcm.a[1][0] = pCoeffsBufB[i]->adpcm.a[1][0];
+            axAdpcm.a[1][1] = pCoeffsBufB[i]->adpcm.a[1][1];
+            axAdpcm.a[2][0] = pCoeffsBufB[i]->adpcm.a[2][0];
+            axAdpcm.a[2][1] = pCoeffsBufB[i]->adpcm.a[2][1];
+            axAdpcm.a[3][0] = pCoeffsBufB[i]->adpcm.a[3][0];
+            axAdpcm.a[3][1] = pCoeffsBufB[i]->adpcm.a[3][1];
+            axAdpcm.a[4][0] = pCoeffsBufB[i]->adpcm.a[4][0];
+            axAdpcm.a[4][1] = pCoeffsBufB[i]->adpcm.a[4][1];
+            axAdpcm.a[5][0] = pCoeffsBufB[i]->adpcm.a[5][0];
+            axAdpcm.a[5][1] = pCoeffsBufB[i]->adpcm.a[5][1];
+            axAdpcm.a[6][0] = pCoeffsBufB[i]->adpcm.a[6][0];
+            axAdpcm.a[6][1] = pCoeffsBufB[i]->adpcm.a[6][1];
+            axAdpcm.a[7][0] = pCoeffsBufB[i]->adpcm.a[7][0];
+            axAdpcm.a[7][1] = pCoeffsBufB[i]->adpcm.a[7][1];
+            axAdpcm.gain = pCoeffsBufB[i]->adpcm.gain;
+            axAdpcm.pred_scale = pCoeffsBufB[i]->adpcm.pred_scale;
+            axAdpcm.yn1 = pCoeffsBufB[i]->adpcm.yn1;
+            axAdpcm.yn2 = pCoeffsBufB[i]->adpcm.yn2;
 
             u32 ratio = infoBlock->sampleRate / 32000.0f * 65536.0f;
             axSrc.ratioHi = ratio >> 16;

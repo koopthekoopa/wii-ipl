@@ -10,7 +10,7 @@ namespace ipl {
                 u32* data = static_cast<u32*>(CHANSVmNewObjData(vm, obj, sizeof(*data)));
                 if (data != NULL) {
                     *data = font;
-                    obj->type = CHANS_VM_TYPE_OBJECT;
+                    obj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                     obj->parentCls = CHANSVmFindNativeClass(vm, "Font");
                     if (obj->parentCls != NULL) {
                         result = TRUE;

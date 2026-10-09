@@ -1,13 +1,20 @@
-### **Thank you for your interest on helping out!**
+**Thank you for your interest on helping out!**
+-----------------------------------------------
+
+AI Notice
+---------
 
 **Unfortunately, we do not allow AI for decompiling code in this project**
-- AI often produces code in questionable quality and a human would unlikely write.
-- They may use source code leaks as references as it could be in their training data.
-- Basically, try and avoid stuff like [this](https://github.com/koopthekoopa/wii-ipl/pull/27)
 
-# Resources
+- AI often produces code in questionable quality and a human would unlikely write. We're trying to aim for readability and quality.
+- There are a lot of sources in it's training data, and one of those may be leaked source code which we do not want.
+- Basically, try and avoid stuff like [this](https://github.com/koopthekoopa/wii-ipl/pull/27).
+- It is also advised to **not** create forks of this project soley for 100% matching with AI (Any existing ones should be avoided)
 
-- An [introduction to decompilation](https://decomp.wiki/en/resources/decomp-intro), if this is your first time learning.
+Resources
+=========
+
+- An introduction to decompilation (either [decomp.wiki](https://decomp.wiki/en/resources/decomp-intro) and/or [decomp-academy](https://decomp-academy.dev/)), if this is your first time learning.
 - A tool for decompiling. This include, but not limited to:
   - [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest)
     - Requires [Cuyler36's GameCube Loader](https://github.com/Cuyler36/Ghidra-GameCube-Loader/releases/latest).
@@ -18,9 +25,11 @@
 - Code IDE (recommended: Visual Studio Code)
 - A diffing tool. (such as [objdiff](https://github.com/encounter/objdiff/releases/latest))
 
-# Ghidra
+Ghidra
+======
 
-### Accessing the repository
+Accessing the repository
+------------------------
 
 >  [!NOTE]
 > At least version 12.0 is required!
@@ -31,7 +40,8 @@
   - Role: If you would like to make changes, select `Write`. Otherwise select `Read`.
 - Click Request then wait for your request to be accepted.
 
-### Opening the repository
+Opening the repository
+----------------------
 
 - Goto File > New Project
 - Select "Shared Project"
@@ -46,11 +56,13 @@
     - Changes will be made to the repository, so make sure that you are checking out to the latest version!
   - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
 
-# Code Guidelines
+Code Guidelines
+===============
 
-### Note: In some scenarios, some of these rules (mostly related to naming) can be ignored if they either affect matching or relate to original symbols or DWARF from ELF files.
+**Note: In some scenarios, some of these rules can be ignored if they either affect matching or relate to the original symbols and/or DWARF.**
 
-### General
+General
+-------
 
 - Style formatting is all done by `clang-format`.
   - It should automatically apply when using Visual Studio Code on saving a source file.
@@ -91,13 +103,15 @@
 nand::wrapper::Delete("cdb.vff");
 ```
 
-### File types
+File types
+----------
 
  - For **C** code, use the `.c` extension.
  - For **C++** code, use the `.cpp` extension.
  - For **C and C++** headers, use the `.h` extension.
 
-### Header guards
+Header guards
+-------------
 
 Despite the compiler that this project uses (CodeWarrior) has support for `#pragma once`, please use the standard way for header guards. This is to help readability.
 
@@ -126,7 +140,8 @@ Despite the compiler that this project uses (CodeWarrior) has support for `#prag
 
 Make sure the guard names are uppercase SNAKE_CASE.
 
-### Header includes
+Header includes
+---------------
 
 - Try and not include any unnecesary includes.
 - For headers in the `libs` directory, please use `<>`
@@ -144,7 +159,8 @@ Make sure the guard names are uppercase SNAKE_CASE.
 #include "decomp.h" // Header in the include/decomp directory
 ```
 
-### Naming
+Naming
+------
 
 - Names with known symbols should **exactly** match,
   - Even if the symbol has typos or does not follow the guidelines!
@@ -170,7 +186,8 @@ Make sure the guard names are uppercase SNAKE_CASE.
   };
 ```
 
-### Classes and structures
+Classes and structures
+----------------------
 
 - Offsets for fields and virtual functions must be commented.
 - For unknown structure/class fields, they must be referred to by their offset (in uppercase hex), prefixed by `unk_`.
@@ -184,7 +201,8 @@ Make sure the guard names are uppercase SNAKE_CASE.
   virtual void VirtualFunc1(); // 0x10
 ```
 
-### Literals
+Literals
+--------
 
 - For floating-point values, please be explicit with them. (they can also affect matching)
 ```cpp
@@ -199,6 +217,7 @@ Make sure the guard names are uppercase SNAKE_CASE.
   float value2 = 3.;
 ```
 
-# Conclusion
+Conclusion
+==========
 
 If you have any questions or are interested in contributing to this project, you can join the [Discord Server](https://discord.gg/hKx3FJJgrV) and ask in the `#wii-menu` channel.

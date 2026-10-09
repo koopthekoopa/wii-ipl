@@ -165,7 +165,7 @@ namespace nw4r {
             math::MTX34 mMtx;     // 0x54
             math::MTX34 mGlbMtx;  // 0x84
 
-            char mName[16];     // 0xB4
+            char mName[16];                               // 0xB4
             char mUserData[NW4R_LYT_PANE_USERDATA_SIZE];  // 0xC4
 
             u8 mBasePosition;      // 0xCC

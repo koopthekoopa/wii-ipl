@@ -769,8 +769,13 @@ namespace ipl {
                     nw4r::ut::Rect drawRect(mDispTrans.x - mpChanSelScn->mChanThumbOff_X, mDispTrans.y + mpChanSelScn->mChanThumbOff_Y,
                                             mDispTrans.x + mpChanSelScn->mChanThumbOff_X, mDispTrans.y - mpChanSelScn->mChanThumbOff_Y);
 
-                    utility::Graphics::drawTexture(drawRect, mpCapture->getGXTex(), (GXColor){255, 255, 255, (u8)mpZoomAnim->get()}, 1);
-                    drawPolygonAroundRect(drawRect, (GXColor){0, 0, 0, (u8)mpZoomAnim->get()});
+                    GXColor color = {255, 255, 255, 255};
+                    color.a = (u8)mpZoomAnim->get();
+                    utility::Graphics::drawTexture(drawRect, mpCapture->getGXTex(), color, 1);
+
+                    GXColor color2 = {0, 0, 0, 0};
+                    color2.a = (u8)mpZoomAnim->get();
+                    drawPolygonAroundRect(drawRect, color2);
                 } else {
                     utility::Graphics::setDefaultOrtho();
 
@@ -2098,6 +2103,7 @@ namespace ipl {
             int start = mChanIndex + (mChanPage * MAX_CHANNEL_INDEX);
             int inc = backwards == TRUE ? -1 : 1;
             int result;
+            channel::Manager* manager;
 
             for (int i = start + inc;; i += inc) {
                 if (i < 0) {
@@ -2114,7 +2120,8 @@ namespace ipl {
                 }
                 int searchPage = i / MAX_CHANNEL_INDEX;
                 int searchIndex = i % MAX_CHANNEL_INDEX;
-                if (System::getChannelManager()->getChannel(searchPage, searchIndex).loadedBnr) {
+                manager = System::getChannelManager();  // why
+                if (manager->getChannel(searchPage, searchIndex).loadedBnr) {
                     *page = searchPage;
                     *index = searchIndex;
                     result = TRUE;
@@ -2454,9 +2461,7 @@ namespace ipl {
             if (mLimitType == LIMIT_TYPE_TIME) {
                 *hour = (u32)mTimeLimitRemain / (60 * 60);
 
-                // FAKEMATCH: should be modular division. not whatever this is
                 *minute = (mTimeLimitRemain - ((60 * 60) * *hour)) / 60;
-                //*minute = (u32)(mTimeLimitRemain % (60 * 60)) / 60U;
                 return TRUE;
             } else {
                 return FALSE;

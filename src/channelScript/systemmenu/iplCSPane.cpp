@@ -10,7 +10,6 @@
 
 #include "math/iplMathTypes.h"
 
-
 namespace ipl {
     namespace cs {
         namespace pane {
@@ -234,7 +233,6 @@ namespace ipl {
             }
 
             CHANSVmDefineMethod(become_youngest_pane) {
-                nw4r::lyt::Pane* parent;
                 nw4r::lyt::Pane* pane;
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
@@ -242,7 +240,8 @@ namespace ipl {
                     if (pane != NULL) {
                         // This function matches when using pointer arithmetic to access the parent field.
                         // Using the getter causes reg-swaps.
-                        parent = pane->GetParent();
+
+                        nw4r::lyt::Pane* parent = pane->GetParent();
                         if (parent != NULL) {
                             parent->RemoveChild(pane);
                             parent->AppendChild(pane);
@@ -357,7 +356,8 @@ namespace ipl {
                     CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                     if (pane != NULL && argc == 1 && arg != NULL) {
                         if (arg->value.int_v < 4ULL) {
-                            result = color::_ctor(VmInst, VmReturnObj, (nw4r::ut::Color) static_cast<u32>(pane->GetVtxColor(arg->value.int_v))) == TRUE;
+                            result =
+                                color::_ctor(VmInst, VmReturnObj, (nw4r::ut::Color) static_cast<u32>(pane->GetVtxColor(arg->value.int_v))) == TRUE;
                         }
                     }
                 }
@@ -394,7 +394,8 @@ namespace ipl {
                         CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                         if (box != NULL && argc == 1 && arg != NULL) {
                             if (arg->value.int_v < 4ULL) {
-                                result = color::_ctor(VmInst, VmReturnObj, (nw4r::ut::Color) static_cast<u32>(box->GetTextColor(arg->value.int_v))) == TRUE;
+                                result = color::_ctor(VmInst, VmReturnObj, (nw4r::ut::Color) static_cast<u32>(box->GetTextColor(arg->value.int_v))) ==
+                                         TRUE;
                             }
                         }
                     }
@@ -543,7 +544,7 @@ namespace ipl {
                 u32* data = static_cast<u32*>(CHANSVmNewObjData(VmInst, VmObj, sizeof(u32)));
                 if (data != NULL) {
                     *data = unk;
-                    VmObj->type = CHANS_VM_TYPE_OBJECT;
+                    VmObj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                     CHANSVmNativeClass* ncls = CHANSVmFindNativeClass(VmInst, "Pane");
                     VmObj->parentCls = ncls;
                     result = ncls != NULL;

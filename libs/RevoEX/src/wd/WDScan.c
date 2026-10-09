@@ -196,9 +196,11 @@ BOOL WDFindInformationElement(WDInfoElement** outIE, u32* outIELength, WDBssDesc
     BOOL found = FALSE;
 
     if (bssDesc != NULL) {
-        WDInfoElement* infoElement;
-        u8* ptr = (u8*)(bssDesc + 1);
         int offset;
+        u8* ptr;
+        WDInfoElement* infoElement;
+
+        ptr = (u8*)(bssDesc + 1);
 
         for (offset = 0; offset < bssDesc->ieLength; offset = (infoElement->length + offset) + sizeof(WDInfoElement)) {
             infoElement = (WDInfoElement*)((u8*)ptr + offset);

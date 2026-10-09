@@ -2,7 +2,6 @@
 
 namespace ipl {
     namespace scene {
-
         APScanThread::APScanThread() : utility::ut_thread() {
         }
 

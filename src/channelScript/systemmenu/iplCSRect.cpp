@@ -50,7 +50,7 @@ namespace ipl {
             DEFINE_CS_IPL_CTOR() {
                 BOOL result = FALSE;
 
-                VmObj->type = CHANS_VM_TYPE_OBJECT;
+                VmObj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                 VmObj->parentCls = CHANSVmFindNativeClass(VmInst, "Rect");
                 if (VmObj->parentCls != NULL) {
                     result = TRUE;

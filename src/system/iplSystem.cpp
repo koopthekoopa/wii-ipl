@@ -47,7 +47,7 @@ namespace ipl {
         smArg.mpMem1Arena = (void*)0x80080000;
         smArg.mMem1ArenaSize = 0xCC0000;
 
-        smArg.mpChannelArena = (void*)0x80B40000;
+        smArg.mpChannelArena = (void*)((u32)smArg.mpMem1Arena + smArg.mMem1ArenaSize - 0x200000);
         smArg.mpMem1Root = EGG::ExpHeap::create((void*)0x80D40000, 0x340000, MEM_HEAP_OPT_DEBUG_FILL);
 
         OSSetMEM1ArenaLo((void*)0x81080000);

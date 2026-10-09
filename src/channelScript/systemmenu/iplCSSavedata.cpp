@@ -16,11 +16,11 @@ namespace ipl {
     namespace cs {
         namespace savedata {
             struct data {
-                char unk_0x00[MAX_PATH_LENGTH + sizeof(wchar_t)]; // 0x00
-                char sPath[MAX_PATH_LENGTH + sizeof(wchar_t)];    // 0x42
-                u8 flag;                                          // 0x84
-                u8* pData;                                        // 0x88
-                u32 size;                                         // 0x8B
+                char unk_0x00[MAX_PATH_LENGTH + sizeof(wchar_t)];  // 0x00
+                char sPath[MAX_PATH_LENGTH + sizeof(wchar_t)];     // 0x42
+                u8 flag;                                           // 0x84
+                u8* pData;                                         // 0x88
+                u32 size;                                          // 0x8B
             };
 
             enum {
@@ -479,7 +479,7 @@ namespace ipl {
                 BOOL result = FALSE;
                 u8* ptr = get_(vm, hdr);
                 if (ptr != NULL) {
-                    result = CHANSVmSetInteger(vm, hdr2, reinterpret_cast<vmInteger>(ptr)) == CHANS_VM_OK;
+                    result = CHANSVmSetInteger(vm, hdr2, reinterpret_cast<s64>(ptr)) == CHANS_VM_OK;
                 }
                 return result;
             }
@@ -491,7 +491,7 @@ namespace ipl {
                 if (ptr != NULL) {
                     if ((u32)ptr & (sizeof(T) - 1)) {
                     } else {
-                        result = CHANSVmSetInteger(vm, hdr2, static_cast<vmInteger>(*(const T*)ptr)) == CHANS_VM_OK;
+                        result = CHANSVmSetInteger(vm, hdr2, static_cast<s64>(*(const T*)ptr)) == CHANS_VM_OK;
                     }
                 }
                 return result;
@@ -573,7 +573,7 @@ namespace ipl {
                     memset(data, 0, sizeof(savedata::data));
                     data->pData = reinterpret_cast<u8*>(bufAddr);
                     data->size = bufSize;
-                    obj->type = CHANS_VM_TYPE_OBJECT;
+                    obj->type = CHANS_VM_OBJ_TYPE_OBJECT;
                     obj->parentCls = CHANSVmFindNativeClass(vm, "SaveData");
                     flag = obj->parentCls != NULL;
                 }
@@ -658,9 +658,8 @@ namespace ipl {
                 {"*CX_COMPRESSION_RL", util::get_int<COMPRESSION_RL>, NULL},
             };
 
-
             template <>
-                BOOL get<s8>(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
+            BOOL get<s8>(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
                 BOOL result = FALSE;
                 u8* ptr = get_(vm, hdr);
                 if (ptr != NULL) {

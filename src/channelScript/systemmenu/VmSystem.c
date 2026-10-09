@@ -3,12 +3,12 @@
 
 #include <revolution/sc.h>
 
-vmBool VmSystemBeginRenderFlag;
-vmBool VmSystemWaitForRetraceFlag;
+bool VmSystemBeginRenderFlag;
+bool VmSystemWaitForRetraceFlag;
 
-vmBoolInt CHANSVmNewBuiltinObject(CHANSVm* vm, const char* className, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor, CHANSVmFunction clsInit,
-                                  const char* globalName, CHANSVmFunction globalCtor, const CHANSVmPropertyList* propAccessors, vmU32 propCount,
-                                  const CHANSVmMethodList* methods, vmU32 methodCount);
+BOOL CHANSVmNewBuiltinObject(CHANSVm* vm, const char* className, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor, CHANSVmFunction clsInit,
+                             const char* globalName, CHANSVmFunction globalCtor, const CHANSVmPropertyList* propAccessors, u32 propCount,
+                             const CHANSVmMethodList* methods, u32 methodCount);
 
 static VmCtorDefine(System) {
     return CHANSVmNewObjData(VmInst, VmReturnObj, 1) ? TRUE : FALSE;
@@ -59,7 +59,7 @@ VmMethodDefine(SCPrivate, GetUnk) {
 VmMethodDefine(SCPrivate, SetUnk) {
     u8* ptr = *VmParentObj->value.ptr_v;
     CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
-    if (arg != vmNull) {
+    if (arg != NULL) {
         *ptr = (u8)(arg->value.int_v != 0);
         return TRUE;
     }
@@ -83,7 +83,7 @@ VmMethodDefine(System, SCGetLanguage) {
     return CHANSVmSetInteger(VmInst, VmReturnObj, SCGetLanguage()) == CHANS_VM_OK;
 }
 
-vmBoolInt VmGetProductArea(CHANSVm* VmInst, CHANSVmObjHdr* VmParentObj, CHANSVmObjHdr* VmReturnObj, vmInteger product) {
+BOOL VmGetProductArea(CHANSVm* VmInst, CHANSVmObjHdr* VmParentObj, CHANSVmObjHdr* VmReturnObj, s64 product) {
     if (*(u8*)(*VmParentObj->value.ptr_v)) {
         return CHANSVmSetInteger(VmInst, VmReturnObj, product) == CHANS_VM_OK;
     }
@@ -131,7 +131,7 @@ VmMethodDefine(System, SCGetWCFlags) {
     return VmGetProductArea(VmInst, VmParentObj, VmReturnObj, result);
 }
 
-vmBoolInt VmSystemGetParentalControl(void) {
+BOOL VmSystemGetParentalControl(void) {
     SCParentalControlsInfo info;
     BOOL result = TRUE;
 
@@ -144,12 +144,12 @@ vmBoolInt VmSystemGetParentalControl(void) {
 }
 
 VmMethodDefine(System, GetParentalControlUseFlag) {
-    vmBoolInt r = VmSystemGetParentalControl();
+    BOOL r = VmSystemGetParentalControl();
     return CHANSVmSetInteger(VmInst, VmReturnObj, r) == CHANS_VM_OK;
 }
 
-vmBoolInt VmSystemGetWWWRestrict(vmU32 mask) {
-    vmBoolInt r = FALSE;
+BOOL VmSystemGetWWWRestrict(u32 mask) {
+    BOOL r = FALSE;
 
     if (VmSystemGetParentalControl()) {
         if (SCGetNetContentRestrictions() & mask) {
@@ -175,7 +175,7 @@ VmMethodDefine(System, GetShoppingRestriction) {
 }
 
 VmMethodDefine(System, GetWwwRestriction) {
-    vmBoolInt r = FALSE;
+    BOOL r = FALSE;
     if (VmSystemGetParentalControl() && SCGetWwwRestriction()) {
         r = TRUE;
     }
@@ -185,7 +185,7 @@ VmMethodDefine(System, GetWwwRestriction) {
 VmMethodDefine(System, Exit) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
     CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
-    if (arg != vmNull) {
+    if (arg != NULL) {
         pVm->exitCode = arg->value.int_v;
     }
     pVm->bSuspendStep = TRUE;
@@ -194,38 +194,38 @@ VmMethodDefine(System, Exit) {
 
 VmMethodDefine(System, GetSmallestFreeSysWorkSize) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
-    vmU32 val = pVm->minFreeHeapSize;
+    u32 val = pVm->minFreeHeapSize;
     return CHANSVmSetInteger(VmInst, VmReturnObj, val) == CHANS_VM_OK;
 }
 
 VmMethodDefine(System, GetFreeSysWorkSize) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
-    vmS32 diff = (vmS32)pVm->pObjStackTopBuf - (vmS32)pVm->pFreeExeBuf;
+    s32 diff = (s32)pVm->pObjStackTopBuf - (s32)pVm->pFreeExeBuf;
     return CHANSVmSetInteger(VmInst, VmReturnObj, diff) == CHANS_VM_OK;
 }
 
 static const CHANSVmPropertyList SCPrivatePropertyTbl[] = {
-    {"SC_ASPECT_RATIO_4x3", VmSCPrivateSC_ASPECT_RATIO_4x3, vmNull},
-    {"SC_ASPECT_RATIO_16x9", VmSCPrivateSC_ASPECT_RATIO_16x9, vmNull},
-    {"SC_LANG_JAPANESE", VmSCPrivateSC_LANG_JAPANESE, vmNull},
-    {"SC_LANG_ENGLISH", VmSCPrivateSC_LANG_ENGLISH, vmNull},
-    {"SC_LANG_GERMAN", VmSCPrivateSC_LANG_GERMAN, vmNull},
-    {"SC_LANG_FRENCH", VmSCPrivateSC_LANG_FRENCH, vmNull},
-    {"SC_LANG_SPANISH", VmSCPrivateSC_LANG_SPANISH, vmNull},
-    {"SC_LANG_ITALIAN", VmSCPrivateSC_LANG_ITALIAN, vmNull},
-    {"SC_LANG_DUTCH", VmSCPrivateSC_LANG_DUTCH, vmNull},
-    {"SC_LANG_SIMP_CHINESE", VmSCPrivateSC_LANG_SIMP_CHINESE, vmNull},
-    {"SC_LANG_TRAD_CHINESE", VmSCPrivateSC_LANG_TRAD_CHINESE, vmNull},
-    {"SC_LANG_KOREAN", VmSCPrivateSC_LANG_KOREAN, vmNull},
+    {"SC_ASPECT_RATIO_4x3", VmSCPrivateSC_ASPECT_RATIO_4x3, NULL},
+    {"SC_ASPECT_RATIO_16x9", VmSCPrivateSC_ASPECT_RATIO_16x9, NULL},
+    {"SC_LANG_JAPANESE", VmSCPrivateSC_LANG_JAPANESE, NULL},
+    {"SC_LANG_ENGLISH", VmSCPrivateSC_LANG_ENGLISH, NULL},
+    {"SC_LANG_GERMAN", VmSCPrivateSC_LANG_GERMAN, NULL},
+    {"SC_LANG_FRENCH", VmSCPrivateSC_LANG_FRENCH, NULL},
+    {"SC_LANG_SPANISH", VmSCPrivateSC_LANG_SPANISH, NULL},
+    {"SC_LANG_ITALIAN", VmSCPrivateSC_LANG_ITALIAN, NULL},
+    {"SC_LANG_DUTCH", VmSCPrivateSC_LANG_DUTCH, NULL},
+    {"SC_LANG_SIMP_CHINESE", VmSCPrivateSC_LANG_SIMP_CHINESE, NULL},
+    {"SC_LANG_TRAD_CHINESE", VmSCPrivateSC_LANG_TRAD_CHINESE, NULL},
+    {"SC_LANG_KOREAN", VmSCPrivateSC_LANG_KOREAN, NULL},
     {"scprivate", VmSCPrivateGetUnk, VmSCPrivateSetUnk},
-    {"SC_PRODUCT_AREA_UNKNOWN", VmSCPrivateSC_PRODUCT_AREA_UNKNOWN, vmNull},
-    {"SC_PRODUCT_AREA_JPN", VmSCPrivateSC_PRODUCT_AREA_JPN, vmNull},
-    {"SC_PRODUCT_AREA_USA", VmSCPrivateSC_PRODUCT_AREA_USA, vmNull},
-    {"SC_PRODUCT_AREA_EUR", VmSCPrivateSC_PRODUCT_AREA_EUR, vmNull},
-    {"SC_PRODUCT_AREA_KOR", VmSCPrivateSC_PRODUCT_AREA_KOR, vmNull},
-    {"SC_PRODUCT_AREA_HKG", VmSCPrivateSC_PRODUCT_AREA_HKG, vmNull},
-    {"SC_PRODUCT_AREA_ASI", VmSCPrivateSC_PRODUCT_AREA_ASI, vmNull},
-    {"SC_PRODUCT_AREA_LTN", VmSCPrivateSC_PRODUCT_AREA_LTN, vmNull},
+    {"SC_PRODUCT_AREA_UNKNOWN", VmSCPrivateSC_PRODUCT_AREA_UNKNOWN, NULL},
+    {"SC_PRODUCT_AREA_JPN", VmSCPrivateSC_PRODUCT_AREA_JPN, NULL},
+    {"SC_PRODUCT_AREA_USA", VmSCPrivateSC_PRODUCT_AREA_USA, NULL},
+    {"SC_PRODUCT_AREA_EUR", VmSCPrivateSC_PRODUCT_AREA_EUR, NULL},
+    {"SC_PRODUCT_AREA_KOR", VmSCPrivateSC_PRODUCT_AREA_KOR, NULL},
+    {"SC_PRODUCT_AREA_HKG", VmSCPrivateSC_PRODUCT_AREA_HKG, NULL},
+    {"SC_PRODUCT_AREA_ASI", VmSCPrivateSC_PRODUCT_AREA_ASI, NULL},
+    {"SC_PRODUCT_AREA_LTN", VmSCPrivateSC_PRODUCT_AREA_LTN, NULL},
 };
 
 static const CHANSVmMethodList VmSystemMethodTbl[] = {
@@ -246,6 +246,6 @@ static const CHANSVmMethodList VmSystemMethodTbl[] = {
 };
 
 BOOL VmSystemInit(CHANSVm* vm) {
-    return CHANSVmNewBuiltinObject(vm, "@System", vmNull, vmNull, vmNull, "System", VmSystemCtor, SCPrivatePropertyTbl,
+    return CHANSVmNewBuiltinObject(vm, "@System", NULL, NULL, NULL, "System", VmSystemCtor, SCPrivatePropertyTbl,
                                    CHANSVmPropertyCount(SCPrivatePropertyTbl), VmSystemMethodTbl, CHANSVmMethodCount(VmSystemMethodTbl));
 }
