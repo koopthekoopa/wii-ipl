@@ -1,0 +1,526 @@
+#include "keyboard/tiHKBManager.h"
+
+#include <revolution/kbd.h>
+#include <revolution/os/OSInterrupt.h>
+
+namespace textinput {
+    namespace input {
+
+        HKBManager HKBManager::sInstance;
+
+        typedef union {
+            struct {
+                u8 unk_0x0;
+                u8 unk_0x1;
+                u8 unk_0x2;
+                u8 unk_0x3;
+                u32 unk_0x4;
+            };
+            u32 asU32;
+        } SetLedsAsyncData;
+
+        void HKBManager::DoSetLedsAsyncCallback(u8 bitIdx) {
+            SetLedsAsyncData cmdData;
+            cmdData.unk_0x0 = bitIdx;
+            cmdData.unk_0x4 = 0;
+
+            BOOL level = OSDisableInterrupts();
+            mEnabledLEDBits &= ~(1 << bitIdx);
+            OSRestoreInterrupts(level);
+
+            if (KBDSetLedsAsync(bitIdx, 0, SetLedCB, cmdData.asU32) == KBD_EC_SET_LED) {
+                BOOL level = OSDisableInterrupts();
+                mEnabledLEDBits |= (1 << bitIdx);
+                OSRestoreInterrupts(level);
+            }
+        }
+
+        void HKBManager::SetLedCB(KBDEc ec, void* data) {
+            if (ec != KBD_EC_SET_LED)
+                return;
+
+            SetLedsAsyncData setLedsAsyncData;
+            setLedsAsyncData.asU32 = (u32)data;
+            getInstance().DoSetLedsAsyncCallback(setLedsAsyncData.unk_0x0);
+        }
+
+        void HKBManager::KBDListenerOwn::OnAttach(KBDDevEvent* event) {
+            if (event->devIdx >= 2) {
+                KBDSetLockProcessing(event->devIdx, 0);
+                mpManager->DoSetLedsAsyncCallback(event->devIdx);
+            } else {
+                mpManager->mStateAttachedFlags[event->devIdx] = true;
+                KBDSetLockProcessing(event->devIdx, 0);
+                mpManager->mKeyStates[event->devIdx].unk_0x30 = true;
+            }
+        }
+        void HKBManager::KBDListenerOwn::OnDetach(KBDDevEvent* event) {
+            if (event->devIdx >= 2)
+                return;
+            mpManager->DetachState(event->devIdx);
+        }
+        void HKBManager::DetachState(u8 devIdx) {
+            mStateAttachedFlags[devIdx] = false;
+            mKeyStates[devIdx].Clear();
+        }
+
+        void HKBManager::KBDListenerOwn::OnKeyEvent(KBDKeyEvent* event) {
+            if (event->devIdx >= 2)
+                return;
+            if ((event->flags & 2) != 0)
+                return;
+
+            mpManager->mKeyStates[event->devIdx].NotifyEvent(event->flags & 1, event->key);
+        }
+
+        void HKBManager::AttachCB(KBDDevEvent* event) {
+            KBDListenerOwn* currListener = &getInstance().mListener;
+            while (currListener != NULL) {
+                currListener->OnAttach(event);
+                currListener = currListener->mpNextListener;
+                if (currListener == &getInstance().mListener)
+                    break;
+            }
+        }
+        void HKBManager::DetachCB(KBDDevEvent* event) {
+            KBDListenerOwn* currListener = &getInstance().mListener;
+            while (currListener != NULL) {
+                currListener->OnDetach(event);
+                currListener = currListener->mpNextListener;
+                if (currListener == &getInstance().mListener)
+                    break;
+            }
+        }
+        void HKBManager::KeyEventCB(KBDKeyEvent* event) {
+            KBDListenerOwn* currListener = &getInstance().mListener;
+            while (currListener != NULL) {
+                currListener->OnKeyEvent(event);
+                currListener = currListener->mpNextListener;
+                if (currListener == &getInstance().mListener)
+                    break;
+            }
+        }
+
+        void HKBManager::KeyState_::Clear() {
+            mActiveMask = 0;
+            mTriggeredMask = 0;
+            mReleasedMask = 0;
+            mRepeatedMask = 0;
+            mPressedMaskCurr = 0;
+            mPressedMaskNext = 0;
+            mModifierState &= 0x700;
+            mModifierStateForceMask = 0;
+            mForceModifierState = 0;
+            unk_0x30 = false;
+        }
+
+        HKBManager::HKBManager() : mbInitialized(false), unk_0x04(0), mEnabledLEDBits(0), mpCharsWhitelist(NULL), mCharsWhitelistLen(0) {
+            mListener.mpManager = this;
+            for (u8 i = 0; i < 2; i++) {
+                mStateAttachedFlags[i] = false;
+                mKeyStates[i].Clear();
+                mKeyStates[i].mDevIdx = i;
+                mKeyStates[i].mCountry = 15;
+                mKeyStates[i].mModifierState = 0;
+            }
+        }
+        HKBManager::KBDListenerOwn::~KBDListenerOwn() {
+        }
+
+        void HKBManager::Initialize() {
+            if (mbInitialized)
+                return;
+
+            mbInitialized = true;
+            KBDInitRegionUS();
+            KBDInit();
+            if (mListener.unk_0x4 == 0) {
+                KBDSetAttachCallback(AttachCB);
+                KBDSetDetachCallback(DetachCB);
+                KBDSetKeyCallback(KeyEventCB);
+            }
+            for (u8 i = 0; i < 2; i++) {
+                KBDSetCountry(i, mKeyStates[i].mCountry);
+            }
+        }
+
+        void HKBManager::ClearState() {
+            for (u8 i = 0; i < 2; i++) {
+                mKeyStates[i].Clear();
+            }
+        }
+
+        void HKBManager::KeyState_::SetModifierStateLEDs() {
+            KBDSetModState(mDevIdx, mModifierState);
+
+            u8 ledFlags = 0;
+            if (mModifierState & 0x100) {
+                ledFlags |= 1;
+            }
+            if (mModifierState & 0x200) {
+                ledFlags |= 2;
+            }
+            if (mModifierState & 0x400) {
+                ledFlags |= 4;
+            }
+            if (KBDSetLeds(mDevIdx, ledFlags) == KBD_EC_SET_LED) {
+                unk_0x30 = true;
+            }
+        }
+
+        u32 HKBManager::KeyState_::GetModifierState() const {
+            u32 state = mModifierState;
+            u32 modStateForceMask0 = mModifierStateForceMask;
+
+            state &= ~modStateForceMask0;
+            state |= mForceModifierState & modStateForceMask0;
+            return state;
+
+            // return mModifierState & ~mModifierStateForceMask |
+        }
+
+        u32 HKBManager::GetModifierState() const {
+            // // fakematched i think, probably an inline on KeyState_
+            // u32 modStateForceMask0, modState0;
+            // modState0 = mKeyStates[0].mModifierState;
+            // modStateForceMask0 = mKeyStates[0].mModifierStateForceMask;
+            // modState0 &= ~modStateForceMask0;
+            // modState0 |= mKeyStates[0].mForceModifierState & modStateForceMask0;
+
+            // u32 modStateForceMask1, modState1;
+            // modState1 = mKeyStates[1].mModifierState;
+            // modStateForceMask1 = mKeyStates[1].mModifierStateForceMask;
+            // modState1 &= ~modStateForceMask1;
+            // modState1 |= mKeyStates[1].mForceModifierState & modStateForceMask1;
+            // return modState0 | modState1;
+
+            u32 modState0 = mKeyStates[0].GetModifierState();
+            u32 modState1 = mKeyStates[1].GetModifierState();
+
+            return modState0 | modState1;
+        }
+
+        void HKBManager::SetCountry(u8 country) {
+            for (u8 i = 0; i < 2; i++) {
+                mKeyStates[i].mCountry = country;
+                KBDSetCountry(i, country);
+                mKeyStates[i].SetModifierStateLEDs();
+            }
+        }
+
+        void HKBManager::SetModifierState(u32 state, u32 updateMask) {
+            unk_0x04 = unk_0x04 & ~updateMask | state & updateMask;
+            for (u8 i = 0; i < 2; i++) {
+                bool modifierStatesChanged = (mKeyStates[i].mModifierState & 0x0700) != (unk_0x04 & 0x0700);
+                mKeyStates[i].mModifierState &= ~0x0700;
+                mKeyStates[i].mModifierState |= unk_0x04;
+                if (modifierStatesChanged && mStateAttachedFlags[i]) {
+                    mKeyStates[i].SetModifierStateLEDs();
+                }
+            }
+        }
+        void HKBManager::SetForceModifierState(u32 state, u32 forceMask) {
+            for (u8 i = 0; i < 2; i++) {
+                mKeyStates[i].mForceModifierState = state;
+                mKeyStates[i].mModifierStateForceMask = forceMask;
+            }
+        }
+
+        void HKBManager::Update() {
+            if (!mbInitialized)
+                return;
+
+            for (u8 bitI = 2; bitI < 4; bitI++) {
+                if ((mEnabledLEDBits & (1 << bitI)) != 0) {
+                    DoSetLedsAsyncCallback(bitI);
+                }
+            }
+
+            for (u8 i = 0; i < 2; i++) {
+                mKeyStates[i].Update();
+            }
+        }
+
+        HKBManager::KeySet HKBManager::GetTriggeredKeySet() const {
+            return KeySet(this, HKBManager::KeySet::KEY_PHASE_TRIGGERED).GetNext();
+        }
+        HKBManager::KeySet HKBManager::GetReleasedKeySet() const {
+            return KeySet(this, HKBManager::KeySet::KEY_PHASE_RELEASED).GetNext();
+        }
+        HKBManager::KeySet HKBManager::GetRepeatedKeySet() const {
+            return KeySet(this, HKBManager::KeySet::KEY_PHASE_REPEATED).GetNext();
+        }
+
+        void HKBManager::KeyState_::NotifyEvent(u8 flag, u8 key) {
+            int i;
+            int freeIdx = -1;
+            if (flag == 1) {
+                for (i = 0; i < 8; i++) {
+                    if ((mPressedMaskNext & (1 << i)) != 0) {
+                        if (key == mKeysNext[i]) {
+                            freeIdx = i;
+                            break;
+                        }
+                    } else {
+                        freeIdx = i;
+                        break;
+                    }
+                }
+
+                if (freeIdx >= 0) {
+                    mKeysNext[freeIdx] = key;
+                    mPressedMaskNext |= 1 << freeIdx;
+                }
+            } else {
+                for (i = 0; i < 8; i++) {
+                    if ((mPressedMaskNext & (1 << i)) != 0 && key == mKeysNext[i]) {
+                        freeIdx = i;
+                        break;
+                    }
+                }
+                if (freeIdx >= 0) {
+                    mPressedMaskNext &= ~(1 << freeIdx);
+                }
+            }
+        }
+        void HKBManager::KeyState_::Update() {
+            BOOL level = OSDisableInterrupts();
+            mPressedMaskPrev = mPressedMaskCurr;
+            mPressedMaskCurr = mPressedMaskNext;
+            for (int i = 0; i < 8; i++) {
+                mKeysPrev[i] = mKeysCurr[i];
+                mKeysCurr[i] = mKeysNext[i];
+            }
+            OSRestoreInterrupts(level);
+            UpdateModState_();
+
+            mActiveMask = mPressedMaskCurr;
+
+            mTriggeredMask = 0;
+            for (int i = 0; i < 8; i++) {
+                if ((mPressedMaskCurr & (1 << i)) == 0)
+                    continue;
+
+                if ((mPressedMaskPrev & (1 << i)) == 0 || mKeysPrev[i] != mKeysCurr[i]) {
+                    mTriggeredMask |= (1 << i);
+                }
+            }
+
+            mReleasedMask = 0;
+            for (int i = 0; i < 8; i++) {
+                if ((mPressedMaskPrev & (1 << i)) == 0)
+                    continue;
+
+                if ((mPressedMaskCurr & (1 << i)) == 0 || mKeysPrev[i] != mKeysCurr[i]) {
+                    mReleasedMask |= (1 << i);
+                }
+            }
+
+            mRepeatedMask = 0;
+            for (int i = 0; i < 8; i++) {
+                if ((mPressedMaskCurr & (1 << i)) != 0) {
+                    if ((mTriggeredMask & (1 << i)) != 0) {
+                        mRepeatDelays[i] = 30;
+                        mRepeatedMask |= (1 << i);
+                    }
+                    if (--mRepeatDelays[i] == 0) {
+                        mRepeatDelays[i] = 8;
+                        mRepeatedMask |= (1 << i);
+                    }
+                }
+            }
+        }
+
+        void HKBManager::KeyState_::UpdateModState_() {
+            u32 oldModifierState = mModifierState;
+            mModifierState &= ~(KBD_HID_MOD_L_SHIFT | KBD_HID_MOD_L_CTRL | KBD_HID_MOD_L_GUI | KBD_HID_MOD_L_ALT | KBD_HID_MOD_R_SHIFT);
+            for (u8 i = 0; i < 8; i++) {
+                if ((mPressedMaskCurr & (1 << i)) == 0)
+                    continue;
+
+                u8 key = mKeysCurr[i];
+                if (key == KBD_KEY_KEYBOARD_R_SHIFT || key == KBD_KEY_KEYBOARD_L_SHIFT) {
+                    mModifierState |= KBD_HID_MOD_L_SHIFT;
+                } else if (key == KBD_KEY_KEYBOARD_R_CONTROL || key == KBD_KEY_KEYBOARD_L_CONTROL) {
+                    mModifierState |= KBD_HID_MOD_L_CTRL;
+                } else if (key == KBD_KEY_KEYBOARD_R_GUI || key == KBD_KEY_KEYBOARD_L_GUI) {
+                    mModifierState |= KBD_HID_MOD_L_GUI;
+                } else if (key == KBD_KEY_KEYBOARD_L_ALT) {
+                    mModifierState |= KBD_HID_MOD_L_ALT;
+                } else if (key == KBD_KEY_KEYBOARD_R_ALT) {
+                    if (mCountry == KBD_CC_JAPAN || mCountry == KBD_CC_UNITED_STATES) {
+                        mModifierState |= KBD_HID_MOD_L_ALT;
+                    } else {
+                        mModifierState |= KBD_HID_MOD_R_SHIFT;
+                    }
+                }
+            }
+            if ((oldModifierState & 0x700) != (mModifierState & 0x700) || unk_0x30) {
+                unk_0x30 = false;
+                SetModifierStateLEDs();
+            }
+        }
+
+        u8 HKBManager::KeySet::GetKey() const {
+            if (!IsValid()) {
+                return 0;
+            }
+
+            switch (mKeyPhase) {
+                case KEY_PHASE_ACTIVE:
+                    return mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx];
+                case KEY_PHASE_TRIGGERED:
+                    return mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx];
+                case KEY_PHASE_RELEASED:
+                    return mpManager->mKeyStates[mDevIdx].mKeysPrev[mBufIdx];
+                case KEY_PHASE_REPEATED:
+                    return mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx];
+                default:
+                    return 0;
+            }
+        }
+
+        wchar_t HKBManager::KeySet::GetWChar() const {
+            wchar_t vcode = GetVCode();
+            if (0xF130 <= vcode && vcode <= 0xF139) {
+                vcode -= 0xF100;
+            } else if (vcode == 0xF10D) {
+                vcode = 0xF1CD;
+            } else if (0xF100 <= vcode && vcode <= 0xF13F) {
+                vcode -= 0xF100;
+            } else if (0xF140 <= vcode && vcode <= 0xF17F) {
+                vcode += 0x40;
+            }
+
+            if ((vcode & 0xF000) == 0xF000) {
+                vcode = 0;
+            } else if (vcode == 0xEEEE) {
+                vcode = 0;
+            } else if (vcode < 0x20) {
+                vcode = 0;
+            }
+
+            return mpManager->FilterAllowList_(vcode);
+        }
+
+        wchar_t HKBManager::FilterAllowList_(wchar_t key) const {
+            if (mpCharsWhitelist == NULL)
+                return key;
+            if (mCharsWhitelistLen == 0)
+                return key;
+
+            for (int i = 0; i < mCharsWhitelistLen; i++) {
+                if (mpCharsWhitelist[i] == key) {
+                    return key;
+                }
+            }
+            return 0;
+        }
+
+        wchar_t HKBManager::KeySet::GetVCode() const {
+            if (!IsValid()) {
+                return 0;
+            }
+
+            if (unk_0x08 != 0)
+                return unk_0x08;
+
+            u32 modifierState = mpManager->GetModifierState();
+
+            if ((modifierState & (KBD_HID_MOD_L_GUI | KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) != 0) {
+                if ((modifierState & (KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) != (KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) {
+                    return 0;
+                }
+            }
+            // u16 out = unk_0x08;
+
+            switch (mKeyPhase) {
+                case KEY_PHASE_ACTIVE:
+                case KEY_PHASE_TRIGGERED:
+                case KEY_PHASE_REPEATED:
+                    if (((1 << mBufIdx) & mpManager->mKeyStates[mDevIdx].mPressedMaskCurr) != 0) {
+                        unk_0x08 = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx], modifierState,
+                                                       mpManager->mKeyStates[mDevIdx].mCountry);
+                    }
+                    break;
+                case KEY_PHASE_RELEASED:
+                    if (((1 << mBufIdx) & mpManager->mKeyStates[mDevIdx].mPressedMaskPrev) != 0) {
+                        unk_0x08 = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysPrev[mBufIdx], modifierState,
+                                                       mpManager->mKeyStates[mDevIdx].mCountry);
+                    }
+                    break;
+            }
+            // out = unk_0x08;
+            return unk_0x08;
+        }
+
+        HKBManager::KeySet HKBManager::KeySet::GetNext() const {
+            KeySet out(mpManager, mKeyPhase);
+
+            if (mpManager == NULL)
+                return out;
+
+            out.mDevIdx = mDevIdx;
+
+            while (out.mDevIdx < 2) {
+                u32 edgeMask = 0;
+                switch (mKeyPhase) {
+                    case KEY_PHASE_ACTIVE:
+                        edgeMask = mpManager->mKeyStates[out.mDevIdx].mActiveMask;
+                        break;
+                    case KEY_PHASE_TRIGGERED:
+                        edgeMask = mpManager->mKeyStates[out.mDevIdx].mTriggeredMask;
+                        break;
+                    case KEY_PHASE_RELEASED:
+                        edgeMask = mpManager->mKeyStates[out.mDevIdx].mReleasedMask;
+                        break;
+                    case KEY_PHASE_REPEATED:
+                        edgeMask = mpManager->mKeyStates[out.mDevIdx].mRepeatedMask;
+                        break;
+                }
+                out.mBufIdx = mBufIdx + 1;
+                while (out.mBufIdx < 8) {
+                    if ((edgeMask & (1 << out.mBufIdx)) != 0) {
+                        return out;
+                    }
+                    out.mBufIdx++;
+                }
+                out.mBufIdx = 0xff;
+                out.mDevIdx++;
+            }
+            return out;
+        }
+
+        bool HKBManager::KeySet::IsValid() const {
+            return IsValid_();
+        }
+
+        // Not sure if this is right.
+        inline bool HKBManager::KeySet::IsValid_() const {
+            if (mpManager == NULL) {
+                return false;
+            }
+            if (!(0 <= mBufIdx && mBufIdx < 8)) {
+                return false;
+            }
+            if (mDevIdx >= 2) {
+                return false;
+            }
+            switch (mKeyPhase) {
+                case KEY_PHASE_ACTIVE:
+                    return (1 << mBufIdx & mpManager->mKeyStates[mDevIdx].mActiveMask) != 0;
+                case KEY_PHASE_TRIGGERED:
+                    return (1 << mBufIdx & mpManager->mKeyStates[mDevIdx].mTriggeredMask) != 0;
+                case KEY_PHASE_RELEASED:
+                    return (1 << mBufIdx & mpManager->mKeyStates[mDevIdx].mReleasedMask) != 0;
+                case KEY_PHASE_REPEATED:
+                    return (1 << mBufIdx & mpManager->mKeyStates[mDevIdx].mRepeatedMask) != 0;
+                default:
+                    return false;
+            }
+        }
+
+        // HKBManager::~HKBManager() {
+        // }
+    }  // namespace input
+}  // namespace textinput
