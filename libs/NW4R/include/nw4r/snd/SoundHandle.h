@@ -45,19 +45,19 @@ namespace nw4r {
                 }
             }
 
-            void Stop(int frames) {
+            void Stop(int frames = 0) {
                 if (IsAttachedSound()) {
                     mSound->Stop(frames);
                 }
             }
 
-            void Pause(bool flag, int frames) {
+            void Pause(bool flag, int frames = 0) {
                 if (IsAttachedSound()) {
                     mSound->Pause(flag, frames);
                 }
             }
 
-            void SetVolume(f32 volume, int frames) {
+            void SetVolume(f32 volume, int frames = 0) {
                 if (IsAttachedSound()) {
                     mSound->SetVolume(volume, frames);
                 }
@@ -65,6 +65,11 @@ namespace nw4r {
             void SetPan(f32 pan) {
                 if (IsAttachedSound()) {
                     mSound->SetPan(pan);
+                }
+            }
+            void SetSurroundPan(f32 pan) {
+                if (IsAttachedSound()) {
+                    mSound->SetSurroundPan(pan);
                 }
             }
             void SetPitch(f32 pitch) {

@@ -1744,7 +1744,7 @@ namespace ipl {
                                                            System::getChannelManager()->getSoundSize(mChanPage, mChanIndex), ignoreAlign);
                     }
                 } else if (mDiskState == DISK_STATE_GC_DISK_IDLE) {
-                    mpDiskBnrSound = snd::getSystem()->startSE("WIPL_ME_GC_BANNER");
+                    mpDiskBnrSound = snd::getSystem()->startSE("WIPL_ME_GC_BANNER")->GetHandle();
                 }
             }
         }
@@ -1842,7 +1842,7 @@ namespace ipl {
                             }
 
                             if (noDisk) {
-                                mpDiskBnrSound = snd::getSystem()->startSE("WIPL_ME_NO_DISC_BANNER");
+                                mpDiskBnrSound = snd::getSystem()->startSE("WIPL_ME_NO_DISC_BANNER")->GetHandle();
                             }
 
                             mDiskState = DISK_STATE_TRANS_IN;

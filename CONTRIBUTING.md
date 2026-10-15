@@ -9,7 +9,8 @@ AI Notice
 - AI often produces code in questionable quality and a human would unlikely write. We're trying to aim for readability and quality.
 - There are a lot of sources in it's training data, and one of those may be leaked source code which we do not want.
 - Basically, try and avoid stuff like [this](https://github.com/koopthekoopa/wii-ipl/pull/27).
-- It is also advised to **not** create forks of this project soley for 100% matching with AI (Any existing ones should be avoided)
+- **Please do not create forks of this project soley for 100% matching with AI** (Any existing ones **must be avoided**)
+  - They are seen as very disrespectful to all the work that we put in.
 
 Resources
 =========
@@ -167,6 +168,7 @@ Naming
 - Function names with no known symbols should be written in camelCase.
   - This mostly applies to static local and inline functions.
 - Labels must be snake_case.
+- Macros and enum values must be uppercase SNAKE_CASE.
 - Struct members must be camelCase (and should not include the `m` prefix).
 - Class members must start with the `m` prefix and be in PascalCase.
   - Some types have different prefixes:
