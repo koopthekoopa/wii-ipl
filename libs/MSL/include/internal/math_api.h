@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 int __signbitd(double x);
+double nan(const char* tagp);
 
 int __fpclassifyf(float x);
 int __fpclassifyd(double x);

@@ -26,9 +26,14 @@ extern "C" {
 #define M_SQRT2 1.41421356237309504880
 
 typedef struct div_t {
-    int quot;
-    int rem;
+    int quot;  // 0x00
+    int rem;   // 0x04
 } div_t;
+
+typedef struct ldiv_t {
+    long quot;  // 0x00
+    long rem;   // 0x04
+} ldiv_t;
 
 extern int __float_nan[];
 extern int __float_huge[];

@@ -9,18 +9,15 @@ extern "C" {
 #endif
 
 typedef struct tm {
-    int tm_sec;
-    int tm_min;
-    int tm_hour;
-    int tm_mday;
-    int tm_mon;
-    int tm_year;
-    int tm_wday;
-    int tm_yday;
-    int tm_isdst;
-
-    long int __tm_gmtoff;
-    const char* __tm_zone;
+    int tm_sec;    // 0x00
+    int tm_min;    // 0x04
+    int tm_hour;   // 0x08
+    int tm_mday;   // 0x0C
+    int tm_mon;    // 0x10
+    int tm_year;   // 0x14
+    int tm_wday;   // 0x18
+    int tm_yday;   // 0x1C
+    int tm_isdst;  // 0x20
 } tm;
 
 #ifdef __cplusplus

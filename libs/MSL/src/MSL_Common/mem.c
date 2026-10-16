@@ -1,15 +1,13 @@
 #include <internal/mem_funcs.h>
 #include <stddef.h>
 
-#pragma exceptions on
-
 void* memmove(void* dest, const void* src, size_t count) {
     const char* cur;
     char* dst;
-    int rev = ((unsigned long)src < (unsigned long)dest);
+    int rev = (unsigned long)src < (unsigned long)dest;
 
-    if (count >= 0x20) {
-        int isUnaligned = (((int)dest ^ (int)src)) & 0x3;
+    if (count >= 32) {
+        int isUnaligned = ((int)dest ^ (int)src) & 0x3;
         if (isUnaligned) {
             if (rev == 0) {
                 __copy_longs_unaligned(dest, src, count);
@@ -41,7 +39,7 @@ void* memmove(void* dest, const void* src, size_t count) {
 
 void* memchr(const void* ptr, int ch, size_t count) {
     const unsigned char* cur;
-    unsigned long val = (ch & 0xFF);
+    unsigned long val = ch & 0xFF;
 
     for (cur = (unsigned char*)ptr - 1, count++; --count;) {
         if ((*++cur & 0xFF) == val) {
@@ -49,12 +47,12 @@ void* memchr(const void* ptr, int ch, size_t count) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 void* __memrchr(const void* ptr, int ch, size_t count) {
     const unsigned char* cur;
-    size_t val = (ch & 0xFF);
+    size_t val = ch & 0xFF;
 
     for (cur = (unsigned char*)ptr + count, count++; --count;) {
         if (*--cur == val) {
@@ -62,7 +60,7 @@ void* __memrchr(const void* ptr, int ch, size_t count) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 int memcmp(const void* ptr1, const void* ptr2, size_t num) {
@@ -71,7 +69,7 @@ int memcmp(const void* ptr1, const void* ptr2, size_t num) {
 
     for (p1 = (const unsigned char*)ptr1 - 1, p2 = (const unsigned char*)ptr2 - 1, num++; --num;) {
         if (*++p1 != *++p2) {
-            return (*p1 < *p2) ? -1 : +1;
+            return *p1 < *p2 ? -1 : +1;
         }
     }
 

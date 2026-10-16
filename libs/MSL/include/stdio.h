@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-
 #include <internal/file_struct.h>
 
 #ifdef __cplusplus

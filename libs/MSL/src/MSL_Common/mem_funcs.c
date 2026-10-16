@@ -23,14 +23,10 @@ void __copy_longs_aligned(void* pDest, const void* pSrc, unsigned long len) {
 
     if (i != 0) {
         do {
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
-            *++(destLongPtr) = *++(srcLongPtr);
+            int j;
+            for (j = 0; j < 8; j++) {
+                *++(destLongPtr) = *++(srcLongPtr);
+            }
         } while (--i);
     }
 
@@ -72,14 +68,10 @@ void __copy_longs_rev_aligned(void* pDest, const void* pSrc, unsigned long len) 
 
     if (i != 0) {
         do {
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
-            *--destLongPtr = *--srcLongPtr;
+            int j;
+            for (j = 0; j < 8; j++) {
+                *--(destLongPtr) = *--(srcLongPtr);
+            }
         } while (--i);
     }
 

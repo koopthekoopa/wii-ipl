@@ -1,52 +1,52 @@
-#include <internal/math_api.h>
-#pragma exceptions on
+#include <math.h>
+
+#define FLOAT_EXP_MASK 0x7F800000
+#define FLOAT_MANT_MASK 0x7FFFFF
+#define DOUBLE_EXP_MASK 0x7FF00000
+#define DOUBLE_MANT_MASK 0xFFFFF
+#define DOUBLE_SIGN_MASK 0x80000000
 
 int __fpclassifyf(float x) {
-    int val = (*(int*)&x);
+    int val = *(int*)&x;
 
-    switch (val & 0x7F800000) {
-        case 0x7F800000:
-            if (val & 0x7FFFFF) {
-                return 1;
-            } else {
-                return 2;
+    switch (val & FLOAT_EXP_MASK) {
+        case FLOAT_EXP_MASK: {
+            if (val & FLOAT_MANT_MASK) {
+                return FP_NAN;
             }
-            break;
-        case 0:
-            if (val & 0x7FFFFF) {
-                return 5;
-            } else {
-                return 3;
+            return FP_INFINITE;
+        }
+        case 0: {
+            if (val & FLOAT_MANT_MASK) {
+                return FP_SUBNORMAL;
             }
-            break;
+            return FP_ZERO;
+        }
     }
 
-    return 4;
+    return FP_NORMAL;
 }
 
 int __signbitd(double x) {
-    return (*(int*)&x) & 0x80000000;
+    return *(int*)&x & DOUBLE_SIGN_MASK;
 }
 
 int __fpclassifyd(double x) {
-    switch ((*(int*)&x) & 0x7FF00000) {
-        case 0x7FF00000:
-            if (((*(int*)&x) & 0xFFFFF) || (*(1 + (int*)&x)) & 0xFFFFFFFF) {
-                return 1;
-            } else {
-                return 2;
+    int val = *(int*)&x;
+    switch (val & DOUBLE_EXP_MASK) {
+        case DOUBLE_EXP_MASK: {
+            if (val & DOUBLE_MANT_MASK || ((int*)&x)[1]) {
+                return FP_NAN;
             }
-
-            break;
-        case 0:
-            if (((*(int*)&x) & 0xFFFFF) || (*(1 + (int*)&x)) & 0xFFFFFFFF) {
-                return 5;
-            } else {
-                return 3;
+            return FP_INFINITE;
+        }
+        case 0: {
+            if (val & DOUBLE_MANT_MASK || ((int*)&x)[1]) {
+                return FP_SUBNORMAL;
             }
-
-            break;
+            return FP_ZERO;
+        }
     }
 
-    return 4;
+    return FP_NORMAL;
 }
