@@ -2627,13 +2627,13 @@ libs/RVL_SDK/src/db/db.c:
 
 libs/RVL_SDK/src/vi/vi.c:
 	.bss        start:0x81114650 end:0x811147C0
-	.text       start:0x81514B04 end:0x81517724
+	.text       start:0x81514B04 end:0x8151768C
 	.data       start:0x81654AE0 end:0x81655038
 	.sdata      start:0x8166C4B8 end:0x8166C4D8
 	.sbss       start:0x8166D740 end:0x8166D7F0
 
 libs/RVL_SDK/src/vi/i2c.c:
-	.text       start:0x81517724 end:0x815180A8
+	.text       start:0x8151768C end:0x815180A8
 	.sdata      start:0x8166C4D8 end:0x8166C4E0
 	.sbss       start:0x8166D7F0 end:0x8166D7F8
 

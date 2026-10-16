@@ -43,14 +43,15 @@ namespace ipl {
 
             static BOOL ContentExist(ESTmdView* tmdView, u32 contentIndex, s32* result);
 
-            static ESError checkContentsNum(ESTitleId titleId, ESTmdView* tmdView);
+            static int checkContentsNum(ESTitleId titleId, ESTmdView* tmdView);
 
+            static ESError GetTicketViewList(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticket = NULL, u32 ticketLength = 0);
             static ESError GetValidTicketIndex(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticket = NULL, u32 ticketLength = 0);
 
             static BOOL IsLastTicketExpired(ESTitleId* titleId);
             static void DeleteExpiredFlagFile();
 
-            static void DeleteUnauthorizedData(EGG::Heap* heap);
+            static void InitSavedata(EGG::Heap* heap);
 
             static u32 CheckTmdCountryCode(ESTmdView* tmdView);
             static u32 CheckTmdParentalControl(ESTmdView* tmdView);
@@ -66,10 +67,11 @@ namespace ipl {
             static ESError PrepareTitleDir(ESTitleId titleId, EGG::Heap* heap);
 
             static ESError DeleteTitleContent(EGG::Heap* heap, ESTitleId titleId);
+            static ESError DeleteDownloadTask(EGG::Heap* heap, u32 appId);
 
             static s32 DeleteTitle(EGG::Heap* heap, ESTitleId titleId);
             static s32 DeleteEmptyTitles(EGG::Heap* heap);
-            static s32 DeleteMetaContent(ESTitleId titleId);
+            static s32 DeleteMetaContent(ESTitleId titleId) NO_INLINE;
         };
     }  // namespace utility
 }  // namespace ipl

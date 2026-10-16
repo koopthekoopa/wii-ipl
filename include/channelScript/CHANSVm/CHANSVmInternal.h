@@ -7,6 +7,7 @@ extern "C" {
 
 // clang-format off
 #include "channelScript/CHANSVm.h"
+#include "channelScript/CHANSVm/VmOpcodes.h"
 #include "channelScript/CHANSVmPrivate/vmMethod.h"
 #include "channelScript/CHANSVmPrivate/vmConvert.h"
 // clang-format on

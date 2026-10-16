@@ -180,7 +180,7 @@ void BS2SetStateFlags();
 void BS2StartGame();
 void BS2StartGCGame();
 
-void BS2SetBannerBuffer(void* pBanner, u32 bannerSize);
+void BS2SetBannerBuffer(void* banner, u32 bannerSize);
 void* BS2GetBannerBufferAddr();
 u32 BS2GetBannerBufferLength();
 
@@ -193,8 +193,8 @@ BOOL BS2IsDiagDisc();
 
 BOOL BS2IsTitleAvailable(ESTitleId titleId);
 BOOL BS2GetLockedTitles(ESTitleId* pTitleIds, u32* count);
-s32 BS2GetTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView);
-BOOL BS2StartLoadingTitle(ESTitleId titleId, ESTicketView* pTicketView);
+s32 BS2GetTicketFromNand(ESTitleId titleId, ESTicketView* ticketView);
+BOOL BS2StartLoadingTitle(ESTitleId titleId, ESTicketView* ticketView);
 
 #ifdef __cplusplus
 }

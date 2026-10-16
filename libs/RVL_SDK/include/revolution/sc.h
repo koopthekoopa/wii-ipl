@@ -131,7 +131,7 @@ typedef struct SCParentalControlsInfo {
 } SCParentalControlsInfo;
 
 #define SC_PARENTAL_FLAG_ENABLED (1 << 7)
-#define SC_PARENTAL_RATING_ENABLED 0x1F
+#define SC_PARENTAL_RATING_BITS 0x1F
 
 #define SC_PARENTAL_ORG_CERO 0
 #define SC_PARENTAL_ORG_ESRB 1

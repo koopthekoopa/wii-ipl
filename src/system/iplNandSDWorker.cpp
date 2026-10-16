@@ -2636,14 +2636,14 @@ namespace ipl {
                 ticketView.ticketId = ticketViewList[i].ticketId;
                 ticketView.deviceId = ticketViewList[i].deviceId;
                 ticketView.titleId = ticketViewList[i].titleId;
-                ticketView.accessMask[0] = ticketViewList[i].accessMask[0];
-                ticketView.accessMask[1] = ticketViewList[i].accessMask[1];
+                ticketView.sysAccessMask[0] = ticketViewList[i].sysAccessMask[0];
+                ticketView.sysAccessMask[1] = ticketViewList[i].sysAccessMask[1];
                 ticketView.ticketVersion = ticketViewList[i].ticketVersion;
-                ticketView.accessTitleID = ticketViewList[i].accessTitleID;
+                ticketView.accessTitleId = ticketViewList[i].accessTitleId;
                 ticketView.accessTitleMask = ticketViewList[i].accessTitleMask;
-                ticketView.license = ticketViewList[i].license;
-                ticketView.reserved = ticketViewList[i].reserved;
-                ticketView.unk_0x55 = ticketViewList[i].unk_0x55;
+                ticketView.licenseType = ticketViewList[i].licenseType;
+                ticketView.customData = ticketViewList[i].customData;
+                ticketView.audit = ticketViewList[i].audit;
                 ticketView.cidxMask = ticketViewList[i].cidxMask;
                 ticketView.limits = ticketViewList[i].limits;
                 esErr = ES_DeleteTicket(&ticketView);
@@ -3205,7 +3205,7 @@ namespace ipl {
         }
         if (!isDataOnlyTitle) {
             ESError esErr = utility::ESMisc::PrepareTitleDir(saveBanner->curTitleId, System::getMem2Sys());
-            if (esErr == ES_ERR_NO_TMD_FILE_FOUND) {
+            if (esErr == ES_ERR_NO_TMD_FILE) {
                 OSReport("NandSDWorker: titleid = 0x%016llx is not installed.\n", saveBanner->curTitleId);
                 myWork->asyncResult = RESULT_ES_ERROR;
                 goto clean_up;

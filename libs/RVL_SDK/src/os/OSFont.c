@@ -219,7 +219,7 @@ u16 OSGetFontEncode() {
 
     switch (*(u32*)OSPhysicalToCached(OS_ADDR_TV_VIDEO_FORMAT)) {
         case VI_NTSC: {
-            FontEncode = (VI_READ_REG(VI_DTV_STATUS) & 2) ? OS_FONT_ENCODE_SJIS : OS_FONT_ENCODE_ANSI;
+            FontEncode = (__VIRegs[VI_DTV_STATUS] & 2) ? OS_FONT_ENCODE_SJIS : OS_FONT_ENCODE_ANSI;
             break;
         }
         case VI_PAL:

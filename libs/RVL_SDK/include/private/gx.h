@@ -310,12 +310,12 @@ void __GetImageTileCount(GXTexFmt fmt, u16 wd, u16 ht, u32* rowTiles, u32* colTi
         regAddr = addr;                                                                                                                              \
     }
 
-#define GET_REG_FIELD(reg, size, shift) ((int)((reg) >> (shift)) & ((1 << (size)) - 1))
+#define GX_GET_REG_FIELD(reg, size, shift) ((int)((reg) >> (shift)) & ((1 << (size)) - 1))
 
-#define OLD_SET_REG_FIELD(reg, size, shift, val)                                                                                                     \
+#define OLD_GX_SET_REG_FIELD(reg, size, shift, val)                                                                                                  \
     { (reg) = ((u32)(reg) & ~(((1 << (size)) - 1) << (shift))) | ((u32)(val) << (shift)); }
 
-#define SET_REG_FIELD(reg, size, shift, val)                                                                                                         \
+#define GX_SET_REG_FIELD(reg, size, shift, val)                                                                                                      \
     { (reg) = ((u32)__rlwimi((u32)(reg), (val), (shift), 32 - (shift) - (size), 31 - (shift))); }
 
 #define GX_GET_MEM_REG(offset) (*(vu16*)((vu16*)(__memReg) + (offset)))

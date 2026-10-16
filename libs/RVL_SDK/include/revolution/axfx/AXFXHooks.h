@@ -1,7 +1,7 @@
 #ifndef REVOLUTION_AXFX_HOOKS_H
 #define REVOLUTION_AXFX_HOOKS_H
 
-#include <revolution/axfx/AXFXCommon.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {

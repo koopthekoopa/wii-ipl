@@ -126,7 +126,7 @@ static void ConfigureVideo(u16 xfbW, u16 xfbH) NO_INLINE {
     switch (VIGetTvFormat()) {
         case VI_MPAL:
         case VI_NTSC: {
-            if (VI_HAS_REG_F(VI_CLOCK_SELECT, (1 << 0))) {
+            if (__VIRegs[VI_CLOCK_SELECT] & (1 << 0)) {
                 mode.viTVmode = 2;
                 mode.viYOrigin = 0;
                 mode.xFBmode = 0;
@@ -250,7 +250,7 @@ static void Halt() {
     fontData = OSAllocFromMEM1ArenaLo(0xA1004, DEFAULT_ALIGN);
     OSLoadFont(fontData, OSGetArenaLo());
 
-    xfb = OSAllocFromMEM1ArenaLo((640 * 480 * VI_DISPLAY_PIX_SZ), DEFAULT_ALIGN);
+    xfb = OSAllocFromMEM1ArenaLo((0x96000), DEFAULT_ALIGN);
     ScreenClear(xfb, 640, 480, RGB2YUV(fp->bg));
     VISetNextFrameBuffer(xfb);
     ConfigureVideo(640, 480);
@@ -260,7 +260,7 @@ static void Halt() {
         ;
 
     ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), FATAL_REPORT_X_POS, FATAL_REPORT_Y_POS, fontData->leading, fp->msg);
-    DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
+    DCFlushRange(xfb, 0x96000);
     VISetBlack(FALSE);
     VIFlush();
     count = VIGetRetraceCount();
@@ -410,7 +410,7 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
     fontData = OSAllocFromMEM2ArenaLo(0xA1004, DEFAULT_ALIGN);
     OSLoadFont(fontData, OSGetMEM2ArenaLo());
 
-    xfb = OSAllocFromMEM1ArenaLo((640 * 480 * VI_DISPLAY_PIX_SZ), DEFAULT_ALIGN);
+    xfb = OSAllocFromMEM1ArenaLo((0x96000), DEFAULT_ALIGN);
     ScreenClear(xfb, 640, 480, RGB2YUV(fp->bg));
     VISetNextFrameBuffer(xfb);
     ConfigureVideo(640, 480);
@@ -420,7 +420,7 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
         ;
 
     ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), BS2_REPORT_X_POS, BS2_REPORT_Y_POS, fontData->leading, fp->msg);
-    DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
+    DCFlushRange(xfb, 0x96000);
     VISetBlack(FALSE);
     VIFlush();
     count = VIGetRetraceCount();

@@ -55,6 +55,11 @@ namespace nw4r {
             GXColorS10 GetTevColor(u32 idx) const { return mTevCols[idx]; }
             void SetTevColor(u32 idx, const GXColorS10& val) { mTevCols[idx] = val; }
 
+            ut::Color GetTevKColor(u32 idx) const { return mTevKCols[idx]; }
+            void SetTevKColor(u32 idx, ut::Color color) { mTevKCols[idx] = color; }
+            ut::Color GetMatColor() const { return *GetMatColAry(); }
+            void SetMatColor(ut::Color color) { *GetMatColAry() = color; }
+
             u8 GetTextureCap() const { return mGXMemCap.texMap; }
 
             u8 GetTexSRTCap() const { return mGXMemCap.texSRT; }

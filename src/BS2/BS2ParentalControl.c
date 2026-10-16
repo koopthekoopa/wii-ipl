@@ -5,29 +5,29 @@
 BOOL __BS2IsPCEnable();
 
 BOOL BS2CheckParentalControl() {
-    SCParentalControlsInfo parentalControls;
+    SCParentalControlsInfo pcInfo;
 
     if (!__BS2IsPCEnable()) {
         return TRUE;
     }
 
-    if (!SCGetParentalControl(&parentalControls)) {
+    if (!SCGetParentalControl(&pcInfo)) {
         return TRUE;
     }
 
-    if (parentalControls.enable & SC_PARENTAL_FLAG_ENABLED) {
-        int pcFlags = bi3.parentalControlFlags[parentalControls.org];
+    if (pcInfo.enable & SC_PARENTAL_FLAG_ENABLED) {
+        int rating = bi3.parentalControlFlags[pcInfo.org];
 
         // If parental controls enabled
-        if (pcFlags & SC_PARENTAL_FLAG_ENABLED) {
+        if (rating & SC_PARENTAL_FLAG_ENABLED) {
             return FALSE;
         }
         // If... this is enabled
-        if (pcFlags & 0x40) {
+        if (rating & 0x40) {
             return FALSE;
         }
         // If the age rating in BI3 is bigger than SYSCONF's
-        if ((pcFlags & SC_PARENTAL_RATING_ENABLED) > parentalControls.rating) {
+        if ((rating & SC_PARENTAL_RATING_BITS) > pcInfo.rating) {
             return FALSE;
         }
     }

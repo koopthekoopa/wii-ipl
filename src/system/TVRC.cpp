@@ -67,6 +67,42 @@ namespace LibTVRC {
 
     OSTime _tickT;
     OSTime _tickWait[2];
+
+    void __FTVRCLoop0Handler(OSAlarm *alarm, OSContext *ctx) {
+        return;
+    }
+
+    void __FTVRCLoop1Handler(OSAlarm *alarm, OSContext *ctx) {
+        if (_ctCombo != 0 && _isActive != 0) {
+            if (_func1state == -1) {
+                _unitStartTime = OSGetTime();
+                _func1state = 0;
+            }
+
+            if (_isLastOnOff != 0) {
+                _unitLastTime = OSGetTime();
+
+                if (_func1state == 0) {
+                    WPADSetSensorBarPower(TRUE);
+                    _func1state = 1;
+                    OSSetAlarm(&_alarm, _tickWait[1], __FTVRCLoop1Handler);
+                    return;
+                }
+
+                BOOL active = (int)(_unitLastTime - _unitStartTime) < (int)(*(u32*)&_tickT * _ctCombo);
+                WPADSetSensorBarPower(FALSE);
+                _func1state = 0;
+                if (active) {
+                    OSSetAlarm(&_alarm, _tickWait[0], __FTVRCLoop1Handler);
+                } else {
+                    OSSetAlarm(&_alarm, _tickWait[0], __FTVRCLoop0Handler);
+                }
+            } else {
+                WPADSetSensorBarPower(FALSE);
+                OSSetAlarm(&_alarm, *(u32*)&_tickT * _ctCombo, __FTVRCLoop0Handler);
+            }
+        }
+    }
 }  // namespace LibTVRC
 
 using namespace LibTVRC;

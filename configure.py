@@ -229,7 +229,7 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20250812"
+config.compilers_tag = "20251118"
 config.dtk_tag = "v1.7.5"
 config.objdiff_tag = "v3.4.5"
 config.sjiswrap_tag = "v1.2.2"
@@ -301,6 +301,7 @@ cflags_base = [
     "-fp hardware",
     "-Cpp_exceptions off",
     # "-W all",
+    "-W nomissingreturn",
     "-O4,p",
     "-inline auto",
     '-pragma "cats off"',
@@ -347,7 +348,6 @@ elif args.warn == "error":
 # Main IPL flags
 cflags_ipl = [
     *cflags_base,
-    "-W nomissingreturn",
     "-ipa file",
     "-gccinc",
     "-fp_contract off",
@@ -688,7 +688,7 @@ config.libs = [
         ]
     ),
     IPLSection("sound", [
-            Object(NonMatching, "sound/iplSound.cpp"),
+            Object(Matching,    "sound/iplSound.cpp"),
         ]
     ),
     IPLSection("iplwww", [
@@ -941,24 +941,24 @@ config.libs = [
     ),
     IPLSection("channelScript", [
             Object(NonMatching, "channelScript/CHANSVm.c"),
-            Object(NonMatching, "channelScript/systemmenu/VmSystem.c"),
+            Object(Matching,    "channelScript/systemmenu/VmSystem.c"),
             Object(Matching,    "channelScript/systemmenu/iplCSSystem.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSLayout.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSPane.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSMaterial.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSTexture.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSSavedata.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSLayout.cpp"),
+            Object(Equivalent,  "channelScript/systemmenu/iplCSPane.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSMaterial.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSTexture.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSSavedata.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSVector.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSGX.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSUtil.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSMtx.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSTextWriter.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSTextWriter.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSFont.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSRect.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSColor.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSSize.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSAnim.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSSound.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSAnim.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSSound.cpp"),
             Object(Matching,    "channelScript/systemmenu/iplCSImage.cpp"),
         ]
     ),
@@ -1387,9 +1387,9 @@ config.libs = [
         ]
     ),
     RVLSDKLib("vi", [
-            Object(NonMatching, "vi/vi.c"),
-            Object(NonMatching, "vi/i2c.c"),
-            Object(NonMatching, "vi/vi3in1.c"),
+            Object(Matching,    "vi/vi.c"),
+            Object(Matching,    "vi/i2c.c"),
+            Object(Matching,    "vi/vi3in1.c"),
         ]
     ),
     RVLSDKLib("mtx", [
@@ -1446,13 +1446,13 @@ config.libs = [
     RVLSDKLib("axfx", [
             Object(Matching,    "axfx/AXFXReverbHi.c"),
             Object(Matching,    "axfx/AXFXReverbHiDpl2.c"),
-            Object(NonMatching, "axfx/AXFXReverbHiExp.c"),
-            Object(NonMatching, "axfx/AXFXReverbHiExpDpl2.c"),
+            Object(Matching,    "axfx/AXFXReverbHiExp.c"),
+            Object(Matching,    "axfx/AXFXReverbHiExpDpl2.c"),
             Object(Matching,    "axfx/AXFXDelay.c"),
             Object(Matching,    "axfx/AXFXReverbStd.c"),
-            Object(NonMatching, "axfx/AXFXReverbStdExp.c"),
+            Object(Matching,    "axfx/AXFXReverbStdExp.c"),
             Object(Matching,    "axfx/AXFXChorus.c"),
-            Object(NonMatching, "axfx/AXFXChorusExp.c"),
+            Object(Equivalent,  "axfx/AXFXChorusExp.c"),
             Object(Matching,    "axfx/AXFXLfoTable.c"),
             Object(Matching,    "axfx/AXFXSrcCoef.c"),
             Object(Matching,    "axfx/AXFXHooks.c"),

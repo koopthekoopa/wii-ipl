@@ -106,6 +106,8 @@ namespace ipl {
             META_BLOCKHDR_FLAG_NET_SETTING = 0x100      // needNetSetting
         };
 
+        // The unused flags are referenced from WiiMakeBanner.exe
+        // (Left over SDK tool from Emergency Mayhem's game data)
         typedef struct SMetaBlockHeader {
             char magic[4];   // 0x00 (Always "IMET"; "IPL Meta"?)
             u32 headerSize;  // 0x04
@@ -137,7 +139,8 @@ namespace ipl {
                     u32 unk_03 : 1;        // 0x03:00000000000000000000000000001000
                     u32 unk_02 : 1;        // 0x03:00000000000000000000000000000100
                     u32 unk_01 : 1;        // 0x03:00000000000000000000000000000010
-                    u32 unk_00 : 1;        // 0x03:00000000000000000000000000000001
+                    u32 noDelete : 1;      // 0x03:00000000000000000000000000000001 (unused)
+                    // "NeedClassic" and "NeedFreestyle" are referenced in WiiMakeBanner, but don't have their associated flags anymore.
                 };
             };  // 0x18
         } SMetaBlockHeader;
@@ -150,7 +153,12 @@ namespace ipl {
 
             wchar_t names[SC_LANG_MAX][NAME_INDEX_MAX][META_CHANNEL_NAME_LENGTH + 1];  // 0x5C
 
-            u8 reserved1[588];  // 0x3A4
+            u8 padding0[504];  // 0x3A4
+
+            char texturePath[32];  // 0x59C (unused)
+            char messagePath[32];  // 0x5BC (unused)
+
+            u8 padding2[0x14];  // 0x5DC
 
             NETMD5Sum MD5Sum;  // 0x4F0
         } SChanMgrMetaHeader;

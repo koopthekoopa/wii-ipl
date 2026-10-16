@@ -1,44 +1,44 @@
 #include <revolution/axfx.h>
 
-static void __ParamConvert(AXFX_REVERBHI* fx);
+static void __ParamConvert(AXFX_REVERBHI* reverb);
 
-u32 AXFXReverbHiGetMemSize(AXFX_REVERBHI* fx) {
-    fx->reverbInner.preDelayTimeMax = fx->preDelay;
-    return AXFXReverbHiExpGetMemSize(&fx->reverbInner);
+u32 AXFXReverbHiGetMemSize(AXFX_REVERBHI* reverb) {
+    reverb->reverbInner.preDelayTimeMax = reverb->preDelay;
+    return AXFXReverbHiExpGetMemSize(&reverb->reverbInner);
 }
 
-BOOL AXFXReverbHiInit(AXFX_REVERBHI* fx) {
-    __ParamConvert(fx);
-    return AXFXReverbHiExpInit(&fx->reverbInner);
+BOOL AXFXReverbHiInit(AXFX_REVERBHI* reverb) {
+    __ParamConvert(reverb);
+    return AXFXReverbHiExpInit(&reverb->reverbInner);
 }
 
-BOOL AXFXReverbHiShutdown(AXFX_REVERBHI* fx) {
-    AXFXReverbHiExpShutdown(&fx->reverbInner);
+BOOL AXFXReverbHiShutdown(AXFX_REVERBHI* reverb) {
+    AXFXReverbHiExpShutdown(&reverb->reverbInner);
     return TRUE;
 }
 
-BOOL AXFXReverbHiSettings(AXFX_REVERBHI* fx) {
-    __ParamConvert(fx);
-    return AXFXReverbHiExpSettings(&fx->reverbInner);
+BOOL AXFXReverbHiSettings(AXFX_REVERBHI* reverb) {
+    __ParamConvert(reverb);
+    return AXFXReverbHiExpSettings(&reverb->reverbInner);
 }
 
-void AXFXReverbHiCallback(void* chans, void* context) {
-    AXFXReverbHiExpCallback((AXFX_BUFFERUPDATE*)chans, (AXFX_REVERBHI_EXP*)context);
+void AXFXReverbHiCallback(AXFX_BUS* bus, AXFX_REVERBHI* reverb) {
+    AXFXReverbHiExpCallback(bus, &reverb->reverbInner);
 }
 
-static void __ParamConvert(AXFX_REVERBHI* fx) {
-    fx->reverbInner.earlyMode = 5;
-    fx->reverbInner.preDelayTimeMax = fx->preDelay;
-    fx->reverbInner.preDelayTime = fx->preDelay;
-    fx->reverbInner.fusedMode = 0;
-    fx->reverbInner.fusedTime = fx->time;
-    fx->reverbInner.coloration = fx->coloration;
-    fx->reverbInner.damping = fx->damping;
-    fx->reverbInner.crosstalk = fx->crosstalk;
-    fx->reverbInner.earlyGain = 0.0f;
-    fx->reverbInner.fusedGain = 1.0f;
-    fx->reverbInner.busIn = NULL;
-    fx->reverbInner.busOut = NULL;
-    fx->reverbInner.outGain = fx->mix;
-    fx->reverbInner.sendGain = 0.0f;
+static void __ParamConvert(AXFX_REVERBHI* reverb) {
+    reverb->reverbInner.earlyMode = 5;
+    reverb->reverbInner.preDelayTimeMax = reverb->preDelay;
+    reverb->reverbInner.preDelayTime = reverb->preDelay;
+    reverb->reverbInner.fusedMode = 0;
+    reverb->reverbInner.fusedTime = reverb->time;
+    reverb->reverbInner.coloration = reverb->coloration;
+    reverb->reverbInner.damping = reverb->damping;
+    reverb->reverbInner.crosstalk = reverb->crosstalk;
+    reverb->reverbInner.earlyGain = 0.0f;
+    reverb->reverbInner.fusedGain = 1.0f;
+    reverb->reverbInner.busIn = NULL;
+    reverb->reverbInner.busOut = NULL;
+    reverb->reverbInner.outGain = reverb->mix;
+    reverb->reverbInner.sendGain = 0.0f;
 }

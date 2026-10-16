@@ -47,7 +47,7 @@ namespace ipl {
         smArg.mpMem1Arena = (void*)0x80080000;
         smArg.mMem1ArenaSize = 0xCC0000;
 
-        smArg.mpChannelArena = (void*)0x80B40000;
+        smArg.mpChannelArena = (void*)((u32)smArg.mpMem1Arena + smArg.mMem1ArenaSize - 0x200000);
         smArg.mpMem1Root = EGG::ExpHeap::create((void*)0x80D40000, 0x340000, MEM_HEAP_OPT_DEBUG_FILL);
 
         OSSetMEM1ArenaLo((void*)0x81080000);
@@ -631,7 +631,7 @@ namespace ipl {
         }
 
         // Delete homebrew titles and exploits
-        utility::ESMisc::DeleteUnauthorizedData(getTreasureHeap());
+        utility::ESMisc::InitSavedata(getTreasureHeap());
 
         // Task threads
         smArg.mpTask1 = EGG::TaskThread::create(0x40, 19, 0x10000, getMem1Sys());
@@ -732,7 +732,7 @@ namespace ipl {
 
 #if defined(KOREAN_BUILD) || !defined(TURN_OFF_CK2_VERIFY)
         // And finally... homebrew's fear.
-        BOOL hasKoreanKey = ES_VerifyCK2() == ES_ERR_OK;
+        BOOL hasKoreanKey = ES_VerifyNewCommonKey() == ES_ERR_OK;
         if (hasKoreanKey) {
             IPLErrorLogAndDisplay(MESG_ERR_KEY2, "ES", hasKoreanKey, 1446);
         }

@@ -7,58 +7,104 @@
 
 #include <egg/core.h>
 
-#include "IplSound.rsid"
+#include "sound/IplSound.rsid"
 
 namespace ipl {
     namespace snd {
+        typedef struct tagSBgmInfo {
+        public:
+            tagSBgmInfo() {}
+
+            nw4r::snd::SoundHandle* GetHandle() { return &mHandle; }
+
+        private:
+            nw4r::snd::SoundHandle mHandle;
+
+            friend class System;
+        } SBgmInfo;
+
+        typedef struct tagSSeInfo {
+        public:
+            tagSSeInfo() {}
+
+            nw4r::snd::SoundHandle* GetHandle() { return &mHandle; }
+
+        private:
+            nw4r::snd::SoundHandle mHandle;  // 0x00
+            const char* mpName;              // 0x04
+            u32 mID;                         // 0x08
+
+            friend class System;
+        } SSeInfo;
+
+        typedef enum EAudioOutputMode {
+            AUDIO_OUTPUT_MODE_STEREO = 0,
+            AUDIO_OUTPUT_MODE_SURROUND,
+            AUDIO_OUTPUT_MODE_MONO,
+        } EAudioOutputMode;
+
         class System : EGG::SimpleAudioMgrWithFx {
         public:
-            System();
+            System() : EGG::SimpleAudioMgrWithFx() {}
 
-            void initOnMemory(const void* data, EGG::Heap* heap, u32 soundSize);
-            void initFx();
+            void initOnMemory(const void* data, EGG::Heap* heap, u32 soundHeapSize);
+            void initFx() NO_INLINE;
 
-            void shutup(BOOL shutUpDMA);
+            void shutup(BOOL isLocked);
 
             virtual void calc();  // 0x0C
 
-            void* /*todo*/ startBGM(const char* bgmName);
-            nw4r::snd::SoundHandle* startSE(const char* sndName);
-            int startSEIndex(u32 sndIndex);
-            int startSEwithPos(const char* sndName, f32 pos);
+            SBgmInfo* startBGM(const char* bgmName);
+            SSeInfo* startSE(const char* seName);
+            SSeInfo* startSEIndex(u32 seIndex);
+            SSeInfo* startSEwithPos(const char* seName, f32 pos);
 
-            int holdSE(const char* sndName);
-            int holdSEwithPosDis(const char* sndName, f32 x, f32 y);
+            SSeInfo* holdSE(const char* seName);
+            SSeInfo* holdSEwithPosDis(const char* seName, f32 pos, f32 dis);
 
-            int stopBGM(int unk = 0);
-            int stopBGM(nw4r::snd::SoundHandle* handle, int unk = 0);
-            int stopSE(nw4r::snd::SoundHandle* handle, int unk = 0);
-            void stopAllSound(int unk = 0);
+            void stopBGM(int fadeOut = 0);
+            void stopSE(nw4r::snd::SoundHandle* handle, int fadeOut = 0);
+            void stopAllSound(int fadeOut = 0);
 
-            int resetAllSound();
+            void resetAllSound();
 
-            int muteOffBGM(int);
-            int muteOnBGM(int);
+            void muteOffBGM(int fadeOut = 0);
+            void muteOnBGM(int fadeOut = 0);
 
-            int pauseOnBGM();
-            int pauseOffBGM();
+            void pauseOnBGM();
+            void pauseOffBGM();
 
-            int pauseOnSE();
-            int pauseOffSE();
+            void pauseOnSE();
+            void pauseOffSE();
 
-            BOOL isSEActive(const char* sndName);
-            BOOL isSEActive(u32 id);
+            // DIRTY FAKEMATCH
+            // The original functions do not return anything, and changing the return type changes codegen
+            // But iplHomeButtonMenu expects it to return a BOOL value so ima just add these hacky inlines... i hate this damn codebase.
+            BOOL resetAllSoundCheck() { resetAllSound(); }
+            BOOL pauseOnBGMCheck() { pauseOnBGM(); }
+            BOOL pauseOffBGMCheck() { pauseOffBGM(); }
 
-            BOOL FisSEActive(const char* sndName);
-            BOOL FisSEActive(u32 id);
+            void setOutputMode(EAudioOutputMode outputMode);
 
-            void startBannerSound(void*, u32, bool ignoreSize = false);
-            void stopBannerSound(int unk = 0);
+            BOOL isSEActive(const char* seName);
+            BOOL isSEActive(u32 seIndex);
 
-            BOOL checkTmpSoundFile(void*, u32);
+            SSeInfo* FIsSEActive(const char* seName);
+            SSeInfo* FIsSEActive(u32 seIndex);
+
+            SSeInfo* getFreeSEBlock(bool unk);
+
+            BOOL startBannerSound(void* data, u32 dataSize, bool ignoreSize = false);
+            void stopBannerSound(int fadeOut = 0);
+
+            BOOL checkTmpSoundFile(void* data, u32 dataSize);
 
         private:
-            u32 unk_0x620[0x18];
+            s32 clipGELT_S32(s32 value, s32 min, s32 max);
+
+            u32 mFreeBlock;  // 0x620
+            u32 unk_0x624;
+            nw4r::snd::SoundArchivePlayer* mpSoundArcPlayer;  // 0x628
         };
 
         // use getSystem() and getBannerPlayer() instead

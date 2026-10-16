@@ -16,7 +16,7 @@ static IOSFd __esFd = -1;
 // Di means something. DVD Interface????
 enum {
     ES_IOCTLV_IMPORT_TICKET = 1,
-    ES_IOCTLV_IMPORT_TITLE_0 = 2,
+    ES_IOCTLV_IMPORT_TITLE_INIT = 2,
     ES_IOCTLV_IMPORT_CONTENT_BEGIN = 3,
     ES_IOCTLV_IMPORT_CONTENT_DATA = 4,
     ES_IOCTLV_IMPORT_CONTENT_END = 5,
@@ -55,7 +55,7 @@ enum {
     ES_IOCTLV_EXPORT_CONTENT_DATA = 40,
     ES_IOCTLV_EXPORT_CONTENT_END = 41,
     ES_IOCTLV_EXPORT_TITLE_DONE = 42,
-    ES_IOCTLV_IMPORT_TITLE_2 = 43,
+    ES_IOCTLV_IMPORT_TITLE_INIT_ALT = 43,
     ES_IOCTLV_ENCRYPT = 44,
     ES_IOCTLV_DECRYPT = 45,
     ES_IOCTLV_GET_BOOT2_VERSION = 46,
@@ -71,7 +71,7 @@ enum {
     ES_IOCTLV_GET_DVD_TMD = 57,
     ES_IOCTLV_GET_DVD_TMD_WITH_COUNT = 58,
     ES_IOCTLV_DELETE_CONTENT = 62,
-    ES_IOCTLV_VERIFY_CK_2 = 69,
+    ES_IOCTLV_VERIFY_NEW_COMMON_KEY = 69,
 };
 
 ESError ES_InitLib() {
@@ -267,7 +267,7 @@ ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, vo
             vec[3].base = (u8*)pUnknown;
             vec[3].length = sizeof(*pUnknown);
 
-            ret = IOS_Ioctlv(__esFd, ES_IOCTLV_IMPORT_TITLE_0, 4, 0, vec);
+            ret = IOS_Ioctlv(__esFd, ES_IOCTLV_IMPORT_TITLE_INIT, 4, 0, vec);
             return ret;
         }
         case 2: {
@@ -285,7 +285,7 @@ ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, vo
             vec[0].base = (u8*)tmd;
             vec[0].length = tmdSize;
 
-            ret = IOS_Ioctlv(__esFd, ES_IOCTLV_IMPORT_TITLE_2, 1, 0, vec);
+            ret = IOS_Ioctlv(__esFd, ES_IOCTLV_IMPORT_TITLE_INIT_ALT, 1, 0, vec);
             return ret;
         }
         default: {
@@ -1323,7 +1323,7 @@ ESError ES_Decrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output) {
     return ret;
 }
 
-ESError ES_VerifyCK2() {
+ESError ES_VerifyNewCommonKey() {
     DECLARE_ES_WORK;
 
     IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
@@ -1334,7 +1334,7 @@ ESError ES_VerifyCK2() {
         return ES_ERR_INVALID;
     }
 
-    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_VERIFY_CK_2, 0, 0, vec);
+    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_VERIFY_NEW_COMMON_KEY, 0, 0, vec);
     return ret;
 }
 

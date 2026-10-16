@@ -31,7 +31,10 @@ namespace nw4r {
                 ut::detail::AutoLock<OSMutex> lock(mMutex);
                 return mFrameHeap.SaveState();
             }
-            void LoadState(int id);
+            void LoadState(int id) {
+                ut::detail::AutoLock<OSMutex> lock(mMutex);
+                mFrameHeap.LoadState(id);
+            }
 
             bool IsValid() { return mFrameHeap.IsValid(); }
 

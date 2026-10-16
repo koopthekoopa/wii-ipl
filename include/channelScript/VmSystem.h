@@ -3,7 +3,7 @@
 
 #include "channelScript/CHANSVm/VmTypes.h"
 
-extern vmBool VmSystemBeginRenderFlag;
-extern vmBool VmSystemWaitForRetraceFlag;
+extern bool VmSystemBeginRenderFlag;
+extern bool VmSystemWaitForRetraceFlag;
 
 #endif  // VM_SYSTEM_H

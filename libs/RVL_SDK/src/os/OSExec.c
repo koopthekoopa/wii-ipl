@@ -127,7 +127,7 @@ BOOL __OSCheckCompanyCode(ESTitleId titleId, BOOL diskApp) {
 
 BOOL __OSCheckTmdCountryCode(ESTmdView* tmd) {
     u32 country = 0;
-    country = tmd->head.reserved.region;
+    country = tmd->head.customData.region;
 
     if (country == ES_REGION_ALL) {
         // Do not bother checking if its region free
@@ -172,11 +172,12 @@ int __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets) {
                 }
 
                 // Get bits to access.
-                accessMask = (u16)((ticketViewList[i].accessMask[1] << 8) | ticketViewList[i].accessMask[0]);
+                accessMask = (u16)((ticketViewList[i].sysAccessMask[1] << 8) | ticketViewList[i].sysAccessMask[0]);
 
                 for (j = 0; j < 16; j++) {
-                    if (accessMask & (1 << j))
+                    if (accessMask & (1 << j)) {
                         bits++;
+					}
                 }
 
                 if (bits > maxBit) {
@@ -284,7 +285,7 @@ inline BOOL __OSCheckTmdSysVersion(ESTmdView* tmd) {
 }
 
 static BOOL __OSCheckTmdDriveSpinFlag(ESTmdView* tmd) {
-    if (tmd->head.reserved.driveSpin & 1) {
+    if (tmd->head.customData.driveSpin & 1) {
         return TRUE;
     } else {
         return FALSE;

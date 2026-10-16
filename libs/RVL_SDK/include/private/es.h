@@ -69,7 +69,7 @@ ESError ES_ExportTitleDone();
 ESError ES_Encrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output);
 ESError ES_Decrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output);
 
-ESError ES_VerifyCK2();
+ESError ES_VerifyNewCommonKey();
 
 ESError ES_Sign(void* data, u32 length, ESSignature signature, ESCertSignature* sigKeyCert);
 ESError ES_VerifySign(void* data, u32 length, ESSignature signature, void* certs, u32 certSize);

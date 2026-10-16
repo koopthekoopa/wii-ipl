@@ -5,142 +5,147 @@
 
 #include <revolution/os.h>
 
+#include <math.h>
 #include <string.h>
 
-static BOOL __AllocDelayLine(AXFX_DELAY* fx);
-static void __FreeDelayLine(AXFX_DELAY* fx);
-static BOOL __InitParams(AXFX_DELAY* fx) NO_INLINE;
+static BOOL __AllocDelayLine(AXFX_DELAY* delay);
+static void __FreeDelayLine(AXFX_DELAY* delay);
 
-u32 AXFXDelayGetMemSize(const AXFX_DELAY* fx) {
-    u32 num = 0;
-    num += fx->delay[0];
-    num += fx->delay[1];
-    num += fx->delay[2];
+static BOOL __InitParams(AXFX_DELAY* delay);
 
-    return num * 128;
+u32 AXFXDelayGetMemSize(AXFX_DELAY* delay) {
+    int i;
+    u32 memSize;
+
+    memSize = 0;
+
+    for (i = 0; i < AXFX_STEREO_CHANNEL_MAX; i++) {
+        ASSERTMSGLINE(70, delay->delay[i], "The value of specified parameter is out of range.");
+        memSize += delay->delay[i];
+    }
+    return (memSize << 5) * 4;
 }
 
-BOOL AXFXDelayInit(AXFX_DELAY* fx) {
+BOOL AXFXDelayInit(AXFX_DELAY* delay) {
+    BOOL result;
     BOOL enabled;
-    int i;
+    u32 i;
 
+    result = TRUE;
     enabled = OSDisableInterrupts();
-    fx->active = 1;
 
-    for (i = 0; i < ARRAY_LENGTH(fx->delay); i++) {
-        if (fx->delay[i] == 0) {
-            AXFXDelayShutdown(fx);
+    delay->active = 1;
+
+    for (i = 0; i < AXFX_STEREO_CHANNEL_MAX; i++) {
+        ASSERTMSGLINE(107, delay->delay[i], "The value of specified parameter is out of range.");
+
+        if (delay->delay[i] == 0) {
+            AXFXDelayShutdown(delay);
             OSRestoreInterrupts(enabled);
             return FALSE;
         }
 
-        fx->length[i] = fx->delay[i] * 32;
+        delay->length[i] = (delay->delay[i] << 5);
     }
 
-    if (!__AllocDelayLine(fx)) {
-        AXFXDelayShutdown(fx);
+    result = __AllocDelayLine(delay);
+    if (result == FALSE) {
+        AXFXDelayShutdown(delay);
         OSRestoreInterrupts(enabled);
         return FALSE;
     }
 
-    if (!__InitParams(fx)) {
-        AXFXDelayShutdown(fx);
+    result = __InitParams(delay);
+    if (result == FALSE) {
+        AXFXDelayShutdown(delay);
         OSRestoreInterrupts(enabled);
         return FALSE;
     }
 
-    fx->active |= 2;
-    fx->active &= ~1;
+    delay->active |= 2;
+    delay->active &= 0xFFFFFFFE;
+
     OSRestoreInterrupts(enabled);
 
     return TRUE;
 }
 
-BOOL AXFXDelaySettings(AXFX_DELAY* fx) {
-    BOOL enabled;
+BOOL AXFXDelaySettings(AXFX_DELAY* delay) {
+    BOOL result = TRUE;
+    BOOL enabled = OSDisableInterrupts();
 
-    enabled = OSDisableInterrupts();
-    fx->active |= 1;
-    AXFXDelayShutdown(fx);
+    delay->active |= 1;
 
-    if (!AXFXDelayInit(fx)) {
-        AXFXDelayShutdown(fx);
+    AXFXDelayShutdown(delay);
+
+    result = AXFXDelayInit(delay);
+    if (result == FALSE) {
+        AXFXDelayShutdown(delay);
         OSRestoreInterrupts(enabled);
         return FALSE;
     }
 
-    fx->active |= 2;
-    fx->active &= ~1;
+    delay->active |= 2;
+    delay->active &= 0xFFFFFFFE;
+
     OSRestoreInterrupts(enabled);
 
     return TRUE;
 }
 
-void AXFXDelayShutdown(AXFX_DELAY* fx) {
-    BOOL enabled;
+void AXFXDelayShutdown(AXFX_DELAY* delay) {
+    BOOL enabled = OSDisableInterrupts();
 
-    enabled = OSDisableInterrupts();
+    delay->active |= 1;
 
-    fx->active |= 1;
-    __FreeDelayLine(fx);
+    __FreeDelayLine(delay);
 
     OSRestoreInterrupts(enabled);
 }
 
-void AXFXDelayCallback(void* chans, void* context) {
-    AXFX_BUFFERUPDATE* buf;
-    AXFX_DELAY* fx;
-    s32* lp;
-    s32* rp;
-    s32* sp;
-    s32 lv, rv, sv;
-    int i;
+void AXFXDelayCallback(AXFX_BUS* bus, AXFX_DELAY* delay) {
+    s32* busParam[AXFX_STEREO_CHANNEL_MAX];
+    s32 line[AXFX_STEREO_CHANNEL_MAX];
+    u32 i;
 
-    buf = (AXFX_BUFFERUPDATE*)chans;
-    fx = (AXFX_DELAY*)context;
-
-    if (fx->active) {
-        fx->active &= ~2;
+    if (delay->active != 0) {
+        delay->active &= 0xFFFFFFFD;
         return;
     }
 
-    lp = buf->left;
-    rp = buf->right;
-    sp = buf->surround;
+    busParam[0] = bus->left;
+    busParam[1] = bus->right;
+    busParam[2] = bus->surround;
 
-    for (i = 0; i < AX_SAMPLES_PER_FRAME; i++) {
-        lv = fx->line[0][fx->curPos[0]];
-        rv = fx->line[1][fx->curPos[1]];
-        sv = fx->line[2][fx->curPos[2]];
-
-        fx->line[0][fx->curPos[0]] = ((lv * fx->feedbackGain[0]) >> 7) + *lp;
-        fx->line[1][fx->curPos[1]] = ((rv * fx->feedbackGain[1]) >> 7) + *rp;
-        fx->line[2][fx->curPos[2]] = ((sv * fx->feedbackGain[2]) >> 7) + *sp;
-
-        if (++fx->curPos[0] >= fx->length[0]) {
-            fx->curPos[0] = 0;
+    for (i = 0; i < 96; i++) {
+        line[0] = delay->line[0][delay->curPos[0]];
+        line[1] = delay->line[1][delay->curPos[1]];
+        line[2] = delay->line[2][delay->curPos[2]];
+        delay->line[0][delay->curPos[0]] = *busParam[0] + ((line[0] * delay->feedbackGain[0]) >> 7);
+        delay->line[1][delay->curPos[1]] = *busParam[1] + ((line[1] * delay->feedbackGain[1]) >> 7);
+        delay->line[2][delay->curPos[2]] = *busParam[2] + ((line[2] * delay->feedbackGain[2]) >> 7);
+        if (++delay->curPos[0] >= delay->length[0]) {
+            delay->curPos[0] = 0;
         }
-
-        if (++fx->curPos[1] >= fx->length[1]) {
-            fx->curPos[1] = 0;
+        if (++delay->curPos[1] >= delay->length[1]) {
+            delay->curPos[1] = 0;
         }
-
-        if (++fx->curPos[2] >= fx->length[2]) {
-            fx->curPos[2] = 0;
+        if (++delay->curPos[2] >= delay->length[2]) {
+            delay->curPos[2] = 0;
         }
-
-        *lp++ = (lv * fx->outGain[0]) >> 7;
-        *rp++ = (rv * fx->outGain[1]) >> 7;
-        *sp++ = (sv * fx->outGain[2]) >> 7;
+        *busParam[0]++ = (line[0] * delay->outGain[0]) >> 7;
+        *busParam[1]++ = (line[1] * delay->outGain[1]) >> 7;
+        *busParam[2]++ = (line[2] * delay->outGain[2]) >> 7;
     }
 }
 
-static BOOL __AllocDelayLine(AXFX_DELAY* fx) {
-    int i;
+static BOOL __AllocDelayLine(AXFX_DELAY* delay) {
+    u32 i;
 
-    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
-        fx->line[i] = __AXFXAlloc(fx->length[i] * sizeof(s32));
-        if (fx->line[i] == NULL) {
+    for (i = 0; i < AXFX_STEREO_CHANNEL_MAX; i++) {
+        delay->line[i] = __AXFXAlloc(delay->length[i] * 4);
+        ASSERTMSGLINE(280, delay->line[i], "Can't allocate the memory.");
+        if (!delay->line[i]) {
             return FALSE;
         }
     }
@@ -148,39 +153,41 @@ static BOOL __AllocDelayLine(AXFX_DELAY* fx) {
     return TRUE;
 }
 
-static void __FreeDelayLine(AXFX_DELAY* fx) {
-    int i;
+static void __FreeDelayLine(AXFX_DELAY* delay) {
+    u32 i;
 
-    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
-        if (fx->line[i] != NULL) {
-            __AXFXFree(fx->line[i]);
-            fx->line[i] = NULL;
+    for (i = 0; i < AXFX_STEREO_CHANNEL_MAX; i++) {
+        if (delay->line[i]) {
+            __AXFXFree(delay->line[i]);
+            delay->line[i] = NULL;
         }
     }
 }
 
-static BOOL __InitParams(AXFX_DELAY* fx) {
-    int i;
+static BOOL __InitParams(AXFX_DELAY* delay) {
+    u32 i;
 
-    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
-        if (fx->feedback[i] >= 100) {
+    for (i = 0; i < AXFX_STEREO_CHANNEL_MAX; i++) {
+        ASSERTMSGLINE(331, delay->feedback[i] < 100, "The value of specified parameter is out of range.");
+        if (delay->feedback[i] >= 100) {
             return FALSE;
         }
 
-        if (fx->output[i] > 100) {
+        ASSERTMSGLINE(334, delay->output[i] <= 100, "The value of specified parameter is out of range.");
+        if (delay->output[i] > 100) {
             return FALSE;
         }
 
-        if (fx->line[i] == NULL) {
+        ASSERTMSGLINE(340, delay->line[i], "Buffer is not allocated.");
+        if (!delay->line[i]) {
             return FALSE;
         }
 
-        memset(fx->line[i], 0, fx->length[i] * sizeof(s32));
-        fx->curPos[i] = 0;
+        memset(delay->line[i], 0, delay->length[i] * 4);
 
-        fx->feedbackGain[i] = 128.0f * fx->feedback[i] / 100.0f;
-        fx->outGain[i] = 128.0f * fx->output[i] / 100.0f;
+        delay->curPos[i] = 0;
+        delay->feedbackGain[i] = (s32)((128.0f * (f32)delay->feedback[i]) / 100.0f);
+        delay->outGain[i] = (s32)((128.0f * (f32)delay->output[i]) / 100.0f);
     }
-
     return TRUE;
 }

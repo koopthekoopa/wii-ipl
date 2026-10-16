@@ -171,8 +171,8 @@ void __GXInitRevisionBits() {
 
     for (i = 0; i < 8; i++) {
         s32 regAddr;
-        SET_REG_FIELD(__GXData->vatA[i], 1, 30, 1);
-        SET_REG_FIELD(__GXData->vatB[i], 1, 31, 1);
+        GX_SET_REG_FIELD(__GXData->vatA[i], 1, 30, 1);
+        GX_SET_REG_FIELD(__GXData->vatB[i], 1, 31, 1);
 
         GX_WRITE_U8(0x8);
         GX_WRITE_U8(i | 0x80);
@@ -184,25 +184,25 @@ void __GXInitRevisionBits() {
         u32 reg1 = 0;
         u32 reg2 = 0;
 
-        SET_REG_FIELD(reg1, 1, 0, 1);
-        SET_REG_FIELD(reg1, 1, 1, 1);
-        SET_REG_FIELD(reg1, 1, 2, 1);
-        SET_REG_FIELD(reg1, 1, 3, 1);
-        SET_REG_FIELD(reg1, 1, 4, 1);
-        SET_REG_FIELD(reg1, 1, 5, 1);
+        GX_SET_REG_FIELD(reg1, 1, 0, 1);
+        GX_SET_REG_FIELD(reg1, 1, 1, 1);
+        GX_SET_REG_FIELD(reg1, 1, 2, 1);
+        GX_SET_REG_FIELD(reg1, 1, 3, 1);
+        GX_SET_REG_FIELD(reg1, 1, 4, 1);
+        GX_SET_REG_FIELD(reg1, 1, 5, 1);
         GX_WRITE_XF_REG(0x1000, reg1);
 
-        SET_REG_FIELD(reg2, 1, 0, 1);
+        GX_SET_REG_FIELD(reg2, 1, 0, 1);
         GX_WRITE_XF_REG(0x1012, reg2);
     }
 
     {
         u32 reg = 0;
-        SET_REG_FIELD(reg, 1, 0, 1);
-        SET_REG_FIELD(reg, 1, 1, 1);
-        SET_REG_FIELD(reg, 1, 2, 1);
-        SET_REG_FIELD(reg, 1, 3, 1);
-        SET_REG_FIELD(reg, 8, 24, 0x58);
+        GX_SET_REG_FIELD(reg, 1, 0, 1);
+        GX_SET_REG_FIELD(reg, 1, 1, 1);
+        GX_SET_REG_FIELD(reg, 1, 2, 1);
+        GX_SET_REG_FIELD(reg, 1, 3, 1);
+        GX_SET_REG_FIELD(reg, 8, 24, 0x58);
         GX_WRITE_RAS_REG(reg);
     }
 }
@@ -240,40 +240,40 @@ GXFifoObj* GXInit(void* base, u32 size) {
     EnableWriteGatherPipe();
 
     __GXData->genMode = 0;
-    SET_REG_FIELD(__GXData->genMode, 8, 24, 0);
+    GX_SET_REG_FIELD(__GXData->genMode, 8, 24, 0);
     __GXData->bpMask = 255;
-    SET_REG_FIELD(__GXData->bpMask, 8, 24, 0x0F);
+    GX_SET_REG_FIELD(__GXData->bpMask, 8, 24, 0x0F);
     __GXData->lpSize = 0;
-    SET_REG_FIELD(__GXData->lpSize, 8, 24, 0x22);
+    GX_SET_REG_FIELD(__GXData->lpSize, 8, 24, 0x22);
 
     for (i = 0; i < 16; ++i) {
         __GXData->tevc[i] = 0;
         __GXData->teva[i] = 0;
         __GXData->tref[i / 2] = 0;
         __GXData->texmapId[i] = GX_TEXMAP_NULL;
-        SET_REG_FIELD(__GXData->tevc[i], 8, 24, 0xC0 + i * 2);
-        SET_REG_FIELD(__GXData->teva[i], 8, 24, 0xC1 + i * 2);
-        SET_REG_FIELD(__GXData->tevKsel[i / 2], 8, 24, 0xF6 + i / 2);
-        SET_REG_FIELD(__GXData->tref[i / 2], 8, 24, 0x28 + i / 2);
+        GX_SET_REG_FIELD(__GXData->tevc[i], 8, 24, 0xC0 + i * 2);
+        GX_SET_REG_FIELD(__GXData->teva[i], 8, 24, 0xC1 + i * 2);
+        GX_SET_REG_FIELD(__GXData->tevKsel[i / 2], 8, 24, 0xF6 + i / 2);
+        GX_SET_REG_FIELD(__GXData->tref[i / 2], 8, 24, 0x28 + i / 2);
     }
 
     __GXData->iref = 0;
-    SET_REG_FIELD(__GXData->iref, 8, 24, 0x27);
+    GX_SET_REG_FIELD(__GXData->iref, 8, 24, 0x27);
 
     for (i = 0; i < 8; ++i) {
         __GXData->suTs0[i] = 0;
         __GXData->suTs1[i] = 0;
-        SET_REG_FIELD(__GXData->suTs0[i], 8, 24, 0x30 + i * 2);
-        SET_REG_FIELD(__GXData->suTs1[i], 8, 24, 0x31 + i * 2);
+        GX_SET_REG_FIELD(__GXData->suTs0[i], 8, 24, 0x30 + i * 2);
+        GX_SET_REG_FIELD(__GXData->suTs1[i], 8, 24, 0x31 + i * 2);
     }
 
-    SET_REG_FIELD(__GXData->suScis0, 8, 24, 0x20);
-    SET_REG_FIELD(__GXData->suScis1, 8, 24, 0x21);
-    SET_REG_FIELD(__GXData->cmode0, 8, 24, 0x41);
-    SET_REG_FIELD(__GXData->cmode1, 8, 24, 0x42);
-    SET_REG_FIELD(__GXData->zmode, 8, 24, 0x40);
-    SET_REG_FIELD(__GXData->peCtrl, 8, 24, 0x43);
-    SET_REG_FIELD(__GXData->cpTex, 2, 7, 0);
+    GX_SET_REG_FIELD(__GXData->suScis0, 8, 24, 0x20);
+    GX_SET_REG_FIELD(__GXData->suScis1, 8, 24, 0x21);
+    GX_SET_REG_FIELD(__GXData->cmode0, 8, 24, 0x41);
+    GX_SET_REG_FIELD(__GXData->cmode1, 8, 24, 0x42);
+    GX_SET_REG_FIELD(__GXData->zmode, 8, 24, 0x40);
+    GX_SET_REG_FIELD(__GXData->peCtrl, 8, 24, 0x43);
+    GX_SET_REG_FIELD(__GXData->cpTex, 2, 7, 0);
 
     __GXData->zScale = 1.6777216E7f;
     __GXData->zOffset = 0.0f;
@@ -313,7 +313,7 @@ GXFifoObj* GXInit(void* base, u32 size) {
 
         GX_SET_CP_REG(3, reg);
 
-        SET_REG_FIELD(__GXData->perfSel, 4, 4, 0);
+        GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 0);
         GX_WRITE_U8(0x8);
         GX_WRITE_U8(0x20);
         GX_WRITE_U32(__GXData->perfSel);

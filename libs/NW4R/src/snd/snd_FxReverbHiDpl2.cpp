@@ -80,13 +80,14 @@ namespace nw4r {
         }
 
         void FxReverbHiDpl2::UpdateBuffer(int channels, void** buffer, u32 size, SampleFormat format, f32 sampleRate, OutputMode mode) {
-            void* chans[AX_DPL2_MAX];
-            chans[AX_DPL2_L] = buffer[AX_DPL2_L];
-            chans[AX_DPL2_R] = buffer[AX_DPL2_R];
-            chans[AX_DPL2_LS] = buffer[AX_DPL2_LS];
-            chans[AX_DPL2_RS] = buffer[AX_DPL2_RS];
+            AXFX_BUS_DPL2 bus;
 
-            AXFXReverbHiCallbackDpl2(chans, &mAxfxParam);
+            bus.L = (s32*)buffer[AX_DPL2_L];
+            bus.R = (s32*)buffer[AX_DPL2_R];
+            bus.Ls = (s32*)buffer[AX_DPL2_LS];
+            bus.Rs = (s32*)buffer[AX_DPL2_RS];
+
+            AXFXReverbHiCallbackDpl2(&bus, &mAxfxParam);
         }
     }  // namespace snd
 }  // namespace nw4r

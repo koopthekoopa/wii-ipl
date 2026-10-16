@@ -18,16 +18,16 @@ void GXSetTevIndirect(GXTevStageID tev_stage, GXIndTexStageID ind_stage, GXIndTe
                       GXIndTexWrap wrap_s, GXIndTexWrap wrap_t, GXBool add_prev, GXBool utc_lod, GXIndTexAlphaSel alpha_sel) NO_INLINE {
     u32 reg = 0;
 
-    SET_REG_FIELD(reg, 2, 0, ind_stage);
-    SET_REG_FIELD(reg, 2, 2, format);
-    SET_REG_FIELD(reg, 3, 4, bias_sel);
-    SET_REG_FIELD(reg, 2, 7, alpha_sel);
-    SET_REG_FIELD(reg, 4, 9, matrix_sel);
-    SET_REG_FIELD(reg, 3, 13, wrap_s);
-    SET_REG_FIELD(reg, 3, 16, wrap_t);
-    SET_REG_FIELD(reg, 1, 19, utc_lod);
-    SET_REG_FIELD(reg, 1, 20, add_prev);
-    SET_REG_FIELD(reg, 8, 24, tev_stage + 16);
+    GX_SET_REG_FIELD(reg, 2, 0, ind_stage);
+    GX_SET_REG_FIELD(reg, 2, 2, format);
+    GX_SET_REG_FIELD(reg, 3, 4, bias_sel);
+    GX_SET_REG_FIELD(reg, 2, 7, alpha_sel);
+    GX_SET_REG_FIELD(reg, 4, 9, matrix_sel);
+    GX_SET_REG_FIELD(reg, 3, 13, wrap_s);
+    GX_SET_REG_FIELD(reg, 3, 16, wrap_t);
+    GX_SET_REG_FIELD(reg, 1, 19, utc_lod);
+    GX_SET_REG_FIELD(reg, 1, 20, add_prev);
+    GX_SET_REG_FIELD(reg, 8, 24, tev_stage + 16);
 
     GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, reg);
 
@@ -68,28 +68,28 @@ void GXSetIndTexMtx(GXIndTexMtxID mtx_id, const Mtx23 offset, s8 scale_exp) {
     mtx[1] = (int)(1024.0f * offset[1][0]) & 0x7FF;
     scale_exp += 17;
     reg = 0;
-    SET_REG_FIELD(reg, 11, 0, mtx[0]);
-    SET_REG_FIELD(reg, 11, 11, mtx[1]);
-    SET_REG_FIELD(reg, 2, 22, scale_exp & 3);
-    SET_REG_FIELD(reg, 8, 24, id * 3 + 6);
+    GX_SET_REG_FIELD(reg, 11, 0, mtx[0]);
+    GX_SET_REG_FIELD(reg, 11, 11, mtx[1]);
+    GX_SET_REG_FIELD(reg, 2, 22, scale_exp & 3);
+    GX_SET_REG_FIELD(reg, 8, 24, id * 3 + 6);
     GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, reg);
 
     mtx[2] = (int)(1024.0f * offset[0][1]) & 0x7FF;
     mtx[3] = (int)(1024.0f * offset[1][1]) & 0x7FF;
     reg = 0;
-    SET_REG_FIELD(reg, 11, 0, mtx[2]);
-    SET_REG_FIELD(reg, 11, 11, mtx[3]);
-    SET_REG_FIELD(reg, 2, 22, (scale_exp >> 2) & 3);
-    SET_REG_FIELD(reg, 8, 24, id * 3 + 7);
+    GX_SET_REG_FIELD(reg, 11, 0, mtx[2]);
+    GX_SET_REG_FIELD(reg, 11, 11, mtx[3]);
+    GX_SET_REG_FIELD(reg, 2, 22, (scale_exp >> 2) & 3);
+    GX_SET_REG_FIELD(reg, 8, 24, id * 3 + 7);
     GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, reg);
 
     mtx[4] = (int)(1024.0f * offset[0][2]) & 0x7FF;
     mtx[5] = (int)(1024.0f * offset[1][2]) & 0x7FF;
     reg = 0;
-    SET_REG_FIELD(reg, 11, 0, mtx[4]);
-    SET_REG_FIELD(reg, 11, 11, mtx[5]);
-    SET_REG_FIELD(reg, 2, 22, (scale_exp >> 4) & 3);
-    SET_REG_FIELD(reg, 8, 24, id * 3 + 8);
+    GX_SET_REG_FIELD(reg, 11, 0, mtx[4]);
+    GX_SET_REG_FIELD(reg, 11, 11, mtx[5]);
+    GX_SET_REG_FIELD(reg, 2, 22, (scale_exp >> 4) & 3);
+    GX_SET_REG_FIELD(reg, 8, 24, id * 3 + 8);
     GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, reg);
 
     __GXData->bpSentNot = GX_FALSE;
@@ -98,30 +98,30 @@ void GXSetIndTexMtx(GXIndTexMtxID mtx_id, const Mtx23 offset, s8 scale_exp) {
 void GXSetIndTexCoordScale(GXIndTexStageID ind_state, GXIndTexScale scale_s, GXIndTexScale scale_t) {
     switch (ind_state) {
         case GX_INDTEXSTAGE0: {
-            SET_REG_FIELD(__GXData->IndTexScale0, 4, 0, scale_s);
-            SET_REG_FIELD(__GXData->IndTexScale0, 4, 4, scale_t);
-            SET_REG_FIELD(__GXData->IndTexScale0, 8, 24, 0x25);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 4, 0, scale_s);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 4, 4, scale_t);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 8, 24, 0x25);
             GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, __GXData->IndTexScale0);
             break;
         }
         case GX_INDTEXSTAGE1: {
-            SET_REG_FIELD(__GXData->IndTexScale0, 4, 8, scale_s);
-            SET_REG_FIELD(__GXData->IndTexScale0, 4, 12, scale_t);
-            SET_REG_FIELD(__GXData->IndTexScale0, 8, 24, 0x25);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 4, 8, scale_s);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 4, 12, scale_t);
+            GX_SET_REG_FIELD(__GXData->IndTexScale0, 8, 24, 0x25);
             GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, __GXData->IndTexScale0);
             break;
         }
         case GX_INDTEXSTAGE2: {
-            SET_REG_FIELD(__GXData->IndTexScale1, 4, 0, scale_s);
-            SET_REG_FIELD(__GXData->IndTexScale1, 4, 4, scale_t);
-            SET_REG_FIELD(__GXData->IndTexScale1, 8, 24, 0x26);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 4, 0, scale_s);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 4, 4, scale_t);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 8, 24, 0x26);
             GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, __GXData->IndTexScale1);
             break;
         }
         case GX_INDTEXSTAGE3: {
-            SET_REG_FIELD(__GXData->IndTexScale1, 4, 8, scale_s);
-            SET_REG_FIELD(__GXData->IndTexScale1, 4, 12, scale_t);
-            SET_REG_FIELD(__GXData->IndTexScale1, 8, 24, 0x26);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 4, 8, scale_s);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 4, 12, scale_t);
+            GX_SET_REG_FIELD(__GXData->IndTexScale1, 8, 24, 0x26);
             GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, __GXData->IndTexScale1);
             break;
         }
@@ -144,23 +144,23 @@ void GXSetIndTexOrder(GXIndTexStageID ind_stage, GXTexCoordID tex_coord, GXTexMa
 
     switch (ind_stage) {
         case GX_INDTEXSTAGE0: {
-            SET_REG_FIELD(__GXData->iref, 3, 0, tex_map);
-            SET_REG_FIELD(__GXData->iref, 3, 3, tex_coord);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 0, tex_map);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 3, tex_coord);
             break;
         }
         case GX_INDTEXSTAGE1: {
-            SET_REG_FIELD(__GXData->iref, 3, 6, tex_map);
-            SET_REG_FIELD(__GXData->iref, 3, 9, tex_coord);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 6, tex_map);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 9, tex_coord);
             break;
         }
         case GX_INDTEXSTAGE2: {
-            SET_REG_FIELD(__GXData->iref, 3, 12, tex_map);
-            SET_REG_FIELD(__GXData->iref, 3, 15, tex_coord);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 12, tex_map);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 15, tex_coord);
             break;
         }
         case GX_INDTEXSTAGE3: {
-            SET_REG_FIELD(__GXData->iref, 3, 18, tex_map);
-            SET_REG_FIELD(__GXData->iref, 3, 21, tex_coord);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 18, tex_map);
+            GX_SET_REG_FIELD(__GXData->iref, 3, 21, tex_coord);
             break;
         }
         default: {
@@ -175,7 +175,7 @@ void GXSetIndTexOrder(GXIndTexStageID ind_stage, GXTexCoordID tex_coord, GXTexMa
 }
 
 void GXSetNumIndStages(u8 nIndStages) {
-    SET_REG_FIELD(__GXData->genMode, 3, 16, nIndStages);
+    GX_SET_REG_FIELD(__GXData->genMode, 3, 16, nIndStages);
     __GXData->dirtyState |= 6;
 }
 
@@ -187,7 +187,7 @@ void __GXUpdateBPMask() {
 }
 
 void __GXSetIndirectMask(u32 mask) {
-    SET_REG_FIELD(__GXData->bpMask, 8, ~0xFF, mask);
+    GX_SET_REG_FIELD(__GXData->bpMask, 8, ~0xFF, mask);
 
     GX_WRITE_SOME_REG5(GX_LOAD_BP_REG, __GXData->bpMask);
 

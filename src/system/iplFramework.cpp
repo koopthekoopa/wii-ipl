@@ -11,7 +11,7 @@ namespace ipl {
     // clang-format off
 
     // NTSC Interlaced
-    static GXRenderModeObj sRMO_Ntsc_640x456IntDf = {
+    static GXRenderModeObj sRenderMode_NTSC_INT = {
         VI_TVMODE_NTSC_INT,
         640,
         456,
@@ -33,7 +33,7 @@ namespace ipl {
     };
 
     // NTSC Progressive
-    static GXRenderModeObj sRMO_Ntsc_640x456Prog = {
+    static GXRenderModeObj sRenderMode_NTSC_PROG = {
         VI_TVMODE_NTSC_PROG,
         640,
         456,
@@ -55,7 +55,7 @@ namespace ipl {
     };
 
     // PAL50 Progressive
-    static GXRenderModeObj sRMO_Pal50_640x456IntDf = {
+    static GXRenderModeObj sRenderMode_PAL50_INT = {
         VI_TVMODE_PAL_INT,
         640,
         456,
@@ -77,7 +77,7 @@ namespace ipl {
     };
 
     // PAL60 Interlaced
-    static GXRenderModeObj sRMO_Pal60_640x456IntDf = {
+    static GXRenderModeObj sRenderMode_PAL60_INT = {
         VI_TVMODE_EURGB60_INT,
         640,
         456,
@@ -99,7 +99,7 @@ namespace ipl {
     };
 
     // PAL60 Progressive
-    static GXRenderModeObj sRMO_Pal60_640x456Prog = {
+    static GXRenderModeObj sRenderMode_PAL60_PROG = {
         VI_TVMODE_EURGB60_PROG,
         640,
         456,
@@ -202,49 +202,49 @@ namespace ipl {
             case VI_MPAL:
             case VI_NTSC: {
                 if (VIGetDTVStatus() == TRUE && progressive == SC_PROGRESSIVE_MODE_ON) {
-                    mpRMode = &sRMO_Ntsc_640x456Prog;
+                    mpRMode = &sRenderMode_NTSC_PROG;
                 } else {
-                    mpRMode = &sRMO_Ntsc_640x456IntDf;
+                    mpRMode = &sRenderMode_NTSC_INT;
                 }
                 if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                     mpRMode->viWidth = 686;
                 } else {
                     mpRMode->viWidth = 670;
                 }
-                mpRMode->viXOrigin = (VI_MAX_WIDTH_NTSC - mpRMode->viWidth) / 2;
+                mpRMode->viXOrigin = (720 - mpRMode->viWidth) / 2;
                 break;
             }
             case VI_PAL:
             case VI_EURGB60: {
                 // PAL60 Progressive
                 if (VIGetDTVStatus() == TRUE && progressive == SC_PROGRESSIVE_MODE_ON) {
-                    mpRMode = &sRMO_Pal60_640x456Prog;
+                    mpRMode = &sRenderMode_PAL60_PROG;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
-                        sRMO_Pal60_640x456Prog.viWidth = 686;
+                        sRenderMode_PAL60_PROG.viWidth = 686;
                     } else {
-                        sRMO_Pal60_640x456Prog.viWidth = 670;
+                        sRenderMode_PAL60_PROG.viWidth = 670;
                     }
-                    mpRMode->viXOrigin = (VI_MAX_WIDTH_EURGB60 - mpRMode->viWidth) / 2;
+                    mpRMode->viXOrigin = (720 - mpRMode->viWidth) / 2;
                 }
                 // PAL60 Interlaced
                 else if (pal60 == SC_EURGB60_MODE_ON) {
-                    mpRMode = &sRMO_Pal60_640x456IntDf;
+                    mpRMode = &sRenderMode_PAL60_INT;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
-                        sRMO_Pal60_640x456IntDf.viWidth = 686;
+                        sRenderMode_PAL60_INT.viWidth = 686;
                     } else {
-                        sRMO_Pal60_640x456IntDf.viWidth = 670;
+                        sRenderMode_PAL60_INT.viWidth = 670;
                     }
-                    mpRMode->viXOrigin = (VI_MAX_WIDTH_EURGB60 - mpRMode->viWidth) / 2;
+                    mpRMode->viXOrigin = (720 - mpRMode->viWidth) / 2;
                 }
                 // PAL50 Interlaced
                 else {
-                    mpRMode = &sRMO_Pal50_640x456IntDf;
+                    mpRMode = &sRenderMode_PAL50_INT;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
-                        sRMO_Pal50_640x456IntDf.viWidth = 682;
+                        sRenderMode_PAL50_INT.viWidth = 682;
                     } else {
-                        sRMO_Pal50_640x456IntDf.viWidth = 666;
+                        sRenderMode_PAL50_INT.viWidth = 666;
                     }
-                    mpRMode->viXOrigin = (VI_MAX_WIDTH_PAL - mpRMode->viWidth) / 2;
+                    mpRMode->viXOrigin = (720 - mpRMode->viWidth) / 2;
                     mDelta = DELTA_50;
                 }
                 break;
@@ -280,12 +280,12 @@ namespace ipl {
 
     void Framework::init_xfb(EGG::Heap* heap) {
 #ifdef SYSMENU_REGION_EUR
-        GXRenderModeObj* rMode = &sRMO_Pal50_640x456IntDf;
+        GXRenderModeObj* rMode = &sRenderMode_PAL50_INT;
 #else
         GXRenderModeObj* rMode = mpRMode;
 #endif
 
-        u32 xfbSize = VIPadFrameBufferWidth(rMode->fbWidth) * rMode->xfbHeight * VI_DISPLAY_PIX_SZ;
+        u32 xfbSize = (u16)ROUNDUP(rMode->fbWidth, 16) * rMode->xfbHeight * 2;
         for (int i = 0; i < 2; i++) {
             mpXfb[i] = new (heap, DEFAULT_ALIGN) u8[xfbSize];
         }

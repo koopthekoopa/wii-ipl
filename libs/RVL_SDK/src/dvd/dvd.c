@@ -802,11 +802,11 @@ static void cbForStateReadingPartitionInfo(u32 intType) {
 
         if (*((u32*)OSPhysicalToCached(OS_ADDR_BOOT_PART_OFFSET))) {
             BootGameInfo = PartInfo;
-            BootGameInfo->partitionType = *((u32*)OSPhysicalToCached(OS_ADDR_BOOT_PART_TYPE));
-            BootGameInfo->partition = (DVDGamePartition*)*((u32*)OSPhysicalToCached(OS_ADDR_BOOT_PART_OFFSET));
+            BootGameInfo->type = *((u32*)OSPhysicalToCached(OS_ADDR_BOOT_PART_TYPE));
+            BootGameInfo->gamePartition = (void*)*((u32*)OSPhysicalToCached(OS_ADDR_BOOT_PART_OFFSET));
         } else {
-            for (i = 0; i < GameToc->partitionCount; i++) {
-                if (PartInfo->partitionType == __OSLaunchPartitionType) {
+            for (i = 0; i < GameToc->numGamePartitions; i++) {
+                if (PartInfo->type == __OSLaunchPartitionType) {
                     BootGameInfo = PartInfo;
                 }
 
@@ -847,13 +847,13 @@ static void stateReadingPartitionInfo(DVDCommandBlock* block) {
 
 static void stateOpenPartition(DVDCommandBlock* block) {
     DVDLowClearCoverInterrupt(NULL);
-    StampCommand(COMMAND_OPEN_PARTITION, (u32)BootGameInfo->partition, 0);
+    StampCommand(COMMAND_OPEN_PARTITION, (u32)BootGameInfo->gamePartition, 0);
 
     if (__OSLockedAppType == OS_APP_TYPE_DVD) {
-        DVDLowOpenPartitionWithTmdAndTicketView((u32)BootGameInfo->partition, &__DVDTicketViewBuffer, __DVDNumTmdBytes, &__DVDTmdBuffer, 0, NULL,
+        DVDLowOpenPartitionWithTmdAndTicketView((u32)BootGameInfo->gamePartition, &__DVDTicketViewBuffer, __DVDNumTmdBytes, &__DVDTmdBuffer, 0, NULL,
                                                 cbForStateOpenPartition);
     } else {
-        DVDLowOpenPartition((u32)BootGameInfo->partition, NULL, 0, 0, &__DVDTmdBuffer, cbForStateOpenPartition);
+        DVDLowOpenPartition((u32)BootGameInfo->gamePartition, NULL, 0, 0, &__DVDTmdBuffer, cbForStateOpenPartition);
     }
 }
 
@@ -905,13 +905,13 @@ static void cbForStateOpenPartition2(u32 intType) {
 
 static void stateOpenPartition2(DVDCommandBlock* block) {
     DVDLowClearCoverInterrupt(NULL);
-    StampCommand(COMMAND_OPEN_PARTITION, (u32)BootGameInfo->partition, 0);
+    StampCommand(COMMAND_OPEN_PARTITION, (u32)BootGameInfo->gamePartition, 0);
 
     if (__OSLockedAppType == OS_APP_TYPE_DVD) {
-        DVDLowOpenPartitionWithTmdAndTicketView((u32)BootGameInfo->partition, &__DVDTicketViewBuffer, __DVDNumTmdBytes, &__DVDTmdBuffer, 0, NULL,
+        DVDLowOpenPartitionWithTmdAndTicketView((u32)BootGameInfo->gamePartition, &__DVDTicketViewBuffer, __DVDNumTmdBytes, &__DVDTmdBuffer, 0, NULL,
                                                 cbForStateOpenPartition2);
     } else {
-        DVDLowOpenPartition((u32)BootGameInfo->partition, NULL, 0, 0, &__DVDTmdBuffer, cbForStateOpenPartition2);
+        DVDLowOpenPartition((u32)BootGameInfo->gamePartition, NULL, 0, 0, &__DVDTmdBuffer, cbForStateOpenPartition2);
     }
 }
 

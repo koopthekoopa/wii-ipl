@@ -1,4 +1,5 @@
-#include <revolution/types.h>
+#include <private/axfx.h>
+#include <revolution/axfx.h>
 
 static s32 __SinTableFixedPoint[128] = {
     0,        411733,   823219,   1234208,  1644454,  2053710,  2461728,  2868264,  3273072,  3675908,  4076531,  4474698,  4870168,
