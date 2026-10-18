@@ -13,8 +13,9 @@ namespace ipl {
                 virtual ~MemoryBaseEvent();
 
             private:
-                int m_unk08;              // Offset 0x08: Set to 0 in assembly
-                MemoryBase* m_memoryBase; // Offset 0x0C: Pointer passed to constructor
+                void* m_unk04;            // Offset 0x04
+                int m_unk08;              // Offset 0x08
+                MemoryBase* m_memoryBase; // Offset 0x0C
         };
     }
 }
