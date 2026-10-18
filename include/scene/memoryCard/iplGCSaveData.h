@@ -4,6 +4,7 @@
 #include "iplSceneHeader.h"
 #include "iplGCWindow.h"
 #include "iplMemoryCardBase.h"
+#include "layout/GUIManager.h"
 
 namespace ipl {
     namespace scene {
@@ -16,7 +17,7 @@ namespace ipl {
             private:
 
             layout::Object* mpLayout; // 0x04
-            //gui::PaneManager* mpPaneManager;
+            gui::PaneManager* mpPaneManager;
             MemoryBaseEvent* mpEvent; // 0x34
             u32 mField_0x38; // 0x38
         };

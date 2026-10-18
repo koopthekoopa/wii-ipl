@@ -16,8 +16,29 @@ namespace ipl {
             MemoryBase();
             virtual ~MemoryBase();
 
+            virtual void onPoint(const char* paneName);
+            virtual void onLeft(const char* paneName);
+            virtual void onMove(const char* paneName);
+            virtual void onTrig(const char* paneName);
+
+            virtual void add_button(const char* paneName, int p2, int p3);
+            virtual void add_anmbutton(const char* paneName, int p2, int p3, int p4);
+
+            virtual void get_button(const char* paneName);
+            virtual void get_anmbutton(const char* paneName);
+            virtual void clear_button();
+
             // Must be virtual to match vtable offset 0x30!
             virtual void add_animation(const AnmName* anims, int count);
+            virtual int  get_animation(int idx);
+
+            virtual int  do_animation(int idx);                          // Offset 0x30
+            virtual int  do_animation(int idx, bool flag);               // Offset 0x34
+
+            virtual void stop_animation(int idx);
+            virtual bool is_animation(int idx);
+            virtual bool is_fadein_enable();
+            virtual void set_visible(bool flag);
 
             private:
 

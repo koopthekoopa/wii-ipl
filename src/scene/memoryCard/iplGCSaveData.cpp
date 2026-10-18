@@ -1,4 +1,5 @@
 #include "scene/memoryCard/iplGCSaveData.h"
+#include "layout/GUIManager.h"
 
 #include "system/iplNand.h"
 #include "iplMath.h"
@@ -23,12 +24,21 @@ static const MemoryBase::AnmName scAnmName[5] = {
 
       add_animation(scAnmName, 5);
       mpLayout->finishBinding();
-
       mpEvent = new MemoryBaseEvent(this);
 
-      // mpPaneManager = new gui::PaneManager(mpEvent);
-      // mpPaneManager->bindLayout(mpLayout->getLayout());
-      // mpPaneManager->init(0);
+      mpPaneManager = new gui::PaneManager(mpEvent, NULL, NULL);
+      mpPaneManager->createLayoutScene(*mpLayout->getNW4RLyt());
+      mpPaneManager->init();
+
+      nw4r::lyt::Pane* pane = mpLayout->FindPaneByName("B_Data_00");
+      gui::PaneComponent* comp = mpPaneManager->getPaneComponentByPane(pane);
+      if (comp != NULL) {
+        comp->setTriggerTarget(true); // Calls Component::setTriggerTarget(bool) at vtable offset 0x54
+      }
+
+      int anim3 = do_animation(3);
+      int anim2 = do_animation(2);
+      add_anmbutton("B_Data_00", anim2, anim3, 0);
     }
 
     GCSaveData::~GCSaveData() {}

@@ -3,11 +3,12 @@
 
 #include "iplSceneHeader.h"
 #include "iplMemoryCardBase.h"
+#include "layout/GUIManager.h"
 
 namespace ipl {
     namespace scene {        
 
-        class MemoryBaseEvent {
+        class MemoryBaseEvent : public gui::EventHandler {
             public:
                 MemoryBaseEvent(MemoryBase*);
                 virtual ~MemoryBaseEvent();
