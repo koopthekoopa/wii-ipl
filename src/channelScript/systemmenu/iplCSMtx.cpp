@@ -23,8 +23,7 @@ namespace ipl {
         return set(VmInst, VmParentObj, _0, _1);                                                                                                     \
     }
 
-#define MTX_PROP(_0, _1)                                                                                                                             \
-    { "_" #_0 #_1, MTX_GET(_0, _1), MTX_SET(_0, _1) }
+#define MTX_PROP(_0, _1) {"_" #_0 #_1, MTX_GET(_0, _1), MTX_SET(_0, _1)}
 
             CHANSVmDefineMethod(ctor) {
                 BOOL result = FALSE;
@@ -42,7 +41,7 @@ namespace ipl {
                     }
                 }
 
-                CHANSVmObjHdr* arrObj = (CHANSVmObjHdr*)CHANSVmNewObjData(VmInst, VmReturnObj, 16);
+                CHANSVmObjHdr* arrObj = static_cast<CHANSVmObjHdr*>(CHANSVmNewObjData(VmInst, VmReturnObj, sizeof(CHANSVmObjHdr)));
                 if (arrObj != NULL) {
                     u32 sizes[] = {3, 4};
                     if (CHANSVmNewArrayObject(VmInst, arrObj, ARRAY_LENGTH(sizes), sizes) != NULL) {
@@ -125,7 +124,7 @@ namespace ipl {
 
             CHANSVmDefineMethod(get_m) {
                 BOOL result = FALSE;
-                if (CHANSVmCopyObject(VmInst, VmReturnObj, (CHANSVmObjHdr*)*VmParentObj->value.ptr_v) != NULL) {
+                if (CHANSVmCopyObject(VmInst, VmReturnObj, static_cast<CHANSVmObjHdr*>(*VmParentObj->value.ptr_v)) != NULL) {
                     result = TRUE;
                 }
                 return result;

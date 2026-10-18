@@ -91,7 +91,7 @@ void GXSetGPMetric(GXPerf0 perf0, GXPerf1 perf1) {
         case GX_PERF1_VC_STREAMBUF_LOW:
         case GX_PERF1_VC_ALL_STALLS:
         case GX_PERF1_VERTICES: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 0);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 0);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
@@ -346,42 +346,42 @@ void GXSetGPMetric(GXPerf0 perf0, GXPerf1 perf1) {
             break;
         }
         case GX_PERF1_VC_ELEMQ_FULL: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 2);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 2);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_MISSQ_FULL: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 3);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 3);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_MEMREQ_FULL: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 4);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 4);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_STATUS7: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 5);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 5);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_MISSREP_FULL: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 6);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 6);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_STREAMBUF_LOW: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 7);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 7);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VC_ALL_STALLS: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 9);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 9);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }
         case GX_PERF1_VERTICES: {
-            SET_REG_FIELD(__GXData->perfSel, 4, 4, 8);
+            GX_SET_REG_FIELD(__GXData->perfSel, 4, 4, 8);
             GX_WRITE_SOME_REG4(8, 0x20, __GXData->perfSel, -12);
             break;
         }

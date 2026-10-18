@@ -51,7 +51,7 @@ typedef struct WADBackupHeader {
     u32 contentSize;    // 0x18
     u32 backupAreaLen;  // 0x1C
 
-    ESContentMask cidx;  // 0x20
+    ESCidxMask cidx;  // 0x20
 
     ESTitleId titleId;  // 0x60
 

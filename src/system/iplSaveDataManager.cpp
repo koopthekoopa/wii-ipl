@@ -509,12 +509,12 @@ namespace ipl {
                 } else {
                     ESTmdView* tmd = NULL;
                     ret = utility::ESMisc::GetTmdView(mpHeap, titleId, &tmd);
-                    if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE_FOUND) {
+                    if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE) {
                         IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 1138);
                     }
 
-                    if (ret == ES_ERR_NO_TMD_FILE_FOUND || utility::ESMisc::checkContentsNum(titleId, tmd)) {
-                        if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE_FOUND) {
+                    if (ret == ES_ERR_NO_TMD_FILE || utility::ESMisc::checkContentsNum(titleId, tmd)) {
+                        if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE) {
                             IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 1149);
                         }
                         result = FALSE;

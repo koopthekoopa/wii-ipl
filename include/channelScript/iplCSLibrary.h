@@ -28,16 +28,16 @@
 
 namespace ipl {
     namespace cs {
-        // Sytsem Menu
+        // System Menu
         EXTERN_IPL_LIB(system)
         // Layout
         EXTERN_IPL_LIB(layout)
         EXTERN_IPL_LIB(pane)
         EXTERN_IPL_LIB_CTOR_ARG(pane, u32 pane) EXTERN_IPL_LIB(material) EXTERN_IPL_LIB_CTOR_ARG(material, u32 material) EXTERN_IPL_LIB(texture)
             // Save data
-            EXTERN_IPL_LIB(savedata)
+            EXTERN_IPL_LIB(savedata) EXTERN_IPL_LIB_CTOR_ARG(savedata, u32 bufAddr, u32 bufSize)
             // Math stuff
-            EXTERN_IPL_LIB(vec3) EXTERN_IPL_LIB_CTOR_ARG(material, f32 x, f32 y, f32 z) EXTERN_IPL_LIB(mtx34)
+            EXTERN_IPL_LIB(vec3) EXTERN_IPL_LIB_CTOR_ARG(vec3, f32 x, f32 y, f32 z) EXTERN_IPL_LIB(mtx34)
             // Graphics
             EXTERN_IPL_LIB(gx)
             // Text

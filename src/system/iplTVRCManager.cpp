@@ -196,8 +196,9 @@ namespace ipl {
         return trigger;
     }
 
-    BOOL TVRCManager::snd_shutup(BOOL stopDma) {
-        if (stopDma) {
+    // rude
+    BOOL TVRCManager::snd_shutup(BOOL isLocked) {
+        if (isLocked) {
             snd::getSystem()->shutup(TRUE);
             unk_0x40 = OSGetTime();
             return TRUE;

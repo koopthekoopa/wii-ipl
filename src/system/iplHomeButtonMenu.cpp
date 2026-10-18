@@ -15,13 +15,13 @@ namespace ipl {
     static BOOL SECallback(int event, int id) {
         switch (event) {
             case HBMSEV_BEFORE_INIT_SOUND: {
-                return snd::getSystem()->pauseOnBGM();
+                return snd::getSystem()->pauseOnBGMCheck();
             }
             case HBMSEV_BEGIN_BLACKOUT: {
                 if (exitAnm) {
-                    return snd::getSystem()->resetAllSound();
+                    return snd::getSystem()->resetAllSoundCheck();
                 } else {
-                    return snd::getSystem()->pauseOffBGM();
+                    return snd::getSystem()->pauseOffBGMCheck();
                 }
             }
             case HBMSEV_BEGIN_EXIT_ANIM: {

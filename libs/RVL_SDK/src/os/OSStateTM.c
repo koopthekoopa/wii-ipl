@@ -137,7 +137,7 @@ BOOL __OSInitSTM() {
 }
 
 void __OSShutdownToSBY() {
-    VI_WRITE_REG(VI_DISPLAY_CONFIG, 0);
+    __VIRegs[VI_DISPLAY_CONFIG] = 0;
 
     OSAssertMsg(StmReady, "Error: The firmware doesn't support shutdown feature.\n", 281);
 
@@ -148,7 +148,7 @@ void __OSShutdownToSBY() {
 }
 
 void __OSShutdownToIDL() {
-    VI_WRITE_REG(VI_DISPLAY_CONFIG, 0);
+    __VIRegs[VI_DISPLAY_CONFIG] = 0;
 
     OSAssertMsg(StmReady, "Error: The firmware doesn't support shutdown feature.\n", 308);
 
@@ -164,7 +164,7 @@ void __OSShutdownToIDL() {
 }
 
 void __OSHotReset() {
-    VI_WRITE_REG(VI_DISPLAY_CONFIG, 0);
+    __VIRegs[VI_DISPLAY_CONFIG] = 0;
 
     OSAssertMsg(StmReady, "Error: The firmware doesn't support reboot feature.\n", 345);
 

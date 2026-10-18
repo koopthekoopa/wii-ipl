@@ -12,17 +12,11 @@
 /* Video Interface */
 
 #define VI_REG_ADDRESS 0x0C002000
-vu16 __VIRegs[64] ADDRESS(OS_BASE_UNCACHED + VI_REG_ADDRESS);
+#define VI_I2C_REGISTER_ADDR 0xCD8000C0
+vu16 __VIRegs[59] ADDRESS(OS_BASE_UNCACHED + VI_REG_ADDRESS);
+volatile u32 __I2CRegs[4] ADDRESS(VI_I2C_REGISTER_ADDR);
 
-#define VI_WRITE_REG(x, v) __VIRegs[(x) >> 1] = ((u16)v)
-#define VI_READ_REG(x) __VIRegs[(x) >> 1]
-
-#define VI_WRITE_REG32(x, v) *(u32*)&__VIRegs[(x) >> 1] = ((u32)v)
-#define VI_READ_REG32(x) *(u32*)&__VIRegs[(x) >> 1]
-
-#define VI_SET_REG_F(x, v) __flipper_set_bit(__VIRegs[(x) >> 1], v)
-#define VI_DEL_REG_F(x, v) __flipper_clear_bit(__VIRegs[(x) >> 1], v)
-#define VI_HAS_REG_F(x, v) __flipper_has_bit(__VIRegs[(x) >> 1], v)
+// TODO: Clean up this (later in the SDK rework)
 
 #include <private/hollywood/flipper/vi_reg.h>
 

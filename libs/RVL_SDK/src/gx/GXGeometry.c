@@ -166,22 +166,22 @@ void __GXSendFlushPrim() {
 }
 
 void GXSetLineWidth(u8 width, GXTexOffset texOffsets) {
-    SET_REG_FIELD(__GXData->lpSize, 8, 0, width);
-    SET_REG_FIELD(__GXData->lpSize, 3, 16, texOffsets);
+    GX_SET_REG_FIELD(__GXData->lpSize, 8, 0, width);
+    GX_SET_REG_FIELD(__GXData->lpSize, 3, 16, texOffsets);
     GX_WRITE_RAS_REG(__GXData->lpSize);
     __GXData->bpSentNot = GX_FALSE;
 }
 
 void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets) {
-    SET_REG_FIELD(__GXData->lpSize, 8, 8, pointSize);
-    SET_REG_FIELD(__GXData->lpSize, 3, 19, texOffsets);
+    GX_SET_REG_FIELD(__GXData->lpSize, 8, 8, pointSize);
+    GX_SET_REG_FIELD(__GXData->lpSize, 3, 19, texOffsets);
     GX_WRITE_RAS_REG(__GXData->lpSize);
     __GXData->bpSentNot = GX_FALSE;
 }
 
 void GXEnableTexOffsets(GXTexCoordID coord, u8 line_enable, u8 point_enable) {
-    SET_REG_FIELD(__GXData->suTs0[coord], 1, 18, line_enable);
-    SET_REG_FIELD(__GXData->suTs0[coord], 1, 19, point_enable);
+    GX_SET_REG_FIELD(__GXData->suTs0[coord], 1, 18, line_enable);
+    GX_SET_REG_FIELD(__GXData->suTs0[coord], 1, 19, point_enable);
     GX_WRITE_RAS_REG(__GXData->suTs0[coord]);
     __GXData->bpSentNot = GX_FALSE;
 }
@@ -189,7 +189,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, u8 line_enable, u8 point_enable) {
 void GXSetCullMode(GXCullMode mode) {
     GXCullMode hwMode = (GXCullMode)(((mode & 0x1) << 1) | ((mode & 0x2) >> 1));
 
-    SET_REG_FIELD(__GXData->genMode, 2, 14, hwMode);
+    GX_SET_REG_FIELD(__GXData->genMode, 2, 14, hwMode);
     __GXData->dirtyState |= 4;
 }
 
@@ -201,7 +201,7 @@ void GXGetCullMode(GXCullMode* mode) {
 void GXSetCoPlanar(GXBool enable) {
     u32 reg;
 
-    SET_REG_FIELD(__GXData->genMode, 1, 19, enable);
+    GX_SET_REG_FIELD(__GXData->genMode, 1, 19, enable);
     reg = 0xFE080000;
     GX_WRITE_RAS_REG(reg);
     GX_WRITE_RAS_REG(__GXData->genMode);

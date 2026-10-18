@@ -1,37 +1,37 @@
 #include <revolution/axfx.h>
 
-static void __ParamConvert(AXFX_CHORUS* fx);
+static void __ParamConvert(AXFX_CHORUS* chorus);
 
-u32 AXFXChorusGetMemSize(const AXFX_CHORUS* fx) {
-    return AXFXChorusExpGetMemSize(&fx->chorusInner);
+u32 AXFXChorusGetMemSize(AXFX_CHORUS* chorus) {
+    return AXFXChorusExpGetMemSize(&chorus->chorusInner);
 }
 
-BOOL AXFXChorusInit(AXFX_CHORUS* fx) {
-    __ParamConvert(fx);
-    return AXFXChorusExpInit(&fx->chorusInner);
+BOOL AXFXChorusInit(AXFX_CHORUS* chorus) {
+    __ParamConvert(chorus);
+    return AXFXChorusExpInit(&chorus->chorusInner);
 }
 
-BOOL AXFXChorusShutdown(AXFX_CHORUS* fx) {
-    AXFXChorusExpShutdown(&fx->chorusInner);
+BOOL AXFXChorusShutdown(AXFX_CHORUS* chorus) {
+    AXFXChorusExpShutdown(&chorus->chorusInner);
     return TRUE;
 }
 
-BOOL AXFXChorusSettings(AXFX_CHORUS* fx) {
-    __ParamConvert(fx);
-    return AXFXChorusExpSettings(&fx->chorusInner);
+BOOL AXFXChorusSettings(AXFX_CHORUS* chorus) {
+    __ParamConvert(chorus);
+    return AXFXChorusExpSettings(&chorus->chorusInner);
 }
 
-void AXFXChorusCallback(void* chans, void* context) {
-    AXFXChorusExpCallback((AXFX_BUFFERUPDATE*)chans, (AXFX_CHORUS_EXP*)context);
+void AXFXChorusCallback(AXFX_BUS* bus, AXFX_CHORUS* chorus) {
+    AXFXChorusExpCallback(bus, &chorus->chorusInner);
 }
 
-static void __ParamConvert(AXFX_CHORUS* fx) {
-    fx->chorusInner.delayTime = fx->baseDelay;
-    fx->chorusInner.depth = fx->variation / fx->chorusInner.delayTime;
-    fx->chorusInner.rate = 1000.0f / fx->period;
-    fx->chorusInner.feedback = 0.0f;
-    fx->chorusInner.busIn = NULL;
-    fx->chorusInner.busOut = NULL;
-    fx->chorusInner.outGain = 1.0f;
-    fx->chorusInner.sendGain = 0.0f;
+static void __ParamConvert(AXFX_CHORUS* chorus) {
+    chorus->chorusInner.delayTime = (f32)chorus->baseDelay;
+    chorus->chorusInner.depth = (f32)chorus->variation / chorus->chorusInner.delayTime;
+    chorus->chorusInner.rate = 1000.0f / (f32)chorus->period;
+    chorus->chorusInner.feedback = 0.0f;
+    chorus->chorusInner.busIn = NULL;
+    chorus->chorusInner.busOut = NULL;
+    chorus->chorusInner.outGain = 1.0f;
+    chorus->chorusInner.sendGain = 0.0f;
 }

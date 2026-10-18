@@ -52,7 +52,7 @@ void SISetSamplingRate(u32 msec) {
         }
     }
 
-    progressive = VI_READ_REG(VI_CLOCK_SELECT) & 1;
+    progressive = __VIRegs[VI_CLOCK_SELECT] & 1;
     SISetXY((progressive ? 2 : 1) * xy[msec].line, xy[msec].count);
     OSRestoreInterrupts(enabled);
 }

@@ -1,10 +1,8 @@
 #include <nw4r/snd/BasicPlayer.h>
 #include <nw4r/snd/BasicSound.h>
 
-
 #include <nw4r/snd/ExternalSoundPlayer.h>
 #include <nw4r/snd/SoundPlayer.h>
-
 
 #include <climits>
 

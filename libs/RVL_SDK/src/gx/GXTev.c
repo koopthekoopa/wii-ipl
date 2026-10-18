@@ -70,10 +70,10 @@ void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTev
     u32 tevReg;
 
     tevReg = __GXData->tevc[stage];
-    SET_REG_FIELD(tevReg, 4, 12, a);
-    SET_REG_FIELD(tevReg, 4, 8, b);
-    SET_REG_FIELD(tevReg, 4, 4, c);
-    SET_REG_FIELD(tevReg, 4, 0, d);
+    GX_SET_REG_FIELD(tevReg, 4, 12, a);
+    GX_SET_REG_FIELD(tevReg, 4, 8, b);
+    GX_SET_REG_FIELD(tevReg, 4, 4, c);
+    GX_SET_REG_FIELD(tevReg, 4, 0, d);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->tevc[stage] = tevReg;
@@ -84,10 +84,10 @@ void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTev
     u32 tevReg;
 
     tevReg = __GXData->teva[stage];
-    SET_REG_FIELD(tevReg, 3, 13, a);
-    SET_REG_FIELD(tevReg, 3, 10, b);
-    SET_REG_FIELD(tevReg, 3, 7, c);
-    SET_REG_FIELD(tevReg, 3, 4, d);
+    GX_SET_REG_FIELD(tevReg, 3, 13, a);
+    GX_SET_REG_FIELD(tevReg, 3, 10, b);
+    GX_SET_REG_FIELD(tevReg, 3, 7, c);
+    GX_SET_REG_FIELD(tevReg, 3, 4, d);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->teva[stage] = tevReg;
@@ -98,16 +98,16 @@ void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     u32 tevReg;
 
     tevReg = __GXData->tevc[stage];
-    SET_REG_FIELD(tevReg, 1, 18, op & 1);
+    GX_SET_REG_FIELD(tevReg, 1, 18, op & 1);
     if (op <= 1) {
-        SET_REG_FIELD(tevReg, 2, 20, scale);
-        SET_REG_FIELD(tevReg, 2, 16, bias);
+        GX_SET_REG_FIELD(tevReg, 2, 20, scale);
+        GX_SET_REG_FIELD(tevReg, 2, 16, bias);
     } else {
-        SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
-        SET_REG_FIELD(tevReg, 2, 16, 3);
+        GX_SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
+        GX_SET_REG_FIELD(tevReg, 2, 16, 3);
     }
-    SET_REG_FIELD(tevReg, 1, 19, clamp & 0xFF);
-    SET_REG_FIELD(tevReg, 2, 22, out_reg);
+    GX_SET_REG_FIELD(tevReg, 1, 19, clamp & 0xFF);
+    GX_SET_REG_FIELD(tevReg, 2, 22, out_reg);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->tevc[stage] = tevReg;
@@ -118,16 +118,16 @@ void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     u32 tevReg;
 
     tevReg = __GXData->teva[stage];
-    SET_REG_FIELD(tevReg, 1, 18, op & 1);
+    GX_SET_REG_FIELD(tevReg, 1, 18, op & 1);
     if (op <= 1) {
-        SET_REG_FIELD(tevReg, 2, 20, scale);
-        SET_REG_FIELD(tevReg, 2, 16, bias);
+        GX_SET_REG_FIELD(tevReg, 2, 20, scale);
+        GX_SET_REG_FIELD(tevReg, 2, 16, bias);
     } else {
-        SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
-        SET_REG_FIELD(tevReg, 2, 16, 3);
+        GX_SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
+        GX_SET_REG_FIELD(tevReg, 2, 16, 3);
     }
-    SET_REG_FIELD(tevReg, 1, 19, clamp & 0xFF);
-    SET_REG_FIELD(tevReg, 2, 22, out_reg);
+    GX_SET_REG_FIELD(tevReg, 1, 19, clamp & 0xFF);
+    GX_SET_REG_FIELD(tevReg, 2, 22, out_reg);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->teva[stage] = tevReg;
@@ -142,12 +142,12 @@ void GXSetTevColor(GXTevRegID id, GXColor color) {
     rgba = *(u32*)&color;
 
     regRA = (0xE0 + id * 2) << 24;
-    SET_REG_FIELD(regRA, 8, 0, rgba >> 24);
-    SET_REG_FIELD(regRA, 8, 12, rgba & 0xFF);
+    GX_SET_REG_FIELD(regRA, 8, 0, rgba >> 24);
+    GX_SET_REG_FIELD(regRA, 8, 12, rgba & 0xFF);
 
     regBG = (0xE1 + id * 2) << 24;
-    SET_REG_FIELD(regBG, 8, 0, (rgba >> 8) & 0xFF);
-    SET_REG_FIELD(regBG, 8, 12, (rgba >> 16) & 0xFF);
+    GX_SET_REG_FIELD(regBG, 8, 0, (rgba >> 8) & 0xFF);
+    GX_SET_REG_FIELD(regBG, 8, 12, (rgba >> 16) & 0xFF);
 
     GX_WRITE_RAS_REG(regRA);
     GX_WRITE_RAS_REG(regBG);
@@ -167,12 +167,12 @@ void GXSetTevColorS10(GXTevRegID id, GXColorS10 color) {
     sBA = *((u32*)&color + 1);
 
     regRA = (0xE0 + id * 2) << 24;
-    SET_REG_FIELD(regRA, 11, 0, (sRG >> 16) & 0x7FF);
-    SET_REG_FIELD(regRA, 11, 12, sBA & 0x7FF);
+    GX_SET_REG_FIELD(regRA, 11, 0, (sRG >> 16) & 0x7FF);
+    GX_SET_REG_FIELD(regRA, 11, 12, sBA & 0x7FF);
 
     regBG = (0xE1 + id * 2) << 24;
-    SET_REG_FIELD(regBG, 11, 0, (sBA >> 16) & 0x7FF);
-    SET_REG_FIELD(regBG, 11, 12, sRG & 0x7FF);
+    GX_SET_REG_FIELD(regBG, 11, 0, (sBA >> 16) & 0x7FF);
+    GX_SET_REG_FIELD(regBG, 11, 12, sRG & 0x7FF);
 
     GX_WRITE_RAS_REG(regRA);
     GX_WRITE_RAS_REG(regBG);
@@ -189,14 +189,14 @@ void GXSetTevKColor(GXTevKColorID id, GXColor color) {
     rgba = *(u32*)&color;
 
     regRA = (0xE0 + id * 2) << 24;
-    SET_REG_FIELD(regRA, 8, 0, rgba >> 24);
-    SET_REG_FIELD(regRA, 8, 12, rgba & 0xFF);
-    SET_REG_FIELD(regRA, 4, 20, 8);
+    GX_SET_REG_FIELD(regRA, 8, 0, rgba >> 24);
+    GX_SET_REG_FIELD(regRA, 8, 12, rgba & 0xFF);
+    GX_SET_REG_FIELD(regRA, 4, 20, 8);
 
     regBG = (0xE1 + id * 2) << 24;
-    SET_REG_FIELD(regBG, 8, 0, (rgba >> 8) & 0xFF);
-    SET_REG_FIELD(regBG, 8, 12, (rgba >> 16) & 0xFF);
-    SET_REG_FIELD(regBG, 4, 20, 8);
+    GX_SET_REG_FIELD(regBG, 8, 0, (rgba >> 8) & 0xFF);
+    GX_SET_REG_FIELD(regBG, 8, 12, (rgba >> 16) & 0xFF);
+    GX_SET_REG_FIELD(regBG, 4, 20, 8);
 
     GX_WRITE_RAS_REG(regRA);
     GX_WRITE_RAS_REG(regBG);
@@ -209,9 +209,9 @@ void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel) {
 
     Kreg = &__GXData->tevKsel[stage >> 1];
     if (stage & 1) {
-        SET_REG_FIELD(*Kreg, 5, 14, sel);
+        GX_SET_REG_FIELD(*Kreg, 5, 14, sel);
     } else {
-        SET_REG_FIELD(*Kreg, 5, 4, sel);
+        GX_SET_REG_FIELD(*Kreg, 5, 4, sel);
     }
 
     GX_WRITE_RAS_REG(*Kreg);
@@ -223,9 +223,9 @@ void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel) {
 
     Kreg = &__GXData->tevKsel[stage >> 1];
     if (stage & 1) {
-        SET_REG_FIELD(*Kreg, 5, 19, sel);
+        GX_SET_REG_FIELD(*Kreg, 5, 19, sel);
     } else {
-        SET_REG_FIELD(*Kreg, 5, 9, sel);
+        GX_SET_REG_FIELD(*Kreg, 5, 9, sel);
     }
 
     GX_WRITE_RAS_REG(*Kreg);
@@ -236,8 +236,8 @@ void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel, GXTevSwapSel tex
     u32* pTevReg;
 
     pTevReg = &__GXData->teva[stage];
-    SET_REG_FIELD(*pTevReg, 2, 0, ras_sel);
-    SET_REG_FIELD(*pTevReg, 2, 2, tex_sel);
+    GX_SET_REG_FIELD(*pTevReg, 2, 0, ras_sel);
+    GX_SET_REG_FIELD(*pTevReg, 2, 2, tex_sel);
 
     GX_WRITE_RAS_REG(*pTevReg);
     __GXData->bpSentNot = GX_FALSE;
@@ -248,14 +248,14 @@ void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red, GXTevColorCha
 
     Kreg = &__GXData->tevKsel[table * 2];
 
-    SET_REG_FIELD(*Kreg, 2, 0, red);
-    SET_REG_FIELD(*Kreg, 2, 2, green);
+    GX_SET_REG_FIELD(*Kreg, 2, 0, red);
+    GX_SET_REG_FIELD(*Kreg, 2, 2, green);
 
     GX_WRITE_RAS_REG(*Kreg);
 
     Kreg = &__GXData->tevKsel[table * 2 + 1];
-    SET_REG_FIELD(*Kreg, 2, 0, blue);
-    SET_REG_FIELD(*Kreg, 2, 2, alpha);
+    GX_SET_REG_FIELD(*Kreg, 2, 0, blue);
+    GX_SET_REG_FIELD(*Kreg, 2, 2, alpha);
 
     GX_WRITE_RAS_REG(*Kreg);
     __GXData->bpSentNot = GX_FALSE;
@@ -266,11 +266,11 @@ void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, 
 
     reg = 0xF3000000;
 
-    SET_REG_FIELD(reg, 8, 0, ref0);
-    SET_REG_FIELD(reg, 8, 8, ref1);
-    SET_REG_FIELD(reg, 3, 16, comp0);
-    SET_REG_FIELD(reg, 3, 19, comp1);
-    SET_REG_FIELD(reg, 2, 22, op);
+    GX_SET_REG_FIELD(reg, 8, 0, ref0);
+    GX_SET_REG_FIELD(reg, 8, 8, ref1);
+    GX_SET_REG_FIELD(reg, 3, 16, comp0);
+    GX_SET_REG_FIELD(reg, 3, 19, comp1);
+    GX_SET_REG_FIELD(reg, 2, 22, op);
 
     GX_WRITE_RAS_REG(reg);
     __GXData->bpSentNot = GX_FALSE;
@@ -282,8 +282,8 @@ void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias) {
     u32 type;
 
     zenv0 = 0;
-    SET_REG_FIELD(zenv0, 24, 0, bias);
-    SET_REG_FIELD(zenv0, 8, 24, 0xF4);
+    GX_SET_REG_FIELD(zenv0, 24, 0, bias);
+    GX_SET_REG_FIELD(zenv0, 8, 24, 0xF4);
 
     zenv1 = 0;
     switch (fmt) {
@@ -305,9 +305,9 @@ void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias) {
         }
     }
 
-    SET_REG_FIELD(zenv1, 2, 0, type);
-    SET_REG_FIELD(zenv1, 2, 2, op);
-    SET_REG_FIELD(zenv1, 8, 24, 0xF5);
+    GX_SET_REG_FIELD(zenv1, 2, 0, type);
+    GX_SET_REG_FIELD(zenv1, 2, 2, op);
+    GX_SET_REG_FIELD(zenv1, 8, 24, 0xF5);
 
     GX_WRITE_RAS_REG(zenv0);
     GX_WRITE_RAS_REG(zenv1);
@@ -335,15 +335,15 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXCha
     }
 
     if (stage & 1) {
-        SET_REG_FIELD(*ptref, 3, 12, tmap);
-        SET_REG_FIELD(*ptref, 3, 15, tcoord);
-        SET_REG_FIELD(*ptref, 3, 19, (color == GX_COLOR_NULL) ? 7 : c2r[color]);
-        SET_REG_FIELD(*ptref, 1, 18, (map != GX_TEXMAP_NULL && !(map & GX_TEX_DISABLE)));
+        GX_SET_REG_FIELD(*ptref, 3, 12, tmap);
+        GX_SET_REG_FIELD(*ptref, 3, 15, tcoord);
+        GX_SET_REG_FIELD(*ptref, 3, 19, (color == GX_COLOR_NULL) ? 7 : c2r[color]);
+        GX_SET_REG_FIELD(*ptref, 1, 18, (map != GX_TEXMAP_NULL && !(map & GX_TEX_DISABLE)));
     } else {
-        SET_REG_FIELD(*ptref, 3, 0, tmap);
-        SET_REG_FIELD(*ptref, 3, 3, tcoord);
-        SET_REG_FIELD(*ptref, 3, 7, (color == GX_COLOR_NULL) ? 7 : c2r[color]);
-        SET_REG_FIELD(*ptref, 1, 6, (map != GX_TEXMAP_NULL && !(map & GX_TEX_DISABLE)));
+        GX_SET_REG_FIELD(*ptref, 3, 0, tmap);
+        GX_SET_REG_FIELD(*ptref, 3, 3, tcoord);
+        GX_SET_REG_FIELD(*ptref, 3, 7, (color == GX_COLOR_NULL) ? 7 : c2r[color]);
+        GX_SET_REG_FIELD(*ptref, 1, 6, (map != GX_TEXMAP_NULL && !(map & GX_TEX_DISABLE)));
     }
 
     GX_WRITE_RAS_REG(*ptref);
@@ -352,6 +352,6 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXCha
 }
 
 void GXSetNumTevStages(u8 nStages) {
-    SET_REG_FIELD(__GXData->genMode, 4, 10, nStages - 1);
+    GX_SET_REG_FIELD(__GXData->genMode, 4, 10, nStages - 1);
     __GXData->dirtyState |= 4;
 }

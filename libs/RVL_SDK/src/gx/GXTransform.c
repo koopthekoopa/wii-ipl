@@ -189,7 +189,7 @@ void GXLoadNrmMtxImm(const Mtx mtx, u32 id) {
 }
 
 void GXSetCurrentMtx(u32 id) {
-    SET_REG_FIELD(__GXData->matIdxA, 6, 0, id);
+    GX_SET_REG_FIELD(__GXData->matIdxA, 6, 0, id);
     __GXData->dirtyState |= 0x4000000;
 }
 
@@ -295,10 +295,10 @@ void GXSetScissor(u32 left, u32 top, u32 wd, u32 ht) {
     bm = tp + ht - 1;
     rt = lf + wd - 1;
 
-    SET_REG_FIELD(__GXData->suScis0, 11, 0, tp);
-    SET_REG_FIELD(__GXData->suScis0, 11, 12, lf);
-    SET_REG_FIELD(__GXData->suScis1, 11, 0, bm);
-    SET_REG_FIELD(__GXData->suScis1, 11, 12, rt);
+    GX_SET_REG_FIELD(__GXData->suScis0, 11, 0, tp);
+    GX_SET_REG_FIELD(__GXData->suScis0, 11, 12, lf);
+    GX_SET_REG_FIELD(__GXData->suScis1, 11, 0, bm);
+    GX_SET_REG_FIELD(__GXData->suScis1, 11, 12, rt);
 
     GX_WRITE_RAS_REG(__GXData->suScis0);
     GX_WRITE_RAS_REG(__GXData->suScis1);
@@ -327,9 +327,9 @@ void GXSetScissorBoxOffset(s32 x_off, s32 y_off) {
     hx = (u32)(x_off + 342) >> 1;
     hy = (u32)(y_off + 342) >> 1;
 
-    SET_REG_FIELD(reg, 10, 0, hx);
-    SET_REG_FIELD(reg, 10, 10, hy);
-    SET_REG_FIELD(reg, 8, 24, 0x59);
+    GX_SET_REG_FIELD(reg, 10, 0, hx);
+    GX_SET_REG_FIELD(reg, 10, 10, hy);
+    GX_SET_REG_FIELD(reg, 8, 24, 0x59);
     GX_WRITE_RAS_REG(reg);
     __GXData->bpSentNot = GX_FALSE;
 }

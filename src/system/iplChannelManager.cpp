@@ -112,7 +112,7 @@ namespace ipl {
 
             // Reset disk banner data
             memset(&mDiskChanMetaHdr, 0, sizeof(mDiskChanMetaHdr));
-            mDiskChanMetaHdr.blockHdr.unk_00 = TRUE;
+            mDiskChanMetaHdr.blockHdr.noDelete = TRUE;
 
             // Reset channel jump data
             memset(&mChJumpData, 0, sizeof(mChJumpData));
@@ -1001,7 +1001,7 @@ namespace ipl {
                     return false;
                 }
 
-                metaBnr->blockHdr.unk_00 = 1;
+                metaBnr->blockHdr.noDelete = TRUE;
 
                 mChannels[diskPage][diskIndex].headerSize = metaBnr->blockHdr.headerSize;
                 mChannels[diskPage][diskIndex].metaHdr = metaBnr;

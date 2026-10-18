@@ -710,7 +710,7 @@ namespace homebutton {
         mAxFxReverb.mix = 1.0f;
 
         AXFXReverbHiInit(&mAxFxReverb);
-        AXRegisterAuxACallback(&AXFXReverbHiCallback, &mAxFxReverb);
+        AXRegisterAuxACallback((AXAuxCallback)AXFXReverbHiCallback, &mAxFxReverb);
 
         AXSetAuxAReturnVolume(AX_MAX_VOLUME);
         AXSetAuxBReturnVolume(0);

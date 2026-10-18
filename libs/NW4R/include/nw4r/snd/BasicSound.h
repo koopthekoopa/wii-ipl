@@ -60,32 +60,32 @@ namespace nw4r {
 
             public:
                 BasicSound();
-                virtual ~BasicSound() {}  // 0x08
+                virtual ~BasicSound() {}  // 0x0C
 
-                virtual void Update();                       // 0x0C
-                virtual void StartPrepared();                // 0x10
-                virtual void Stop(int frames = 0);           // 0x14
-                virtual void Pause(bool flag, int frames);   // 0x18
-                virtual void SetAutoStopCounter(int count);  // 0x1C
-                virtual void FadeIn(int frames);             // 0x20
-                virtual void Shutdown();                     // 0x24
-                virtual bool IsPrepared() const;             // 0x28
-                virtual bool IsPause() const;                // 0x2C
+                virtual void Update();                       // 0x10
+                virtual void StartPrepared();                // 0x14
+                virtual void Stop(int frames = 0);           // 0x18
+                virtual void Pause(bool flag, int frames);   // 0x1C
+                virtual void SetAutoStopCounter(int count);  // 0x20
+                virtual void FadeIn(int frames);             // 0x24
+                virtual void Shutdown();                     // 0x28
+                virtual bool IsPrepared() const;             // 0x2C
+                virtual bool IsPause() const;                // 0x30
 
-                virtual void SetInitialVolume(f32 volume);       // 0x30
-                virtual void SetVolume(f32 volume, int frames);  // 0x34
-                virtual void SetPitch(f32 pitch);                // 0x38
-                virtual void SetPan(f32 pan);                    // 0x3C
-                virtual void SetSurroundPan(f32 pan);            // 0x40
-                virtual void SetLpfFreq(f32 freq);               // 0x44
-                virtual void SetPlayerPriority(int priority);    // 0x48
+                virtual void SetInitialVolume(f32 volume);       // 0x34
+                virtual void SetVolume(f32 volume, int frames);  // 0x38
+                virtual void SetPitch(f32 pitch);                // 0x3C
+                virtual void SetPan(f32 pan);                    // 0x40
+                virtual void SetSurroundPan(f32 pan);            // 0x44
+                virtual void SetLpfFreq(f32 freq);               // 0x48
+                virtual void SetPlayerPriority(int priority);    // 0x4C
 
-                virtual bool IsAttachedTempSpecialHandle() = 0;  // 0x4C
-                virtual void DetachTempSpecialHandle() = 0;      // 0x50
+                virtual bool IsAttachedTempSpecialHandle() = 0;  // 0x50
+                virtual void DetachTempSpecialHandle() = 0;      // 0x54
 
-                virtual void InitParam();                               // 0x54
-                virtual BasicPlayer& GetBasicPlayer() = 0;              // 0x58
-                virtual const BasicPlayer& GetBasicPlayer() const = 0;  // 0x5C
+                virtual void InitParam();                               // 0x58
+                virtual BasicPlayer& GetBasicPlayer() = 0;              // 0x5C
+                virtual const BasicPlayer& GetBasicPlayer() const = 0;  // 0x60
 
                 PlayerHeap* GetPlayerHeap() { return mHeap; }
                 void SetPlayerHeap(PlayerHeap* heap) { mHeap = heap; }

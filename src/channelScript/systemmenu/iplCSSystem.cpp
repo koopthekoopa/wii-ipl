@@ -7,9 +7,6 @@ extern "C" BOOL VmSystemInit(CHANSVm* vm);
 namespace ipl {
     namespace cs {
         namespace system {
-#define METHOD_COUNT 2
-            extern const CHANSVmMethodList cMethodList[METHOD_COUNT];
-
             CHANSVmDefineMethod(is_first_call) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
@@ -34,9 +31,9 @@ namespace ipl {
             }
 
             // clang-format off
-            const CHANSVmMethodList cMethodList[METHOD_COUNT] = {
-                {"isFirstCall",         is_first_call },
-                {"isDlTaskRegistered",  is_dltask_registered },
+            const CHANSVmMethodList cMethodList[] = {
+                {"isFirstCall", is_first_call},
+                {"isDlTaskRegistered", is_dltask_registered},
             };
             // clang-format on
 
@@ -47,7 +44,7 @@ namespace ipl {
                     // Get created class
                     CHANSVmNativeClass* cls = CHANSVmFindNativeClass(vm, "@System");
                     if (cls != NULL) {
-                        result = CHANSVmAddNativeMethodList(vm, cls, cMethodList, METHOD_COUNT) == CHANS_VM_OK;
+                        result = CHANSVmAddNativeMethodList(vm, cls, cMethodList, CHANSVmMethodCount(cMethodList)) == CHANS_VM_OK;
                     }
                 }
                 return result;

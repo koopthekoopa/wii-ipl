@@ -5,6 +5,10 @@
 
 #include <private/ios/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* thanks to Dolphin emulator and WiiBrew */
 
 #define WD_VENDOR_LENGTH 3
@@ -93,5 +97,9 @@ s32 WDGetPrivacyMode(WDBssDesc* bssDesc);
 
 BOOL WDFindInformationElement(WDInfoElement** outIE, u32* outIELength, WDBssDesc* bssDesc, int id);
 BOOL WDiFindVendorSpecificIE(WDVendorInfoElement** outIE, u32* outIELength, WDBssDesc* bssDesc, int id, u8* data, u8 mode);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // REVOLUTION_WD_H

@@ -87,30 +87,21 @@ private:
         BlockHead head;          // 0x00
         u8 codec;                // 0x08
         u8 hasLoop;              // 0x09
-        u8 channelCount;         // 0x0a
-        u16 sampleRate;          // 0x0c
+        u8 channelCount;         // 0x0A
+        u16 sampleRate;          // 0x0C
         u32 loopStart;           // 0x10
         u32 loopEnd;             // 0x14
         u32 offsToChannelStart;  // 0x18
     };
+
     struct ChannelInfo {
-        u32 dataOff;   // 0x0
-        u32 coeffOff;  // 0x4
+        u32 dataOff;   // 0x00
+        u32 coeffOff;  // 0x04
     };
 
-    struct ChannelConfig {
-        u16 gain;           // 0x0
-        u16 predScale;      // 0x2
-        u16 yn1;            // 0x4
-        u16 yn2;            // 0x6
-        u16 loopPredScale;  // 0x8
-        u16 loopYn1;        // 0xa
-        u16 loopYn2;        // 0xc
-        u16 loopPadding;    // 0xe
-    };
     struct AdpcmCoeffs {
-        u16 a[8][2];
-        ChannelConfig cfg;
+        AXPBADPCM adpcm;
+        AXPBADPCMLOOP loop;
     };
 
     struct DATABlock {

@@ -42,27 +42,22 @@ typedef struct DVDVideoReportKey {
     u8 data[32];
 } DVDVideoReportKey;
 
-typedef struct DVDGamePartition {
-    ESTicket ticket;  // 0x00
-
-    u32 tmdSize;       // 0x2A4
-    ESTitleMeta* tmd;  // 0x2A8
-
-    u32 certSize;  // 0x2AC
-    void* cert;    // 0x2B0
-
-    u8* h3Hash;         // 0x2B4
-    u8* encryptedArea;  // 0x2B8
-} DVDGamePartition;
+typedef struct DVDAppLoaderHeader {
+    char appLoaderDate[16];      // 0x00
+    u32 appLoaderFunc1;          // 0x10
+    u32 appLoaderLength;         // 0x14
+    u32 appLoaderTrailerLength;  // 0x18
+    u8 pad_0x1C[4];
+} DVDAppLoaderHeader;
 
 typedef struct DVDPartitionInfo {
-    DVDGamePartition* partition;  // 0x00
-    u32 partitionType;            // 0x04
+    void* gamePartition;  // 0x00
+    u32 type;             // 0x04
 } DVDPartitionInfo;
 
 typedef struct DVDGameTOC {
-    u32 partitionCount;               // 0x00
-    DVDPartitionInfo* partitionInfo;  // 0x04
+    u32 numGamePartitions;             // 0x00
+    DVDPartitionInfo* partitionInfos;  // 0x04
 } DVDGameTOC;
 
 typedef struct DVDPartitionParams {
@@ -148,6 +143,8 @@ s32 DVDLowGetLastEticketError();
 BOOL __DVDLowTestAlarm(OSAlarm* alarm);
 
 /* Main stuff */
+
+extern DVDCommandBlock __DVDStopMotorCommandBlock;
 
 void __DVDAudioBufferConfig(DVDCommandBlock* block, u32 enable, u32 size, DVDCommandCallback callback);
 

@@ -33,6 +33,7 @@ typedef struct NETMD5Context {
 
 typedef u8 NETMD5Sum[NET_MD5_DIGEST_SIZE];
 
+void* NETGetMD5Interface();
 void NETMD5Init(NETMD5Context* context);
 void NETMD5Update(NETMD5Context* context, const void* input, u32 length);
 void NETMD5GetDigest(NETMD5Context* context, void* digest);
@@ -55,6 +56,7 @@ typedef struct NETSHA1Context {
 
 typedef u8 NETSHA1Sum[NET_SHA1_DIGEST_SIZE];
 
+void* NETGetSHA1Interface();
 void NETSHA1Init(NETSHA1Context* context);
 void NETSHA1Update(NETSHA1Context* context, const void* input, u32 length);
 void NETSHA1GetDigest(NETSHA1Context* context, void* digest);
@@ -65,6 +67,32 @@ static void NETCalcSHA1(void* digest, const void* input, u32 length) {
     NETSHA1Init(&context);
     NETSHA1Update(&context, input, length);
     NETSHA1GetDigest(&context, digest);
+}
+
+/* == HMAC == */
+
+typedef struct {
+    u8 buf[0xD4];
+} NETHMACContext;
+
+void NETHMACInit(NETHMACContext* context, const void* interface, const void* key, u32 keyLen);
+void NETHMACUpdate(NETHMACContext* context, const void* input, u32 length);
+void NETHMACGetDigest(NETHMACContext* context, void* digest);
+
+static void NETCalcHMAC_MD5Interface(void* digest, const void* input, u32 length, const void* key, u32 keyLen) {
+    NETHMACContext context;
+
+    NETHMACInit(&context, NETGetMD5Interface(), key, keyLen);
+    NETHMACUpdate(&context, input, length);
+    NETHMACGetDigest(&context, digest);
+}
+
+static void NETCalcHMAC_SHA1Interface(void* digest, const void* input, u32 length, const void* key, u32 keyLen) {
+    NETHMACContext context;
+
+    NETHMACInit(&context, NETGetSHA1Interface(), key, keyLen);
+    NETHMACUpdate(&context, input, length);
+    NETHMACGetDigest(&context, digest);
 }
 
 #ifdef __cplusplus

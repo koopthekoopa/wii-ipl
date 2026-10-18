@@ -25,7 +25,7 @@ namespace ipl {
 
         s32 getTrigger();
 
-        BOOL snd_shutup(BOOL stopDma);
+        BOOL snd_shutup(BOOL isLocked);
         s32 trans_cmd(s32 command);
 
         BOOL isTVRCChannel(u32 titleCode);

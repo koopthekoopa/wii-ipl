@@ -10,7 +10,7 @@ void CXInitUncompContextRL(CXUncompContextRL* context, u8* param_2) {
     context->unk_0x0e = 0;
     context->unk_0x0C = 0;
     context->unk_0x0f = 8;
-    context->unk_0x08 = 0;
+    context->size = 0;
 }
 
 void CXInitUncompContextLZ(CXUncompContextLZ* context, u8* param_2) {
@@ -22,7 +22,7 @@ void CXInitUncompContextLZ(CXUncompContextLZ* context, u8* param_2) {
     context->unk_0x10 = 3;
     context->unk_0x13 = 8;
     context->unk_0x14 = 0;
-    context->unk_0x08 = 0;
+    context->size = 0;
 }
 
 void CXInitUncompContextHuffman(CXUncompContextHuffman* context, u8* data) {
@@ -36,7 +36,7 @@ void CXInitUncompContextHuffman(CXUncompContextHuffman* context, u8* data) {
     context->bits = 0;
     context->bitsLeft = 0;
     context->hdrLen = 8;
-    context->unk_0x08 = 0;
+    context->size = 0;
 }
 
 CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u32 size) {
@@ -54,7 +54,7 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
             }
         }
 
-        a = CXiReadHeader(&context->unk_0x0f, &context->unk_0x04, pSrc, size, context->unk_0x08);
+        a = CXiReadHeader(&context->unk_0x0f, &context->unk_0x04, pSrc, size, context->size);
 
         pSrc += a;
         size -= a;
@@ -104,7 +104,7 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
         }
 
         if (context->unk_0x0C > context->unk_0x04) {
-            if (!context->unk_0x08) {
+            if (!context->size) {
                 return CX_STREAMING_ERR_BAD_FILE_SIZE;
             }
 
@@ -118,7 +118,7 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
         return context->unk_0x04;
     }
 
-    if (!context->unk_0x08 && size > 32) {
+    if (!context->size && size > 32) {
         return CX_STREAMING_ERR_BUFFER_TOO_LARGE;
     }
 
@@ -174,7 +174,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
             }
         }
 
-        a = CXiReadHeader(&context->unk_0x13, &context->unk_0x04, pSrc, size, context->unk_0x08);
+        a = CXiReadHeader(&context->unk_0x13, &context->unk_0x04, pSrc, size, context->size);
 
         pSrc += a;
         size -= a;
@@ -252,7 +252,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
             context->unk_0x10 = 3;
 
             if (context->unk_0x0C > context->unk_0x04) {
-                if (!context->unk_0x08) {
+                if (!context->size) {
                     return CX_STREAMING_ERR_BAD_FILE_SIZE;
                 }
 
@@ -285,7 +285,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
     }
 
 out:
-    if (!context->unk_0x08 && size > 32)
+    if (!context->size && size > 32)
         return CX_STREAMING_ERR_BUFFER_TOO_LARGE;
 
     return CX_STREAMING_ERR_OK;
@@ -308,7 +308,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
             }
         }
 
-        a = CXiReadHeader(&context->hdrLen, &context->outDataLen, pSrc, size, context->unk_0x08);
+        a = CXiReadHeader(&context->hdrLen, &context->outDataLen, pSrc, size, context->size);
 
         pSrc += a;
         size -= a;
@@ -390,7 +390,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
     }
 
 out:
-    if (!context->unk_0x08 && size > 32) {
+    if (!context->size && size > 32) {
         return CX_STREAMING_ERR_BUFFER_TOO_LARGE;
     }
 

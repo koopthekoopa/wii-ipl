@@ -76,7 +76,7 @@ namespace ipl {
                 mDescriptor = result;
 
                 // If we don't have the rights to open the file, load the meta file from the NAND instead (from the meta folder).
-                if (result == ES_ERR_TMD_INVALID_RIGHT) {
+                if (result == ES_ERR_NO_RIGHT) {
                     mbMetaInNand = true;
                     return openNandFile_();
                 }

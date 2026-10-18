@@ -41,7 +41,7 @@ public:
     BannerSoundPlayer();
     ~BannerSoundPlayer();
 
-    void init(s32);
+    void init(s32 prio);
     BannerSoundPlayer::SoundType checkHeader(void* data, u32 length);
     bool checkData(void* data, u32 length, bool ignoreSize);
 

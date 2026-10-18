@@ -14,6 +14,14 @@
 
 #include "config.h"
 
+#include "iplSystem.h"
+
+#include "titledb.h"
+
+// this TU is brutal
+
+#pragma sym on
+
 #define TMD_FILE "/title/00000001/00000002/data/tmds.sys"
 
 namespace ipl {
@@ -130,7 +138,7 @@ namespace ipl {
 
         BOOL ESMisc::ContentExist(ESTmdView* tmdView, u32 contentIndex, s32* result) {
             u32 numContents;
-            u32 contents[512] ALIGN32;
+            ESContentId contents[512] ALIGN32;
 
             ESTitleId titleId = tmdView->head.titleId;
 
@@ -187,6 +195,168 @@ namespace ipl {
                 *result = 0;
             }
             return FALSE;
+        }
+
+        int ESMisc::checkContentsNum(ESTitleId titleId, ESTmdView* tmdView) {
+            ESContentId contents[ES_MAX_CONTENT] ALIGN32;
+            u32 numContents = 0;
+            u32 privContentExist = PrivateContentsExist(titleId);
+
+            if (privContentExist == 0) {
+                OSReport("ESMisc::checkContentsNum: no TMD or content for 0x%016llx.\n", titleId);
+                return 1;
+            }
+
+            u32 got = 0;
+            u32 numContents2 = tmdView->head.numContents;
+            for (int i = 0; i < numContents2; i++) {
+                if (!(tmdView->contents[i].type & 0x8000)) {
+                    got++;
+                }
+            }
+
+            if (privContentExist == got) {
+                return 0;
+            }
+
+            ESError esErr = ES_ListTitleContentsOnCard(titleId, NULL, &numContents);
+            if (esErr != ES_ERR_OK) {
+                OSReport("ESMisc::checkContentsNum: ES_ListTitleContentsOnCard err %d\n", esErr);
+                return esErr;
+            }
+
+            if (numContents == 0) {
+                OSReport("ESMisc::checkContentsNum: no content for 0x%016llx.\n", titleId);
+                return 1;
+            }
+
+            esErr = ES_ListTitleContentsOnCard(titleId, contents, &numContents);
+            if (esErr == ES_ERR_OK) {
+                BOOL ret2 = FALSE;
+
+                for (int i = 0; i < numContents && !ret2; i++) {
+                    for (u32 j = 0; j < tmdView->head.numContents; j++) {
+                        if (contents[i] == tmdView->contents[j].cid && !(tmdView->contents[j].type & 0x8000)) {
+                            ret2 = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (!ret2) {
+                    OSReport("ESMisc::checkContentsNum: 0x%016llx is already deleted.\n", titleId);
+                    return 1;
+                }
+
+                // TODO: what
+                int unk = 0;
+                for (int i = 0; i < numContents2; i++) {
+                    u32 got2 = 0;
+                    u32 uVar6 = numContents;
+                    for (int iVar1 = 0; uVar6 != 0 && contents[iVar1] != tmdView->contents[unk].cid; iVar1 = iVar1 + 4) {
+                        got2 = got2 + 1;
+                        uVar6 = uVar6 - 1;
+                    }
+                    if (!(tmdView->contents[unk].type & 0x4000)) {
+                        OSReport("ESMisc::checkContentsNum: not complete: non-optional cidx %d missing for 0x%016llx.\n",
+                                 tmdView->contents[unk].index, titleId);
+                        return 2;
+                    }
+                    unk++;
+                }
+
+                OSReport("ESMisc::checkContentsNum: complete: only missing non-optional contents for 0x%016llx.\n", titleId);
+                return 0;
+            } else {
+                // why
+                OSReport("ESMisc::checkContentsNum: ES_ListTitleContentsOnCard err %d\n", esErr);
+                return esErr;
+            }
+        }
+
+        ESError ESMisc::GetValidTicketIndex(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticket, u32 ticketLength) {
+            BOOL isValid = FALSE;
+            BOOL hasNoTicket = FALSE;
+
+            if (ticket == NULL) {
+                if (GetTicketViewList(heap, titleId, &ticket, &ticketLength) < ES_ERR_OK) {
+                    if (ticket) {
+                        heap->free(ticket);
+                    }
+                    return 0;
+                }
+                hasNoTicket = TRUE;
+            }
+
+            ESTicketView* curTicket = (ESTicketView*)heap->alloc(OSRoundUp32B(sizeof(ESTicketView)), -32);
+            if (ESP_InitLib() >= 0) {
+                s32 index = __OSGetValidTicketIndex(ticket, ticketLength);
+                if (index >= -1) {
+                    if (index == -1) {
+                        index = 0;
+                    }
+
+                    s32 fd;
+                    char* readTest;
+                    u32 err;
+
+                    memcpy(curTicket, &ticket[index], sizeof(ESTicketView));
+
+                    // Open 00000000.app
+                    fd = ES_OpenTitleContentFile(titleId, curTicket, 0);
+
+                    if (fd < 0) {
+                        OSReport("ESMisc::GetValidTicketIndex: ES_OpenTitleContentFile fd %d\n", fd);
+                        goto done;
+                    }
+
+                    // Read the footer...
+                    readTest = (char*)heap->alloc(64, -32);
+                    err = ES_ReadContentFile(fd, readTest, 64);
+                    if (err != 64) {
+                        OSReport("ESMisc::GetValidTicketIndex: ES_ReadContentFile err %d\n", err);
+                        heap->free(readTest);
+                        if (ES_CloseContentFile(fd) >= 0) {
+                            goto done;
+                        } else {
+                            goto bad;
+                        }
+                    }
+
+                    if (ES_CloseContentFile(fd) < 0) {
+                        heap->free(readTest);
+                        goto bad;
+                    }
+
+                    // Check if the footer is not blank
+                    if (*readTest == 0) {
+                        OSReport("ESMisc::GetValidTicketIndex: No name\n");
+                        heap->free(readTest);
+                    } else {
+                        heap->free(readTest);
+                        isValid = TRUE;
+                    }
+
+                    // Clean up
+                done:
+                    heap->free(curTicket);
+                    if (hasNoTicket && ticket != NULL) {
+                        heap->free(ticket);
+                    }
+
+                    return isValid ? index : -1;
+                }
+            }
+
+        bad:
+            heap->free(curTicket);
+            if (hasNoTicket && ticket != NULL) {
+                heap->free(ticket);
+            }
+
+            IPLErrorDisplay(MESG_ERR_FILE);
+
+            return 0;
         }
 
         // DeleteSharedContent did not survive
@@ -258,6 +428,39 @@ namespace ipl {
             }
         }
 
+        u32 ESMisc::CheckTmdParentalControl(ESTmdView* tmdView) {
+            SCParentalControlsInfo pcInfo;
+            u8 ratings[16];
+
+            if (!__IsPCEnable()) {
+                return TRUE;
+            }
+
+            memcpy(ratings, tmdView->head.customData.ratings, sizeof(ratings));
+
+            if (!SCGetParentalControl(&pcInfo)) {
+                return TRUE;
+            }
+
+            if (pcInfo.enable & SC_PARENTAL_FLAG_ENABLED) {
+                int rating = ratings[pcInfo.org];
+
+                // If parental controls enabled
+                if (rating & SC_PARENTAL_FLAG_ENABLED) {
+                    return FALSE;
+                }
+                // If... this is enabled
+                if (rating & 0x40) {
+                    return FALSE;
+                }
+                // If the age rating in BI3 is bigger than SYSCONF's
+                if ((rating & SC_PARENTAL_RATING_BITS) > pcInfo.rating) {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+
         BOOL ESMisc::ChangeUid(ESTitleId titleId) {
             s32 ret = ES_SetUid(titleId);
             if (ret != ES_ERR_OK) {
@@ -325,8 +528,44 @@ namespace ipl {
 
         s32 ESMisc::DeleteMetaContent(ESTitleId titleId) {
             char metaPath[64] = "";
-            snprintf(metaPath, sizeof(metaPath), "/meta/%08x/%08x/title.met", NANDTitleIdHi(titleId), NANDTitleIdLo(titleId));
+            snprintf(metaPath, sizeof(metaPath), "/meta/%08x/%08x/title.met", ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId));
             return NANDPrivateDelete(metaPath);
+        }
+
+        ESError ESMisc::DeleteTitleContent(EGG::Heap* heap, ESTitleId titleId) {
+            s32 err = DeleteMetaContent(titleId);
+            if (err != NAND_RESULT_OK && err != NAND_RESULT_NOEXISTS) {
+                ES_ERR_REPORT("failed to delete meta for %016llx: %d\n", titleId, err);
+                return err;
+            }
+
+            BOOL isTVRC = ES_TITLE_CODE(titleId) == ES_TITLE_CODE(TITLE_TVRC);
+            s32 unk = CheckSafeDeleteTitle(heap, titleId);
+            if (unk == 1 || isTVRC) {
+                err = DeleteTitle(heap, titleId);
+                if (err != ES_ERR_OK) {
+                    ES_ERR_REPORT("failed to delete title for %016llx: %d\n", titleId, err);
+                    return err;
+                }
+                goto del;
+            }
+
+            if (unk == 0) {
+                err = ES_DeleteTitleContent(titleId);
+                if (err != ES_ERR_OK) {
+                    ES_ERR_REPORT("failed to delete contents for %016llx: %d\n", titleId, err);
+                    return err;
+                }
+            } else {
+                ES_ERR_REPORT("failed to check safety for %016llx: %d\n", titleId, unk);
+                return unk;
+            }
+        del:
+            err = DeleteDownloadTask(heap, ES_TITLE_CODE(titleId));
+            if (err != ES_ERR_OK) {
+                ES_ERR_REPORT("failed to delete contents for %016llx: %d\n", titleId, err);
+            }
+            return err;
         }
 
         BOOL checkForNullTermination(char* str, u32 len) {
@@ -391,7 +630,7 @@ namespace ipl {
                 return FALSE;
             }
 
-            for (; offset < mFileLength; offset += OSRoundUp32B(entry.tmdSize)) {
+            for (; offset < mFileLength; offset += entry.tmdSize, offset = OSRoundUp32B(offset)) {
                 s32 ret = NANDSeek(&mFile, offset, NAND_SEEK_BEG);
                 if (ret != offset) {
                     ES_ERR_REPORT("NANDSeek err: %d!=%d", ret, offset);
@@ -522,7 +761,7 @@ namespace ipl {
 
                 ret = Exist(titleId, &tmdOffset, &tmdSize);
                 if (ret == FALSE) {
-                    ret = ES_ERR_NO_TMD_FILE_FOUND;
+                    ret = ES_ERR_NO_TMD_FILE;
                     goto out;
                 }
 

@@ -451,7 +451,7 @@ static void SetupVideo() {
     *(u32*)OSPhysicalToCached(OS_ADDR_TV_VIDEO_FORMAT) = BS2VideoMode;
 
     if (!BS2ReturnToMenu && !BS2ReturnToDataManager) {
-        if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == VI_DTV_COMPONENT) {
+        if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == 1) {
             switch (BS2VideoMode) {
                 case VI_PAL:
                 case VI_EURGB60: {
@@ -468,7 +468,7 @@ static void SetupVideo() {
         }
     } else {
         if (VIGetScanMode() == VI_NON_INTERLACE) {
-            if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == VI_DTV_COMPONENT) {
+            if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == 1) {
                 switch (BS2VideoMode) {
                     case VI_PAL:
                     case VI_EURGB60: {

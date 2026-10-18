@@ -87,26 +87,26 @@ void GXSetChanAmbColor(GXChannelID chan, GXColor amb_color) {
         case GX_COLOR0: {
             reg = __GXData->ambColor[GX_COLOR0];
             rgb = GXCOLOR_AS_U32(amb_color) >> 8;
-            SET_REG_FIELD(reg, 24, 8, rgb);
+            GX_SET_REG_FIELD(reg, 24, 8, rgb);
             colIdx = 0;
             break;
         }
         case GX_COLOR1: {
             reg = __GXData->ambColor[GX_COLOR1];
             rgb = GXCOLOR_AS_U32(amb_color) >> 8;
-            SET_REG_FIELD(reg, 24, 8, rgb);
+            GX_SET_REG_FIELD(reg, 24, 8, rgb);
             colIdx = 1;
             break;
         }
         case GX_ALPHA0: {
             reg = __GXData->ambColor[GX_COLOR0];
-            SET_REG_FIELD(reg, 8, 0, amb_color.a);
+            GX_SET_REG_FIELD(reg, 8, 0, amb_color.a);
             colIdx = 0;
             break;
         }
         case GX_ALPHA1: {
             reg = __GXData->ambColor[GX_COLOR1];
-            SET_REG_FIELD(reg, 8, 0, amb_color.a);
+            GX_SET_REG_FIELD(reg, 8, 0, amb_color.a);
             colIdx = 1;
             break;
         }
@@ -138,26 +138,26 @@ void GXSetChanMatColor(GXChannelID chan, GXColor mat_color) {
         case GX_COLOR0: {
             reg = __GXData->matColor[GX_COLOR0];
             rgb = GXCOLOR_AS_U32(mat_color) >> 8;
-            SET_REG_FIELD(reg, 24, 8, rgb);
+            GX_SET_REG_FIELD(reg, 24, 8, rgb);
             colIdx = 0;
             break;
         }
         case GX_COLOR1: {
             reg = __GXData->matColor[GX_COLOR1];
             rgb = GXCOLOR_AS_U32(mat_color) >> 8;
-            SET_REG_FIELD(reg, 24, 8, rgb);
+            GX_SET_REG_FIELD(reg, 24, 8, rgb);
             colIdx = 1;
             break;
         }
         case GX_ALPHA0: {
             reg = __GXData->matColor[GX_COLOR0];
-            SET_REG_FIELD(reg, 8, 0, mat_color.a);
+            GX_SET_REG_FIELD(reg, 8, 0, mat_color.a);
             colIdx = 0;
             break;
         }
         case GX_ALPHA1: {
             reg = __GXData->matColor[GX_COLOR1];
-            SET_REG_FIELD(reg, 8, 0, mat_color.a);
+            GX_SET_REG_FIELD(reg, 8, 0, mat_color.a);
             colIdx = 1;
             break;
         }
@@ -181,7 +181,7 @@ void GXSetChanMatColor(GXChannelID chan, GXColor mat_color) {
 }
 
 void GXSetNumChans(u8 nChans) {
-    SET_REG_FIELD(__GXData->genMode, 3, 4, nChans);
+    GX_SET_REG_FIELD(__GXData->genMode, 3, 4, nChans);
     __GXData->dirtyState |= 0x1000000;
     __GXData->dirtyState |= 0x04;
 }
@@ -190,16 +190,16 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorS
     u32 idx = chan & 3;
     u32 reg = 0;
 
-    SET_REG_FIELD(reg, 1, 1, enable);
-    SET_REG_FIELD(reg, 1, 0, mat_src);
-    SET_REG_FIELD(reg, 1, 6, amb_src);
+    GX_SET_REG_FIELD(reg, 1, 1, enable);
+    GX_SET_REG_FIELD(reg, 1, 0, mat_src);
+    GX_SET_REG_FIELD(reg, 1, 6, amb_src);
 
-    SET_REG_FIELD(reg, 2, 7, (attn_fn == GX_AF_SPEC) ? GX_DF_NONE : diff_fn);
-    SET_REG_FIELD(reg, 1, 9, (attn_fn != GX_AF_NONE));
-    SET_REG_FIELD(reg, 1, 10, (attn_fn != GX_AF_SPEC));
+    GX_SET_REG_FIELD(reg, 2, 7, (attn_fn == GX_AF_SPEC) ? GX_DF_NONE : diff_fn);
+    GX_SET_REG_FIELD(reg, 1, 9, (attn_fn != GX_AF_NONE));
+    GX_SET_REG_FIELD(reg, 1, 10, (attn_fn != GX_AF_SPEC));
 
-    SET_REG_FIELD(reg, 4, 2, light_mask & 0xF);
-    SET_REG_FIELD(reg, 4, 11, (light_mask >> 4) & 0xF);
+    GX_SET_REG_FIELD(reg, 4, 2, light_mask & 0xF);
+    GX_SET_REG_FIELD(reg, 4, 11, (light_mask >> 4) & 0xF);
 
     __GXData->chanCtrl[idx] = reg;
     __GXData->dirtyState |= 0x1000 << (idx);

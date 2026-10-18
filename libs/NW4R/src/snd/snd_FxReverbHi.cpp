@@ -80,12 +80,13 @@ namespace nw4r {
         }
 
         void FxReverbHi::UpdateBuffer(int channels, void** buffer, u32 size, SampleFormat format, f32 sampleRate, OutputMode mode) {
-            void* chans[AX_STEREO_MAX];
-            chans[AX_STEREO_L] = buffer[AX_STEREO_L];
-            chans[AX_STEREO_R] = buffer[AX_STEREO_R];
-            chans[AX_STEREO_S] = buffer[AX_STEREO_S];
+            AXFX_BUS bus;
 
-            AXFXReverbHiCallback(chans, &mAxfxParam);
+            bus.left = (s32*)buffer[AX_STEREO_L];
+            bus.right = (s32*)buffer[AX_STEREO_R];
+            bus.surround = (s32*)buffer[AX_STEREO_S];
+
+            AXFXReverbHiCallback(&bus, &mAxfxParam);
         }
     }  // namespace snd
 }  // namespace nw4r
