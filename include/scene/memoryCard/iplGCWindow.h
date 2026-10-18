@@ -7,9 +7,14 @@
 namespace ipl {
     namespace scene {        
 
-        SCENE_CLASS(MemoryBaseEvent){
+        class MemoryBaseEvent {
             public:
-            MemoryBaseEvent(MemoryBase*);
+                MemoryBaseEvent(MemoryBase*);
+                virtual ~MemoryBaseEvent();
+
+            private:
+                int m_unk08;              // Offset 0x08: Set to 0 in assembly
+                MemoryBase* m_memoryBase; // Offset 0x0C: Pointer passed to constructor
         };
     }
 }
