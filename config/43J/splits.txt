@@ -4122,13 +4122,13 @@ libs/RVL_SDK/src/usbcmn/puh_ker_tsk.c:
 libs/RVL_SDK/src/kbd/kbd_lib.c:
 	.bss        start:0x811BFCE0 end:0x811C0C60
 	.text       start:0x8161C258 end:0x8161D884
-	.data       start:0x816C2110 end:0x816C2168
+	.data       start:0x816C2110 end:0x816C21F0
 	.sdata      start:0x816C7CC8 end:0x816C7CD0
 	.sbss       start:0x816C8E60 end:0x816C8E70
 
 libs/RVL_SDK/src/kbd/kbd_lib_map_jp.c:
 	.text       start:0x8161D884 end:0x8161D8DC
-	.data       start:0x816C2168 end:0x816C29D0
+	.data       start:0x816C21F0 end:0x816C29D0
 
 libs/RVL_SDK/src/kpr/kpr_lib.c:
 	.text       start:0x8161D8DC end:0x8161E2B4

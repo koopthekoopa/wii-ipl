@@ -47,17 +47,18 @@ namespace textinput {
                 }
 
             private:
-                KeySet(const HKBManager* manager, u8 keyPhase) : mKeyPhase(keyPhase), mBufIdx(-1), mDevIdx(0), unk_0x08(0), mpManager(manager) {}
+                KeySet(const HKBManager* manager, u8 keyPhase)
+                    : mKeyPhase(keyPhase), mBufIdx(-1), mDevIdx(0), mResolvedVCode(0), mpManager(manager) {}
                 friend class HKBManager;
 
                 bool IsValid_() const;
 
             private:
-                const HKBManager* mpManager;  // 0x0
-                u8 mKeyPhase;                 // 0x4
-                s8 mBufIdx;                   // 0x5
-                u8 mDevIdx;                   // 0x6
-                mutable u16 unk_0x08;         // 0x8
+                const HKBManager* mpManager;     // 0x0
+                u8 mKeyPhase;                    // 0x4
+                s8 mBufIdx;                      // 0x5
+                u8 mDevIdx;                      // 0x6
+                mutable wchar_t mResolvedVCode;  // 0x8
             };
 
             KeySet GetTriggeredKeySet() const;
@@ -82,8 +83,8 @@ namespace textinput {
                 u32 mForceModifierState;      // 0x24
                 u32 mModifierStateForceMask;  // 0x28
 
-                int mCountry;   // 0x2C
-                bool unk_0x30;  // 0x30
+                int mCountry;      // 0x2C
+                bool mbLedsUnset;  // 0x30
 
                 u8 mKeysPrev[8];       // 0x31
                 u8 mKeysCurr[8];       // 0x39
@@ -104,14 +105,14 @@ namespace textinput {
 
             struct KBDListenerOwn {
             public:
-                KBDListenerOwn() : mpNextListener(NULL), unk_0x4(0), mpManager(NULL) {}
+                KBDListenerOwn() : mpNextListener(NULL), mbDontListen(FALSE), mpManager(NULL) {}
 
                 virtual ~KBDListenerOwn();                    // 0x08
                 virtual void OnAttach(KBDDevEvent* event);    // 0x0C
                 virtual void OnDetach(KBDDevEvent* event);    // 0x10
                 virtual void OnKeyEvent(KBDKeyEvent* event);  // 0x14
 
-                u32 unk_0x4;                     // 0x4
+                BOOL mbDontListen;               // 0x4
                 KBDListenerOwn* mpNextListener;  // 0x8
                 HKBManager* mpManager;           // 0xC
             };
@@ -122,7 +123,7 @@ namespace textinput {
 
             bool mbInitialized;            // 0x00
             bool mStateAttachedFlags[2];   // 0x01
-            u32 unk_0x04;                  // 0x04
+            u32 mModifierState;            // 0x04
             volatile u32 mEnabledLEDBits;  // 0x08
             wchar_t* mpCharsWhitelist;     // 0x0C
             u32 mCharsWhitelistLen;        // 0x10

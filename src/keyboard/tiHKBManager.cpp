@@ -1,11 +1,12 @@
 #include "keyboard/tiHKBManager.h"
 
 #include <revolution/kbd.h>
+#include <revolution/kbd/hidtypes.h>
+
 #include <revolution/os/OSInterrupt.h>
 
 namespace textinput {
     namespace input {
-
         HKBManager HKBManager::sInstance;
 
         typedef union {
@@ -16,7 +17,7 @@ namespace textinput {
                 u8 unk_0x3;
                 u32 unk_0x4;
             };
-            u32 asU32;
+            void* asVoid;
         } SetLedsAsyncData;
 
         void HKBManager::DoSetLedsAsyncCallback(u8 bitIdx) {
@@ -28,7 +29,7 @@ namespace textinput {
             mEnabledLEDBits &= ~(1 << bitIdx);
             OSRestoreInterrupts(level);
 
-            if (KBDSetLedsAsync(bitIdx, 0, SetLedCB, cmdData.asU32) == KBD_EC_SET_LED) {
+            if (KBDSetLedsAsync(bitIdx, 0, SetLedCB, cmdData.asVoid) == KBD_EC_SET_LED) {
                 BOOL level = OSDisableInterrupts();
                 mEnabledLEDBits |= (1 << bitIdx);
                 OSRestoreInterrupts(level);
@@ -40,7 +41,7 @@ namespace textinput {
                 return;
 
             SetLedsAsyncData setLedsAsyncData;
-            setLedsAsyncData.asU32 = (u32)data;
+            setLedsAsyncData.asVoid = data;
             getInstance().DoSetLedsAsyncCallback(setLedsAsyncData.unk_0x0);
         }
 
@@ -51,7 +52,7 @@ namespace textinput {
             } else {
                 mpManager->mStateAttachedFlags[event->devIdx] = true;
                 KBDSetLockProcessing(event->devIdx, 0);
-                mpManager->mKeyStates[event->devIdx].unk_0x30 = true;
+                mpManager->mKeyStates[event->devIdx].mbLedsUnset = true;
             }
         }
         void HKBManager::KBDListenerOwn::OnDetach(KBDDevEvent* event) {
@@ -70,7 +71,7 @@ namespace textinput {
             if ((event->flags & 2) != 0)
                 return;
 
-            mpManager->mKeyStates[event->devIdx].NotifyEvent(event->flags & 1, event->key);
+            mpManager->mKeyStates[event->devIdx].NotifyEvent(event->flags & 1, event->keyCode);
         }
 
         void HKBManager::AttachCB(KBDDevEvent* event) {
@@ -108,13 +109,13 @@ namespace textinput {
             mRepeatedMask = 0;
             mPressedMaskCurr = 0;
             mPressedMaskNext = 0;
-            mModifierState &= 0x700;
+            mModifierState &= KBD_HID_MODS_WITHLEDS;
             mModifierStateForceMask = 0;
             mForceModifierState = 0;
-            unk_0x30 = false;
+            mbLedsUnset = false;
         }
 
-        HKBManager::HKBManager() : mbInitialized(false), unk_0x04(0), mEnabledLEDBits(0), mpCharsWhitelist(NULL), mCharsWhitelistLen(0) {
+        HKBManager::HKBManager() : mbInitialized(false), mModifierState(0), mEnabledLEDBits(0), mpCharsWhitelist(NULL), mCharsWhitelistLen(0) {
             mListener.mpManager = this;
             for (u8 i = 0; i < 2; i++) {
                 mStateAttachedFlags[i] = false;
@@ -132,9 +133,19 @@ namespace textinput {
                 return;
 
             mbInitialized = true;
+
+#if defined(VERSION_43U)
             KBDInitRegionUS();
+#elif defined(VERSION_43K)
+            KBDInitRegionUS();
+#elif defined(VERSION_43E)
+            KBDInitRegionEU();
+#elif defined(VERSION_43J)
+            KBDInitRegionJP();
+#endif
+
             KBDInit();
-            if (mListener.unk_0x4 == 0) {
+            if (!mListener.mbDontListen) {
                 KBDSetAttachCallback(AttachCB);
                 KBDSetDetachCallback(DetachCB);
                 KBDSetKeyCallback(KeyEventCB);
@@ -154,17 +165,17 @@ namespace textinput {
             KBDSetModState(mDevIdx, mModifierState);
 
             u8 ledFlags = 0;
-            if (mModifierState & 0x100) {
+            if (mModifierState & KBD_HID_MOD_NUM_LOCK) {
                 ledFlags |= 1;
             }
-            if (mModifierState & 0x200) {
+            if (mModifierState & KBD_HID_MOD_CAPSLOCK) {
                 ledFlags |= 2;
             }
-            if (mModifierState & 0x400) {
+            if (mModifierState & KBD_HID_MOD_SCROLL_LOCK) {
                 ledFlags |= 4;
             }
             if (KBDSetLeds(mDevIdx, ledFlags) == KBD_EC_SET_LED) {
-                unk_0x30 = true;
+                mbLedsUnset = true;
             }
         }
 
@@ -175,8 +186,6 @@ namespace textinput {
             state &= ~modStateForceMask0;
             state |= mForceModifierState & modStateForceMask0;
             return state;
-
-            // return mModifierState & ~mModifierStateForceMask |
         }
 
         u32 HKBManager::GetModifierState() const {
@@ -209,11 +218,11 @@ namespace textinput {
         }
 
         void HKBManager::SetModifierState(u32 state, u32 updateMask) {
-            unk_0x04 = unk_0x04 & ~updateMask | state & updateMask;
+            mModifierState = mModifierState & ~updateMask | state & updateMask;
             for (u8 i = 0; i < 2; i++) {
-                bool modifierStatesChanged = (mKeyStates[i].mModifierState & 0x0700) != (unk_0x04 & 0x0700);
-                mKeyStates[i].mModifierState &= ~0x0700;
-                mKeyStates[i].mModifierState |= unk_0x04;
+                bool modifierStatesChanged = (mKeyStates[i].mModifierState & KBD_HID_MODS_WITHLEDS) != (mModifierState & KBD_HID_MODS_WITHLEDS);
+                mKeyStates[i].mModifierState &= ~KBD_HID_MODS_WITHLEDS;
+                mKeyStates[i].mModifierState |= mModifierState;
                 if (modifierStatesChanged && mStateAttachedFlags[i]) {
                     mKeyStates[i].SetModifierStateLEDs();
                 }
@@ -333,30 +342,30 @@ namespace textinput {
 
         void HKBManager::KeyState_::UpdateModState_() {
             u32 oldModifierState = mModifierState;
-            mModifierState &= ~(KBD_HID_MOD_L_SHIFT | KBD_HID_MOD_L_CTRL | KBD_HID_MOD_L_GUI | KBD_HID_MOD_L_ALT | KBD_HID_MOD_R_SHIFT);
+            mModifierState &= ~(KBD_HID_MOD_SHIFT | KBD_HID_MOD_CTRL | KBD_HID_MOD_GUI | KBD_HID_MOD_ALT | KBD_HID_MOD_ALTGR);
             for (u8 i = 0; i < 8; i++) {
                 if ((mPressedMaskCurr & (1 << i)) == 0)
                     continue;
 
                 u8 key = mKeysCurr[i];
                 if (key == KBD_KEY_KEYBOARD_R_SHIFT || key == KBD_KEY_KEYBOARD_L_SHIFT) {
-                    mModifierState |= KBD_HID_MOD_L_SHIFT;
+                    mModifierState |= KBD_HID_MOD_SHIFT;
                 } else if (key == KBD_KEY_KEYBOARD_R_CONTROL || key == KBD_KEY_KEYBOARD_L_CONTROL) {
-                    mModifierState |= KBD_HID_MOD_L_CTRL;
+                    mModifierState |= KBD_HID_MOD_CTRL;
                 } else if (key == KBD_KEY_KEYBOARD_R_GUI || key == KBD_KEY_KEYBOARD_L_GUI) {
-                    mModifierState |= KBD_HID_MOD_L_GUI;
+                    mModifierState |= KBD_HID_MOD_GUI;
                 } else if (key == KBD_KEY_KEYBOARD_L_ALT) {
-                    mModifierState |= KBD_HID_MOD_L_ALT;
+                    mModifierState |= KBD_HID_MOD_ALT;
                 } else if (key == KBD_KEY_KEYBOARD_R_ALT) {
                     if (mCountry == KBD_CC_JAPAN || mCountry == KBD_CC_UNITED_STATES) {
-                        mModifierState |= KBD_HID_MOD_L_ALT;
+                        mModifierState |= KBD_HID_MOD_ALT;
                     } else {
-                        mModifierState |= KBD_HID_MOD_R_SHIFT;
+                        mModifierState |= KBD_HID_MOD_ALTGR;
                     }
                 }
             }
-            if ((oldModifierState & 0x700) != (mModifierState & 0x700) || unk_0x30) {
-                unk_0x30 = false;
+            if ((oldModifierState & KBD_HID_MODS_WITHLEDS) != (mModifierState & KBD_HID_MODS_WITHLEDS) || mbLedsUnset) {
+                mbLedsUnset = false;
                 SetModifierStateLEDs();
             }
         }
@@ -422,36 +431,39 @@ namespace textinput {
                 return 0;
             }
 
-            if (unk_0x08 != 0)
-                return unk_0x08;
+            if (mResolvedVCode != 0)
+                return mResolvedVCode;
 
-            u32 modifierState = mpManager->GetModifierState();
+            u32 modState0 = mpManager->mKeyStates[0].GetModifierState();
+            u32 modState1 = mpManager->mKeyStates[1].GetModifierState();
+            u32 modifierState = modState0 | modState1;
 
-            if ((modifierState & (KBD_HID_MOD_L_GUI | KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) != 0) {
-                if ((modifierState & (KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) != (KBD_HID_MOD_L_ALT | KBD_HID_MOD_L_CTRL)) {
+            // If any GUI/ALT/CTRL keys are held, unless they're acting as the
+            // ALTGR equivalent CTRL+ALT, it's meant to be an action and not
+            // type a character.
+            if ((modifierState & (KBD_HID_MOD_GUI | KBD_HID_MOD_ALT | KBD_HID_MOD_CTRL)) != 0) {
+                if ((modifierState & (KBD_HID_MOD_ALT | KBD_HID_MOD_CTRL)) != (KBD_HID_MOD_ALT | KBD_HID_MOD_CTRL)) {
                     return 0;
                 }
             }
-            // u16 out = unk_0x08;
 
             switch (mKeyPhase) {
                 case KEY_PHASE_ACTIVE:
                 case KEY_PHASE_TRIGGERED:
                 case KEY_PHASE_REPEATED:
                     if (((1 << mBufIdx) & mpManager->mKeyStates[mDevIdx].mPressedMaskCurr) != 0) {
-                        unk_0x08 = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx], modifierState,
-                                                       mpManager->mKeyStates[mDevIdx].mCountry);
+                        mResolvedVCode = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysCurr[mBufIdx], modifierState,
+                                                             mpManager->mKeyStates[mDevIdx].mCountry);
                     }
                     break;
                 case KEY_PHASE_RELEASED:
                     if (((1 << mBufIdx) & mpManager->mKeyStates[mDevIdx].mPressedMaskPrev) != 0) {
-                        unk_0x08 = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysPrev[mBufIdx], modifierState,
-                                                       mpManager->mKeyStates[mDevIdx].mCountry);
+                        mResolvedVCode = KBDTranslateHidCode(mpManager->mKeyStates[mDevIdx].mKeysPrev[mBufIdx], modifierState,
+                                                             mpManager->mKeyStates[mDevIdx].mCountry);
                     }
                     break;
             }
-            // out = unk_0x08;
-            return unk_0x08;
+            return mResolvedVCode;
         }
 
         HKBManager::KeySet HKBManager::KeySet::GetNext() const {
