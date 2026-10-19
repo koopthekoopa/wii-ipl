@@ -4095,6 +4095,9 @@ libs/RVL_SDK/src/kbd/kbd_lib.c:
 	.sdata      start:0x8166CBE8 end:0x8166CBF0
 	.sbss       start:0x8166DD80 end:0x8166DD90
 
+libs/RVL_SDK/src/kpr/kpr_init.c:
+	.sbss       start:0x8166DD90 end:0x8166DD98
+
 libs/RVL_SDK/src/kbd/kbd_lib_map_us.c:
 	.text       start:0x815CD700 end:0x815CD7FC
 	.data       start:0x81666C88 end:0x81667930
@@ -4104,7 +4107,7 @@ libs/RVL_SDK/src/kpr/kpr_lib.c:
 	.rodata     start:0x8160B0B8 end:0x8160B1F8
 	.data       start:0x81667930 end:0x816679A0
 	.sdata      start:0x8166CBF0 end:0x8166CBF8
-	.sbss       start:0x8166DD90 end:0x8166DDA0
+	.sbss       start:0x8166DD98 end:0x8166DDA0
 
 libs/RVL_SDK/src/usbkbd/usb_kbd.c:
 	.bss        start:0x811AF3A0 end:0x811AF3C0

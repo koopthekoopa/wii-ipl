@@ -1892,7 +1892,8 @@ config.libs = [
         ]
     ),
     RVLSDKLib("kpr", [
-            Object(NonMatching, "kpr/kpr_lib.c"),
+            Object(Matching,    "kpr/kpr_init.c", shift_jis=False, extra_cflags=["-enc UTF8"]),
+            Object(Matching,    "kpr/kpr_lib.c", shift_jis=False, extra_cflags=["-enc UTF8"]),
         ]
     ),
     RVLSDKLib("usbkbd", [
