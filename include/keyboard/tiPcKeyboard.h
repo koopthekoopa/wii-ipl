@@ -61,14 +61,28 @@ namespace textinput {
                 virtual void goSignInputMode();
                 virtual void changePredictLanguage();
                 virtual void updateFixMode();
+
+            protected:
+                u8 unk_0x10[0x34];  // 0x10
+            };
+
+            class UIObj : public gui::EventHandler {
+            public:
+                class Listener {
+                public:
+                    virtual void onEvent(UIObj*, u32, void*);
+                };
             };
 
             // TODO
-            class LayoutByNW4R : public Base, public nw4rmanager::Layout {
+            class LayoutByNW4R : public Base, public nw4rmanager::Layout, public UIObj::Listener {
             public:
                 // TODO - ...
 
                 virtual void onClose();
+
+                virtual void draw();
+                virtual void calc();
 
                 void onPressedShift(bool shift);
                 void onReleasedShift();

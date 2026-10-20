@@ -182,6 +182,8 @@ namespace textinput {
 
                 virtual void                makeUpCursorPos(CursorPos* cursorPos, u32 pos, s32 startLine, s32 endLine);
 
+                bool isAtokActive() const;
+
             private:
                 Rect mRect;                         // 0x120
                 nw4r::math::MTX34 mMtx;             // 0x130

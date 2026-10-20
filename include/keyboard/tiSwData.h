@@ -1,5 +1,5 @@
-#ifndef TEXTINPUT_SING_WINDOW_DATA_H
-#define TEXTINPUT_SING_WINDOW_DATA_H
+#ifndef TEXTINPUT_SIGN_WINDOW_DATA_H
+#define TEXTINPUT_SIGN_WINDOW_DATA_H
 
 #include <revolution/types.h>
 
@@ -9,9 +9,9 @@ namespace textinput {
             static const int KEY_COUNT = 20;
 
             typedef struct PaneNameToCharCodeInSignMode {
-                const char* szPaneName;     // 0x00
-                const char* szNextPaneName; // 0x04
-                wchar_t     wc[16];         // 0x08
+                const char* szPaneName;      // 0x00
+                const char* szNextPaneName;  // 0x04
+                wchar_t wc[16];              // 0x08
             } PaneNameToCharCodeInSignMode;
 
             extern const PaneNameToCharCodeInSignMode csSignKeyJP[KEY_COUNT];
@@ -24,8 +24,8 @@ namespace textinput {
             extern const PaneNameToCharCodeInSignMode csSignKeyNL[KEY_COUNT];
             extern const PaneNameToCharCodeInSignMode csSignKeyCN[KEY_COUNT];
             extern const PaneNameToCharCodeInSignMode csSignKeyKR[KEY_COUNT];
-        }
-    }
-}
+        }  // namespace signwindow
+    }  // namespace keyboard
+}  // namespace textinput
 
-#endif // TEXTINPUT_SING_WINDOW_DATA_H
+#endif  // TEXTINPUT_SIGN_WINDOW_DATA_H

@@ -1,23 +1,13 @@
 #include "keyboard/tiCellPhone.h"
 
-// #include "keyboard/tiHKBManager.h"
-// #include "keyboard/tiLayoutGather.h"
 #include "keyboard/tiManager.h"
-#include "keyboard/tiUtil.h"
+#include "keyboard/tiSignWindow.h"
 
 #include <new>
 
 namespace textinput {
     namespace keyboard {
         namespace cellphonetype {
-            typedef struct {
-                wchar_t ch;                                    // 0x0
-                u16 inputMode;                                 // 0x2
-                bool unk_0x4;                                  // 0x4
-                bool unk_0x5;                                  // 0x5
-                u16 unk_0x6;                                   // 0x6
-                const PaneNameToCharCode* paneNameToCharCode;  // 0x8
-            } Command3Or5Data;
             typedef struct {
                 inputform::Base::PredictMode predictMode;  // 0x0
                 bool unk_0x4;                              // 0x4
@@ -212,7 +202,7 @@ namespace textinput {
                                 }
                             }
                             if (mpHeldButtonData != NULL) {
-                                Command3Or5Data cmdData = {};
+                                CommandReceiver::Command3Or5Data cmdData = {};
                                 cmdData.ch = mpHeldButtonData->wc[mHeldButtonCharIdx];
                                 cmdData.paneNameToCharCode = mpHeldButtonData;
 
@@ -246,7 +236,7 @@ namespace textinput {
                                     continue;
 
                                 wchar_t ch = csKeySetNumber.pPaneNameToCharCode[i].wc[0];
-                                Command3Or5Data cmdData = {ch, mInputMode, false, false, 0, mpHeldButtonData};
+                                CommandReceiver::Command3Or5Data cmdData = {ch, mInputMode, false, false, 0, mpHeldButtonData};
 
                                 bool local_78[1];
                                 sendCommand(32, local_78);
@@ -255,7 +245,7 @@ namespace textinput {
                                         sendCommand(6, NULL);
                                     }
 
-                                    Command3Or5Data cmdData2 = {L' ', mInputMode, true, false, 0x100, mpHeldButtonData};
+                                    CommandReceiver::Command3Or5Data cmdData2 = {L' ', mInputMode, true, false, 0x100, mpHeldButtonData};
                                     sendCommand(5, &cmdData2);
                                     mHeldButtonCharIdx = 0;
                                     mpHeldButtonData = NULL;
@@ -280,7 +270,7 @@ namespace textinput {
                             uVar6 = L'　';  // Ideographic space U+3000
                         }
 
-                        Command3Or5Data cmdData = {uVar6, INPUT_MODE_UNK_0, false, false, 0x100, mpHeldButtonData};
+                        CommandReceiver::Command3Or5Data cmdData = {uVar6, INPUT_MODE_UNK_0, false, false, 0x100, mpHeldButtonData};
                         if (getInputType() == 1) {
                             cmdData.unk_0x4 = true;
                         }
@@ -340,7 +330,7 @@ namespace textinput {
                     if ((int)command == 33) {
                         setAbcMode(1);
                     }
-                    if ((int)command == 5 && !((Command3Or5Data*)data)->unk_0x5) {
+                    if ((int)command == 5 && !((CommandReceiver::Command3Or5Data*)data)->unk_0x5) {
                         setAbcMode(0);
                         mbNextIsCapital = false;
                     }
@@ -927,17 +917,11 @@ namespace textinput {
                 }
             }
             void LayoutByNW4R::goSignInputMode() {
-                int value = 0;
-                if (mInputMode == INPUT_MODE_NUMERIC) {
-                    value = 1;
-                }
-                // TODO: Actual VTables please
-                ((void (*)(void*, LayoutByNW4R*, int)) * (u32*)(*(u32*)mpSignWindow + 0xD8))(mpSignWindow, this, value);
+                bool isNumeric = false;
+                if (mInputMode == INPUT_MODE_NUMERIC)
+                    isNumeric = true;
+                mpSignWindow->open(this, isNumeric);
                 throwReleaseForAll();
-                // piVar1 = (this->_).mpSignWindow;
-                // (**(code **)(*piVar1 + 0xd8))(piVar1,this,(this->_).b.mInputMode == 3);
-                // (*(code *)this->v->throwReleaseForAll)(this);
-                // return;
             }
 
             void LayoutByNW4R::doNumericMode(bool isNumeric) {
@@ -1342,7 +1326,7 @@ namespace textinput {
                 return 1;
             }
 
-            void LayoutByNW4R::setSignWindow(void* signWindow) {
+            void LayoutByNW4R::setSignWindow(signwindow::LayoutByNW4R* signWindow) {
                 mpSignWindow = signWindow;
             }
             void LayoutByNW4R::setPredictLanguageDialog(predictlang::LayoutByNW4R* predictLangDialog) {

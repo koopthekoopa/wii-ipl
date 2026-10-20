@@ -17,6 +17,9 @@ namespace textinput {
             CODE_UNK_0x12 = 0x12,
             CODE_UNK_0x13 = 0x13,
             CODE_UNK_0x17 = 0x17,
+            VCODE_SGNCLOSE = 0x18,
+            VCODE_SGNNEXT = 0x19,
+            VCODE_SGNPREV = 0x1A,
             CODE_UNK_0x1B = 0x1B,
         };
 
@@ -29,7 +32,7 @@ namespace textinput {
             virtual void setLanguage(Language language) { meLanguage = language; }  // 0x28
             virtual Language getLanguage() const;                                   // 0x2C
             virtual void update();                                                  // 0x30
-            virtual void onActive();                                                // 0x34
+            virtual void onActive() {}                                              // 0x34
 
         protected:
             Language meLanguage;  // 0x10

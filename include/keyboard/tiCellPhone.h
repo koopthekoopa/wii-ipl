@@ -8,6 +8,9 @@
 
 namespace textinput {
     namespace keyboard {
+        namespace signwindow {
+            class LayoutByNW4R;
+        }
         namespace cellphonetype {
             typedef struct {
                 u16 unk_0x00;              // 0x00
@@ -151,7 +154,7 @@ namespace textinput {
                 virtual void setAbcMode(bool) override;                             // 0x78
 
                 virtual void setPredictLanguageDialog(predictlang::LayoutByNW4R*);                                        // 0x104
-                virtual void setSignWindow(void* signWindow);                                                             // 0x108 // TODO: SIGNWINDOW
+                virtual void setSignWindow(signwindow::LayoutByNW4R* signWindow);                                         // 0x108 // TODO: SIGNWINDOW
                 virtual void doNumericWithDotMode(bool);                                                                  // 0x10C
                 virtual void setLineFeedButton(bool);                                                                     // 0x110
                 virtual void setPredictLanguageButton(bool);                                                              // 0x114
@@ -178,7 +181,7 @@ namespace textinput {
                 GXTexObj mTexObjSpaceBtnKR;                      // 0x124
                 nw4rmanager::TiEventHandler* mpEventHandler;     // 0x144
                 predictlang::LayoutByNW4R* mpPredictLangDialog;  // 0x148
-                void* mpSignWindow;                              // 0x14C // TODO: SIGNWINDOW
+                signwindow::LayoutByNW4R* mpSignWindow;          // 0x14C
             };
         }  // namespace cellphonetype
     }  // namespace keyboard

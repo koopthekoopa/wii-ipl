@@ -80,6 +80,8 @@ namespace textinput {
                     PE_5,
                     PE_6,
                     PE_7,
+                    PE_8,
+                    PE_9,
                     PE_Last,
                 } AnmPaneEvent;
 

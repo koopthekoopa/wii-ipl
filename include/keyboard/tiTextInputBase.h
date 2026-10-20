@@ -58,6 +58,14 @@ namespace textinput {
             int unk_0x0;      // 0x0
             bool bZiEnabled;  // 0x4
         };
+        struct Command3Or5Data {
+            wchar_t ch;                      // 0x0
+            u16 inputMode;                   // 0x2
+            bool unk_0x4;                    // 0x4
+            bool unk_0x5;                    // 0x5
+            u16 unk_0x6;                     // 0x6
+            const void* paneNameToCharCode;  // 0x8
+        };
 
         virtual void clearSender();
         virtual void onCommand(INPUT_COMMAND command, void* data);
@@ -75,10 +83,10 @@ namespace textinput {
         virtual void sendCommand(u32 command, void* data);
         virtual void updateFromReceiver(u32 command, void* data) {}
 
-        nw4r::ut::Link mLink;  // 0x00
+        nw4r::ut::Link mLink;  // 0x04
 
     private:
-        CommandReceiver* mpCommandReceiver;  // 0x08
+        CommandReceiver* mpCommandReceiver;  // 0x0C
     };
 }  // namespace textinput
 
