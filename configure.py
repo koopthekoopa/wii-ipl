@@ -918,7 +918,7 @@ config.libs = [
             Object(Equivalent,  "keyboard/tiString.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiAtokString.cpp", extra_cflags=["-O4,p"]),  # for 4.3J
             Object(Matching,    "keyboard/tiZiString.cpp", extra_cflags=["-O4,p"]),    # for 4.3U and 4.3E
-            Object(NonMatching, "keyboard/tiTextDrawer.cpp", extra_cflags=["-O4,p"]),
+            Object(Matching,    "keyboard/tiTextDrawer.cpp", extra_cflags=["-O4,p", "-enc UTF8"], shift_jis=False),
             Object(Matching,    "keyboard/tiNw4rManager.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiManager.cpp", extra_cflags=["-O4,p"]),
             Object(Matching,    "keyboard/tiUtil.cpp", extra_cflags=["-O4,p"]),

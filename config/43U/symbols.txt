@@ -5836,7 +5836,7 @@ doAfterDrawProcess__Q39textinput9inputform4BaseFPCwUlRCQ49textinput10textdrawer4
 finishDraw__Q39textinput9inputform4BaseFUl = .text:0x81427DC0; // type:function size:0x4
 addSender__Q29textinput15CommandReceiverFPQ29textinput13CommandSender = .text:0x81427DC4; // type:function size:0x8
 getDrawModifyStartLine__Q39textinput10textdrawer4BaseCFv = .text:0x81427DCC; // type:function size:0x8
-isEnableCursorCache__Q39textinput10textdrawer4BaseCFvgetStartPos__Q39textinput10textdrawer4BaseCFv = .text:0x81427DD4; // type:function size:0x8
+isEnableCursorCache__Q39textinput10textdrawer4BaseCFv = .text:0x81427DD4; // type:function size:0x8
 getStartPos__Q39textinput10textdrawer4BaseCFv = .text:0x81427DDC; // type:function size:0x8
 setVIWidth__Q39textinput10textdrawer4BaseFf = .text:0x81427DE4; // type:function size:0x8
 setCandidateBox__Q39textinput12candidatebox18CandidateBoxCallerFPQ39textinput12candidatebox4Base = .text:0x81427DEC; // type:function size:0x8
@@ -20695,7 +20695,7 @@ lbl_81694DF8 = .sdata2:0x81694DF8; // type:object size:0x4 align:4 data:float
 lbl_81694DFC = .sdata2:0x81694DFC; // type:object size:0x4 align:4 data:float
 lbl_81694E00 = .sdata2:0x81694E00; // type:object size:0x4 align:4 data:float
 lbl_81694E04 = .sdata2:0x81694E04; // type:object size:0x4 align:4 data:float
-lbl_81694E08 = .sdata2:0x81694E08; // type:object size:0x8 align:4 data:float
+lbl_81694E08 = .sdata2:0x81694E08; // type:object size:0x4 align:4 data:float
 @6510 = .sdata2:0x81694E10; // type:object size:0x4 scope:local align:4 data:float
 @6752 = .sdata2:0x81694E14; // type:object size:0x4 scope:local align:4 data:float
 @6771 = .sdata2:0x81694E18; // type:object size:0x4 scope:local align:4 data:float
