@@ -24,6 +24,10 @@ typedef struct _KPRQueue {
     u32 altVal;       // 0x14
 } KPRQueue;
 
+void KPRInitRegionUS();
+void KPRInitRegionEU();
+void KPRInitRegionJP();
+
 void KPRInitQueue(KPRQueue* queue);
 void KPRClearQueue(KPRQueue* queue);
 void KPRSetMode(KPRQueue* queue, KPRMode mode);

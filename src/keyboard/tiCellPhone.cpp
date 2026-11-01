@@ -236,7 +236,7 @@ namespace textinput {
                                     continue;
 
                                 wchar_t ch = csKeySetNumber.pPaneNameToCharCode[i].wc[0];
-                                CommandReceiver::Command3Or5Data cmdData = {ch, mInputMode, false, false, 0, mpHeldButtonData};
+                                CommandReceiver::Command3Or5Data cmdData = {ch, mInputMode, false, false, false, false, mpHeldButtonData};
 
                                 bool local_78[1];
                                 sendCommand(32, local_78);
@@ -245,7 +245,7 @@ namespace textinput {
                                         sendCommand(6, NULL);
                                     }
 
-                                    CommandReceiver::Command3Or5Data cmdData2 = {L' ', mInputMode, true, false, 0x100, mpHeldButtonData};
+                                    CommandReceiver::Command3Or5Data cmdData2 = {L' ', mInputMode, true, false, true, false, mpHeldButtonData};
                                     sendCommand(5, &cmdData2);
                                     mHeldButtonCharIdx = 0;
                                     mpHeldButtonData = NULL;
@@ -270,7 +270,7 @@ namespace textinput {
                             uVar6 = L'　';  // Ideographic space U+3000
                         }
 
-                        CommandReceiver::Command3Or5Data cmdData = {uVar6, INPUT_MODE_UNK_0, false, false, 0x100, mpHeldButtonData};
+                        CommandReceiver::Command3Or5Data cmdData = {uVar6, INPUT_MODE_UNK_0, false, false, true, false, mpHeldButtonData};
                         if (getInputType() == 1) {
                             cmdData.unk_0x4 = true;
                         }
@@ -380,8 +380,8 @@ namespace textinput {
             bool Base::isZiActive() {
                 CommandReceiver::ChangePredictMode local_8 = {};
                 sendCommand(31, &local_8);
-                if (local_8.bZiEnabled) {
-                    if (local_8.unk_0x0 != 1)
+                if (local_8.bPredictEnabled) {
+                    if (local_8.ePredictMode != 1)
                         return 1;
                     return 0;
                 } else {
@@ -389,10 +389,10 @@ namespace textinput {
                 }
             }
             bool Base::isAtokActive() {
-                textinput::CommandReceiver::ChangePredictMode local_8 = {};
+                CommandReceiver::ChangePredictMode local_8 = {};
                 sendCommand(31, &local_8);
 
-                if (!local_8.bZiEnabled || local_8.unk_0x0 == 1)
+                if (!local_8.bPredictEnabled || local_8.ePredictMode == 1)
                     return 1;
                 return 0;
             }
@@ -653,7 +653,7 @@ namespace textinput {
                 changeInputMode(mInputMode);
                 setLangKeyActive(true);
 
-                textinput::CommandReceiver::ChangePredictMode changePredictModeData = {};
+                CommandReceiver::ChangePredictMode changePredictModeData = {};
                 sendCommand(31, &changePredictModeData);
                 updatePredictLanguage(&changePredictModeData);
                 initPaneLastDrawReceived();
@@ -884,7 +884,7 @@ namespace textinput {
                 if (getLanguage() == JP)
                     return;
 
-                if (!changePredictMode->bZiEnabled) {
+                if (!changePredictMode->bPredictEnabled) {
                     setVisible("N_prdc_EU_ON", false);
                     setVisible("N_prdc_EU_OFF", true);
                     mbPrdcModeOn = false;
@@ -894,7 +894,7 @@ namespace textinput {
                     mbPrdcModeOn = true;
                 }
                 nw4r::lyt::TextBox* pic = (nw4r::lyt::TextBox*)getPane("N_prdc_EU_lang");
-                pic->SetString(csszPredictLanguage[changePredictMode->unk_0x0]);
+                pic->SetString(csszPredictLanguage[changePredictMode->ePredictMode]);
                 changeSpaceKeyTop(mpLangDepData->keySets[mInputMode]->pPaneNameToCharCode);
             }
 

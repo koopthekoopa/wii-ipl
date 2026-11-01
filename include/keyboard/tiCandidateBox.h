@@ -62,6 +62,8 @@ namespace textinput {
                 wchar_t szwcPredicted[40][64];  // 0x04
             };
 
+            CandidateBoxCaller() : mpCandidateBox(NULL) {}
+
             virtual void resetCandidate();
             virtual void addCandidate(const wchar_t* wcString);
             virtual void setCandidateBox(textinput::candidatebox::Base* candidateBox) { mpCandidateBox = candidateBox; }
@@ -90,7 +92,7 @@ namespace textinput {
             virtual void onClose() {}                                               // 0x40
             virtual void setOnOff(bool);                                            // 0x44
             virtual void setInvalid(bool invalid) { mbInvalid = invalid; }          // 0x48
-            virtual bool isInvalid() const;                                         // 0x4C
+            virtual bool isInvalid() const { return mbInvalid; }                    // 0x4C
             virtual void setLanguage(Language language) { meLanguage = language; }  // 0x50
 
             bool checkValidation();
@@ -307,7 +309,7 @@ namespace textinput {
             virtual void changeSelect(s32);                                                  // 0x0F8
             virtual void updateDisplay();                                                    // 0x0FC
             virtual u16 getScroll() { return mTextArea.GetDispOffset(); }                    // 0x100
-            virtual bool isInScroll();                                                       // 0x104
+            virtual bool isInScroll() { return mTextArea.IsScrolling(); }                    // 0x104
             virtual void setActive(bool active);                                             // 0x108
             virtual bool isActive() const;                                                   // 0x10C
             virtual void setSelectedTextPane(int pane) { mTextArea.SetSelectedText(pane); }  // 0x110
@@ -322,6 +324,8 @@ namespace textinput {
             void onPressedShift(bool shift);
             void onReleasedShift();
             void startTurnOn(bool);
+
+            UITextArea* getTextArea() { return &mTextArea; }
 
         private:
             void createAnmPane_(MEMAllocator* allocator);

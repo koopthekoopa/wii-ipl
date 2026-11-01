@@ -33,7 +33,7 @@ namespace textinput {
 
             virtual void setCandidate(wchar_t candidate) { mwcCandidate = candidate; }
             virtual wchar_t getCandidate() const { return mwcCandidate; }
-            virtual bool hasCandidate() const;
+            virtual bool hasCandidate() const { return mwcCandidate != L'\0'; }
 
             virtual wchar_t getLastWChar();
 
@@ -59,14 +59,13 @@ namespace textinput {
         class Decolated : public StringBase {
         public:
             enum TranslateMode {
-                TRANSLATE_MODE_UNINITIALIZED = 0,
-                TRANSLATE_MODE_ROMAJI_HIRAGANA = 1,
-                TRANSLATE_MODE_ROMAJI_KATAKANA = 2,
-                TRANSLATE_MODE_ROMAJI_KANAFIX = 3,
+                TM_NONE = 0,
+                TM_ROMAJI_HIRAGANA = 1,
+                TM_ROMAJI_KATAKANA = 2,
+                TM_ROMAJI_KANAFIX = 3,
             };
 
-            Decolated(u16 maxLen)
-                : StringBase(maxLen), mCursorStart(0), mCursorEnd(0), mbIsSustaining(0), mTranslateMode(TRANSLATE_MODE_UNINITIALIZED) {
+            Decolated(u16 maxLen) : StringBase(maxLen), mCursorStart(0), mCursorEnd(0), mbIsSustaining(0), mTranslateMode(TM_NONE) {
                 initKanaConverter();
             }
 
@@ -86,7 +85,7 @@ namespace textinput {
             virtual void inputChar(wchar_t ch);
             virtual void inputString(const wchar_t* string);
             void inputString(const wchar_t* string, TranslateMode translateMode);
-            virtual void deleteChar();
+            virtual void deleteChar() {}
             virtual void backSpace();
             virtual void confirm(const wchar_t* string);
             virtual bool moveCursorRight();
@@ -113,14 +112,15 @@ namespace textinput {
             virtual void initKanaConverter();
             virtual wchar_t* getKanaBuffer() { return mKanaStream.mBuf; }
             virtual bool isKanaFix() const {
-                if (mTranslateMode == TRANSLATE_MODE_ROMAJI_KANAFIX)
+                if (mTranslateMode == TM_ROMAJI_KANAFIX)
                     return true;
-                return KPRLookAhead(&mKanaStream.mQueue, NULL, 0);
+                return KPRLookAhead(&mKanaStream.mQueue, NULL, 0) == 0;
             }
             virtual void confirmKana();
             virtual void clearKana();
             virtual void EnableKSXFilter(bool) {}
 
+            TranslateMode getTranslateMode() const { return mTranslateMode; }
             void setTranslateMode(TranslateMode translateMode);
             void setLength(u16 newLen) override;
 
@@ -133,8 +133,6 @@ namespace textinput {
             TranslateMode mTranslateMode;  // 0x24
             KanaStream mKanaStream;        // 0x28
         };
-
-        class WithAtok : public StringBase {};
     }  // namespace tistring
 }  // namespace textinput
 

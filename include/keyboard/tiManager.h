@@ -116,6 +116,8 @@ namespace textinput {
             void                                        enableCompatibleFilter(bool compatibleFilter);
 
             bool                                        isVacancy() const;
+            void                                        startPredictTurnOn(bool);
+            bool                                        isPredictTurning() const;
 
         private:
             MEMAllocator*                           mpAllocator;                // 0x04

@@ -910,7 +910,7 @@ config.libs = [
     IPLSection("keyboard", [
             Object(NonMatching, "keyboard/tiPcKeyboard.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiCellPhone.cpp", extra_cflags=["-O4,p"]),
-            Object(NonMatching, "keyboard/tiInputForm.cpp", extra_cflags=["-O4,p"]),
+            Object(Equivalent,  "keyboard/tiInputForm.cpp", extra_cflags=["-O4,p", "-enc UTF8"], shift_jis=False),
             Object(NonMatching, "keyboard/tiCandidateBox.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiToolBar.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiPredictLang.cpp", extra_cflags=["-O4,p"]),

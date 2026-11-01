@@ -14,8 +14,13 @@ namespace textinput {
             // TODO
             class Base : public CommandSender {
             public:
+                // This appears to be used as textinput::tistring::Decolated::TranslateMode.
+                //
+                // Should those be unified?
                 enum TranslateMode {
-                    TM_00,
+                    TM_00 = 0,
+                    TM_01,
+                    TM_02,
                 };
 
                 enum InputType {
@@ -43,7 +48,7 @@ namespace textinput {
                 virtual void isCapsOn();
                 virtual bool isABC();
                 virtual void setABC(bool);
-                virtual void getABCInputMode();
+                virtual s32 getABCInputMode();
                 virtual void getAIUInputMode();
                 virtual TranslateMode getTranslateMode();
                 virtual void setTranslateMode(TranslateMode);
@@ -61,6 +66,10 @@ namespace textinput {
                 virtual void goSignInputMode();
                 virtual void changePredictLanguage();
                 virtual void updateFixMode();
+
+                u8 getUnkValue() { return unk_0x10[0x24]; }
+                u8 getUnkValue2() { return unk_0x10[0x2C]; }
+                u8 getUnkValue3() { return unk_0x10[0x2D]; }
 
             protected:
                 u8 unk_0x10[0x34];  // 0x10
@@ -86,6 +95,12 @@ namespace textinput {
 
                 void onPressedShift(bool shift);
                 void onReleasedShift();
+
+                bool getUnkValue4() { return unk_0xFC; }
+
+            protected:
+                u8 unk_0xF0[0xC];
+                bool unk_0xFC;  // 0xFC
             };
 
         }  // namespace pctype

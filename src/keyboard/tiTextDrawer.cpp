@@ -48,9 +48,9 @@ namespace textinput {
             unk_0x0F4 = a;
             unk_0x0F8 = b;
             unk_0x0FC = c;
-            unk_0x100 = d - unk_0x0F0;
+            unk_0x100 = d - mfScrollOffsetY;
             unk_0x0E8 = e;
-            unk_0x0EC = f - unk_0x0F0;
+            unk_0x0EC = f - mfScrollOffsetY;
             mbCursorCacheValid = true;
         }
 

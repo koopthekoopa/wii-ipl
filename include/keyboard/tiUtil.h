@@ -12,6 +12,8 @@ namespace textinput {
 
         wchar_t reverseLetterCaseW(wchar_t ch);
 
+        wchar_t HankakuToZenkaku(wchar_t ch);
+
         wchar_t KBD_ConvertDakuten(wchar_t ch);
         wchar_t KBD_ConvertHandaku(wchar_t ch);
         wchar_t KBD_ConvertSmall(wchar_t ch);
@@ -25,7 +27,7 @@ namespace textinput {
         void replaceChar(char* dest, u32 destLen, const char* src, int replaceIdx, char newCh);
         bool isAlphabet(wchar_t ch);
 
-        f32 hermiteInterporation(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+        f32 hermiteInterporation(f32 currVal, f32 startVal, f32 startPos, f32 startMomentum, f32 endVal, f32 endPos, f32 endMomentum);
 
         void getProjectionRect4x3(nw4r::ut::Rect* rect);
         void getProjectionRect16x9(nw4r::ut::Rect* rect);
@@ -33,8 +35,8 @@ namespace textinput {
         class AnimObserver {
         public:
             enum AnmEvent {
-                AE_0,
-                AE_1,
+                AE_Start,
+                AE_End,
                 // ...
                 AE_Last
             };
@@ -46,13 +48,37 @@ namespace textinput {
         public:
             Animation() : mfAnimationTime(0.0f), mbInAnimation(false), mbSE(false), mpAnimObserver(NULL) {}
 
-            virtual void startAnm(AnimObserver*, f32, f32, f32, void*);  // 0x08
-            virtual void calc();                                         // 0x0C
-            virtual f32 getValue();                                      // 0x10
-            virtual bool isActive();                                     // 0x14
-            virtual void setSEFlag(bool);                                // 0x18
-            virtual bool isSEFlag();                                     // 0x1C
-            virtual void stop();                                         // 0x20
+            virtual void startAnm(f32 startPoint, f32 endPoint, f32 animTime, AnimObserver* observer, void* data) {
+                mfStartPoint = startPoint;
+                mfEndPoint = endPoint;
+                mfAnimationTime = animTime;
+                mfCurrentFrame = 0.0f;
+                mbInAnimation = true;
+                mpAnimObserver = observer;
+                mpData = data;
+                mbSE = false;
+
+                if (observer)
+                    observer->onAnmEvent(AnimObserver::AE_Start, data);
+            }  // 0x08
+            virtual void calc() {
+                if (!mbInAnimation)
+                    return;
+
+                if (mfCurrentFrame < mfAnimationTime) {
+                    mfCurrentFrame = mfCurrentFrame + 1.0f;
+                } else {
+                    if (mbInAnimation && mpAnimObserver != NULL) {
+                        mpAnimObserver->onAnmEvent(AnimObserver::AE_End, mpData);
+                    }
+                    mbInAnimation = false;
+                }
+            }  // 0x0C
+            virtual f32 getValue() { return hermiteInterporation(mfCurrentFrame, 0, mfStartPoint, 0, mfAnimationTime, mfEndPoint, 0); }  // 0x10
+            virtual bool isActive() { return mbInAnimation; }                                                                            // 0x14
+            virtual void setSEFlag(bool flag) { mbSE = flag; }                                                                           // 0x18
+            virtual bool isSEFlag() { return mbSE; }                                                                                     // 0x1C
+            virtual void stop() { mbInAnimation = false; }                                                                               // 0x20
 
         private:
             f32 mfStartPoint;              // 0x04

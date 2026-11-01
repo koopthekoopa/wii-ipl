@@ -130,7 +130,7 @@ namespace textinput {
             string[2] = L'\0';
             string[1] = L'\0';
             string[0] = L'\0';
-            if (mTranslateMode == TRANSLATE_MODE_ROMAJI_HIRAGANA || mTranslateMode == TRANSLATE_MODE_ROMAJI_KATAKANA) {
+            if (mTranslateMode == TM_ROMAJI_HIRAGANA || mTranslateMode == TM_ROMAJI_KATAKANA) {
                 mKanaStream.mBuf[4] = L'\0';
                 mKanaStream.mBuf[3] = L'\0';
                 mKanaStream.mBuf[2] = L'\0';
@@ -147,7 +147,7 @@ namespace textinput {
                 }
                 KPRLookAhead(&mKanaStream.mQueue, mKanaStream.mBuf, 5);
                 return len;
-            } else if (mTranslateMode == TRANSLATE_MODE_ROMAJI_KANAFIX) {
+            } else if (mTranslateMode == TM_ROMAJI_KANAFIX) {
                 // TODO: MWCC optimizer gave up or something here
                 len = 0;
                 string[len] = L'\0';
@@ -209,17 +209,17 @@ namespace textinput {
 
             oldTranslateMode = mTranslateMode;
             if (oldTranslateMode != translateMode) {
-                if (!isKanaFix() && translateMode == TRANSLATE_MODE_UNINITIALIZED) {
+                if (!isKanaFix() && translateMode == TM_NONE) {
                     confirmKana();
                 }
 
                 mTranslateMode = translateMode;
                 switch (mTranslateMode) {
-                    case TRANSLATE_MODE_ROMAJI_HIRAGANA:
+                    case TM_ROMAJI_HIRAGANA:
                         mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_HIRAGANA;
                         break;
 
-                    case TRANSLATE_MODE_ROMAJI_KATAKANA:
+                    case TM_ROMAJI_KATAKANA:
                         mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_KATAKANA;
                         break;
 
@@ -229,17 +229,17 @@ namespace textinput {
             }
             inputString(string);
             if (mTranslateMode != oldTranslateMode) {
-                if (!isKanaFix() && oldTranslateMode == TRANSLATE_MODE_UNINITIALIZED) {
+                if (!isKanaFix() && oldTranslateMode == TM_NONE) {
                     confirmKana();
                 }
 
                 mTranslateMode = oldTranslateMode;
                 switch (mTranslateMode) {
-                    case TRANSLATE_MODE_ROMAJI_HIRAGANA:
+                    case TM_ROMAJI_HIRAGANA:
                         mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_HIRAGANA;
                         break;
 
-                    case TRANSLATE_MODE_ROMAJI_KATAKANA:
+                    case TM_ROMAJI_KATAKANA:
                         mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_KATAKANA;
                         break;
 
@@ -250,7 +250,7 @@ namespace textinput {
         }
 
         void Decolated::backSpace() {
-            if (mTranslateMode == TRANSLATE_MODE_ROMAJI_HIRAGANA || mTranslateMode == TRANSLATE_MODE_ROMAJI_KATAKANA) {
+            if (mTranslateMode == TM_ROMAJI_HIRAGANA || mTranslateMode == TM_ROMAJI_KATAKANA) {
                 if (KPRLookAhead(&mKanaStream.mQueue, NULL, 0) != 0) {
                     mKanaStream.mQueue.iCount--;
 
@@ -433,17 +433,17 @@ namespace textinput {
             if (mTranslateMode == translateMode)
                 return;
 
-            if (!isKanaFix() && translateMode == TRANSLATE_MODE_UNINITIALIZED) {
+            if (!isKanaFix() && translateMode == TM_NONE) {
                 confirmKana();
             }
 
             mTranslateMode = translateMode;
             switch (translateMode) {
-                case TRANSLATE_MODE_ROMAJI_HIRAGANA:
+                case TM_ROMAJI_HIRAGANA:
                     mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_HIRAGANA;
                     break;
 
-                case TRANSLATE_MODE_ROMAJI_KATAKANA:
+                case TM_ROMAJI_KATAKANA:
                     mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_KATAKANA;
                     break;
 
@@ -457,11 +457,11 @@ namespace textinput {
             KPRSetMode(&(this->mKanaStream).mQueue, KPR_MODE_NONE);
             mKanaStream.mBuf[0] = L'\0';
             switch (mTranslateMode) {
-                case TRANSLATE_MODE_ROMAJI_HIRAGANA:
+                case TM_ROMAJI_HIRAGANA:
                     mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_HIRAGANA;
                     break;
 
-                case TRANSLATE_MODE_ROMAJI_KATAKANA:
+                case TM_ROMAJI_KATAKANA:
                     mKanaStream.mQueue.mode = KPR_MODE_JP_ROMAJI_KATAKANA;
                     break;
 

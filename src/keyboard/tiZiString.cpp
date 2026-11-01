@@ -213,7 +213,7 @@ namespace textinput {
             return CandidatedWord[mSelectedCandidate];
         }
 
-        u32 WithZi::getCurrentInput(wchar_t* out, u32 outLen) {
+        s32 WithZi::getCurrentInput(wchar_t* out, u32 outLen) {
             wchar_t* candCurr;
             wchar_t* outCurr;
             u32 len, i;
@@ -436,7 +436,7 @@ namespace textinput {
                     }
                     currCand++;
                     CandidatedWord[i][j] = L'\0';
-                } else if (mPredictLang == PREDICT_LANG_KO_2) {
+                } else if (mPredictLang == PREDICT_LANG_KO_SYLL) {
                     CandidatedWord[i][0] = *currCand++;
                     CandidatedWord[i][1] = L'\0';
                 } else if (getPredictLanguage() == ZI8_LANG_KO) {
@@ -563,9 +563,9 @@ namespace textinput {
                     return ZI8_LANG_NL;
                 case PREDICT_LANG_ZH:
                     return ZI8_LANG_ZH;
-                case PREDICT_LANG_KO:
+                case PREDICT_LANG_KO_ROMA:
                     return ZI8_LANG_KO;
-                case PREDICT_LANG_KO_2:
+                case PREDICT_LANG_KO_SYLL:
                     return ZI8_LANG_KO;
                 default:
                     return ZI8_LANG_ENAM;

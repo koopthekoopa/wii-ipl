@@ -8,7 +8,7 @@
 
 namespace textinput {
     namespace tistring {
-        class WithZi : Decolated {
+        class WithZi : public Decolated {
         public:
             enum LetterMode {
                 LETTER_MODE_TITLE = 0,
@@ -18,25 +18,31 @@ namespace textinput {
             };
             enum PredictLanguage {
                 PREDICT_LANG_ENAM = 0,
-                PREDICT_LANG_FRCA = 1,
-                PREDICT_LANG_ESSA = 2,
-                PREDICT_LANG_ENUK = 3,
-                PREDICT_LANG_DE = 4,
-                PREDICT_LANG_FREU = 5,
-                PREDICT_LANG_ESEU = 6,
-                PREDICT_LANG_IT = 7,
-                PREDICT_LANG_NL = 8,
-                PREDICT_LANG_ZH = 9,
-                PREDICT_LANG_KO = 10,
-                PREDICT_LANG_KO_2 = 11,
+                PREDICT_LANG_FRCA,
+                PREDICT_LANG_ESSA,
+                PREDICT_LANG_ENUK,
+                PREDICT_LANG_DE,
+                PREDICT_LANG_FREU,
+                PREDICT_LANG_ESEU,
+                PREDICT_LANG_IT,
+                PREDICT_LANG_NL,
+                PREDICT_LANG_ZH,
+                PREDICT_LANG_KO_ROMA,  // Romaji
+                PREDICT_LANG_KO_SYLL,  // Syllabary (Katakana/Hiragana)
             };
+
+            WithZi(u16 maxLen)
+                : Decolated(maxLen), mbDictOpen(false), unk_0x79(false), mWordExtensionLen(0), mpOemDictData(NULL), mpEztxWork(NULL),
+                  mInputStringLen(0), mCurrNumPredicted(0), mOemDictAttached(FALSE), mCurrDictLang(0xFF), mSelectedCandidate(0),
+                  mPredictLang(PREDICT_LANG_ENAM), mLetterMode(LETTER_MODE_UPPER), mCellPhoneHoldingkey(NULL), unk_0xA8(0) {}
+
             virtual ~WithZi();
 
             void create(MEMAllocator* alloc) override;
 
             virtual void init();                                                             // 0x00
             virtual void setInputting(wchar_t ch);                                           // 0x04
-            virtual u32 getCurrentNumPredicted();                                            // 0x08
+            virtual s32 getCurrentNumPredicted() { return mCurrNumPredicted; }               // 0x08
             virtual void getPredicted(int idx, wchar_t* out);                                // 0x0C
             virtual wchar_t* getCurrentSelected();                                           // 0x10
             virtual u16 getInputStringLength() { return mInputStringLen; }                   // 0x14
@@ -62,7 +68,7 @@ namespace textinput {
 
             void clearCandidates();
             void update();
-            u32 getCurrentInput(wchar_t* out, u32 outLen);
+            s32 getCurrentInput(wchar_t* out, u32 outLen);
             const wchar_t* getCurrentInput();
             void partialConfirmForKR();
 
@@ -71,6 +77,8 @@ namespace textinput {
             s32 complementsCandidates_(s32);
 
             void setCurrentWord(const wchar_t* word);
+
+            s32 getSelectedCandidate() const { return mSelectedCandidate; }
 
         private:
             typedef struct {

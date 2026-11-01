@@ -151,7 +151,7 @@ namespace textinput {
                     } else {
                         wchar_t enteredCharCode = getWCharCode(mpLangDepData->paneNameToCharCode, (char*)data, mPageIdx);
                         if (enteredCharCode != L'\0') {
-                            CommandReceiver::Command3Or5Data cmdData = {enteredCharCode, 3, mbOpenFlag, false, 0, NULL};
+                            CommandReceiver::Command3Or5Data cmdData = {enteredCharCode, 3, mbOpenFlag, false, false, false, NULL};
 
                             if (mpMgr->getInputForm()->isAtokActive()) {
                                 cmdData.unk_0x4 = 1;

@@ -172,6 +172,8 @@ namespace textinput {
                 void onReleasedShift();
                 void resetHoldingButton();
 
+                bool isLineFeedEnabled() const { return mbLineFeedButtonEnabled; }
+
             private:
                 void setKeysetTextboxes();
 

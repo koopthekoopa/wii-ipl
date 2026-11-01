@@ -236,31 +236,28 @@ namespace textinput {
             return ch;
         }
 
-        f32 hermiteInterporation(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
-            f32 var_f26;
-            f32 var_f25;
-            f32 var_f27;
-            f32 var_f28;
-            f32 var_f29;
-            f32 var_f30;
+        // Seemingly hand-optimized floating point math.
+        //
+        // See https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Interpolation_on_an_arbitrary_interval
+        // for more information on the exact algorithm
+        f32 hermiteInterporation(f32 currVal, f32 startVal, f32 startPos, f32 startMomentum, f32 endVal, f32 endPos, f32 endMomentum) {
+            const f32 valOffset = currVal - startVal;
+            const f32 valLength = endVal - startVal;
+            const f32 posOffset = startPos - endPos;
 
-            f32 result;
+            const f32 t = valOffset / valLength;
+            const f32 tSq = t * t;
 
-            var_f26 = arg0 - arg1;
-            var_f29 = arg4 - arg1;
-            var_f30 = var_f26 / var_f29;
-            var_f25 = var_f30 * var_f30;
-            result = var_f30 + var_f30;
-            var_f28 = var_f25 - var_f30;
-            var_f29 = arg2 - arg5;
-            var_f27 = (result * var_f28) - var_f25;
-            result = arg3 + (arg3 * var_f28);
-            var_f27 = arg2 + (var_f27 * var_f29);
-            result += arg6 * var_f28;
-            result = (var_f30 * arg3) - result;
-            result = var_f27 - (var_f26 * result);
+            // h00(t) * p0 + h01(t) * p1
+            const f32 end_pos_weight = (t + t) * (tSq - t) - tSq;
+            const f32 pos_part = startPos + end_pos_weight * posOffset;
 
-            return result;
+            // -h10(t) * valLength * m0 + -h11(t) * valLength * m1
+            const f32 unscaled_momentums = startMomentum + (tSq - t) * startMomentum + (tSq - t) * endMomentum;
+            const f32 momentum_part = valOffset * (t * startMomentum - unscaled_momentums);
+
+            // h00(t) * p0 + h10(t) * valLength * m0 + h01(t) * p1 + h11(t) * valLength * m1
+            return pos_part - momentum_part;
         }
 
         void getProjectionRect4x3(nw4r::ut::Rect* rect) {

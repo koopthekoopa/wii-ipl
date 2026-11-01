@@ -7,9 +7,11 @@
 #include <nw4r/ut/CharWriter.h>
 #include <nw4r/ut/Rect.h>
 
+#include <cstring>
+
 namespace textinput {
     namespace textdrawer {
-        class Base : nw4r::ut::CharWriter {
+        class Base : public nw4r::ut::CharWriter {
         public:
             struct ViewPort {
                 f32 xOrig;  // 0x00
@@ -21,6 +23,9 @@ namespace textinput {
             };
 
             struct CursorPos {
+            public:
+                CursorPos() : uCursorPos(0), fCursorX(0.0f), fCursorY(0.0f) {}
+
                 u32 uCursorPos;  // 0x00
                 f32 fCursorX;    // 0x04
                 f32 fCursorY;    // 0x08
@@ -30,6 +35,15 @@ namespace textinput {
                 nw4r::ut::Rect rect;  // 0x00
                 wchar_t ch;           // 0x10
             };
+
+            Base()
+                : mpDrawString(NULL), mProjectionRect(), mfViWidth(640.0), mbAspect4x3(false), unk_0x09D(0), mLine(0), mLineLeading(0.0),
+                  mTracking(0.0), mFontW(0.0), mFontH(0.0), mCursorX(0.0), mCursorOffsetY(0.0), mStartPos(0), mEndPos(0xffff), mbSecretMode(false),
+                  mDrawModifyStartLine(0), mDrawModifyEndLine(0), mDrawCacheStartLine(0), mDrawCacheEndLine(0), mDrawCacheStartPos(0),
+                  __unused_0x0E0(0), mbDrawCacheValid(false), unk_0x0E8(0.0), unk_0x0EC(0.0), mfScrollOffsetY(0.0), unk_0x0F4(0),
+                  mbCursorCacheValid(false), unk_0x105('\x01') {
+                memset(&unk_0x0F8, 0, 0xc);
+            }
 
             virtual void create(MEMAllocator* allocator);  // 0x08
             virtual void draw(CursorPos* cursorPos);       // 0x0C
@@ -83,6 +97,22 @@ namespace textinput {
             virtual void dirtyDrawCache() { mbDrawCacheValid = false; }                                              // 0x90
             virtual void dirtyCursorCache() { mbCursorCacheValid = false; }                                          // 0x94
 
+            void setScrollOffsetY(f32 newScrollOffsetY) { mfScrollOffsetY = newScrollOffsetY; }
+            f32 getScrollOffsetY() { return mfScrollOffsetY; }
+
+            f32 getCursorOffsetY() const { return mCursorOffsetY; }
+
+            f32 getLineLeading() { return mLineLeading; }
+            void setLineLeading(f32 leading) { mLineLeading = leading; }
+
+            f32 getLetterTracking() { return mTracking; }
+            void setLetterTracking(f32 tracking) { mTracking = tracking; }
+
+            void setFontW(f32 fontW) { mFontW = fontW; }
+            void setFontH(f32 fontH) { mFontH = fontH; }
+
+            const nw4r::ut::Rect& getProjectionRect() { return mProjectionRect; }
+
         private:
             f32 getViewportXOrig(const nw4r::ut::Rect&) const;
             f32 getViewportYOrig(const nw4r::ut::Rect&) const;
@@ -95,6 +125,7 @@ namespace textinput {
             nw4r::ut::Rect mProjectionRect;  // 0x088
             f32 mfViWidth;                   // 0x098
             bool mbAspect4x3;                // 0x09C
+            bool unk_0x09D;                  // 0x09D
             u32 mLine;                       // 0x0A0
             f32 mLineLeading;                // 0x0A4
             f32 mTracking;                   // 0x0A8
@@ -102,7 +133,7 @@ namespace textinput {
             f32 mFontH;                      // 0x0B0
             f32 mCursorX;                    // 0x0B4
             f32 mCursorOffsetY;              // 0x0B8
-            u32 mStartPos;                   // 0x0Bc
+            u32 mStartPos;                   // 0x0BC
             u32 mEndPos;                     // 0x0C0
             u32 mCurrPos;                    // 0x0C4
             bool mbSecretMode;               // 0x0C8
@@ -115,12 +146,13 @@ namespace textinput {
             bool mbDrawCacheValid;           // 0x0E4
             f32 unk_0x0E8;                   // 0x0E8
             f32 unk_0x0EC;                   // 0x0EC
-            f32 unk_0x0F0;                   // 0x0F0
+            f32 mfScrollOffsetY;             // 0x0F0
             s32 unk_0x0F4;                   // 0x0F4
             u32 unk_0x0F8;                   // 0x0F8
             f32 unk_0x0FC;                   // 0x0FC
             f32 unk_0x100;                   // 0x100
             bool mbCursorCacheValid;         // 0x104
+            u8 unk_0x105;                    // 0x105
         };
     }  // namespace textdrawer
 }  // namespace textinput

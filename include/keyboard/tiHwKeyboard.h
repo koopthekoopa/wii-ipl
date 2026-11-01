@@ -16,7 +16,11 @@ namespace textinput {
                     virtual void    init();
 
                     virtual bool    updateInput(input::HKBManager& hkbManager);
-                        
+
+                    void setBytes() {
+                        field_0x15 = 0;
+                        field_0x16 = 0;
+                    }
                 private:
                     void            updateShift(input::HKBManager& hkbManager);
                     void controlKeyTriggeredHandler(input::HKBManager);
@@ -28,8 +32,6 @@ namespace textinput {
                     u8          field_0x15; // 0x15
                     u8          field_0x16; // 0x16
             };
-
-            
         }
     }
 }

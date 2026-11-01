@@ -346,10 +346,10 @@ namespace textinput {
                     }
                     break;
                 case CN:
-                    setPredictMode(inputform::Base::PM_11);
+                    setPredictMode(inputform::Base::PM_Cn);
                     break;
                 case KR:
-                    setPredictMode(inputform::Base::PM_12);
+                    setPredictMode(inputform::Base::PM_Kr);
                     break;
             }
         }
