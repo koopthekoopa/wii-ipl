@@ -80,15 +80,6 @@ KBDAttachCB kbdDevAttachCallback = NULL;
 KBDDetachCB kbdDevDetachCallback = NULL;
 KBDKeyCB kbdKeyCallback = NULL;
 
-enum {
-    KBD_KEYSTATE_IS_DOWN = 1 << 0,
-    KBD_KEYSTATE_IS_REPEAT = 1 << 1,
-
-    KBD_KEYSTATE_RELEASE = 0,
-    KBD_KEYSTATE_TRIGGER = KBD_KEYSTATE_IS_DOWN,
-    KBD_KEYSTATE_REPEAT = KBD_KEYSTATE_IS_DOWN | KBD_KEYSTATE_IS_REPEAT,
-};
-
 KBDKeyMap* kbdGetKeyMap(u32 country) {
     return &kbdKeyMaps[country];
 }

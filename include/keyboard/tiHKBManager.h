@@ -93,7 +93,7 @@ namespace textinput {
                 u8 mKeysNext[8];       // 0x41
                 u32 mRepeatDelays[8];  // 0x4C
 
-                void NotifyEvent(u8 flag, u8 key);
+                void NotifyEvent(u8 keyState, u8 key);
                 void Update();
 
                 void Clear();
@@ -120,17 +120,17 @@ namespace textinput {
             };
 
             wchar_t FilterAllowList_(wchar_t key) const;
-            void DoSetLedsAsyncCallback(u8 bitI);
+            void DoSetLedsAsyncCallback(u8 devIdx);
             void DetachState(u8 devIdx);
 
-            bool mbInitialized;            // 0x00
-            bool mStateAttachedFlags[2];   // 0x01
-            u32 mModifierState;            // 0x04
-            volatile u32 mEnabledLEDBits;  // 0x08
-            wchar_t* mpCharsWhitelist;     // 0x0C
-            u32 mCharsWhitelistLen;        // 0x10
-            KeyState_ mKeyStates[2];       // 0x14
-            KBDListenerOwn mListener;      // 0xEC
+            bool mbInitialized;             // 0x00
+            bool mStateAttachedFlags[2];    // 0x01
+            u32 mModifierState;             // 0x04
+            volatile u32 mUnsyncedLEDBits;  // 0x08
+            wchar_t* mpCharsWhitelist;      // 0x0C
+            u32 mCharsWhitelistLen;         // 0x10
+            KeyState_ mKeyStates[2];        // 0x14
+            KBDListenerOwn mListener;       // 0xEC
 
             static HKBManager sInstance;
             static void SetLedCB(KBDEc ec, void* data);

@@ -11,27 +11,24 @@ namespace textinput {
 
         typedef union {
             struct {
-                u8 unk_0x0;
-                u8 unk_0x1;
-                u8 unk_0x2;
-                u8 unk_0x3;
+                u8 devIdx;
                 u32 unk_0x4;
             };
             void* asVoid;
         } SetLedsAsyncData;
 
-        void HKBManager::DoSetLedsAsyncCallback(u8 bitIdx) {
+        void HKBManager::DoSetLedsAsyncCallback(u8 devIdx) {
             SetLedsAsyncData cmdData;
-            cmdData.unk_0x0 = bitIdx;
+            cmdData.devIdx = devIdx;
             cmdData.unk_0x4 = 0;
 
             BOOL level = OSDisableInterrupts();
-            mEnabledLEDBits &= ~(1 << bitIdx);
+            mUnsyncedLEDBits &= ~(1 << devIdx);
             OSRestoreInterrupts(level);
 
-            if (KBDSetLedsAsync(bitIdx, 0, SetLedCB, cmdData.asVoid) == KBD_EC_SET_LED) {
+            if (KBDSetLedsAsync(devIdx, 0, SetLedCB, cmdData.asVoid) == KBD_EC_SET_LED) {
                 BOOL level = OSDisableInterrupts();
-                mEnabledLEDBits |= (1 << bitIdx);
+                mUnsyncedLEDBits |= (1 << devIdx);
                 OSRestoreInterrupts(level);
             }
         }
@@ -42,7 +39,7 @@ namespace textinput {
 
             SetLedsAsyncData setLedsAsyncData;
             setLedsAsyncData.asVoid = data;
-            getInstance().DoSetLedsAsyncCallback(setLedsAsyncData.unk_0x0);
+            getInstance().DoSetLedsAsyncCallback(setLedsAsyncData.devIdx);
         }
 
         void HKBManager::KBDListenerOwn::OnAttach(KBDDevEvent* event) {
@@ -68,10 +65,10 @@ namespace textinput {
         void HKBManager::KBDListenerOwn::OnKeyEvent(KBDKeyEvent* event) {
             if (event->devIdx >= 2)
                 return;
-            if ((event->flags & 2) != 0)
+            if (event->flags & KBD_KEYSTATE_IS_REPEAT)
                 return;
 
-            mpManager->mKeyStates[event->devIdx].NotifyEvent(event->flags & 1, event->keyCode);
+            mpManager->mKeyStates[event->devIdx].NotifyEvent(event->flags & KBD_KEYSTATE_IS_DOWN, event->keyCode);
         }
 
         void HKBManager::AttachCB(KBDDevEvent* event) {
@@ -115,13 +112,13 @@ namespace textinput {
             mbLedsUnset = false;
         }
 
-        HKBManager::HKBManager() : mbInitialized(false), mModifierState(0), mEnabledLEDBits(0), mpCharsWhitelist(NULL), mCharsWhitelistLen(0) {
+        HKBManager::HKBManager() : mbInitialized(false), mModifierState(0), mUnsyncedLEDBits(0), mpCharsWhitelist(NULL), mCharsWhitelistLen(0) {
             mListener.mpManager = this;
             for (u8 i = 0; i < 2; i++) {
                 mStateAttachedFlags[i] = false;
                 mKeyStates[i].Clear();
                 mKeyStates[i].mDevIdx = i;
-                mKeyStates[i].mCountry = 15;
+                mKeyStates[i].mCountry = KBD_CC_JAPAN;
                 mKeyStates[i].mModifierState = 0;
             }
         }
@@ -240,7 +237,7 @@ namespace textinput {
                 return;
 
             for (u8 bitI = 2; bitI < 4; bitI++) {
-                if ((mEnabledLEDBits & (1 << bitI)) != 0) {
+                if ((mUnsyncedLEDBits & (1 << bitI)) != 0) {
                     DoSetLedsAsyncCallback(bitI);
                 }
             }
@@ -260,10 +257,10 @@ namespace textinput {
             return KeySet(this, HKBManager::KeySet::KEY_PHASE_REPEATED).GetNext();
         }
 
-        void HKBManager::KeyState_::NotifyEvent(u8 flag, u8 key) {
+        void HKBManager::KeyState_::NotifyEvent(u8 keyState, u8 key) {
             int i;
             int freeIdx = -1;
-            if (flag == 1) {
+            if (keyState == KBD_KEYSTATE_IS_DOWN) {
                 for (i = 0; i < 8; i++) {
                     if ((mPressedMaskNext & (1 << i)) != 0) {
                         if (key == mKeysNext[i]) {

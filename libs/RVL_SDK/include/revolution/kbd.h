@@ -96,6 +96,15 @@ typedef enum _KBDEc {
     KBD_EC_SET_LED = 7,
 } KBDEc;
 
+enum {
+    KBD_KEYSTATE_IS_DOWN = 1 << 0,
+    KBD_KEYSTATE_IS_REPEAT = 1 << 1,
+
+    KBD_KEYSTATE_RELEASE = 0,
+    KBD_KEYSTATE_TRIGGER = KBD_KEYSTATE_IS_DOWN,
+    KBD_KEYSTATE_REPEAT = KBD_KEYSTATE_IS_DOWN | KBD_KEYSTATE_IS_REPEAT,
+};
+
 typedef struct _KBDKeyEvent {
     u8 devIdx;          // 0x0
     u8 keyCode;         // 0x1
