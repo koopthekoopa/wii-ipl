@@ -320,7 +320,7 @@ namespace textinput {
 
             enableSpaceByRight(true);
 
-            mpManager->getHWKeyboard()->setBytes();
+            mpManager->getHWKeyboard()->resetQuotes();
             mpUnfixString->resetRelation();
 
             updateCandidateState_();
@@ -650,7 +650,7 @@ namespace textinput {
                     }
 
                     if (currString == mpString) {
-                        mpManager->getHWKeyboard()->setBytes();
+                        mpManager->getHWKeyboard()->resetQuotes();
 
                         mpUnfixString->resetRelation();
                         updateCandidateState_();
@@ -720,7 +720,7 @@ namespace textinput {
                                 }
                             }
                         }
-                        mpManager->getHWKeyboard()->setBytes();
+                        mpManager->getHWKeyboard()->resetQuotes();
 
                         mpUnfixString->resetRelation();
                         updateCandidateState_();
@@ -864,7 +864,7 @@ namespace textinput {
 
                         onCommand(INPUT_COMMAND_12, NULL);
 
-                        mpManager->getHWKeyboard()->setBytes();
+                        mpManager->getHWKeyboard()->resetQuotes();
                         mpUnfixString->resetRelation();
                         updateCandidateState_();
                     } else {
@@ -1041,7 +1041,7 @@ namespace textinput {
                                     mpUnfixString->enableConfirmedString(false);
                                 }
                             } else {
-                                mpManager->getHWKeyboard()->setBytes();
+                                mpManager->getHWKeyboard()->resetQuotes();
                                 mpUnfixString->resetRelation();
                                 updateCandidateState_();
                             }
@@ -2337,7 +2337,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
                 updateCandidateState_();
                 if (mpUnfixString->getCandidate() != L' ') {
@@ -2387,7 +2387,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
                 updateCandidateState_();
                 if (mpUnfixString->getCandidate() != L' ') {
@@ -2416,7 +2416,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
 
                 updateCandidateState_();
@@ -2454,7 +2454,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
 
                 updateCandidateState_();
@@ -2485,7 +2485,7 @@ namespace textinput {
             const u32 modifierState = input::HKBManager::getInstance().GetModifierState();
 
             if (currString == mpString) {
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
                 updateCandidateState_();
 
@@ -2561,7 +2561,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
 
                 updateCandidateState_();
@@ -2641,7 +2641,7 @@ namespace textinput {
                 if (currString->hasCandidate() || !currString->isKanaFix())
                     return;
 
-                mpManager->getHWKeyboard()->setBytes();
+                mpManager->getHWKeyboard()->resetQuotes();
                 mpUnfixString->resetRelation();
 
                 updateCandidateState_();
@@ -2967,7 +2967,7 @@ namespace textinput {
         }
 
         void Base::resetRelation() {
-            mpManager->getHWKeyboard()->setBytes();
+            mpManager->getHWKeyboard()->resetQuotes();
             mpUnfixString->resetRelation();
         }
 

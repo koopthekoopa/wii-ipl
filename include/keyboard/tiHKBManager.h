@@ -27,6 +27,8 @@ namespace textinput {
 
             class KeySet {
             public:
+                KeySet() : mKeyPhase(KEY_PHASE_ACTIVE), mBufIdx(-1), mDevIdx(0), mResolvedVCode(0), mpManager(NULL) {}
+
                 enum {
                     KEY_PHASE_ACTIVE = 0,
                     KEY_PHASE_TRIGGERED = 1,

@@ -88,8 +88,8 @@ namespace textinput {
             virtual keyboard::cellphonetype::LayoutByNW4R*       getCellPhoneKeyboard()                  { return mpCellPhoneKeyboard; }
             virtual const keyboard::cellphonetype::LayoutByNW4R* getCellPhoneKeyboard() const            { return mpCellPhoneKeyboard; }
             
-            virtual void*                               getSignKeyboard()                       { return mpSignWindow; }
-            virtual const void*                         getSignKeyboard() const                 { return mpSignWindow; }
+            virtual keyboard::signwindow::LayoutByNW4R* getSignKeyboard()                       { return mpSignWindow; }
+            virtual const keyboard::signwindow::LayoutByNW4R* getSignKeyboard() const           { return mpSignWindow; }
             
             virtual candidatebox::LayoutByNW4R*         getCandidateBox()                       { return mpCandidateBox; }
             virtual const candidatebox::LayoutByNW4R*   getCandidateBox() const                 { return mpCandidateBox; }
@@ -118,6 +118,7 @@ namespace textinput {
             bool                                        isVacancy() const;
             void                                        startPredictTurnOn(bool);
             bool                                        isPredictTurning() const;
+            void                                        onSE(sound::SE id)                      { if (mpEventObserver != NULL) mpEventObserver->onSE(id); }
 
         private:
             MEMAllocator*                           mpAllocator;                // 0x04
@@ -132,7 +133,7 @@ namespace textinput {
             candidatebox::LayoutByNW4R*             mpCandidateBox;             // 0x20
             toolbar::LayoutByNW4R*                  mpToolBar;                  // 0x24
             void*                                   mpPredictLanguageDialog;    // 0x28
-            void*                                   mpSignWindow;               // 0x2C
+            keyboard::signwindow::LayoutByNW4R*     mpSignWindow;               // 0x2C
 
             EventObserver*                          mpEventObserver;            // 0x30
 

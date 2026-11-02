@@ -1106,7 +1106,7 @@ src/keyboard/MyTiInputForm.cpp:
 
 src/keyboard/MyTiLetterForm.cpp:
 	.text       start:0x81444730 end:0x814454D8
-	.rodata     start:0x816168B8 end:0x81616B88
+	.rodata     start:0x816168B8 end:0x81616BC8
 	.data       start:0x81668860 end:0x81668CD8
 	.sdata2     start:0x81694EB0 end:0x81694ED0
 	.sdata      start:0x81697528 end:0x81697570
@@ -1133,7 +1133,7 @@ src/keyboard/tiHKBManager.cpp:
 src/keyboard/tiHwKeyboard.cpp:
 	.bss        start:0x810C8940 end:0x810C8950
 	.text       start:0x81448AA4 end:0x81449C98
-	.rodata     start:0x81616B88 end:0x81616C78
+	.rodata     start:0x81616BC8 end:0x81616C78
 	.data       start:0x81668EF8 end:0x81669018
 	.sdata2     start:0x81694EF8 end:0x81694F08
 	.sdata      start:0x81697570 end:0x81697578

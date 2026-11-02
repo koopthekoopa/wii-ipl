@@ -31,6 +31,17 @@ namespace textinput {
                     IT_04,
                 };
 
+                // I don't believe this is the right size, it's just
+                // here to generate symbols
+                class KeyState {
+                    public:
+                        void andABCFlag(u32 value) { setABCFlag(unk_0x0 & value); }
+                        void setABCFlag(u32);
+                    private:
+                        u32 unk_0x0; // 0x0
+
+                };
+
                 virtual ~Base();
                 virtual void create(MEMAllocator* allocator);
                 virtual void init();
@@ -44,13 +55,13 @@ namespace textinput {
                 virtual void onActive();
                 virtual void inputCharCode();
                 virtual void getState();
-                virtual void isShiftOn();
-                virtual void isCapsOn();
+                virtual void isShiftOn() const;
+                virtual void isCapsOn() const;
                 virtual bool isABC();
                 virtual void setABC(bool);
-                virtual s32 getABCInputMode();
-                virtual void getAIUInputMode();
-                virtual TranslateMode getTranslateMode();
+                virtual s32 getABCInputMode() const;
+                virtual void getAIUInputMode() const;
+                virtual TranslateMode getTranslateMode() const;
                 virtual void setTranslateMode(TranslateMode);
                 virtual void onlyQwerty();
                 virtual void setLangKeyActive(bool);
@@ -67,12 +78,16 @@ namespace textinput {
                 virtual void changePredictLanguage();
                 virtual void updateFixMode();
 
-                u8 getUnkValue() { return unk_0x10[0x24]; }
-                u8 getUnkValue2() { return unk_0x10[0x2C]; }
-                u8 getUnkValue3() { return unk_0x10[0x2D]; }
+                u8 getUnkValue() { return unk_0x24[0x10]; }
+                u8 getUnkValue2() { return unk_0x24[0x18]; }
+                u8 getUnkValue3() { return unk_0x24[0x19]; }
+
+                KeyState *getKeyState() { return &unk_0x20; }
 
             protected:
-                u8 unk_0x10[0x34];  // 0x10
+                u8 unk_0x10[0x10];  // 0x10
+                KeyState unk_0x20;  // 0x20
+                u8 unk_0x24[0x20];  // 0x10
             };
 
             class UIObj : public gui::EventHandler {
@@ -95,6 +110,8 @@ namespace textinput {
 
                 void onPressedShift(bool shift);
                 void onReleasedShift();
+
+                void onPressedCaps();
 
                 bool getUnkValue4() { return unk_0xFC; }
 

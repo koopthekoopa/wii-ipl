@@ -35,18 +35,64 @@ namespace textinput {
 
     // TODO: Location?
     typedef enum HVKCode {
-        HVK_UNK_0x01 = 0x01,
-        HVK_UNK_0x02 = 0x02,
-        HVK_UNK_0x08 = 0x08,
-        HVK_UNK_0x09 = 0x09,
-        HVK_UNK_0x10 = 0x10,
-        HVK_UNK_0x11 = 0x11,
-        HVK_UNK_0x12 = 0x12,
-        HVK_UNK_0x1D = 0x1D,
-        HVK_UNK_0x1E = 0x1E,
-        HVK_UNK_0x1F = 0x1F,
-        HVK_UNK_0x20 = 0x20,
-        HVK_UNK_0x24 = 0x24,
+        HVK_NONE = 0x00,
+
+        HVK_UNK_0x01,  // Escape
+
+        // Main typing keypad keys
+        HVK_UNK_0x02,  // (Backtick/tilde)
+        HVK_UNK_0x03,  // Tab
+        HVK_UNK_0x04,  // Caps Lock
+        HVK_UNK_0x05,  // Shift
+        HVK_UNK_0x06,  // Ctrl
+        HVK_UNK_0x07,  // Alt
+        HVK_UNK_0x08,  // Gui + Space
+        HVK_UNK_0x09,  // Enter
+        HVK_UNK_0x0A,  // Backspace
+        HVK_UNK_0x0B,  // Gui
+        HVK_UNK_0x0C,  // Application
+
+        // Idk what this is
+        HVK_UNK_0x0D,
+
+        // Language change keys
+        HVK_UNK_0x0E,  // International 5
+        HVK_UNK_0x0F,  // International 4
+        HVK_UNK_0x10,  // International 2
+        HVK_UNK_0x11,  // Lang 1
+        HVK_UNK_0x12,  // Lang 2
+
+        // Navigation keys (and num lock I guess)
+        HVK_UNK_0x13,  // Insert
+        HVK_UNK_0x14,  // Delete
+        HVK_UNK_0x15,  // Home
+        HVK_UNK_0x16,  // End
+        HVK_UNK_0x17,  // Page Up
+        HVK_UNK_0x18,  // Page Down
+        HVK_UNK_0x19,  // Print Screen
+        HVK_UNK_0x1A,  // Scroll Lock
+        HVK_UNK_0x1B,  // Pause
+        HVK_UNK_0x1C,  // Num Lock
+
+        // Arrow keys
+        HVK_UNK_0x1D,  // Up arrow
+        HVK_UNK_0x1E,  // Down arrow
+        HVK_UNK_0x1F,  // Left arrow
+        HVK_UNK_0x20,  // Right arrow
+
+        // Function keys
+        HVK_UNK_0x21,  // F1
+        HVK_UNK_0x22,  // F2
+        HVK_UNK_0x23,  // F3
+        HVK_UNK_0x24,  // F4
+        HVK_UNK_0x25,  // F5
+        HVK_UNK_0x26,  // F6
+        HVK_UNK_0x27,  // F7
+        HVK_UNK_0x28,  // F8
+        HVK_UNK_0x29,  // F9
+        HVK_UNK_0x2A,  // F10
+        HVK_UNK_0x2B,  // F11
+        HVK_UNK_0x2C,  // F12
     } HVKCode;
 
     class Base {
@@ -99,7 +145,7 @@ namespace textinput {
             INPUT_COMMAND_35,                // 35
             INPUT_COMMAND_36,                // 36
             INPUT_COMMAND_37,                // 37
-            INPUT_COMMAND_38,                // 38
+            INPUT_COMMAND_38,                // 38 Process HW Keyboard Code
             INPUT_COMMAND_39,                // 39
             INPUT_COMMAND_40,                // 40
             INPUT_COMMAND_41,                // 41
@@ -107,7 +153,7 @@ namespace textinput {
             INPUT_COMMAND_43,                // 43
             INPUT_COMMAND_44,                // 44
             INPUT_COMMAND_45,                // 45
-            INPUT_COMMAND_46,                // 46
+            INPUT_COMMAND_46,                // 46 Shift Tapped(?)
             INPUT_COMMAND_47,                // 47
         } INPUT_COMMAND;
         struct ChangePredictMode {
