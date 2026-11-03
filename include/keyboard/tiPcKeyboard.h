@@ -34,12 +34,12 @@ namespace textinput {
                 // I don't believe this is the right size, it's just
                 // here to generate symbols
                 class KeyState {
-                    public:
-                        void andABCFlag(u32 value) { setABCFlag(unk_0x0 & value); }
-                        void setABCFlag(u32);
-                    private:
-                        u32 unk_0x0; // 0x0
+                public:
+                    void andABCFlag(u32 value) { setABCFlag(unk_0x0 & value); }
+                    void setABCFlag(u32);
 
+                private:
+                    u32 unk_0x0;  // 0x0
                 };
 
                 virtual ~Base();
@@ -49,7 +49,7 @@ namespace textinput {
                 virtual void updateFromReceiver(u32, void*);
                 virtual void onKey();
                 virtual void getType();
-                virtual void setLanguage();
+                virtual void setLanguage(Language);
                 virtual void getLanguage();
                 virtual void update();
                 virtual void onActive();
@@ -82,7 +82,7 @@ namespace textinput {
                 u8 getUnkValue2() { return unk_0x24[0x18]; }
                 u8 getUnkValue3() { return unk_0x24[0x19]; }
 
-                KeyState *getKeyState() { return &unk_0x20; }
+                KeyState* getKeyState() { return &unk_0x20; }
 
             protected:
                 u8 unk_0x10[0x10];  // 0x10
@@ -103,10 +103,21 @@ namespace textinput {
             public:
                 // TODO - ...
 
-                virtual void onClose();
+                virtual void init() override;
 
-                virtual void draw();
-                virtual void calc();
+                virtual void onClose() override;
+
+                virtual void draw() override;
+                virtual void calc() override;
+
+                virtual void setPredictLanguageDialog(predictlang::LayoutByNW4R*);
+                virtual void setSignWindow(signwindow::LayoutByNW4R*);
+
+                virtual void setLineFeedButton(bool);
+                virtual void setPredictLanguageButton(bool);
+                virtual void setSignWindowButton(bool);
+                virtual bool updateInput(int chan, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data) override;
+                virtual bool updateInput(input::HKBManager& hkbManager) override;
 
                 void onPressedShift(bool shift);
                 void onReleasedShift();

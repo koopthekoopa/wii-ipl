@@ -8,6 +8,16 @@
 #include <nw4r/ut/list.h>
 
 namespace textinput {
+    class Manager;
+    namespace predictlang {
+        class LayoutByNW4R;
+    }
+    namespace keyboard {
+        namespace signwindow {
+            class LayoutByNW4R;
+        }
+    }  // namespace keyboard
+
     typedef enum Language {
         JP = 0,
         USA,

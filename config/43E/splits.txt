@@ -1049,7 +1049,7 @@ src/keyboard/tiNw4rManager.cpp:
 	.data       start:0x8165FAD8 end:0x8165FBB0
 	.sdata2     start:0x81696CB0 end:0x81696CC8
 
-src/keyboard/tiManager.cpp:
+src/keyboard/tiKeyboard.cpp:
 	.text       start:0x81437654 end:0x81439704
 	.ctors      start:0x8160D448 end:0x8160D44C
 	.data       start:0x8165FBB0 end:0x81660638

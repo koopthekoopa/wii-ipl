@@ -1045,7 +1045,7 @@ src/keyboard/tiNw4rManager.cpp:
 	.data       start:0x81634668 end:0x81634740
 	.sdata2     start:0x81669490 end:0x816694A8
 
-src/keyboard/tiManager.cpp:
+src/keyboard/tiKeyboard.cpp:
 	.text       start:0x81434DD0 end:0x81436E80
 	.ctors      start:0x815E5DE8 end:0x815E5DEC
 	.data       start:0x81634740 end:0x816351C8

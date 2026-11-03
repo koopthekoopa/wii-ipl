@@ -10,6 +10,7 @@ namespace textinput {
     namespace toolbar {
         class Base {
         public:
+            Base(Manager* manager) : mQwerty(true), meLanguage(USA), mpAllocator(NULL), mpManager(manager) {}
             virtual void create(MEMAllocator* allocator) { mpAllocator = allocator; }
             virtual void init() {}
             virtual bool isQwerty() const { return mQwerty; }
@@ -31,6 +32,9 @@ namespace textinput {
 
         class LayoutByNW4R : public Base, public nw4rmanager::Layout {
         public:
+            LayoutByNW4R(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : Base(manager), Layout(resAccessor, layoutBinName, event), mpEventHandler(NULL), mbIsEnableQwertyChg(false) {}
+
             virtual ~LayoutByNW4R();
             virtual void create(MEMAllocator* allocator) override;
             virtual void init() override;
@@ -107,7 +111,11 @@ namespace textinput {
             KeyType meKeyType;  // 0x30
         };
 
-        class Sample {};
+        class Sample : public LayoutByNW4R {
+        public:
+            Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : LayoutByNW4R(manager, resAccessor, layoutBinName, event) {}
+        };
 
         class NormalButtonAnmPane : public AnmPane {
         public:

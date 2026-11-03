@@ -3,7 +3,6 @@
 
 #include "keyboard/tiKeyboard.h"
 #include "keyboard/tiNw4rManager.h"
-#include "keyboard/tiPredictLang.h"
 #include "keyboard/tiTextInputBase.h"
 
 namespace textinput {
@@ -38,7 +37,9 @@ namespace textinput {
                     INPUT_MODE_ABC_LOWER_JP = 4,
                 };
 
-                // TODO
+                Base(Manager* manager) : mpMgr(manager) {}
+
+                virtual ~Base() override;                                           // 0x08
                 virtual void create(MEMAllocator* allocator) override;              // 0x0C
                 virtual void init() override;                                       // 0x10
                 virtual void updateFromReceiver(u32 command, void* data) override;  // 0x1C
@@ -132,6 +133,8 @@ namespace textinput {
 
             class LayoutByNW4R : public Base, public nw4rmanager::Layout {
             public:
+                LayoutByNW4R(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                    : Base(manager), Layout(resAccessor, layoutBinName, event), mpEventHandler(NULL) {}
                 virtual ~LayoutByNW4R();                                            // 0x08
                 virtual void create(MEMAllocator* allocator) override;              // 0x0C
                 virtual void init() override;                                       // 0x10
@@ -184,6 +187,12 @@ namespace textinput {
                 nw4rmanager::TiEventHandler* mpEventHandler;     // 0x144
                 predictlang::LayoutByNW4R* mpPredictLangDialog;  // 0x148
                 signwindow::LayoutByNW4R* mpSignWindow;          // 0x14C
+            };
+
+            class Sample : public LayoutByNW4R {
+            public:
+                Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                    : LayoutByNW4R(manager, resAccessor, layoutBinName, event) {}
             };
         }  // namespace cellphonetype
     }  // namespace keyboard

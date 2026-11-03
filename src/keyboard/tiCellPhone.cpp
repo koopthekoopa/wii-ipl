@@ -1,6 +1,7 @@
 #include "keyboard/tiCellPhone.h"
 
 #include "keyboard/tiManager.h"
+#include "keyboard/tiPredictLang.h"
 #include "keyboard/tiSignWindow.h"
 
 #include <new>

@@ -1,7 +1,7 @@
 #ifndef TEXTINPUT_SIGN_WINDOW_H
 #define TEXTINPUT_SIGN_WINDOW_H
 
-#include "keyboard/tiManager.h"
+#include "keyboard/tiKeyboard.h"
 #include "keyboard/tiNw4rManager.h"
 
 #include "keyboard/tiSwData.h"
@@ -16,6 +16,8 @@ namespace textinput {
 
             class Base : public KeyboardBase {
             public:
+                Base(Manager* manager) : mpAllocator(NULL), mpMgr(manager) {}
+
                 virtual ~Base() {}                                      // 0x08
                 virtual void create(MEMAllocator* allocator) override;  // 0x0C
                 virtual void init() override;                           // 0x10
@@ -51,6 +53,10 @@ namespace textinput {
 
             class LayoutByNW4R : public Base, public nw4rmanager::Layout, public nw4rmanager::AnmObserver {
             public:
+                LayoutByNW4R(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                    : Base(manager), Layout(resAccessor, layoutBinName, event), mbIsActive(false), mbInputStarted(false), mpEventHandler(NULL),
+                      mpKeyboard(NULL) {}
+
                 virtual ~LayoutByNW4R();                                                                                            // 0x008
                 virtual void create(MEMAllocator* allocator) override;                                                              // 0x00C
                 virtual void init() override;                                                                                       // 0x010
@@ -121,6 +127,12 @@ namespace textinput {
                 CellPhoneSignButtonPane(nw4r::lyt::Pane* pane, nw4rmanager::AnmObserver* observer) : AnmPane(pane, observer) { mKeyType = 2; }
                 virtual void init() override { mCurrAnimId = 0; };         // 0x0C
                 virtual void onAnmEvent(AnmPaneEvent paneEvent) override;  // 0x10
+            };
+
+            class Sample : public LayoutByNW4R {
+            public:
+                Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                    : LayoutByNW4R(manager, resAccessor, layoutBinName, event) {}
             };
         }  // namespace signwindow
     }  // namespace keyboard

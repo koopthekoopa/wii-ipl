@@ -21,7 +21,6 @@ namespace textinput {
                     u32 field_0x0C; // 0x0C trig
                     u32 field_0x10; // 0x10 hold
                     u32 release;    // 0x14
-                    u8  dummy[8];   // 0x18
                 } Input;
 
                 virtual void    onEvent(gui::GUIComponent& comp, u32 event, void* data);                    // 0x0C

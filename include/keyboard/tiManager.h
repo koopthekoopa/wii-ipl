@@ -2,13 +2,18 @@
 #define TEXTINPUT_MANAGER_H
 
 #include "tiTextInputBase.h"
-#include "tiInputForm.h"
-#include "tiSaveData.h"
-#include "tiHKBManager.h"
-#include "tiHWKeyboard.h"
-#include "tiToolBar.h"
+
 #include "tiPcKeyboard.h"
 #include "tiCellPhone.h"
+#include "tiCandidateBox.h"
+#include "tiInputForm.h"
+#include "tiToolBar.h"
+#include "tiPredictLang.h"
+#include "tiSignWindow.h"
+
+#include "tiHWKeyboard.h"
+
+#include "tiSaveData.h"
 
 #include <nw4r/lyt/pane.h>
 #include <nw4r/lyt/arcResourceAccessor.h>
@@ -68,7 +73,7 @@ namespace textinput {
 
             virtual void                                setSecretInputMode(bool secretInputMode) { mpInputForm->setSecretModeOn(secretInputMode); }
 
-            virtual void                                setDefaultPredictionJP(int num, const char** predicts);
+            virtual void                                setDefaultPredictionJP(int num, const char** predicts) { getInputForm()->getAtokString()->setDefaultPrediction(num, predicts); }
             virtual void                                setFixedPredictionJP(int num, const char** predicts);
 
             virtual void                                setTitleText(const wchar_t* titleText);
@@ -102,13 +107,13 @@ namespace textinput {
 
             virtual inputform::EditBuffer*              createEditBuffer();
             virtual keyboard::hwkey::HWKeyboard*        createHWKeyboard();
-            virtual void*                               createPCTypeKeyboard();
-            virtual void*                               createCellPhoneTypeKeyboard();
+            virtual keyboard::pctype::LayoutByNW4R*     createPCTypeKeyboard();
+            virtual keyboard::cellphonetype::LayoutByNW4R* createCellPhoneTypeKeyboard();
             virtual InputForm*                          createInputForm();
-            virtual void*                               createCandidateBox();
-            virtual void*                               createToolBar();
-            virtual void*                               createPredictLanguageDialog();
-            virtual void*                               createSignWindow();
+            virtual candidatebox::LayoutByNW4R*         createCandidateBox();
+            virtual toolbar::LayoutByNW4R*              createToolBar();
+            virtual predictlang::LayoutByNW4R*          createPredictLanguageDialog();
+            virtual keyboard::signwindow::LayoutByNW4R* createSignWindow();
 
             virtual void                                setLayoutScaleFor16x9();
             virtual void                                setLayoutScaleFor4x3();
@@ -119,6 +124,8 @@ namespace textinput {
             void                                        startPredictTurnOn(bool);
             bool                                        isPredictTurning() const;
             void                                        onSE(sound::SE id)                      { if (mpEventObserver != NULL) mpEventObserver->onSE(id); }
+            void                                        initAspect();
+            void                                        enableKSXFilter(bool);
 
         private:
             MEMAllocator*                           mpAllocator;                // 0x04
@@ -132,7 +139,7 @@ namespace textinput {
             InputForm*                              mpInputForm;                // 0x1C
             candidatebox::LayoutByNW4R*             mpCandidateBox;             // 0x20
             toolbar::LayoutByNW4R*                  mpToolBar;                  // 0x24
-            void*                                   mpPredictLanguageDialog;    // 0x28
+            predictlang::LayoutByNW4R*              mpPredictLanguageDialog;    // 0x28
             keyboard::signwindow::LayoutByNW4R*     mpSignWindow;               // 0x2C
 
             EventObserver*                          mpEventObserver;            // 0x30

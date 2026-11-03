@@ -25,6 +25,8 @@ namespace textinput {
 
         class KeyboardBase : public CommandSender {
         public:
+            KeyboardBase() : meLanguage(JP) {}
+
             virtual ~KeyboardBase() {}
 
             virtual void onKey(u32, void*);                                         // 0x20

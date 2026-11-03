@@ -1,14 +1,15 @@
 #ifndef TEXTINPUT_HW_KEYBOARD_H
 #define TEXTINPUT_HW_KEYBOARD_H
 
-#include "tiHKBManager.h"
 #include "tiTextInputBase.h"
+
+#include "tiHKBManager.h"
 
 namespace textinput {
     class Manager;
     namespace keyboard {
         namespace hwkey {
-            class HWKeyboard : CommandSender {
+            class HWKeyboard : public CommandSender {
             public:
                 HWKeyboard(Manager*);
 

@@ -47,6 +47,7 @@ namespace textinput {
 
         class EditBuffer {
         public:
+            EditBuffer() : mpString(NULL), mpUnfixString(NULL), mpZiString(NULL), mpAllocator(NULL) {}
             virtual ~EditBuffer();
 
             void create(MEMAllocator* allocator);
@@ -265,7 +266,7 @@ namespace textinput {
             virtual void updateCandidateState_();
 
             virtual wchar_t* getWCString() const { return mpString->getWCString(); }
-            virtual void* getAtokString() { return mpUnfixString; }
+            virtual tistring::WithAtok* getAtokString() { return mpUnfixString; }
             virtual wchar_t getCandidate() const { return mpString->getCandidate(); }
             virtual u32 getCursorPos();
 
@@ -386,6 +387,8 @@ namespace textinput {
             void dirtyCacheAll();
 
             void resetRelation();
+
+            bool isPredictOn() const { return mbPredictOn; }
 
         protected:
             void confirmInput_();
@@ -519,7 +522,6 @@ namespace textinput {
             int mRepeatTimerE;                            // 0x2FC
             u32 unused_0x300;                             // 0x300
             u32 unk_0x304;                                // 0x304, flags?
-            u32 unused_0x308;                             // 0x308
         };
 
         class EventHandler : public nw4rmanager::TiEventHandler {
@@ -550,7 +552,15 @@ namespace textinput {
 
             virtual void onAnmEvent(AnmPaneEvent paneEvent) override;  // 0x10
         };
+
+        class Sample : public LayoutByNW4R {
+        public:
+            Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event,
+                   const char* fontName)
+                : LayoutByNW4R(manager, resAccessor, layoutBinName, event, fontName) {}
+        };
     }  // namespace inputform
+
     typedef inputform::LayoutByNW4R InputForm;
     typedef inputform::Base InputFormBase;
 }  // namespace textinput
