@@ -1367,7 +1367,7 @@ libs/RVLMiddleware/eZiText/src/clib/zi8pud2.c:
 	extabindex  start:0x813313B0 end:0x813313F8
 	.text       start:0x8147F694 end:0x8147FEEC
 
-libs/RVLMiddleware/eZiText/src/clib/Zi8punct.c:
+libs/RVLMiddleware/eZiText/src/clib/zi8punct.c:
 	extab       start:0x813306F0 end:0x813306F8
 	extabindex  start:0x813313F8 end:0x81331404
 	.text       start:0x8147FEEC end:0x81480018

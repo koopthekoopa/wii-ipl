@@ -3,7 +3,8 @@
 
 #include <zi8clib/zitypes.h>
 
-ziU8 Zi8AttachOEMdata(ziU8* oemData, ziU16 oemSize, ziPtr other ZI_NEED_WORK);
+ziU8 Zi8AttachOEMdata(Zi8OemSearchDict searchCb, ziU16 dictLen, ziPtr dictData ZI_NEED_WORK);
 ziU8 Zi8DetachOEMdata(ziU8 oemId ZI_NEED_WORK);
+ziU8 Zi8MatchOEMdata(ziWChar* text, ziU8 textLen, ziU8 language, ziWChar* wordOut, ziU16 wordMax, ziBool fullMatch, ziBool resume ZI_NEED_WORK);
 
 #endif  // ZI8_OEM_DATA_H

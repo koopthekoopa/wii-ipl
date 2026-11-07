@@ -1,12 +1,13 @@
+#include <zi8clib/zaddress.h>
+
 #include <zi8clib/zierror.h>
-#include <zi8clib/zitypes.h>
 
 ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
     ziU8 i;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
     if (ZI_WORK->langEntries == ZI8_NULL) {
-        Zi8ReplaceLastError(0x578, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_DICT_NULL, ZI_WORK);
         return 0;
     }
 
@@ -24,10 +25,10 @@ ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
         }
     }
 
-    if (ZI_WORK->langEntries[i].language != 0) {
+    if (ZI_WORK->langEntries[i].language != ZI8_LANG_NONE) {
         return i + 1;
     } else {
-        Zi8ReplaceLastError(0x582, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_DICT_LANG_UNSUPPORTED, ZI_WORK);
         return 0;
     }
 }
@@ -46,8 +47,9 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
     ziU8 langIdx;
     ziU32 offset = 0;
     ziU8* tableData;
+    volatile ziU32 tableAddrOffset;
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
 
     langIdx = Zi8LangSupported(lang, ZI_WORK);
 
@@ -62,26 +64,27 @@ ziU32 Zi8GetTableData(ziU8 lang, ziU8 tableIdx, ziU8 memberId ZI_NEED_WORK) {
         }
         switch (memberId) {
             case ziTableAddress: {
-                return ((ziU32)tableData + (tableData[(tableIdx * ZI8_TABLE_SIZE) + 7] << 0x10) + (tableData[(tableIdx * ZI8_TABLE_SIZE) + 8] << 8) +
-                        (tableData[(tableIdx * ZI8_TABLE_SIZE) + 9]));
+                tableAddrOffset = ((tableData[(tableIdx * ZI8_TABLE_SIZE) + 7] << 0x10) + (tableData[(tableIdx * ZI8_TABLE_SIZE) + 8] << 8) +
+                                   (tableData[(tableIdx * ZI8_TABLE_SIZE) + 9]));
+                return (ziU32)tableData + tableAddrOffset;
             }
             case ziTableSize: {
                 tableData = tableData + ((tableIdx * ZI8_TABLE_SIZE) + 4);
                 return (ziU32)(tableData[2] | ((tableData[0] << 0x10) | (tableData[1] << 8)));
             }
             case ziTableUnk3: {
-                return tableData[1];  // always 0x80?
+                return tableData[1];  // Always 0x80 (Except for Chinese, which isn't supported on the Wii)
             }
             case ziTableFormatVersion: {
-                return tableData[3];
+                return tableData[3];  // Always 0x00 (Except for Chinese again)
             }
             default: {
-                Zi8ReplaceLastError(0x134, ZI_WORK);
+                Zi8ReplaceLastError(ZI8_ERR_COM_INVALID_TABLE_MEMBER, ZI_WORK);
                 return 0;
             }
         }
     } else {
-        Zi8ReplaceLastError(0x258, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_LANG_UNSUPPORTED, ZI_WORK);
         return 0;
     }
 }
@@ -102,15 +105,15 @@ ziU8 Zi8GetFormatVersion(ziU8 lang ZI_NEED_WORK) {
     return Zi8GetTableData(lang, 0, 4, ZI_WORK);
 }
 
-ziU32 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
-    ziU32 count = 0;
+ziU8 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
+    ziU8 count = 0;
 
     str;  // *sob*
 
-    Zi8LogError(0x64, ZI_WORK);
+    Zi8LogError(ZI8_ERR_OK, ZI_WORK);
 
     if (str == ZI8_NULL) {
-        Zi8ReplaceLastError(0x12D, ZI_WORK);
+        Zi8ReplaceLastError(ZI8_ERR_COM_UNK_B, ZI_WORK);
         return 0;
     }
 
