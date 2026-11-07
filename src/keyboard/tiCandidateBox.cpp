@@ -673,7 +673,7 @@ namespace textinput {
             mbActive = active;
             if (meLanguage == CN || meLanguage == KR) {
                 mpManager->getPCKeyboard()->setLangKeyActive(active);
-                mpManager->getCellPhoneKeyboard()->vt_0x68(active);
+                mpManager->getCellPhoneKeyboard()->setLangKeyActive(active);
             }
         }
 
@@ -1258,7 +1258,7 @@ namespace textinput {
                 }
             }
 
-            mScrollAnimation.startAnm(this, 0.0f, -acc, 15.0f, this);
+            mScrollAnimation.startAnm(0.0f, -acc, 15.0f, this, this);
         }
 
         void UITextArea::StartScrollToIdx(s32 idx) {
@@ -1281,7 +1281,7 @@ namespace textinput {
             }
 
             s32 diff = idx - mnBaseIdx;
-            mScrollAnimation.startAnm(this, mfXOffset, acc, 15.0f, reinterpret_cast<void*>(diff));
+            mScrollAnimation.startAnm(mfXOffset, acc, 15.0f, this, reinterpret_cast<void*>(diff));
         }
 
         void UITextArea::StartRightPageScroll() {
@@ -1392,7 +1392,7 @@ namespace textinput {
         }
 
         void UITextArea::onAnmEvent(AnmEvent ev, void* data) {
-            if (ev == AE_1) {
+            if (ev == AE_End) {
                 s32 dat = reinterpret_cast<s32>(data);
                 if (mnBaseIdx + dat < 0) {
                     ChangeBaseIdx_(0);

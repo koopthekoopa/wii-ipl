@@ -15,11 +15,12 @@ namespace textinput {
             public:
                 typedef struct Input {
                     // todo
-                    u32 field_0x00; // 0x00
-                    u8  dummy[8];
-                    u32 field_0x0C; // 0x0C
-                    u32 field_0x10; // 0x10
-                    u8  dummy2[12];
+                    u32 field_0x00; // 0x00 chan
+                    f32 x;          // 0x04
+                    f32 y;          // 0x08
+                    u32 field_0x0C; // 0x0C trig
+                    u32 field_0x10; // 0x10 hold
+                    u32 release;    // 0x14
                 } Input;
 
                 virtual void    onEvent(gui::GUIComponent& comp, u32 event, void* data);                    // 0x0C
@@ -72,14 +73,16 @@ namespace textinput {
         class AnmPane {
             public:
                 typedef enum AnmPaneEvent {
-                    PE_0 = 0,
-                    PE_1,
-                    PE_2,
-                    PE_3,
-                    PE_4,
-                    PE_5,
-                    PE_6,
-                    PE_7,
+                    PE_0 = 0,  // Unknown
+                    PE_1,      // Unknown
+                    PE_2,      // Unknown
+                    PE_3,      // Unknown
+                    PE_4,      // Unknown
+                    PE_5,      // Unknown
+                    PE_6,      // Show
+                    PE_7,      // Hide
+                    PE_8,      // Unknown
+                    PE_9,      // Unknown
                     PE_Last,
                 } AnmPaneEvent;
 

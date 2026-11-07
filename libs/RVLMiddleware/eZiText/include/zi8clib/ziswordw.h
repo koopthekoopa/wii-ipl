@@ -5,4 +5,6 @@
 
 ziBool Zi8IsWordW(ziWChar* word, ziU8 language ZI_NEED_WORK);
 
+ziU16 Zi8ConvertUC2UserKey(ziChar ch, ziU8 language ZI_NEED_WORK);
+
 #endif  // ZI8_CLIB_IS_WORD_WIDE_H

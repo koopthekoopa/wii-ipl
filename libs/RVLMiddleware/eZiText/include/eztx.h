@@ -130,12 +130,20 @@ typedef struct EZTXGetParam {
     wchar_t* candidates;     // 0x18
     u8 maxCandidates;        // 0x1C
     wchar_t firstCandidate;  // 0x1E
-    u8 wordCandidates;       // 0x1F
+    u8 wordCandidates;       // 0x20
 
-    u8 count;     // 0x20
-    u8 letters;   // 0x21
-    u8* scratch;  // 0x22
+    u8 count;     // 0x21
+    u8 letters;   // 0x22
+    u8* scratch;  // 0x24
+
+    u32 unk_0x28;  // 0x28
 } EZTXGetParam;
+
+typedef u8 (*Zi8OemSearchDict)(u16 idx, u16* wordOut, u8 maxLen, void* dictData);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 u16 EZTXGetGlobalDataSize();
 
@@ -146,7 +154,11 @@ BOOL EZTXSetLatinSearchOrder(u8* searchArray, u8 searchSize, void* workData);
 u8 EZTXGetCandidates(EZTXGetParam* cands, void* workData);
 u8 EZTXCopy(wchar_t* dest, EZTXGetParam* getParams, u8 index, void* workData);
 
-u8 EZTXAttachOEMDict(u8* oemData, u16 oemSize, void* other, void* workData);
+u8 EZTXAttachOEMDict(Zi8OemSearchDict searchCb, u16 dictLen, void* dictData, void* workData);
 int EZTXDetachOEMDict(u8 oemId, void* workData);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // EZI_TEXT_H

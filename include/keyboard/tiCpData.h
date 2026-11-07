@@ -11,8 +11,8 @@ namespace textinput {
             ALPHABET_MAP_UPPER,
             ALPHABET_MAP_MAX,
         };
-        extern const wchar_t*   s_alphabet_map[/*ALPHABET_MAP_MAX*/];
-    }
+        extern const wchar_t* s_alphabet_map[/*ALPHABET_MAP_MAX*/];
+    }  // namespace util
 
     namespace keyboard {
         namespace cellphonetype {
@@ -28,16 +28,16 @@ namespace textinput {
             static const int KEY_COUNT = 12;
 
             typedef struct PaneNameToCharCode {
-                const char* szPaneName;     // 0x00
-                wchar_t     szPaneDisp[8];  // 0x04
-                wchar_t     wc[16];         // 0x14
+                const char* szPaneName;  // 0x00
+                wchar_t szPaneDisp[8];   // 0x04
+                wchar_t wc[16];          // 0x14
             } PaneNameToCharCode;
 
             typedef struct KeySet {
-                const PaneNameToCharCode*   pPaneNameToCharCode;    // 0x00
-                wchar_t                     szKeySetName[17];       // 0x04
-                u16                         uNum;                   // 0x26
-                u16                         uType;                  // 0x28
+                const PaneNameToCharCode* pPaneNameToCharCode;  // 0x00
+                wchar_t szKeySetName[17];                       // 0x04
+                u16 uNum;                                       // 0x26
+                u16 uType;                                      // 0x28
             } KeySet;
 
             extern const PaneNameToCharCode csAlphabetKeyABCUS[KEY_COUNT];
@@ -61,6 +61,9 @@ namespace textinput {
             extern const PaneNameToCharCode csAlphabetKeyaiuJP[KEY_COUNT];
             extern const PaneNameToCharCode csAlphabetKeyABCJP[KEY_COUNT];
             extern const PaneNameToCharCode csAlphabetKeyabcJP[KEY_COUNT];
+
+            extern const PaneNameToCharCode csNumberKey[KEY_COUNT];
+            extern const PaneNameToCharCode csHangulKey[KEY_COUNT];
 
             extern const KeySet csKeySetUSAbc;
             extern const KeySet csKeySetUSABC;
@@ -95,8 +98,8 @@ namespace textinput {
 
             extern const wchar_t csSpaceZero[3];
             extern const wchar_t csSpace[3];
-        }
-    }
-}
+        }  // namespace cellphonetype
+    }  // namespace keyboard
+}  // namespace textinput
 
-#endif // TEXTINPUT_CELLPHONE_DATA_H
+#endif  // TEXTINPUT_CELLPHONE_DATA_H

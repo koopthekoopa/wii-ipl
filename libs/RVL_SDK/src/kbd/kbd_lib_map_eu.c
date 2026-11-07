@@ -1,0 +1,25 @@
+#include <revolution/kbd.h>
+#include <revolution/kbd/hidtypes.h>
+
+#include <private/kbd/init_maps.h>
+#include <private/kbd/maps/regionEU.h>
+
+void KBDInitRegionEU() {
+    kbdInitMapIntl();
+
+    kbdInitMap(KBD_CC_DANISH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapDENMARK, kbdModifierMapDENMARK, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_FINNISH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapSWEDEN_FINLAND, kbdModifierMapSWEDEN_FINLAND, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_FRENCH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapFRANCE, kbdModifierMapFRANCE, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_GERMAN, 4, KBD_MAPHAS_ALTGR, kbdKeyMapGERMANY, kbdModifierMapGERMANY, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_GREEK, 6, KBD_MAPHAS_LANG2 | KBD_MAPHAS_LANG2_SHIFT | KBD_MAPHAS_ALTGR, kbdKeyMapGREECE, kbdModifierMapGREECE, 3, 0, 5, 100,
+               KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_ITALIAN, 5, KBD_MAPHAS_ALTGR | KBD_MAPHAS_ALTGR_SHIFT, kbdKeyMapITALY, kbdModifierMapITALY, 0, 0, 3, 100,
+               KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_NETHERLANDS_DUTCH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapNETHERLANDS, kbdModifierMapNETHERLANDS, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_NORWEGIAN, 4, KBD_MAPHAS_ALTGR, kbdKeyMapNORWAY, kbdModifierMapNORWAY, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_PORTUGUESE, 4, KBD_MAPHAS_ALTGR, kbdKeyMapPORTUGAL, kbdModifierMapPORTUGAL, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_SPANISH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapSPAIN, kbdModifierMapSPAIN, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_SWEDISH, 4, KBD_MAPHAS_ALTGR, kbdKeyMapSWEDEN_FINLAND, kbdModifierMapSWEDEN_FINLAND, 0, 0, 3, 100, KBD_REPLACETYPE_OTHER);
+    kbdInitMap(KBD_CC_UNITED_KINGDOM, 5, KBD_MAPHAS_ALTGR | KBD_MAPHAS_ALTGR_SHIFT, kbdKeyMapUNITED_KINGDOM, kbdModifierMapUNITED_KINGDOM, 0, 0, 3,
+               100, KBD_REPLACETYPE_OTHER);
+}

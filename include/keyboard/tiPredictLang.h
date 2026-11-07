@@ -1,10 +1,11 @@
 #ifndef TEXTINPUT_PREDICT_LANG_H
 #define TEXTINPUT_PREDICT_LANG_H
 
-#include "tiInputForm.h"
 #include "tiKeyboard.h"
 #include "tiNw4rManager.h"
 #include "tiTextInputBase.h"
+
+#include "tiInputForm.h"
 
 namespace textinput {
     class Manager;
@@ -14,7 +15,9 @@ namespace textinput {
 
         class Base : public CommandSender {
         public:
+            Base(Manager* manager) : mePredictMode(inputform::Base::PM_USEn), mpAllocator(NULL), mpManager(manager) {}
             virtual void create(MEMAllocator* allocator) override { mpAllocator = allocator; }
+            virtual void init() override {}
             virtual void setPredictMode(inputform::Base::PredictMode mode) { mePredictMode = mode; }
 
         protected:
@@ -28,6 +31,10 @@ namespace textinput {
 
         class LayoutByNW4R : public Base, public nw4rmanager::Layout, public nw4rmanager::AnmObserver {
         public:
+            LayoutByNW4R(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : Base(manager), Layout(resAccessor, layoutBinName, event), mbActive(false), mbInput(false), mpEventHandler(NULL),
+                  meDestination(DST_US), mpCaller(NULL) {}
+
             virtual ~LayoutByNW4R();
             virtual void create(MEMAllocator* allocator) override;
             virtual void init() override;
@@ -131,6 +138,12 @@ namespace textinput {
             virtual void onAnmEvent(AnmPaneEvent paneEvent) override;  // 0x10
         private:
             LayoutByNW4R* mpLayout;  // 0x34
+        };
+
+        class Sample : public LayoutByNW4R {
+        public:
+            Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : LayoutByNW4R(manager, resAccessor, layoutBinName, event) {}
         };
     }  // namespace predictlang
 }  // namespace textinput

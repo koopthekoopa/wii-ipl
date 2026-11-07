@@ -17,11 +17,9 @@ enum {
 };
 
 typedef struct _usbKbdAsyncMem {
-    u32 state;       // 0x00
-    void* kbd;       // 0x04
-    char modifiers;  // 0x08
-    u8 unk_0x09;
-    u8 keys[6];  // 0x0A
+    u32 state;                 // 0x00
+    void* kbd;                 // 0x04
+    USBKBDInputReport report;  // 0x08
 } usbKbdAsyncMem;
 
 static s32 usbKbdFd;
@@ -55,7 +53,7 @@ static IOSError usbKbdCallbackHandler(s32 result, void* arg) {
         }
         case USB_KBD_STATE_EVENT: {
             if (usbKbdEventCb != NULL) {
-                usbKbdEventCb(data->kbd, &data->modifiers);
+                usbKbdEventCb(data->kbd, &data->report);
             }
             break;
         }
@@ -96,7 +94,7 @@ USBKBDErr USBKBDInitialize(USBKBDAttachCallback attachCb, USBKBDDetachCallback d
     return USB_KBD_ERR_OK;
 }
 
-USBKBDErr USBKBDSetLED(u32 param_1, u8 param_2, USBKBDCmdLED* cmd) {
+USBKBDErr USBKBDSetLED(void* param_1, u8 param_2, USBKBDCmdLED* cmd) {
     if (usbKbdFd < 0) {
         return USB_KBD_ERR_NOT_INIT;
     }
@@ -114,7 +112,7 @@ static IOSError usbKbdSetLEDHandler(IOSError error, void* arg) {
     return IPC_RESULT_OK;
 }
 
-USBKBDErr USBKBDSetLEDAsync(u32 param_1, u8 param_2, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg) {
+USBKBDErr USBKBDSetLEDAsync(void* param_1, u8 param_2, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg) {
     if (usbKbdFd < 0) {
         return USB_KBD_ERR_NOT_INIT;
     }

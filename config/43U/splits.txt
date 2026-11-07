@@ -1049,7 +1049,7 @@ src/keyboard/tiNw4rManager.cpp:
 	.data       start:0x8165F818 end:0x8165F8F0
 	.sdata2     start:0x81694E10 end:0x81694E28
 
-src/keyboard/tiManager.cpp:
+src/keyboard/tiKeyboard.cpp:
 	.text       start:0x81437558 end:0x81439608
 	.ctors      start:0x8160D208 end:0x8160D20C
 	.data       start:0x8165F8F0 end:0x81660378
@@ -1106,7 +1106,7 @@ src/keyboard/MyTiInputForm.cpp:
 
 src/keyboard/MyTiLetterForm.cpp:
 	.text       start:0x81444730 end:0x814454D8
-	.rodata     start:0x816168B8 end:0x81616B88
+	.rodata     start:0x816168B8 end:0x81616BC8
 	.data       start:0x81668860 end:0x81668CD8
 	.sdata2     start:0x81694EB0 end:0x81694ED0
 	.sdata      start:0x81697528 end:0x81697570
@@ -1133,7 +1133,7 @@ src/keyboard/tiHKBManager.cpp:
 src/keyboard/tiHwKeyboard.cpp:
 	.bss        start:0x810C8940 end:0x810C8950
 	.text       start:0x81448AA4 end:0x81449C98
-	.rodata     start:0x81616B88 end:0x81616C78
+	.rodata     start:0x81616BC8 end:0x81616C78
 	.data       start:0x81668EF8 end:0x81669018
 	.sdata2     start:0x81694EF8 end:0x81694F08
 	.sdata      start:0x81697570 end:0x81697578
@@ -1367,7 +1367,7 @@ libs/RVLMiddleware/eZiText/src/clib/zi8pud2.c:
 	extabindex  start:0x813313B0 end:0x813313F8
 	.text       start:0x8147F598 end:0x8147FDF0
 
-libs/RVLMiddleware/eZiText/src/clib/Zi8punct.c:
+libs/RVLMiddleware/eZiText/src/clib/zi8punct.c:
 	extab       start:0x813306F0 end:0x813306F8
 	extabindex  start:0x813313F8 end:0x81331404
 	.text       start:0x8147FDF0 end:0x8147FF1C
@@ -1400,7 +1400,7 @@ libs/RVLMiddleware/eZiText/src/clib/zikorean.c:
 	extab       start:0x81330748 end:0x81330760
 	extabindex  start:0x8133147C end:0x813314A0
 	.text       start:0x814813FC end:0x81482840
-	.data       start:0x8166B2B0 end:0x8166B3D0
+	.data       start:0x8166B2B0 end:0x8166B3A8
 
 libs/RVLMiddleware/eZiText/src/clib/ziswordw.c:
 	extab       start:0x81330760 end:0x81330770
@@ -1412,6 +1412,7 @@ libs/RVLMiddleware/eZiText/src/clib/zkokeyp.c:
 	extab       start:0x81330770 end:0x813307A8
 	extabindex  start:0x813314B8 end:0x8133150C
 	.text       start:0x8148302C end:0x8148447C
+	.data       start:0x8166B3A8 end:0x8166B3D0
 
 libs/RVLMiddleware/eZiText/src/clib/zierror.c:
 	.text       start:0x8148447C end:0x81484484
@@ -4268,12 +4269,16 @@ libs/RVL_SDK/src/kbd/kbd_lib_map_us.c:
 	.text       start:0x815F499C end:0x815F4A98
 	.data       start:0x81692628 end:0x816932D0
 
+libs/RVL_SDK/src/kpr/kpr_init.c:
+	.text       start:0x815F4A98 end:0x815F4AA8
+	.sbss       start:0x81699770 end:0x81699778
+
 libs/RVL_SDK/src/kpr/kpr_lib.c:
-	.text       start:0x815F4A98 end:0x815F5098
+	.text       start:0x815F4AA8 end:0x815F5098
 	.rodata     start:0x81632BB0 end:0x81632F78
 	.data       start:0x816932D0 end:0x81693340
 	.sdata      start:0x816985D0 end:0x816985D8
-	.sbss       start:0x81699770 end:0x81699780
+	.sbss       start:0x81699778 end:0x81699780
 
 libs/RVL_SDK/src/usbkbd/usb_kbd.c:
 	.bss        start:0x811B1020 end:0x811B1040

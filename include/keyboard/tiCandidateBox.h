@@ -62,6 +62,8 @@ namespace textinput {
                 wchar_t szwcPredicted[40][64];  // 0x04
             };
 
+            CandidateBoxCaller() : mpCandidateBox(NULL) {}
+
             virtual void resetCandidate();
             virtual void addCandidate(const wchar_t* wcString);
             virtual void setCandidateBox(textinput::candidatebox::Base* candidateBox) { mpCandidateBox = candidateBox; }
@@ -74,6 +76,7 @@ namespace textinput {
 
         class Base : public CommandSender {
         public:
+            Base(Manager* manager) : mpManager(manager), mpCandidates(NULL), mpAllocator(NULL), mbOn(false), mbInvalid(true), meLanguage(USA) {}
             virtual ~Base();
             virtual void create(MEMAllocator* allocator) override;
             virtual void init() override {}
@@ -90,7 +93,7 @@ namespace textinput {
             virtual void onClose() {}                                               // 0x40
             virtual void setOnOff(bool);                                            // 0x44
             virtual void setInvalid(bool invalid) { mbInvalid = invalid; }          // 0x48
-            virtual bool isInvalid() const;                                         // 0x4C
+            virtual bool isInvalid() const { return mbInvalid; }                    // 0x4C
             virtual void setLanguage(Language language) { meLanguage = language; }  // 0x50
 
             bool checkValidation();
@@ -108,6 +111,8 @@ namespace textinput {
 
         class EventHandler : public nw4rmanager::TiEventHandler {
         public:
+            EventHandler(LayoutByNW4R* lyt) : mpLayoutByNW4R(lyt) {}
+
             virtual void onTiEvent(gui::PaneComponent* paneComponent, u32 event, Input* input) override;  // 0x18
 
             LayoutByNW4R* mpLayoutByNW4R;  // 0xC
@@ -281,6 +286,11 @@ namespace textinput {
         // TODO
         class LayoutByNW4R : public Base, public nw4rmanager::Layout, public UIObj::Listener {
         public:
+            LayoutByNW4R(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : Base(manager), Layout(resAccessor, layoutBinName, event), mTextArea(0, this, this), mLeftScroll(1, this, this),
+                  mRightScroll(2, this, this), mOnOffButton(3, this, this), mTextWindow(4, this, this), mEventHandler(this), mpTiString(NULL),
+                  mbActive(true) {}
+
             virtual ~LayoutByNW4R();
             virtual void create(MEMAllocator* allocator) override;
             virtual void init() override;
@@ -307,7 +317,7 @@ namespace textinput {
             virtual void changeSelect(s32);                                                  // 0x0F8
             virtual void updateDisplay();                                                    // 0x0FC
             virtual u16 getScroll() { return mTextArea.GetDispOffset(); }                    // 0x100
-            virtual bool isInScroll();                                                       // 0x104
+            virtual bool isInScroll() { return mTextArea.IsScrolling(); }                    // 0x104
             virtual void setActive(bool active);                                             // 0x108
             virtual bool isActive() const;                                                   // 0x10C
             virtual void setSelectedTextPane(int pane) { mTextArea.SetSelectedText(pane); }  // 0x110
@@ -323,17 +333,21 @@ namespace textinput {
             void onReleasedShift();
             void startTurnOn(bool);
 
+            UITextArea* getTextArea() { return &mTextArea; }
+
+            bool isPredictTurning() const { return mOnOffButton.IsTurning(); }
+
         private:
             void createAnmPane_(MEMAllocator* allocator);
 
-            EventHandler mEventHandler;
+            EventHandler mEventHandler;       // 0x0D0
             tistring::Decolated* mpTiString;  // 0x0E0
             UITextArea mTextArea;             // 0x0E4
-            UIButton mLeftScroll;
-            UIButton mRightScroll;
-            UIOnOffButton mOnOffButton;  // 0x32C
-            UITextWindow mTextWindow;
-            bool mbActive;
+            UIButton mLeftScroll;             // 0x2EC
+            UIButton mRightScroll;            // 0x30C
+            UIOnOffButton mOnOffButton;       // 0x32C
+            UITextWindow mTextWindow;         // 0x3FC
+            bool mbActive;                    // 0x41C
         };
 
         class CandidateTextAnmPane : public nw4rmanager::AnmPane {
@@ -384,6 +398,12 @@ namespace textinput {
             PredictWindow(nw4r::lyt::Pane* pane, nw4rmanager::AnmObserver* observer) : CandidateTextAnmPane(pane, observer) { meKeyType = KT_Window; }
 
             virtual void onAnmEvent(AnmPaneEvent paneEvent) override;  // 0x10
+        };
+
+        class Sample : public LayoutByNW4R {
+        public:
+            Sample(Manager* manager, nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+                : LayoutByNW4R(manager, resAccessor, layoutBinName, event) {}
         };
     }  // namespace candidatebox
 }  // namespace textinput

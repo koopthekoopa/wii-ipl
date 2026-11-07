@@ -32,7 +32,7 @@ wchar_t* wcsstr(const wchar_t* s1, const wchar_t* s2);
 int swprintf(wchar_t* ws, size_t len, const wchar_t* format, ...);
 int vswprintf(wchar_t* ws, size_t len, const wchar_t* format, va_list arg);
 
-int wcsnicmp(const char* dst, const char* src, size_t num);
+int wcsnicmp(const wchar_t* dst, const wchar_t* src, size_t num);
 
 #ifdef __cplusplus
 }

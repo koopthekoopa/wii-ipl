@@ -24,6 +24,23 @@ typedef struct _KPRQueue {
     u32 altVal;       // 0x14
 } KPRQueue;
 
+void KPRInitRegionUS();
+void KPRInitRegionEU();
+void KPRInitRegionJP();
+
+void KPRInitQueue(KPRQueue* queue);
+void KPRClearQueue(KPRQueue* queue);
+void KPRSetMode(KPRQueue* queue, KPRMode mode);
+
+u8 KPRPutChar(KPRQueue* queue, wchar_t);
+wchar_t KPRGetChar(KPRQueue* queue);
+
+u8 KPRLookAhead(const KPRQueue* queue, wchar_t* outBuf, u32 outBufLen);
+
+BOOL KPRProcessAltKeypad(KPRQueue* queue, wchar_t ch);
+void KPRProcessDeadKeys(KPRQueue* queue);
+void KPRProcessRomaji(KPRQueue* queue);
+
 #ifdef __cplusplus
 }
 #endif

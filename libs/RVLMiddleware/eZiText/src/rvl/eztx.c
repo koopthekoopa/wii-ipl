@@ -37,8 +37,8 @@ u8 EZTXCopy(wchar_t* dest, EZTXGetParam* getParams, u8 index, void* workData) {
     return Zi8CopyW(dest, (ziGetParam*)getParams, index, workData);
 }
 
-u8 EZTXAttachOEMDict(u8* oemData, u16 oemSize, void* other, void* workData) {
-    return Zi8AttachOEMdata(oemData, oemSize, other, workData);
+u8 EZTXAttachOEMDict(Zi8OemSearchDict searchCb, u16 dictLen, void* dictData, void* workData) {
+    return Zi8AttachOEMdata(searchCb, dictLen, dictData, workData);
 }
 
 int EZTXDetachOEMDict(u8 oemId, void* workData) {

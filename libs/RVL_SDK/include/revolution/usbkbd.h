@@ -14,13 +14,19 @@ enum {
     USB_KBD_ERR_FAIL_ASYNC_INIT = 6,
 };
 
+typedef struct _USBKBDInputReport {
+    u8 modifiers;  // 0x0
+    u8 reserved;   // 0x1
+    u8 keys[6];
+} USBKBDInputReport;
+
 typedef void (*USBKBDAttachCallback)(void*);
 typedef void (*USBKBDDetachCallback)(void*);
-typedef void (*USBKBDEventCallback)(void*, char*);
+typedef void (*USBKBDEventCallback)(void*, USBKBDInputReport*);
 typedef void (*USBKBDCmdLEDCallback)(BOOL success, void* cbarg);
 
 typedef struct USBKBDCmdLED {
-    vu32 unk_0x00;
+    void* volatile unk_0x00;
     vu8 unk_0x04;
 } USBKBDCmdLED;
 
@@ -33,8 +39,8 @@ typedef struct USBKBDCmdLEDAsync {
 
 USBKBDErr USBKBDInitialize(USBKBDAttachCallback attachCb, USBKBDDetachCallback detachCb);
 
-USBKBDErr USBKBDSetLED(u32, u8, USBKBDCmdLED* cmd);
-USBKBDErr USBKBDSetLEDAsync(u32, u8, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg);
+USBKBDErr USBKBDSetLED(void*, u8, USBKBDCmdLED* cmd);
+USBKBDErr USBKBDSetLEDAsync(void*, u8, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg);
 
 USBKBDErr USBKBDRegisterEventCallback(USBKBDEventCallback cb);
 
